@@ -121,3 +121,6 @@ iOSInjectionProject/
 ### SwiftPackageManager ###
 Packages
 xcuserdata
+
+### CocoaPods ###
+Pods/
