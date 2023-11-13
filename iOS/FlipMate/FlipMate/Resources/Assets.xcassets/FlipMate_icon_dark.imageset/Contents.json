@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "FlipMate_Dark_icon.png",
+      "filename" : "FlipMate_icon_dark.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "FlipMate_Dark_icon@2x.png",
+      "filename" : "FlipMate_icon_dark@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "FlipMate_Dark_icon@3x.png",
+      "filename" : "FlipMate_icon_dark@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
