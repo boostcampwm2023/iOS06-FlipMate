@@ -1,8 +1,8 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
+name: iOS Feature Template
+about: iOS Feature Template
 title: ''
-labels: ''
+labels: iOS
 assignees: ericKwon95, leemhyungyu, nemanjabenkovic
 
 ---
