@@ -49,12 +49,13 @@ final class LoginViewController: UIViewController {
         return button
     }()
     
-    private var loginSkipButton: UIButton = {
+    private lazy var loginSkipButton: UIButton = {
         let button = UIButton()
         button.setTitle("로그인하지 않고 이용하기", for: .normal)
         button.setTitleColor(.systemGray, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(loginSkipButtonDidTapped), for: .touchUpInside)
         return button
     }()
     
@@ -62,6 +63,16 @@ final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+    }
+}
+
+// MARK: - Objc func
+private extension LoginViewController {
+    // TODO: Condinator 패턴 도입 !?
+    @objc func loginSkipButtonDidTapped() {
+        let tabBarViewController = TabBarViewController()
+        tabBarViewController.modalPresentationStyle = .fullScreen
+        view.window?.rootViewController = tabBarViewController
     }
 }
 
