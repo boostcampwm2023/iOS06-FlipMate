@@ -45,10 +45,13 @@ extension TabBarViewController {
         self.selectedIndex = 1
         self.tabBar.layer.borderWidth = 1
         self.tabBar.layer.borderColor = UIColor.lightGray.cgColor
+        self.tabBar.layer.backgroundColor = UIColor.white.cgColor
     }
 
     func configureTimerButton() {
-        let timerButton = UIButton(frame: CGRect(x: 0, y: 0, width: self.tabBar.frame.size.height * 0.5 + 45, height: self.tabBar.frame.size.height * 0.5 + 45))
+        let timerButton = UIButton(frame: CGRect(x: 0, y: 0,
+                                                 width: self.tabBar.frame.size.height * 0.5 + 45,
+                                                 height: self.tabBar.frame.size.height * 0.5 + 45))
         var timerButtonFrame = timerButton.frame
         timerButtonFrame.origin.y = view.bounds.height - timerButtonFrame.height - self.tabBar.frame.size.height / 2
         timerButtonFrame.origin.x = view.bounds.width / 2 - timerButtonFrame.size.width / 2
