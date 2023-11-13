@@ -53,7 +53,7 @@ extension TabBarViewController {
                                                  width: self.tabBar.frame.size.height * 0.5 + 45,
                                                  height: self.tabBar.frame.size.height * 0.5 + 45))
         var timerButtonFrame = timerButton.frame
-        timerButtonFrame.origin.y = view.bounds.height - timerButtonFrame.height - self.tabBar.frame.size.height / 2
+        timerButtonFrame.origin.y = view.bounds.height - timerButtonFrame.height - self.tabBar.frame.size.height / 2 + 10
         timerButtonFrame.origin.x = view.bounds.width / 2 - timerButtonFrame.size.width / 2
         timerButton.frame = timerButtonFrame
 
