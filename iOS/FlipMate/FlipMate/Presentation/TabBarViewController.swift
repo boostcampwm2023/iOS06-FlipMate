@@ -12,15 +12,15 @@ final class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
-        configureTimerButton()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         var tabFrame = self.tabBar.frame
-        tabFrame.size.height = 94
-        tabFrame.origin.y = self.view.frame.size.height - 94
+        tabFrame.size.height += 10
+        tabFrame.origin.y = self.view.frame.size.height - tabFrame.size.height
         self.tabBar.frame = tabFrame
+        configureTimerButton()
     }
 }
 
@@ -48,9 +48,9 @@ extension TabBarViewController {
     }
 
     func configureTimerButton() {
-        let timerButton = UIButton(frame: CGRect(x: 0, y: 0, width: 95, height: 95))
+        let timerButton = UIButton(frame: CGRect(x: 0, y: 0, width: self.tabBar.frame.size.height * 0.5 + 45, height: self.tabBar.frame.size.height * 0.5 + 45))
         var timerButtonFrame = timerButton.frame
-        timerButtonFrame.origin.y = view.bounds.height - timerButtonFrame.height - 35
+        timerButtonFrame.origin.y = view.bounds.height - timerButtonFrame.height - self.tabBar.frame.size.height / 2
         timerButtonFrame.origin.x = view.bounds.width / 2 - timerButtonFrame.size.width / 2
         timerButton.frame = timerButtonFrame
 
