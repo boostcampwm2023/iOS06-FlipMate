@@ -122,7 +122,7 @@ private extension LoginViewController {
 // MARK: - UIButton extension
 fileprivate extension UIButton {
     func setLoginButton(type: LoginType) {
-        self.setTitle(type.description, for: .normal)
+        self.setTitle(type.buttonTitle, for: .normal)
         self.backgroundColor = .systemBackground
         self.titleLabel?.font = FlipMateFont.smallRegular.font
         self.setTitleColor(.label, for: .normal)
