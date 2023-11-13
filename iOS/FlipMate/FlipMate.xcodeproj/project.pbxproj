@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		24A38712CF24997B512A0C4A /* Pods_FlipMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67C5E61F07640B8F89AB356 /* Pods_FlipMate.framework */; };
+		2C5CDA482B0252B2007AFC57 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA472B0252B2007AFC57 /* LoginViewController.swift */; };
+		2C5CDA4B2B0252C1007AFC57 /* LoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA4A2B0252C1007AFC57 /* LoginType.swift */; };
+		2C5CDA4F2B025403007AFC57 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA4E2B025403007AFC57 /* SocialViewController.swift */; };
+		2C5CDA562B025426007AFC57 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA512B025426007AFC57 /* BaseViewController.swift */; };
+		2C5CDA572B025426007AFC57 /* FlipMateColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA532B025426007AFC57 /* FlipMateColor.swift */; };
+		2C5CDA582B025426007AFC57 /* FlipMateFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA552B025426007AFC57 /* FlipMateFont.swift */; };
+		2C5CDA5B2B025440007AFC57 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA5A2B025440007AFC57 /* ChartViewController.swift */; };
 		600908BE2AFCD7DF0065DFFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908BD2AFCD7DF0065DFFB /* AppDelegate.swift */; };
 		600908C02AFCD7DF0065DFFB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908BF2AFCD7DF0065DFFB /* SceneDelegate.swift */; };
 		600908C22AFCD7DF0065DFFB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908C12AFCD7DF0065DFFB /* ViewController.swift */; };
@@ -41,6 +48,13 @@
 
 /* Begin PBXFileReference section */
 		045022A6DA9A21DB95C267D0 /* Pods-FlipMateTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMateTests.release.xcconfig"; path = "Target Support Files/Pods-FlipMateTests/Pods-FlipMateTests.release.xcconfig"; sourceTree = "<group>"; };
+		2C5CDA472B0252B2007AFC57 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2C5CDA4A2B0252C1007AFC57 /* LoginType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginType.swift; sourceTree = "<group>"; };
+		2C5CDA4E2B025403007AFC57 /* SocialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
+		2C5CDA512B025426007AFC57 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		2C5CDA532B025426007AFC57 /* FlipMateColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlipMateColor.swift; sourceTree = "<group>"; };
+		2C5CDA552B025426007AFC57 /* FlipMateFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlipMateFont.swift; sourceTree = "<group>"; };
+		2C5CDA5A2B025440007AFC57 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		2CA80839AC9EFDD4BAA10C67 /* Pods_FlipMate_FlipMateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate_FlipMateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B11F58319D7A81A41943F5 /* Pods-FlipMateTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMateTests.debug.xcconfig"; path = "Target Support Files/Pods-FlipMateTests/Pods-FlipMateTests.debug.xcconfig"; sourceTree = "<group>"; };
 		600908BA2AFCD7DF0065DFFB /* FlipMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlipMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +115,62 @@
 				D6BD4FEF5337019834533B60 /* Pods_FlipMateTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2C5CDA462B0252B2007AFC57 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2C5CDA472B0252B2007AFC57 /* LoginViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2C5CDA492B0252C1007AFC57 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2C5CDA4A2B0252C1007AFC57 /* LoginType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2C5CDA4D2B0253F5007AFC57 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2C5CDA4E2B025403007AFC57 /* SocialViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2C5CDA502B025426007AFC57 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				2C5CDA512B025426007AFC57 /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		2C5CDA522B025426007AFC57 /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				2C5CDA532B025426007AFC57 /* FlipMateColor.swift */,
+			);
+			path = Color;
+			sourceTree = "<group>";
+		};
+		2C5CDA542B025426007AFC57 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				2C5CDA552B025426007AFC57 /* FlipMateFont.swift */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		2C5CDA592B025435007AFC57 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2C5CDA5A2B025440007AFC57 /* ChartViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		48114A3517087E7FD0C9546F /* Pods */ = {
@@ -214,6 +284,7 @@
 		600908F22AFCDCE10065DFFB /* SocialScene */ = {
 			isa = PBXGroup;
 			children = (
+				2C5CDA4D2B0253F5007AFC57 /* ViewController */,
 			);
 			path = SocialScene;
 			sourceTree = "<group>";
@@ -221,6 +292,7 @@
 		600908F32AFCDCE70065DFFB /* ChartScene */ = {
 			isa = PBXGroup;
 			children = (
+				2C5CDA592B025435007AFC57 /* ViewController */,
 			);
 			path = ChartScene;
 			sourceTree = "<group>";
@@ -228,6 +300,8 @@
 		600908F42AFCDCFA0065DFFB /* LoginScene */ = {
 			isa = PBXGroup;
 			children = (
+				2C5CDA492B0252C1007AFC57 /* Model */,
+				2C5CDA462B0252B2007AFC57 /* ViewController */,
 			);
 			path = LoginScene;
 			sourceTree = "<group>";
@@ -323,6 +397,9 @@
 		600909012AFCDFD10065DFFB /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2C5CDA502B025426007AFC57 /* Base */,
+				2C5CDA522B025426007AFC57 /* Color */,
+				2C5CDA542B025426007AFC57 /* Font */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -590,11 +667,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C5CDA4B2B0252C1007AFC57 /* LoginType.swift in Sources */,
+				2C5CDA482B0252B2007AFC57 /* LoginViewController.swift in Sources */,
+				2C5CDA582B025426007AFC57 /* FlipMateFont.swift in Sources */,
 				601773E42B021E6000D175D9 /* TimerViewController.swift in Sources */,
 				600908C22AFCD7DF0065DFFB /* ViewController.swift in Sources */,
+				2C5CDA5B2B025440007AFC57 /* ChartViewController.swift in Sources */,
 				600908BE2AFCD7DF0065DFFB /* AppDelegate.swift in Sources */,
+				2C5CDA562B025426007AFC57 /* BaseViewController.swift in Sources */,
 				EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */,
+				2C5CDA572B025426007AFC57 /* FlipMateColor.swift in Sources */,
 				600908C02AFCD7DF0065DFFB /* SceneDelegate.swift in Sources */,
+				2C5CDA4F2B025403007AFC57 /* SocialViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
