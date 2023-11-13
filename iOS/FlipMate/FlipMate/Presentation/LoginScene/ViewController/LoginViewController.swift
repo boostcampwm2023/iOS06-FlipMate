@@ -23,6 +23,16 @@ final class LoginViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    private var loginSkipButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("로그인하지 않고 이용하기", for: .normal)
+        button.setTitleColor(.systemGray, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 14)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +45,7 @@ private extension LoginViewController {
     func configureUI() {
         view.backgroundColor = .systemBackground
 
-        [ googleLoginButton, appleLoginButton ].forEach { view.addSubview($0) }
+        [ googleLoginButton, appleLoginButton, loginSkipButton ].forEach { view.addSubview($0) }
         
         NSLayoutConstraint.activate([
             googleLoginButton.bottomAnchor.constraint(equalTo: appleLoginButton.topAnchor, constant: -20),
@@ -46,7 +56,10 @@ private extension LoginViewController {
             appleLoginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
             appleLoginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             appleLoginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            appleLoginButton.heightAnchor.constraint(equalToConstant: 44)
+            appleLoginButton.heightAnchor.constraint(equalToConstant: 44),
+            
+            loginSkipButton.topAnchor.constraint(equalTo: appleLoginButton.bottomAnchor, constant: 20),
+            loginSkipButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
 }
