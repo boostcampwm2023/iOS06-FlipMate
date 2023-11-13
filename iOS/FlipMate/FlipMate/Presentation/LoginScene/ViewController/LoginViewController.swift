@@ -7,7 +7,14 @@
 
 import UIKit
 
-final class LoginViewController: UIViewController {
+final class LoginViewController: BaseViewController {
+    
+    // MARK: - Constant
+    private enum Constant {
+        static let logoMainTitle = "FLIP MATE"
+        static let logoSubTitle = "우리들이 공부하는 시간"
+        static let skipLoginTitle = "로그인하지 않고 이용하기"
+    }
     // MARK: - UI Components
     private var logoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -19,18 +26,18 @@ final class LoginViewController: UIViewController {
     
     private var logoMainTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 30, weight: .bold)
-        label.text = "FLIP MATE"
-        label.textColor = .blue
+        label.font = FlipMateFont.largeBold.font
+        label.textColor = FlipMateColor.darkBlue.color
+        label.text = Constant.logoMainTitle
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private var logoSubTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .bold)
-        label.text = "우리들이 공부하는 시간"
-        label.textColor = .systemGray
+        label.font = FlipMateFont.smallBold.font
+        label.textColor = FlipMateColor.gray2.color
+        label.text = Constant.logoSubTitle
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -51,9 +58,9 @@ final class LoginViewController: UIViewController {
     
     private lazy var loginSkipButton: UIButton = {
         let button = UIButton()
-        button.setTitle("로그인하지 않고 이용하기", for: .normal)
-        button.setTitleColor(.systemGray, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 14)
+        button.setTitle(Constant.skipLoginTitle, for: .normal)
+        button.titleLabel?.font = FlipMateFont.smallRegular.font
+        button.setTitleColor(FlipMateColor.gray2.color, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(loginSkipButtonDidTapped), for: .touchUpInside)
         return button
@@ -62,23 +69,10 @@ final class LoginViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
     }
-}
-
-// MARK: - Objc func
-private extension LoginViewController {
-    // TODO: Condinator 패턴 도입 !?
-    @objc func loginSkipButtonDidTapped() {
-        let tabBarViewController = TabBarViewController()
-        tabBarViewController.modalPresentationStyle = .fullScreen
-        view.window?.rootViewController = tabBarViewController
-    }
-}
-
-// MARK: - UI Setting
-private extension LoginViewController {
-    func configureUI() {
+    
+    // MARK: - UI Setting
+    override func configureUI() {
         view.backgroundColor = .systemBackground
 
         [ logoImageView,
@@ -115,17 +109,26 @@ private extension LoginViewController {
     }
 }
 
+// MARK: - Objc func
+private extension LoginViewController {
+    // TODO: Condinator 패턴 도입 !?
+    @objc func loginSkipButtonDidTapped() {
+        let tabBarViewController = TabBarViewController()
+        tabBarViewController.modalPresentationStyle = .fullScreen
+        view.window?.rootViewController = tabBarViewController
+    }
+}
+
 // MARK: - UIButton extension
 fileprivate extension UIButton {
     func setLoginButton(type: LoginType) {
         self.setTitle(type.description, for: .normal)
         self.backgroundColor = .systemBackground
-        self.titleLabel?.font = .systemFont(ofSize: 16)
-        self.setTitleColor(.black, for: .normal)
-        self.titleLabel?.textColor = .black
+        self.titleLabel?.font = FlipMateFont.smallRegular.font
+        self.setTitleColor(.label, for: .normal)
         self.layer.cornerRadius = 11
         self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor.systemGray2.cgColor
+        self.layer.borderColor = FlipMateColor.gray2.color?.cgColor
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOffset = CGSize(width: 3.0, height: 3.0)
         self.layer.shadowOpacity = 0.3
