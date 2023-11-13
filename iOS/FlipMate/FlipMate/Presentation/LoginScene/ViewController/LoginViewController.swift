@@ -8,8 +8,33 @@
 import UIKit
 
 final class LoginViewController: UIViewController {
-
     // MARK: - UI Components
+    private var logoImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "FlipMate_icon")
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private var logoMainTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 30, weight: .bold)
+        label.text = "FLIP MATE"
+        label.textColor = .blue
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private var logoSubTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.text = "우리들이 공부하는 시간"
+        label.textColor = .systemGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private var googleLoginButton: UIButton = {
         let button = UIButton()
         button.setLoginButton(type: .google)
@@ -45,9 +70,24 @@ private extension LoginViewController {
     func configureUI() {
         view.backgroundColor = .systemBackground
 
-        [ googleLoginButton, appleLoginButton, loginSkipButton ].forEach { view.addSubview($0) }
+        [ logoImageView,
+          logoMainTitleLabel,
+          logoSubTitleLabel,
+          googleLoginButton,
+          appleLoginButton,
+          loginSkipButton ].forEach { view.addSubview($0) }
         
         NSLayoutConstraint.activate([
+            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
+            
+            logoMainTitleLabel.bottomAnchor.constraint(equalTo: logoSubTitleLabel.topAnchor, constant: -5),
+            logoMainTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            logoSubTitleLabel.bottomAnchor.constraint(equalTo: logoImageView.topAnchor, constant: -20),
+            logoSubTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            
             googleLoginButton.bottomAnchor.constraint(equalTo: appleLoginButton.topAnchor, constant: -20),
             googleLoginButton.leadingAnchor.constraint(equalTo: appleLoginButton.leadingAnchor),
             googleLoginButton.trailingAnchor.constraint(equalTo: appleLoginButton.trailingAnchor),
