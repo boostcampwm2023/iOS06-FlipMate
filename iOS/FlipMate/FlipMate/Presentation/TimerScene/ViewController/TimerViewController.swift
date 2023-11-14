@@ -137,6 +137,7 @@ private extension TimerViewController {
     @objc func orientationDidChange(_ notification: Notification) {
         guard let device = notification.object as? UIDevice else { return }
         guard let deviceOrientation = DeviceOrientation(rawValue: device.orientation.rawValue) else { return }
+        UIDevice.current.isProximityMonitoringEnabled = deviceOrientation == .faceDown ? true : false
         timerViewModel.deviceOrientationDidChange(deviceOrientation)
     }
     
