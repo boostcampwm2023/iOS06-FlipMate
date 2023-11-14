@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TimerViewController: BaseViewController {
+final class TimerViewController: BaseViewController {
     
     private var timerViewModel: TimerViewModelProtocol
     
@@ -53,9 +53,11 @@ class TimerViewController: BaseViewController {
     }()
     
     private lazy var categoryManageButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "gear"), for: .normal)
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(systemName: "gearshape"), for: .normal)
         button.setTitle("관리", for: .normal)
+        button.setTitleColor(FlipMateColor.gray1.color, for: .normal)
+        button.tintColor = FlipMateColor.gra
         return button
     }()
     
@@ -64,10 +66,9 @@ class TimerViewController: BaseViewController {
         image.image = UIImage(resource: .instruction)
         return image
     }()
-    
+        
     // MARK: - View LifeCycles
     override func viewDidLoad() {
-        view.backgroundColor = .white
         super.viewDidLoad()
         configureNotification()
     }
@@ -75,24 +76,23 @@ class TimerViewController: BaseViewController {
     override func viewDidDisappear(_ animated: Bool) {
         UIDevice.current.isProximityMonitoringEnabled = false
     }
-    
+  
     // MARK: - setup UI
     override func configureUI() {
-        view.addSubview(timerLabel)
-        view.addSubview(divider)
-        view.addSubview(categoryInstructionBlock)
-        view.addSubview(categoryManageButton)
-        view.addSubview(instructionImage)
-        
+        let subViews = [timerLabel,
+                        divider,
+                        categoryInstructionBlock,
+                        categoryManageButton,
+                        instructionImage
+                        ]
         UIDevice.current.isProximityMonitoringEnabled = true
-        
-        timerLabel.translatesAutoresizingMaskIntoConstraints = false
-        divider.translatesAutoresizingMaskIntoConstraints = false
-        categoryInstructionBlock.translatesAutoresizingMaskIntoConstraints = false
-        categoryManageButton.translatesAutoresizingMaskIntoConstraints = false
-        instructionImage.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
+
+        subViews.forEach {
+                view.addSubview($0)
+                $0.translatesAutoresizingMaskIntoConstraints = false
+            }
+      
+       NSLayoutConstraint.activate([
             timerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
