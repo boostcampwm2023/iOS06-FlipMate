@@ -57,7 +57,7 @@ final class TimerViewController: BaseViewController {
         button.setImage(UIImage(systemName: "gearshape"), for: .normal)
         button.setTitle("관리", for: .normal)
         button.setTitleColor(FlipMateColor.gray1.color, for: .normal)
-        button.tintColor = FlipMateColor.gra
+        button.tintColor = FlipMateColor.gray1.color
         return button
     }()
     
