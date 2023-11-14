@@ -276,7 +276,7 @@
 		600908F12AFCDCD80065DFFB /* TimerScene */ = {
 			isa = PBXGroup;
 			children = (
-				601773E32B021E6000D175D9 /* TimerViewController.swift */,
+				607222FC2B026BE200516463 /* ViewController */,
 			);
 			path = TimerScene;
 			sourceTree = "<group>";
@@ -445,6 +445,14 @@
 			children = (
 			);
 			path = Repositories;
+			sourceTree = "<group>";
+		};
+		607222FC2B026BE200516463 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				601773E32B021E6000D175D9 /* TimerViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
