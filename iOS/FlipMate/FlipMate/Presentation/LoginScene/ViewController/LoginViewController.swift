@@ -129,9 +129,6 @@ fileprivate extension UIButton {
         self.layer.cornerRadius = 11
         self.layer.borderWidth = 1.0
         self.layer.borderColor = FlipMateColor.gray2.color?.cgColor
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = CGSize(width: 3.0, height: 3.0)
-        self.layer.shadowOpacity = 0.3
-        self.layer.shadowRadius = 2.0
+        self.setShadow()
     }
 }
