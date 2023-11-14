@@ -66,6 +66,7 @@ private extension TabBarViewController {
         timerButton.layer.cornerRadius = timerButtonFrame.height / 2
         timerButton.layer.borderWidth = 0.5
         timerButton.layer.borderColor = UIColor.lightGray.cgColor
+        timerButton.setShadow()
         view.addSubview(timerButton)
 
         timerButton.setImage(UIImage(systemName: "timer",
