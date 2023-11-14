@@ -9,6 +9,17 @@ import UIKit
 
 final class TimerViewController: BaseViewController {
     
+    private var timerViewModel: TimerViewModelProtocol
+    
+    init(timerViewModel: TimerViewModelProtocol) {
+        self.timerViewModel = timerViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("Don't use storyboard")
+    }
+    
     /// 오늘 학습한 총 시간 타이머
     private lazy var timerLabel: UILabel = {
         let label = UILabel()
@@ -46,7 +57,7 @@ final class TimerViewController: BaseViewController {
         button.setImage(UIImage(systemName: "gearshape"), for: .normal)
         button.setTitle("관리", for: .normal)
         button.setTitleColor(FlipMateColor.gray1.color, for: .normal)
-        button.tintColor = FlipMateColor.gray1.color
+        button.tintColor = FlipMateColor.gra
         return button
     }()
     
@@ -55,8 +66,17 @@ final class TimerViewController: BaseViewController {
         image.image = UIImage(resource: .instruction)
         return image
     }()
+        
+    // MARK: - View LifeCycles
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureNotification()
+    }
     
-    
+    override func viewDidDisappear(_ animated: Bool) {
+        UIDevice.current.isProximityMonitoringEnabled = false
+    }
+  
     // MARK: - setup UI
     override func configureUI() {
         let subViews = [timerLabel,
@@ -65,13 +85,14 @@ final class TimerViewController: BaseViewController {
                         categoryManageButton,
                         instructionImage
                         ]
-        
+        UIDevice.current.isProximityMonitoringEnabled = true
+
         subViews.forEach {
                 view.addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
             }
-        
-        NSLayoutConstraint.activate([
+      
+       NSLayoutConstraint.activate([
             timerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
@@ -103,7 +124,30 @@ final class TimerViewController: BaseViewController {
     }
 }
 
+// MARK: Notification Method
+private extension TimerViewController {
+    func configureNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange(_:)), name: UIDevice.orientationDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(proximityDidChange(_:)), name: UIDevice.proximityStateDidChangeNotification, object: nil)
+    }
+}
+
+// MARK: objc function
+private extension TimerViewController {
+    @objc func orientationDidChange(_ notification: Notification) {
+        guard let device = notification.object as? UIDevice else { return }
+        guard let deviceOrientation = DeviceOrientation(rawValue: device.orientation.rawValue) else { return }
+        timerViewModel.deviceOrientationDidChange(deviceOrientation)
+    }
+    
+    @objc func proximityDidChange(_ notification: Notification) {
+        guard let device = notification.object as? UIDevice else { return }
+        let deviceProximityStatus = device.proximityState
+        timerViewModel.deviceProximityDidChange(deviceProximityStatus)
+    }
+}
+
 @available(iOS 17.0, *)
 #Preview {
-    TimerViewController()
+    TimerViewController(timerViewModel: TimerViewModel())
 }

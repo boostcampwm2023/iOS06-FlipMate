@@ -9,7 +9,7 @@ enum LoginType {
     case google
     case apple
     
-    var description: String {
+    var buttonTitle: String {
         switch self {
         case .google:
             "구글 계정으로 로그인"

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		24A38712CF24997B512A0C4A /* Pods_FlipMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67C5E61F07640B8F89AB356 /* Pods_FlipMate.framework */; };
+		2C4D55AB2B033029006D7C26 /* UIView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D55AA2B033029006D7C26 /* UIView++Extension.swift */; };
+		2C4D55B02B0348FB006D7C26 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D55AF2B0348FB006D7C26 /* TimerViewModel.swift */; };
+		2C4D55B32B035484006D7C26 /* DeviceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D55B22B035484006D7C26 /* DeviceOrientation.swift */; };
 		2C5CDA482B0252B2007AFC57 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA472B0252B2007AFC57 /* LoginViewController.swift */; };
 		2C5CDA4B2B0252C1007AFC57 /* LoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA4A2B0252C1007AFC57 /* LoginType.swift */; };
 		2C5CDA4F2B025403007AFC57 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA4E2B025403007AFC57 /* SocialViewController.swift */; };
@@ -48,6 +51,9 @@
 
 /* Begin PBXFileReference section */
 		045022A6DA9A21DB95C267D0 /* Pods-FlipMateTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMateTests.release.xcconfig"; path = "Target Support Files/Pods-FlipMateTests/Pods-FlipMateTests.release.xcconfig"; sourceTree = "<group>"; };
+		2C4D55AA2B033029006D7C26 /* UIView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView++Extension.swift"; sourceTree = "<group>"; };
+		2C4D55AF2B0348FB006D7C26 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
+		2C4D55B22B035484006D7C26 /* DeviceOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceOrientation.swift; sourceTree = "<group>"; };
 		2C5CDA472B0252B2007AFC57 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2C5CDA4A2B0252C1007AFC57 /* LoginType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginType.swift; sourceTree = "<group>"; };
 		2C5CDA4E2B025403007AFC57 /* SocialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +121,38 @@
 				D6BD4FEF5337019834533B60 /* Pods_FlipMateTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2C4D55A92B033015006D7C26 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				2C4D55AA2B033029006D7C26 /* UIView++Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		2C4D55AC2B0348D1006D7C26 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2C4D55AF2B0348FB006D7C26 /* TimerViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2C4D55AE2B0348EC006D7C26 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				601773E32B021E6000D175D9 /* TimerViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2C4D55B12B035476006D7C26 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2C4D55B22B035484006D7C26 /* DeviceOrientation.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		2C5CDA462B0252B2007AFC57 /* ViewController */ = {
@@ -276,7 +314,9 @@
 		600908F12AFCDCD80065DFFB /* TimerScene */ = {
 			isa = PBXGroup;
 			children = (
-				607222FC2B026BE200516463 /* ViewController */,
+				2C4D55B12B035476006D7C26 /* Model */,
+				2C4D55AC2B0348D1006D7C26 /* ViewModel */,
+				2C4D55AE2B0348EC006D7C26 /* ViewController */,
 			);
 			path = TimerScene;
 			sourceTree = "<group>";
@@ -334,6 +374,7 @@
 		600908F82AFCDE630065DFFB /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				2C4D55A92B033015006D7C26 /* Extension */,
 				600908FA2AFCDF0F0065DFFB /* Repositories */,
 				600908FC2AFCDF2F0065DFFB /* Network */,
 				600909022AFCDFEA0065DFFB /* Persistants */,
@@ -675,6 +716,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C4D55B02B0348FB006D7C26 /* TimerViewModel.swift in Sources */,
+				2C4D55AB2B033029006D7C26 /* UIView++Extension.swift in Sources */,
 				2C5CDA4B2B0252C1007AFC57 /* LoginType.swift in Sources */,
 				2C5CDA482B0252B2007AFC57 /* LoginViewController.swift in Sources */,
 				2C5CDA582B025426007AFC57 /* FlipMateFont.swift in Sources */,
@@ -683,6 +726,7 @@
 				2C5CDA5B2B025440007AFC57 /* ChartViewController.swift in Sources */,
 				600908BE2AFCD7DF0065DFFB /* AppDelegate.swift in Sources */,
 				2C5CDA562B025426007AFC57 /* BaseViewController.swift in Sources */,
+				2C4D55B32B035484006D7C26 /* DeviceOrientation.swift in Sources */,
 				EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */,
 				2C5CDA572B025426007AFC57 /* FlipMateColor.swift in Sources */,
 				600908C02AFCD7DF0065DFFB /* SceneDelegate.swift in Sources */,

@@ -16,17 +16,15 @@ final class TabBarViewController: UITabBarController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        var tabFrame = self.tabBar.frame
-        tabFrame.size.height += 10
-        tabFrame.origin.y = self.view.frame.size.height - tabFrame.size.height
-        self.tabBar.frame = tabFrame
+        setupFrame()
         configureTimerButton()
     }
 }
 
-extension TabBarViewController {
+// MARK: - UI Setting
+private extension TabBarViewController {
     func setUpUI() {
-        let timerViewController = TimerViewController()
+        let timerViewController = TimerViewController(timerViewModel: TimerViewModel())
         let socialViewController = SocialViewController()
         let chartViewController = ChartViewController()
 
@@ -48,6 +46,13 @@ extension TabBarViewController {
         self.tabBar.layer.backgroundColor = UIColor.white.cgColor
     }
 
+    func setupFrame() {
+        var tabFrame = self.tabBar.frame
+        tabFrame.size.height += 10
+        tabFrame.origin.y = self.view.frame.size.height - tabFrame.size.height
+        self.tabBar.frame = tabFrame
+    }
+
     func configureTimerButton() {
         let timerButton = UIButton(frame: CGRect(x: 0, y: 0,
                                                  width: self.tabBar.frame.size.height * 0.5 + 45,
@@ -61,6 +66,7 @@ extension TabBarViewController {
         timerButton.layer.cornerRadius = timerButtonFrame.height / 2
         timerButton.layer.borderWidth = 0.5
         timerButton.layer.borderColor = UIColor.lightGray.cgColor
+        timerButton.setShadow()
         view.addSubview(timerButton)
 
         timerButton.setImage(UIImage(systemName: "timer",
@@ -71,7 +77,10 @@ extension TabBarViewController {
         timerButton.tintColor = .darkGray
         view.layoutIfNeeded()
     }
+}
 
+// MARK: - objc function
+private extension TabBarViewController {
     @objc private func timerButtonAction(sender: UIButton) {
         selectedIndex = 1
     }
