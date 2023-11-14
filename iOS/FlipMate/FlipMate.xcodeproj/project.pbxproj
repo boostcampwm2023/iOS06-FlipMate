@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		24A38712CF24997B512A0C4A /* Pods_FlipMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67C5E61F07640B8F89AB356 /* Pods_FlipMate.framework */; };
 		2C4D55AB2B033029006D7C26 /* UIView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D55AA2B033029006D7C26 /* UIView++Extension.swift */; };
+		2C4D55B02B0348FB006D7C26 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D55AF2B0348FB006D7C26 /* TimerViewModel.swift */; };
 		2C5CDA482B0252B2007AFC57 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA472B0252B2007AFC57 /* LoginViewController.swift */; };
 		2C5CDA4B2B0252C1007AFC57 /* LoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA4A2B0252C1007AFC57 /* LoginType.swift */; };
 		2C5CDA4F2B025403007AFC57 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA4E2B025403007AFC57 /* SocialViewController.swift */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		045022A6DA9A21DB95C267D0 /* Pods-FlipMateTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMateTests.release.xcconfig"; path = "Target Support Files/Pods-FlipMateTests/Pods-FlipMateTests.release.xcconfig"; sourceTree = "<group>"; };
 		2C4D55AA2B033029006D7C26 /* UIView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView++Extension.swift"; sourceTree = "<group>"; };
+		2C4D55AF2B0348FB006D7C26 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
 		2C5CDA472B0252B2007AFC57 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2C5CDA4A2B0252C1007AFC57 /* LoginType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginType.swift; sourceTree = "<group>"; };
 		2C5CDA4E2B025403007AFC57 /* SocialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,22 @@
 				2C4D55AA2B033029006D7C26 /* UIView++Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		2C4D55AC2B0348D1006D7C26 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2C4D55AF2B0348FB006D7C26 /* TimerViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2C4D55AE2B0348EC006D7C26 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				601773E32B021E6000D175D9 /* TimerViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		2C5CDA462B0252B2007AFC57 /* ViewController */ = {
@@ -286,7 +304,8 @@
 		600908F12AFCDCD80065DFFB /* TimerScene */ = {
 			isa = PBXGroup;
 			children = (
-				601773E32B021E6000D175D9 /* TimerViewController.swift */,
+				2C4D55AC2B0348D1006D7C26 /* ViewModel */,
+				2C4D55AE2B0348EC006D7C26 /* ViewController */,
 			);
 			path = TimerScene;
 			sourceTree = "<group>";
@@ -678,6 +697,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C4D55B02B0348FB006D7C26 /* TimerViewModel.swift in Sources */,
 				2C4D55AB2B033029006D7C26 /* UIView++Extension.swift in Sources */,
 				2C5CDA4B2B0252C1007AFC57 /* LoginType.swift in Sources */,
 				2C5CDA482B0252B2007AFC57 /* LoginViewController.swift in Sources */,
