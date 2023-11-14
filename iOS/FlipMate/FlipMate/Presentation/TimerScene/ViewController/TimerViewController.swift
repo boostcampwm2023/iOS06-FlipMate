@@ -6,13 +6,20 @@
 //
 
 import UIKit
+import Combine
 
 final class TimerViewController: BaseViewController {
     
+    // MARK: - Properties
     private var timerViewModel: TimerViewModelProtocol
+    private var feedbackManager: FeedbackManager
+    private var cancellabes = Set<AnyCancellable>()
+    private var userScreenBrightness: CGFloat = UIScreen.main.brightness
     
-    init(timerViewModel: TimerViewModelProtocol) {
+    // MARK: - init
+    init(timerViewModel: TimerViewModelProtocol, feedbackManager: FeedbackManager) {
         self.timerViewModel = timerViewModel
+        self.feedbackManager = feedbackManager
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -122,6 +129,28 @@ final class TimerViewController: BaseViewController {
             instructionImage.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
+    
+    override func bind() {
+        timerViewModel.isDeviceFaceDownPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isFaceDown in
+                guard let self = self else { return }
+                self.setScreenBrightness(isFaceDown)
+            }
+            .store(in: &cancellabes)
+    }
+}
+
+private extension TimerViewController {
+    func setScreenBrightness(_ isFaceDown: Bool) {
+        if isFaceDown {
+            self.userScreenBrightness = UIScreen.main.brightness
+            self.feedbackManager.startHapticFeedback(feedbackStyle: .heavy)
+            UIScreen.main.brightness = 0.0
+        } else {
+            UIScreen.main.brightness = self.userScreenBrightness
+        }
+    }
 }
 
 // MARK: Notification Method
@@ -137,7 +166,7 @@ private extension TimerViewController {
     @objc func orientationDidChange(_ notification: Notification) {
         guard let device = notification.object as? UIDevice else { return }
         guard let deviceOrientation = DeviceOrientation(rawValue: device.orientation.rawValue) else { return }
-        UIDevice.current.isProximityMonitoringEnabled = deviceOrientation == .faceDown ? true : false
+        device.isProximityMonitoringEnabled = deviceOrientation == .faceDown ? true : false
         timerViewModel.deviceOrientationDidChange(deviceOrientation)
     }
     
@@ -150,5 +179,5 @@ private extension TimerViewController {
 
 @available(iOS 17.0, *)
 #Preview {
-    TimerViewController(timerViewModel: TimerViewModel())
+    TimerViewController(timerViewModel: TimerViewModel(), feedbackManager: FeedbackManager())
 }

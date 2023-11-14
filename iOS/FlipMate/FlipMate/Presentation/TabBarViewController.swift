@@ -24,7 +24,7 @@ final class TabBarViewController: UITabBarController {
 // MARK: - UI Setting
 private extension TabBarViewController {
     func setUpUI() {
-        let timerViewController = TimerViewController(timerViewModel: TimerViewModel())
+        let timerViewController = TimerViewController(timerViewModel: TimerViewModel(), feedbackManager: FeedbackManager())
         let socialViewController = SocialViewController()
         let chartViewController = ChartViewController()
 
