@@ -39,7 +39,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="FlipMate_icon" width="76" height="80.333335876464844"/>
+        <image name="FlipMate_icon" width="163.33332824707031" height="162.33332824707031"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
