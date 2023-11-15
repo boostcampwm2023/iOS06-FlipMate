@@ -18,4 +18,13 @@ export class CategoriesService {
   async findAll(): Promise<Categories[]> {
     return this.categoriesRepository.find();
   }
+
+  async update(categoriesData: Categories, id: number): Promise<Categories> {
+    const category = await this.categoriesRepository.findOne({
+      where: { id: id },
+    });
+    category.name = categoriesData.name;
+    category.color_code = categoriesData.color_code;
+    return this.categoriesRepository.save(category);
+  }
 }
