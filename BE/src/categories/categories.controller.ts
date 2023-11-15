@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiCreatedResponse,
@@ -53,5 +61,18 @@ export class CategoriesController {
     @Body() id: number,
   ): Promise<Categories> {
     return this.categoriesService.update(categoriesData, id);
+  }
+
+  @Delete(':id')
+  @ApiOperation({ summary: '카테고리 삭제' })
+  @ApiCreatedResponse({
+    type: Categories,
+    description: '카테고리 삭제 성공',
+  })
+  @ApiBadRequestResponse({
+    description: '잘못된 요청입니다.',
+  })
+  deleteCategories(@Param() id: number): Promise<void> {
+    return this.categoriesService.remove(id);
   }
 }
