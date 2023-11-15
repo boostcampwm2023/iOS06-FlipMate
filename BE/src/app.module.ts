@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { StudyLogsModule } from './study-logs/study-logs.module';
 import { StudyLogs } from './study-logs/study-logs.entity';
+import { MatesModule } from './mates/mates.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { StudyLogs } from './study-logs/study-logs.entity';
       inject: [ConfigService],
     }),
     StudyLogsModule,
+    MatesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
