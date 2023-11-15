@@ -13,6 +13,7 @@ final class TimerViewController: BaseViewController {
     // MARK: - Properties
     private var timerViewModel: TimerViewModelProtocol
     private var feedbackManager: FeedbackManager
+    private let deviceMotionManager = DeviceMotionManager.shared
     private var cancellabes = Set<AnyCancellable>()
     private var userScreenBrightness: CGFloat = UIScreen.main.brightness
     
@@ -77,10 +78,14 @@ final class TimerViewController: BaseViewController {
     // MARK: - View LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         configureNotification()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        deviceMotionManager.stopDeviceMotion()
         UIDevice.current.isProximityMonitoringEnabled = false
     }
   
@@ -92,7 +97,6 @@ final class TimerViewController: BaseViewController {
                         categoryManageButton,
                         instructionImage
                         ]
-        UIDevice.current.isProximityMonitoringEnabled = true
 
         subViews.forEach {
                 view.addSubview($0)
@@ -156,18 +160,20 @@ private extension TimerViewController {
 // MARK: Notification Method
 private extension TimerViewController {
     func configureNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange(_:)), name: UIDevice.orientationDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange(_:)), name: DeviceMotionManager.orientationDidChangeNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(proximityDidChange(_:)), name: UIDevice.proximityStateDidChangeNotification, object: nil)
+        deviceMotionManager.startDeviceMotion()
     }
 }
 
 // MARK: objc function
 private extension TimerViewController {
     @objc func orientationDidChange(_ notification: Notification) {
-        guard let device = notification.object as? UIDevice else { return }
-        guard let deviceOrientation = DeviceOrientation(rawValue: device.orientation.rawValue) else { return }
-        device.isProximityMonitoringEnabled = deviceOrientation == .faceDown ? true : false
-        timerViewModel.deviceOrientationDidChange(deviceOrientation)
+        guard let deviceOrientation = DeviceOrientation(rawValue: deviceMotionManager.orientation.rawValue) else { return }
+        DispatchQueue.main.async {
+            UIDevice.current.isProximityMonitoringEnabled = deviceOrientation == .faceDown ? true : false
+            self.timerViewModel.deviceOrientationDidChange(deviceOrientation)
+        }
     }
     
     @objc func proximityDidChange(_ notification: Notification) {
