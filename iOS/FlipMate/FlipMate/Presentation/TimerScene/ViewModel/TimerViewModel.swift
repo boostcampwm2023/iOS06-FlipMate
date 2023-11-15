@@ -28,6 +28,12 @@ final class TimerViewModel: TimerViewModelProtocol {
     private var proximity: Bool?
     private var isDeviceFaceDownSubject = PassthroughSubject<Bool, Never>()
     private var isPresentingCategorySubject = PassthroughSubject<Void, Never>()
+    private var timerUseCase: TimerUseCase
+    
+    // MARK: - init
+    init(timerUseCase: TimerUseCase) {
+        self.timerUseCase = timerUseCase
+    }
     
     // MARK: Output
     var isDeviceFaceDownPublisher: AnyPublisher<Bool, Never> {
