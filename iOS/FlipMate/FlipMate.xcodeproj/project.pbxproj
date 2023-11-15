@@ -30,6 +30,7 @@
 		601773E42B021E6000D175D9 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601773E32B021E6000D175D9 /* TimerViewController.swift */; };
 		A18D97900627849B3EFACF76 /* Pods_FlipMate_FlipMateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA80839AC9EFDD4BAA10C67 /* Pods_FlipMate_FlipMateUITests.framework */; };
 		EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851C62B021492009031EA /* TabBarViewController.swift */; };
+		EDC851CC2B0489A2009031EA /* DeviceMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851CB2B0489A2009031EA /* DeviceMotionManager.swift */; };
 		F7A950D65406B09770F804B3 /* Pods_FlipMateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BD4FEF5337019834533B60 /* Pods_FlipMateTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,7 @@
 		D7C2A09FEADF1334BDCDF5EB /* Pods-FlipMate-FlipMateUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate-FlipMateUITests.debug.xcconfig"; path = "Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E67C5E61F07640B8F89AB356 /* Pods_FlipMate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDC851C62B021492009031EA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		EDC851CB2B0489A2009031EA /* DeviceMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMotionManager.swift; sourceTree = "<group>"; };
 		FD66C3A5CB659DEB2A0165B8 /* Pods-FlipMate-FlipMateUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate-FlipMateUITests.release.xcconfig"; path = "Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -425,6 +427,7 @@
 		600908FE2AFCDF8D0065DFFB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				EDC851CA2B04894F009031EA /* MotionManager */,
 				2C43A0D62B037BA50005596A /* FeedbackManager */,
 				600908FF2AFCDF990065DFFB /* Extensions */,
 				600909002AFCDFA10065DFFB /* Protocols */,
@@ -497,6 +500,14 @@
 			children = (
 			);
 			path = Repositories;
+			sourceTree = "<group>";
+		};
+		EDC851CA2B04894F009031EA /* MotionManager */ = {
+			isa = PBXGroup;
+			children = (
+				EDC851CB2B0489A2009031EA /* DeviceMotionManager.swift */,
+			);
+			path = MotionManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -729,6 +740,7 @@
 				600908C22AFCD7DF0065DFFB /* ViewController.swift in Sources */,
 				2C5CDA5B2B025440007AFC57 /* ChartViewController.swift in Sources */,
 				600908BE2AFCD7DF0065DFFB /* AppDelegate.swift in Sources */,
+				EDC851CC2B0489A2009031EA /* DeviceMotionManager.swift in Sources */,
 				2C5CDA562B025426007AFC57 /* BaseViewController.swift in Sources */,
 				2C4D55B32B035484006D7C26 /* DeviceOrientation.swift in Sources */,
 				EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */,
