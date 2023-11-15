@@ -58,7 +58,7 @@ export class CategoriesController {
   })
   updateCategories(
     @Body() categoriesData: Categories,
-    @Body() id: number,
+    @Param() id: number,
   ): Promise<Categories> {
     return this.categoriesService.update(categoriesData, id);
   }
