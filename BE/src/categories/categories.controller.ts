@@ -47,7 +47,7 @@ export class CategoriesController {
     return this.categoriesService.create(categoriesData);
   }
 
-  @Patch(':id')
+  @Patch(':category_id')
   @ApiOperation({ summary: '카테고리 수정' })
   @ApiCreatedResponse({
     type: Categories,
@@ -58,12 +58,12 @@ export class CategoriesController {
   })
   updateCategories(
     @Body() categoriesData: Categories,
-    @Param() id: number,
+    @Param() category_id: number,
   ): Promise<Categories> {
-    return this.categoriesService.update(categoriesData, id);
+    return this.categoriesService.update(categoriesData, category_id);
   }
 
-  @Delete(':id')
+  @Delete(':category_id')
   @ApiOperation({ summary: '카테고리 삭제' })
   @ApiCreatedResponse({
     type: Categories,
@@ -72,7 +72,7 @@ export class CategoriesController {
   @ApiBadRequestResponse({
     description: '잘못된 요청입니다.',
   })
-  deleteCategories(@Param() id: number): Promise<void> {
-    return this.categoriesService.remove(id);
+  deleteCategories(@Param() category_id: number): Promise<void> {
+    return this.categoriesService.remove(category_id);
   }
 }
