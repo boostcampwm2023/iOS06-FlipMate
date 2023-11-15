@@ -9,7 +9,7 @@ import { Categories } from './categories/categories.entity';
 import { CategoriesModule } from './categories/categories.module';
 import { MatesModule } from './mates/mates.module';
 import { UsersModule } from './users/users.module';
-
+import { Users } from './users/users.entity';
 
 @Module({
   imports: [
@@ -24,7 +24,7 @@ import { UsersModule } from './users/users.module';
         username: config.get<string>('DATABASE_USERNAME'),
         password: config.get<string>('DATABASE_PASSWORD'),
         database: config.get<string>('DATABASE_NAME'),
-        entities: [StudyLogs, Categories],
+        entities: [StudyLogs, Categories, Users],
         synchronize: true,
       }),
       inject: [ConfigService],

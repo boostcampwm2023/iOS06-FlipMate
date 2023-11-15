@@ -1,12 +1,13 @@
-import { Controller, Post, Delete, Patch, Get } from '@nestjs/common';
+import { Controller, Post, Delete, Patch, Get, Body } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Users } from './users.entity';
 
 @ApiTags('Users')
 @Controller('users')
 export class UsersController {
   @Post()
   @ApiOperation({ summary: '유저 회원 가입' })
-  createUser() {}
+  createUser(@Body() userData: Users) {}
 
   @Post('/auth')
   @ApiOperation({ summary: '유저 로그인' })
