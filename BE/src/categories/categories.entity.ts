@@ -7,18 +7,24 @@ export class Categories {
   id: number;
 
   @ApiProperty({
-    type: 'char(50)',
+    type: 'string',
     example: '백준',
     description: '카테고리 이름',
   })
-  @Column({ type: 'char' })
+  @Column({
+    type: 'char',
+    length: 50,
+  })
   name: string;
 
   @ApiProperty({
-    type: 'char(8)',
+    type: 'string',
     example: 'FFFFFFFF',
     description: '카테고리 색상',
   })
-  @Column({ type: 'char' })
+  @Column({
+    type: 'char',
+    length: 8,
+  })
   color_code: string;
 }
