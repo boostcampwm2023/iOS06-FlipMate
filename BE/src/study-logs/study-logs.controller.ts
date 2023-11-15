@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { StudyLogsService } from './study-logs.service';
 import { StudyLogs } from './study-logs.entity';
 import {
@@ -25,4 +25,18 @@ export class StudyLogsController {
   createStudyLogs(@Body() studyLogsData: StudyLogs): Promise<StudyLogs> {
     return this.studyLogsService.create(studyLogsData);
   }
+
+  @Get()
+  @ApiOperation({ summary: '학습시간 조회' })
+  @ApiCreatedResponse({
+    type: StudyLogs,
+    description: '학습 기록이 성공적으로 조회되었습니다.',
+  })
+  @ApiBadRequestResponse({
+    description: '잘못된 요청입니다.',
+  })
+  getStudyLogs(): Promise<StudyLogs[]> {
+    return this.studyLogsService.findAll();
+  }
+  
 }

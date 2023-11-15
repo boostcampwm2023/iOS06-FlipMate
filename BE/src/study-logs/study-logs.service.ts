@@ -14,4 +14,9 @@ export class StudyLogsService {
     const studyLog = this.studyLogsRepository.create(studyLogsData);
     return this.studyLogsRepository.save(studyLog);
   }
+
+  async findAll(): Promise<StudyLogs[]> {
+    return this.studyLogsRepository.find();
+  }
+
 }
