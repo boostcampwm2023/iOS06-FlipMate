@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { StudyLogsService } from './study-logs.service';
 import { StudyLogs } from './study-logs.entity';
 import {
@@ -38,5 +38,28 @@ export class StudyLogsController {
   getStudyLogs(): Promise<StudyLogs[]> {
     return this.studyLogsService.findAll();
   }
-  
+}
+
+@Controller('/study-logs/stats')
+export class StatsController {
+  @Get()
+  @ApiTags('Stats')
+  @ApiOperation({ summary: '일간 통계 조회하기' })
+  getStats(
+    @Query('year') year: number,
+    @Query('month') month: number,
+    @Query('day') day: number,
+  ) {
+    return { year, month, day };
+  }
+
+  @Get('/weekly')
+  @ApiTags('Stats')
+  @ApiOperation({ summary: '주간 통계 조회하기' })
+  getWeeklyStats() {}
+
+  @Get('/monthly')
+  @ApiTags('Stats')
+  @ApiOperation({ summary: '주간 통계 조회하기' })
+  getMonthlyStats() {}
 }
