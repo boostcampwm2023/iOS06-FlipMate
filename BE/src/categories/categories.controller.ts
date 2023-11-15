@@ -22,7 +22,20 @@ export class CategoriesController {
   @ApiBadRequestResponse({
     description: '잘못된 요청입니다.',
   })
-  getCategories() {
+  getCategories(): Promise<Categories[]> {
     return this.categoriesService.findAll();
+  }
+
+  @Post()
+  @ApiOperation({ summary: '카테고리 생성' })
+  @ApiCreatedResponse({
+    type: Categories,
+    description: '카테고리 생성 성공',
+  })
+  @ApiBadRequestResponse({
+    description: '잘못된 요청입니다.',
+  })
+  createCategories(@Body() categoriesData: Categories): Promise<Categories> {
+    return this.categoriesService.create(categoriesData);
   }
 }
