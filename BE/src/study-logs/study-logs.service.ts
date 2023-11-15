@@ -18,5 +18,4 @@ export class StudyLogsService {
   async findAll(): Promise<StudyLogs[]> {
     return this.studyLogsRepository.find();
   }
-
 }
