@@ -145,9 +145,10 @@ private extension TimerViewController {
     func setScreenBrightness(_ isFaceDown: Bool) {
         if isFaceDown {
             self.userScreenBrightness = UIScreen.main.brightness
-            self.feedbackManager.startHapticFeedback(feedbackStyle: .heavy)
+            self.feedbackManager.startFacedownFeedback()
             UIScreen.main.brightness = 0.0
         } else {
+            self.feedbackManager.startFaceupFeedback()
             UIScreen.main.brightness = self.userScreenBrightness
         }
     }
