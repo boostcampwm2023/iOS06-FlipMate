@@ -7,6 +7,8 @@ import { StudyLogsModule } from './study-logs/study-logs.module';
 import { StudyLogs } from './study-logs/study-logs.entity';
 import { Categories } from './categories/categories.entity';
 import { CategoriesModule } from './categories/categories.module';
+import { MatesModule } from './mates/mates.module';
+
 
 @Module({
   imports: [
@@ -28,6 +30,7 @@ import { CategoriesModule } from './categories/categories.module';
     }),
     StudyLogsModule,
     CategoriesModule,
+    MatesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
