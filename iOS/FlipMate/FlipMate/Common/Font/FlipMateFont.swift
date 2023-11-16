@@ -12,6 +12,7 @@ enum FlipMateFont {
     case mediumRegular
     case smallRegular
     case caption
+    case extraLargeBold
     case largeBold
     case mediumBold
     case smallBold
@@ -22,6 +23,7 @@ enum FlipMateFont {
         case .mediumRegular: return .systemFont(ofSize: 18, weight: .regular)
         case .smallRegular: return .systemFont(ofSize: 14, weight: .regular)
         case .caption: return .systemFont(ofSize: 12, weight: .regular)
+        case .extraLargeBold: return .systemFont(ofSize: 64, weight: .bold)
         case .largeBold: return .systemFont(ofSize: 32, weight: .bold)
         case .mediumBold: return .systemFont(ofSize: 18, weight: .bold)
         case .smallBold: return .systemFont(ofSize: 14, weight: .bold)

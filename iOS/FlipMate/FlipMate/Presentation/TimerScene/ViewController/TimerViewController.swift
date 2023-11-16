@@ -33,7 +33,7 @@ final class TimerViewController: BaseViewController {
     private lazy var timerLabel: UILabel = {
         let label = UILabel()
         label.text = "00:00:00"
-        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        label.font = FlipMateFont.extraLargeBold.font
         label.textColor = .label
         return label
     }()
@@ -130,7 +130,7 @@ final class TimerViewController: BaseViewController {
             categoryManageButton.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
             categoryManageButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             categoryManageButton.widthAnchor.constraint(equalToConstant: 90),
-            categoryManageButton.heightAnchor.constraint(equalToConstant: 40)
+            categoryManageButton.heightAnchor.constraint(equalToConstant: 32)
             
         ])
         
