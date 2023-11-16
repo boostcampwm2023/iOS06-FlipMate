@@ -31,6 +31,7 @@
 		A18D97900627849B3EFACF76 /* Pods_FlipMate_FlipMateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA80839AC9EFDD4BAA10C67 /* Pods_FlipMate_FlipMateUITests.framework */; };
 		EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851C62B021492009031EA /* TabBarViewController.swift */; };
 		EDC851CC2B0489A2009031EA /* DeviceMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851CB2B0489A2009031EA /* DeviceMotionManager.swift */; };
+		EDC851D62B05C261009031EA /* CategoryListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851D52B05C261009031EA /* CategoryListCollectionViewCell.swift */; };
 		F7A950D65406B09770F804B3 /* Pods_FlipMateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BD4FEF5337019834533B60 /* Pods_FlipMateTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,7 @@
 		E67C5E61F07640B8F89AB356 /* Pods_FlipMate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDC851C62B021492009031EA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		EDC851CB2B0489A2009031EA /* DeviceMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMotionManager.swift; sourceTree = "<group>"; };
+		EDC851D52B05C261009031EA /* CategoryListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCollectionViewCell.swift; sourceTree = "<group>"; };
 		FD66C3A5CB659DEB2A0165B8 /* Pods-FlipMate-FlipMateUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate-FlipMateUITests.release.xcconfig"; path = "Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,6 +164,7 @@
 		2C4D55B12B035476006D7C26 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EDC851D32B05C24A009031EA /* View */,
 				2C4D55B22B035484006D7C26 /* DeviceOrientation.swift */,
 			);
 			path = Model;
@@ -510,6 +513,14 @@
 			path = MotionManager;
 			sourceTree = "<group>";
 		};
+		EDC851D32B05C24A009031EA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EDC851D52B05C261009031EA /* CategoryListCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -742,6 +753,7 @@
 				600908BE2AFCD7DF0065DFFB /* AppDelegate.swift in Sources */,
 				EDC851CC2B0489A2009031EA /* DeviceMotionManager.swift in Sources */,
 				2C5CDA562B025426007AFC57 /* BaseViewController.swift in Sources */,
+				EDC851D62B05C261009031EA /* CategoryListCollectionViewCell.swift in Sources */,
 				2C4D55B32B035484006D7C26 /* DeviceOrientation.swift in Sources */,
 				EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */,
 				2C5CDA572B025426007AFC57 /* FlipMateColor.swift in Sources */,
