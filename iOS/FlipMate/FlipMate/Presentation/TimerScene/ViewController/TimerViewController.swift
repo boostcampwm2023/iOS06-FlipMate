@@ -7,15 +7,16 @@
 
 import UIKit
 import Combine
+import OSLog
 
 final class TimerViewController: BaseViewController {
-    
+   
     // MARK: - Properties
     private var timerViewModel: TimerViewModelProtocol
     private var feedbackManager: FeedbackManager
     private var cancellabes = Set<AnyCancellable>()
     private var userScreenBrightness: CGFloat = UIScreen.main.brightness
-    
+    private var logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "", category: "test")
     // MARK: - init
     init(timerViewModel: TimerViewModelProtocol, feedbackManager: FeedbackManager) {
         self.timerViewModel = timerViewModel
@@ -32,7 +33,7 @@ final class TimerViewController: BaseViewController {
         let label = UILabel()
         label.text = "00:00:00"
         label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-        label.textColor = .black
+        label.textColor = .label
         return label
     }()
     
@@ -138,6 +139,14 @@ final class TimerViewController: BaseViewController {
                 self.setScreenBrightness(isFaceDown)
             }
             .store(in: &cancellabes)
+        
+        timerViewModel.totalTimePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] totalTime in
+                guard let self = self else { return }
+                self.timerLabel.text = totalTime.secondsToStringTime()
+            }
+            .store(in: &cancellabes)
     }
 }
 
@@ -179,5 +188,5 @@ private extension TimerViewController {
 
 @available(iOS 17.0, *)
 #Preview {
-    TimerViewController(timerViewModel: TimerViewModel(), feedbackManager: FeedbackManager())
+    TimerViewController(timerViewModel: TimerViewModel(timerUseCase: DefaultTimerUseCase()), feedbackManager: FeedbackManager())
 }
