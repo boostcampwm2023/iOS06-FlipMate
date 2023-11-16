@@ -514,6 +514,7 @@
 			children = (
 			);
 			path = AHAP;
+        };
 		EDC851D02B04EE74009031EA /* View */ = {
 			isa = PBXGroup;
 			children = (
