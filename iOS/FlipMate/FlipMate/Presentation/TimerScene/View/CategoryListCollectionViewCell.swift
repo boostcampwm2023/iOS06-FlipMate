@@ -9,14 +9,14 @@ import UIKit
 import Combine
 
 final class CategoryListCollectionViewCell: UICollectionViewCell {
-    static let cellID = "CategoryListCollectionViewCell"
+    static let identifier = "CategoryListCollectionViewCell"
     
     var cancellable: AnyCancellable?
     
     private let subjectLabel: UILabel = {
         let label = UILabel()
         label.font = FlipMateFont.mediumBold.font
-        label.textColor = UIColor.black
+        label.textColor = UIColor.label
         label.text = "과목명"
         return label
     }()
@@ -24,7 +24,7 @@ final class CategoryListCollectionViewCell: UICollectionViewCell {
     private let timeLabel: UILabel = {
         let label = UILabel()
         label.font = FlipMateFont.mediumBold.font
-        label.textColor = UIColor.black
+        label.textColor = UIColor.label
         label.text = "00:00:00"
         return label
     }()
