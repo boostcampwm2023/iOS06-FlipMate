@@ -67,6 +67,9 @@ final class TimerViewController: BaseViewController {
         button.setTitle("관리", for: .normal)
         button.setTitleColor(FlipMateColor.gray1.color, for: .normal)
         button.tintColor = FlipMateColor.gray1.color
+        button.layer.borderWidth = 1.0
+        button.layer.borderColor = FlipMateColor.gray1.color?.cgColor
+            button.layer.cornerRadius = 8.0
         return button
     }()
     
@@ -125,7 +128,9 @@ final class TimerViewController: BaseViewController {
         NSLayoutConstraint.activate([
             categoryManageButton.topAnchor.constraint(equalTo: categoryInstructionBlock.bottomAnchor, constant: 10),
             categoryManageButton.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
-            categoryManageButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+            categoryManageButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            categoryManageButton.widthAnchor.constraint(equalToConstant: 90),
+            categoryManageButton.heightAnchor.constraint(equalToConstant: 40)
             
         ])
         
