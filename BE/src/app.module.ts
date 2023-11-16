@@ -10,6 +10,9 @@ import { CategoriesModule } from './categories/categories.module';
 import { MatesModule } from './mates/mates.module';
 import { UsersModule } from './users/users.module';
 import { Users } from './users/users.entity';
+import { GoogleStrategy } from './google.strategy';
+import { PassportModule } from '@nestjs/passport';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -33,8 +36,10 @@ import { Users } from './users/users.entity';
     CategoriesModule,
     MatesModule,
     UsersModule,
+    PassportModule,
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, GoogleStrategy],
 })
 export class AppModule {}
