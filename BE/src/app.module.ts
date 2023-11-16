@@ -5,6 +5,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { StudyLogsModule } from './study-logs/study-logs.module';
 import { StudyLogs } from './study-logs/study-logs.entity';
+import { Categories } from './categories/categories.entity';
+import { CategoriesModule } from './categories/categories.module';
+import { MatesModule } from './mates/mates.module';
+import { UsersModule } from './users/users.module';
+import { Users } from './users/users.entity';
 
 @Module({
   imports: [
@@ -19,12 +24,15 @@ import { StudyLogs } from './study-logs/study-logs.entity';
         username: config.get<string>('DATABASE_USERNAME'),
         password: config.get<string>('DATABASE_PASSWORD'),
         database: config.get<string>('DATABASE_NAME'),
-        entities: [StudyLogs],
+        entities: [StudyLogs, Categories, Users],
         synchronize: true,
       }),
       inject: [ConfigService],
     }),
     StudyLogsModule,
+    CategoriesModule,
+    MatesModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
