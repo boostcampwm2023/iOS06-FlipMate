@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct Category: Hashable {
+    var color: String
+    var subject: String
+    var studyTime: TimeInterval
+}
