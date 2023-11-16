@@ -6,13 +6,22 @@
 //
 
 import UIKit
+import Combine
+import OSLog
 
 final class TimerViewController: BaseViewController {
-    
+   
+    // MARK: - Properties
     private var timerViewModel: TimerViewModelProtocol
+    private var feedbackManager: FeedbackManager
+    private let deviceMotionManager = DeviceMotionManager.shared
+    private var cancellables = Set<AnyCancellable>()
+    private var userScreenBrightness: CGFloat = UIScreen.main.brightness
     
-    init(timerViewModel: TimerViewModelProtocol) {
+    // MARK: - init
+    init(timerViewModel: TimerViewModelProtocol, feedbackManager: FeedbackManager) {
         self.timerViewModel = timerViewModel
+        self.feedbackManager = feedbackManager
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -24,8 +33,8 @@ final class TimerViewController: BaseViewController {
     private lazy var timerLabel: UILabel = {
         let label = UILabel()
         label.text = "00:00:00"
-        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-        label.textColor = .black
+        label.font = FlipMateFont.extraLargeBold.font
+        label.textColor = .label
         return label
     }()
     
@@ -35,21 +44,10 @@ final class TimerViewController: BaseViewController {
         return divider
     }()
     
-    private lazy var categoryInstructionBlock: UIView = {
-        let view = UIView()
-        let label = UILabel()
-        label.text = "관리 버튼을 눌러\n카테고리를 설정해주세요"
-        label.numberOfLines = 2
-        label.textAlignment = .center
-        view.addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-        view.layer.borderWidth = 10
-        view.layer.borderColor = UIColor.gray.cgColor
-        return view
+    private lazy var categoryListCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return collectionView
     }()
     
     private lazy var categoryManageButton: UIButton = {
@@ -58,6 +56,9 @@ final class TimerViewController: BaseViewController {
         button.setTitle("관리", for: .normal)
         button.setTitleColor(FlipMateColor.gray1.color, for: .normal)
         button.tintColor = FlipMateColor.gray1.color
+        button.layer.borderWidth = 1.0
+        button.layer.borderColor = FlipMateColor.gray1.color?.cgColor
+            button.layer.cornerRadius = 8.0
         return button
     }()
     
@@ -70,10 +71,15 @@ final class TimerViewController: BaseViewController {
     // MARK: - View LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureCollectionView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         configureNotification()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        deviceMotionManager.stopDeviceMotion()
         UIDevice.current.isProximityMonitoringEnabled = false
     }
   
@@ -81,11 +87,10 @@ final class TimerViewController: BaseViewController {
     override func configureUI() {
         let subViews = [timerLabel,
                         divider,
-                        categoryInstructionBlock,
+                        categoryListCollectionView,
                         categoryManageButton,
                         instructionImage
                         ]
-        UIDevice.current.isProximityMonitoringEnabled = true
 
         subViews.forEach {
                 view.addSubview($0)
@@ -105,15 +110,18 @@ final class TimerViewController: BaseViewController {
         ])
         
         NSLayoutConstraint.activate([
-            categoryInstructionBlock.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 30),
-            categoryInstructionBlock.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            categoryInstructionBlock.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+            categoryListCollectionView.topAnchor.constraint(equalTo: categoryManageButton.bottomAnchor, constant: 10),
+            categoryListCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            categoryListCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            categoryListCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
         
         NSLayoutConstraint.activate([
-            categoryManageButton.topAnchor.constraint(equalTo: categoryInstructionBlock.bottomAnchor, constant: 10),
+            categoryManageButton.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 10),
             categoryManageButton.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
-            categoryManageButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+            categoryManageButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            categoryManageButton.widthAnchor.constraint(equalToConstant: 90),
+            categoryManageButton.heightAnchor.constraint(equalToConstant: 32)
             
         ])
         
@@ -122,24 +130,62 @@ final class TimerViewController: BaseViewController {
             instructionImage.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
+    
+    override func bind() {
+        timerViewModel.isDeviceFaceDownPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isFaceDown in
+                guard let self = self else { return }
+                self.setScreenBrightness(isFaceDown)
+            }
+            .store(in: &cancellables)
+
+        timerViewModel.totalTimePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] totalTime in
+                guard let self = self else { return }
+                self.timerLabel.text = totalTime.secondsToStringTime()
+            }
+            .store(in: &cancellables)
+
+        deviceMotionManager.orientationDidChangePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] newOrientation in
+                guard let self = self else { return }
+                self.handleOrientationChange(newOrientation)
+            }
+            .store(in: &cancellables)
+    }
 }
 
-// MARK: Notification Method
+private extension TimerViewController {
+    func setScreenBrightness(_ isFaceDown: Bool) {
+        if isFaceDown {
+            self.userScreenBrightness = UIScreen.main.brightness
+            self.feedbackManager.startFacedownFeedback()
+            UIScreen.main.brightness = 0.0
+        } else {
+            UIScreen.main.brightness = self.userScreenBrightness
+        }
+    }
+}
+
+// MARK: Detecting FaceDown Method
 private extension TimerViewController {
     func configureNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange(_:)), name: UIDevice.orientationDidChangeNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(proximityDidChange(_:)), name: UIDevice.proximityStateDidChangeNotification, object: nil)
+        deviceMotionManager.startDeviceMotion()
+    }
+    
+    func handleOrientationChange(_ orientation: UIDeviceOrientation) {
+        guard let deviceOrientation = DeviceOrientation(rawValue: orientation.rawValue) else { return }
+        UIDevice.current.isProximityMonitoringEnabled = orientation == .faceDown ? true : false
+        timerViewModel.deviceOrientationDidChange(deviceOrientation)
     }
 }
 
 // MARK: objc function
 private extension TimerViewController {
-    @objc func orientationDidChange(_ notification: Notification) {
-        guard let device = notification.object as? UIDevice else { return }
-        guard let deviceOrientation = DeviceOrientation(rawValue: device.orientation.rawValue) else { return }
-        timerViewModel.deviceOrientationDidChange(deviceOrientation)
-    }
-    
     @objc func proximityDidChange(_ notification: Notification) {
         guard let device = notification.object as? UIDevice else { return }
         let deviceProximityStatus = device.proximityState
@@ -147,7 +193,36 @@ private extension TimerViewController {
     }
 }
 
-@available(iOS 17.0, *)
-#Preview {
-    TimerViewController(timerViewModel: TimerViewModel())
+// MARK: CollectionView function
+extension TimerViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func configureCollectionView() {
+        categoryListCollectionView.register(CategoryListCollectionViewCell.self, forCellWithReuseIdentifier: CategoryListCollectionViewCell.identifier)
+        categoryListCollectionView.delegate = self
+        categoryListCollectionView.dataSource = self
+    }
+    
+    // TODO: Category Model 생성 후 수정
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryListCollectionViewCell.identifier, for: indexPath) as? CategoryListCollectionViewCell else { return UICollectionViewCell() }
+        return cell
+    }
+    
+    /// cell size
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.size.width - 20, height: 58)
+    }
+    
+    /// 위아래 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
 }
+
+//@available(iOS 17.0, *)
+//#Preview {
+//    TimerViewController(timerViewModel: TimerViewModel(timerUseCase: DefaultTimerUseCase()), feedbackManager: FeedbackManager())
+//}
