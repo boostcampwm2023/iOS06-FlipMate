@@ -36,7 +36,7 @@ final class FeedbackManager {
     
     private func configureResetHandler() {
         engine.resetHandler = {
-            print("Reset Handler: 햅틱 엔진 재시작")
+            FMLogger.device.log("Reset Handler: 햅틱 엔진 재시작")
             do {
                 try self.engine.start()
             } catch {
@@ -47,7 +47,7 @@ final class FeedbackManager {
     
     private func configureStoppedHandler() {
         engine.stoppedHandler = { reason in
-            print("Stop Handler: 햅틱 엔진 정지: \(reason.rawValue)")
+            FMLogger.device.debug("Stop Handler: 햅틱 엔진 정지: \(reason.rawValue)")
             switch reason {
             case .audioSessionInterrupt:
                 break
@@ -83,7 +83,7 @@ final class FeedbackManager {
             try engine?.start()
             try engine?.playPattern(from: URL(fileURLWithPath: path))
         } catch { // Engine startup errors
-            print("An error occured playing \(fileName): \(error).")
+            FMLogger.device.error("An error occured playing \(fileName): \(error).")
         }
     }
     

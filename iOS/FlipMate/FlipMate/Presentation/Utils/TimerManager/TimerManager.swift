@@ -18,7 +18,6 @@ final class TimerManager {
     }
     
     // MARK: - Properties
-    private var logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "", category: "Timer")
     private var state: TimerState = .suspended
     private var eventHandler: (() -> Void)?
     private(set) var totalTime: Int = 0
@@ -49,7 +48,7 @@ final class TimerManager {
         self.startTime = startTime.timeIntervalSince1970
         state = .resumed
         timer.activate()
-        self.logger.debug("타미어를 시작합니다.")
+        FMLogger.device.debug("타미어를 시작합니다.")
     }
     
     /// 타이머를 재개합니다.
@@ -58,7 +57,7 @@ final class TimerManager {
         self.startTime = resumeTime.timeIntervalSince1970
         state = .resumed
         timer.resume()
-        self.logger.debug("타미어를 재개합니다.")
+        FMLogger.device.debug("타미어를 재개합니다.")
     }
     
     /// 타이머를 일시정지합니다.
@@ -66,14 +65,14 @@ final class TimerManager {
         guard state == .resumed else { return }
         state = .suspended
         timer.suspend()
-        self.logger.debug("타미어를 일시정지합니다. 현재까지 누적 시간\(self.totalTime)")
+        FMLogger.device.debug("타미어를 일시정지합니다. 현재까지 누적 시간\(self.totalTime)")
     }
     
     /// 타이머를 종료합니다.
     func cancle() {
         state = .cancled
         timer.cancel()
-        self.logger.debug("타미어를 종료합니다.")
+        FMLogger.device.debug("타미어를 종료합니다.")
     }
 }
 
@@ -92,7 +91,7 @@ private extension TimerManager {
         if fourNumber == "0000" {
             totalTime += 1
             let time = String(self.totalTime)
-            self.logger.debug("경과시간: \(diffTime), 총 누적 시간: \(time)")
+            FMLogger.device.debug("경과시간: \(diffTime), 총 누적 시간: \(time)")
         }
     }
 }
