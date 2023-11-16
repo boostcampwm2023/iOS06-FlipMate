@@ -15,7 +15,7 @@ final class TimerViewController: BaseViewController {
     private var timerViewModel: TimerViewModelProtocol
     private var feedbackManager: FeedbackManager
     private let deviceMotionManager = DeviceMotionManager.shared
-    private var cancellabes = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>()
     private var userScreenBrightness: CGFloat = UIScreen.main.brightness
     private var logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "", category: "test")
     // MARK: - init
@@ -142,7 +142,7 @@ final class TimerViewController: BaseViewController {
                 guard let self = self else { return }
                 self.setScreenBrightness(isFaceDown)
             }
-            .store(in: &cancellabes)
+            .store(in: &cancellables)
 
         timerViewModel.totalTimePublisher
             .receive(on: DispatchQueue.main)
@@ -150,7 +150,7 @@ final class TimerViewController: BaseViewController {
                 guard let self = self else { return }
                 self.timerLabel.text = totalTime.secondsToStringTime()
             }
-            .store(in: &cancellabes)
+            .store(in: &cancellables)
 
         deviceMotionManager.orientationDidChangePublisher
             .receive(on: DispatchQueue.main)
@@ -158,7 +158,7 @@ final class TimerViewController: BaseViewController {
                 guard let self = self else { return }
                 self.handleOrientationChange(newOrientation)
             }
-            .store(in: &cancellabes)
+            .store(in: &cancellables)
     }
 }
 
@@ -169,7 +169,6 @@ private extension TimerViewController {
             self.feedbackManager.startFacedownFeedback()
             UIScreen.main.brightness = 0.0
         } else {
-            self.feedbackManager.startFaceupFeedback()
             UIScreen.main.brightness = self.userScreenBrightness
         }
     }
@@ -198,7 +197,7 @@ private extension TimerViewController {
     }
 }
 
-@available(iOS 17.0, *)
-#Preview {
-    TimerViewController(timerViewModel: TimerViewModel(timerUseCase: DefaultTimerUseCase()), feedbackManager: FeedbackManager())
-}
+//@available(iOS 17.0, *)
+//#Preview {
+//    TimerViewController(timerViewModel: TimerViewModel(timerUseCase: DefaultTimerUseCase()), feedbackManager: FeedbackManager())
+//}
