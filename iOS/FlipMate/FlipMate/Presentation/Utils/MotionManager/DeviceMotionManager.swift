@@ -7,18 +7,14 @@
 
 import UIKit
 import CoreMotion
+import Combine
 
 final class DeviceMotionManager {
     static let shared = DeviceMotionManager()
-    static let orientationDidChangeNotification = Notification.Name("orientationDidChangeNotification")
     
     private let motion: CMMotionManager
-    private(set) var orientation: UIDeviceOrientation {
-        didSet {
-            guard oldValue != orientation else { return }
-            NotificationCenter.default.post(name: DeviceMotionManager.orientationDidChangeNotification, object: self)
-        }
-    }
+    private(set) var orientation: UIDeviceOrientation
+    private(set) var orientationDidChangePublisher = PassthroughSubject<UIDeviceOrientation, Never>()
     
     private init() {
         self.motion = CMMotionManager()
@@ -29,17 +25,24 @@ final class DeviceMotionManager {
         guard self.motion.isDeviceMotionAvailable else { return }
         
         self.motion.deviceMotionUpdateInterval = 0.1
-        self.motion.startDeviceMotionUpdates(to: OperationQueue()) { (data, error) in
-            guard error == nil, let gravityData = data?.gravity else { return }
+        self.motion.startDeviceMotionUpdates(to: OperationQueue()) { [weak self] (data, error) in
+            guard let self = self, error == nil, let gravityData = data?.gravity else { return }
+            
+            var newOrientation: UIDeviceOrientation = .unknown
             
             if abs(gravityData.z) > 0.9 {
-                self.orientation = gravityData.z < 0 ? .faceUp : .faceDown
+                newOrientation = gravityData.z < 0 ? .faceUp : .faceDown
             } else if abs(gravityData.x) < 0.33 {
-                self.orientation = gravityData.y < 0 ? .portrait : .portraitUpsideDown
+                newOrientation = gravityData.y < 0 ? .portrait : .portraitUpsideDown
             } else if abs(gravityData.y) < 0.33 {
-                self.orientation = gravityData.x < 0 ? .landscapeLeft : .landscapeRight
+                newOrientation = gravityData.x < 0 ? .landscapeLeft : .landscapeRight
             } else {
-                self.orientation = .unknown
+                newOrientation = .unknown
+            }
+            
+            if newOrientation != self.orientation {
+                self.orientationDidChangePublisher.send(newOrientation)
+                self.orientation = newOrientation
             }
         }
     }
@@ -48,5 +51,4 @@ final class DeviceMotionManager {
         self.motion.stopDeviceMotionUpdates()
     }
 }
-
 

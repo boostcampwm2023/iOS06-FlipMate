@@ -142,6 +142,14 @@ final class TimerViewController: BaseViewController {
                 self.setScreenBrightness(isFaceDown)
             }
             .store(in: &cancellabes)
+        
+        deviceMotionManager.orientationDidChangePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] newOrientation in
+                guard let self = self else { return }
+                self.handleOrientationChange(newOrientation)
+            }
+            .store(in: &cancellabes)
     }
 }
 
@@ -157,25 +165,22 @@ private extension TimerViewController {
     }
 }
 
-// MARK: Notification Method
+// MARK: Detecting FaceDown Method
 private extension TimerViewController {
     func configureNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange(_:)), name: DeviceMotionManager.orientationDidChangeNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(proximityDidChange(_:)), name: UIDevice.proximityStateDidChangeNotification, object: nil)
         deviceMotionManager.startDeviceMotion()
+    }
+    
+    func handleOrientationChange(_ orientation: UIDeviceOrientation) {
+        guard let deviceOrientation = DeviceOrientation(rawValue: orientation.rawValue) else { return }
+        UIDevice.current.isProximityMonitoringEnabled = orientation == .faceDown ? true : false
+        timerViewModel.deviceOrientationDidChange(deviceOrientation)
     }
 }
 
 // MARK: objc function
 private extension TimerViewController {
-    @objc func orientationDidChange(_ notification: Notification) {
-        guard let deviceOrientation = DeviceOrientation(rawValue: deviceMotionManager.orientation.rawValue) else { return }
-        DispatchQueue.main.async {
-            UIDevice.current.isProximityMonitoringEnabled = deviceOrientation == .faceDown ? true : false
-            self.timerViewModel.deviceOrientationDidChange(deviceOrientation)
-        }
-    }
-    
     @objc func proximityDidChange(_ notification: Notification) {
         guard let device = notification.object as? UIDevice else { return }
         let deviceProximityStatus = device.proximityState
