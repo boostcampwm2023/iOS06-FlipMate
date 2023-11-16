@@ -197,7 +197,7 @@ private extension TimerViewController {
     }
 }
 
-//@available(iOS 17.0, *)
-//#Preview {
-//    TimerViewController(timerViewModel: TimerViewModel(timerUseCase: DefaultTimerUseCase()), feedbackManager: FeedbackManager())
-//}
+@available(iOS 17.0, *)
+#Preview {
+    TimerViewController(timerViewModel: TimerViewModel(timerUseCase: DefaultTimerUseCase()), feedbackManager: FeedbackManager())
+}
