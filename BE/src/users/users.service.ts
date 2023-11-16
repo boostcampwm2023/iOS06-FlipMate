@@ -23,7 +23,7 @@ export class UsersService {
   }
 }
 
-type UserCreateDto = {
+export type UserCreateDto = {
   nickname: string;
   google_id: string;
   image_url: string;
