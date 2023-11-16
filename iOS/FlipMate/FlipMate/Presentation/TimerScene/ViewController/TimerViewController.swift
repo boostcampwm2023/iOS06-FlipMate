@@ -17,7 +17,7 @@ final class TimerViewController: BaseViewController {
     private let deviceMotionManager = DeviceMotionManager.shared
     private var cancellabes = Set<AnyCancellable>()
     private var userScreenBrightness: CGFloat = UIScreen.main.brightness
-    private var logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "", category: "test")
+    
     // MARK: - init
     init(timerViewModel: TimerViewModelProtocol, feedbackManager: FeedbackManager) {
         self.timerViewModel = timerViewModel

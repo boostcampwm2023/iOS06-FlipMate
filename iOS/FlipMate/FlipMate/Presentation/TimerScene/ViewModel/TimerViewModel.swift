@@ -33,7 +33,6 @@ final class TimerViewModel: TimerViewModelProtocol {
     private var totalTimeSubject = PassthroughSubject<Int, Never>()
     private var timerUseCase: TimerUseCase
     private var isSuspendedTimer: Bool = false
-    private var logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "", category: "test")
 
     // MARK: - init
     init(timerUseCase: TimerUseCase) {
@@ -75,7 +74,7 @@ private extension TimerViewModel {
     /// 화면이 뒤집어져있는지 판단해 그 결과를 Output으로 전달합니다
     func sendFaceDownStatus() {
         if orientation == DeviceOrientation.faceDown && proximity == true {
-            logger.debug("디바이스가 뒤집어졌습니다.")
+            FMLogger.user.debug("디바이스가 뒤집어졌습니다.")
             isDeviceFaceDownSubject.send(true)
             if isSuspendedTimer {
                 timerUseCase.resumeTimer(resumeTime: Date())

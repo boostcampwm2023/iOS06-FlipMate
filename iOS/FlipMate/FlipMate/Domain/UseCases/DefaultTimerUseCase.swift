@@ -10,7 +10,6 @@ import OSLog
 
 /// 타이머 작동 비즈니스 로직을 가지고 있는 Usecase
 class DefaultTimerUseCase: TimerUseCase {
-    private var logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "", category: "test")
 
     private lazy var timerManager = TimerManager()
     
