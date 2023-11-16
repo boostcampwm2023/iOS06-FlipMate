@@ -44,21 +44,10 @@ final class TimerViewController: BaseViewController {
         return divider
     }()
     
-    private lazy var categoryInstructionBlock: UIView = {
-        let view = UIView()
-        let label = UILabel()
-        label.text = "관리 버튼을 눌러\n카테고리를 설정해주세요"
-        label.numberOfLines = 2
-        label.textAlignment = .center
-        view.addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-        view.layer.borderWidth = 10
-        view.layer.borderColor = UIColor.gray.cgColor
-        return view
+    private lazy var categoryListCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return collectionView
     }()
     
     private lazy var categoryManageButton: UIButton = {
@@ -82,6 +71,7 @@ final class TimerViewController: BaseViewController {
     // MARK: - View LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureCollectionView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,7 +87,7 @@ final class TimerViewController: BaseViewController {
     override func configureUI() {
         let subViews = [timerLabel,
                         divider,
-                        categoryInstructionBlock,
+                        categoryListCollectionView,
                         categoryManageButton,
                         instructionImage
                         ]
@@ -120,13 +110,14 @@ final class TimerViewController: BaseViewController {
         ])
         
         NSLayoutConstraint.activate([
-            categoryInstructionBlock.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 30),
-            categoryInstructionBlock.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            categoryInstructionBlock.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+            categoryListCollectionView.topAnchor.constraint(equalTo: categoryManageButton.bottomAnchor, constant: 10),
+            categoryListCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            categoryListCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            categoryListCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
         
         NSLayoutConstraint.activate([
-            categoryManageButton.topAnchor.constraint(equalTo: categoryInstructionBlock.bottomAnchor, constant: 10),
+            categoryManageButton.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 10),
             categoryManageButton.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
             categoryManageButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             categoryManageButton.widthAnchor.constraint(equalToConstant: 90),
@@ -202,7 +193,36 @@ private extension TimerViewController {
     }
 }
 
-@available(iOS 17.0, *)
-#Preview {
-    TimerViewController(timerViewModel: TimerViewModel(timerUseCase: DefaultTimerUseCase()), feedbackManager: FeedbackManager())
+// MARK: CollectionView function
+extension TimerViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func configureCollectionView() {
+        categoryListCollectionView.register(CategoryListCollectionViewCell.self, forCellWithReuseIdentifier: CategoryListCollectionViewCell.identifier)
+        categoryListCollectionView.delegate = self
+        categoryListCollectionView.dataSource = self
+    }
+    
+    // TODO: Category Model 생성 후 수정
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryListCollectionViewCell.identifier, for: indexPath) as? CategoryListCollectionViewCell else { return UICollectionViewCell() }
+        return cell
+    }
+    
+    /// cell size
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.size.width - 20, height: 58)
+    }
+    
+    /// 위아래 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
 }
+
+//@available(iOS 17.0, *)
+//#Preview {
+//    TimerViewController(timerViewModel: TimerViewModel(timerUseCase: DefaultTimerUseCase()), feedbackManager: FeedbackManager())
+//}

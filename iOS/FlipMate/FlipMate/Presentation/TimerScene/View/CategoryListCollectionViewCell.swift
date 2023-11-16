@@ -38,6 +38,7 @@ final class CategoryListCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
+        configureCell()
     }
     
     required init?(coder: NSCoder) {
@@ -74,6 +75,11 @@ private extension CategoryListCollectionViewCell {
         ])
     }
     
+    func configureCell() {
+        layer.borderWidth = 1.0
+        layer.borderColor = FlipMateColor.gray2.color?.cgColor
+        layer.cornerRadius = 8.0
+    }
 }
 
 @available(iOS 17.0, *)
