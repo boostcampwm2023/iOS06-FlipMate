@@ -9,16 +9,31 @@ import UIKit
 
 final class TabBarViewController: UITabBarController {
 
+    private lazy var timerButton: UIButton = {
+        let button = UIButton()
+        button.layer.borderWidth = 0.5
+        button.backgroundColor = FlipMateColor.tabBarColor.color
+        button.layer.borderColor = FlipMateColor.gray2.color?.cgColor
+        button.tintColor = FlipMateColor.gray3.color
+        button.addTarget(self, action: #selector(timerButtonAction(sender:)), for: .touchUpInside)
+        button.setShadow()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "timer",
+                                     withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 40))),
+                                     for: .normal)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpUI()
+        configureUI()
         configureTabBar()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupFrame()
-        configureTimerButton()
+        setUpTimerButton()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -30,7 +45,7 @@ final class TabBarViewController: UITabBarController {
 
 // MARK: - UI Setting
 private extension TabBarViewController {
-    func setUpUI() {
+    func configureUI() {
         let timerViewController = TimerViewController(timerViewModel: TimerViewModel(timerUseCase: DefaultTimerUseCase()), feedbackManager: FeedbackManager())
         let socialViewController = SocialViewController()
         let chartViewController = ChartViewController()
@@ -61,31 +76,18 @@ private extension TabBarViewController {
         self.tabBar.layer.borderWidth = 1
         self.tabBar.layer.borderColor = FlipMateColor.tabBarLayerColor.color?.cgColor
         self.tabBar.layer.backgroundColor = FlipMateColor.tabBarColor.color?.cgColor
+        view.addSubview(timerButton)
     }
 
-    func configureTimerButton() {
-        let timerButton = UIButton(frame: CGRect(x: 0, y: 0,
-                                                 width: self.tabBar.frame.size.height * 0.5 + 45,
-                                                 height: self.tabBar.frame.size.height * 0.5 + 45))
-        var timerButtonFrame = timerButton.frame
-        timerButtonFrame.origin.y = view.bounds.height - timerButtonFrame.height - self.tabBar.frame.size.height / 2 + 10
-        timerButtonFrame.origin.x = view.bounds.width / 2 - timerButtonFrame.size.width / 2
-        timerButton.frame = timerButtonFrame
-
-        timerButton.backgroundColor = FlipMateColor.tabBarColor.color
-        timerButton.layer.cornerRadius = timerButtonFrame.height / 2
-        timerButton.layer.borderWidth = 0.5
-        timerButton.layer.borderColor = FlipMateColor.gray2.color?.cgColor
-        timerButton.tintColor = FlipMateColor.gray3.color
-        timerButton.setShadow()
-        view.addSubview(timerButton)
-
-        timerButton.setImage(UIImage(systemName: "timer",
-                                     withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 40))),
-                                     for: .normal)
-        timerButton.addTarget(self, action: #selector(timerButtonAction(sender:)), for: .touchUpInside)
-
-        view.layoutIfNeeded()
+    func setUpTimerButton() {
+        let tabBarHeight = tabBar.frame.size.height
+        timerButton.layer.cornerRadius = tabBarHeight / 2
+        NSLayoutConstraint.activate([
+            timerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            timerButton.widthAnchor.constraint(equalToConstant: tabBarHeight),
+            timerButton.heightAnchor.constraint(equalToConstant: tabBarHeight),
+            timerButton.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -tabBarHeight * 1.5)
+        ])
     }
 }
 
