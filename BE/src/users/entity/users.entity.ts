@@ -3,6 +3,7 @@ import { IsEmail, IsString, Length } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { StudyLogs } from 'src/study-logs/study-logs.entity';
 import { Categories } from 'src/categories/categories.entity';
+import { AuthTypeEnum } from '../const/auth-type.const';
 
 @Entity()
 export class UsersModel {
@@ -43,6 +44,13 @@ export class UsersModel {
     nullable: true,
   })
   image_url: string;
+
+  @Column({
+    type: 'enum',
+    enum: AuthTypeEnum,
+    default: AuthTypeEnum.GOOGLE,
+  })
+  auth_type: AuthTypeEnum;
 
   @OneToMany(() => StudyLogs, (studyLog) => studyLog.user)
   study_logs: StudyLogs[];
