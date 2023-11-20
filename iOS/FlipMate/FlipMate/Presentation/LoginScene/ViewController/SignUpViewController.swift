@@ -37,6 +37,28 @@ final class SignUpViewController: BaseViewController {
         return textField
     }()
     
+    private lazy var signUpButton: UIButton = {
+        let button = UIButton()
+        if #available(iOS 15.0, *) {
+            var configuration = UIButton.Configuration.filled()
+            var titleContainer = AttributeContainer()
+            titleContainer.font = FlipMateFont.mediumBold.font
+            configuration.baseBackgroundColor = FlipMateColor.darkBlue.color
+            configuration.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 16, trailing: 32)
+            configuration.attributedTitle = AttributedString("회원가입", attributes: titleContainer)
+            button.configuration = configuration
+        } else {
+            // iOS 14 지원
+            button.contentEdgeInsets = UIEdgeInsets(top: 16, left: 32, bottom: 16, right: 32)
+            button.setTitle("회원가입", for: .normal)
+            button.titleLabel?.font = FlipMateFont.mediumBold.font
+            button.backgroundColor = FlipMateColor.darkBlue.color
+        }
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 15
+        return button
+    }()
+    
     override func viewDidLayoutSubviews() {
         let underLine = UIView()
         underLine.frame = CGRect(x: 0, y: Double(nickNameTextField.frame.height) + 2, width: Double(nickNameTextField.frame.width), height: 1.5)
@@ -50,6 +72,7 @@ final class SignUpViewController: BaseViewController {
         let subViews = [
             profileImage,
             nickNameTextField,
+            signUpButton
         ]
         
         subViews.forEach {
@@ -66,6 +89,11 @@ final class SignUpViewController: BaseViewController {
             nickNameTextField.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 16),
             nickNameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nickNameTextField.widthAnchor.constraint(equalToConstant: 220),
+            
+            signUpButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
+            signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            signUpButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
+            signUpButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32)
         ])
     }
 }
