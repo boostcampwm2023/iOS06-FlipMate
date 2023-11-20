@@ -1,15 +1,16 @@
-import { Users } from 'src/users/users.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { ApiProperty } from '@nestjs/swagger';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import { UsersModel } from 'src/users/entity/users.entity';
 
 @Entity()
 export class Categories {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @ManyToOne(() => Users, (user) => user.categories)
-  user: number;
 
   @Column({
     type: 'char',
@@ -24,5 +25,6 @@ export class Categories {
   color_code: string;
 
   @ManyToOne(() => UsersModel, (user) => user.categories)
-  user: UsersModel;
+  @JoinColumn({ name: 'user_id' })
+  user_id: UsersModel;
 }

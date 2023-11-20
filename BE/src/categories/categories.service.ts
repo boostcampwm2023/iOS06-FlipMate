@@ -5,6 +5,7 @@ import { Categories } from './categories.entity';
 import { CategoryCreateDto } from './dto/request/create-categories.dto';
 import { CategoryUpdateDto } from './dto/request/update-categories.dto';
 import { CategoryDto } from './dto/response/category.dto';
+import { UsersModel } from 'src/users/entity/users.entity';
 
 @Injectable()
 export class CategoriesService {
@@ -14,8 +15,14 @@ export class CategoriesService {
   ) {}
 
   async create(categoriesData: CategoryCreateDto): Promise<CategoryDto> {
-    const category = this.categoriesRepository.create(categoriesData);
-    return this.categoriesRepository.save(category);
+    const { user_id, ...data } = categoriesData;
+    const user = { id: user_id } as UsersModel;
+    const category = this.categoriesRepository.create({
+      ...data,
+      user_id: user,
+    });
+    const savedCategory = await this.categoriesRepository.save(category);
+    return this.entityToDto(savedCategory);
   }
 
   async findAll(): Promise<Categories[]> {
@@ -23,7 +30,14 @@ export class CategoriesService {
   }
 
   async findByUserId(user_id: number): Promise<CategoryDto[]> {
-    return this.categoriesRepository.find({ where: { user: user_id } });
+    const categories = await this.categoriesRepository.find({
+      where: { user_id: { id: user_id } },
+      relations: ['user_id'],
+    });
+    const categoryDto = categories.map((category) => {
+      return this.entityToDto(category);
+    });
+    return categoryDto;
   }
 
   async update(
@@ -31,11 +45,13 @@ export class CategoriesService {
     id: number,
   ): Promise<CategoryDto> {
     const category = await this.categoriesRepository.findOne({
-      where: { id: id },
+      where: { id },
+      relations: ['user_id'],
     });
     category.name = categoriesData.name;
     category.color_code = categoriesData.color_code;
-    return this.categoriesRepository.save(category);
+    const updatedCategory = await this.categoriesRepository.save(category);
+    return this.entityToDto(updatedCategory);
   }
 
   async remove(id: number): Promise<void> {
@@ -43,5 +59,15 @@ export class CategoriesService {
     if (result.affected === 0) {
       throw new NotFoundException('해당 카테고리가 존재하지 않습니다.');
     }
+  }
+
+  entityToDto(category: Categories): CategoryDto {
+    const categoryDto: CategoryDto = {
+      id: category.id,
+      user_id: category.user_id.id,
+      name: category.name,
+      color_code: category.color_code,
+    };
+    return categoryDto;
   }
 }

@@ -73,20 +73,25 @@ export class CategoriesController {
   })
   updateCategories(
     @Body() categoriesData: CategoryUpdateDto,
-    @Param() category_id: number,
+    @Param('category_id') category_id: number,
   ): Promise<CategoryDto> {
-    return this.categoriesService.update(categoriesData, Number(category_id));
+    return this.categoriesService.update(categoriesData, category_id);
   }
 
   @Delete(':category_id')
   @ApiOperation({ summary: '카테고리 삭제' })
+  @ApiParam({
+    name: 'category_id',
+    description: '카테고리 id',
+    required: true,
+  })
   @ApiCreatedResponse({
     description: '카테고리 삭제 성공',
   })
   @ApiBadRequestResponse({
     description: '잘못된 요청입니다.',
   })
-  deleteCategories(@Param() category_id: number): Promise<void> {
+  deleteCategories(@Param('category_id') category_id: number): Promise<void> {
     return this.categoriesService.remove(category_id);
   }
 }

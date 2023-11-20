@@ -6,7 +6,7 @@ export class CategoryCreateDto {
     example: '1',
     description: '유저 id',
   })
-  user: number;
+  user_id: number;
 
   @ApiProperty({
     type: 'string',
