@@ -62,6 +62,7 @@ export class CategoriesController {
   @ApiParam({
     name: 'category_id',
     description: '카테고리 id',
+    type: Number,
     required: true,
   })
   @ApiCreatedResponse({
@@ -83,6 +84,7 @@ export class CategoriesController {
   @ApiParam({
     name: 'category_id',
     description: '카테고리 id',
+    type: Number,
     required: true,
   })
   @ApiCreatedResponse({
