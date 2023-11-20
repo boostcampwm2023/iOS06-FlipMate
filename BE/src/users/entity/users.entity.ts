@@ -32,7 +32,7 @@ export class UsersModel {
   })
   @IsString()
   @IsEmail()
-  google_email: string;
+  email: string;
 
   @ApiProperty({
     type: 'string',

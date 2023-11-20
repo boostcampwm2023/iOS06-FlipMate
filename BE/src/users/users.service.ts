@@ -17,7 +17,7 @@ export class UsersService {
 
   async findUserByEmail(email: string): Promise<UsersModel> {
     const user = await this.usersRepository.findOne({
-      where: { google_email: email },
+      where: { email },
     });
     return user;
   }
