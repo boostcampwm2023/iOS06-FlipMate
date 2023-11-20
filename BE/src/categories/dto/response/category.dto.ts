@@ -1,5 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-export class CategoryCreateDto {
+
+export class CategoryDto {
+  @ApiProperty({
+    type: 'number',
+    example: '1',
+    description: '카테고리 id',
+  })
+  id: number;
   @ApiProperty({
     type: 'number',
     example: '1',

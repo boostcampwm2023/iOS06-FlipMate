@@ -16,8 +16,9 @@ import {
 } from '@nestjs/swagger';
 import { CategoriesService } from './categories.service';
 import { Categories } from './categories.entity';
-import { CategoryGetDto } from './dto/get-categories.dto';
-import { CategoryCreateDto } from './dto/create-categories.dto';
+import { CategoryGetDto } from './dto/request/get-categories.dto';
+import { CategoryCreateDto } from './dto/request/create-categories.dto';
+import { CategoryUpdateDto } from './dto/request/update-categories.dto';
 
 @ApiTags('Categories')
 @Controller('categories')
@@ -65,7 +66,7 @@ export class CategoriesController {
     description: '잘못된 요청입니다.',
   })
   updateCategories(
-    @Body() categoriesData: Categories,
+    @Body() categoriesData: CategoryUpdateDto,
     @Param() category_id: number,
   ): Promise<Categories> {
     return this.categoriesService.update(categoriesData, category_id);
