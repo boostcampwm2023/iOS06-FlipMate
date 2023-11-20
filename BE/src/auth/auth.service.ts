@@ -25,7 +25,7 @@ export class AuthService {
     if (!prevUser) {
       const userEntity = {
         nickname: 'test',
-        google_id: user.email,
+        email: user.email,
         image_url: '',
       };
       prevUser = await this.usersService.createUser(userEntity);
