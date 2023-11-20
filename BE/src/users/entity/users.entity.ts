@@ -55,6 +55,6 @@ export class UsersModel {
   @OneToMany(() => StudyLogs, (studyLog) => studyLog.user)
   study_logs: StudyLogs[];
 
-  @OneToMany(() => Categories, (category) => category.user)
+  @OneToMany(() => Categories, (category) => category.user_id)
   categories: Categories[];
 }
