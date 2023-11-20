@@ -8,6 +8,7 @@
 import UIKit
 
 final class SignUpViewController: BaseViewController {
+    
     private lazy var profileImage: UIImageView = {
         let imageView = UIImageView()
         let cameraView = UIImageView()
@@ -27,12 +28,30 @@ final class SignUpViewController: BaseViewController {
         return imageView
     }()
     
+    private lazy var nickNameTextField: UITextField = {
+        let textField = UITextField()
+        textField.borderStyle = .none
+        textField.textAlignment = .center
+        textField.font = FlipMateFont.mediumRegular.font
+        textField.placeholder = Constant.nickNameTextFieldPlaceHolderText
+        return textField
+    }()
+    
+    override func viewDidLayoutSubviews() {
+        let underLine = UIView()
+        underLine.frame = CGRect(x: 0, y: Double(nickNameTextField.frame.height) + 2, width: Double(nickNameTextField.frame.width), height: 1.5)
+        underLine.backgroundColor = FlipMateColor.gray1.color
+        self.nickNameTextField.addSubview(underLine)
+    }
+    
     override func configureUI() {
         self.title = "회원가입"
         
         let subViews = [
             profileImage,
+            nickNameTextField,
         ]
+        
         subViews.forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -43,6 +62,10 @@ final class SignUpViewController: BaseViewController {
             profileImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             profileImage.widthAnchor.constraint(equalToConstant: 100),
             profileImage.heightAnchor.constraint(equalToConstant: 100),
+            
+            nickNameTextField.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 16),
+            nickNameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            nickNameTextField.widthAnchor.constraint(equalToConstant: 220),
         ])
     }
 }
