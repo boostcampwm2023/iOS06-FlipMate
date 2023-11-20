@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Headers,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -15,6 +16,7 @@ import {
 } from '@nestjs/swagger';
 import { CategoriesService } from './categories.service';
 import { Categories } from './categories.entity';
+import { CategoryGetDto } from './dto/get-categories.dto';
 
 @ApiTags('Categories')
 @Controller('categories')
@@ -30,8 +32,11 @@ export class CategoriesController {
   @ApiBadRequestResponse({
     description: '잘못된 요청입니다.',
   })
-  getCategories(): Promise<Categories[]> {
-    return this.categoriesService.findAll();
+  getCategories(
+    @Headers('authorization') CategoryGetDto,
+  ): Promise<Categories[]> {
+    // TODO: 유저 id를 받아올 방식 정하기
+    return this.categoriesService.findByUserId(1);
   }
 
   @Post()

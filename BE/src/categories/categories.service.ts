@@ -19,6 +19,10 @@ export class CategoriesService {
     return this.categoriesRepository.find();
   }
 
+  async findByUserId(user_id: number): Promise<Categories[]> {
+    return this.categoriesRepository.find({ where: { user_id: user_id } });
+  }
+
   async update(categoriesData: Categories, id: number): Promise<Categories> {
     const category = await this.categoriesRepository.findOne({
       where: { id: id },
