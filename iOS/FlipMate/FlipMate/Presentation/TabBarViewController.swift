@@ -38,8 +38,8 @@ final class TabBarViewController: UITabBarController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        self.tabBar.layer.backgroundColor = FlipMateColor.tabBarColor.color?.cgColor
-        self.tabBar.layer.borderColor = FlipMateColor.tabBarLayerColor.color?.cgColor
+        tabBar.layer.backgroundColor = FlipMateColor.tabBarColor.color?.cgColor
+        tabBar.layer.borderColor = FlipMateColor.tabBarLayerColor.color?.cgColor
     }
 }
 
@@ -62,20 +62,20 @@ private extension TabBarViewController {
 
         setViewControllers([navigationSocial, navigationTimer, navigationChart], animated: false)
 
-        self.selectedIndex = 1
+        selectedIndex = 1
     }
 
     func setupFrame() {
-        var tabFrame = self.tabBar.frame
+        var tabFrame = tabBar.frame
         tabFrame.size.height += 10
-        tabFrame.origin.y = self.view.frame.size.height - tabFrame.size.height
-        self.tabBar.frame = tabFrame
+        tabFrame.origin.y = view.frame.size.height - tabFrame.size.height
+        tabBar.frame = tabFrame
     }
     
     func configureTabBar() {
-        self.tabBar.layer.borderWidth = 1
-        self.tabBar.layer.borderColor = FlipMateColor.tabBarLayerColor.color?.cgColor
-        self.tabBar.layer.backgroundColor = FlipMateColor.tabBarColor.color?.cgColor
+        tabBar.layer.borderWidth = 1
+        tabBar.layer.borderColor = FlipMateColor.tabBarLayerColor.color?.cgColor
+        tabBar.layer.backgroundColor = FlipMateColor.tabBarColor.color?.cgColor
         view.addSubview(timerButton)
     }
 
