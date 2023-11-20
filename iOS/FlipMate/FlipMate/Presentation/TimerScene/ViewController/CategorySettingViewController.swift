@@ -16,7 +16,7 @@ final class CategorySettingViewController: BaseViewController {
     
     // MARK: - UI Components
     private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(CategoryListCollectionViewCell.self)
         return collectionView
@@ -60,6 +60,25 @@ private extension CategorySettingViewController {
         snapshot.appendSections(sections)
         snapshot.appendItems([CategorySettingItem.categoryCell])
         dataSource?.apply(snapshot)
+    }
+}
+
+// MARK: - CompositionalLayout
+private extension CategorySettingViewController {
+    func makeLayoutSection(sectionType: CategorySettingSection) -> NSCollectionLayoutSection {
+        let item = NSCollectionLayoutItem(layoutSize: sectionType.itemSize)
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: sectionType.groupSize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = sectionType.sectionInset
+        section.interGroupSpacing = sectionType.itemSpacing
+        return section
+    }
+    
+    func setCollectionViewLayout() -> UICollectionViewCompositionalLayout {
+        return UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
+            guard let sectionType = self?.dataSource?.snapshot().sectionIdentifiers[sectionIndex] else { return nil }
+            return self?.makeLayoutSection(sectionType: sectionType)
+        }
     }
 }
 
