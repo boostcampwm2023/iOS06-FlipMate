@@ -10,7 +10,6 @@ import Combine
 import OSLog
 
 final class TimerViewController: BaseViewController {
-   
     // MARK: - Properties
     private var timerViewModel: TimerViewModelProtocol
     private var feedbackManager: FeedbackManager
@@ -32,7 +31,7 @@ final class TimerViewController: BaseViewController {
     /// 오늘 학습한 총 시간 타이머
     private lazy var timerLabel: UILabel = {
         let label = UILabel()
-        label.text = "00:00:00"
+        label.text = Constant.startTime
         label.font = FlipMateFont.extraLargeBold.font
         label.textColor = .label
         return label
@@ -52,8 +51,8 @@ final class TimerViewController: BaseViewController {
     
     private lazy var categoryManageButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(systemName: "gearshape"), for: .normal)
-        button.setTitle("관리", for: .normal)
+        button.setImage(UIImage(systemName: Constant.categoryManageButtonImageName), for: .normal)
+        button.setTitle(Constant.categoryManageButtonTitle, for: .normal)
         button.setTitleColor(FlipMateColor.gray1.color, for: .normal)
         button.tintColor = FlipMateColor.gray1.color
         button.layer.borderWidth = 1.0
@@ -219,6 +218,15 @@ extension TimerViewController: UICollectionViewDelegate, UICollectionViewDataSou
     /// 위아래 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
+    }
+}
+        
+// MARK: - Constants
+private extension TimerViewController {
+    enum Constant {
+        static let startTime = "00:00:00"
+        static let categoryManageButtonImageName = "gearshape"
+        static let categoryManageButtonTitle = "관리"
     }
 }
 
