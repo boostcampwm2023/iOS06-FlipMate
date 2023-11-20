@@ -39,6 +39,10 @@ export class StudyLogsService {
     return studyLogs.map((studyLog) => this.entityToDto(studyLog));
   }
 
+  async deleteRowsByUserId(id: number): Promise<void> {
+    this.studyLogsRepository.delete({ user_id: { id: id } });
+  }
+
   entityToDto(studyLog: StudyLogs): StudyLogsDto {
     const { id, date, created_at, type, learning_time, user_id, category_id } =
       studyLog;

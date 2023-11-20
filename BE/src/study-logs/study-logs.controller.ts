@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Delete } from '@nestjs/common';
 import { StudyLogsService } from './study-logs.service';
 import { StudyLogs } from './study-logs.entity';
 import {
