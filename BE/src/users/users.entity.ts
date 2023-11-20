@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
+import { Categories } from 'src/categories/categories.entity';
 
 @Entity()
 export class Users {
@@ -38,4 +39,7 @@ export class Users {
     length: 255,
   })
   image_url: string;
+
+  @OneToMany(() => Categories, (category) => category.user_id)
+  categories: Categories[];
 }
