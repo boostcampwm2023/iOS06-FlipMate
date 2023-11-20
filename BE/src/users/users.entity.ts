@@ -40,6 +40,6 @@ export class Users {
   })
   image_url: string;
 
-  @OneToMany(() => Categories, (category) => category.user_id)
+  @OneToMany(() => Categories, (category) => category.user)
   categories: Categories[];
 }

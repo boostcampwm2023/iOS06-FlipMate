@@ -12,6 +12,7 @@ import {
   ApiBadRequestResponse,
   ApiCreatedResponse,
   ApiOperation,
+  ApiParam,
   ApiTags,
 } from '@nestjs/swagger';
 import { CategoriesService } from './categories.service';
@@ -58,6 +59,11 @@ export class CategoriesController {
 
   @Patch(':category_id')
   @ApiOperation({ summary: '카테고리 수정' })
+  @ApiParam({
+    name: 'category_id',
+    description: '카테고리 id',
+    required: true,
+  })
   @ApiCreatedResponse({
     type: CategoryDto,
     description: '카테고리 수정 성공',
@@ -69,7 +75,7 @@ export class CategoriesController {
     @Body() categoriesData: CategoryUpdateDto,
     @Param() category_id: number,
   ): Promise<CategoryDto> {
-    return this.categoriesService.update(categoriesData, category_id);
+    return this.categoriesService.update(categoriesData, Number(category_id));
   }
 
   @Delete(':category_id')

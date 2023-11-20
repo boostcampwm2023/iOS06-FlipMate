@@ -7,8 +7,7 @@ export class Categories {
   id: number;
 
   @ManyToOne(() => Users, (user) => user.categories)
-  @Column({})
-  user_id: number;
+  user: number;
 
   @Column({
     type: 'char',

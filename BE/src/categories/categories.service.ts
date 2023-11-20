@@ -23,7 +23,7 @@ export class CategoriesService {
   }
 
   async findByUserId(user_id: number): Promise<CategoryDto[]> {
-    return this.categoriesRepository.find({ where: { user_id: user_id } });
+    return this.categoriesRepository.find({ where: { user: user_id } });
   }
 
   async update(
