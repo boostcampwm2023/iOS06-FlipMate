@@ -13,6 +13,8 @@ enum FlipMateColor {
     case gray2
     case gray3
     case gray4
+    case tabBarColor
+    case tabBarLayerColor
 
     var color: UIColor? {
         switch self {
@@ -26,6 +28,10 @@ enum FlipMateColor {
             return UIColor(named: "Gray3")
         case .gray4:
             return UIColor(named: "Gray4")
+        case .tabBarColor:
+            return UIColor(named: "TabBarColor")
+        case .tabBarLayerColor:
+            return UIColor(named: "TabBarLayerColor")
         }
     }
 }

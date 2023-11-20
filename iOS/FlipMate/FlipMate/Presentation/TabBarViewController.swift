@@ -12,12 +12,19 @@ final class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
+        configureTabBar()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupFrame()
         configureTimerButton()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        self.tabBar.layer.backgroundColor = FlipMateColor.tabBarColor.color?.cgColor
+        self.tabBar.layer.borderColor = FlipMateColor.tabBarLayerColor.color?.cgColor
     }
 }
 
@@ -41,9 +48,6 @@ private extension TabBarViewController {
         setViewControllers([navigationSocial, navigationTimer, navigationChart], animated: false)
 
         self.selectedIndex = 1
-        self.tabBar.layer.borderWidth = 1
-        self.tabBar.layer.borderColor = UIColor.lightGray.cgColor
-        self.tabBar.layer.backgroundColor = UIColor.white.cgColor
     }
 
     func setupFrame() {
@@ -51,6 +55,12 @@ private extension TabBarViewController {
         tabFrame.size.height += 10
         tabFrame.origin.y = self.view.frame.size.height - tabFrame.size.height
         self.tabBar.frame = tabFrame
+    }
+    
+    func configureTabBar() {
+        self.tabBar.layer.borderWidth = 1
+        self.tabBar.layer.borderColor = FlipMateColor.tabBarLayerColor.color?.cgColor
+        self.tabBar.layer.backgroundColor = FlipMateColor.tabBarColor.color?.cgColor
     }
 
     func configureTimerButton() {
@@ -62,10 +72,11 @@ private extension TabBarViewController {
         timerButtonFrame.origin.x = view.bounds.width / 2 - timerButtonFrame.size.width / 2
         timerButton.frame = timerButtonFrame
 
-        timerButton.backgroundColor = .white
+        timerButton.backgroundColor = FlipMateColor.tabBarColor.color
         timerButton.layer.cornerRadius = timerButtonFrame.height / 2
         timerButton.layer.borderWidth = 0.5
-        timerButton.layer.borderColor = UIColor.lightGray.cgColor
+        timerButton.layer.borderColor = FlipMateColor.gray2.color?.cgColor
+        timerButton.tintColor = FlipMateColor.gray3.color
         timerButton.setShadow()
         view.addSubview(timerButton)
 
@@ -74,7 +85,6 @@ private extension TabBarViewController {
                                      for: .normal)
         timerButton.addTarget(self, action: #selector(timerButtonAction(sender:)), for: .touchUpInside)
 
-        timerButton.tintColor = .darkGray
         view.layoutIfNeeded()
     }
 }
