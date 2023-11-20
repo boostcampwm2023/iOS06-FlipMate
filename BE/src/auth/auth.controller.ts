@@ -2,8 +2,9 @@ import { AuthService } from './auth.service';
 
 import { Controller, Get, UseGuards, Req, Res } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { AccessTokenGuard } from './guard/bearer-token.guard';
+import { User } from 'src/users/decorator/user.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -18,7 +19,8 @@ export class AuthController {
 
   @Get('logout')
   @UseGuards(AccessTokenGuard)
-  logout(@Req() req: Request, @Res() res: Response) {
+  logout(@User('id') userId: number, @Res() res: Response) {
+    console.log(`${userId}를 로그아웃 시키는 로직`);
     res.redirect('/');
   }
 }
