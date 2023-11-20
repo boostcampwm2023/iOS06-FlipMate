@@ -9,7 +9,7 @@ import { Categories } from './categories/categories.entity';
 import { CategoriesModule } from './categories/categories.module';
 import { MatesModule } from './mates/mates.module';
 import { UsersModule } from './users/users.module';
-import { Users } from './users/users.entity';
+import { UsersModel } from './users/entity/users.entity';
 import { GoogleStrategy } from './google.strategy';
 import { PassportModule } from '@nestjs/passport';
 import { AuthModule } from './auth/auth.module';
@@ -27,7 +27,7 @@ import { AuthModule } from './auth/auth.module';
         username: config.get<string>('DATABASE_USERNAME'),
         password: config.get<string>('DATABASE_PASSWORD'),
         database: config.get<string>('DATABASE_NAME'),
-        entities: [StudyLogs, Categories, Users],
+        entities: [StudyLogs, Categories, UsersModel],
         synchronize: true,
       }),
       inject: [ConfigService],

@@ -26,7 +26,7 @@ final class LoginViewController: BaseViewController {
     
     private var logoMainTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = FlipMateFont.largeBold.font
+        label.font = FlipMateFont.extraLargeBold.font
         label.textColor = FlipMateColor.darkBlue.color
         label.text = Constant.logoMainTitle
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -35,7 +35,7 @@ final class LoginViewController: BaseViewController {
     
     private var logoSubTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = FlipMateFont.smallBold.font
+        label.font = FlipMateFont.mediumRegular.font
         label.textColor = FlipMateColor.gray2.color
         label.text = Constant.logoSubTitle
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -84,14 +84,14 @@ final class LoginViewController: BaseViewController {
         
         NSLayoutConstraint.activate([
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
+            logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            logoImageView.widthAnchor.constraint(equalToConstant: 150),
             
             logoMainTitleLabel.bottomAnchor.constraint(equalTo: logoSubTitleLabel.topAnchor, constant: -5),
             logoMainTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            logoSubTitleLabel.bottomAnchor.constraint(equalTo: logoImageView.topAnchor, constant: -20),
+            logoSubTitleLabel.bottomAnchor.constraint(equalTo: logoImageView.topAnchor, constant: -50),
             logoSubTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
             
             googleLoginButton.bottomAnchor.constraint(equalTo: appleLoginButton.topAnchor, constant: -20),
             googleLoginButton.leadingAnchor.constraint(equalTo: appleLoginButton.leadingAnchor),
@@ -131,4 +131,9 @@ fileprivate extension UIButton {
         self.layer.borderColor = FlipMateColor.gray2.color?.cgColor
         self.setShadow()
     }
+}
+
+@available(iOS 17, *)
+#Preview {
+    LoginViewController()
 }

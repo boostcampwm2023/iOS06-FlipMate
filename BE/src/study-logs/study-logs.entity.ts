@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
+import { UsersModel } from 'src/users/entity/users.entity';
 
 @Entity()
 export class StudyLogs {
@@ -28,4 +29,7 @@ export class StudyLogs {
   })
   @Column({ type: 'enum', enum: ['start', 'finish'] })
   type: 'start' | 'finish';
+
+  @ManyToOne(() => UsersModel, (user) => user.study_logs)
+  user: UsersModel;
 }
