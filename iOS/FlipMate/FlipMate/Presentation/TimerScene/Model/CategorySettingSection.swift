@@ -31,7 +31,7 @@ extension CategorySettingSection {
     var footerSize: NSCollectionLayoutSize {
         return NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(58))
+            heightDimension: .absolute(58))
     }
     
     var sectionInset: NSDirectionalEdgeInsets {

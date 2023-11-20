@@ -19,6 +19,7 @@ final class CategorySettingViewController: BaseViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(CategoryListCollectionViewCell.self)
+        collectionView.register(CategorySettingFooterView.self, kind: .footer)
         return collectionView
     }()
     
@@ -52,6 +53,11 @@ private extension CategorySettingViewController {
                 return cell
             }
         })
+        
+        dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
+            let footer: CategorySettingFooterView = collectionView.dequeueReusableView(for: indexPath, kind: kind)
+            return footer
+        }
     }
     
     func setSnapshot() {
@@ -69,6 +75,11 @@ private extension CategorySettingViewController {
         let item = NSCollectionLayoutItem(layoutSize: sectionType.itemSize)
         let group = NSCollectionLayoutGroup.vertical(layoutSize: sectionType.groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
+        let footer = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: sectionType.footerSize,
+            elementKind: UICollectionView.elementKindSectionFooter,
+            alignment: .bottom)
+        section.boundarySupplementaryItems = [footer]
         section.contentInsets = sectionType.sectionInset
         section.interGroupSpacing = sectionType.itemSpacing
         return section
