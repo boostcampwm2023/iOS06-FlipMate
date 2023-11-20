@@ -9,17 +9,27 @@ import UIKit
 
 final class TabBarViewController: UITabBarController {
 
+    private enum Constant {
+        static let timerImageName = "timer"
+        static let socialNomalImageName = "person.3"
+        static let socialSelectedImageName = "person.3.fill"
+        static let chartNomalImageName = "chart.bar"
+        static let chartSelectedImageName = "chart.bar.fill"
+        static let borderWidth: CGFloat = 1.0
+        static let timerImageSize: CGFloat = 40
+    }
+    
     private lazy var timerButton: UIButton = {
         let button = UIButton()
-        button.layer.borderWidth = 0.5
+        button.layer.borderWidth = Constant.borderWidth
         button.backgroundColor = FlipMateColor.tabBarColor.color
         button.layer.borderColor = FlipMateColor.gray2.color?.cgColor
         button.tintColor = FlipMateColor.gray3.color
         button.addTarget(self, action: #selector(timerButtonAction(sender:)), for: .touchUpInside)
         button.setShadow()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "timer",
-                                     withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 40))),
+        button.setImage(UIImage(systemName: Constant.timerImageName,
+                                withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: Constant.timerImageSize))),
                                      for: .normal)
         return button
     }()
@@ -50,11 +60,11 @@ private extension TabBarViewController {
         let socialViewController = SocialViewController()
         let chartViewController = ChartViewController()
 
-        socialViewController.tabBarItem.image = UIImage(systemName: "person.3")
-        socialViewController.tabBarItem.selectedImage = UIImage(systemName: "person.3.fill")
+        socialViewController.tabBarItem.image = UIImage(systemName: Constant.socialNomalImageName)
+        socialViewController.tabBarItem.selectedImage = UIImage(systemName: Constant.socialSelectedImageName)
 
-        chartViewController.tabBarItem.image = UIImage(systemName: "chart.bar")
-        chartViewController.tabBarItem.selectedImage = UIImage(systemName: "chart.bar.fill")
+        chartViewController.tabBarItem.image = UIImage(systemName: Constant.chartNomalImageName)
+        chartViewController.tabBarItem.selectedImage = UIImage(systemName: Constant.chartSelectedImageName)
 
         let navigationTimer = UINavigationController(rootViewController: timerViewController)
         let navigationSocial = UINavigationController(rootViewController: socialViewController)
@@ -73,7 +83,7 @@ private extension TabBarViewController {
     }
     
     func configureTabBar() {
-        tabBar.layer.borderWidth = 1
+        tabBar.layer.borderWidth = Constant.borderWidth
         tabBar.layer.borderColor = FlipMateColor.tabBarLayerColor.color?.cgColor
         tabBar.layer.backgroundColor = FlipMateColor.tabBarColor.color?.cgColor
         view.addSubview(timerButton)
