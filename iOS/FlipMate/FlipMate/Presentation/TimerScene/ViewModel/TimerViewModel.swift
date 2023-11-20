@@ -33,7 +33,7 @@ final class TimerViewModel: TimerViewModelProtocol {
     private var totalTimeSubject = PassthroughSubject<Int, Never>()
     private var timerUseCase: TimerUseCase
     private var isSuspendedTimer: Bool = false
-    private var isTimerCounting: Bool = false
+    private var timerState: TimerState = .stopped
     
     // MARK: - init
     init(timerUseCase: TimerUseCase) {
@@ -84,15 +84,21 @@ private extension TimerViewModel {
                 timerUseCase.startTimer(startTime: Date())
                 isSuspendedTimer = true
             }
-            isTimerCounting = true
+            timerState = .counting
         } else {
             FMLogger.user.debug("디바이스가 face up 상태입니다.")
             
-            guard isTimerCounting else { return }
+            guard timerState == .counting else { return }
             isDeviceFaceDownSubject.send(false)
             let time = timerUseCase.suspendTimer()
             totalTimeSubject.send(time)
-            isTimerCounting = false
+            timerState = .stopped
         }
+    }
+}
+
+private extension TimerViewModel {
+    enum TimerState {
+        case counting, stopped
     }
 }
