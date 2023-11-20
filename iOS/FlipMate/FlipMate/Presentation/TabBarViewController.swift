@@ -24,7 +24,7 @@ final class TabBarViewController: UITabBarController {
         button.layer.borderWidth = Constant.borderWidth
         button.backgroundColor = FlipMateColor.tabBarColor.color
         button.layer.borderColor = FlipMateColor.gray2.color?.cgColor
-        button.tintColor = FlipMateColor.gray3.color
+        button.tintColor = FlipMateColor.gray2.color
         button.addTarget(self, action: #selector(timerButtonAction(sender:)), for: .touchUpInside)
         button.setShadow()
         button.translatesAutoresizingMaskIntoConstraints = false
