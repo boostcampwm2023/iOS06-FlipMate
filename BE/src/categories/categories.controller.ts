@@ -17,6 +17,7 @@ import {
 import { CategoriesService } from './categories.service';
 import { Categories } from './categories.entity';
 import { CategoryGetDto } from './dto/get-categories.dto';
+import { CategoryCreateDto } from './dto/create-categories.dto';
 
 @ApiTags('Categories')
 @Controller('categories')
@@ -48,7 +49,9 @@ export class CategoriesController {
   @ApiBadRequestResponse({
     description: '잘못된 요청입니다.',
   })
-  createCategories(@Body() categoriesData: Categories): Promise<Categories> {
+  createCategories(
+    @Body() categoriesData: CategoryCreateDto,
+  ): Promise<CategoryCreateDto> {
     return this.categoriesService.create(categoriesData);
   }
 
