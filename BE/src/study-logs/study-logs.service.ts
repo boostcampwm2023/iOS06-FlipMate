@@ -32,6 +32,13 @@ export class StudyLogsService {
     return this.studyLogsRepository.find();
   }
 
+  async findByUserId(id: number): Promise<StudyLogsDto[]> {
+    const studyLogs = await this.studyLogsRepository.find({
+      where: { user_id: { id: id } },
+    });
+    return studyLogs.map((studyLog) => this.entityToDto(studyLog));
+  }
+
   entityToDto(studyLog: StudyLogs): StudyLogsDto {
     const { id, date, created_at, type, learning_time, user_id, category_id } =
       studyLog;

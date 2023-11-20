@@ -25,11 +25,13 @@ export class StudyLogs {
   @Column({ type: 'int', default: 0 })
   learning_time: number;
 
-  @ManyToOne(() => UsersModel, (user) => user.study_logs)
+  @ManyToOne(() => UsersModel, (user) => user.study_logs, { eager: true })
   @JoinColumn({ name: 'user_id' })
   user_id: UsersModel;
 
-  @ManyToOne(() => Categories, (categories) => categories.study_logs)
+  @ManyToOne(() => Categories, (categories) => categories.study_logs, {
+    eager: true,
+  })
   @JoinColumn({ name: 'category_id' })
   category_id: Categories;
 }

@@ -39,8 +39,9 @@ export class StudyLogsController {
   @ApiBadRequestResponse({
     description: '잘못된 요청입니다.',
   })
-  getStudyLogs(): Promise<StudyLogs[]> {
-    return this.studyLogsService.findAll();
+  //TODO: 유저 아이디 받아오는 방법 추가 필요
+  getStudyLogs(): Promise<StudyLogsDto[]> {
+    return this.studyLogsService.findByUserId(1);
   }
 }
 
