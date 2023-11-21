@@ -48,7 +48,7 @@ final class TimerViewController: BaseViewController {
         return collectionView
     }()
     
-    private lazy var categoryManageButton: UIButton = {
+    private lazy var categorySettingButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(systemName: Constant.categoryManageButtonImageName), for: .normal)
         button.setTitle(Constant.categoryManageButtonTitle, for: .normal)
@@ -57,6 +57,7 @@ final class TimerViewController: BaseViewController {
         button.layer.borderWidth = 1.0
         button.layer.borderColor = FlipMateColor.gray1.color?.cgColor
             button.layer.cornerRadius = 8.0
+        button.addTarget(self, action: #selector(categorySettingButtonDidTapped), for: .touchUpInside)
         return button
     }()
     
@@ -86,7 +87,7 @@ final class TimerViewController: BaseViewController {
         let subViews = [timerLabel,
                         divider,
                         categoryListCollectionView,
-                        categoryManageButton,
+                        categorySettingButton,
                         instructionImage
                         ]
 
@@ -108,18 +109,18 @@ final class TimerViewController: BaseViewController {
         ])
         
         NSLayoutConstraint.activate([
-            categoryListCollectionView.topAnchor.constraint(equalTo: categoryManageButton.bottomAnchor, constant: 10),
+            categoryListCollectionView.topAnchor.constraint(equalTo: categorySettingButton.bottomAnchor, constant: 10),
             categoryListCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             categoryListCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             categoryListCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
         
         NSLayoutConstraint.activate([
-            categoryManageButton.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 10),
-            categoryManageButton.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
-            categoryManageButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            categoryManageButton.widthAnchor.constraint(equalToConstant: 90),
-            categoryManageButton.heightAnchor.constraint(equalToConstant: 32)
+            categorySettingButton.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 10),
+            categorySettingButton.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
+            categorySettingButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            categorySettingButton.widthAnchor.constraint(equalToConstant: 90),
+            categorySettingButton.heightAnchor.constraint(equalToConstant: 32)
             
         ])
         
@@ -146,6 +147,14 @@ final class TimerViewController: BaseViewController {
                 self.timerLabel.text = totalTime.secondsToStringTime()
             }
             .store(in: &cancellables)
+        
+        timerViewModel.isPresentingCategoryPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                guard let self = self else { return }
+                self.pushtCategorySettingViewController()
+            }
+            .store(in: &cancellables)
 
         deviceMotionManager.orientationDidChangePublisher
             .receive(on: DispatchQueue.main)
@@ -157,6 +166,7 @@ final class TimerViewController: BaseViewController {
     }
 }
 
+// MARK: Prviate Method
 private extension TimerViewController {
     func setScreenBrightness(_ isFaceDown: Bool) {
         if isFaceDown {
@@ -173,6 +183,11 @@ private extension TimerViewController {
         } else {
             feedbackManager.startFaceupFeedback()
         }
+    }
+    
+    func pushtCategorySettingViewController() {
+        let categorySettingViewController = CategorySettingViewController()
+        navigationController?.pushViewController(categorySettingViewController, animated: true)
     }
 }
 
@@ -197,10 +212,14 @@ private extension TimerViewController {
         let deviceProximityStatus = device.proximityState
         timerViewModel.deviceProximityDidChange(deviceProximityStatus)
     }
+    
+    @objc func categorySettingButtonDidTapped() {
+        timerViewModel.categorySettingButtoneDidTapped()
+    }
 }
 
 // MARK: CollectionView function
-extension TimerViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension TimerViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func configureCollectionView() {
         categoryListCollectionView.register(CategoryListCollectionViewCell.self, forCellWithReuseIdentifier: CategoryListCollectionViewCell.identifier)
         categoryListCollectionView.delegate = self
