@@ -40,6 +40,8 @@
 		600908E12AFCD7E00065DFFB /* FlipMateUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908E02AFCD7E00065DFFB /* FlipMateUITestsLaunchTests.swift */; };
 		601773E42B021E6000D175D9 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601773E32B021E6000D175D9 /* TimerViewController.swift */; };
 		60243EF02B05D24D0098A92F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 60243EEF2B05D24D0098A92F /* .swiftlint.yml */; };
+		6057A58D2B0C7F0F00EE58E8 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58C2B0C7F0F00EE58E8 /* Requestable.swift */; };
+		6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58E2B0C801300EE58E8 /* NetworkError.swift */; };
 		6096F91E2B04F3CA00D0B972 /* FaceDown.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 6096F91D2B04F3CA00D0B972 /* FaceDown.ahap */; };
 		60DE493D2B05DEA400ACE6DD /* FlipMateLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE493C2B05DEA400ACE6DD /* FlipMateLogger.swift */; };
 		60DE49402B05E67200ACE6DD /* FlipMateConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE493F2B05E67200ACE6DD /* FlipMateConstant.swift */; };
@@ -111,6 +113,8 @@
 		600908E02AFCD7E00065DFFB /* FlipMateUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipMateUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		601773E32B021E6000D175D9 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		60243EEF2B05D24D0098A92F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		6057A58C2B0C7F0F00EE58E8 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
+		6057A58E2B0C801300EE58E8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		6096F91D2B04F3CA00D0B972 /* FaceDown.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = FaceDown.ahap; sourceTree = "<group>"; };
 		60DE493C2B05DEA400ACE6DD /* FlipMateLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipMateLogger.swift; sourceTree = "<group>"; };
 		60DE493F2B05E67200ACE6DD /* FlipMateConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipMateConstant.swift; sourceTree = "<group>"; };
@@ -170,8 +174,10 @@
 		2C3430942B0C7C55008CBC85 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
-				2C3430962B0C7ED8008CBC85 /* EndPoint.swift */,
 				ED3595A82B0C7F3500558FAA /* HTTPMethod.swift */,
+				6057A58E2B0C801300EE58E8 /* NetworkError.swift */,
+				6057A58C2B0C7F0F00EE58E8 /* Requestable.swift */,
+				2C3430962B0C7ED8008CBC85 /* EndPoint.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -855,6 +861,8 @@
 				601773E42B021E6000D175D9 /* TimerViewController.swift in Sources */,
 				600908C22AFCD7DF0065DFFB /* ViewController.swift in Sources */,
 				2C5CDA5B2B025440007AFC57 /* ChartViewController.swift in Sources */,
+				6057A58D2B0C7F0F00EE58E8 /* Requestable.swift in Sources */,
+				6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */,
 				600908BE2AFCD7DF0065DFFB /* AppDelegate.swift in Sources */,
 				2CE84EFB2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift in Sources */,
 				ED3595A92B0C7F3500558FAA /* HTTPMethod.swift in Sources */,
