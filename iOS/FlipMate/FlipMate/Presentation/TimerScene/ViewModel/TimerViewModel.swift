@@ -65,7 +65,7 @@ final class TimerViewModel: TimerViewModelProtocol {
     }
     
     func categorySettingButtoneDidTapped() {
-        isPresentingCategorySubject.send(Void())
+        isPresentingCategorySubject.send(())
     }
 }
 
