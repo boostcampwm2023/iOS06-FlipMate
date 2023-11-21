@@ -10,6 +10,7 @@ async function bootstrap() {
     .setTitle('StudyLog API')
     .setDescription('StudyLog 애플리케이션 API 문서')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

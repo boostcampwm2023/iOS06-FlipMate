@@ -52,9 +52,9 @@ export class UsersModel {
   })
   auth_type: AuthTypeEnum;
 
-  @OneToMany(() => StudyLogs, (studyLog) => studyLog.user)
+  @OneToMany(() => StudyLogs, (studyLog) => studyLog.user_id)
   study_logs: StudyLogs[];
 
-  @OneToMany(() => Categories, (category) => category.user)
+  @OneToMany(() => Categories, (category) => category.user_id)
   categories: Categories[];
 }
