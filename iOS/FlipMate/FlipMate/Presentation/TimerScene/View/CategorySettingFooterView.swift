@@ -35,8 +35,7 @@ final class CategorySettingFooterView: UICollectionReusableView {
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        configureUI()
+        fatalError("Don't use storyboard")
     }
 }
 
