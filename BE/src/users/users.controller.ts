@@ -1,27 +1,37 @@
-import { Controller, Post, Delete, Patch, Get, Body } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Users } from './users.entity';
+import { Controller, Get, Query } from '@nestjs/common';
+import {
+  ApiBadRequestResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiQuery,
+  ApiTags,
+} from '@nestjs/swagger';
+import { UsersService } from './users.service';
 
 @ApiTags('Users')
 @Controller('users')
 export class UsersController {
-  @Post()
-  @ApiOperation({ summary: '유저 회원 가입' })
-  createUser(@Body() userData: Users) {}
-
-  @Post('/auth')
-  @ApiOperation({ summary: '유저 로그인' })
-  authUser() {}
-
-  @Delete()
-  @ApiOperation({ summary: '유저 회원 탈퇴' })
-  deleteUser() {}
+  constructor(private readonly usersService: UsersService) {}
 
   @Get('/nickname-validation')
-  @ApiOperation({ summary: '유저 닉네임 중복 확인' })
-  validateNickname() {}
-
-  @Patch()
-  @ApiOperation({ summary: '유저 정보 수정' })
-  modifyUser() {}
+  @ApiOperation({ summary: '유저 닉네임 유효한지 확인' })
+  @ApiQuery({
+    name: 'nickname',
+    example: '어린콩',
+    required: true,
+    type: String,
+    description: '검증할 유저 닉네임',
+  })
+  @ApiOkResponse({
+    type: Boolean,
+    description: '닉네임 검증 확인 결과 true(사용가능), false(불가능)',
+  })
+  @ApiBadRequestResponse({
+    description: '잘못된 요청',
+  })
+  async validateNickname(
+    @Query('nickname') nickname: string,
+  ): Promise<boolean> {
+    return this.usersService.isUniqueNickname(nickname);
+  }
 }
