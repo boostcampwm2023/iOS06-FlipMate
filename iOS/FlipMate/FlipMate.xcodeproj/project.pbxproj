@@ -49,6 +49,8 @@
 		A18D97900627849B3EFACF76 /* Pods_FlipMate_FlipMateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA80839AC9EFDD4BAA10C67 /* Pods_FlipMate_FlipMateUITests.framework */; };
 		ED3595A92B0C7F3500558FAA /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595A82B0C7F3500558FAA /* HTTPMethod.swift */; };
 		ED3595AB2B0C81B800558FAA /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595AA2B0C81B800558FAA /* Responsable.swift */; };
+		ED3595B02B0C82C800558FAA /* TimerStartRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595AF2B0C82C800558FAA /* TimerStartRequestDTO.swift */; };
+		ED3595B22B0C83D700558FAA /* TimerStartResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595B12B0C83D700558FAA /* TimerStartResponseDTO.swift */; };
 		ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A7E2B06033F008FE1C5 /* Category.swift */; };
 		ED9B2A812B06048D008FE1C5 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */; };
 		EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851C62B021492009031EA /* TabBarViewController.swift */; };
@@ -127,6 +129,8 @@
 		E67C5E61F07640B8F89AB356 /* Pods_FlipMate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED3595A82B0C7F3500558FAA /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		ED3595AA2B0C81B800558FAA /* Responsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responsable.swift; sourceTree = "<group>"; };
+		ED3595AF2B0C82C800558FAA /* TimerStartRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStartRequestDTO.swift; sourceTree = "<group>"; };
+		ED3595B12B0C83D700558FAA /* TimerStartResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStartResponseDTO.swift; sourceTree = "<group>"; };
 		ED9B2A7E2B06033F008FE1C5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		EDC851C62B021492009031EA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -503,6 +507,7 @@
 		600908FD2AFCDF3A0065DFFB /* DataMapping */ = {
 			isa = PBXGroup;
 			children = (
+				ED3595AE2B0C82A200558FAA /* TimerScene */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -608,6 +613,15 @@
 				60DE493F2B05E67200ACE6DD /* FlipMateConstant.swift */,
 			);
 			path = Constant;
+			sourceTree = "<group>";
+		};
+		ED3595AE2B0C82A200558FAA /* TimerScene */ = {
+			isa = PBXGroup;
+			children = (
+				ED3595AF2B0C82C800558FAA /* TimerStartRequestDTO.swift */,
+				ED3595B12B0C83D700558FAA /* TimerStartResponseDTO.swift */,
+			);
+			path = TimerScene;
 			sourceTree = "<group>";
 		};
 		EDC851D02B04EE74009031EA /* View */ = {
@@ -858,7 +872,9 @@
 				2C5CDA4B2B0252C1007AFC57 /* LoginType.swift in Sources */,
 				60F6FD732B0B5E130057CE0B /* SignUpViewController.swift in Sources */,
 				2CE84EEF2B0B742A00E2FB71 /* CategorySettingViewController.swift in Sources */,
+				ED3595B02B0C82C800558FAA /* TimerStartRequestDTO.swift in Sources */,
 				2C5CDA482B0252B2007AFC57 /* LoginViewController.swift in Sources */,
+				ED3595B22B0C83D700558FAA /* TimerStartResponseDTO.swift in Sources */,
 				2C5CDA582B025426007AFC57 /* FlipMateFont.swift in Sources */,
 				60DE493D2B05DEA400ACE6DD /* FlipMateLogger.swift in Sources */,
 				2C801D802B04B68900A7ABAE /* TimerUseCase.swift in Sources */,
