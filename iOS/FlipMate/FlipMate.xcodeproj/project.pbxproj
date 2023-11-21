@@ -163,6 +163,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2C3430942B0C7C55008CBC85 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		2C3430952B0C7E44008CBC85 /* PersistenceService */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PersistenceService;
+			sourceTree = "<group>";
+		};
 		2C43A0D62B037BA50005596A /* FeedbackManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +330,8 @@
 				600908EF2AFCDBC90065DFFB /* Presentation */,
 				600908F72AFCDE540065DFFB /* Domain */,
 				600908F82AFCDE630065DFFB /* Data */,
+				2C3430942B0C7C55008CBC85 /* NetworkService */,
+				2C3430952B0C7E44008CBC85 /* PersistenceService */,
 				600909012AFCDFD10065DFFB /* Common */,
 				600908EE2AFCDBAB0065DFFB /* Resources */,
 			);
