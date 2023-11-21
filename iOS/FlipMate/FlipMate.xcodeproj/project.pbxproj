@@ -37,7 +37,7 @@
 		600908C22AFCD7DF0065DFFB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908C12AFCD7DF0065DFFB /* ViewController.swift */; };
 		600908C72AFCD7E00065DFFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 600908C62AFCD7E00065DFFB /* Assets.xcassets */; };
 		600908CA2AFCD7E00065DFFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 600908C82AFCD7E00065DFFB /* LaunchScreen.storyboard */; };
-		600908D52AFCD7E00065DFFB /* FlipMateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908D42AFCD7E00065DFFB /* FlipMateTests.swift */; };
+		600908D52AFCD7E00065DFFB /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908D42AFCD7E00065DFFB /* NetworkServiceTests.swift */; };
 		600908DF2AFCD7E00065DFFB /* FlipMateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908DE2AFCD7E00065DFFB /* FlipMateUITests.swift */; };
 		600908E12AFCD7E00065DFFB /* FlipMateUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908E02AFCD7E00065DFFB /* FlipMateUITestsLaunchTests.swift */; };
 		601773E42B021E6000D175D9 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601773E32B021E6000D175D9 /* TimerViewController.swift */; };
@@ -116,7 +116,7 @@
 		600908C92AFCD7E00065DFFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		600908CB2AFCD7E00065DFFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		600908D02AFCD7E00065DFFB /* FlipMateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlipMateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		600908D42AFCD7E00065DFFB /* FlipMateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipMateTests.swift; sourceTree = "<group>"; };
+		600908D42AFCD7E00065DFFB /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
 		600908DA2AFCD7E00065DFFB /* FlipMateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlipMateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		600908DE2AFCD7E00065DFFB /* FlipMateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipMateUITests.swift; sourceTree = "<group>"; };
 		600908E02AFCD7E00065DFFB /* FlipMateUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipMateUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -370,7 +370,7 @@
 		600908D32AFCD7E00065DFFB /* FlipMateTests */ = {
 			isa = PBXGroup;
 			children = (
-				600908D42AFCD7E00065DFFB /* FlipMateTests.swift */,
+				600908D42AFCD7E00065DFFB /* NetworkServiceTests.swift */,
 			);
 			path = FlipMateTests;
 			sourceTree = "<group>";
@@ -926,7 +926,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				600908D52AFCD7E00065DFFB /* FlipMateTests.swift in Sources */,
+				600908D52AFCD7E00065DFFB /* NetworkServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
