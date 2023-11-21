@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct TimerFinishRequestDTO: Encodable {
+    let type: String
+    let currentTime: String
+    let learningSeconds: Int
+    let category: String
+}

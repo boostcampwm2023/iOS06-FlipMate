@@ -51,6 +51,8 @@
 		ED3595AB2B0C81B800558FAA /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595AA2B0C81B800558FAA /* Responsable.swift */; };
 		ED3595B02B0C82C800558FAA /* TimerStartRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595AF2B0C82C800558FAA /* TimerStartRequestDTO.swift */; };
 		ED3595B22B0C83D700558FAA /* TimerStartResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595B12B0C83D700558FAA /* TimerStartResponseDTO.swift */; };
+		ED3595B72B0C887C00558FAA /* TimerFinishRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595B62B0C887C00558FAA /* TimerFinishRequestDTO.swift */; };
+		ED3595B92B0C88A300558FAA /* TimerFinishResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595B82B0C88A300558FAA /* TimerFinishResponseDTO.swift */; };
 		ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A7E2B06033F008FE1C5 /* Category.swift */; };
 		ED9B2A812B06048D008FE1C5 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */; };
 		EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851C62B021492009031EA /* TabBarViewController.swift */; };
@@ -131,6 +133,8 @@
 		ED3595AA2B0C81B800558FAA /* Responsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responsable.swift; sourceTree = "<group>"; };
 		ED3595AF2B0C82C800558FAA /* TimerStartRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStartRequestDTO.swift; sourceTree = "<group>"; };
 		ED3595B12B0C83D700558FAA /* TimerStartResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStartResponseDTO.swift; sourceTree = "<group>"; };
+		ED3595B62B0C887C00558FAA /* TimerFinishRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishRequestDTO.swift; sourceTree = "<group>"; };
+		ED3595B82B0C88A300558FAA /* TimerFinishResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishResponseDTO.swift; sourceTree = "<group>"; };
 		ED9B2A7E2B06033F008FE1C5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		EDC851C62B021492009031EA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -620,6 +624,8 @@
 			children = (
 				ED3595AF2B0C82C800558FAA /* TimerStartRequestDTO.swift */,
 				ED3595B12B0C83D700558FAA /* TimerStartResponseDTO.swift */,
+				ED3595B62B0C887C00558FAA /* TimerFinishRequestDTO.swift */,
+				ED3595B82B0C88A300558FAA /* TimerFinishResponseDTO.swift */,
 			);
 			path = TimerScene;
 			sourceTree = "<group>";
@@ -885,10 +891,12 @@
 				6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */,
 				600908BE2AFCD7DF0065DFFB /* AppDelegate.swift in Sources */,
 				2CE84EFB2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift in Sources */,
+				ED3595B72B0C887C00558FAA /* TimerFinishRequestDTO.swift in Sources */,
 				ED3595A92B0C7F3500558FAA /* HTTPMethod.swift in Sources */,
 				2C5CDA562B025426007AFC57 /* BaseViewController.swift in Sources */,
 				2CE84EF72B0B7F3C00E2FB71 /* CategorySettingSection.swift in Sources */,
 				2C6717F82B0535A8004D118D /* Int++Extension.swift in Sources */,
+				ED3595B92B0C88A300558FAA /* TimerFinishResponseDTO.swift in Sources */,
 				ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */,
 				2CE84EF92B0B8A0B00E2FB71 /* CategorySettingFooterView.swift in Sources */,
 				2C3430972B0C7ED8008CBC85 /* EndPoint.swift in Sources */,
