@@ -12,7 +12,7 @@ final class CategorySettingFooterView: UICollectionReusableView {
     private enum Constant {
         static let addButtonTitle = "카테고리 추가 +"
         static let addButtonborderWidth: CGFloat = 1
-        static let addButtoncorenrRedius: CGFloat = 8
+        static let addButtoncornerRedius: CGFloat = 8
     }
     
     // MARK: - UI Components
@@ -23,7 +23,7 @@ final class CategorySettingFooterView: UICollectionReusableView {
         button.titleLabel?.font = FlipMateFont.mediumBold.font
         button.layer.borderColor = FlipMateColor.gray2.color?.cgColor
         button.layer.borderWidth = Constant.addButtonborderWidth
-        button.layer.cornerRadius = Constant.addButtoncorenrRedius
+        button.layer.cornerRadius = Constant.addButtoncornerRedius
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
