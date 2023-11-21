@@ -19,7 +19,7 @@ final class TabBarViewController: UITabBarController {
         static let timerImageSize: CGFloat = 40
     }
     
-    private lazy var timerButton: UIButton = {
+    lazy var timerButton: UIButton = {
         let button = UIButton()
         button.layer.borderWidth = Constant.borderWidth
         button.backgroundColor = FlipMateColor.tabBarColor.color
@@ -57,7 +57,7 @@ final class TabBarViewController: UITabBarController {
 private extension TabBarViewController {
 
     func configureUI() {
-        let timerViewController = TimerViewController(timerViewModel: TimerViewModel(timerUseCase: DefaultTimerUseCase()), feedbackManager: FeedbackManager())
+        let timerViewController = TimerViewController(timerViewModel: TimerViewModel(timerUseCase: DefaultTimerUseCase()))
         let socialViewController = SocialViewController()
         let chartViewController = ChartViewController()
 
