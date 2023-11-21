@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
 
@@ -8,16 +8,34 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly usersService: UsersService,
   ) {}
+
+  public extractBearerTokenFromHeader(header: string) {
+    const splitToken = header.split(' ');
+
+    if (splitToken.length !== 2 || splitToken[0] !== 'Bearer') {
+      throw new UnauthorizedException('잘못된 토큰입니다!');
+    }
+
+    const token = splitToken[1];
+
+    return token;
+  }
+
+  public verifyToken(token: string) {
+    try {
+      return this.jwtService.verify(token);
+    } catch (e) {
+      throw new UnauthorizedException('유효하지 않은 토큰입니다!');
+    }
+  }
+
   private signToken(user) {
     const payload = {
       email: user.email,
       nickname: user.nickname,
       type: 'access',
     };
-    return this.jwtService.sign(payload, {
-      secret: 'slkdjf',
-      expiresIn: 300,
-    });
+    return this.jwtService.sign(payload);
   }
 
   public async loginWithGoogle(user) {
@@ -25,7 +43,7 @@ export class AuthService {
     if (!prevUser) {
       const userEntity = {
         nickname: 'test',
-        google_id: user.email,
+        email: user.email,
         image_url: '',
       };
       prevUser = await this.usersService.createUser(userEntity);
