@@ -2,10 +2,21 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { readFileSync } from 'fs';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const configService = new ConfigService();
 
+  let httpsOptions = null;
+  if (configService.get<boolean>('SSL')) {
+    httpsOptions = {
+      key: readFileSync(configService.get<string>('HTTPS_KEY_PATH')),
+      cert: readFileSync(configService.get<string>('HTTPS_CERT_PATH')),
+    };
+  }
+
+  const app = await NestFactory.create(AppModule, { httpsOptions });
   const config = new DocumentBuilder()
     .setTitle('StudyLog API')
     .setDescription('StudyLog 애플리케이션 API 문서')
@@ -17,6 +28,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   app.useGlobalPipes(new ValidationPipe());
+
   await app.listen(3000);
 }
 bootstrap();
