@@ -75,6 +75,7 @@ final class TimerViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         configureNotification()
+        UIDevice.current.isProximityMonitoringEnabled = true
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -200,7 +201,6 @@ private extension TimerViewController {
     
     func handleOrientationChange(_ orientation: UIDeviceOrientation) {
         guard let deviceOrientation = DeviceOrientation(rawValue: orientation.rawValue) else { return }
-        UIDevice.current.isProximityMonitoringEnabled = orientation == .faceDown ? true : false
         timerViewModel.deviceOrientationDidChange(deviceOrientation)
     }
 }
