@@ -8,5 +8,5 @@
 import Foundation
 
 protocol Responsable {
-    associatedtype Response
+    associatedtype Response: Decodable
 }
