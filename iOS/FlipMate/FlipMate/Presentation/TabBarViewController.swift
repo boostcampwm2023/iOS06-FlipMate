@@ -55,6 +55,7 @@ final class TabBarViewController: UITabBarController {
 
 // MARK: - UI Setting
 private extension TabBarViewController {
+
     func configureUI() {
         let timerViewController = TimerViewController(timerViewModel: TimerViewModel(timerUseCase: DefaultTimerUseCase()), feedbackManager: FeedbackManager())
         let socialViewController = SocialViewController()

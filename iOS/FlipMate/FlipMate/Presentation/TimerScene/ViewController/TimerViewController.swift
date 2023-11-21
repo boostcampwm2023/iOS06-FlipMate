@@ -13,15 +13,14 @@ final class TimerViewController: BaseViewController {
    
     // MARK: - Properties
     private var timerViewModel: TimerViewModelProtocol
-    private var feedbackManager: FeedbackManager
     private let deviceMotionManager = DeviceMotionManager.shared
+    private let feedbackManager = FeedbackManager()
     private var cancellables = Set<AnyCancellable>()
     private var userScreenBrightness: CGFloat = UIScreen.main.brightness
     
     // MARK: - init
-    init(timerViewModel: TimerViewModelProtocol, feedbackManager: FeedbackManager) {
+    init(timerViewModel: TimerViewModelProtocol) {
         self.timerViewModel = timerViewModel
-        self.feedbackManager = feedbackManager
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -137,6 +136,7 @@ final class TimerViewController: BaseViewController {
             .sink { [weak self] isFaceDown in
                 guard let self = self else { return }
                 self.setScreenBrightness(isFaceDown)
+                self.startHapticFeedback(isFaceDown)
             }
             .store(in: &cancellables)
 
@@ -162,10 +162,17 @@ private extension TimerViewController {
     func setScreenBrightness(_ isFaceDown: Bool) {
         if isFaceDown {
             self.userScreenBrightness = UIScreen.main.brightness
-            self.feedbackManager.startFacedownFeedback()
             UIScreen.main.brightness = 0.0
         } else {
             UIScreen.main.brightness = self.userScreenBrightness
+        }
+    }
+    
+    func startHapticFeedback(_ isFaceDown: Bool) {
+        if isFaceDown {
+            feedbackManager.startFacedownFeedback()
+        } else {
+            feedbackManager.startFaceupFeedback()
         }
     }
 }
