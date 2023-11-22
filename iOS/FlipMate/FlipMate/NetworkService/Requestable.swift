@@ -11,18 +11,18 @@ protocol Requestable {
     var baseURL: String { get }
     var path: String { get }
     var method: HTTPMethod { get }
-    var bodyParameters: Encodable? { get }
-    var headers: [String: String]? { get }
+    var data: Data? { get }
+    var headers: [HTTPHeader]? { get }
 }
 
 extension Requestable {
-    func getUrlRequest() throws -> URLRequest {
+    func makeURLRequest() throws -> URLRequest {
         let url = try makeURL()
         var urlRequest = URLRequest(url: url)
-        
         urlRequest.httpMethod = method.rawValue
-        
-        headers?.forEach { urlRequest.setValue($1, forHTTPHeaderField: $0)}
+        urlRequest.httpBody = data
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        headers?.forEach { urlRequest.setValue($0.value, forHTTPHeaderField: $0.field)}
         return urlRequest
     }
 

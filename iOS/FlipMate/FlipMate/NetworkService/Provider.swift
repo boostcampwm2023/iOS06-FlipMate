@@ -22,7 +22,7 @@ struct Provider: Providable {
     
     func request<E: ReqeustResponseable>(with endpoint: E) -> AnyPublisher<E.Response, NetworkError> {
         do {
-            let urlReqeust = try endpoint.getUrlRequest()
+            let urlReqeust = try endpoint.makeURLRequest()
             return urlSession.response(for: urlReqeust)
                 .tryMap { data, response in
                     guard let response = response as? HTTPURLResponse else { throw NetworkError.invalidURLComponents }
