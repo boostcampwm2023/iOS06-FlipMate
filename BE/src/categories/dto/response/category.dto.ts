@@ -7,12 +7,6 @@ export class CategoryDto {
     description: '카테고리 id',
   })
   id: number;
-  @ApiProperty({
-    type: 'number',
-    example: '1',
-    description: '유저 id',
-  })
-  user_id: number;
 
   @ApiProperty({
     type: 'string',
