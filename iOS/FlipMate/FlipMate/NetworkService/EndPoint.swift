@@ -16,9 +16,9 @@ final class EndPoint<R: Decodable>: ReqeustResponseable {
     var path: String
     var method: HTTPMethod
     var data: Data?
-    var headers: [String : String]?
+    var headers: [HTTPHeader]?
     
-    init(baseURL: String, path: String, method: HTTPMethod, data: Data? = nil, headers: [String: String]? = nil) {
+    init(baseURL: String, path: String, method: HTTPMethod, data: Data? = nil, headers: [HTTPHeader]? = nil) {
         self.baseURL = baseURL
         self.path = path
         self.method = method

@@ -12,7 +12,7 @@ protocol Requestable {
     var path: String { get }
     var method: HTTPMethod { get }
     var data: Data? { get }
-    var headers: [String: String]? { get }
+    var headers: [HTTPHeader]? { get }
 }
 
 extension Requestable {
@@ -22,7 +22,7 @@ extension Requestable {
         urlRequest.httpMethod = method.rawValue
         urlRequest.httpBody = data
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        headers?.forEach { urlRequest.setValue($1, forHTTPHeaderField: $0)}
+        headers?.forEach { urlRequest.setValue($0.value, forHTTPHeaderField: $0.field)}
         return urlRequest
     }
 

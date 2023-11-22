@@ -7,4 +7,4 @@
 
 import Foundation
 
-let BaseURL = "https://flipmate.site:3000"
+let baseURL = "https://flipmate.site:3000"
