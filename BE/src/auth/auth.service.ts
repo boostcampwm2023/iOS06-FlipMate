@@ -42,7 +42,7 @@ export class AuthService {
     let prevUser = await this.usersService.findUserByEmail(user.email);
     if (!prevUser) {
       const userEntity = {
-        nickname: 'test',
+        nickname: user.email.split('@')[0],
         email: user.email,
         image_url: '',
       };
