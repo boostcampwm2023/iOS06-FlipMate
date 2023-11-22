@@ -11,7 +11,7 @@
 		2C3430972B0C7ED8008CBC85 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430962B0C7ED8008CBC85 /* EndPoint.swift */; };
 		2C3430992B0C8427008CBC85 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430982B0C8427008CBC85 /* Provider.swift */; };
 		2C34309B2B0C8674008CBC85 /* URLSessionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34309A2B0C8674008CBC85 /* URLSessionable.swift */; };
-		2C3430A12B0DA4E6008CBC85 /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A02B0DA4E6008CBC85 /* BaseURL.swift */; };
+		2C3430A12B0DA4E6008CBC85 /* BaseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A02B0DA4E6008CBC85 /* BaseComponents.swift */; };
 		2C3430A32B0DA5A5008CBC85 /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A22B0DA5A5008CBC85 /* HTTPHeader.swift */; };
 		2C43A0D82B037BBC0005596A /* FeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C43A0D72B037BBC0005596A /* FeedbackManager.swift */; };
 		2C4D55AB2B033029006D7C26 /* UIView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D55AA2B033029006D7C26 /* UIView++Extension.swift */; };
@@ -34,6 +34,7 @@
 		2CE84EF72B0B7F3C00E2FB71 /* CategorySettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF62B0B7F3C00E2FB71 /* CategorySettingSection.swift */; };
 		2CE84EF92B0B8A0B00E2FB71 /* CategorySettingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF82B0B8A0B00E2FB71 /* CategorySettingFooterView.swift */; };
 		2CE84EFB2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EFA2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift */; };
+		600195A02B0DFA3900F02BA4 /* StatusResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6001959F2B0DFA3900F02BA4 /* StatusResponseDTO.swift */; };
 		600908BE2AFCD7DF0065DFFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908BD2AFCD7DF0065DFFB /* AppDelegate.swift */; };
 		600908C02AFCD7DF0065DFFB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908BF2AFCD7DF0065DFFB /* SceneDelegate.swift */; };
 		600908C22AFCD7DF0065DFFB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908C12AFCD7DF0065DFFB /* ViewController.swift */; };
@@ -46,9 +47,17 @@
 		60243EF02B05D24D0098A92F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 60243EEF2B05D24D0098A92F /* .swiftlint.yml */; };
 		6057A58D2B0C7F0F00EE58E8 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58C2B0C7F0F00EE58E8 /* Requestable.swift */; };
 		6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58E2B0C801300EE58E8 /* NetworkError.swift */; };
+		6086464E2B0DDA1300B0C1BC /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086464D2B0DDA1300B0C1BC /* CategoryRepository.swift */; };
+		608646502B0DDBA800B0C1BC /* DefaultCategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086464F2B0DDBA800B0C1BC /* DefaultCategoryRepository.swift */; };
+		608646552B0DDC3900B0C1BC /* CategoryRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646542B0DDC3900B0C1BC /* CategoryRequestDTO.swift */; };
+		608646572B0DE31800B0C1BC /* CategoryResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646562B0DE31800B0C1BC /* CategoryResponseDTO.swift */; };
+		608646592B0DE61200B0C1BC /* CategoryEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646582B0DE61200B0C1BC /* CategoryEndpoints.swift */; };
 		6096F91E2B04F3CA00D0B972 /* FaceDown.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 6096F91D2B04F3CA00D0B972 /* FaceDown.ahap */; };
 		60DE493D2B05DEA400ACE6DD /* FlipMateLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE493C2B05DEA400ACE6DD /* FlipMateLogger.swift */; };
 		60DE49402B05E67200ACE6DD /* FlipMateConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE493F2B05E67200ACE6DD /* FlipMateConstant.swift */; };
+		60F67C682B0E1785002C8BF3 /* CategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F67C672B0E1785002C8BF3 /* CategoryUseCase.swift */; };
+		60F67C6A2B0E1868002C8BF3 /* DefaultCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F67C692B0E1868002C8BF3 /* DefaultCategoryUseCase.swift */; };
+		60F67C6C2B0E1E02002C8BF3 /* CategoryRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F67C6B2B0E1E02002C8BF3 /* CategoryRepositoryTests.swift */; };
 		60F6FD732B0B5E130057CE0B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F6FD722B0B5E130057CE0B /* SignUpViewController.swift */; };
 		A18D97900627849B3EFACF76 /* Pods_FlipMate_FlipMateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA80839AC9EFDD4BAA10C67 /* Pods_FlipMate_FlipMateUITests.framework */; };
 		ED3595A92B0C7F3500558FAA /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595A82B0C7F3500558FAA /* HTTPMethod.swift */; };
@@ -87,7 +96,7 @@
 		2C3430962B0C7ED8008CBC85 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		2C3430982B0C8427008CBC85 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		2C34309A2B0C8674008CBC85 /* URLSessionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionable.swift; sourceTree = "<group>"; };
-		2C3430A02B0DA4E6008CBC85 /* BaseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURL.swift; sourceTree = "<group>"; };
+		2C3430A02B0DA4E6008CBC85 /* BaseComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseComponents.swift; sourceTree = "<group>"; };
 		2C3430A22B0DA5A5008CBC85 /* HTTPHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
 		2C43A0D72B037BBC0005596A /* FeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackManager.swift; sourceTree = "<group>"; };
 		2C4D55AA2B033029006D7C26 /* UIView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView++Extension.swift"; sourceTree = "<group>"; };
@@ -112,6 +121,7 @@
 		2CE84EF82B0B8A0B00E2FB71 /* CategorySettingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingFooterView.swift; sourceTree = "<group>"; };
 		2CE84EFA2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView++Extension.swift"; sourceTree = "<group>"; };
 		52B11F58319D7A81A41943F5 /* Pods-FlipMateTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMateTests.debug.xcconfig"; path = "Target Support Files/Pods-FlipMateTests/Pods-FlipMateTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6001959F2B0DFA3900F02BA4 /* StatusResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusResponseDTO.swift; sourceTree = "<group>"; };
 		600908BA2AFCD7DF0065DFFB /* FlipMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlipMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		600908BD2AFCD7DF0065DFFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		600908BF2AFCD7DF0065DFFB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,9 +138,17 @@
 		60243EEF2B05D24D0098A92F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		6057A58C2B0C7F0F00EE58E8 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		6057A58E2B0C801300EE58E8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		6086464D2B0DDA1300B0C1BC /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
+		6086464F2B0DDBA800B0C1BC /* DefaultCategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCategoryRepository.swift; sourceTree = "<group>"; };
+		608646542B0DDC3900B0C1BC /* CategoryRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRequestDTO.swift; sourceTree = "<group>"; };
+		608646562B0DE31800B0C1BC /* CategoryResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryResponseDTO.swift; sourceTree = "<group>"; };
+		608646582B0DE61200B0C1BC /* CategoryEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEndpoints.swift; sourceTree = "<group>"; };
 		6096F91D2B04F3CA00D0B972 /* FaceDown.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = FaceDown.ahap; sourceTree = "<group>"; };
 		60DE493C2B05DEA400ACE6DD /* FlipMateLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipMateLogger.swift; sourceTree = "<group>"; };
 		60DE493F2B05E67200ACE6DD /* FlipMateConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipMateConstant.swift; sourceTree = "<group>"; };
+		60F67C672B0E1785002C8BF3 /* CategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryUseCase.swift; sourceTree = "<group>"; };
+		60F67C692B0E1868002C8BF3 /* DefaultCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCategoryUseCase.swift; sourceTree = "<group>"; };
+		60F67C6B2B0E1E02002C8BF3 /* CategoryRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepositoryTests.swift; sourceTree = "<group>"; };
 		60F6FD722B0B5E130057CE0B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		71ED06C5254CFE8E3AB612B4 /* Pods-FlipMate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate.debug.xcconfig"; path = "Target Support Files/Pods-FlipMate/Pods-FlipMate.debug.xcconfig"; sourceTree = "<group>"; };
 		BC232C114FB45EEC8C2E974D /* Pods-FlipMate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate.release.xcconfig"; path = "Target Support Files/Pods-FlipMate/Pods-FlipMate.release.xcconfig"; sourceTree = "<group>"; };
@@ -199,7 +217,6 @@
 				2C3430962B0C7ED8008CBC85 /* EndPoint.swift */,
 				2C3430982B0C8427008CBC85 /* Provider.swift */,
 				2C34309A2B0C8674008CBC85 /* URLSessionable.swift */,
-				2C3430A02B0DA4E6008CBC85 /* BaseURL.swift */,
 				2C3430A22B0DA5A5008CBC85 /* HTTPHeader.swift */,
 			);
 			path = NetworkService;
@@ -250,7 +267,6 @@
 			isa = PBXGroup;
 			children = (
 				2C4D55B22B035484006D7C26 /* DeviceOrientation.swift */,
-				ED9B2A7E2B06033F008FE1C5 /* Category.swift */,
 				2CE84EF62B0B7F3C00E2FB71 /* CategorySettingSection.swift */,
 			);
 			path = Model;
@@ -377,6 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				600908D42AFCD7E00065DFFB /* NetworkServiceTests.swift */,
+				60F67C6B2B0E1E02002C8BF3 /* CategoryRepositoryTests.swift */,
 			);
 			path = FlipMateTests;
 			sourceTree = "<group>";
@@ -501,6 +518,7 @@
 			isa = PBXGroup;
 			children = (
 				600908FB2AFCDF180065DFFB /* Utils */,
+				6086464F2B0DDBA800B0C1BC /* DefaultCategoryRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -515,6 +533,8 @@
 		600908FC2AFCDF2F0065DFFB /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				608646582B0DE61200B0C1BC /* CategoryEndpoints.swift */,
+				2C3430A02B0DA4E6008CBC85 /* BaseComponents.swift */,
 				600908FD2AFCDF3A0065DFFB /* DataMapping */,
 			);
 			path = Network;
@@ -523,7 +543,9 @@
 		600908FD2AFCDF3A0065DFFB /* DataMapping */ = {
 			isa = PBXGroup;
 			children = (
+				6001959F2B0DFA3900F02BA4 /* StatusResponseDTO.swift */,
 				ED3595AE2B0C82A200558FAA /* TimerScene */,
+				608646512B0DDBCC00B0C1BC /* Category */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -587,6 +609,7 @@
 		600909052AFCE0C90065DFFB /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				ED9B2A7E2B06033F008FE1C5 /* Category.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -596,6 +619,7 @@
 			children = (
 				600909072AFCE0DC0065DFFB /* Protocol */,
 				2C801D7D2B04B65400A7ABAE /* DefaultTimerUseCase.swift */,
+				60F67C692B0E1868002C8BF3 /* DefaultCategoryUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -604,6 +628,7 @@
 			isa = PBXGroup;
 			children = (
 				2C801D7F2B04B68900A7ABAE /* TimerUseCase.swift */,
+				60F67C672B0E1785002C8BF3 /* CategoryUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -611,8 +636,18 @@
 		600909082AFCE0EA0065DFFB /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				6086464D2B0DDA1300B0C1BC /* CategoryRepository.swift */,
 			);
 			path = Repositories;
+			sourceTree = "<group>";
+		};
+		608646512B0DDBCC00B0C1BC /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				608646542B0DDC3900B0C1BC /* CategoryRequestDTO.swift */,
+				608646562B0DE31800B0C1BC /* CategoryResponseDTO.swift */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 		60DE493B2B05DE6700ACE6DD /* Logger */ = {
@@ -888,18 +923,23 @@
 				2C4D55B02B0348FB006D7C26 /* TimerViewModel.swift in Sources */,
 				2C801D7E2B04B65400A7ABAE /* DefaultTimerUseCase.swift in Sources */,
 				2C4D55AB2B033029006D7C26 /* UIView++Extension.swift in Sources */,
+				60F67C6A2B0E1868002C8BF3 /* DefaultCategoryUseCase.swift in Sources */,
 				2C5CDA4B2B0252C1007AFC57 /* LoginType.swift in Sources */,
+				600195A02B0DFA3900F02BA4 /* StatusResponseDTO.swift in Sources */,
 				60F6FD732B0B5E130057CE0B /* SignUpViewController.swift in Sources */,
 				2CE84EEF2B0B742A00E2FB71 /* CategorySettingViewController.swift in Sources */,
 				ED3595B02B0C82C800558FAA /* TimerStartRequestDTO.swift in Sources */,
 				2C5CDA482B0252B2007AFC57 /* LoginViewController.swift in Sources */,
+				608646572B0DE31800B0C1BC /* CategoryResponseDTO.swift in Sources */,
 				ED3595B22B0C83D700558FAA /* TimerStartResponseDTO.swift in Sources */,
 				2C5CDA582B025426007AFC57 /* FlipMateFont.swift in Sources */,
 				60DE493D2B05DEA400ACE6DD /* FlipMateLogger.swift in Sources */,
 				2C801D802B04B68900A7ABAE /* TimerUseCase.swift in Sources */,
+				6086464E2B0DDA1300B0C1BC /* CategoryRepository.swift in Sources */,
 				601773E42B021E6000D175D9 /* TimerViewController.swift in Sources */,
 				600908C22AFCD7DF0065DFFB /* ViewController.swift in Sources */,
-				2C3430A12B0DA4E6008CBC85 /* BaseURL.swift in Sources */,
+				2C3430A12B0DA4E6008CBC85 /* BaseComponents.swift in Sources */,
+				60F67C682B0E1785002C8BF3 /* CategoryUseCase.swift in Sources */,
 				2C5CDA5B2B025440007AFC57 /* ChartViewController.swift in Sources */,
 				6057A58D2B0C7F0F00EE58E8 /* Requestable.swift in Sources */,
 				6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */,
@@ -909,13 +949,16 @@
 				ED3595A92B0C7F3500558FAA /* HTTPMethod.swift in Sources */,
 				2C5CDA562B025426007AFC57 /* BaseViewController.swift in Sources */,
 				2C3430992B0C8427008CBC85 /* Provider.swift in Sources */,
+				608646502B0DDBA800B0C1BC /* DefaultCategoryRepository.swift in Sources */,
 				2CE84EF72B0B7F3C00E2FB71 /* CategorySettingSection.swift in Sources */,
 				2C6717F82B0535A8004D118D /* Int++Extension.swift in Sources */,
 				ED3595B92B0C88A300558FAA /* TimerFinishResponseDTO.swift in Sources */,
+				608646552B0DDC3900B0C1BC /* CategoryRequestDTO.swift in Sources */,
 				ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */,
 				2C34309B2B0C8674008CBC85 /* URLSessionable.swift in Sources */,
 				2CE84EF92B0B8A0B00E2FB71 /* CategorySettingFooterView.swift in Sources */,
 				2C3430972B0C7ED8008CBC85 /* EndPoint.swift in Sources */,
+				608646592B0DE61200B0C1BC /* CategoryEndpoints.swift in Sources */,
 				2C4D55B32B035484006D7C26 /* DeviceOrientation.swift in Sources */,
 				EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */,
 				2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */,
@@ -935,6 +978,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				600908D52AFCD7E00065DFFB /* NetworkServiceTests.swift in Sources */,
+				60F67C6C2B0E1E02002C8BF3 /* CategoryRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
