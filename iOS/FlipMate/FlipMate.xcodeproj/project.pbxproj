@@ -57,6 +57,7 @@
 		ED3595B92B0C88A300558FAA /* TimerFinishResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595B82B0C88A300558FAA /* TimerFinishResponseDTO.swift */; };
 		ED3595BD2B0DB29F00558FAA /* CategoryModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595BC2B0DB29F00558FAA /* CategoryModifyViewController.swift */; };
 		ED3595BF2B0DB68200558FAA /* CategoryTitleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595BE2B0DB68200558FAA /* CategoryTitleTextView.swift */; };
+		ED3595C12B0DC2F100558FAA /* CategoryColorSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */; };
 		ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A7E2B06033F008FE1C5 /* Category.swift */; };
 		ED9B2A812B06048D008FE1C5 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */; };
 		EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851C62B021492009031EA /* TabBarViewController.swift */; };
@@ -143,6 +144,7 @@
 		ED3595B82B0C88A300558FAA /* TimerFinishResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishResponseDTO.swift; sourceTree = "<group>"; };
 		ED3595BC2B0DB29F00558FAA /* CategoryModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModifyViewController.swift; sourceTree = "<group>"; };
 		ED3595BE2B0DB68200558FAA /* CategoryTitleTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTitleTextView.swift; sourceTree = "<group>"; };
+		ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColorSelectView.swift; sourceTree = "<group>"; };
 		ED9B2A7E2B06033F008FE1C5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		EDC851C62B021492009031EA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -647,6 +649,7 @@
 				EDC851D12B04EE83009031EA /* CategoryListCollectionViewCell.swift */,
 				2CE84EF82B0B8A0B00E2FB71 /* CategorySettingFooterView.swift */,
 				ED3595BE2B0DB68200558FAA /* CategoryTitleTextView.swift */,
+				ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -926,6 +929,7 @@
 				60DE49402B05E67200ACE6DD /* FlipMateConstant.swift in Sources */,
 				2C801D832B04C64F00A7ABAE /* TimerManager.swift in Sources */,
 				2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */,
+				ED3595C12B0DC2F100558FAA /* CategoryColorSelectView.swift in Sources */,
 				EDC851D92B05C37C009031EA /* DeviceMotionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

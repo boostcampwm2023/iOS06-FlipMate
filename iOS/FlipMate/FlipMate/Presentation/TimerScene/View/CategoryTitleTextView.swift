@@ -26,7 +26,7 @@ final class CategoryTitleTextView: UIView {
     init(placeholder: String){
         super.init(frame: .zero)
         self.placeholder = placeholder
-        setupUI()
+        configureUI()
         showPlaceholder()
     }
     
@@ -34,7 +34,7 @@ final class CategoryTitleTextView: UIView {
         fatalError("Don't use storyboard")
     }
     
-    private func setupUI() {
+    private func configureUI() {
         textView.delegate = self
         addSubview(textView)
         NSLayoutConstraint.activate([

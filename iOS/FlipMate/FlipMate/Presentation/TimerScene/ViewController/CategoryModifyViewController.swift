@@ -37,6 +37,11 @@ final class CategoryModifyViewController: BaseViewController {
         textView.layer.cornerRadius = 6
         return textView
     }()
+    // MARK: View LifeCycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpNavigation()
+    }
     
     // MARK: Configure UI
     override func configureUI() {
@@ -62,8 +67,32 @@ final class CategoryModifyViewController: BaseViewController {
     }
 }
 
-@available(iOS 17.0, *)
-#Preview {
-    CategoryModifyViewController()
+// MARK: Navigation Bar
+private extension CategoryModifyViewController {
+    func setUpNavigation() {
+        navigationItem.title = ConstantString.title
+        navigationItem.largeTitleDisplayMode = .never
+        
+        setupNavigationBarButton()
+    }
+    
+    func setupNavigationBarButton() {
+        let closeButton = UIBarButtonItem(title: ConstantString.leftNavigationBarItemTitle, style: .plain, target: self, action: #selector(closeButtonTapped))
+        let doneButton = UIBarButtonItem(title: ConstantString.rightNavigationBarItemTitle, style: .done, target: self, action: #selector(doneButtonTapped))
+    }
 }
 
+// MARK: objc function
+private extension CategoryModifyViewController {
+    @objc func closeButtonTapped(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
+    
+    @objc func doneButtonTapped(_ sender: UIBarButtonItem) {
+        // TODO: 완료 버튼 눌렸을 때 동작
+    }
+}
+//@available(iOS 17.0, *)
+//#Preview {
+//    CategoryModifyViewController()
+//}
