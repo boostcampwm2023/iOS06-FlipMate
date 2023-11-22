@@ -6,7 +6,7 @@ export class CategoryDto {
     example: '1',
     description: '카테고리 id',
   })
-  id: number;
+  category_id: number;
 
   @ApiProperty({
     type: 'string',
