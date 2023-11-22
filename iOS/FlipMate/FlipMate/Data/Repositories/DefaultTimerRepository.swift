@@ -47,7 +47,7 @@ extension DefaultTimerRepsoitory: TimerRepsoitory {
         let requestDTO = TimerFinishRequestDTO(
             date: endTime.dateToString(format: .yyyyMMdd),
             createdAt: endTime.dateToString(format: .yyyyMMddhhmmss),
-            type: "end",
+            type: "finish",
             learningTime: learningTime,
             userID: userId,
             categoryID: categoryId)
