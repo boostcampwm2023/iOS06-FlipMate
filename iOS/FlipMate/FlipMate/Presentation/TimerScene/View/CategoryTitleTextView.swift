@@ -7,14 +7,14 @@
 
 import UIKit
 
-final class CustomTextView: UIView {
+final class CategoryTitleTextView: UIView {
     private var textView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isEditable = true
         textView.isScrollEnabled = false
         textView.backgroundColor = .systemBackground
-        textView.font = FlipMateFont.smallRegular.font
+        textView.font = FlipMateFont.mediumRegular.font
         textView.contentInset = .init(top: 5, left: 10, bottom: 5, right: 10)
         
         return textView
@@ -46,7 +46,7 @@ final class CustomTextView: UIView {
     }
 }
 
-extension CustomTextView: UITextViewDelegate {
+extension CategoryTitleTextView: UITextViewDelegate {
     func showPlaceholder() {
         isShowPlaceholder = true
         textView.text = placeholder
@@ -75,4 +75,9 @@ extension CustomTextView: UITextViewDelegate {
             showPlaceholder()
         }
     }
+}
+
+@available(iOS 17.0, *)
+#Preview {
+    CategoryTitleTextView(placeholder: "HELLO")
 }
