@@ -9,7 +9,8 @@ async function bootstrap() {
   const configService = new ConfigService();
 
   let httpsOptions = null;
-  if (configService.get<boolean>('SSL')) {
+  const ssl = configService.get<string>('SSL');
+  if (ssl == 'true') {
     httpsOptions = {
       key: readFileSync(configService.get<string>('HTTPS_KEY_PATH')),
       cert: readFileSync(configService.get<string>('HTTPS_CERT_PATH')),
@@ -29,6 +30,6 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
-  await app.listen(3000);
+  await app.listen(configService.get<number>('PORT'));
 }
 bootstrap();
