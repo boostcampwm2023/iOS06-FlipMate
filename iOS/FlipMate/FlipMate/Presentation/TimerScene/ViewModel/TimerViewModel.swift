@@ -26,14 +26,15 @@ typealias TimerViewModelProtocol = TimerViewModelInput & TimerViewModelOutput
 final class TimerViewModel: TimerViewModelProtocol {
     
     // MARK: Properties
-    private var orientation: DeviceOrientation = .unknown
-    private var proximity: Bool?
+    private var timerUseCase: TimerUseCase
     private var isDeviceFaceDownSubject = PassthroughSubject<Bool, Never>()
     private var isPresentingCategorySubject = PassthroughSubject<Void, Never>()
     private var totalTimeSubject = PassthroughSubject<Int, Never>()
-    private var timerUseCase: TimerUseCase
-    private var isSuspendedTimer: Bool = false
-    private var timerState: TimerState = .stopped
+    private var proximity: Bool?
+    private var orientation: DeviceOrientation = .unknown
+    private var timerState: TimerState = .notStarted
+    private var cancellables = Set<AnyCancellable>()
+    private var totalTime: Int = 0 // 총 공부 시간
     
     // MARK: - init
     init(timerUseCase: TimerUseCase) {
@@ -77,28 +78,95 @@ private extension TimerViewModel {
         if orientation == DeviceOrientation.faceDown && proximity == true {
             FMLogger.user.debug("디바이스가 face down 상태입니다.")
             isDeviceFaceDownSubject.send(true)
-            
-            if isSuspendedTimer {
-                timerUseCase.resumeTimer(resumeTime: Date())
+            if timerState == .notStarted {
+                startTimer()
             } else {
-                timerUseCase.startTimer(startTime: Date())
-                isSuspendedTimer = true
+                resumeTimer()
             }
-            timerState = .counting
         } else {
-            FMLogger.user.debug("디바이스가 face up 상태입니다.")
+            guard timerState == .resumed else { return }
             
-            guard timerState == .counting else { return }
+            FMLogger.user.debug("디바이스가 face up 상태입니다.")
             isDeviceFaceDownSubject.send(false)
-            let time = timerUseCase.suspendTimer()
-            totalTimeSubject.send(time)
-            timerState = .stopped
+            suspendTimer()
         }
+    }
+}
+
+// MARK: - Timer
+private extension TimerViewModel {
+    /// 타이머 시작
+    func startTimer() {
+        timerUseCase.startTimer(startTime: Date(), userId: 1, categoryId: 1)
+            .receive(on: DispatchQueue.main)
+            .sink { complection in
+                switch complection {
+                case .finished:
+                    FMLogger.timer.debug("공부 시작 API 요청 성공")
+                    return
+                case .failure(let error):
+                    // TODO: 타이머 일시정지 후 타이머 작동 이전 시간으로 롤백
+                    FMLogger.timer.error("\(error.localizedDescription)")
+                }
+            } receiveValue: { [weak self] _ in
+                guard let self = self else { return }
+                self.timerState = .resumed
+            }
+            .store(in: &cancellables)
+    }
+    
+    /// 타이머 재시작
+    func resumeTimer() {
+        timerUseCase.resumeTimer(resumeTime: Date(), userId: 1, categoryId: 1)
+            .receive(on: DispatchQueue.main)
+            .sink { complection in
+                switch complection {
+                case .finished:
+                    FMLogger.timer.debug("공부 재시작 API 요청 성공")
+                    return
+                case .failure(let error):
+                    // TODO: 타이머 일시정지 후 타이머 작동 이전 시간으로 롤백
+                    FMLogger.timer.error("\(error.localizedDescription)")
+                }
+            } receiveValue: { [weak self] _ in
+                guard let self = self else { return }
+                self.timerState = .resumed
+            }
+            .store(in: &cancellables)
+    }
+    
+    /// 타이머 일시정지
+    func suspendTimer() {
+        timerUseCase.suspendTimer(suspendTime: Date(), userId: 1, categoryId: 1)
+            .receive(on: DispatchQueue.main)
+            .sink { complection in
+                switch complection {
+                case .finished:
+                    FMLogger.timer.debug("공부 종료 API 요청 성공")
+                    return
+                case .failure(let error):
+                    FMLogger.timer.error("\(error.localizedDescription)")
+                }
+            } receiveValue: { [weak self] learningTime in
+                guard let self = self else { return }
+                self.timerState = .suspended
+                self.totalTime += learningTime
+                self.totalTimeSubject.send(self.totalTime)
+            }
+            .store(in: &cancellables)
+    }
+    
+    /// 타이머 종료
+    func stopTimer() {
+        timerUseCase.stopTimer()
     }
 }
 
 private extension TimerViewModel {
     enum TimerState {
-        case counting, stopped
+        case suspended // 타이머 일시정지 상태
+        case resumed // 타이머 작동 상태
+        case cancled // 타이머 종료 상태
+        case notStarted // 타이머 시작안된 상태
     }
 }
