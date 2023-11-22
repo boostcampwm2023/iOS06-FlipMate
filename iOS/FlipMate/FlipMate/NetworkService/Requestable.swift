@@ -21,6 +21,7 @@ extension Requestable {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
         urlRequest.httpBody = data
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         headers?.forEach { urlRequest.setValue($1, forHTTPHeaderField: $0)}
         return urlRequest
     }
