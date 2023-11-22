@@ -29,10 +29,10 @@ export class AuthController {
 
   @Get('logout')
   @UseGuards(AccessTokenGuard)
+  @ApiBearerAuth()
   @ApiOperation({ summary: '로그아웃' })
   @ApiResponse({ status: 200, description: '로그아웃 성공' })
   @ApiResponse({ status: 401, description: '인증 실패' })
-  @ApiBearerAuth()
   logout(@User('id') userId: number, @Res() res: Response) {
     console.log(`${userId}를 로그아웃 시키는 로직`);
     res.redirect('/');

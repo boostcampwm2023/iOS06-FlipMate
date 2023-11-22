@@ -30,6 +30,6 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
-  await app.listen(configService.get<number>('PORT'));
+  await app.listen(configService.get<number>('PORT') || 3000);
 }
 bootstrap();
