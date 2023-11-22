@@ -40,9 +40,7 @@ export class CategoriesController {
     description: '잘못된 요청입니다.',
   })
   getCategories(@User('id') user_id: number): Promise<CategoryDto[]> {
-    // TODO: 유저 id를 받아올 방식 정하기
-    user_id;
-    return this.categoriesService.findByUserId(1);
+    return this.categoriesService.findByUserId(user_id);
   }
 
   @Post()
