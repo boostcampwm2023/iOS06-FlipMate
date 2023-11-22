@@ -16,6 +16,7 @@ struct MockResponse {
 }
 
 class MockURLSession: URLSessionable {
+    
     let response: MockResponse
     
     init(response: MockResponse) {
@@ -38,6 +39,21 @@ class MockURLSession: URLSessionable {
         return Just((data: data, response: httpResponse))
             .setFailureType(to: URLError.self)
             .eraseToAnyPublisher()
+    }
+    
+    func response(for request: URLRequest) async throws -> (Data, URLResponse) {
+        let status = response.urlResponse as! HTTPURLResponse
+        let httpResponse = HTTPURLResponse(
+            url: request.url!,
+            statusCode: status.statusCode,
+            httpVersion: nil,
+            headerFields: nil)!
+        
+        guard let data = response.data else {
+            return ((data: Data(), response: httpResponse))
+        }
+        
+        return (data: data, response: httpResponse)
     }
 }
 
