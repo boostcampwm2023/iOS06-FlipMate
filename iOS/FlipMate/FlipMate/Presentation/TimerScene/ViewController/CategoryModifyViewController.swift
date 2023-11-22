@@ -30,13 +30,34 @@ final class CategoryModifyViewController: BaseViewController {
         return label
     }()
     
+    private lazy var secondSectionTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = ConstantString.sectionNames.last
+        label.font = FlipMateFont.mediumBold.font
+        label.textColor = .label
+        
+        return label
+    }()
+    
     private lazy var categoryTitleTextView: CategoryTitleTextView = {
         let textView = CategoryTitleTextView(placeholder: ConstantString.placeHolders[0])
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.layer.masksToBounds = true
         textView.layer.cornerRadius = 6
+        
         return textView
     }()
+    
+    private lazy var categoryColorSelectView: CategoryColorSelectView = {
+        let colorView = CategoryColorSelectView()
+        colorView.translatesAutoresizingMaskIntoConstraints = false
+        colorView.layer.masksToBounds = true
+        colorView.layer.cornerRadius = 6
+        
+        return colorView
+    }()
+    
     // MARK: View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +68,9 @@ final class CategoryModifyViewController: BaseViewController {
     override func configureUI() {
         view.backgroundColor = FlipMateColor.gray4.color
         let subViews = [firstSectionTitleLabel,
-                        categoryTitleTextView
+                        categoryTitleTextView,
+                        secondSectionTitleLabel,
+                        categoryColorSelectView
                         ]
 
         subViews.forEach {
@@ -63,6 +86,18 @@ final class CategoryModifyViewController: BaseViewController {
             categoryTitleTextView.topAnchor.constraint(equalTo: firstSectionTitleLabel.bottomAnchor, constant: 20),
             categoryTitleTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
             categoryTitleTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
+        ])
+        
+        NSLayoutConstraint.activate([
+            secondSectionTitleLabel.topAnchor.constraint(equalTo: categoryTitleTextView.bottomAnchor, constant: 60),
+            secondSectionTitleLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 32)
+        ])
+        
+        NSLayoutConstraint.activate([
+            categoryColorSelectView.topAnchor.constraint(equalTo: secondSectionTitleLabel.bottomAnchor, constant: 20),
+            categoryColorSelectView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
+            categoryColorSelectView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
+            categoryColorSelectView.heightAnchor.constraint(equalTo: categoryTitleTextView.heightAnchor)
         ])
     }
 }
@@ -92,7 +127,7 @@ private extension CategoryModifyViewController {
         // TODO: 완료 버튼 눌렸을 때 동작
     }
 }
-//@available(iOS 17.0, *)
-//#Preview {
-//    CategoryModifyViewController()
-//}
+@available(iOS 17.0, *)
+#Preview {
+    CategoryModifyViewController()
+}

@@ -11,13 +11,14 @@ final class CategoryColorSelectView: UIView {
     private var colorLabel: UILabel = {
         let colorLabel = UILabel()
         colorLabel.translatesAutoresizingMaskIntoConstraints = false
+        colorLabel.textColor = .label
         colorLabel.font = FlipMateFont.mediumRegular.font
         colorLabel.text = "# 000000"
         
         return colorLabel
     }()
     
-    private let colorCircle: UIImageView = {
+    private var colorCircle: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(systemName: "circle.fill")
@@ -39,6 +40,7 @@ private extension CategoryColorSelectView {
     func configureUI() {
         addSubview(colorLabel)
         addSubview(colorCircle)
+        self.backgroundColor = .systemBackground
         NSLayoutConstraint.activate([
             colorCircle.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24.0),
             colorCircle.centerYAnchor.constraint(equalTo: self.centerYAnchor),
