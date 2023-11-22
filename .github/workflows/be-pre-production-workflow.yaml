@@ -26,7 +26,7 @@ jobs:
             cd iOS06-FlipMate-preproduction/BE
             git pull origin preproduction
             npm install
-            if ! pm2 list | grep -q "flipmate-preproduction"; then
+            if ! pm2 list | grep "flipmate-preproduction"; then
               pm2 start npm --name "flipmate-preproduction" -- run start
             else 
               pm2 restart flipmate-preproduction

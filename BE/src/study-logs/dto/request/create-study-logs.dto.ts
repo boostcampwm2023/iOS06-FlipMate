@@ -31,13 +31,6 @@ export class StudyLogsCreateDto {
   @ApiProperty({
     type: 'number',
     example: 1,
-    description: '유저 아이디',
-  })
-  user_id: number;
-
-  @ApiProperty({
-    type: 'number',
-    example: 1,
     description: '카테고리 아이디',
   })
   category_id: number;

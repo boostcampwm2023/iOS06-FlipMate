@@ -1,14 +1,25 @@
-import { Body, Controller, Get, Post, Query, Delete } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Query,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { StudyLogsService } from './study-logs.service';
 import { StudyLogs } from './study-logs.entity';
 import {
   ApiBadRequestResponse,
+  ApiBearerAuth,
   ApiCreatedResponse,
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
 import { StudyLogsCreateDto } from './dto/request/create-study-logs.dto';
 import { StudyLogsDto } from './dto/response/study-logs.dto';
+import { AccessTokenGuard } from 'src/auth/guard/bearer-token.guard';
+import { User } from 'src/users/decorator/user.decorator';
 
 @ApiTags('Timer')
 @Controller('study-logs')
@@ -16,6 +27,7 @@ export class StudyLogsController {
   constructor(private readonly studyLogsService: StudyLogsService) {}
 
   @Post()
+  @UseGuards(AccessTokenGuard)
   @ApiOperation({ summary: '학습시간 생성 및 종료' })
   @ApiCreatedResponse({
     type: StudyLogsCreateDto,
@@ -24,13 +36,16 @@ export class StudyLogsController {
   @ApiBadRequestResponse({
     description: '잘못된 요청입니다.',
   })
+  @ApiBearerAuth()
   createStudyLogs(
+    @User('id') userId: number,
     @Body() studyLogsData: StudyLogsCreateDto,
   ): Promise<StudyLogsDto> {
-    return this.studyLogsService.create(studyLogsData);
+    return this.studyLogsService.create(studyLogsData, userId);
   }
 
   @Get()
+  @UseGuards(AccessTokenGuard)
   @ApiOperation({ summary: '학습시간 조회' })
   @ApiCreatedResponse({
     type: StudyLogs,
@@ -39,9 +54,9 @@ export class StudyLogsController {
   @ApiBadRequestResponse({
     description: '잘못된 요청입니다.',
   })
-  //TODO: 유저 아이디 받아오는 방법 추가 필요
-  getStudyLogs(): Promise<StudyLogsDto[]> {
-    return this.studyLogsService.findByUserId(1);
+  @ApiBearerAuth()
+  getStudyLogs(@User('id') userId: number): Promise<StudyLogsDto[]> {
+    return this.studyLogsService.findByUserId(userId);
   }
 }
 
