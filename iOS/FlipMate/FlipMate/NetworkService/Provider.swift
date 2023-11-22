@@ -9,7 +9,8 @@ import Foundation
 import Combine
 
 protocol Providable {
-    func request<E: ReqeustResponseable>(with endpoint: E) -> AnyPublisher<E.Response, NetworkError>
+    func request<E: RequestResponseable>(with endpoint: E) -> AnyPublisher<E.Response, NetworkError>
+    func request<E: RequestResponseable>(with endpoint: E) async throws -> E.Response
 }
 
 struct Provider: Providable {
@@ -20,12 +21,14 @@ struct Provider: Providable {
         self.urlSession = urlSession
     }
     
-    func request<E: ReqeustResponseable>(with endpoint: E) -> AnyPublisher<E.Response, NetworkError> {
+    func request<E: RequestResponseable>(with endpoint: E) -> AnyPublisher<E.Response, NetworkError> {
         do {
             let urlReqeust = try endpoint.makeURLRequest()
             return urlSession.response(for: urlReqeust)
                 .tryMap { data, response in
-                    guard let response = response as? HTTPURLResponse else { throw NetworkError.invalidURLComponents }
+                    guard let response = response as? HTTPURLResponse else { 
+                        throw NetworkError.invalidURLComponents
+                    }
                     
                     guard 200..<300 ~= response.statusCode else {
                         throw NetworkError.invalidURLComponents
@@ -51,6 +54,28 @@ struct Provider: Providable {
         } catch {
             return Fail(error: NetworkError.invalidURLComponents).eraseToAnyPublisher()
         }
+    }
+    
+    
+    func request<E: RequestResponseable>(with endpoint: E) async throws -> E.Response where E : Requestable, E : Responsable {
+        let urlRequest = try endpoint.makeURLRequest()
+        let (data, response) = try await urlSession.response(for: urlRequest)
+        
+        guard let response = response as? HTTPURLResponse else {
+            throw NetworkError.invalidURLComponents
+        }
+        
+        guard 200..<300 ~= response.statusCode else {
+            throw NetworkError.invalidURLComponents
+        }
+        
+        guard !data.isEmpty else {
+            throw NetworkError.invalidURLComponents
+        }
+        
+        let decoder = JSONDecoder()
+        let responseData = try decoder.decode(E.Response.self, from: data)
+        return responseData
     }
 }
 
