@@ -31,6 +31,7 @@ export class StudyLogs {
 
   @ManyToOne(() => Categories, (categories) => categories.study_logs, {
     eager: true,
+    nullable: true,
   })
   @JoinColumn({ name: 'category_id' })
   category_id: Categories;
