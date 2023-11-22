@@ -29,7 +29,7 @@ struct CategoryEndpoints {
     static func updateCategory(id: Int, category: CategoryRequestDTO) -> EndPoint<CategoryResponseDTO> {
         let encoder = JSONEncoder()
         let data = try? encoder.encode(category)
-        let path = Paths.categories + "\\\(id)"
+        let path = Paths.categories + "/\(id)"
         return EndPoint(
             baseURL: BaseURL.flipmateDomain,
             path: path,
@@ -38,7 +38,7 @@ struct CategoryEndpoints {
     }
     
     static func deleteCategory(id: Int) -> EndPoint<StatusResponseDTO> {
-        let path = Paths.categories + "\\\(id)"
+        let path = Paths.categories + "/\(id)"
         return EndPoint(
             baseURL: BaseURL.flipmateDomain,
             path: path,
