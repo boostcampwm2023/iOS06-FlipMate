@@ -21,6 +21,8 @@ jobs:
           password: ${{ secrets.NCP_PASSWORD }}
 
           script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
             cd iOS06-FlipMate-preproduction/BE
             git pull origin preproduction
             npm install
