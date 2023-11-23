@@ -54,31 +54,32 @@ export class StudyLogsService {
       .where('study_logs.user_id = :user_id', { user_id })
       .andWhere('study_logs.date = :date', { date })
       .getRawOne();
-    return parseInt(sum.sum);
+    return parseInt(sum?.sum ?? 0);
   }
 
   async groupByCategory(user_id: number, date: string): Promise<object> {
     const studyLogsByCategory = await this.studyLogsRepository.query(
       `SELECT
-      c.id as category_id,
-      c.name,
-      c.color_code,
-      IFNULL(SUM(s.learning_time), 0) as today_time
-      FROM
-      study_logs s
-      
-      RIGHT OUTER JOIN
-      categories c ON c.id = s.category_id
-      AND s.user_id = ?
-      AND DATE(s.date) = ?
+        c.id,
+        c.name,
+        c.color_code,
+        c.user_id,
+        COALESCE(SUM(s.learning_time), 0) AS today_time
+      FROM categories c
+      LEFT JOIN study_logs s
+        ON c.id = s.category_id
+        AND s.date = ?
+      WHERE c.user_id = ?
       GROUP BY
-      c.id, c.name, c.color_code;
+        c.id, c.name, c.color_code;
       `,
-      [user_id, date],
+      [date, user_id],
     );
 
     const categories = studyLogsByCategory.map((studyLog) => ({
-      ...studyLog,
+      id: studyLog.id,
+      name: studyLog.name,
+      color_code: studyLog.color_code,
       today_time: parseInt(studyLog.today_time),
     }));
 
