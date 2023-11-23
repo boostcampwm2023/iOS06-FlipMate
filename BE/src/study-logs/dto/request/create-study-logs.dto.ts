@@ -5,7 +5,7 @@ export class StudyLogsCreateDto {
     example: '2023-11-23',
     description: '학습을 시작한 날짜',
   })
-  date: string;
+  date: Date;
 
   @ApiProperty({
     type: 'date',

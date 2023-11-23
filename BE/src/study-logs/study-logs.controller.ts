@@ -6,6 +6,7 @@ import {
   ApiBearerAuth,
   ApiCreatedResponse,
   ApiOperation,
+  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 import { StudyLogsCreateDto } from './dto/request/create-study-logs.dto';
@@ -43,7 +44,7 @@ export class StudyLogsController {
 
   @Get()
   @UseGuards(AccessTokenGuard)
-  @ApiOperation({ summary: '학습시간 조회' })
+  @ApiOperation({ summary: '학습시간 조회 (완)' })
   @ApiCreatedResponse({
     type: StudyLogs,
     description: '학습 기록이 성공적으로 조회되었습니다.',
@@ -51,9 +52,17 @@ export class StudyLogsController {
   @ApiBadRequestResponse({
     description: '잘못된 요청입니다.',
   })
+  @ApiQuery({
+    name: 'date',
+    example: '2023-11-22',
+    description: '날짜',
+  })
   @ApiBearerAuth()
-  getStudyLogs(@User('id') userId: number): Promise<StudyLogsDto[]> {
-    return this.studyLogsService.findByUserId(userId);
+  getStudyLogs(
+    @User('id') userId: number,
+    @Query('date') date: string,
+  ): Promise<object> {
+    return this.studyLogsService.groupByCategory(userId, date);
   }
 }
 
