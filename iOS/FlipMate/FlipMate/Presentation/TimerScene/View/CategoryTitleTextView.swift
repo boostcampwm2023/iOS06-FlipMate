@@ -79,6 +79,10 @@ extension CategoryTitleTextView {
         guard !isShowPlaceholder else { return nil }
         return textView.text
     }
+    
+    func setText(text: String) {
+        textView.text = text
+    }
 }
 
 @available(iOS 17.0, *)
