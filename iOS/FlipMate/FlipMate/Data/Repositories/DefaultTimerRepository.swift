@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class DefaultTimerRepsoitory {
+final class DefaultTimerRepository {
     private let provider: Providable
     
     init(provider: Providable) {
@@ -16,7 +16,7 @@ final class DefaultTimerRepsoitory {
     }
 }
 
-extension DefaultTimerRepsoitory: TimerRepsoitory {
+extension DefaultTimerRepository: TimerRepsoitory {
     func startTimer(
         startTime: Date,
         userId: Int,
