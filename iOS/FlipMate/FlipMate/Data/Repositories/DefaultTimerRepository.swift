@@ -9,6 +9,11 @@ import Foundation
 import Combine
 
 final class DefaultTimerRepository {
+    private enum StudyType: String {
+        case start
+        case finish
+    }
+    
     private let provider: Providable
     
     init(provider: Providable) {
@@ -25,7 +30,7 @@ extension DefaultTimerRepository: TimerRepsoitory {
         let requestDTO = TimerStartRequestDTO(
             date: startTime.dateToString(format: .yyyyMMdd),
             createdAt: startTime.dateToString(format: .yyyyMMddhhmmss),
-            type: "start",
+            type: StudyType.start.rawValue,
             learningTime: 0,
             userID: userId,
             categoryID: categoryId)
@@ -47,7 +52,7 @@ extension DefaultTimerRepository: TimerRepsoitory {
         let requestDTO = TimerFinishRequestDTO(
             date: endTime.dateToString(format: .yyyyMMdd),
             createdAt: endTime.dateToString(format: .yyyyMMddhhmmss),
-            type: "finish",
+            type: StudyType.finish.rawValue,
             learningTime: learningTime,
             userID: userId,
             categoryID: categoryId)
