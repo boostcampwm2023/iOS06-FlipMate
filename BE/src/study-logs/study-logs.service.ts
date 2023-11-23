@@ -21,7 +21,7 @@ export class StudyLogsService {
   ): Promise<StudyLogsDto> {
     const { category_id, ...data } = studyLogsData;
     const user = { id: user_id } as UsersModel;
-    const category = { id: category_id } as Categories;
+    const category = { id: category_id ?? null } as Categories;
 
     const studyLog = this.studyLogsRepository.create({
       ...data,
@@ -69,7 +69,7 @@ export class StudyLogsService {
 
     const result = {
       total_time: this.calculateTotalTime(categories),
-      categories,
+      categories: categories.filter((category) => category.name),
     };
     return result;
   }
