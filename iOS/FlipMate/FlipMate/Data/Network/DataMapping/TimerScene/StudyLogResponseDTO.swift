@@ -9,14 +9,15 @@ import Foundation
 
 struct StudyLogResponseDTO: Decodable {
     let todayTime: Int
-    let categories: [CategoryDTO]
+    let categories: [CategoryDTO]?
     
     private enum CodingKeys: String, CodingKey {
-        case todayTime = "today_time"
+        case todayTime = "total_time"
         case categories
     }
     
     func toEntity() -> StudyLog {
+        guard let categories = categories else { return .init(totalTime: todayTime, category: []) }
         return .init(
             totalTime: todayTime,
             category: categories.map {
@@ -35,7 +36,8 @@ extension StudyLogResponseDTO {
         
         private enum CodingKeys: String, CodingKey {
             case id = "category_id"
-            case name, color
+            case name
+            case color = "color_code"
             case todayTime = "today_time"
         }
     }
