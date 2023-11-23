@@ -13,5 +13,5 @@ enum BaseURL {
 
 enum Paths {
     static let categories = "/categories"
-    static let studylogs = "/studylogs"
+    static let studylogs = "/study-logs"
 }

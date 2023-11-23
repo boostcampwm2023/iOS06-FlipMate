@@ -49,6 +49,16 @@ final class CategoryListCollectionViewCell: UICollectionViewCell {
         subjectLabel.text = category.subject
         timeLabel.text = category.studyTime?.secondsToStringTime()
     }
+    
+    func updateShadow() {
+        if isSelected {
+            backgroundColor = FlipMateColor.gray3.color
+            setShadow()
+        } else {
+            backgroundColor = .white
+            layer.shadowOpacity = 0
+        }
+    }
 }
 
 private extension CategoryListCollectionViewCell {
