@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UsersModel } from './entity/users.entity';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -29,11 +30,29 @@ export class UsersService {
     }
   }
 
-  async isUniqueNickname(nickname: string): Promise<boolean> {
+  async updateUser(user_id: number, user: UpdateUserDto): Promise<UsersModel> {
+    const selectedUser = await this.usersRepository.findOne({
+      where: { id: user_id },
+    });
+    if (user.nickname) {
+      selectedUser.nickname = user.nickname;
+    }
+    if (user.image_url) {
+      selectedUser.image_url = user.image_url;
+    }
+
+    const updatedUser = await this.usersRepository.save(selectedUser);
+    return updatedUser;
+  }
+
+  async isUniqueNickname(nickname: string): Promise<object> {
     const isDuplicated = await this.usersRepository.exist({
       where: { nickname },
     });
-    return !isDuplicated;
+
+    return {
+      is_unique: !isDuplicated,
+    };
   }
 
   async findUserByEmail(email: string): Promise<UsersModel> {

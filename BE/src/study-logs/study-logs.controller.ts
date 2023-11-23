@@ -1,12 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Query,
-  Delete,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { StudyLogsService } from './study-logs.service';
 import { StudyLogs } from './study-logs.entity';
 import {
@@ -21,14 +13,14 @@ import { StudyLogsDto } from './dto/response/study-logs.dto';
 import { AccessTokenGuard } from 'src/auth/guard/bearer-token.guard';
 import { User } from 'src/users/decorator/user.decorator';
 
-@ApiTags('Timer')
+@ApiTags('타이머 페이지')
 @Controller('study-logs')
 export class StudyLogsController {
   constructor(private readonly studyLogsService: StudyLogsService) {}
 
   @Post()
   @UseGuards(AccessTokenGuard)
-  @ApiOperation({ summary: '학습시간 생성 및 종료' })
+  @ApiOperation({ summary: '학습시간 생성 및 종료 (완)' })
   @ApiCreatedResponse({
     type: StudyLogsCreateDto,
     description: '학습 기록이 성공적으로 생성되었습니다.',
@@ -60,10 +52,10 @@ export class StudyLogsController {
   }
 }
 
+@ApiTags('통계 페이지')
 @Controller('/study-logs/stats')
 export class StatsController {
   @Get()
-  @ApiTags('Stats')
   @ApiOperation({ summary: '일간 통계 조회하기' })
   getStats(
     @Query('year') year: number,
@@ -74,12 +66,10 @@ export class StatsController {
   }
 
   @Get('/weekly')
-  @ApiTags('Stats')
   @ApiOperation({ summary: '주간 통계 조회하기' })
   getWeeklyStats() {}
 
   @Get('/monthly')
-  @ApiTags('Stats')
   @ApiOperation({ summary: '주간 통계 조회하기' })
   getMonthlyStats() {}
 }

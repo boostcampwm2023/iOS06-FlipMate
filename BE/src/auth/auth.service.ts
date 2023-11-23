@@ -34,20 +34,49 @@ export class AuthService {
       email: user.email,
       nickname: user.nickname,
       type: 'access',
+      auth_type: 'google',
     };
     return this.jwtService.sign(payload);
   }
 
   public async loginWithGoogle(user) {
-    let prevUser = await this.usersService.findUserByEmail(user.email);
+    const prevUser = await this.usersService.findUserByEmail(user.email);
     if (!prevUser) {
+      const id = user.email.split('@')[0];
       const userEntity = {
-        nickname: user.email.split('@')[0],
+        nickname:
+          id + Buffer.from(user.email + user.auth_type).toString('base64'),
         email: user.email,
         image_url: '',
       };
-      prevUser = await this.usersService.createUser(userEntity);
+      const newUser = await this.usersService.createUser(userEntity);
+      return {
+        access_token: this.signToken(newUser),
+        is_member: false,
+      };
     }
-    return this.signToken(prevUser);
+    return {
+      access_token: this.signToken(prevUser),
+      is_member: true,
+    };
+  }
+
+  public async getUserInfo(accessToken: string): Promise<string> {
+    const url = 'https://www.googleapis.com/oauth2/v2/userinfo';
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      if (!response.ok) {
+        throw new UnauthorizedException('유효하지 않은 토큰입니다.');
+      }
+      const { email } = await response.json();
+      return email;
+    } catch (error) {
+      throw error;
+    }
   }
 }
