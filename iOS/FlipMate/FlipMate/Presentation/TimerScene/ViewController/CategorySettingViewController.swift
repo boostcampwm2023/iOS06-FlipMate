@@ -44,6 +44,9 @@ final class CategorySettingViewController: BaseViewController {
         setDataSource()
         setDelegate()
         setSnapshot()
+        Task {
+            await readCategories()
+        }
     }
     
     // MARK: - Configure UI
