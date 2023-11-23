@@ -10,13 +10,17 @@ import Combine
 import OSLog
 
 final class TimerViewController: BaseViewController {
+    typealias CateogoryDataSource = UICollectionViewDiffableDataSource<CategorySettingSection,CategorySettingItem>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<CategorySettingSection, CategorySettingItem>
+    
     // MARK: - Properties
     private var timerViewModel: TimerViewModelProtocol
     private let deviceMotionManager = DeviceMotionManager.shared
     private let feedbackManager = FeedbackManager()
     private var cancellables = Set<AnyCancellable>()
     private var userScreenBrightness: CGFloat = UIScreen.main.brightness
-    
+    private var dataSource: CateogoryDataSource?
+
     // MARK: - init
     init(timerViewModel: TimerViewModelProtocol) {
         self.timerViewModel = timerViewModel
@@ -45,6 +49,8 @@ final class TimerViewController: BaseViewController {
     private lazy var categoryListCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(CategoryListCollectionViewCell.self)
+        collectionView.delegate = self
         return collectionView
     }()
     
@@ -70,7 +76,8 @@ final class TimerViewController: BaseViewController {
     // MARK: - View LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureCollectionView()
+        setDataSource()
+        setSnapshot()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -218,24 +225,30 @@ private extension TimerViewController {
     }
 }
 
+// MARK: - DiffableDataSource
+private extension TimerViewController {
+    func setDataSource() {
+        dataSource = CateogoryDataSource(collectionView: categoryListCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+            switch itemIdentifier {
+            case .categoryCell:
+                let cell: CategoryListCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+                return cell
+            }
+        })
+    }
+    
+    func setSnapshot() {
+        var snapshot = Snapshot()
+        let sections: [CategorySettingSection] = [.categorySection([])]
+        snapshot.appendSections(sections)
+        snapshot.appendItems([CategorySettingItem.categoryCell])
+        dataSource?.apply(snapshot)
+    }
+}
+
 // MARK: CollectionView function
-extension TimerViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func configureCollectionView() {
-        categoryListCollectionView.register(CategoryListCollectionViewCell.self, forCellWithReuseIdentifier: CategoryListCollectionViewCell.identifier)
-        categoryListCollectionView.delegate = self
-        categoryListCollectionView.dataSource = self
-    }
-    
-    // TODO: Category Model 생성 후 수정
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryListCollectionViewCell.identifier, for: indexPath) as? CategoryListCollectionViewCell else { return UICollectionViewCell() }
-        return cell
-    }
-    
+extension TimerViewController: UICollectionViewDelegateFlowLayout {
+
     /// cell size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.size.width - 20, height: 58)
