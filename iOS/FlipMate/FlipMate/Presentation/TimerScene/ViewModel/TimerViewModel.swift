@@ -14,19 +14,20 @@ protocol TimerViewModelInput {
     func deviceOrientationDidChange(_ sender: DeviceOrientation)
     func deviceProximityDidChange(_ sender: Bool)
     func categorySettingButtoneDidTapped()
+    func categoryDidSelected(category: Category)
 }
 
 protocol TimerViewModelOutput {
     var isDeviceFaceDownPublisher: AnyPublisher<Bool, Never> { get }
     var isPresentingCategoryPublisher: AnyPublisher<Void, Never> { get }
     var totalTimePublisher: AnyPublisher<Int, Never> { get }
-    var categoryPublisher: AnyPublisher<[Category], Never> { get }
+    var categoryChangePublisher: AnyPublisher<[Category], Never> { get }
+    var categoriesPublisher: AnyPublisher<[Category], Never> { get }
 }
 
 typealias TimerViewModelProtocol = TimerViewModelInput & TimerViewModelOutput
 
 final class TimerViewModel: TimerViewModelProtocol {
-
     // MARK: UseCase
     private var timerUseCase: TimerUseCase
     private var userInfoUserCase: StudyLogUseCase
@@ -35,8 +36,9 @@ final class TimerViewModel: TimerViewModelProtocol {
     private var isDeviceFaceDownSubject = PassthroughSubject<Bool, Never>()
     private var isPresentingCategorySubject = PassthroughSubject<Void, Never>()
     private var totalTimeSubject = PassthroughSubject<Int, Never>()
-    private var categorySubject = PassthroughSubject<[Category], Never>()
-    
+    private var categoryChangeSubject = PassthroughSubject<[Category], Never>()
+    private var categoriesSubject = PassthroughSubject<[Category], Never>()
+
     // MARK: Properties
     private var proximity: Bool?
     private var orientation: DeviceOrientation = .unknown
@@ -44,6 +46,7 @@ final class TimerViewModel: TimerViewModelProtocol {
     private var cancellables = Set<AnyCancellable>()
     private var totalTime: Int = 0 // 총 공부 시간
     private var categories = [Category]()
+    private var selectedCategory: Category?
     
     // MARK: - init
     init(timerUseCase: TimerUseCase, userInfoUserCase: StudyLogUseCase) {
@@ -64,8 +67,12 @@ final class TimerViewModel: TimerViewModelProtocol {
         return totalTimeSubject.eraseToAnyPublisher()
     }
     
-    var categoryPublisher: AnyPublisher<[Category], Never> {
-        return categorySubject.eraseToAnyPublisher()
+    var categoryChangePublisher: AnyPublisher<[Category], Never> {
+        return categoryChangeSubject.eraseToAnyPublisher()
+    }
+    
+    var categoriesPublisher: AnyPublisher<[Category], Never> {
+        return categoriesSubject.eraseToAnyPublisher()
     }
     
     // MARK: Input
@@ -96,9 +103,14 @@ final class TimerViewModel: TimerViewModelProtocol {
             } receiveValue: { [weak self] userInfo in
                 guard let self = self else { return }
                 self.totalTimeDidChange(time: userInfo.totalTime)
-                self.cateogoriesDidChange(categories: userInfo.category)
+                self.categoriesDidChange(categories: userInfo.category)
             }
             .store(in: &cancellables)
+    }
+    
+    func categoryDidSelected(category: Category) {
+        FMLogger.timer.debug("\(category.subject)가 선택되었습니다.")
+        selectedCategory = category
     }
 }
 
@@ -129,9 +141,9 @@ private extension TimerViewModel {
         totalTimeSubject.send(totalTime)
     }
     
-    func cateogoriesDidChange(categories: [Category]) {
+    func categoriesDidChange(categories: [Category]) {
         self.categories = categories
-        categorySubject.send(categories)
+        categoriesSubject.send(categories)
     }
 }
 
@@ -139,7 +151,8 @@ private extension TimerViewModel {
 private extension TimerViewModel {
     /// 타이머 시작
     func startTimer() {
-        timerUseCase.startTimer(startTime: Date(), userId: 1, categoryId: 1)
+        let categoryId = selectedCategory?.id
+        timerUseCase.startTimer(startTime: Date(), categoryId: categoryId)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -159,7 +172,8 @@ private extension TimerViewModel {
     
     /// 타이머 재시작
     func resumeTimer() {
-        timerUseCase.resumeTimer(resumeTime: Date(), userId: 1, categoryId: 1)
+        let categoryId = selectedCategory?.id
+        timerUseCase.resumeTimer(resumeTime: Date(), categoryId: categoryId)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -179,7 +193,8 @@ private extension TimerViewModel {
     
     /// 타이머 일시정지
     func suspendTimer() {
-        timerUseCase.suspendTimer(suspendTime: Date(), userId: 1, categoryId: 1)
+        let categoryId = selectedCategory?.id
+        timerUseCase.suspendTimer(suspendTime: Date(), categoryId: categoryId)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -194,6 +209,19 @@ private extension TimerViewModel {
                 self.timerState = .suspended
                 self.totalTime += learningTime
                 self.totalTimeSubject.send(self.totalTime)
+                guard let selectedCategory = selectedCategory,
+                      let categoryStudyTime = selectedCategory.studyTime,
+                      let categoryIndex = self.categories.firstIndex(of: selectedCategory) else { return }
+            
+                let newCategory = Category(
+                    id: selectedCategory.id, 
+                    color: selectedCategory.color,
+                    subject: selectedCategory.subject, 
+                    studyTime: categoryStudyTime + learningTime)
+                
+                categories[categoryIndex] = newCategory
+                categoryChangeSubject.send(categories)
+                self.selectedCategory = nil
             }
             .store(in: &cancellables)
     }

@@ -174,11 +174,24 @@ final class TimerViewController: BaseViewController {
             }
             .store(in: &cancellables)
         
-        timerViewModel.categoryPublisher
+        timerViewModel.categoriesPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] categories in
                 guard let self = self else { return }
                 guard var snapShot = self.dataSource?.snapshot() else { return }
+                snapShot.appendItems(categories.map { CategorySettingItem.categoryCell($0) })
+                self.dataSource?.apply(snapShot)
+            }
+            .store(in: &cancellables)
+        
+        timerViewModel.categoryChangePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] categories in
+                guard let self = self else { return }
+                guard var snapShot = self.dataSource?.snapshot() else { return }
+                let sections: [CategorySettingSection] = [.categorySection([])]
+                snapShot.deleteAllItems()
+                snapShot.appendSections(sections)
                 snapShot.appendItems(categories.map { CategorySettingItem.categoryCell($0) })
                 self.dataSource?.apply(snapShot)
             }
@@ -275,6 +288,8 @@ extension TimerViewController: UICollectionViewDelegateFlowLayout {
 extension TimerViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryListCollectionViewCell else { return }
+        guard let item = dataSource?.itemIdentifier(for: indexPath) else { return }
+        timerViewModel.categoryDidSelected(category: item.category)
         cell.updateShadow()
     }
     
