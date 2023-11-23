@@ -16,11 +16,11 @@ export class UsersModel {
     description: '유저 닉네임',
   })
   @Column({
-    length: 20,
+    length: 84,
     unique: true,
   })
   @IsString()
-  @Length(1, 20)
+  @Length(1, 84)
   nickname: string;
 
   @ApiProperty({

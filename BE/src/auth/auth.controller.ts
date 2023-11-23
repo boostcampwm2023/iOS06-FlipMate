@@ -8,6 +8,7 @@ import {
   Res,
   Post,
   Body,
+  Patch,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
@@ -15,40 +16,59 @@ import { AccessTokenGuard } from './guard/bearer-token.guard';
 import { User } from 'src/users/decorator/user.decorator';
 import {
   ApiBearerAuth,
+  ApiExcludeEndpoint,
   ApiOperation,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { UsersService } from 'src/users/users.service';
+import { UpdateUserDto } from 'src/users/dto/update-user.dto';
+import { UsersModel } from 'src/users/entity/users.entity';
 
-@ApiTags('auth')
+@ApiTags('로그인 페이지')
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly usersService: UsersService,
+  ) {}
 
   @Get('google')
   @UseGuards(AuthGuard('google'))
-  @ApiOperation({ summary: 'Google 테스트용 로그인' })
-  @ApiResponse({ status: 200, description: '로그인 성공' })
-  @ApiResponse({ status: 401, description: '인증 실패' })
+  @ApiExcludeEndpoint()
   googleAuth(@Req() req) {
     const user = req.user;
     return this.authService.loginWithGoogle(user);
   }
 
   @Post('google/app')
-  @ApiOperation({ summary: 'Google 아이폰용 로그인' })
-  googleAppAuth(@Body() body) {
-    return body;
+  @ApiOperation({ summary: 'Google 아이폰용 로그인 (완)' })
+  @ApiResponse({ status: 201, description: '인증 성공' })
+  @ApiResponse({ status: 401, description: '인증 실패' })
+  googleAppAuth(@Body('access_token') accessToken: string) {
+    const email = this.authService.getUserInfo(accessToken);
+    return this.authService.loginWithGoogle({ email });
   }
 
   @Get('logout')
   @UseGuards(AccessTokenGuard)
-  @ApiBearerAuth()
-  @ApiOperation({ summary: '로그아웃' })
-  @ApiResponse({ status: 200, description: '로그아웃 성공' })
-  @ApiResponse({ status: 401, description: '인증 실패' })
+  @ApiExcludeEndpoint()
   logout(@User('id') userId: number, @Res() res: Response) {
     console.log(`${userId}를 로그아웃 시키는 로직`);
     res.redirect('/');
+  }
+
+  @Patch('info')
+  @UseGuards(AccessTokenGuard)
+  @ApiOperation({ summary: '유저 정보 설정 (완)' })
+  @ApiResponse({ status: 200, description: '프로필 변경 성공' })
+  @ApiResponse({ status: 400, description: '잘못된 요청' })
+  @ApiResponse({ status: 401, description: '인증 실패' })
+  @ApiBearerAuth()
+  patchUser(
+    @User('id') user_id: number,
+    @Body() user: UpdateUserDto,
+  ): Promise<UsersModel> {
+    return this.usersService.updateUser(user_id, user);
   }
 }

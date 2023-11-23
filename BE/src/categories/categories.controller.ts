@@ -12,6 +12,7 @@ import {
   ApiBadRequestResponse,
   ApiBearerAuth,
   ApiCreatedResponse,
+  ApiOkResponse,
   ApiOperation,
   ApiParam,
   ApiTags,
@@ -23,7 +24,7 @@ import { CategoryDto } from './dto/response/category.dto';
 import { AccessTokenGuard } from 'src/auth/guard/bearer-token.guard';
 import { User } from 'src/users/decorator/user.decorator';
 
-@ApiTags('Categories')
+@ApiTags('카테고리 페이지')
 @Controller('categories')
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
@@ -31,7 +32,7 @@ export class CategoriesController {
   @Get()
   @UseGuards(AccessTokenGuard)
   @ApiBearerAuth()
-  @ApiOperation({ summary: '카테고리 조회' })
+  @ApiOperation({ summary: '카테고리 조회 (완)' })
   @ApiCreatedResponse({
     type: [CategoryDto],
     description: '카테고리 조회 성공',
@@ -46,7 +47,7 @@ export class CategoriesController {
   @Post()
   @UseGuards(AccessTokenGuard)
   @ApiBearerAuth()
-  @ApiOperation({ summary: '카테고리 생성' })
+  @ApiOperation({ summary: '카테고리 생성 (완)' })
   @ApiCreatedResponse({
     type: CategoryDto,
     description: '카테고리 생성 성공',
@@ -64,14 +65,14 @@ export class CategoriesController {
   @Patch(':category_id')
   @UseGuards(AccessTokenGuard)
   @ApiBearerAuth()
-  @ApiOperation({ summary: '카테고리 수정' })
+  @ApiOperation({ summary: '카테고리 수정 (완)' })
   @ApiParam({
     name: 'category_id',
     description: '카테고리 id',
     type: Number,
     required: true,
   })
-  @ApiCreatedResponse({
+  @ApiOkResponse({
     type: CategoryDto,
     description: '카테고리 수정 성공',
   })

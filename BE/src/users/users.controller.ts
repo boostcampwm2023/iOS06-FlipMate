@@ -6,15 +6,15 @@ import {
   ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
-import { UsersService } from './users.service';
 
-@ApiTags('Users')
-@Controller('users')
+import { UsersService } from './users.service';
+@ApiTags('로그인 페이지')
+@Controller('user')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get('/nickname-validation')
-  @ApiOperation({ summary: '유저 닉네임 유효한지 확인' })
+  @ApiOperation({ summary: '유저 닉네임 유효한지 확인 (완)' })
   @ApiQuery({
     name: 'nickname',
     example: '어린콩',
@@ -29,9 +29,7 @@ export class UsersController {
   @ApiBadRequestResponse({
     description: '잘못된 요청',
   })
-  async validateNickname(
-    @Query('nickname') nickname: string,
-  ): Promise<boolean> {
+  async validateNickname(@Query('nickname') nickname: string): Promise<object> {
     return this.usersService.isUniqueNickname(nickname);
   }
 }
