@@ -59,15 +59,13 @@ final class CategorySettingViewController: BaseViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
-        
     }
     
     override func bind() {
         viewModel.presentingCategoryModifyViewControllerPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                print("tapped")
-                self?.present(CategoryModifyViewController(), animated: true)
+                self?.createCategoryButtonTapped()
             }
             .store(in: &cancellables)
         
@@ -125,7 +123,6 @@ private extension CategorySettingViewController {
                     .sink { [weak self] _ in
                         self?.viewModel.createCategoryTapped()
                     }
-                print(footer.gestureRecognizers)
                 return footer
             }
     }
@@ -142,7 +139,10 @@ private extension CategorySettingViewController {
     }
     
     func createCategoryButtonTapped() {
-        present(CategoryModifyViewController(), animated: true)
+        let presentingViewController = CategoryModifyViewController(
+            title: "카테고리 추가", viewModel: self.viewModel)
+        let navController = UINavigationController(rootViewController: presentingViewController)
+        present(navController, animated: true)
     }
 }
 

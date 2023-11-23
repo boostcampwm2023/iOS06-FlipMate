@@ -72,12 +72,15 @@ private extension CategoryTitleTextView {
         textView.text = ""
         textView.textColor = .label
     }
-    
+}
+
+extension CategoryTitleTextView {
     func text() -> String? {
         guard !isShowPlaceholder else { return nil }
         return textView.text
     }
 }
+
 @available(iOS 17.0, *)
 #Preview {
     CategoryTitleTextView(placeholder: "HELLO")
