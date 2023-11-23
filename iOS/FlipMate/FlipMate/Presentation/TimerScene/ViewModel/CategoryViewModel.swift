@@ -10,6 +10,7 @@ import Combine
 
 protocol CategoryViewModelInput {
     func createCategoryTapped()
+    func categoryTapped(at index: Int)
     func createCategory(name: String, colorCode: String) async throws
     func readCategories() async throws
     func updateCategory(of id: Int, newName: String, newColorCode: String) async throws
@@ -18,6 +19,7 @@ protocol CategoryViewModelInput {
 
 protocol CategoryViewModelOutput {
     var presentingCategoryModifyViewControllerPublisher: AnyPublisher<Void, Never> { get }
+    var tappedCategoryDataPublisher: AnyPublisher<Category, Never> { get }
     var categoriesPublisher: AnyPublisher<[Category], Never> { get }
 }
 
@@ -26,6 +28,7 @@ typealias CategoryViewModelProtocol = CategoryViewModelInput & CategoryViewModel
 final class CategoryViewModel: CategoryViewModelProtocol {
     // MARK: properties
     private var presentingCategoryModifyViewControllerSubject = PassthroughSubject<Void, Never>()
+    private var tappedCategoryDataSubject = PassthroughSubject<Category, Never>()
     private var categoriesSubject = CurrentValueSubject<[Category], Never>([])
     
     var categories = [Category]()
@@ -41,6 +44,11 @@ final class CategoryViewModel: CategoryViewModelProtocol {
         return presentingCategoryModifyViewControllerSubject
             .eraseToAnyPublisher()
     }
+    var tappedCategoryDataPublisher: AnyPublisher<Category, Never> {
+        return tappedCategoryDataSubject
+            .eraseToAnyPublisher()
+    }
+    
     var categoriesPublisher: AnyPublisher<[Category], Never> {
         return categoriesSubject.eraseToAnyPublisher()
     }
@@ -48,6 +56,10 @@ final class CategoryViewModel: CategoryViewModelProtocol {
     // MARK: Input
     func createCategoryTapped() {
         presentingCategoryModifyViewControllerSubject.send()
+    }
+    
+    func categoryTapped(at index: Int) {
+        tappedCategoryDataSubject.send(categories[index])
     }
     
     func createCategory(name: String, colorCode: String) async throws {
@@ -69,6 +81,7 @@ final class CategoryViewModel: CategoryViewModelProtocol {
         }
         
         categories[index] = Category(id: id, color: newColorCode, subject: newName)
+        print(categories)
         categoriesSubject.send(categories)
     }
     

@@ -75,11 +75,14 @@ final class CategoryModifyViewController: BaseViewController {
     }()
     
     private let viewModel: CategoryViewModelProtocol
+    private let purpose: CategoryPurpose
+    private let category: Category?
     
-    init(title: String, viewModel: CategoryViewModelProtocol) {
+    init(viewModel: CategoryViewModelProtocol, purpose: CategoryPurpose, category: Category? = nil) {
         self.viewModel = viewModel
+        self.purpose = purpose
+        self.category = category
         super.init(nibName: nil, bundle: nil)
-        self.title = title
     }
     
     required init?(coder: NSCoder) {
@@ -140,12 +143,21 @@ final class CategoryModifyViewController: BaseViewController {
             categoryColorSelectView.heightAnchor.constraint(
                 equalTo: categoryTitleTextView.heightAnchor)
         ])
+        
+        if purpose == .update {
+            guard let category = category else {
+                FMLogger.general.error("가져온 카테고리 없음 에러")
+                return
+            }
+            categoryTitleTextView.setText(text: category.subject)
+        }
     }
 }
 
 // MARK: Navigation Bar
 private extension CategoryModifyViewController {
     func setUpNavigation() {
+        title = purpose.title
         navigationItem.largeTitleDisplayMode = .never
         setupNavigationBarButton()
     }
@@ -161,7 +173,7 @@ private extension CategoryModifyViewController {
             style: .done,
             target: self,
             action: #selector(doneButtonTapped))
-
+        
         navigationItem.leftBarButtonItem = closeButton
         navigationItem.rightBarButtonItem = doneButton
     }
@@ -175,7 +187,7 @@ private extension CategoryModifyViewController {
     
     @objc func doneButtonTapped(_ sender: UIBarButtonItem) {
         // TODO: 색깔 선택 기능 미구현
-        if title == "카테고리 추가" {
+        if purpose == .create {
             Task {
                 do {
                     guard let categoryTitle = categoryTitleTextView.text() else {
@@ -183,6 +195,23 @@ private extension CategoryModifyViewController {
                         return
                     }
                     try await viewModel.createCategory(name: categoryTitle, colorCode: "FFFFFFFF")
+                    dismiss(animated: true)
+                } catch let error {
+                    FMLogger.general.error("카테고리 추가 중 에러 \(error)")
+                }
+            }
+        } else {
+            Task {
+                do {
+                    guard let categoryTitle = categoryTitleTextView.text() else {
+                        FMLogger.general.error("빈 제목, 추가할 수 없음")
+                        return
+                    }
+                    guard let category = category else {
+                        FMLogger.general.error("가져온 카테고리 없음 에러")
+                        return
+                    }
+                    try await viewModel.updateCategory(of: category.id, newName: categoryTitle, newColorCode: "FFFFFFFF")
                     dismiss(animated: true)
                 } catch let error {
                     FMLogger.general.error("카테고리 추가 중 에러 \(error)")

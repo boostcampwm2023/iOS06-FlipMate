@@ -69,11 +69,20 @@ final class CategorySettingViewController: BaseViewController {
             }
             .store(in: &cancellables)
         
+        viewModel.tappedCategoryDataPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] category in
+                self?.updateCategoryTapped(with: category)
+            }
+            .store(in: &cancellables)
+        
         viewModel.categoriesPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] categories in
                 guard let self = self else { return }
                 guard var snapShot = self.dataSource?.snapshot() else { return }
+                snapShot.deleteAllItems()
+                snapShot.appendSections([.categorySection([])])
                 snapShot.appendItems(categories.map { CategorySettingItem.categoryCell($0) })
                 self.dataSource?.apply(snapShot)
             }
@@ -95,7 +104,7 @@ private extension CategorySettingViewController {
 // MARK: - CollectionViewDelegate
 extension CategorySettingViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
+        viewModel.categoryTapped(at: indexPath.row)
     }
 }
 
@@ -140,7 +149,14 @@ private extension CategorySettingViewController {
     
     func createCategoryButtonTapped() {
         let presentingViewController = CategoryModifyViewController(
-            title: "카테고리 추가", viewModel: self.viewModel)
+            viewModel: self.viewModel, purpose: .create)
+        let navController = UINavigationController(rootViewController: presentingViewController)
+        present(navController, animated: true)
+    }
+    
+    func updateCategoryTapped(with category: Category) {
+        let presentingViewController = CategoryModifyViewController(
+            viewModel: self.viewModel, purpose: .update, category: category)
         let navController = UINavigationController(rootViewController: presentingViewController)
         present(navController, animated: true)
     }
