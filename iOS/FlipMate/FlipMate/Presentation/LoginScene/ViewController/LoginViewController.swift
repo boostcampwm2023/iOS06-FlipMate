@@ -127,13 +127,20 @@ final class LoginViewController: BaseViewController {
     }
     
     override func bind() {
-        loginViewModel.$isMember
+        loginViewModel.isMemberPublisher
             .sink { [weak self] isMember in
                 guard let self = self else { return }
-                if isMember {
-                    FMLogger.device.log("회원가입 창으로 이동합니다")
-                } else {
-                    FMLogger.device.log("타이머 창으로 이동합니다")
+                if let isMember = isMember {
+                    if isMember {
+                        FMLogger.device.log("타이머 창으로 이동합니다")
+                        DispatchQueue.main.async {
+                            let tabBarViewController = TabBarViewController()
+                            tabBarViewController.modalPresentationStyle = .fullScreen
+                            self.view.window?.rootViewController = tabBarViewController
+                        }
+                    } else {
+                        FMLogger.device.log("회원가입 창으로 이동합니다")
+                    }
                 }
             }
             .store(in: &cancellables)

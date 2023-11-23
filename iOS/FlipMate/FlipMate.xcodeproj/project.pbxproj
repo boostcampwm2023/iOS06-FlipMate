@@ -78,6 +78,7 @@
 		ED3842272B0F1E0C001E2803 /* GoogleAuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842262B0F1E0C001E2803 /* GoogleAuthUseCase.swift */; };
 		ED3842292B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842282B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift */; };
 		ED38422C2B0F4531001E2803 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422B2B0F4531001E2803 /* LoginViewModel.swift */; };
+		ED38422F2B0F747B001E2803 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422E2B0F747B001E2803 /* KeyChainManager.swift */; };
 		ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A7E2B06033F008FE1C5 /* Category.swift */; };
 		ED9B2A812B06048D008FE1C5 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */; };
 		EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851C62B021492009031EA /* TabBarViewController.swift */; };
@@ -185,6 +186,7 @@
 		ED3842262B0F1E0C001E2803 /* GoogleAuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthUseCase.swift; sourceTree = "<group>"; };
 		ED3842282B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGoogleAuthRepository.swift; sourceTree = "<group>"; };
 		ED38422B2B0F4531001E2803 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		ED38422E2B0F747B001E2803 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		ED9B2A7E2B06033F008FE1C5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		EDC851C62B021492009031EA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -624,6 +626,7 @@
 		600909022AFCDFEA0065DFFB /* Persistants */ = {
 			isa = PBXGroup;
 			children = (
+				ED38422E2B0F747B001E2803 /* KeyChainManager.swift */,
 			);
 			path = Persistants;
 			sourceTree = "<group>";
@@ -1035,6 +1038,7 @@
 				2C5CDA5B2B025440007AFC57 /* ChartViewController.swift in Sources */,
 				6057A58D2B0C7F0F00EE58E8 /* Requestable.swift in Sources */,
 				6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */,
+				ED38422F2B0F747B001E2803 /* KeyChainManager.swift in Sources */,
 				ED3595BF2B0DB68200558FAA /* CategoryTitleTextView.swift in Sources */,
 				ED3842292B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift in Sources */,
 				600908BE2AFCD7DF0065DFFB /* AppDelegate.swift in Sources */,
