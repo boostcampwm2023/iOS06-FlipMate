@@ -35,6 +35,7 @@ final class LoginViewModel {
                 
                 if response.isMember {
                     FMLogger.user.log("나는 이미 회원이야")
+                    try KeychainManager.saveAccessToken(token: accessToken)
                 } else {
                     FMLogger.user.log("나는 아직 회원이 아니야")
                 }
