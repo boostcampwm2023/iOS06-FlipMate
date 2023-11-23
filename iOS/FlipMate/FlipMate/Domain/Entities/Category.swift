@@ -11,5 +11,5 @@ struct Category: Hashable {
     let id: Int
     var color: String
     var subject: String
-    var studyTime: TimeInterval?
+    var studyTime: Int?
 }
