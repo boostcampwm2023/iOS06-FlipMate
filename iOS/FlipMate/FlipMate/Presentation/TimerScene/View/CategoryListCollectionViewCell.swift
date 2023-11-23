@@ -55,7 +55,7 @@ final class CategoryListCollectionViewCell: UICollectionViewCell {
             backgroundColor = FlipMateColor.gray3.color
             setShadow()
         } else {
-            backgroundColor = .white
+            backgroundColor = .systemBackground
             layer.shadowOpacity = 0
         }
     }
