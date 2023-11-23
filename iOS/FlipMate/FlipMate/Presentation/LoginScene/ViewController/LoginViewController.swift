@@ -6,8 +6,14 @@
 //
 
 import UIKit
+import Combine
+import GoogleSignIn
 
 final class LoginViewController: BaseViewController {
+    
+    // MARK: - Properties
+    private let loginViewModel: LoginViewModel
+    private var cancellables: Set<AnyCancellable> = []
     
     // MARK: - Constant
     private enum Constant {
@@ -15,6 +21,17 @@ final class LoginViewController: BaseViewController {
         static let logoSubTitle = "우리들이 공부하는 시간"
         static let skipLoginTitle = "로그인하지 않고 이용하기"
     }
+    
+    // MARK: - Init
+    init(loginViewModel: LoginViewModel){
+        self.loginViewModel = loginViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("Don't use storyboard")
+    }
+    
     // MARK: - UI Components
     private var logoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -46,6 +63,7 @@ final class LoginViewController: BaseViewController {
         let button = UIButton()
         button.setLoginButton(type: .google)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handleGoogleLoginButton), for: .touchUpInside)
         return button
     }()
 
@@ -107,6 +125,26 @@ final class LoginViewController: BaseViewController {
             loginSkipButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
+    
+    override func bind() {
+        loginViewModel.isMemberPublisher
+            .sink { [weak self] isMember in
+                guard let self = self else { return }
+                if let isMember = isMember {
+                    if isMember {
+                        FMLogger.device.log("타이머 창으로 이동합니다")
+                        DispatchQueue.main.async {
+                            let tabBarViewController = TabBarViewController()
+                            tabBarViewController.modalPresentationStyle = .fullScreen
+                            self.view.window?.rootViewController = tabBarViewController
+                        }
+                    } else {
+                        FMLogger.device.log("회원가입 창으로 이동합니다")
+                    }
+                }
+            }
+            .store(in: &cancellables)
+    }
 }
 
 // MARK: - Objc func
@@ -117,7 +155,22 @@ private extension LoginViewController {
         tabBarViewController.modalPresentationStyle = .fullScreen
         view.window?.rootViewController = tabBarViewController
     }
+    
+    @objc func handleGoogleLoginButton() {
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { [weak self] signInResult, error in
+            guard let self = self else { return }
+            if let result = signInResult {
+                let accessToken = result.user.accessToken.tokenString
+                self.loginViewModel.requestLogin(accessToken: accessToken)
+            } else if let error = error {
+                FMLogger.device.error("\(error.localizedDescription)")
+            } else {
+                FMLogger.device.error("알 수 없는 에러")
+            }
+        }
+    }
 }
+
 
 // MARK: - UIButton extension
 fileprivate extension UIButton {
@@ -133,7 +186,7 @@ fileprivate extension UIButton {
     }
 }
 
-@available(iOS 17, *)
-#Preview {
-    LoginViewController()
-}
+//@available(iOS 17, *)
+//#Preview {
+//    LoginViewController()
+//}
