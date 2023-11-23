@@ -59,7 +59,7 @@ private extension TabBarViewController {
     func configureUI() {
         let timerViewController = TimerViewController(timerViewModel: TimerViewModel(
             timerUseCase: DefaultTimerUseCase(timerRepository: DefaultTimerRepository(provider: Provider(urlSession: URLSession.shared))),
-            userInfoUserCase: DefaultStudyLogUseCase(userInfoRepository: DefaultStudyLogRepository(provider: Provider(urlSession: MockURLSession(response: studyLogMockResponse))))))
+            userInfoUserCase: DefaultStudyLogUseCase(userInfoRepository: DefaultStudyLogRepository(provider: Provider(urlSession: URLSession.shared)))))
         let socialViewController = SocialViewController()
         let chartViewController = ChartViewController()
 

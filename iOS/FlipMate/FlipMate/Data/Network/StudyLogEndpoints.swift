@@ -12,7 +12,7 @@ struct StudyLogEndpoints {
         let encoder = JSONEncoder()
         return EndPoint(
             baseURL: BaseURL.flipmateDomain,
-            path: "/study-logs",
+            path: Paths.studylogs + "?date=\(Date().dateToString(format: .yyyyMMdd))",
             method: .get)
     }
 }
