@@ -30,7 +30,9 @@ final class LoginViewModel {
                 isMemberSubject.send(response.isMember)
                 
                 // TODO: 추후 분기 처리 (회원가입 안했을 때 고려)
-                try KeyChainManager.save(userId: "FlipMate", token: Data(response.accessToken.utf8))
+                let accessToken = response.accessToken
+                try KeychainManager.saveAccessToken(token: accessToken)
+                
                 if response.isMember {
                     FMLogger.user.log("나는 이미 회원이야")
                 } else {

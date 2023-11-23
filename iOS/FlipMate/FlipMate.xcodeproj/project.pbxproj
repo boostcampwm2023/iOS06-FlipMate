@@ -14,7 +14,7 @@
 		2C2F21782B0F4CCC00B45BA8 /* StudyLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F21772B0F4CCC00B45BA8 /* StudyLog.swift */; };
 		2C2F217A2B0F4CF900B45BA8 /* StudyLogUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F21792B0F4CF900B45BA8 /* StudyLogUseCase.swift */; };
 		2C2F217C2B0F4D4000B45BA8 /* StudyLogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F217B2B0F4D4000B45BA8 /* StudyLogRepository.swift */; };
-		2C2F217E2B0F4D7F00B45BA8 /* DefaultStudyLogRespository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F217D2B0F4D7F00B45BA8 /* DefaultStudyLogRespository.swift */; };
+		2C2F217E2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F217D2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift */; };
 		2C2F21802B0F4DA600B45BA8 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F217F2B0F4DA600B45BA8 /* MockURLSession.swift */; };
 		2C2F21832B0F53B500B45BA8 /* StduyLogMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F21822B0F53B500B45BA8 /* StduyLogMock.swift */; };
 		2C3430972B0C7ED8008CBC85 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430962B0C7ED8008CBC85 /* EndPoint.swift */; };
@@ -61,7 +61,6 @@
 		6057A58D2B0C7F0F00EE58E8 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58C2B0C7F0F00EE58E8 /* Requestable.swift */; };
 		6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58E2B0C801300EE58E8 /* NetworkError.swift */; };
 		6086464E2B0DDA1300B0C1BC /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086464D2B0DDA1300B0C1BC /* CategoryRepository.swift */; };
-		608646502B0DDBA800B0C1BC /* DefaultCategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086464F2B0DDBA800B0C1BC /* DefaultCategoryRepository.swift */; };
 		608646552B0DDC3900B0C1BC /* CategoryRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646542B0DDC3900B0C1BC /* CategoryRequestDTO.swift */; };
 		608646572B0DE31800B0C1BC /* CategoryResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646562B0DE31800B0C1BC /* CategoryResponseDTO.swift */; };
 		608646592B0DE61200B0C1BC /* CategoryEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646582B0DE61200B0C1BC /* CategoryEndpoints.swift */; };
@@ -92,6 +91,7 @@
 		ED3842292B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842282B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift */; };
 		ED38422C2B0F4531001E2803 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422B2B0F4531001E2803 /* LoginViewModel.swift */; };
 		ED38422F2B0F747B001E2803 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422E2B0F747B001E2803 /* KeyChainManager.swift */; };
+		ED3842312B0F94E6001E2803 /* DefaultCategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842302B0F94E6001E2803 /* DefaultCategoryRepository.swift */; };
 		ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A7E2B06033F008FE1C5 /* Category.swift */; };
 		ED9B2A812B06048D008FE1C5 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */; };
 		EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851C62B021492009031EA /* TabBarViewController.swift */; };
@@ -125,7 +125,7 @@
 		2C2F21772B0F4CCC00B45BA8 /* StudyLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLog.swift; sourceTree = "<group>"; };
 		2C2F21792B0F4CF900B45BA8 /* StudyLogUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogUseCase.swift; sourceTree = "<group>"; };
 		2C2F217B2B0F4D4000B45BA8 /* StudyLogRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogRepository.swift; sourceTree = "<group>"; };
-		2C2F217D2B0F4D7F00B45BA8 /* DefaultStudyLogRespository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStudyLogRespository.swift; sourceTree = "<group>"; };
+		2C2F217D2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStudyLogRepository.swift; sourceTree = "<group>"; };
 		2C2F217F2B0F4DA600B45BA8 /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
 		2C2F21822B0F53B500B45BA8 /* StduyLogMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StduyLogMock.swift; sourceTree = "<group>"; };
 		2C3430962B0C7ED8008CBC85 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
@@ -178,7 +178,6 @@
 		6057A58C2B0C7F0F00EE58E8 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		6057A58E2B0C801300EE58E8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		6086464D2B0DDA1300B0C1BC /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
-		6086464F2B0DDBA800B0C1BC /* DefaultCategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCategoryRepository.swift; sourceTree = "<group>"; };
 		608646542B0DDC3900B0C1BC /* CategoryRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRequestDTO.swift; sourceTree = "<group>"; };
 		608646562B0DE31800B0C1BC /* CategoryResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryResponseDTO.swift; sourceTree = "<group>"; };
 		608646582B0DE61200B0C1BC /* CategoryEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEndpoints.swift; sourceTree = "<group>"; };
@@ -213,6 +212,7 @@
 		ED3842282B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGoogleAuthRepository.swift; sourceTree = "<group>"; };
 		ED38422B2B0F4531001E2803 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		ED38422E2B0F747B001E2803 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
+		ED3842302B0F94E6001E2803 /* DefaultCategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCategoryRepository.swift; sourceTree = "<group>"; };
 		ED9B2A7E2B06033F008FE1C5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		EDC851C62B021492009031EA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -582,8 +582,8 @@
 			children = (
 				600908FB2AFCDF180065DFFB /* Utils */,
 				2C3430AC2B0DDF25008CBC85 /* DefaultTimerRepository.swift */,
-				6086464F2B0DDBA800B0C1BC /* DefaultCategoryRepository.swift */,
-				2C2F217D2B0F4D7F00B45BA8 /* DefaultStudyLogRespository.swift */,
+				2C2F217D2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift */,
+				ED3842302B0F94E6001E2803 /* DefaultCategoryRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -592,7 +592,6 @@
 			isa = PBXGroup;
 			children = (
 				ED3842282B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift */,
-				6086464F2B0DDBA800B0C1BC /* DefaultCategoryRepository.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1105,7 +1104,6 @@
 				2C3430992B0C8427008CBC85 /* Provider.swift in Sources */,
 				2C2F21702B0F429800B45BA8 /* StudyLogResponseDTO.swift in Sources */,
 				2C2F216E2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift in Sources */,
-				608646502B0DDBA800B0C1BC /* DefaultCategoryRepository.swift in Sources */,
 				2CE84EF72B0B7F3C00E2FB71 /* CategorySettingSection.swift in Sources */,
 				2C3430AD2B0DDF25008CBC85 /* DefaultTimerRepository.swift in Sources */,
 				2C6717F82B0535A8004D118D /* Int++Extension.swift in Sources */,
@@ -1126,13 +1124,14 @@
 				2C2F217C2B0F4D4000B45BA8 /* StudyLogRepository.swift in Sources */,
 				600908C02AFCD7DF0065DFFB /* SceneDelegate.swift in Sources */,
 				2C3430B12B0DE3D0008CBC85 /* Date++Extension.swift in Sources */,
-				2C2F217E2B0F4D7F00B45BA8 /* DefaultStudyLogRespository.swift in Sources */,
+				2C2F217E2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift in Sources */,
 				2C5CDA4F2B025403007AFC57 /* SocialViewController.swift in Sources */,
 				ED9B2A812B06048D008FE1C5 /* CategoryViewModel.swift in Sources */,
 				60DE49402B05E67200ACE6DD /* FlipMateConstant.swift in Sources */,
 				ED3842232B0F1D70001E2803 /* GoogleAuthRepostiory.swift in Sources */,
 				2C801D832B04C64F00A7ABAE /* TimerManager.swift in Sources */,
 				2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */,
+				ED3842312B0F94E6001E2803 /* DefaultCategoryRepository.swift in Sources */,
 				ED3595C12B0DC2F100558FAA /* CategoryColorSelectView.swift in Sources */,
 				ED38421B2B0F1B7E001E2803 /* GoogleAuthRequestDTO.swift in Sources */,
 				EDC851D92B05C37C009031EA /* DeviceMotionManager.swift in Sources */,

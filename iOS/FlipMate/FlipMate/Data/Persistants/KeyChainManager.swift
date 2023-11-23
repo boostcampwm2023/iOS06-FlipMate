@@ -1,24 +1,21 @@
-//
-//  KeyChainManager.swift
-//  FlipMate
-//
-//  Created by 신민규 on 11/23/23.
-//
-
 import Foundation
 
-final class KeyChainManager {
+final class KeychainManager {
+    
     enum KeychainError: Error {
         case duplicateEntry
         case noToken
         case unknown(OSStatus)
     }
     
-    static func save(userId: String, token: Data) throws {
+    private static let serviceName = "FlipMate"
+    
+    static func saveAccessToken(token: String) throws {
         let query: [String: AnyObject] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: userId as AnyObject,
-            kSecValueData as String: token as AnyObject]
+            kSecAttrService as String: serviceName as AnyObject,
+            kSecValueData as String: token.data(using: .utf8)! as AnyObject
+        ]
         
         let status = SecItemAdd(query as CFDictionary, nil)
         
@@ -31,30 +28,42 @@ final class KeyChainManager {
         }
     }
     
-    static func get() -> (userId: String, token: String)? {
+    static func getAccessToken() throws -> String {
         let query: [String: AnyObject] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecReturnAttributes as String: kCFBooleanTrue,
+            kSecAttrService as String: serviceName as AnyObject,
             kSecReturnData as String: kCFBooleanTrue,
             kSecMatchLimit as String: kSecMatchLimitOne
         ]
         
         var result: CFTypeRef?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
-        guard let data = result as? [String: AnyObject],
-              let tokenData = data[kSecValueData as String] as? Data,
-              let token = String(data: tokenData, encoding: String.Encoding.utf8),
-              let userId = data[kSecAttrAccount as String] as? String
-        else { return nil }
         
-        return (userId, token)
+        guard status == errSecSuccess else {
+            throw KeychainError.noToken
+        }
+        
+        guard let tokenData = result as? Data, let token = String(data: tokenData, encoding: .utf8) else {
+            throw KeychainError.noToken
+        }
+        
+        return token
     }
     
-    static func delete() throws {
-        let query: [String: AnyObject] = [kSecClass as String: kSecClassGenericPassword]
+    static func deleteAccessToken() throws {
+        let query: [String: AnyObject] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: serviceName as AnyObject
+        ]
+        
         let status = SecItemDelete(query as CFDictionary)
         
-        guard status != errSecItemNotFound else { throw KeychainError.noToken }
-        guard status == errSecSuccess else { throw KeychainError.unknown(status) }
+        guard status != errSecItemNotFound else {
+            throw KeychainError.noToken
+        }
+        
+        guard status == errSecSuccess else {
+            throw KeychainError.unknown(status)
+        }
     }
 }
