@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleSignIn
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -17,10 +18,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = LoginViewController()
+        window.rootViewController = LoginViewController(loginViewModel: LoginViewModel(googleAuthUseCase: DefaultGoogleAuthUseCase(repository: DefaultGoogleAuthRepository(provider: Provider(urlSession: URLSession.shared)))))
         window.makeKeyAndVisible()
         
         self.window = window
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        guard let url = URLContexts.first?.url else { return }
+        let _ = GIDSignIn.sharedInstance.handle(url)
     }
 }
 

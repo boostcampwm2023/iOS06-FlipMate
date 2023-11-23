@@ -44,6 +44,21 @@ final class CategoryListCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("Don't use storyboard")
     }
+    
+    func updateUI(category: Category) {
+        subjectLabel.text = category.subject
+        timeLabel.text = category.studyTime?.secondsToStringTime()
+    }
+    
+    func updateShadow() {
+        if isSelected {
+            backgroundColor = FlipMateColor.gray3.color
+            setShadow()
+        } else {
+            backgroundColor = .white
+            layer.shadowOpacity = 0
+        }
+    }
 }
 
 private extension CategoryListCollectionViewCell {
