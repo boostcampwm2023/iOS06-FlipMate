@@ -13,6 +13,10 @@
 		2C34309B2B0C8674008CBC85 /* URLSessionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34309A2B0C8674008CBC85 /* URLSessionable.swift */; };
 		2C3430A12B0DA4E6008CBC85 /* BaseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A02B0DA4E6008CBC85 /* BaseComponents.swift */; };
 		2C3430A32B0DA5A5008CBC85 /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A22B0DA5A5008CBC85 /* HTTPHeader.swift */; };
+		2C3430A72B0DD0F6008CBC85 /* TimerRepsoitory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A62B0DD0F6008CBC85 /* TimerRepsoitory.swift */; };
+		2C3430AB2B0DDB8D008CBC85 /* TimerEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430AA2B0DDB8D008CBC85 /* TimerEndpoints.swift */; };
+		2C3430AD2B0DDF25008CBC85 /* DefaultTimerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430AC2B0DDF25008CBC85 /* DefaultTimerRepository.swift */; };
+		2C3430B12B0DE3D0008CBC85 /* Date++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430B02B0DE3D0008CBC85 /* Date++Extension.swift */; };
 		2C43A0D82B037BBC0005596A /* FeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C43A0D72B037BBC0005596A /* FeedbackManager.swift */; };
 		2C4D55AB2B033029006D7C26 /* UIView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D55AA2B033029006D7C26 /* UIView++Extension.swift */; };
 		2C4D55B02B0348FB006D7C26 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D55AF2B0348FB006D7C26 /* TimerViewModel.swift */; };
@@ -101,6 +105,10 @@
 		2C34309A2B0C8674008CBC85 /* URLSessionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionable.swift; sourceTree = "<group>"; };
 		2C3430A02B0DA4E6008CBC85 /* BaseComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseComponents.swift; sourceTree = "<group>"; };
 		2C3430A22B0DA5A5008CBC85 /* HTTPHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
+		2C3430A62B0DD0F6008CBC85 /* TimerRepsoitory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRepsoitory.swift; sourceTree = "<group>"; };
+		2C3430AA2B0DDB8D008CBC85 /* TimerEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEndpoints.swift; sourceTree = "<group>"; };
+		2C3430AC2B0DDF25008CBC85 /* DefaultTimerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimerRepository.swift; sourceTree = "<group>"; };
+		2C3430B02B0DE3D0008CBC85 /* Date++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date++Extension.swift"; sourceTree = "<group>"; };
 		2C43A0D72B037BBC0005596A /* FeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackManager.swift; sourceTree = "<group>"; };
 		2C4D55AA2B033029006D7C26 /* UIView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView++Extension.swift"; sourceTree = "<group>"; };
 		2C4D55AF2B0348FB006D7C26 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
@@ -525,6 +533,7 @@
 			isa = PBXGroup;
 			children = (
 				600908FB2AFCDF180065DFFB /* Utils */,
+				2C3430AC2B0DDF25008CBC85 /* DefaultTimerRepository.swift */,
 				6086464F2B0DDBA800B0C1BC /* DefaultCategoryRepository.swift */,
 			);
 			path = Repositories;
@@ -543,6 +552,7 @@
 				608646582B0DE61200B0C1BC /* CategoryEndpoints.swift */,
 				2C3430A02B0DA4E6008CBC85 /* BaseComponents.swift */,
 				600908FD2AFCDF3A0065DFFB /* DataMapping */,
+				2C3430AA2B0DDB8D008CBC85 /* TimerEndpoints.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -574,6 +584,7 @@
 			children = (
 				2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */,
 				2CE84EF42B0B783800E2FB71 /* UICollectionViewCell++Extension.swift */,
+				2C3430B02B0DE3D0008CBC85 /* Date++Extension.swift */,
 				2CE84EFA2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift */,
 			);
 			path = Extensions;
@@ -643,6 +654,7 @@
 		600909082AFCE0EA0065DFFB /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				2C3430A62B0DD0F6008CBC85 /* TimerRepsoitory.swift */,
 				6086464D2B0DDA1300B0C1BC /* CategoryRepository.swift */,
 			);
 			path = Repositories;
@@ -947,10 +959,13 @@
 				6086464E2B0DDA1300B0C1BC /* CategoryRepository.swift in Sources */,
 				601773E42B021E6000D175D9 /* TimerViewController.swift in Sources */,
 				600908C22AFCD7DF0065DFFB /* ViewController.swift in Sources */,
+				2C3430AB2B0DDB8D008CBC85 /* TimerEndpoints.swift in Sources */,
+				2C3430A12B0DA4E6008CBC85 /* BaseURL.swift in Sources */,
 				2C3430A12B0DA4E6008CBC85 /* BaseComponents.swift in Sources */,
 				60F67C682B0E1785002C8BF3 /* CategoryUseCase.swift in Sources */,
 				2C5CDA5B2B025440007AFC57 /* ChartViewController.swift in Sources */,
 				6057A58D2B0C7F0F00EE58E8 /* Requestable.swift in Sources */,
+				2C3430A72B0DD0F6008CBC85 /* TimerRepsoitory.swift in Sources */,
 				6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */,
 				ED3595BF2B0DB68200558FAA /* CategoryTitleTextView.swift in Sources */,
 				600908BE2AFCD7DF0065DFFB /* AppDelegate.swift in Sources */,
@@ -961,6 +976,7 @@
 				2C3430992B0C8427008CBC85 /* Provider.swift in Sources */,
 				608646502B0DDBA800B0C1BC /* DefaultCategoryRepository.swift in Sources */,
 				2CE84EF72B0B7F3C00E2FB71 /* CategorySettingSection.swift in Sources */,
+				2C3430AD2B0DDF25008CBC85 /* DefaultTimerRepository.swift in Sources */,
 				2C6717F82B0535A8004D118D /* Int++Extension.swift in Sources */,
 				ED3595B92B0C88A300558FAA /* TimerFinishResponseDTO.swift in Sources */,
 				608646552B0DDC3900B0C1BC /* CategoryRequestDTO.swift in Sources */,
@@ -975,6 +991,7 @@
 				2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */,
 				2C5CDA572B025426007AFC57 /* FlipMateColor.swift in Sources */,
 				600908C02AFCD7DF0065DFFB /* SceneDelegate.swift in Sources */,
+				2C3430B12B0DE3D0008CBC85 /* Date++Extension.swift in Sources */,
 				2C5CDA4F2B025403007AFC57 /* SocialViewController.swift in Sources */,
 				ED9B2A812B06048D008FE1C5 /* CategoryViewModel.swift in Sources */,
 				60DE49402B05E67200ACE6DD /* FlipMateConstant.swift in Sources */,

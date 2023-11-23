@@ -57,7 +57,7 @@ final class TabBarViewController: UITabBarController {
 private extension TabBarViewController {
 
     func configureUI() {
-        let timerViewController = TimerViewController(timerViewModel: TimerViewModel(timerUseCase: DefaultTimerUseCase()))
+        let timerViewController = TimerViewController(timerViewModel: TimerViewModel(timerUseCase: DefaultTimerUseCase(timerRepository: DefaultTimerRepository(provider: Provider(urlSession: URLSession.shared)))))
         let socialViewController = SocialViewController()
         let chartViewController = ChartViewController()
 
