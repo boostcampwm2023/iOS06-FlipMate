@@ -7,12 +7,14 @@
 
 import UIKit
 
+let token = ""
+
 enum CategorySettingSection: Hashable {
     case categorySection([CategorySettingItem])
 }
 
 enum CategorySettingItem: Hashable {
-    case categoryCell
+    case categoryCell(Category)
 }
 
 extension CategorySettingSection {

@@ -10,6 +10,7 @@ import Combine
 import OSLog
 
 protocol TimerViewModelInput {
+    func viewDidLoad()
     func deviceOrientationDidChange(_ sender: DeviceOrientation)
     func deviceProximityDidChange(_ sender: Bool)
     func categorySettingButtoneDidTapped()
@@ -19,26 +20,35 @@ protocol TimerViewModelOutput {
     var isDeviceFaceDownPublisher: AnyPublisher<Bool, Never> { get }
     var isPresentingCategoryPublisher: AnyPublisher<Void, Never> { get }
     var totalTimePublisher: AnyPublisher<Int, Never> { get }
+    var categoryPublisher: AnyPublisher<[Category], Never> { get }
 }
 
 typealias TimerViewModelProtocol = TimerViewModelInput & TimerViewModelOutput
 
 final class TimerViewModel: TimerViewModelProtocol {
-    
-    // MARK: Properties
+
+    // MARK: UseCase
     private var timerUseCase: TimerUseCase
+    private var userInfoUserCase: StudyLogUseCase
+    
+    // MARK: Subject
     private var isDeviceFaceDownSubject = PassthroughSubject<Bool, Never>()
     private var isPresentingCategorySubject = PassthroughSubject<Void, Never>()
     private var totalTimeSubject = PassthroughSubject<Int, Never>()
+    private var categorySubject = PassthroughSubject<[Category], Never>()
+    
+    // MARK: Properties
     private var proximity: Bool?
     private var orientation: DeviceOrientation = .unknown
     private var timerState: TimerState = .notStarted
     private var cancellables = Set<AnyCancellable>()
     private var totalTime: Int = 0 // 총 공부 시간
+    private var categories = [Category]()
     
     // MARK: - init
-    init(timerUseCase: TimerUseCase) {
+    init(timerUseCase: TimerUseCase, userInfoUserCase: StudyLogUseCase) {
         self.timerUseCase = timerUseCase
+        self.userInfoUserCase = userInfoUserCase
     }
     
     // MARK: Output
@@ -54,6 +64,10 @@ final class TimerViewModel: TimerViewModelProtocol {
         return totalTimeSubject.eraseToAnyPublisher()
     }
     
+    var categoryPublisher: AnyPublisher<[Category], Never> {
+        return categorySubject.eraseToAnyPublisher()
+    }
+    
     // MARK: Input
     func deviceOrientationDidChange(_ sender: DeviceOrientation) {
         orientation = sender
@@ -67,6 +81,24 @@ final class TimerViewModel: TimerViewModelProtocol {
     
     func categorySettingButtoneDidTapped() {
         isPresentingCategorySubject.send(())
+    }
+    
+    func viewDidLoad() {
+        userInfoUserCase.getUserInfo()
+            .receive(on: DispatchQueue.main)
+            .sink { complection in
+                switch complection {
+                case .finished:
+                    FMLogger.timer.debug("유저 정보 요청 성공")
+                case .failure(let error):
+                    FMLogger.timer.error("유저 정보 요청 실패 \(error.localizedDescription)")
+                }
+            } receiveValue: { [weak self] userInfo in
+                guard let self = self else { return }
+                self.totalTimeDidChange(time: userInfo.totalTime)
+                self.cateogoriesDidChange(categories: userInfo.category)
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -90,6 +122,16 @@ private extension TimerViewModel {
             isDeviceFaceDownSubject.send(false)
             suspendTimer()
         }
+    }
+    
+    func totalTimeDidChange(time: Int) {
+        totalTime += time
+        totalTimeSubject.send(totalTime)
+    }
+    
+    func cateogoriesDidChange(categories: [Category]) {
+        self.categories = categories
+        categorySubject.send(categories)
     }
 }
 
