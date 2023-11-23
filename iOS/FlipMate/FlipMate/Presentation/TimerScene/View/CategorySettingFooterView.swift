@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class CategorySettingFooterView: UICollectionReusableView {
     // MARK: - Constant
@@ -28,14 +29,29 @@ final class CategorySettingFooterView: UICollectionReusableView {
         return button
     }()
     
+    private lazy var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(footerViewSelected))
+    private var subject = PassthroughSubject<Void, Never>()
+    var cancellable: AnyCancellable?
+    
     // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
+        configureGestureRecognizers()
     }
     
     required init?(coder: NSCoder) {
         fatalError("Don't use storyboard")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        cancellable?.cancel()
+    }
+    
+    func tapPublisher() -> AnyPublisher<Void, Never> {
+        return subject
+            .eraseToAnyPublisher()
     }
 }
 
@@ -50,5 +66,18 @@ private extension CategorySettingFooterView {
             addButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             addButton.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+    }
+}
+
+private extension CategorySettingFooterView {
+    func configureGestureRecognizers() {
+        print("tapgesture added")
+        tapGestureRecognizer.cancelsTouchesInView = false
+        self.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc
+    func footerViewSelected() {
+        subject.send()
     }
 }

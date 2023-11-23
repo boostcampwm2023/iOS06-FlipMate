@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 protocol CategoryViewModelInput {
+    func createCategoryTapped()
     func createCategory(_ sender: Category) async throws
     func readCategories() async throws
     func updateCategory(of id: Int, newName: String, newColorCode: String) async throws
@@ -16,6 +17,7 @@ protocol CategoryViewModelInput {
 }
 
 protocol CategoryViewModelOutput {
+    var presentingCategoryModifyViewControllerPublisher: AnyPublisher<Void, Never> { get }
     var categoriesPublisher: AnyPublisher<[Category], Never> { get }
 }
 
@@ -23,7 +25,9 @@ typealias CategoryViewModelProtocol = CategoryViewModelInput & CategoryViewModel
 
 final class CategoryViewModel: CategoryViewModelProtocol {
     // MARK: properties
+    private var presentingCategoryModifyViewControllerSubject = PassthroughSubject<Void, Never>()
     private var categoriesSubject = CurrentValueSubject<[Category], Never>([])
+    
     var categories = [Category]()
     
     private let useCase: CategoryUseCase
@@ -33,11 +37,19 @@ final class CategoryViewModel: CategoryViewModelProtocol {
     }
     
     // MARK: Output
+    var presentingCategoryModifyViewControllerPublisher: AnyPublisher<Void, Never> {
+        return presentingCategoryModifyViewControllerSubject
+            .eraseToAnyPublisher()
+    }
     var categoriesPublisher: AnyPublisher<[Category], Never> {
         return categoriesSubject.eraseToAnyPublisher()
     }
     
     // MARK: Input
+    func createCategoryTapped() {
+        presentingCategoryModifyViewControllerSubject.send()
+    }
+    
     func createCategory(_ sender: Category) async throws {
         try await useCase.createCategory(name: sender.subject, colorCode: sender.color)
         categories.append(sender)

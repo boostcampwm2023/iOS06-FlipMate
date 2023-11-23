@@ -6,13 +6,18 @@
 //
 
 import UIKit
+import Combine
 
 final class CategorySettingViewController: BaseViewController {
-    typealias CateogoryDataSource = UICollectionViewDiffableDataSource<CategorySettingSection,CategorySettingItem>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<CategorySettingSection, CategorySettingItem>
-
+    typealias CategoryDataSource
+    = UICollectionViewDiffableDataSource<CategorySettingSection, CategorySettingItem>
+    typealias Snapshot
+    = NSDiffableDataSourceSnapshot<CategorySettingSection, CategorySettingItem>
+    
     // MARK: - Properties
-    private var dataSource: CateogoryDataSource?
+    private var dataSource: CategoryDataSource?
+    private let viewModel: CategoryViewModelProtocol
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - UI Components
     private lazy var collectionView: UICollectionView = {
@@ -23,10 +28,21 @@ final class CategorySettingViewController: BaseViewController {
         return collectionView
     }()
     
+    // MARK: - Initializers
+    init(viewModel: CategoryViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("can't use this view controller in storyboard")
+    }
+    
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setDataSource()
+        setDelegate()
         setSnapshot()
     }
     
@@ -40,32 +56,90 @@ final class CategorySettingViewController: BaseViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+        
+    }
+    
+    override func bind() {
+        viewModel.presentingCategoryModifyViewControllerPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                print("tapped")
+                self?.present(CategoryModifyViewController(), animated: true)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.categoriesPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] categories in
+                guard let self = self else { return }
+                guard var snapShot = self.dataSource?.snapshot() else { return }
+                snapShot.appendItems(categories.map { CategorySettingItem.categoryCell($0) })
+                self.dataSource?.apply(snapShot)
+            }
+            .store(in: &cancellables)
+    }
+}
+
+// MARK: - ViewModel Functions
+private extension CategorySettingViewController {
+    func readCategories() async {
+        do {
+            try await viewModel.readCategories()
+        } catch let error {
+            FMLogger.general.error("카테고리 읽는 중 에러 발생 : \(error)")
+        }
+    }
+}
+
+// MARK: - CollectionViewDelegate
+extension CategorySettingViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath)
     }
 }
 
 // MARK: - DiffableDataSource
 private extension CategorySettingViewController {
     func setDataSource() {
-        dataSource = CateogoryDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            switch itemIdentifier {
-            case .categoryCell:
-                let cell: CategoryListCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-                return cell
-            }
-        })
+        dataSource = CategoryDataSource(
+            collectionView: collectionView,
+            cellProvider: { collectionView, indexPath, itemIdentifier in
+                switch itemIdentifier {
+                case .categoryCell(let category):
+                    let cell: CategoryListCollectionViewCell = collectionView
+                        .dequeueReusableCell(for: indexPath)
+                    cell.updateUI(category: category)
+                    return cell
+                }
+            })
         
-        dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
-            let footer: CategorySettingFooterView = collectionView.dequeueReusableView(for: indexPath, kind: kind)
-            return footer
-        }
+        dataSource?
+            .supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+                let footer: CategorySettingFooterView = collectionView
+                    .dequeueReusableView(for: indexPath, kind: kind)
+                footer.cancellable = footer.tapPublisher()
+                    .receive(on: DispatchQueue.main)
+                    .sink { [weak self] _ in
+                        self?.viewModel.createCategoryTapped()
+                    }
+                print(footer.gestureRecognizers)
+                return footer
+            }
+    }
+    
+    func setDelegate() {
+        collectionView.delegate = self
     }
     
     func setSnapshot() {
         var snapshot = Snapshot()
         let sections: [CategorySettingSection] = [.categorySection([])]
         snapshot.appendSections(sections)
-        snapshot.appendItems([CategorySettingItem.categoryCell])
         dataSource?.apply(snapshot)
+    }
+    
+    func createCategoryButtonTapped() {
+        present(CategoryModifyViewController(), animated: true)
     }
 }
 
@@ -87,7 +161,8 @@ private extension CategorySettingViewController {
     
     func setCollectionViewLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
-            guard let sectionType = self?.dataSource?.snapshot().sectionIdentifiers[sectionIndex] else { return nil }
+            guard let sectionType = self?.dataSource?.snapshot()
+                .sectionIdentifiers[sectionIndex] else { return nil }
             return self?.makeLayoutSection(sectionType: sectionType)
         }
     }
@@ -95,5 +170,9 @@ private extension CategorySettingViewController {
 
 @available(iOS 17.0, *)
 #Preview {
-    CategorySettingViewController()
+    CategorySettingViewController(
+        viewModel: CategoryViewModel(
+            useCase: DefaultCategoryUseCase(
+                repository: DefaultCategoryRepository(
+                    provider: Provider(urlSession: URLSession.shared)))))
 }
