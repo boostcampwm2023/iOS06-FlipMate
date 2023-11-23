@@ -11,8 +11,8 @@ import { LoggingInterceptor } from './common/logging.interceptor';
 async function bootstrap() {
   const configService = new ConfigService();
 
-  let httpsOptions = null;
   const ssl = configService.get<string>('SSL');
+  let httpsOptions = null;
   if (ssl == 'true') {
     httpsOptions = {
       key: readFileSync(configService.get<string>('HTTPS_KEY_PATH')),

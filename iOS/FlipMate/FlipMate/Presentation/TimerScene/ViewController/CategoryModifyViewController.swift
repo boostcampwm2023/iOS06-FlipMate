@@ -7,23 +7,35 @@
 
 import UIKit
 
+enum CategoryPurpose {
+    case create
+    case update
+    
+    var title: String {
+        switch self {
+        case .create: return "카테고리 추가"
+        case .update: return "카테고리 수정"
+        }
+    }
+}
+
 final class CategoryModifyViewController: BaseViewController {
-    private enum ConstantString {
-        static let title = "카테고리 수정"
+    private enum Constant {
         static let leftNavigationBarItemTitle = "닫기"
         static let rightNavigationBarItemTitle = "완료"
-        static let sectionNames: [String] = ["카테고리 명", "색상"]
-        static let placeHolders: [String] = ["카테고리 이름을 입력해주세요", "색상을 선택해주세요"]
+        static let sectionNames: [String] = ["카테고리 이름", "카테고리 색상"]
+        static let placeHolders: [String] = ["이름을 입력해주세요", "색상을 선택해주세요"]
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
+    
     // MARK: UI Components
     private lazy var firstSectionTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = ConstantString.sectionNames.first
+        label.text = Constant.sectionNames.first
         label.font = FlipMateFont.mediumBold.font
         label.textColor = .label
         
@@ -33,7 +45,7 @@ final class CategoryModifyViewController: BaseViewController {
     private lazy var secondSectionTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = ConstantString.sectionNames.last
+        label.text = Constant.sectionNames.last
         label.font = FlipMateFont.mediumBold.font
         label.textColor = .label
         
@@ -41,10 +53,12 @@ final class CategoryModifyViewController: BaseViewController {
     }()
     
     private lazy var categoryTitleTextView: CategoryTitleTextView = {
-        let textView = CategoryTitleTextView(placeholder: ConstantString.placeHolders[0])
+        let textView = CategoryTitleTextView(placeholder: Constant.placeHolders[0])
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.layer.masksToBounds = true
         textView.layer.cornerRadius = 6
+        textView.layer.borderColor = FlipMateColor.gray2.color?.cgColor
+        textView.layer.borderWidth = 1
         
         return textView
     }()
@@ -54,9 +68,26 @@ final class CategoryModifyViewController: BaseViewController {
         colorView.translatesAutoresizingMaskIntoConstraints = false
         colorView.layer.masksToBounds = true
         colorView.layer.cornerRadius = 6
+        colorView.layer.borderColor = FlipMateColor.gray2.color?.cgColor
+        colorView.layer.borderWidth = 1
         
         return colorView
     }()
+    
+    private let viewModel: CategoryViewModelProtocol
+    private let purpose: CategoryPurpose
+    private let category: Category?
+    
+    init(viewModel: CategoryViewModelProtocol, purpose: CategoryPurpose, category: Category? = nil) {
+        self.viewModel = viewModel
+        self.purpose = purpose
+        self.category = category
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
     
     // MARK: View LifeCycle
     override func viewDidLoad() {
@@ -66,54 +97,85 @@ final class CategoryModifyViewController: BaseViewController {
     
     // MARK: Configure UI
     override func configureUI() {
-        view.backgroundColor = FlipMateColor.gray4.color
-        let subViews = [firstSectionTitleLabel,
-                        categoryTitleTextView,
-                        secondSectionTitleLabel,
-                        categoryColorSelectView
-                        ]
-
+        view.backgroundColor = .systemBackground
+        
+        let subViews = [
+            firstSectionTitleLabel,
+            categoryTitleTextView,
+            secondSectionTitleLabel,
+            categoryColorSelectView
+        ]
+        
         subViews.forEach {
-                view.addSubview($0)
+            view.addSubview($0)
+        }
+        
+        NSLayoutConstraint.activate([
+            firstSectionTitleLabel.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            firstSectionTitleLabel.leftAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 32)
+        ])
+        
+        NSLayoutConstraint.activate([
+            categoryTitleTextView.topAnchor.constraint(
+                equalTo: firstSectionTitleLabel.bottomAnchor, constant: 12),
+            categoryTitleTextView.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
+            categoryTitleTextView.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
+        ])
+        
+        NSLayoutConstraint.activate([
+            secondSectionTitleLabel.topAnchor.constraint(
+                equalTo: categoryTitleTextView.bottomAnchor, constant: 60),
+            secondSectionTitleLabel.leftAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 32)
+        ])
+        
+        NSLayoutConstraint.activate([
+            categoryColorSelectView.topAnchor.constraint(
+                equalTo: secondSectionTitleLabel.bottomAnchor, constant: 12),
+            categoryColorSelectView.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
+            categoryColorSelectView.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
+            categoryColorSelectView.heightAnchor.constraint(
+                equalTo: categoryTitleTextView.heightAnchor)
+        ])
+        
+        if purpose == .update {
+            guard let category = category else {
+                FMLogger.general.error("가져온 카테고리 없음 에러")
+                return
             }
-        
-        NSLayoutConstraint.activate([
-            firstSectionTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
-            firstSectionTitleLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 32)
-        ])
-        
-        NSLayoutConstraint.activate([
-            categoryTitleTextView.topAnchor.constraint(equalTo: firstSectionTitleLabel.bottomAnchor, constant: 12),
-            categoryTitleTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            categoryTitleTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
-        ])
-        
-        NSLayoutConstraint.activate([
-            secondSectionTitleLabel.topAnchor.constraint(equalTo: categoryTitleTextView.bottomAnchor, constant: 60),
-            secondSectionTitleLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 32)
-        ])
-        
-        NSLayoutConstraint.activate([
-            categoryColorSelectView.topAnchor.constraint(equalTo: secondSectionTitleLabel.bottomAnchor, constant: 12),
-            categoryColorSelectView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            categoryColorSelectView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
-            categoryColorSelectView.heightAnchor.constraint(equalTo: categoryTitleTextView.heightAnchor)
-        ])
+            categoryTitleTextView.setText(text: category.subject)
+        }
     }
 }
 
 // MARK: Navigation Bar
 private extension CategoryModifyViewController {
     func setUpNavigation() {
-        navigationItem.title = ConstantString.title
+        title = purpose.title
         navigationItem.largeTitleDisplayMode = .never
-        
         setupNavigationBarButton()
     }
     
     func setupNavigationBarButton() {
-        let closeButton = UIBarButtonItem(title: ConstantString.leftNavigationBarItemTitle, style: .plain, target: self, action: #selector(closeButtonTapped))
-        let doneButton = UIBarButtonItem(title: ConstantString.rightNavigationBarItemTitle, style: .done, target: self, action: #selector(doneButtonTapped))
+        let closeButton = UIBarButtonItem(
+            title: Constant.leftNavigationBarItemTitle,
+            style: .plain,
+            target: self,
+            action: #selector(closeButtonTapped))
+        let doneButton = UIBarButtonItem(
+            title: Constant.rightNavigationBarItemTitle,
+            style: .done,
+            target: self,
+            action: #selector(doneButtonTapped))
+        
+        navigationItem.leftBarButtonItem = closeButton
+        navigationItem.rightBarButtonItem = doneButton
     }
 }
 
@@ -124,10 +186,37 @@ private extension CategoryModifyViewController {
     }
     
     @objc func doneButtonTapped(_ sender: UIBarButtonItem) {
-        // TODO: 완료 버튼 눌렸을 때 동작
+        // TODO: 색깔 선택 기능 미구현
+        if purpose == .create {
+            Task {
+                do {
+                    guard let categoryTitle = categoryTitleTextView.text() else {
+                        FMLogger.general.error("빈 제목, 추가할 수 없음")
+                        return
+                    }
+                    try await viewModel.createCategory(name: categoryTitle, colorCode: "FFFFFFFF")
+                    dismiss(animated: true)
+                } catch let error {
+                    FMLogger.general.error("카테고리 추가 중 에러 \(error)")
+                }
+            }
+        } else {
+            Task {
+                do {
+                    guard let categoryTitle = categoryTitleTextView.text() else {
+                        FMLogger.general.error("빈 제목, 추가할 수 없음")
+                        return
+                    }
+                    guard let category = category else {
+                        FMLogger.general.error("가져온 카테고리 없음 에러")
+                        return
+                    }
+                    try await viewModel.updateCategory(of: category.id, newName: categoryTitle, newColorCode: "FFFFFFFF")
+                    dismiss(animated: true)
+                } catch let error {
+                    FMLogger.general.error("카테고리 추가 중 에러 \(error)")
+                }
+            }
+        }
     }
-}
-@available(iOS 17.0, *)
-#Preview {
-    CategoryModifyViewController()
 }

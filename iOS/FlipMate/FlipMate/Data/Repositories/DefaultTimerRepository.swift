@@ -24,15 +24,13 @@ final class DefaultTimerRepository {
 extension DefaultTimerRepository: TimerRepsoitory {
     func startTimer(
         startTime: Date,
-        userId: Int,
-        categoryId: Int)
+        categoryId: Int?)
     -> AnyPublisher<Void, NetworkError> {
         let requestDTO = TimerStartRequestDTO(
             date: startTime.dateToString(format: .yyyyMMdd),
             createdAt: startTime.dateToString(format: .yyyyMMddhhmmss),
             type: StudyType.start.rawValue,
             learningTime: 0,
-            userID: userId,
             categoryID: categoryId)
         let endpoint = TimerEndpoints.startTimer(with: requestDTO)
         
@@ -46,15 +44,13 @@ extension DefaultTimerRepository: TimerRepsoitory {
     func finishTimer(
         endTime: Date,
         learningTime: Int,
-        userId: Int,
-        categoryId: Int) 
+        categoryId: Int?)
     -> AnyPublisher<Void, NetworkError> {
         let requestDTO = TimerFinishRequestDTO(
             date: endTime.dateToString(format: .yyyyMMdd),
             createdAt: endTime.dateToString(format: .yyyyMMddhhmmss),
             type: StudyType.finish.rawValue,
             learningTime: learningTime,
-            userID: userId,
             categoryID: categoryId)
         let endpoint = TimerEndpoints.stopTimer(with: requestDTO)
     

@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		24A38712CF24997B512A0C4A /* Pods_FlipMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67C5E61F07640B8F89AB356 /* Pods_FlipMate.framework */; };
+		2C2F216E2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F216D2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift */; };
+		2C2F21702B0F429800B45BA8 /* StudyLogResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F216F2B0F429800B45BA8 /* StudyLogResponseDTO.swift */; };
+		2C2F21762B0F440D00B45BA8 /* StudyLogEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F21752B0F440D00B45BA8 /* StudyLogEndpoints.swift */; };
+		2C2F21782B0F4CCC00B45BA8 /* StudyLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F21772B0F4CCC00B45BA8 /* StudyLog.swift */; };
+		2C2F217A2B0F4CF900B45BA8 /* StudyLogUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F21792B0F4CF900B45BA8 /* StudyLogUseCase.swift */; };
+		2C2F217C2B0F4D4000B45BA8 /* StudyLogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F217B2B0F4D4000B45BA8 /* StudyLogRepository.swift */; };
+		2C2F217E2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F217D2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift */; };
+		2C2F21802B0F4DA600B45BA8 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F217F2B0F4DA600B45BA8 /* MockURLSession.swift */; };
+		2C2F21832B0F53B500B45BA8 /* StduyLogMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F21822B0F53B500B45BA8 /* StduyLogMock.swift */; };
 		2C3430972B0C7ED8008CBC85 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430962B0C7ED8008CBC85 /* EndPoint.swift */; };
 		2C3430992B0C8427008CBC85 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430982B0C8427008CBC85 /* Provider.swift */; };
 		2C34309B2B0C8674008CBC85 /* URLSessionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34309A2B0C8674008CBC85 /* URLSessionable.swift */; };
@@ -52,7 +61,6 @@
 		6057A58D2B0C7F0F00EE58E8 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58C2B0C7F0F00EE58E8 /* Requestable.swift */; };
 		6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58E2B0C801300EE58E8 /* NetworkError.swift */; };
 		6086464E2B0DDA1300B0C1BC /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086464D2B0DDA1300B0C1BC /* CategoryRepository.swift */; };
-		608646502B0DDBA800B0C1BC /* DefaultCategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086464F2B0DDBA800B0C1BC /* DefaultCategoryRepository.swift */; };
 		608646552B0DDC3900B0C1BC /* CategoryRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646542B0DDC3900B0C1BC /* CategoryRequestDTO.swift */; };
 		608646572B0DE31800B0C1BC /* CategoryResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646562B0DE31800B0C1BC /* CategoryResponseDTO.swift */; };
 		608646592B0DE61200B0C1BC /* CategoryEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646582B0DE61200B0C1BC /* CategoryEndpoints.swift */; };
@@ -73,6 +81,17 @@
 		ED3595BD2B0DB29F00558FAA /* CategoryModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595BC2B0DB29F00558FAA /* CategoryModifyViewController.swift */; };
 		ED3595BF2B0DB68200558FAA /* CategoryTitleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595BE2B0DB68200558FAA /* CategoryTitleTextView.swift */; };
 		ED3595C12B0DC2F100558FAA /* CategoryColorSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */; };
+		ED38421B2B0F1B7E001E2803 /* GoogleAuthRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38421A2B0F1B7E001E2803 /* GoogleAuthRequestDTO.swift */; };
+		ED38421D2B0F1BE9001E2803 /* GoogleAuthEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38421C2B0F1BE9001E2803 /* GoogleAuthEndpoints.swift */; };
+		ED38421F2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38421E2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift */; };
+		ED3842212B0F1CF9001E2803 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842202B0F1CF9001E2803 /* User.swift */; };
+		ED3842232B0F1D70001E2803 /* GoogleAuthRepostiory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842222B0F1D70001E2803 /* GoogleAuthRepostiory.swift */; };
+		ED3842252B0F1DDA001E2803 /* DefaultGoogleAuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842242B0F1DDA001E2803 /* DefaultGoogleAuthUseCase.swift */; };
+		ED3842272B0F1E0C001E2803 /* GoogleAuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842262B0F1E0C001E2803 /* GoogleAuthUseCase.swift */; };
+		ED3842292B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842282B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift */; };
+		ED38422C2B0F4531001E2803 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422B2B0F4531001E2803 /* LoginViewModel.swift */; };
+		ED38422F2B0F747B001E2803 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422E2B0F747B001E2803 /* KeyChainManager.swift */; };
+		ED3842312B0F94E6001E2803 /* DefaultCategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842302B0F94E6001E2803 /* DefaultCategoryRepository.swift */; };
 		ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A7E2B06033F008FE1C5 /* Category.swift */; };
 		ED9B2A812B06048D008FE1C5 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */; };
 		EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851C62B021492009031EA /* TabBarViewController.swift */; };
@@ -100,6 +119,15 @@
 
 /* Begin PBXFileReference section */
 		045022A6DA9A21DB95C267D0 /* Pods-FlipMateTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMateTests.release.xcconfig"; path = "Target Support Files/Pods-FlipMateTests/Pods-FlipMateTests.release.xcconfig"; sourceTree = "<group>"; };
+		2C2F216D2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStudyLogUseCase.swift; sourceTree = "<group>"; };
+		2C2F216F2B0F429800B45BA8 /* StudyLogResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogResponseDTO.swift; sourceTree = "<group>"; };
+		2C2F21752B0F440D00B45BA8 /* StudyLogEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogEndpoints.swift; sourceTree = "<group>"; };
+		2C2F21772B0F4CCC00B45BA8 /* StudyLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLog.swift; sourceTree = "<group>"; };
+		2C2F21792B0F4CF900B45BA8 /* StudyLogUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogUseCase.swift; sourceTree = "<group>"; };
+		2C2F217B2B0F4D4000B45BA8 /* StudyLogRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogRepository.swift; sourceTree = "<group>"; };
+		2C2F217D2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStudyLogRepository.swift; sourceTree = "<group>"; };
+		2C2F217F2B0F4DA600B45BA8 /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
+		2C2F21822B0F53B500B45BA8 /* StduyLogMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StduyLogMock.swift; sourceTree = "<group>"; };
 		2C3430962B0C7ED8008CBC85 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		2C3430982B0C8427008CBC85 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		2C34309A2B0C8674008CBC85 /* URLSessionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionable.swift; sourceTree = "<group>"; };
@@ -150,7 +178,6 @@
 		6057A58C2B0C7F0F00EE58E8 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		6057A58E2B0C801300EE58E8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		6086464D2B0DDA1300B0C1BC /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
-		6086464F2B0DDBA800B0C1BC /* DefaultCategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCategoryRepository.swift; sourceTree = "<group>"; };
 		608646542B0DDC3900B0C1BC /* CategoryRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRequestDTO.swift; sourceTree = "<group>"; };
 		608646562B0DE31800B0C1BC /* CategoryResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryResponseDTO.swift; sourceTree = "<group>"; };
 		608646582B0DE61200B0C1BC /* CategoryEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEndpoints.swift; sourceTree = "<group>"; };
@@ -175,6 +202,17 @@
 		ED3595BC2B0DB29F00558FAA /* CategoryModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModifyViewController.swift; sourceTree = "<group>"; };
 		ED3595BE2B0DB68200558FAA /* CategoryTitleTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTitleTextView.swift; sourceTree = "<group>"; };
 		ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColorSelectView.swift; sourceTree = "<group>"; };
+		ED38421A2B0F1B7E001E2803 /* GoogleAuthRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthRequestDTO.swift; sourceTree = "<group>"; };
+		ED38421C2B0F1BE9001E2803 /* GoogleAuthEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthEndpoints.swift; sourceTree = "<group>"; };
+		ED38421E2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthResponseDTO.swift; sourceTree = "<group>"; };
+		ED3842202B0F1CF9001E2803 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		ED3842222B0F1D70001E2803 /* GoogleAuthRepostiory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthRepostiory.swift; sourceTree = "<group>"; };
+		ED3842242B0F1DDA001E2803 /* DefaultGoogleAuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGoogleAuthUseCase.swift; sourceTree = "<group>"; };
+		ED3842262B0F1E0C001E2803 /* GoogleAuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthUseCase.swift; sourceTree = "<group>"; };
+		ED3842282B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGoogleAuthRepository.swift; sourceTree = "<group>"; };
+		ED38422B2B0F4531001E2803 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		ED38422E2B0F747B001E2803 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
+		ED3842302B0F94E6001E2803 /* DefaultCategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCategoryRepository.swift; sourceTree = "<group>"; };
 		ED9B2A7E2B06033F008FE1C5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		EDC851C62B021492009031EA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -219,6 +257,14 @@
 				D6BD4FEF5337019834533B60 /* Pods_FlipMateTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2C2F21812B0F53AB00B45BA8 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				2C2F21822B0F53B500B45BA8 /* StduyLogMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		2C3430942B0C7C55008CBC85 /* NetworkService */ = {
@@ -445,6 +491,7 @@
 		600908EF2AFCDBC90065DFFB /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				2C2F21812B0F53AB00B45BA8 /* Mocks */,
 				600908F62AFCDDDC0065DFFB /* Splash */,
 				600908F42AFCDCFA0065DFFB /* LoginScene */,
 				600908F12AFCDCD80065DFFB /* TimerScene */,
@@ -488,6 +535,7 @@
 			isa = PBXGroup;
 			children = (
 				2C5CDA492B0252C1007AFC57 /* Model */,
+				ED38422A2B0F451F001E2803 /* ViewModel */,
 				2C5CDA462B0252B2007AFC57 /* ViewController */,
 			);
 			path = LoginScene;
@@ -534,7 +582,8 @@
 			children = (
 				600908FB2AFCDF180065DFFB /* Utils */,
 				2C3430AC2B0DDF25008CBC85 /* DefaultTimerRepository.swift */,
-				6086464F2B0DDBA800B0C1BC /* DefaultCategoryRepository.swift */,
+				2C2F217D2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift */,
+				ED3842302B0F94E6001E2803 /* DefaultCategoryRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -542,6 +591,7 @@
 		600908FB2AFCDF180065DFFB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				ED3842282B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -550,9 +600,12 @@
 			isa = PBXGroup;
 			children = (
 				608646582B0DE61200B0C1BC /* CategoryEndpoints.swift */,
+				ED38421C2B0F1BE9001E2803 /* GoogleAuthEndpoints.swift */,
 				2C3430A02B0DA4E6008CBC85 /* BaseComponents.swift */,
 				600908FD2AFCDF3A0065DFFB /* DataMapping */,
 				2C3430AA2B0DDB8D008CBC85 /* TimerEndpoints.swift */,
+				2C2F21752B0F440D00B45BA8 /* StudyLogEndpoints.swift */,
+				2C2F217F2B0F4DA600B45BA8 /* MockURLSession.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -561,6 +614,7 @@
 			isa = PBXGroup;
 			children = (
 				6001959F2B0DFA3900F02BA4 /* StatusResponseDTO.swift */,
+				ED3842192B0F1B66001E2803 /* LoginScene */,
 				ED3595AE2B0C82A200558FAA /* TimerScene */,
 				608646512B0DDBCC00B0C1BC /* Category */,
 			);
@@ -613,6 +667,7 @@
 		600909022AFCDFEA0065DFFB /* Persistants */ = {
 			isa = PBXGroup;
 			children = (
+				ED38422E2B0F747B001E2803 /* KeyChainManager.swift */,
 			);
 			path = Persistants;
 			sourceTree = "<group>";
@@ -628,6 +683,8 @@
 			isa = PBXGroup;
 			children = (
 				ED9B2A7E2B06033F008FE1C5 /* Category.swift */,
+				2C2F21772B0F4CCC00B45BA8 /* StudyLog.swift */,
+				ED3842202B0F1CF9001E2803 /* User.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -638,6 +695,8 @@
 				600909072AFCE0DC0065DFFB /* Protocol */,
 				2C801D7D2B04B65400A7ABAE /* DefaultTimerUseCase.swift */,
 				60F67C692B0E1868002C8BF3 /* DefaultCategoryUseCase.swift */,
+				2C2F216D2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift */,
+				ED3842242B0F1DDA001E2803 /* DefaultGoogleAuthUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -647,6 +706,8 @@
 			children = (
 				2C801D7F2B04B68900A7ABAE /* TimerUseCase.swift */,
 				60F67C672B0E1785002C8BF3 /* CategoryUseCase.swift */,
+				2C2F21792B0F4CF900B45BA8 /* StudyLogUseCase.swift */,
+				ED3842262B0F1E0C001E2803 /* GoogleAuthUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -656,6 +717,8 @@
 			children = (
 				2C3430A62B0DD0F6008CBC85 /* TimerRepsoitory.swift */,
 				6086464D2B0DDA1300B0C1BC /* CategoryRepository.swift */,
+				2C2F217B2B0F4D4000B45BA8 /* StudyLogRepository.swift */,
+				ED3842222B0F1D70001E2803 /* GoogleAuthRepostiory.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -692,8 +755,26 @@
 				ED3595B12B0C83D700558FAA /* TimerStartResponseDTO.swift */,
 				ED3595B62B0C887C00558FAA /* TimerFinishRequestDTO.swift */,
 				ED3595B82B0C88A300558FAA /* TimerFinishResponseDTO.swift */,
+				2C2F216F2B0F429800B45BA8 /* StudyLogResponseDTO.swift */,
 			);
 			path = TimerScene;
+			sourceTree = "<group>";
+		};
+		ED3842192B0F1B66001E2803 /* LoginScene */ = {
+			isa = PBXGroup;
+			children = (
+				ED38421A2B0F1B7E001E2803 /* GoogleAuthRequestDTO.swift */,
+				ED38421E2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift */,
+			);
+			path = LoginScene;
+			sourceTree = "<group>";
+		};
+		ED38422A2B0F451F001E2803 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ED38422B2B0F4531001E2803 /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		EDC851D02B04EE74009031EA /* View */ = {
@@ -727,6 +808,7 @@
 				600908B72AFCD7DF0065DFFB /* Frameworks */,
 				600908B82AFCD7DF0065DFFB /* Resources */,
 				EDA976DF2AFCF727003F8687 /* ShellScript */,
+				02DF06E7C5D60EF029210EC6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -764,6 +846,7 @@
 				600908D62AFCD7E00065DFFB /* Sources */,
 				600908D72AFCD7E00065DFFB /* Frameworks */,
 				600908D82AFCD7E00065DFFB /* Resources */,
+				34D63FDA91760D8E5AD13069 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -847,6 +930,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		02DF06E7C5D60EF029210EC6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FlipMate/Pods-FlipMate-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FlipMate/Pods-FlipMate-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FlipMate/Pods-FlipMate-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		24A8677C1DF5E35B747E74DE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -889,6 +989,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		34D63FDA91760D8E5AD13069 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		426B05C7C096CC05653DAF8B /* [CP] Check Pods Manifest.lock */ = {
@@ -939,9 +1056,11 @@
 			files = (
 				2C3430A32B0DA5A5008CBC85 /* HTTPHeader.swift in Sources */,
 				EDC851D22B04EE83009031EA /* CategoryListCollectionViewCell.swift in Sources */,
+				ED38422C2B0F4531001E2803 /* LoginViewModel.swift in Sources */,
 				2C43A0D82B037BBC0005596A /* FeedbackManager.swift in Sources */,
 				ED3595AB2B0C81B800558FAA /* Responsable.swift in Sources */,
 				2C4D55B02B0348FB006D7C26 /* TimerViewModel.swift in Sources */,
+				ED3842252B0F1DDA001E2803 /* DefaultGoogleAuthUseCase.swift in Sources */,
 				2C801D7E2B04B65400A7ABAE /* DefaultTimerUseCase.swift in Sources */,
 				2C4D55AB2B033029006D7C26 /* UIView++Extension.swift in Sources */,
 				60F67C6A2B0E1868002C8BF3 /* DefaultCategoryUseCase.swift in Sources */,
@@ -952,29 +1071,39 @@
 				ED3595B02B0C82C800558FAA /* TimerStartRequestDTO.swift in Sources */,
 				2C5CDA482B0252B2007AFC57 /* LoginViewController.swift in Sources */,
 				608646572B0DE31800B0C1BC /* CategoryResponseDTO.swift in Sources */,
+				ED38421F2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift in Sources */,
 				ED3595B22B0C83D700558FAA /* TimerStartResponseDTO.swift in Sources */,
 				2C5CDA582B025426007AFC57 /* FlipMateFont.swift in Sources */,
 				60DE493D2B05DEA400ACE6DD /* FlipMateLogger.swift in Sources */,
+				2C2F21802B0F4DA600B45BA8 /* MockURLSession.swift in Sources */,
 				2C801D802B04B68900A7ABAE /* TimerUseCase.swift in Sources */,
 				6086464E2B0DDA1300B0C1BC /* CategoryRepository.swift in Sources */,
+				2C2F21782B0F4CCC00B45BA8 /* StudyLog.swift in Sources */,
 				601773E42B021E6000D175D9 /* TimerViewController.swift in Sources */,
 				600908C22AFCD7DF0065DFFB /* ViewController.swift in Sources */,
 				2C3430AB2B0DDB8D008CBC85 /* TimerEndpoints.swift in Sources */,
-				2C3430A12B0DA4E6008CBC85 /* BaseURL.swift in Sources */,
+				ED3842212B0F1CF9001E2803 /* User.swift in Sources */,
 				2C3430A12B0DA4E6008CBC85 /* BaseComponents.swift in Sources */,
+				2C3430A12B0DA4E6008CBC85 /* BaseComponents.swift in Sources */,
+				2C2F21832B0F53B500B45BA8 /* StduyLogMock.swift in Sources */,
 				60F67C682B0E1785002C8BF3 /* CategoryUseCase.swift in Sources */,
 				2C5CDA5B2B025440007AFC57 /* ChartViewController.swift in Sources */,
 				6057A58D2B0C7F0F00EE58E8 /* Requestable.swift in Sources */,
 				2C3430A72B0DD0F6008CBC85 /* TimerRepsoitory.swift in Sources */,
 				6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */,
+				ED38422F2B0F747B001E2803 /* KeyChainManager.swift in Sources */,
 				ED3595BF2B0DB68200558FAA /* CategoryTitleTextView.swift in Sources */,
+				ED3842292B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift in Sources */,
 				600908BE2AFCD7DF0065DFFB /* AppDelegate.swift in Sources */,
 				2CE84EFB2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift in Sources */,
 				ED3595B72B0C887C00558FAA /* TimerFinishRequestDTO.swift in Sources */,
+				2C2F217A2B0F4CF900B45BA8 /* StudyLogUseCase.swift in Sources */,
 				ED3595A92B0C7F3500558FAA /* HTTPMethod.swift in Sources */,
+				ED38421D2B0F1BE9001E2803 /* GoogleAuthEndpoints.swift in Sources */,
 				2C5CDA562B025426007AFC57 /* BaseViewController.swift in Sources */,
 				2C3430992B0C8427008CBC85 /* Provider.swift in Sources */,
-				608646502B0DDBA800B0C1BC /* DefaultCategoryRepository.swift in Sources */,
+				2C2F21702B0F429800B45BA8 /* StudyLogResponseDTO.swift in Sources */,
+				2C2F216E2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift in Sources */,
 				2CE84EF72B0B7F3C00E2FB71 /* CategorySettingSection.swift in Sources */,
 				2C3430AD2B0DDF25008CBC85 /* DefaultTimerRepository.swift in Sources */,
 				2C6717F82B0535A8004D118D /* Int++Extension.swift in Sources */,
@@ -986,18 +1115,25 @@
 				2CE84EF92B0B8A0B00E2FB71 /* CategorySettingFooterView.swift in Sources */,
 				2C3430972B0C7ED8008CBC85 /* EndPoint.swift in Sources */,
 				608646592B0DE61200B0C1BC /* CategoryEndpoints.swift in Sources */,
+				2C2F21762B0F440D00B45BA8 /* StudyLogEndpoints.swift in Sources */,
 				2C4D55B32B035484006D7C26 /* DeviceOrientation.swift in Sources */,
+				ED3842272B0F1E0C001E2803 /* GoogleAuthUseCase.swift in Sources */,
 				EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */,
 				2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */,
 				2C5CDA572B025426007AFC57 /* FlipMateColor.swift in Sources */,
+				2C2F217C2B0F4D4000B45BA8 /* StudyLogRepository.swift in Sources */,
 				600908C02AFCD7DF0065DFFB /* SceneDelegate.swift in Sources */,
 				2C3430B12B0DE3D0008CBC85 /* Date++Extension.swift in Sources */,
+				2C2F217E2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift in Sources */,
 				2C5CDA4F2B025403007AFC57 /* SocialViewController.swift in Sources */,
 				ED9B2A812B06048D008FE1C5 /* CategoryViewModel.swift in Sources */,
 				60DE49402B05E67200ACE6DD /* FlipMateConstant.swift in Sources */,
+				ED3842232B0F1D70001E2803 /* GoogleAuthRepostiory.swift in Sources */,
 				2C801D832B04C64F00A7ABAE /* TimerManager.swift in Sources */,
 				2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */,
+				ED3842312B0F94E6001E2803 /* DefaultCategoryRepository.swift in Sources */,
 				ED3595C12B0DC2F100558FAA /* CategoryColorSelectView.swift in Sources */,
+				ED38421B2B0F1B7E001E2803 /* GoogleAuthRequestDTO.swift in Sources */,
 				EDC851D92B05C37C009031EA /* DeviceMotionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

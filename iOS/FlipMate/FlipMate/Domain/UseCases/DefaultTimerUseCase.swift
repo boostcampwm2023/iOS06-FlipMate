@@ -17,20 +17,20 @@ class DefaultTimerUseCase: TimerUseCase {
         self.timerRepository = timerRepository
     }
     
-    func startTimer(startTime: Date, userId: Int, categoryId: Int) -> AnyPublisher<Void, NetworkError> {
+    func startTimer(startTime: Date, categoryId: Int?) -> AnyPublisher<Void, NetworkError> {
         timerManager.start(startTime: startTime)
-        return timerRepository.startTimer(startTime: startTime, userId: userId, categoryId: categoryId)
+        return timerRepository.startTimer(startTime: startTime, categoryId: categoryId)
     }
 
-    func resumeTimer(resumeTime: Date, userId: Int, categoryId: Int) -> AnyPublisher<Void, NetworkError> {
+    func resumeTimer(resumeTime: Date, categoryId: Int?) -> AnyPublisher<Void, NetworkError> {
         timerManager.resume(resumeTime: resumeTime)
-        return timerRepository.startTimer(startTime: resumeTime, userId: userId, categoryId: categoryId)
+        return timerRepository.startTimer(startTime: resumeTime, categoryId: categoryId)
     }
 
-    func suspendTimer(suspendTime: Date, userId: Int, categoryId: Int) -> AnyPublisher<Int, NetworkError> {
+    func suspendTimer(suspendTime: Date, categoryId: Int?) -> AnyPublisher<Int, NetworkError> {
         let totalTime = timerManager.totalTime
         timerManager.suspend()
-        return timerRepository.finishTimer(endTime: suspendTime, learningTime: totalTime, userId: userId, categoryId: categoryId)
+        return timerRepository.finishTimer(endTime: suspendTime, learningTime: totalTime, categoryId: categoryId)
             .map { response -> Int in
                 return totalTime
             }

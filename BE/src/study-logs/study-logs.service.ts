@@ -84,7 +84,7 @@ export class StudyLogsService {
 
     const result = {
       total_time: await this.calculateTotalTime(user_id, date),
-      categories: categories.filter((category) => category.name),
+      categories,
     };
     return result;
   }

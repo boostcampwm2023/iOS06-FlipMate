@@ -14,7 +14,7 @@ struct TimerEndpoints {
         let encoder = JSONEncoder()
         let data = try? encoder.encode(timerStartRequestDTO)
         return EndPoint(
-            baseURL: baseURL,
+            baseURL: BaseURL.flipmateDomain,
             path: "/study-logs",
             method: .post,
             data: data
@@ -25,7 +25,7 @@ struct TimerEndpoints {
         let encoder = JSONEncoder()
         let data = try? encoder.encode(timerFinishRequestDTO)
         return EndPoint(
-            baseURL: baseURL,
+            baseURL: BaseURL.flipmateDomain,
             path: "/study-logs",
             method: .post,
             data: data

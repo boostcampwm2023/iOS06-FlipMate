@@ -6,7 +6,7 @@ target 'FlipMate' do
   use_frameworks!
   
   pod 'SwiftLint'
-
+  pod 'GoogleSignIn'
   # Pods for FlipMate
 
   target 'FlipMateTests' do
