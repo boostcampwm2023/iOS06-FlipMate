@@ -99,8 +99,8 @@ private extension TimerViewModel {
     func startTimer() {
         timerUseCase.startTimer(startTime: Date(), userId: 1, categoryId: 1)
             .receive(on: DispatchQueue.main)
-            .sink { complection in
-                switch complection {
+            .sink { completion in
+                switch completion {
                 case .finished:
                     FMLogger.timer.debug("공부 시작 API 요청 성공")
                     return
@@ -119,8 +119,8 @@ private extension TimerViewModel {
     func resumeTimer() {
         timerUseCase.resumeTimer(resumeTime: Date(), userId: 1, categoryId: 1)
             .receive(on: DispatchQueue.main)
-            .sink { complection in
-                switch complection {
+            .sink { completion in
+                switch completion {
                 case .finished:
                     FMLogger.timer.debug("공부 재시작 API 요청 성공")
                     return
@@ -139,8 +139,8 @@ private extension TimerViewModel {
     func suspendTimer() {
         timerUseCase.suspendTimer(suspendTime: Date(), userId: 1, categoryId: 1)
             .receive(on: DispatchQueue.main)
-            .sink { complection in
-                switch complection {
+            .sink { completion in
+                switch completion {
                 case .finished:
                     FMLogger.timer.debug("공부 종료 API 요청 성공")
                     return
