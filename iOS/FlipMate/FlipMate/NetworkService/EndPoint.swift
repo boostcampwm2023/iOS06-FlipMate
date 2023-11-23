@@ -7,9 +7,9 @@
 
 import Foundation
 
-typealias ReqeustResponseable = Responsable & Requestable
+typealias RequestResponseable = Responsable & Requestable
 
-final class EndPoint<R: Decodable>: ReqeustResponseable {
+final class EndPoint<R: Decodable>: RequestResponseable {
     typealias Response = R
     
     var baseURL: String

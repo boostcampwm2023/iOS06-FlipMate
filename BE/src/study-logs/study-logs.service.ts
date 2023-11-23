@@ -14,8 +14,11 @@ export class StudyLogsService {
     private studyLogsRepository: Repository<StudyLogs>,
   ) {}
 
-  async create(studyLogsData: StudyLogsCreateDto): Promise<StudyLogsDto> {
-    const { user_id, category_id, ...data } = studyLogsData;
+  async create(
+    studyLogsData: StudyLogsCreateDto,
+    user_id: number,
+  ): Promise<StudyLogsDto> {
+    const { category_id, ...data } = studyLogsData;
     const user = { id: user_id } as UsersModel;
     const category = { id: category_id } as Categories;
 
