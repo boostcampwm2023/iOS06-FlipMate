@@ -14,7 +14,7 @@ class DefaultCategoryUseCase: CategoryUseCase {
         self.repository = repository
     }
     
-    func createCategory(name: String, colorCode: String) async throws {
+    func createCategory(name: String, colorCode: String) async throws -> Int {
         try await repository.createCategory(name: name, colorCode: colorCode)
     }
     

@@ -14,13 +14,14 @@ final class DefaultCategoryRepository: CategoryRepository {
         self.provider = provider
     }
     
-    func createCategory(name: String, colorCode: String) async throws {
+    func createCategory(name: String, colorCode: String) async throws -> Int {
         let categoryDTO = CategoryRequestDTO(
             name: name,
             colorCode: colorCode)
         let endpoint = CategoryEndpoints.createCategory(categoryDTO)
         let createdCategory = try await provider.request(with: endpoint)
         FMLogger.general.log("카테고리 생성 완료")
+        return createdCategory.categoryID
     }
     
     func readCategories() async throws -> [Category] {

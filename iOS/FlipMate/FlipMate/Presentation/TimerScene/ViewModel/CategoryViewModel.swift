@@ -10,7 +10,7 @@ import Combine
 
 protocol CategoryViewModelInput {
     func createCategoryTapped()
-    func createCategory(_ sender: Category) async throws
+    func createCategory(name: String, colorCode: String) async throws
     func readCategories() async throws
     func updateCategory(of id: Int, newName: String, newColorCode: String) async throws
     func deleteCategory(of id: Int) async throws
@@ -50,9 +50,9 @@ final class CategoryViewModel: CategoryViewModelProtocol {
         presentingCategoryModifyViewControllerSubject.send()
     }
     
-    func createCategory(_ sender: Category) async throws {
-        try await useCase.createCategory(name: sender.subject, colorCode: sender.color)
-        categories.append(sender)
+    func createCategory(name: String, colorCode: String) async throws {
+        let newCategoryID = try await useCase.createCategory(name: name, colorCode: colorCode)
+        categories.append(Category(id: newCategoryID, color: colorCode, subject: name))
         categoriesSubject.send(categories)
     }
     
