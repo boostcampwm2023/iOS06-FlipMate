@@ -39,7 +39,6 @@ export class StudyLogsController {
       new Date(created_at),
       learning_time,
     );
-
     return this.studyLogsService.create(studyLogsData, userId);
   }
 
