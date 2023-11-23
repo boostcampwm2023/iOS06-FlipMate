@@ -83,7 +83,7 @@ final class CategoryModifyViewController: BaseViewController {
         ])
         
         NSLayoutConstraint.activate([
-            categoryTitleTextView.topAnchor.constraint(equalTo: firstSectionTitleLabel.bottomAnchor, constant: 20),
+            categoryTitleTextView.topAnchor.constraint(equalTo: firstSectionTitleLabel.bottomAnchor, constant: 12),
             categoryTitleTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
             categoryTitleTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
         ])
@@ -94,7 +94,7 @@ final class CategoryModifyViewController: BaseViewController {
         ])
         
         NSLayoutConstraint.activate([
-            categoryColorSelectView.topAnchor.constraint(equalTo: secondSectionTitleLabel.bottomAnchor, constant: 20),
+            categoryColorSelectView.topAnchor.constraint(equalTo: secondSectionTitleLabel.bottomAnchor, constant: 12),
             categoryColorSelectView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
             categoryColorSelectView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
             categoryColorSelectView.heightAnchor.constraint(equalTo: categoryTitleTextView.heightAnchor)

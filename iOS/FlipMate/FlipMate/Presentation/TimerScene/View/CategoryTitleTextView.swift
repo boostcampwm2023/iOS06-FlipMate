@@ -20,10 +20,10 @@ final class CategoryTitleTextView: UIView {
         return textView
     }()
     
-    private(set) var placeholder: String? = nil
-    private(set) var isShowPlaceholder: Bool = true
+    private var placeholder: String?
+    private var isShowPlaceholder: Bool = true
     
-    init(placeholder: String){
+    init(placeholder: String) {
         super.init(frame: .zero)
         self.placeholder = placeholder
         configureUI()
@@ -47,23 +47,6 @@ final class CategoryTitleTextView: UIView {
 }
 
 extension CategoryTitleTextView: UITextViewDelegate {
-    func showPlaceholder() {
-        isShowPlaceholder = true
-        textView.text = placeholder
-        textView.textColor = FlipMateColor.gray3.color
-    }
-    
-    func hidePlaceholder() {
-        isShowPlaceholder = false
-        textView.text = ""
-        textView.textColor = .label
-    }
-    
-    func text() -> String? {
-        guard !isShowPlaceholder else { return nil }
-        return textView.text
-    }
-    
     func textViewDidBeginEditing(_ textView: UITextView) {
         if isShowPlaceholder {
             hidePlaceholder()
@@ -77,6 +60,24 @@ extension CategoryTitleTextView: UITextViewDelegate {
     }
 }
 
+private extension CategoryTitleTextView {
+    func showPlaceholder() {
+        isShowPlaceholder = true
+        textView.text = placeholder
+        textView.textColor = FlipMateColor.gray2.color
+    }
+    
+    func hidePlaceholder() {
+        isShowPlaceholder = false
+        textView.text = ""
+        textView.textColor = .label
+    }
+    
+    func text() -> String? {
+        guard !isShowPlaceholder else { return nil }
+        return textView.text
+    }
+}
 @available(iOS 17.0, *)
 #Preview {
     CategoryTitleTextView(placeholder: "HELLO")
