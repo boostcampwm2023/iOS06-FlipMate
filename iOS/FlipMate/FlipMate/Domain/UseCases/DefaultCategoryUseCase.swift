@@ -14,12 +14,16 @@ class DefaultCategoryUseCase: CategoryUseCase {
         self.repository = repository
     }
     
-    func createCategory(with category: Category) async throws {
-        try await repository.createCategory(category)
+    func createCategory(name: String, colorCode: String) async throws {
+        try await repository.createCategory(name: name, colorCode: colorCode)
     }
     
-    func updateCategory(of id: Int, to category: Category) async throws {
-        try await repository.updateCategory(id: id, to: category)
+    func readCategory() async throws -> [Category] {
+        return try await repository.readCategories()
+    }
+    
+    func updateCategory(of id: Int, newName: String, newColorCode: String) async throws {
+        try await repository.updateCategory(id: id, newName: newName, newColorCode: newColorCode)
     }
     
     func deleteCategory(of id: Int) async throws {
