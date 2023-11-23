@@ -139,6 +139,8 @@ final class TimerViewController: BaseViewController {
     }
     
     override func bind() {
+        timerViewModel.viewDidLoad()
+        
         timerViewModel.isDeviceFaceDownPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isFaceDown in
@@ -169,6 +171,16 @@ final class TimerViewController: BaseViewController {
             .sink { [weak self] newOrientation in
                 guard let self = self else { return }
                 self.handleOrientationChange(newOrientation)
+            }
+            .store(in: &cancellables)
+        
+        timerViewModel.categoryPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] categories in
+                guard let self = self else { return }
+                guard var snapShot = self.dataSource?.snapshot() else { return }
+                snapShot.appendItems(categories.map { CategorySettingItem.categoryCell($0) })
+                self.dataSource?.apply(snapShot)
             }
             .store(in: &cancellables)
     }
@@ -230,8 +242,9 @@ private extension TimerViewController {
     func setDataSource() {
         dataSource = CateogoryDataSource(collectionView: categoryListCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
-            case .categoryCell:
+            case .categoryCell(let category):
                 let cell: CategoryListCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+                cell.updateUI(category: category)
                 return cell
             }
         })
@@ -241,7 +254,6 @@ private extension TimerViewController {
         var snapshot = Snapshot()
         let sections: [CategorySettingSection] = [.categorySection([])]
         snapshot.appendSections(sections)
-        snapshot.appendItems([CategorySettingItem.categoryCell])
         dataSource?.apply(snapshot)
     }
 }
