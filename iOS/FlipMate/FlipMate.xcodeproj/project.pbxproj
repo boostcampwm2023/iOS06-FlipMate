@@ -69,6 +69,13 @@
 		ED3595BD2B0DB29F00558FAA /* CategoryModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595BC2B0DB29F00558FAA /* CategoryModifyViewController.swift */; };
 		ED3595BF2B0DB68200558FAA /* CategoryTitleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595BE2B0DB68200558FAA /* CategoryTitleTextView.swift */; };
 		ED3595C12B0DC2F100558FAA /* CategoryColorSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */; };
+		ED38421B2B0F1B7E001E2803 /* GoogleLoginRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38421A2B0F1B7E001E2803 /* GoogleLoginRequestDTO.swift */; };
+		ED38421D2B0F1BE9001E2803 /* GoogleLoginEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38421C2B0F1BE9001E2803 /* GoogleLoginEndpoints.swift */; };
+		ED38421F2B0F1C7A001E2803 /* GoogleLoginResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38421E2B0F1C7A001E2803 /* GoogleLoginResponseDTO.swift */; };
+		ED3842212B0F1CF9001E2803 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842202B0F1CF9001E2803 /* User.swift */; };
+		ED3842232B0F1D70001E2803 /* GoogleLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842222B0F1D70001E2803 /* GoogleLoginRepository.swift */; };
+		ED3842252B0F1DDA001E2803 /* DefaultGoogleLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842242B0F1DDA001E2803 /* DefaultGoogleLoginUseCase.swift */; };
+		ED3842272B0F1E0C001E2803 /* GoogleLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842262B0F1E0C001E2803 /* GoogleLoginUseCase.swift */; };
 		ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A7E2B06033F008FE1C5 /* Category.swift */; };
 		ED9B2A812B06048D008FE1C5 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */; };
 		EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851C62B021492009031EA /* TabBarViewController.swift */; };
@@ -167,6 +174,13 @@
 		ED3595BC2B0DB29F00558FAA /* CategoryModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModifyViewController.swift; sourceTree = "<group>"; };
 		ED3595BE2B0DB68200558FAA /* CategoryTitleTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTitleTextView.swift; sourceTree = "<group>"; };
 		ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColorSelectView.swift; sourceTree = "<group>"; };
+		ED38421A2B0F1B7E001E2803 /* GoogleLoginRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginRequestDTO.swift; sourceTree = "<group>"; };
+		ED38421C2B0F1BE9001E2803 /* GoogleLoginEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginEndpoints.swift; sourceTree = "<group>"; };
+		ED38421E2B0F1C7A001E2803 /* GoogleLoginResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginResponseDTO.swift; sourceTree = "<group>"; };
+		ED3842202B0F1CF9001E2803 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		ED3842222B0F1D70001E2803 /* GoogleLoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginRepository.swift; sourceTree = "<group>"; };
+		ED3842242B0F1DDA001E2803 /* DefaultGoogleLoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGoogleLoginUseCase.swift; sourceTree = "<group>"; };
+		ED3842262B0F1E0C001E2803 /* GoogleLoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginUseCase.swift; sourceTree = "<group>"; };
 		ED9B2A7E2B06033F008FE1C5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		EDC851C62B021492009031EA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -541,6 +555,7 @@
 			isa = PBXGroup;
 			children = (
 				608646582B0DE61200B0C1BC /* CategoryEndpoints.swift */,
+				ED38421C2B0F1BE9001E2803 /* GoogleLoginEndpoints.swift */,
 				2C3430A02B0DA4E6008CBC85 /* BaseComponents.swift */,
 				600908FD2AFCDF3A0065DFFB /* DataMapping */,
 			);
@@ -551,6 +566,7 @@
 			isa = PBXGroup;
 			children = (
 				6001959F2B0DFA3900F02BA4 /* StatusResponseDTO.swift */,
+				ED3842192B0F1B66001E2803 /* LoginScene */,
 				ED3595AE2B0C82A200558FAA /* TimerScene */,
 				608646512B0DDBCC00B0C1BC /* Category */,
 			);
@@ -617,6 +633,7 @@
 			isa = PBXGroup;
 			children = (
 				ED9B2A7E2B06033F008FE1C5 /* Category.swift */,
+				ED3842202B0F1CF9001E2803 /* User.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -627,6 +644,7 @@
 				600909072AFCE0DC0065DFFB /* Protocol */,
 				2C801D7D2B04B65400A7ABAE /* DefaultTimerUseCase.swift */,
 				60F67C692B0E1868002C8BF3 /* DefaultCategoryUseCase.swift */,
+				ED3842242B0F1DDA001E2803 /* DefaultGoogleLoginUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -636,6 +654,7 @@
 			children = (
 				2C801D7F2B04B68900A7ABAE /* TimerUseCase.swift */,
 				60F67C672B0E1785002C8BF3 /* CategoryUseCase.swift */,
+				ED3842262B0F1E0C001E2803 /* GoogleLoginUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -644,6 +663,7 @@
 			isa = PBXGroup;
 			children = (
 				6086464D2B0DDA1300B0C1BC /* CategoryRepository.swift */,
+				ED3842222B0F1D70001E2803 /* GoogleLoginRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -682,6 +702,15 @@
 				ED3595B82B0C88A300558FAA /* TimerFinishResponseDTO.swift */,
 			);
 			path = TimerScene;
+			sourceTree = "<group>";
+		};
+		ED3842192B0F1B66001E2803 /* LoginScene */ = {
+			isa = PBXGroup;
+			children = (
+				ED38421A2B0F1B7E001E2803 /* GoogleLoginRequestDTO.swift */,
+				ED38421E2B0F1C7A001E2803 /* GoogleLoginResponseDTO.swift */,
+			);
+			path = LoginScene;
 			sourceTree = "<group>";
 		};
 		EDC851D02B04EE74009031EA /* View */ = {
@@ -966,6 +995,7 @@
 				2C43A0D82B037BBC0005596A /* FeedbackManager.swift in Sources */,
 				ED3595AB2B0C81B800558FAA /* Responsable.swift in Sources */,
 				2C4D55B02B0348FB006D7C26 /* TimerViewModel.swift in Sources */,
+				ED3842252B0F1DDA001E2803 /* DefaultGoogleLoginUseCase.swift in Sources */,
 				2C801D7E2B04B65400A7ABAE /* DefaultTimerUseCase.swift in Sources */,
 				2C4D55AB2B033029006D7C26 /* UIView++Extension.swift in Sources */,
 				60F67C6A2B0E1868002C8BF3 /* DefaultCategoryUseCase.swift in Sources */,
@@ -976,6 +1006,7 @@
 				ED3595B02B0C82C800558FAA /* TimerStartRequestDTO.swift in Sources */,
 				2C5CDA482B0252B2007AFC57 /* LoginViewController.swift in Sources */,
 				608646572B0DE31800B0C1BC /* CategoryResponseDTO.swift in Sources */,
+				ED38421F2B0F1C7A001E2803 /* GoogleLoginResponseDTO.swift in Sources */,
 				ED3595B22B0C83D700558FAA /* TimerStartResponseDTO.swift in Sources */,
 				2C5CDA582B025426007AFC57 /* FlipMateFont.swift in Sources */,
 				60DE493D2B05DEA400ACE6DD /* FlipMateLogger.swift in Sources */,
@@ -983,6 +1014,7 @@
 				6086464E2B0DDA1300B0C1BC /* CategoryRepository.swift in Sources */,
 				601773E42B021E6000D175D9 /* TimerViewController.swift in Sources */,
 				600908C22AFCD7DF0065DFFB /* ViewController.swift in Sources */,
+				ED3842212B0F1CF9001E2803 /* User.swift in Sources */,
 				2C3430A12B0DA4E6008CBC85 /* BaseComponents.swift in Sources */,
 				60F67C682B0E1785002C8BF3 /* CategoryUseCase.swift in Sources */,
 				2C5CDA5B2B025440007AFC57 /* ChartViewController.swift in Sources */,
@@ -993,6 +1025,7 @@
 				2CE84EFB2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift in Sources */,
 				ED3595B72B0C887C00558FAA /* TimerFinishRequestDTO.swift in Sources */,
 				ED3595A92B0C7F3500558FAA /* HTTPMethod.swift in Sources */,
+				ED38421D2B0F1BE9001E2803 /* GoogleLoginEndpoints.swift in Sources */,
 				2C5CDA562B025426007AFC57 /* BaseViewController.swift in Sources */,
 				2C3430992B0C8427008CBC85 /* Provider.swift in Sources */,
 				608646502B0DDBA800B0C1BC /* DefaultCategoryRepository.swift in Sources */,
@@ -1007,6 +1040,7 @@
 				2C3430972B0C7ED8008CBC85 /* EndPoint.swift in Sources */,
 				608646592B0DE61200B0C1BC /* CategoryEndpoints.swift in Sources */,
 				2C4D55B32B035484006D7C26 /* DeviceOrientation.swift in Sources */,
+				ED3842272B0F1E0C001E2803 /* GoogleLoginUseCase.swift in Sources */,
 				EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */,
 				2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */,
 				2C5CDA572B025426007AFC57 /* FlipMateColor.swift in Sources */,
@@ -1014,9 +1048,11 @@
 				2C5CDA4F2B025403007AFC57 /* SocialViewController.swift in Sources */,
 				ED9B2A812B06048D008FE1C5 /* CategoryViewModel.swift in Sources */,
 				60DE49402B05E67200ACE6DD /* FlipMateConstant.swift in Sources */,
+				ED3842232B0F1D70001E2803 /* GoogleLoginRepository.swift in Sources */,
 				2C801D832B04C64F00A7ABAE /* TimerManager.swift in Sources */,
 				2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */,
 				ED3595C12B0DC2F100558FAA /* CategoryColorSelectView.swift in Sources */,
+				ED38421B2B0F1B7E001E2803 /* GoogleLoginRequestDTO.swift in Sources */,
 				EDC851D92B05C37C009031EA /* DeviceMotionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
