@@ -27,15 +27,15 @@ struct Provider: Providable {
             return urlSession.response(for: urlReqeust)
                 .tryMap { data, response in
                     guard let response = response as? HTTPURLResponse else { 
-                        throw NetworkError.invalidURLComponents
+                        throw NetworkError.invalidResponse
                     }
                     
                     guard 200..<300 ~= response.statusCode else {
-                        throw NetworkError.invalidURLComponents
+                        throw NetworkError.statusCodeError
                     }
                     
                     guard !data.isEmpty else {
-                        throw NetworkError.invalidURLComponents
+                        throw NetworkError.bodyEmpty
                     }
                     
                     return data
@@ -45,14 +45,14 @@ struct Provider: Providable {
                     if let error = error as? NetworkError {
                         return error
                     } else {
-                        return NetworkError.invalidURLComponents
+                        return NetworkError.typeCastingFailed
                     }
                 })
                 .eraseToAnyPublisher()
         } catch let error as NetworkError {
             return Fail(error: error).eraseToAnyPublisher()
         } catch {
-            return Fail(error: NetworkError.invalidURLComponents).eraseToAnyPublisher()
+            return Fail(error: NetworkError.unknown).eraseToAnyPublisher()
         }
     }
     
@@ -60,15 +60,16 @@ struct Provider: Providable {
         let urlRequest = try endpoint.makeURLRequest()
         let (data, response) = try await urlSession.response(for: urlRequest)
         guard let response = response as? HTTPURLResponse else {
-            throw NetworkError.invalidURLComponents
+            throw NetworkError.invalidResponse
         }
         
         guard 200..<300 ~= response.statusCode else {
-            throw NetworkError.invalidURLComponents
+            FMLogger.general.error("에러 코드 : \(response.statusCode)\n내용: \(response.description)")
+            throw NetworkError.statusCodeError
         }
         
         guard !data.isEmpty else {
-            throw NetworkError.invalidURLComponents
+            throw NetworkError.bodyEmpty
         }
         
         let decoder = JSONDecoder()
