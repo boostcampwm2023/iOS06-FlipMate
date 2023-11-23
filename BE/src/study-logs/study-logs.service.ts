@@ -44,31 +44,46 @@ export class StudyLogsService {
     return started_at;
   }
 
-  private calculateTotalTime(studyLogs): number {
-    return studyLogs.reduce((accumulator, studyLog) => {
-      return accumulator + studyLog.today_time;
-    }, 0);
+  private async calculateTotalTime(
+    user_id: number,
+    date: string,
+  ): Promise<number> {
+    const sum = await this.studyLogsRepository
+      .createQueryBuilder('study_logs')
+      .select('SUM(study_logs.learning_time)', 'sum')
+      .where('study_logs.user_id = :user_id', { user_id })
+      .andWhere('study_logs.date = :date', { date })
+      .getRawOne();
+    return parseInt(sum.sum);
   }
 
   async groupByCategory(user_id: number, date: string): Promise<object> {
-    const studyLogsByCategory = await this.studyLogsRepository
-      .createQueryBuilder('study_logs')
-      .select('study_logs.category_id', 'category_id')
-      .addSelect('SUM(study_logs.learning_time)', 'today_time')
-      .addSelect('categories.name', 'name')
-      .addSelect('categories.color_code', 'color_code')
-      .leftJoin('study_logs.category_id', 'categories')
-      .where('study_logs.date = :today', { today: date })
-      .andWhere('study_logs.user_id = :user_id', { user_id })
-      .groupBy('study_logs.category_id')
-      .getRawMany();
+    const studyLogsByCategory = await this.studyLogsRepository.query(
+      `SELECT
+      c.id as category_id,
+      c.name,
+      c.color_code,
+      IFNULL(SUM(s.learning_time), 0) as today_time
+      FROM
+      study_logs s
+      
+      RIGHT OUTER JOIN
+      categories c ON c.id = s.category_id
+      AND s.user_id = ?
+      AND DATE(s.date) = ?
+      GROUP BY
+      c.id, c.name, c.color_code;
+      `,
+      [user_id, date],
+    );
+
     const categories = studyLogsByCategory.map((studyLog) => ({
       ...studyLog,
       today_time: parseInt(studyLog.today_time),
     }));
 
     const result = {
-      total_time: this.calculateTotalTime(categories),
+      total_time: await this.calculateTotalTime(user_id, date),
       categories: categories.filter((category) => category.name),
     };
     return result;
