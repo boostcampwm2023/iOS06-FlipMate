@@ -22,6 +22,7 @@ extension Requestable {
         urlRequest.httpMethod = method.rawValue
         urlRequest.httpBody = data
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         headers?.forEach { urlRequest.setValue($0.value, forHTTPHeaderField: $0.field)}
         return urlRequest
     }
