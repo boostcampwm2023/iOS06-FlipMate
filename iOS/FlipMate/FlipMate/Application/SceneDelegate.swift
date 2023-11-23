@@ -20,6 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = LoginViewController(loginViewModel: LoginViewModel(googleAuthUseCase: DefaultGoogleAuthUseCase(repository: DefaultGoogleAuthRepository(provider: Provider(urlSession: URLSession.shared)))))
         window.makeKeyAndVisible()
+        try? KeychainManager.deleteAccessToken()
         
         self.window = window
     }
