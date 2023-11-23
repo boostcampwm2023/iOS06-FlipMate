@@ -14,7 +14,7 @@ export class StudyLogs {
   id: number;
 
   @Column({ type: 'date' })
-  date: string;
+  date: Date;
 
   @Column({ type: 'datetime' })
   created_at: Date;

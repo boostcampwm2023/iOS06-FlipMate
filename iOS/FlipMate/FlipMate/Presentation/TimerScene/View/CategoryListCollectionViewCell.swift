@@ -44,6 +44,11 @@ final class CategoryListCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("Don't use storyboard")
     }
+    
+    func updateUI(category: Category) {
+        subjectLabel.text = category.subject
+        timeLabel.text = category.studyTime?.secondsToStringTime()
+    }
 }
 
 private extension CategoryListCollectionViewCell {
