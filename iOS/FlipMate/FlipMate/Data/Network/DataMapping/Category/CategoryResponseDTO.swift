@@ -8,12 +8,12 @@
 import Foundation
 
 struct CategoryResponseDTO: Decodable {
-    let id: Int
+    let categoryID: Int
     let name: String
     let colorCode: String
     
     private enum CodingKeys: String, CodingKey {
-        case id
+        case categoryID = "category_id"
         case name
         case colorCode = "color_code"
     }
