@@ -56,11 +56,9 @@ struct Provider: Providable {
         }
     }
     
-    
     func request<E: RequestResponseable>(with endpoint: E) async throws -> E.Response where E : Requestable, E : Responsable {
         let urlRequest = try endpoint.makeURLRequest()
         let (data, response) = try await urlSession.response(for: urlRequest)
-        
         guard let response = response as? HTTPURLResponse else {
             throw NetworkError.invalidURLComponents
         }

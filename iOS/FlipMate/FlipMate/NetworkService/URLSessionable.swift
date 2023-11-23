@@ -11,7 +11,7 @@ import Combine
 protocol URLSessionable {
     typealias APIResponse = (data: Data, response: URLResponse)
     func response(for request: URLRequest) -> AnyPublisher<APIResponse, URLError>
-    func response(for request: URLRequest) async throws -> (Data, URLResponse)
+    func response(for request: URLRequest) async throws -> APIResponse
 }
 
 extension URLSession: URLSessionable {
@@ -19,7 +19,7 @@ extension URLSession: URLSessionable {
         return dataTaskPublisher(for: request).eraseToAnyPublisher()
     }
     
-    func response(for request: URLRequest) async throws -> (Data, URLResponse) {
+    func response(for request: URLRequest) async throws -> APIResponse {
         return try await data(for: request)
     }
 }

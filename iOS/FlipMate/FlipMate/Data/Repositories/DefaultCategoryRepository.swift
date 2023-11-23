@@ -6,11 +6,10 @@
 //
 
 import Foundation
-import Combine
 
-class DefaultCategoryRepository: CategoryRepository {
-    let provider: Provider
-    let userID: Int
+final class DefaultCategoryRepository: CategoryRepository {
+    private let provider: Provider
+    private let userID: Int
     
     init(provider: Provider, userID: Int ) {
         self.provider = provider
