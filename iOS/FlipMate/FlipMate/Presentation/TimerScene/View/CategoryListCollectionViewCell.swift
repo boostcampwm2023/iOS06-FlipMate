@@ -25,7 +25,6 @@ final class CategoryListCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = FlipMateFont.mediumBold.font
         label.textColor = UIColor.label
-        label.text = "00:00:00"
         return label
     }()
     
