@@ -27,7 +27,7 @@ final class DefaultCategoryRepository: CategoryRepository {
         let endpoint = CategoryEndpoints.fetchCategories()
         let categories = try await provider.request(with: endpoint)
         return categories.map { dto in
-            Category(color: dto.colorCode, subject: dto.name, studyTime: 0)
+            Category(id: dto.categoryID, color: dto.colorCode, subject: dto.name, studyTime: 0)
         }
     }
     

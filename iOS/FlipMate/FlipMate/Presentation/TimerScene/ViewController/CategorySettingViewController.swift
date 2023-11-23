@@ -48,8 +48,9 @@ private extension CategorySettingViewController {
     func setDataSource() {
         dataSource = CateogoryDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
-            case .categoryCell:
+            case .categoryCell(let category):
                 let cell: CategoryListCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+                cell.updateUI(category: category)
                 return cell
             }
         })
@@ -64,7 +65,6 @@ private extension CategorySettingViewController {
         var snapshot = Snapshot()
         let sections: [CategorySettingSection] = [.categorySection([])]
         snapshot.appendSections(sections)
-        snapshot.appendItems([CategorySettingItem.categoryCell])
         dataSource?.apply(snapshot)
     }
 }

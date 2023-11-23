@@ -7,14 +7,9 @@
 
 import Foundation
 
-class Category: Identifiable {
+struct Category: Hashable {
+    let id: Int
     var color: String
     var subject: String
-    var studyTime: TimeInterval
-    
-    init(color: String, subject: String, studyTime: TimeInterval) {
-        self.color = color
-        self.subject = subject
-        self.studyTime = studyTime
-    }
+    var studyTime: Int?
 }
