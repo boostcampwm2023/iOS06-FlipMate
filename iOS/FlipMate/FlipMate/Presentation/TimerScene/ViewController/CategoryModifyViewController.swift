@@ -7,6 +7,18 @@
 
 import UIKit
 
+enum CategoryPurpose {
+    case create
+    case update
+    
+    var title: String {
+        switch self {
+        case .create: return "카테고리 추가"
+        case .update: return "카테고리 수정"
+        }
+    }
+}
+
 final class CategoryModifyViewController: BaseViewController {
     private enum Constant {
         static let leftNavigationBarItemTitle = "닫기"
