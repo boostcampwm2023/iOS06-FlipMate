@@ -40,6 +40,7 @@ export class AuthService {
   }
 
   public async loginWithGoogle(user) {
+    console.log(user.email);
     const prevUser = await this.usersService.findUserByEmail(user.email);
     if (!prevUser) {
       const id = user.email.split('@')[0];
@@ -71,7 +72,7 @@ export class AuthService {
         },
       });
       if (!response.ok) {
-        throw new UnauthorizedException('유효하지 않은 토큰입니다.');
+        throw new UnauthorizedException('유효하지 않은 구글 토큰입니다.');
       }
       const { email } = await response.json();
       return email;

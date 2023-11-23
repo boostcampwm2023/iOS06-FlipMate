@@ -45,9 +45,9 @@ export class AuthController {
   @ApiOperation({ summary: 'Google 아이폰용 로그인 (완)' })
   @ApiResponse({ status: 201, description: '인증 성공' })
   @ApiResponse({ status: 401, description: '인증 실패' })
-  googleAppAuth(@Body('access_token') accessToken: string) {
-    const email = this.authService.getUserInfo(accessToken);
-    return this.authService.loginWithGoogle({ email });
+  async googleAppAuth(@Body('access_token') accessToken: string) {
+    const email = await this.authService.getUserInfo(accessToken);
+    return this.authService.loginWithGoogle({ email, auth_type: 'google' });
   }
 
   @Get('logout')

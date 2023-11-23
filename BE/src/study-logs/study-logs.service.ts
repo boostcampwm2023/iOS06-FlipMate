@@ -6,6 +6,7 @@ import { StudyLogsCreateDto } from './dto/request/create-study-logs.dto';
 import { UsersModel } from 'src/users/entity/users.entity';
 import { Categories } from 'src/categories/categories.entity';
 import { StudyLogsDto } from './dto/response/study-logs.dto';
+import { transformDate } from 'src/common/utils';
 
 @Injectable()
 export class StudyLogsService {
@@ -35,11 +36,42 @@ export class StudyLogsService {
     return this.studyLogsRepository.find();
   }
 
-  async findByUserId(id: number): Promise<StudyLogsDto[]> {
-    const studyLogs = await this.studyLogsRepository.find({
-      where: { user_id: { id: id } },
-    });
-    return studyLogs.map((studyLog) => this.entityToDto(studyLog));
+  calculateStartDay(created_at: Date, learning_time: number): Date {
+    const standardMS = 5 * 60 * 60 * 1000;
+    const millisecond =
+      created_at.getTime() - learning_time * 1000 - standardMS;
+    const started_at = new Date(millisecond);
+    return started_at;
+  }
+
+  private calculateTotalTime(studyLogs): number {
+    return studyLogs.reduce((accumulator, studyLog) => {
+      return accumulator + studyLog.today_time;
+    }, 0);
+  }
+
+  async groupByCategory(user_id: number, date: string): Promise<object> {
+    const studyLogsByCategory = await this.studyLogsRepository
+      .createQueryBuilder('study_logs')
+      .select('study_logs.category_id', 'category_id')
+      .addSelect('SUM(study_logs.learning_time)', 'today_time')
+      .addSelect('categories.name', 'name')
+      .addSelect('categories.color_code', 'color_code')
+      .leftJoin('study_logs.category_id', 'categories')
+      .where('study_logs.date = :today', { today: date })
+      .andWhere('study_logs.user_id = :user_id', { user_id })
+      .groupBy('study_logs.category_id')
+      .getRawMany();
+    const categories = studyLogsByCategory.map((studyLog) => ({
+      ...studyLog,
+      today_time: parseInt(studyLog.today_time),
+    }));
+
+    const result = {
+      total_time: this.calculateTotalTime(categories),
+      categories,
+    };
+    return result;
   }
 
   async deleteRowsByUserId(id: number): Promise<void> {
@@ -51,7 +83,7 @@ export class StudyLogsService {
       studyLog;
     return {
       id,
-      date,
+      date: transformDate(date),
       created_at,
       type,
       learning_time,

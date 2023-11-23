@@ -103,10 +103,14 @@ export class CategoriesController {
   @ApiBadRequestResponse({
     description: '잘못된 요청입니다.',
   })
-  deleteCategories(
+  async deleteCategories(
     @User('id') user_id: number,
     @Param('category_id') category_id: number,
-  ): Promise<void> {
-    return this.categoriesService.remove(user_id, category_id);
+  ): Promise<object> {
+    await this.categoriesService.remove(user_id, category_id);
+    return {
+      statusCode: 200,
+      message: '성공적으로 삭제되었습니다.',
+    };
   }
 }
