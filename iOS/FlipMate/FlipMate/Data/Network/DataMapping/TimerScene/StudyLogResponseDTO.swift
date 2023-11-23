@@ -35,7 +35,7 @@ extension StudyLogResponseDTO {
         let todayTime: Int
         
         private enum CodingKeys: String, CodingKey {
-            case id = "category_id"
+            case id
             case name
             case color = "color_code"
             case todayTime = "today_time"
