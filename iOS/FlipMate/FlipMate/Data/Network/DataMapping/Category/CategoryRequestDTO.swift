@@ -8,12 +8,10 @@
 import Foundation
 
 struct CategoryRequestDTO: Encodable {
-    let userID: Int
     let name: String
     let colorCode: String
     
     private enum CodingKeys: String, CodingKey {
-        case userID = "user_id"
         case name
         case colorCode = "color_code"
     }

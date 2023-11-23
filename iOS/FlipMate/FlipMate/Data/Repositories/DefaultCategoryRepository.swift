@@ -9,16 +9,13 @@ import Foundation
 
 final class DefaultCategoryRepository: CategoryRepository {
     private let provider: Provider
-    private let userID: Int
     
-    init(provider: Provider, userID: Int ) {
+    init(provider: Provider) {
         self.provider = provider
-        self.userID = userID
     }
     
     func createCategory(_ newCategory: Category) async throws {
         let categoryDTO = CategoryRequestDTO(
-            userID: userID,
             name: newCategory.subject,
             colorCode: newCategory.color)
         let endpoint = CategoryEndpoints.createCategory(categoryDTO)
@@ -36,7 +33,6 @@ final class DefaultCategoryRepository: CategoryRepository {
     
     func updateCategory(id: Int, to newCategory: Category) async throws {
         let categoryDTO = CategoryRequestDTO(
-            userID: userID,
             name: newCategory.subject,
             colorCode: newCategory.color)
         let endpoint = CategoryEndpoints.updateCategory(id: id, category: categoryDTO)
