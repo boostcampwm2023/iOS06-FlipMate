@@ -6,6 +6,7 @@ import { StudyLogsCreateDto } from './dto/request/create-study-logs.dto';
 import { UsersModel } from 'src/users/entity/users.entity';
 import { Categories } from 'src/categories/categories.entity';
 import { StudyLogsDto } from './dto/response/study-logs.dto';
+import { transformDate } from 'src/common/utils';
 
 @Injectable()
 export class StudyLogsService {
@@ -33,6 +34,14 @@ export class StudyLogsService {
 
   async findAll(): Promise<StudyLogs[]> {
     return this.studyLogsRepository.find();
+  }
+
+  calculateStartDay(created_at: Date, learning_time: number): string {
+    const standardMS = 5 * 60 * 60 * 1000;
+    const millisecond =
+      created_at.getTime() - learning_time * 1000 - standardMS;
+    const started_at = new Date(millisecond);
+    return transformDate(started_at);
   }
 
   async findByUserId(id: number): Promise<StudyLogsDto[]> {

@@ -33,6 +33,11 @@ export class StudyLogsController {
     @User('id') userId: number,
     @Body() studyLogsData: StudyLogsCreateDto,
   ): Promise<StudyLogsDto> {
+    const { created_at, learning_time } = studyLogsData;
+    studyLogsData.date = this.studyLogsService.calculateStartDay(
+      new Date(created_at),
+      learning_time,
+    );
     return this.studyLogsService.create(studyLogsData, userId);
   }
 
