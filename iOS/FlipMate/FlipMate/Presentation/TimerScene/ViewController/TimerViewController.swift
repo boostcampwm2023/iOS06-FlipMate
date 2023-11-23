@@ -62,7 +62,7 @@ final class TimerViewController: BaseViewController {
         button.tintColor = FlipMateColor.gray1.color
         button.layer.borderWidth = 1.0
         button.layer.borderColor = FlipMateColor.gray1.color?.cgColor
-            button.layer.cornerRadius = 8.0
+        button.layer.cornerRadius = 8.0
         button.addTarget(self, action: #selector(categorySettingButtonDidTapped), for: .touchUpInside)
         return button
     }()
@@ -72,7 +72,7 @@ final class TimerViewController: BaseViewController {
         image.image = UIImage(resource: .instruction)
         return image
     }()
-        
+    
     // MARK: - View LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,7 +89,7 @@ final class TimerViewController: BaseViewController {
         deviceMotionManager.stopDeviceMotion()
         UIDevice.current.isProximityMonitoringEnabled = false
     }
-  
+    
     // MARK: - setup UI
     override func configureUI() {
         let subViews = [timerLabel,
@@ -97,14 +97,14 @@ final class TimerViewController: BaseViewController {
                         categoryListCollectionView,
                         categorySettingButton,
                         instructionImage
-                        ]
-
+        ]
+        
         subViews.forEach {
-                view.addSubview($0)
-                $0.translatesAutoresizingMaskIntoConstraints = false
-            }
-      
-       NSLayoutConstraint.activate([
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        NSLayoutConstraint.activate([
             timerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
@@ -149,7 +149,7 @@ final class TimerViewController: BaseViewController {
                 self.startHapticFeedback(isFaceDown)
             }
             .store(in: &cancellables)
-
+        
         timerViewModel.totalTimePublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] totalTime in
@@ -165,7 +165,7 @@ final class TimerViewController: BaseViewController {
                 self.pushtCategorySettingViewController()
             }
             .store(in: &cancellables)
-
+        
         deviceMotionManager.orientationDidChangePublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] newOrientation in
@@ -219,7 +219,11 @@ private extension TimerViewController {
     }
     
     func pushtCategorySettingViewController() {
-        let categorySettingViewController = CategorySettingViewController()
+        let categorySettingViewController = CategorySettingViewController(
+            viewModel: CategoryViewModel(
+                useCase: DefaultCategoryUseCase(
+                    repository: DefaultCategoryRepository(
+                        provider: Provider(urlSession: URLSession.shared)))))
         navigationController?.pushViewController(categorySettingViewController, animated: true)
     }
 }
