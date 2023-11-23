@@ -41,7 +41,7 @@ class MockURLSession: URLSessionable {
             .eraseToAnyPublisher()
     }
     
-    func response(for request: URLRequest) async throws -> (Data, URLResponse) {
+    func response(for request: URLRequest) async throws -> APIResponse {
         let status = response.urlResponse as! HTTPURLResponse
         let httpResponse = HTTPURLResponse(
             url: request.url!,
