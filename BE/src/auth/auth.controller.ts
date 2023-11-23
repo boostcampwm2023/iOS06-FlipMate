@@ -1,6 +1,14 @@
 import { AuthService } from './auth.service';
 
-import { Controller, Get, UseGuards, Req, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  UseGuards,
+  Req,
+  Res,
+  Post,
+  Body,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
 import { AccessTokenGuard } from './guard/bearer-token.guard';
@@ -19,7 +27,7 @@ export class AuthController {
 
   @Get('google')
   @UseGuards(AuthGuard('google'))
-  @ApiOperation({ summary: 'Google 로그인' })
+  @ApiOperation({ summary: 'Google 테스트용 로그인' })
   @ApiResponse({ status: 200, description: '로그인 성공' })
   @ApiResponse({ status: 401, description: '인증 실패' })
   googleAuth(@Req() req) {
@@ -27,12 +35,18 @@ export class AuthController {
     return this.authService.loginWithGoogle(user);
   }
 
+  @Post('google/app')
+  @ApiOperation({ summary: 'Google 아이폰용 로그인' })
+  googleAppAuth(@Body() body) {
+    return body;
+  }
+
   @Get('logout')
   @UseGuards(AccessTokenGuard)
+  @ApiBearerAuth()
   @ApiOperation({ summary: '로그아웃' })
   @ApiResponse({ status: 200, description: '로그아웃 성공' })
   @ApiResponse({ status: 401, description: '인증 실패' })
-  @ApiBearerAuth()
   logout(@User('id') userId: number, @Res() res: Response) {
     console.log(`${userId}를 로그아웃 시키는 로직`);
     res.redirect('/');

@@ -7,20 +7,22 @@
 
 import Foundation
 
-typealias ReqeustResponseable = Responsable & Requestable
+typealias RequestResponseable = Responsable & Requestable
 
-final class EndPoint<R: Decodable>: ReqeustResponseable {
+final class EndPoint<R: Decodable>: RequestResponseable {
     typealias Response = R
     
     var baseURL: String
     var path: String
     var method: HTTPMethod
-    var bodyParameters: Encodable?
-    var headers: [String : String]?
+    var data: Data?
+    var headers: [HTTPHeader]?
     
-    init(baseURL: String, path: String, method: HTTPMethod) {
+    init(baseURL: String, path: String, method: HTTPMethod, data: Data? = nil, headers: [HTTPHeader]? = nil) {
         self.baseURL = baseURL
         self.path = path
         self.method = method
+        self.data = data
+        self.headers = headers
     }
 }

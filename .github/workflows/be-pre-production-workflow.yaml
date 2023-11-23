@@ -1,0 +1,33 @@
+name: BE Pre Production Workflow
+
+on:
+  push:
+    branches: preproduction
+    paths: "BE/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: connect to NCP
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.NCP_HOST }}
+          username: ${{ secrets.NCP_USERNAME }}
+          password: ${{ secrets.NCP_PASSWORD }}
+
+          script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            cd iOS06-FlipMate-preproduction/BE
+            git pull origin preproduction
+            npm install
+            if ! pm2 list | grep "flipmate-preproduction"; then
+              pm2 start npm --name "flipmate-preproduction" -- run start
+            else 
+              pm2 restart flipmate-preproduction
+            fi
