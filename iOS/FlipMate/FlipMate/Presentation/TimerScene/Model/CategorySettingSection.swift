@@ -7,12 +7,14 @@
 
 import UIKit
 
+let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImltaHllb25neXUyQGdtYWlsLmNvbSIsIm5pY2tuYW1lIjoiaW1oeWVvbmd5dTIiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzAwNzI0ODMyLCJleHAiOjE3MDMzMTY4MzJ9.y7r1jBp0Vtrv_6eYnZgBeth83jbcPyFHCVE2pfnHZEE"
+
 enum CategorySettingSection: Hashable {
     case categorySection([CategorySettingItem])
 }
 
 enum CategorySettingItem: Hashable {
-    case categoryCell
+    case categoryCell(Category)
 }
 
 extension CategorySettingSection {
