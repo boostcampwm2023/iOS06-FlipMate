@@ -12,7 +12,7 @@ enum CategorySettingSection: Hashable {
 }
 
 enum CategorySettingItem: Hashable {
-    case categoryCell
+    case categoryCell(Category)
 }
 
 extension CategorySettingSection {
