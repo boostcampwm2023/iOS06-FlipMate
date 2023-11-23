@@ -19,7 +19,6 @@ final class TimerManager {
     
     // MARK: - Properties
     private var state: TimerState = .suspended
-    private var eventHandler: (() -> Void)?
     private(set) var totalTime: Int = 0
     private var startTime: TimeInterval = 0.0
 
@@ -33,14 +32,9 @@ final class TimerManager {
         return timer
     }()
     
-    // MARK: - init
-    init(eventHandler: (() -> Void)? = nil) {
-        self.eventHandler = eventHandler
-    }
-    
+    // MARK: - deinit
     deinit {
         timer.cancel()
-        eventHandler = nil
     }
     
     /// 타이머를 시작합니다.
@@ -63,9 +57,10 @@ final class TimerManager {
     /// 타이머를 일시정지합니다.
     func suspend() {
         guard state == .resumed else { return }
+        self.totalTime = 0
         state = .suspended
         timer.suspend()
-        FMLogger.device.debug("타미어를 일시정지합니다. 현재까지 누적 시간\(self.totalTime)")
+        FMLogger.device.debug("타미어를 일시정지합니다.")
     }
     
     /// 타이머를 종료합니다.
@@ -91,7 +86,7 @@ private extension TimerManager {
         if fourNumber == "0000" {
             totalTime += 1
             let time = String(self.totalTime)
-            FMLogger.device.debug("경과시간: \(diffTime), 총 누적 시간: \(time)")
+            FMLogger.device.debug("경과시간: \(diffTime)")
         }
     }
 }

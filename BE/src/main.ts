@@ -11,8 +11,8 @@ import { LoggingInterceptor } from './common/logging.interceptor';
 async function bootstrap() {
   const configService = new ConfigService();
 
-  let httpsOptions = null;
   const ssl = configService.get<string>('SSL');
+  let httpsOptions = null;
   if (ssl == 'true') {
     httpsOptions = {
       key: readFileSync(configService.get<string>('HTTPS_KEY_PATH')),
@@ -27,7 +27,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('StudyLog API')
     .setDescription('StudyLog 애플리케이션 API 문서')
-    .setVersion('1.0')
+    .setVersion('2.0')
     .addBearerAuth()
     .build();
 

@@ -8,17 +8,17 @@
 import Foundation
 
 struct TimerFinishResponseDTO: Decodable {
-    let id: Int
     let date: String
     let createdAt: String
     let type: String
-    let category: String
+    let learningTime: Int
+    let categoryID: Int?
     
     private enum CodingKeys: String, CodingKey {
-        case id
         case date
         case createdAt = "created_at"
         case type
-        case category
+        case learningTime = "learning_time"
+        case categoryID = "category_id"
     }
 }
