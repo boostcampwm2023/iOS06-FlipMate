@@ -9,9 +9,11 @@ import Foundation
 
 enum BaseURL {
     static let flipmateDomain = "https://flipmate.site:3333"
+    static let developDomain = "https://flipmate.site:3333"
 }
 
 enum Paths {
     static let categories = "/categories"
-    static let studylogs = "/studylogs"
+    static let googleApp = "/auth/google/app"
+    static let studylogs = "/study-logs"
 }
