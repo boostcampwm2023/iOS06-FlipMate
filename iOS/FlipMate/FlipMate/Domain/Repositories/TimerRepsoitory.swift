@@ -11,14 +11,12 @@ import Combine
 protocol TimerRepsoitory {
     func startTimer(
         startTime: Date,
-        userId: Int,
-        categoryId: Int
+        categoryId: Int?
     ) -> AnyPublisher<Void, NetworkError>
     
     func finishTimer(
         endTime: Date,
         learningTime: Int,
-        userId: Int,
-        categoryId: Int
+        categoryId: Int?
     ) -> AnyPublisher<Void, NetworkError>
 }
