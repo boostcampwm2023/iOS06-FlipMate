@@ -101,4 +101,3 @@ private extension CategoryListCollectionViewCell {
 #Preview {
     CategoryListCollectionViewCell()
 }
-
