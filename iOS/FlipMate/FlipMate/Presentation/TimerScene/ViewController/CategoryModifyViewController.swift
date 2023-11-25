@@ -52,14 +52,15 @@ final class CategoryModifyViewController: BaseViewController {
         return label
     }()
     
-    private lazy var categoryTitleTextField: CategoryTitleTextField = {
-        let textField = CategoryTitleTextField(placeholder: Constant.placeHolders[0])
+    private lazy var categoryTitleTextField: UITextField = {
+        let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.delegate = self
         textField.layer.masksToBounds = true
         textField.layer.cornerRadius = 6
         textField.layer.borderColor = FlipMateColor.gray2.color?.cgColor
         textField.layer.borderWidth = 1
-        textField.addLeftPadding(width: 15)
+        textField.clearButtonMode = .always
         
         return textField
     }()
@@ -99,6 +100,9 @@ final class CategoryModifyViewController: BaseViewController {
     // MARK: Configure UI
     override func configureUI() {
         view.backgroundColor = .systemBackground
+        
+        categoryTitleTextField.placeholder = Constant.placeHolders[0]
+        categoryTitleTextField.addLeftPadding(width: 15)
         
         let subViews = [
             firstSectionTitleLabel,
@@ -151,11 +155,16 @@ final class CategoryModifyViewController: BaseViewController {
                 FMLogger.general.error("가져온 카테고리 없음 에러")
                 return
             }
-            categoryTitleTextField.setText(text: category.subject)
+            setText(text: category.subject)
         }
     }
 }
-
+// MARK: UITextFieldDelegate
+extension CategoryModifyViewController: UITextFieldDelegate {
+    func setText(text: String) {
+        categoryTitleTextField.text = text
+    }
+}
 // MARK: Navigation Bar
 private extension CategoryModifyViewController {
     func setUpNavigation() {
@@ -192,7 +201,7 @@ private extension CategoryModifyViewController {
         if purpose == .create {
             Task {
                 do {
-                    guard let categoryTitle = categoryTitleTextField.text() else {
+                    guard let categoryTitle = categoryTitleTextField.text else {
                         FMLogger.general.error("빈 제목, 추가할 수 없음")
                         return
                     }
@@ -205,7 +214,7 @@ private extension CategoryModifyViewController {
         } else {
             Task {
                 do {
-                    guard let categoryTitle = categoryTitleTextField.text() else {
+                    guard let categoryTitle = categoryTitleTextField.text else {
                         FMLogger.general.error("빈 제목, 추가할 수 없음")
                         return
                     }
@@ -222,7 +231,6 @@ private extension CategoryModifyViewController {
         }
     }
 }
-
 //@available(iOS 17.0, *)
 //#Preview {
 //    CategoryModifyViewController(viewModel: CategoryViewModel(useCase: DefaultCategoryUseCase(repository: DefaultCategoryRepository(provider: Provider(urlSession: URLSession.shared)))), purpose: .create)
