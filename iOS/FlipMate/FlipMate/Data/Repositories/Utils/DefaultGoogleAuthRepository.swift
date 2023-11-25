@@ -16,9 +16,9 @@ final class DefaultGoogleAuthRepository: GoogleAuthRepository {
         return responseDTO
     }
     
-    private let provider: Provider
+    private let provider: Providable
     
-    init(provider: Provider) {
+    init(provider: Providable) {
         self.provider = provider
     }
 }
