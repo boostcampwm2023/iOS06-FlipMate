@@ -27,7 +27,7 @@ final class AppFlowCoordinator: Coordinator {
     
     func start() {
         if isLogginIn {
-            showTimerViewController()
+            showTabBarViewController()
         } else {
             showLoginViewController()
         }
@@ -40,9 +40,9 @@ final class AppFlowCoordinator: Coordinator {
         childCoordinators.append(coordinator)
     }
     
-    private func showTimerViewController() {
-        let timerSceneDIContainer = appDIContainer.makeTimerSceneDIContainer()
-        let coordinator = timerSceneDIContainer.makeTimerFlowCoordinator(navigationController: navigationController)
+    private func showTabBarViewController() {
+        let tabBarDIContainer = appDIContainer.makeTabBarDIContainer()
+        let coordinator = tabBarDIContainer.makeTabBarFlowCoordinator(navigationController: navigationController)
         coordinator.start()
         childCoordinators.append(coordinator)
     }

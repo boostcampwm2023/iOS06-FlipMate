@@ -8,25 +8,31 @@
 import UIKit
 
 protocol LoginFlowCoordinatorDependencies {
-    func makeLoginViewController() -> LoginViewController
+    func makeLoginViewController(actions: LoginViewModelActions) -> UIViewController
+    func makeTabBarDIContainer() -> TabBarDIContainer
 }
 
 final class LoginFlowCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
-    private weak var navigationViewController: UINavigationController?
+    private var navigationViewController: UINavigationController
     private let dependencies: LoginFlowCoordinatorDependencies
-    
-    private weak var loginViewController: LoginViewController?
-    
-    init(navigationViewController: UINavigationController? = nil, dependencies: LoginFlowCoordinatorDependencies) {
+        
+    init(navigationViewController: UINavigationController, dependencies: LoginFlowCoordinatorDependencies) {
         self.navigationViewController = navigationViewController
         self.dependencies = dependencies
     }
     
     func start() {
-        let viewController = dependencies.makeLoginViewController()
-        navigationViewController?.viewControllers = [viewController]
-        loginViewController = viewController
+        let actions = LoginViewModelActions(showTabBarController: showTabBarController)
+        let viewController = dependencies.makeLoginViewController(actions: actions)
+//        navigationViewController.view.window?.rootViewController = viewController
+        navigationViewController.viewControllers = [viewController]
+    }
+    
+    private func showTabBarController() {
+        let tabBarDIContainer = dependencies.makeTabBarDIContainer()
+        let coordinator = tabBarDIContainer.makeTabBarFlowCoordinator(navigationController: navigationViewController)
+        coordinator.start()
     }
 }
 

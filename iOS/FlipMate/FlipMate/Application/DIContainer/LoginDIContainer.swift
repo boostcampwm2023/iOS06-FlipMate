@@ -8,9 +8,9 @@
 import UIKit
 
 final class LoginDIContainer: LoginFlowCoordinatorDependencies {
-
     struct Dependencies {
         let provider: Providable
+        let categoryManager: CategoryManager
     }
     
     private let dependencies: Dependencies
@@ -19,15 +19,24 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
         self.dependencies = dependencies
     }
     
-    func makeLoginViewController() -> LoginViewController {
+    func makeLoginViewController(actions: LoginViewModelActions) -> UIViewController {
         return LoginViewController(
             loginViewModel: LoginViewModel(
                 googleAuthUseCase: DefaultGoogleAuthUseCase(
                     repository: DefaultGoogleAuthRepository(
                         provider: dependencies.provider)
-                )
+                ),
+                actions: actions
             )
         )
+    }
+    
+    func makeTabBarDIContainer() -> TabBarDIContainer {
+        let dependencies = TabBarDIContainer.Dependencies(
+            provider: dependencies.provider,
+            categoryManager: dependencies.categoryManager)
+        
+        return TabBarDIContainer(dependencies: dependencies)
     }
     
     func makeLoginFlowCoordinator(navigationController: UINavigationController) -> LoginFlowCoordinator {

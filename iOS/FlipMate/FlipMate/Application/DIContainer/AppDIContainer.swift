@@ -11,16 +11,16 @@ final class AppDIContainer {
     lazy var provider: Provider = Provider(urlSession: URLSession.shared)
     lazy var categoryManager: CategoryManager = CategoryManager()
     
-    func makeTimerSceneDIContainer() -> TimerSceneDIContainer {
-        let dependencies = TimerSceneDIContainer.Dependencies(
+    func makeTabBarDIContainer() -> TabBarDIContainer {
+        let dependencies = TabBarDIContainer.Dependencies(
             provider: provider,
             categoryManager: categoryManager)
         
-        return TimerSceneDIContainer(dependencies: dependencies)
+        return TabBarDIContainer(dependencies: dependencies)
     }
     
     func makeLoginDiContainer() -> LoginDIContainer {
-        let dependencies = LoginDIContainer.Dependencies(provider: provider)
+        let dependencies = LoginDIContainer.Dependencies(provider: provider, categoryManager: categoryManager)
         
         return LoginDIContainer(dependencies: dependencies)
     }
