@@ -11,7 +11,8 @@ protocol LoginFlowCoordinatorDependencies {
     func makeLoginViewController() -> LoginViewController
 }
 
-final class LoginFlowCoordinator {
+final class LoginFlowCoordinator: Coordinator {
+    var childCoordinators: [Coordinator] = []
     private weak var navigationViewController: UINavigationController?
     private let dependencies: LoginFlowCoordinatorDependencies
     
@@ -24,7 +25,7 @@ final class LoginFlowCoordinator {
     
     func start() {
         let viewController = dependencies.makeLoginViewController()
-        navigationViewController?.pushViewController(viewController, animated: true)
+        navigationViewController?.viewControllers = [viewController]
         loginViewController = viewController
     }
 }
