@@ -29,7 +29,7 @@ final class DefaultCategoryRepository: CategoryRepository {
         let categories = try await provider.request(with: endpoint)
         FMLogger.general.log("카테고리 읽기 완료")
         return categories.map { dto in
-            Category(id: dto.categoryID, color: dto.colorCode, subject: dto.name, studyTime: 0)
+            Category(id: dto.categoryID, color: dto.colorCode, subject: dto.name, studyTime: nil)
         }
     }
     

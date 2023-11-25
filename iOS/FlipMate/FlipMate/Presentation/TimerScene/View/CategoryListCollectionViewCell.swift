@@ -25,7 +25,6 @@ final class CategoryListCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = FlipMateFont.mediumBold.font
         label.textColor = UIColor.label
-        label.text = "00:00:00"
         return label
     }()
     
@@ -55,7 +54,7 @@ final class CategoryListCollectionViewCell: UICollectionViewCell {
             backgroundColor = FlipMateColor.gray3.color
             setShadow()
         } else {
-            backgroundColor = .white
+            backgroundColor = .systemBackground
             layer.shadowOpacity = 0
         }
     }

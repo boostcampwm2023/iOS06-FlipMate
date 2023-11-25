@@ -21,7 +21,7 @@ export class StudyLogsService {
   ): Promise<StudyLogsDto> {
     const { category_id, ...data } = studyLogsData;
     const user = { id: user_id } as UsersModel;
-    const category = { id: category_id } as Categories;
+    const category = { id: category_id ?? null } as Categories;
 
     const studyLog = this.studyLogsRepository.create({
       ...data,
@@ -44,31 +44,47 @@ export class StudyLogsService {
     return started_at;
   }
 
-  private calculateTotalTime(studyLogs): number {
-    return studyLogs.reduce((accumulator, studyLog) => {
-      return accumulator + studyLog.today_time;
-    }, 0);
+  private async calculateTotalTime(
+    user_id: number,
+    date: string,
+  ): Promise<number> {
+    const sum = await this.studyLogsRepository
+      .createQueryBuilder('study_logs')
+      .select('SUM(study_logs.learning_time)', 'sum')
+      .where('study_logs.user_id = :user_id', { user_id })
+      .andWhere('study_logs.date = :date', { date })
+      .getRawOne();
+    return parseInt(sum?.sum ?? 0);
   }
 
   async groupByCategory(user_id: number, date: string): Promise<object> {
-    const studyLogsByCategory = await this.studyLogsRepository
-      .createQueryBuilder('study_logs')
-      .select('study_logs.category_id', 'category_id')
-      .addSelect('SUM(study_logs.learning_time)', 'today_time')
-      .addSelect('categories.name', 'name')
-      .addSelect('categories.color_code', 'color_code')
-      .leftJoin('study_logs.category_id', 'categories')
-      .where('study_logs.date = :today', { today: date })
-      .andWhere('study_logs.user_id = :user_id', { user_id })
-      .groupBy('study_logs.category_id')
-      .getRawMany();
+    const studyLogsByCategory = await this.studyLogsRepository.query(
+      `SELECT
+        c.id,
+        c.name,
+        c.color_code,
+        c.user_id,
+        COALESCE(SUM(s.learning_time), 0) AS today_time
+      FROM categories c
+      LEFT JOIN study_logs s
+        ON c.id = s.category_id
+        AND s.date = ?
+      WHERE c.user_id = ?
+      GROUP BY
+        c.id, c.name, c.color_code;
+      `,
+      [date, user_id],
+    );
+
     const categories = studyLogsByCategory.map((studyLog) => ({
-      ...studyLog,
+      id: studyLog.id,
+      name: studyLog.name,
+      color_code: studyLog.color_code,
       today_time: parseInt(studyLog.today_time),
     }));
 
     const result = {
-      total_time: this.calculateTotalTime(categories),
+      total_time: await this.calculateTotalTime(user_id, date),
       categories,
     };
     return result;

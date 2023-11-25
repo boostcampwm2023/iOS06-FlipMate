@@ -83,10 +83,12 @@ final class TimerViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         configureNotification()
         UIDevice.current.isProximityMonitoringEnabled = true
+        timerViewModel.viewDidLoad()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         deviceMotionManager.stopDeviceMotion()
+        NotificationCenter.default.removeObserver(self)
         UIDevice.current.isProximityMonitoringEnabled = false
     }
     
