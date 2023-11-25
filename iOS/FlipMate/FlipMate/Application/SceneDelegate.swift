@@ -8,8 +8,11 @@
 import UIKit
 import GoogleSignIn
 
+final class CategoryManager { }
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    
+    let appDIContainer = AppDIContainer()
+    var appFlowCoordinator: AppFlowCoordinator?
     var window: UIWindow?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -18,11 +21,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = LoginViewController(loginViewModel: LoginViewModel(googleAuthUseCase: DefaultGoogleAuthUseCase(repository: DefaultGoogleAuthRepository(provider: Provider(urlSession: URLSession.shared)))))
+        self.window = window
+
+        let navigationController = UINavigationController()
+        window.rootViewController = navigationController
+        
+        appFlowCoordinator = AppFlowCoordinator(
+            navigationController: navigationController,
+            appDIContainer: appDIContainer
+        )
+        
+        appFlowCoordinator?.start()
         window.makeKeyAndVisible()
         try? KeychainManager.deleteAccessToken()
-        
-        self.window = window
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
