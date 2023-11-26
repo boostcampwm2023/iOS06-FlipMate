@@ -77,6 +77,7 @@ final class SignUpViewController: BaseViewController {
         }
         button.clipsToBounds = true
         button.layer.cornerRadius = 15
+        button.isEnabled = false
         return button
     }()
     
