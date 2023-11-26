@@ -61,7 +61,11 @@ final class SignUpViewController: BaseViewController {
             var titleContainer = AttributeContainer()
             titleContainer.font = FlipMateFont.mediumBold.font
             configuration.baseBackgroundColor = FlipMateColor.darkBlue.color
-            configuration.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 16, trailing: 32)
+            configuration.contentInsets = NSDirectionalEdgeInsets(
+                top: 16,
+                leading: 32,
+                bottom: 16,
+                trailing: 32)
             configuration.attributedTitle = AttributedString("회원가입", attributes: titleContainer)
             button.configuration = configuration
         } else {
@@ -104,10 +108,13 @@ final class SignUpViewController: BaseViewController {
             nickNameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nickNameTextField.widthAnchor.constraint(equalToConstant: 220),
             
-            signUpButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
+            signUpButton.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
             signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            signUpButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
-            signUpButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32)
+            signUpButton.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
+            signUpButton.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32)
         ])
     }
     
