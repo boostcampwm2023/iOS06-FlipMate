@@ -43,6 +43,17 @@ final class SignUpViewController: BaseViewController {
         return textField
     }()
     
+    private lazy var textFieldUnderline: UIView = {
+        let underline = UIView()
+        underline.frame = CGRect(
+            x: 0,
+            y: Double(nickNameTextField.frame.height) + 2,
+            width: Double(nickNameTextField.frame.width),
+            height: 1.5)
+        underline.backgroundColor = FlipMateColor.gray1.color
+        return underline
+    }()
+    
     private lazy var signUpButton: UIButton = {
         let button = UIButton()
         if #available(iOS 15.0, *) {
@@ -66,10 +77,7 @@ final class SignUpViewController: BaseViewController {
     }()
     
     override func viewDidLayoutSubviews() {
-        let underLine = UIView()
-        underLine.frame = CGRect(x: 0, y: Double(nickNameTextField.frame.height) + 2, width: Double(nickNameTextField.frame.width), height: 1.5)
-        underLine.backgroundColor = FlipMateColor.gray1.color
-        self.nickNameTextField.addSubview(underLine)
+        drawTextFieldUnderline()
     }
     
     override func configureUI() {
@@ -101,6 +109,10 @@ final class SignUpViewController: BaseViewController {
             signUpButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
             signUpButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32)
         ])
+    }
+    
+    func drawTextFieldUnderline() {
+        self.nickNameTextField.addSubview(textFieldUnderline)
     }
 }
 
