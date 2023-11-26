@@ -47,6 +47,10 @@
 		2C88DCF92B1242DA000B4686 /* TimerFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF82B1242DA000B4686 /* TimerFlowCoordinator.swift */; };
 		2C88DCFB2B124451000B4686 /* LoginDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCFA2B124451000B4686 /* LoginDIContainer.swift */; };
 		2C88DCFE2B1244A6000B4686 /* LoginFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCFD2B1244A6000B4686 /* LoginFlowCoordinator.swift */; };
+		2C88DD052B1256D0000B4686 /* TabBarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD042B1256D0000B4686 /* TabBarFlowCoordinator.swift */; };
+		2C88DD072B125781000B4686 /* TabBarDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD062B125781000B4686 /* TabBarDIContainer.swift */; };
+		2C88DD092B1274FA000B4686 /* CategorySettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */; };
+		2C88DD0B2B1340E4000B4686 /* CategoryDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */; };
 		2CE84EEF2B0B742A00E2FB71 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */; };
 		2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */; };
 		2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF42B0B783800E2FB71 /* UICollectionViewCell++Extension.swift */; };
@@ -164,6 +168,10 @@
 		2C88DCF82B1242DA000B4686 /* TimerFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFlowCoordinator.swift; sourceTree = "<group>"; };
 		2C88DCFA2B124451000B4686 /* LoginDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDIContainer.swift; sourceTree = "<group>"; };
 		2C88DCFD2B1244A6000B4686 /* LoginFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFlowCoordinator.swift; sourceTree = "<group>"; };
+		2C88DD042B1256D0000B4686 /* TabBarFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowCoordinator.swift; sourceTree = "<group>"; };
+		2C88DD062B125781000B4686 /* TabBarDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarDIContainer.swift; sourceTree = "<group>"; };
+		2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingCoordinator.swift; sourceTree = "<group>"; };
+		2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDIContainer.swift; sourceTree = "<group>"; };
 		2CA80839AC9EFDD4BAA10C67 /* Pods_FlipMate_FlipMateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate_FlipMateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView++Extension.swift"; sourceTree = "<group>"; };
@@ -414,6 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				2C88DCF82B1242DA000B4686 /* TimerFlowCoordinator.swift */,
+				2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -422,6 +431,31 @@
 			isa = PBXGroup;
 			children = (
 				2C88DCFD2B1244A6000B4686 /* LoginFlowCoordinator.swift */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		2C88DD012B1256B5000B4686 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				2C88DD032B1256C4000B4686 /* Flows */,
+				2C88DD022B1256BD000B4686 /* ViewController */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		2C88DD022B1256BD000B4686 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EDC851C62B021492009031EA /* TabBarViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2C88DD032B1256C4000B4686 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				2C88DD042B1256D0000B4686 /* TabBarFlowCoordinator.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -520,6 +554,7 @@
 		600908EF2AFCDBC90065DFFB /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				2C88DD012B1256B5000B4686 /* TabBar */,
 				2C2F21812B0F53AB00B45BA8 /* Mocks */,
 				600908F62AFCDDDC0065DFFB /* Splash */,
 				600908F42AFCDCFA0065DFFB /* LoginScene */,
@@ -528,7 +563,6 @@
 				600908F22AFCDCE10065DFFB /* SocialScene */,
 				600908F52AFCDD0A0065DFFB /* MyPageScene */,
 				600908FE2AFCDF8D0065DFFB /* Utils */,
-				EDC851C62B021492009031EA /* TabBarViewController.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -709,6 +743,8 @@
 				2C88DCF32B124272000B4686 /* AppDIContainer.swift */,
 				2C88DCF52B124292000B4686 /* TimerSceneDIContainer.swift */,
 				2C88DCFA2B124451000B4686 /* LoginDIContainer.swift */,
+				2C88DD062B125781000B4686 /* TabBarDIContainer.swift */,
+				2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -1097,6 +1133,8 @@
 				ED3842252B0F1DDA001E2803 /* DefaultGoogleAuthUseCase.swift in Sources */,
 				2C801D7E2B04B65400A7ABAE /* DefaultTimerUseCase.swift in Sources */,
 				2C88DCFB2B124451000B4686 /* LoginDIContainer.swift in Sources */,
+				2C88DD072B125781000B4686 /* TabBarDIContainer.swift in Sources */,
+				2C88DD092B1274FA000B4686 /* CategorySettingCoordinator.swift in Sources */,
 				2C4D55AB2B033029006D7C26 /* UIView++Extension.swift in Sources */,
 				60F67C6A2B0E1868002C8BF3 /* DefaultCategoryUseCase.swift in Sources */,
 				2C5CDA4B2B0252C1007AFC57 /* LoginType.swift in Sources */,
@@ -1166,11 +1204,13 @@
 				2C3430B12B0DE3D0008CBC85 /* Date++Extension.swift in Sources */,
 				2C2F217E2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift in Sources */,
 				2C5CDA4F2B025403007AFC57 /* SocialViewController.swift in Sources */,
+				2C88DD052B1256D0000B4686 /* TabBarFlowCoordinator.swift in Sources */,
 				ED9B2A812B06048D008FE1C5 /* CategoryViewModel.swift in Sources */,
 				60DE49402B05E67200ACE6DD /* FlipMateConstant.swift in Sources */,
 				ED3842232B0F1D70001E2803 /* GoogleAuthRepostiory.swift in Sources */,
 				2C801D832B04C64F00A7ABAE /* TimerManager.swift in Sources */,
 				2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */,
+				2C88DD0B2B1340E4000B4686 /* CategoryDIContainer.swift in Sources */,
 				ED3842312B0F94E6001E2803 /* DefaultCategoryRepository.swift in Sources */,
 				ED3595C12B0DC2F100558FAA /* CategoryColorSelectView.swift in Sources */,
 				ED38421B2B0F1B7E001E2803 /* GoogleAuthRequestDTO.swift in Sources */,

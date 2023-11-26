@@ -19,15 +19,16 @@ final class TimerSceneDIContainer: TimerFlowCoordinatorDependencies {
         self.dependencies = dependencies
     }
     
-    func makeTimerViewController() -> TimerViewController {
+    func makeTimerViewController(actions: TimerViewModelActions) -> TimerViewController {
         return TimerViewController(
-            timerViewModel: makeTimerViewModel())
+            timerViewModel: makeTimerViewModel(actions: actions))
     }
     
-    func makeTimerViewModel() -> TimerViewModelProtocol {
+    func makeTimerViewModel(actions: TimerViewModelActions) -> TimerViewModelProtocol {
         return TimerViewModel(
             timerUseCase: makeTimerUseCase(),
-            userInfoUserCase: makeUserInfoUseCase())
+            userInfoUserCase: makeUserInfoUseCase(),
+            actions: actions)
     }
     
     func makeTimerUseCase() -> TimerUseCase {
@@ -50,5 +51,13 @@ final class TimerSceneDIContainer: TimerFlowCoordinatorDependencies {
         return TimerFlowCoordinator(
             navigationController: navigationController,
             dependencies: self)
+    }
+    
+    // MARK: - Category Setting
+    func makeCategoryDIContainer() -> CategoryDIContainer {
+        let dependencies = CategoryDIContainer.Dependencies(
+            provider: dependencies.provider,
+            categoryManager: dependencies.categoryManager)
+        return CategoryDIContainer(dependencies: dependencies)
     }
 }

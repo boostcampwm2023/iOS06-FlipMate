@@ -8,24 +8,30 @@
 import UIKit
 
 protocol TimerFlowCoordinatorDependencies {
-    func makeTimerViewController() -> TimerViewController
+    func makeTimerViewController(actions: TimerViewModelActions) -> TimerViewController
+    func makeCategoryDIContainer() -> CategoryDIContainer
 }
 
 final class TimerFlowCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
-    private weak var navigationController: UINavigationController?
+    private var navigationController: UINavigationController
     private let dependencies: TimerFlowCoordinatorDependencies
-    
-    private weak var timerViewController: TimerViewController?
-    
-    init(navigationController: UINavigationController? = nil, dependencies: TimerFlowCoordinatorDependencies) {
+        
+    init(navigationController: UINavigationController, dependencies: TimerFlowCoordinatorDependencies) {
         self.navigationController = navigationController
         self.dependencies = dependencies
     }
     
     func start() {
-        let viewController = dependencies.makeTimerViewController()
-        navigationController?.viewControllers = [viewController]
-        timerViewController = viewController
+        let actions = TimerViewModelActions(showCategorySettingViewController: showCategorySettingViewController)
+        let viewController = dependencies.makeTimerViewController(actions: actions)
+        navigationController.viewControllers = [viewController]
+    }
+    
+    private func showCategorySettingViewController() {
+        let categoryDIContainer = dependencies.makeCategoryDIContainer()
+        let coordinator = categoryDIContainer.makeCategoryFlowCoordinator(navigationController: navigationController)
+        coordinator.start()
+        childCoordinators.append(coordinator)
     }
 }
