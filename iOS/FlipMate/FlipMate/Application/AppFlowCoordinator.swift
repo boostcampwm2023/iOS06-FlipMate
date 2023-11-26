@@ -7,9 +7,20 @@
 
 import UIKit
 
-protocol Coordinator {
+protocol Coordinator: AnyObject {
     var childCoordinators: [Coordinator] { get set }
     func start()
+}
+
+extension Coordinator {
+    func childDidFinish(_ child: Coordinator?) {
+        for (index, coordinator) in childCoordinators.enumerated() {
+            if coordinator === child {
+                childCoordinators.remove(at: index)
+                break
+            }
+        }
+    }
 }
 
 final class AppFlowCoordinator: Coordinator {
@@ -37,6 +48,7 @@ final class AppFlowCoordinator: Coordinator {
         let loginDIContainer = appDIContainer.makeLoginDiContainer()
         let coordinator = loginDIContainer.makeLoginFlowCoordinator(navigationController: navigationController)
         coordinator.start()
+        coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
     }
     
@@ -44,6 +56,7 @@ final class AppFlowCoordinator: Coordinator {
         let tabBarDIContainer = appDIContainer.makeTabBarDIContainer()
         let coordinator = tabBarDIContainer.makeTabBarFlowCoordinator(navigationController: navigationController)
         coordinator.start()
+        coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
     }
 }

@@ -49,6 +49,10 @@ final class CategorySettingViewController: BaseViewController {
         }
     }
     
+    deinit {
+        viewModel.didFinishCategorySetting()
+    }
+    
     // MARK: - Configure UI
     override func configureUI() {
         view.addSubview(collectionView)

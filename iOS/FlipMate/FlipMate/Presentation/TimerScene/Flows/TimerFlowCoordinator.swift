@@ -31,6 +31,7 @@ final class TimerFlowCoordinator: Coordinator {
     private func showCategorySettingViewController() {
         let categoryDIContainer = dependencies.makeCategoryDIContainer()
         let coordinator = categoryDIContainer.makeCategoryFlowCoordinator(navigationController: navigationController)
+        coordinator.parentCoordinator = self
         coordinator.start()
         childCoordinators.append(coordinator)
     }

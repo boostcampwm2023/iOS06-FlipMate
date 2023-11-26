@@ -14,6 +14,7 @@ protocol CategoryFlowCoordinatorDependencies {
 
 final class CategoryFlowCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
+    weak var parentCoordinator: Coordinator?
     private var navigationController: UINavigationController
     private let dependencies: CategoryFlowCoordinatorDependencies
     
@@ -24,7 +25,8 @@ final class CategoryFlowCoordinator: Coordinator {
     
     func start() {
         let actions = CategoryViewModelActions(
-            showModifyCategory: showCategoryModifyVieWController
+            showModifyCategory: showCategoryModifyVieWController,
+            didFinishCategorySetting: didFinishCategorySetting
         )
         let viewController = dependencies.makeCategorySettingViewController(actions: actions)
         navigationController.pushViewController(viewController, animated: true)
@@ -33,5 +35,9 @@ final class CategoryFlowCoordinator: Coordinator {
     private func showCategoryModifyVieWController(purpose: CategoryPurpose, category: Category? = nil) {
         let categoryModifyViewController = dependencies.makeCategoryModifyViewController(purpose: purpose, category: category)
         navigationController.pushViewController(categoryModifyViewController, animated: true)
+    }
+    
+    func didFinishCategorySetting() {
+        parentCoordinator?.childDidFinish(self)
     }
 }
