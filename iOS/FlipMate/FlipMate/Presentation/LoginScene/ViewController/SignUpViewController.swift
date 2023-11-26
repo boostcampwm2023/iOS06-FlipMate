@@ -9,21 +9,27 @@ import UIKit
 
 final class SignUpViewController: BaseViewController {
     
-    private lazy var profileImage: UIImageView = {
+    // MARK: - View Properties
+    private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
-        let cameraView = UIImageView()
+        let cameraButtonView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(systemName: Constant.profileImageName)
         imageView.tintColor = FlipMateColor.darkBlue.color
-        cameraView.image = UIImage(systemName: Constant.cameraImageName)
-        cameraView.tintColor = FlipMateColor.gray1.color
-        cameraView.backgroundColor = FlipMateColor.gray3.color
-        cameraView.clipsToBounds = true
-        cameraView.layer.cornerRadius = cameraView.bounds.height / 2
-        imageView.addSubview(cameraView)
-        cameraView.translatesAutoresizingMaskIntoConstraints = false
+        cameraButtonView.contentMode = .center
+        cameraButtonView.image = UIImage(systemName: Constant.cameraImageName)
+        cameraButtonView.tintColor = FlipMateColor.gray1.color
+        cameraButtonView.backgroundColor = FlipMateColor.gray3.color
+        cameraButtonView.clipsToBounds = true
+        cameraButtonView.frame = CGRect(x: 0, y: 0, width: 33, height: 33)
+        cameraButtonView.layer.cornerRadius = cameraButtonView.frame.height / 2
+        imageView.addSubview(cameraButtonView)
+        cameraButtonView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cameraView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
-            cameraView.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 0)
+            cameraButtonView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
+            cameraButtonView.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -30),
+            cameraButtonView.widthAnchor.constraint(equalToConstant: 33),
+            cameraButtonView.heightAnchor.constraint(equalToConstant: 33)
         ])
         return imageView
     }()
@@ -70,7 +76,7 @@ final class SignUpViewController: BaseViewController {
         self.title = "회원가입"
         
         let subViews = [
-            profileImage,
+            profileImageView,
             nickNameTextField,
             signUpButton
         ]
@@ -81,12 +87,12 @@ final class SignUpViewController: BaseViewController {
         }
         
         NSLayoutConstraint.activate([
-            profileImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 64),
-            profileImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profileImage.widthAnchor.constraint(equalToConstant: 100),
-            profileImage.heightAnchor.constraint(equalToConstant: 100),
+            profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 64),
+            profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            profileImageView.widthAnchor.constraint(equalToConstant: 100),
+            profileImageView.heightAnchor.constraint(equalToConstant: 100),
             
-            nickNameTextField.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 16),
+            nickNameTextField.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 16),
             nickNameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nickNameTextField.widthAnchor.constraint(equalToConstant: 220),
             
