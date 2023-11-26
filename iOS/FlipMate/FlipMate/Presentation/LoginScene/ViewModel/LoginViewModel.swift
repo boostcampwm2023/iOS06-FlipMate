@@ -10,10 +10,12 @@ import Combine
 
 struct LoginViewModelActions {
     let showTabBarController: () -> Void
+    let didFinishLogin: () -> Void
 }
 
 protocol LoginViewModelInput {
     func didLogin()
+    func didFinishLogin()
     func requestLogin(accessToken: String)
 }
 
@@ -43,6 +45,10 @@ final class LoginViewModel: LoginViewModelProtocol {
     // MARK: - input
     func didLogin() {
         actions?.showTabBarController()
+    }
+    
+    func didFinishLogin() {
+        actions?.didFinishLogin()
     }
     
     func requestLogin(accessToken: String) {

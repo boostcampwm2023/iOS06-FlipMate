@@ -32,6 +32,10 @@ final class LoginViewController: BaseViewController {
         fatalError("Don't use storyboard")
     }
     
+    deinit {
+        loginViewModel.didFinishLogin()
+    }
+    
     // MARK: - UI Components
     private var logoImageView: UIImageView = {
         let imageView = UIImageView()

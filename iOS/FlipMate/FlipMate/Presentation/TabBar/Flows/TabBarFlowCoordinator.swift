@@ -15,6 +15,8 @@ protocol TabBarFlowCoordinatorDependencies {
 
 final class TabBarFlowCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
+    weak var parentCoordinator: Coordinator?
+    
     private var navigationController: UINavigationController
     private weak var tabBarViewController: UITabBarController?
     private let dependencies: TabBarFlowCoordinatorDependencies
@@ -26,8 +28,9 @@ final class TabBarFlowCoordinator: Coordinator {
     
     func start() {
         let tabBarController = dependencies.makeTabBarController()
-        tabBarController.setViewControllers([makeSocialViewController(), makeTimerViewContorller(), makeChartViewController()], animated: true)
+        tabBarController.setViewControllers([makeSocialViewController(), makeTimerViewContorller(), makeChartViewController()], animated: false)
         navigationController.view.window?.rootViewController = tabBarController
+        navigationController.viewControllers = []
         tabBarController.selectedIndex = 1
         tabBarViewController = tabBarController
     }

@@ -14,6 +14,8 @@ protocol LoginFlowCoordinatorDependencies {
 
 final class LoginFlowCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
+    weak var parentCoordinator: Coordinator?
+    
     private var navigationViewController: UINavigationController
     private let dependencies: LoginFlowCoordinatorDependencies
         
@@ -23,16 +25,24 @@ final class LoginFlowCoordinator: Coordinator {
     }
     
     func start() {
-        let actions = LoginViewModelActions(showTabBarController: showTabBarController)
+        let actions = LoginViewModelActions(
+            showTabBarController: showTabBarController,
+            didFinishLogin: didFinishLogin
+        )
         let viewController = dependencies.makeLoginViewController(actions: actions)
-//        navigationViewController.view.window?.rootViewController = viewController
         navigationViewController.viewControllers = [viewController]
     }
     
     private func showTabBarController() {
         let tabBarDIContainer = dependencies.makeTabBarDIContainer()
         let coordinator = tabBarDIContainer.makeTabBarFlowCoordinator(navigationController: navigationViewController)
+        coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
         coordinator.start()
+    }
+    
+    func didFinishLogin() {
+        parentCoordinator?.childDidFinish(self)
     }
 }
 
