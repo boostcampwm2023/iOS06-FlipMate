@@ -81,10 +81,12 @@ final class SignUpViewController: BaseViewController {
         return button
     }()
     
+    // MARK: - View Life Cycles
     override func viewDidLayoutSubviews() {
         drawTextFieldUnderline()
     }
     
+    // MARK: - Configure UI
     override func configureUI() {
         self.title = "회원가입"
         
@@ -128,6 +130,7 @@ final class SignUpViewController: BaseViewController {
     }
 }
 
+// MARK: - Constants
 private extension SignUpViewController {
     enum Constant {
         static let profileImageName = "person.crop.circle.fill"
