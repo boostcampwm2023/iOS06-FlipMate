@@ -8,9 +8,13 @@
 import Foundation
 import Combine
 
+struct CategoryViewModelActions {
+    let showModifyCategory: (CategoryPurpose, Category?) -> Void
+}
+
 protocol CategoryViewModelInput {
     func createCategoryTapped()
-    func categoryTapped(at index: Int)
+    func updateCategoryTapped(category: Category)
     func createCategory(name: String, colorCode: String) async throws
     func readCategories() async throws
     func updateCategory(of id: Int, newName: String, newColorCode: String) async throws
@@ -18,8 +22,6 @@ protocol CategoryViewModelInput {
 }
 
 protocol CategoryViewModelOutput {
-    var presentingCategoryModifyViewControllerPublisher: AnyPublisher<Void, Never> { get }
-    var tappedCategoryDataPublisher: AnyPublisher<Category, Never> { get }
     var categoriesPublisher: AnyPublisher<[Category], Never> { get }
 }
 
@@ -27,39 +29,31 @@ typealias CategoryViewModelProtocol = CategoryViewModelInput & CategoryViewModel
 
 final class CategoryViewModel: CategoryViewModelProtocol {
     // MARK: properties
-    private var presentingCategoryModifyViewControllerSubject = PassthroughSubject<Void, Never>()
-    private var tappedCategoryDataSubject = PassthroughSubject<Category, Never>()
     private var categoriesSubject = CurrentValueSubject<[Category], Never>([])
     
     var categories = [Category]()
-    
+    private var categoryMananger: CategoryManager
     private let useCase: CategoryUseCase
+    private let actions: CategoryViewModelActions?
     
-    init(useCase: CategoryUseCase) {
+    init(useCase: CategoryUseCase, categoryManager: CategoryManager, actions: CategoryViewModelActions? = nil) {
         self.useCase = useCase
+        self.categoryMananger = categoryManager
+        self.actions = actions
     }
     
     // MARK: Output
-    var presentingCategoryModifyViewControllerPublisher: AnyPublisher<Void, Never> {
-        return presentingCategoryModifyViewControllerSubject
-            .eraseToAnyPublisher()
-    }
-    var tappedCategoryDataPublisher: AnyPublisher<Category, Never> {
-        return tappedCategoryDataSubject
-            .eraseToAnyPublisher()
-    }
-    
     var categoriesPublisher: AnyPublisher<[Category], Never> {
         return categoriesSubject.eraseToAnyPublisher()
     }
     
     // MARK: Input
     func createCategoryTapped() {
-        presentingCategoryModifyViewControllerSubject.send()
+        actions?.showModifyCategory(.create, nil)
     }
     
-    func categoryTapped(at index: Int) {
-        tappedCategoryDataSubject.send(categories[index])
+    func updateCategoryTapped(category: Category) {
+        actions?.showModifyCategory(.update, category)
     }
     
     func createCategory(name: String, colorCode: String) async throws {
@@ -81,7 +75,6 @@ final class CategoryViewModel: CategoryViewModelProtocol {
         }
         
         categories[index] = Category(id: id, color: newColorCode, subject: newName)
-        print(categories)
         categoriesSubject.send(categories)
     }
     

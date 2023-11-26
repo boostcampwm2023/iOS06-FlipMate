@@ -19,12 +19,25 @@ final class CategoryDIContainer: CategoryFlowCoordinatorDependencies {
         self.dependencies = dependencies
     }
     
-    func makeCategorySettingViewController() -> UIViewController {
-        return CategorySettingViewController(
-            viewModel: CategoryViewModel(
-                useCase: DefaultCategoryUseCase(
-                    repository: DefaultCategoryRepository(
-                        provider: dependencies.provider))))
+    func makeCategoryViewModel(actions: CategoryViewModelActions? = nil) -> CategoryViewModelProtocol {
+        return CategoryViewModel(
+            useCase: DefaultCategoryUseCase(
+                repository: DefaultCategoryRepository(
+                    provider: dependencies.provider)),
+            categoryManager: dependencies.categoryManager,
+            actions: actions
+        )
+    }
+    
+    func makeCategorySettingViewController(actions: CategoryViewModelActions) -> UIViewController {
+        return CategorySettingViewController(viewModel: makeCategoryViewModel(actions: actions))
+    }
+    
+    func makeCategoryModifyViewController(purpose: CategoryPurpose, category: Category? = nil) -> UIViewController {
+        return CategoryModifyViewController(
+            viewModel: makeCategoryViewModel(),
+            purpose: purpose,
+            category: category)
     }
     
     func makeCategoryFlowCoordinator(navigationController: UINavigationController) -> CategoryFlowCoordinator {

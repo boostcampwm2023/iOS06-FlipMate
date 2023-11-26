@@ -8,7 +8,8 @@
 import UIKit
 
 protocol CategoryFlowCoordinatorDependencies {
-    func makeCategorySettingViewController() -> UIViewController
+    func makeCategorySettingViewController(actions: CategoryViewModelActions) -> UIViewController
+    func makeCategoryModifyViewController(purpose: CategoryPurpose, category: Category?) -> UIViewController
 }
 
 final class CategoryFlowCoordinator: Coordinator {
@@ -22,11 +23,15 @@ final class CategoryFlowCoordinator: Coordinator {
     }
     
     func start() {
-        let viewController = dependencies.makeCategorySettingViewController()
+        let actions = CategoryViewModelActions(
+            showModifyCategory: showCategoryModifyVieWController
+        )
+        let viewController = dependencies.makeCategorySettingViewController(actions: actions)
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func showCategoryModifyVieWController() {
-        
+    private func showCategoryModifyVieWController(purpose: CategoryPurpose, category: Category? = nil) {
+        let categoryModifyViewController = dependencies.makeCategoryModifyViewController(purpose: purpose, category: category)
+        navigationController.pushViewController(categoryModifyViewController, animated: true)
     }
 }
