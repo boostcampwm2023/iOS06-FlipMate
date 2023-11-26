@@ -121,6 +121,10 @@ final class SignUpViewController: BaseViewController {
     func drawTextFieldUnderline() {
         self.nickNameTextField.addSubview(textFieldUnderline)
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
 
 private extension SignUpViewController {
