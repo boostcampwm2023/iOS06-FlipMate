@@ -8,12 +8,12 @@
 import UIKit
 
 final class CategoryColorSelectView: UIView {
-    private var colorLabel: UILabel = {
+    var colorLabel: UILabel = {
         let colorLabel = UILabel()
         colorLabel.translatesAutoresizingMaskIntoConstraints = false
         colorLabel.textColor = .label
         colorLabel.font = FlipMateFont.mediumRegular.font
-        colorLabel.text = "색상을 선택하세요"
+        colorLabel.text = "000000FF"
         
         return colorLabel
     }()
@@ -39,6 +39,7 @@ private extension CategoryColorSelectView {
     func configureUI() {
         addSubview(colorLabel)
         addSubview(colorWell)
+        colorWell.selectedColor = .black
         self.backgroundColor = .systemBackground
         NSLayoutConstraint.activate([
             colorWell.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24.0),
@@ -57,8 +58,7 @@ private extension CategoryColorSelectView {
 // MARK: - objc function
 private extension CategoryColorSelectView {
     @objc func colorWellChanged(_ sender: Any) {
-        colorLabel.text = colorWell.selectedColor?.toHexString()
-    }
+        colorLabel.text = colorWell.selectedColor?.toHexString() }
 }
 @available(iOS 17.0, *)
 #Preview {

@@ -46,6 +46,7 @@ final class CategoryListCollectionViewCell: UICollectionViewCell {
     
     func updateUI(category: Category) {
         subjectLabel.text = category.subject
+        colorCircle.tintColor = UIColor(hexString: category.color)
         timeLabel.text = category.studyTime?.secondsToStringTime()
     }
     

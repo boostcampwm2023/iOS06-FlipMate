@@ -89,18 +89,53 @@ private extension CategorySettingViewController {
             FMLogger.general.error("카테고리 읽는 중 에러 발생 : \(error)")
         }
     }
+    
+    func deleteCategory(id: Int) async {
+        do {
+            try await viewModel.deleteCategory(of: id)
+        } catch let error {
+            FMLogger.general.error("카테고리 삭제 중 에러 발생 : \(error)")
+        }
+    }
 }
 
 // MARK: - CollectionViewDelegate
 extension CategorySettingViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        viewModel.categoryTapped(at: indexPath.row)
-        // 임시로 카테고리 클릭 시 수정화면으로 이동
-        guard let item = dataSource?.itemIdentifier(for: indexPath) else { return }
-        viewModel.updateCategoryTapped(category: item.category)
+        showActionSheet()
     }
 }
 
+// MARK: - objc function
+private extension CategorySettingViewController {
+    @objc func showActionSheet() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let modifyAction = UIAlertAction(title: "카테고리 수정", style: .default) { [weak self] _ in
+            guard let self = self,
+                  let indexPath = self.collectionView.indexPathsForSelectedItems?.first else { return }
+            guard let item = self.dataSource?.itemIdentifier(for: indexPath) else { return }
+            self.viewModel.updateCategoryTapped(category: item.category)
+        }
+        
+        let deleteAction = UIAlertAction(title: "카테고리 삭제", style: .destructive) { [weak self] _ in
+            guard let self = self,
+                  let indexPath = self.collectionView.indexPathsForSelectedItems?.first else { return }
+            guard let item = self.dataSource?.itemIdentifier(for: indexPath) else { return }
+            Task {
+                await self.deleteCategory(id: item.category.id)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        
+        actionSheet.addAction(modifyAction)
+        actionSheet.addAction(deleteAction)
+        actionSheet.addAction(cancelAction)
+        
+        self.present(actionSheet, animated: true)
+    }
+}
 // MARK: - DiffableDataSource
 private extension CategorySettingViewController {
     func setDataSource() {
@@ -169,12 +204,3 @@ private extension CategorySettingViewController {
         }
     }
 }
-
-//@available(iOS 17.0, *)
-//#Preview {
-//    CategorySettingViewController(
-//        viewModel: CategoryViewModel(
-//            useCase: DefaultCategoryUseCase(
-//                repository: DefaultCategoryRepository(
-//                    provider: Provider(urlSession: URLSession.shared)))))
-//}
