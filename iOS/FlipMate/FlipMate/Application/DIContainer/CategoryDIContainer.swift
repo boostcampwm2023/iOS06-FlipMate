@@ -33,14 +33,19 @@ final class CategoryDIContainer: CategoryFlowCoordinatorDependencies {
         return CategorySettingViewController(viewModel: makeCategoryViewModel(actions: actions))
     }
     
-    func makeCategoryModifyViewController(purpose: CategoryPurpose, category: Category? = nil) -> UIViewController {
+    func makeCategoryModifyViewController(
+        purpose: CategoryPurpose,
+        category: Category? = nil
+    ) -> UIViewController {
         return CategoryModifyViewController(
             viewModel: makeCategoryViewModel(),
             purpose: purpose,
             category: category)
     }
     
-    func makeCategoryFlowCoordinator(navigationController: UINavigationController) -> CategoryFlowCoordinator {
+    func makeCategoryFlowCoordinator(
+        navigationController: UINavigationController
+    ) -> CategoryFlowCoordinator {
         return CategoryFlowCoordinator(
             navigationController: navigationController,
             dependencies: self)

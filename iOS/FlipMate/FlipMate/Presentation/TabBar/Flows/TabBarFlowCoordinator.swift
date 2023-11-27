@@ -28,7 +28,10 @@ final class TabBarFlowCoordinator: Coordinator {
     
     func start() {
         let tabBarController = dependencies.makeTabBarController()
-        tabBarController.setViewControllers([makeSocialViewController(), makeTimerViewContorller(), makeChartViewController()], animated: false)
+        tabBarController.setViewControllers(
+            [makeSocialViewController(), makeTimerViewContorller(), makeChartViewController()],
+            animated: false
+        )
         navigationController.view.window?.rootViewController = tabBarController
         navigationController.viewControllers = []
         tabBarController.selectedIndex = 1
@@ -38,22 +41,27 @@ final class TabBarFlowCoordinator: Coordinator {
     private func makeTimerViewContorller() -> UINavigationController {
         let navigationViewController = UINavigationController()
         let timerSceneDIContainer = dependencies.makeTimerDIContainer()
-        let coordinator = timerSceneDIContainer.makeTimerFlowCoordinator(navigationController: navigationViewController)
+        let coordinator = timerSceneDIContainer.makeTimerFlowCoordinator(
+            navigationController: navigationViewController)
         coordinator.start()
         return navigationViewController
     }
     
     private func makeSocialViewController() -> UINavigationController {
         let navigationViewController = UINavigationController()
-        navigationViewController.tabBarItem.image = UIImage(systemName: Constant.socialNomalImageName)
-        navigationViewController.tabBarItem.selectedImage = UIImage(systemName: Constant.socialSelectedImageName)
+        navigationViewController.tabBarItem.image = UIImage(
+            systemName: Constant.socialNomalImageName)
+        navigationViewController.tabBarItem.selectedImage = UIImage(
+            systemName: Constant.socialSelectedImageName)
         return navigationViewController
     }
 
     private func makeChartViewController() -> UINavigationController {
         let navigationViewController = UINavigationController()
-        navigationViewController.tabBarItem.image = UIImage(systemName: Constant.chartNomalImageName)
-        navigationViewController.tabBarItem.selectedImage = UIImage(systemName: Constant.socialSelectedImageName)
+        navigationViewController.tabBarItem.image = UIImage(
+            systemName: Constant.chartNomalImageName)
+        navigationViewController.tabBarItem.selectedImage = UIImage(
+            systemName: Constant.socialSelectedImageName)
         return navigationViewController
     }
     

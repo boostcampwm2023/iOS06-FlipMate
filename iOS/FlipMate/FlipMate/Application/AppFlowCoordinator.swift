@@ -41,12 +41,13 @@ final class AppFlowCoordinator: Coordinator {
             showTabBarViewController()
         } else {
             showLoginViewController()
-        }
+        }        
     }
 
     private func showLoginViewController() {
         let loginDIContainer = appDIContainer.makeLoginDiContainer()
-        let coordinator = loginDIContainer.makeLoginFlowCoordinator(navigationController: navigationController)
+        let coordinator = loginDIContainer.makeLoginFlowCoordinator(
+            navigationController: navigationController)
         coordinator.start()
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
@@ -54,7 +55,8 @@ final class AppFlowCoordinator: Coordinator {
     
     private func showTabBarViewController() {
         let tabBarDIContainer = appDIContainer.makeTabBarDIContainer()
-        let coordinator = tabBarDIContainer.makeTabBarFlowCoordinator(navigationController: navigationController)
+        let coordinator = tabBarDIContainer.makeTabBarFlowCoordinator(
+            navigationController: navigationController)
         coordinator.start()
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
