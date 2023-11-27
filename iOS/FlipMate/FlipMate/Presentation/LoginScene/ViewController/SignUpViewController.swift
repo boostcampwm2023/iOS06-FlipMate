@@ -10,27 +10,32 @@ import UIKit
 final class SignUpViewController: BaseViewController {
     
     // MARK: - View Properties
+    /// 프로필 이미지 뷰
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
-        let cameraButtonView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage(systemName: Constant.profileImageName)
         imageView.tintColor = FlipMateColor.darkBlue.color
-        cameraButtonView.contentMode = .center
-        cameraButtonView.image = UIImage(systemName: Constant.cameraImageName)
-        cameraButtonView.tintColor = FlipMateColor.gray1.color
-        cameraButtonView.backgroundColor = FlipMateColor.gray3.color
-        cameraButtonView.clipsToBounds = true
-        cameraButtonView.frame = CGRect(x: 0, y: 0, width: 33, height: 33)
-        cameraButtonView.layer.cornerRadius = cameraButtonView.frame.height / 2
-        imageView.addSubview(cameraButtonView)
-        cameraButtonView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            cameraButtonView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
-            cameraButtonView.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -30),
-            cameraButtonView.widthAnchor.constraint(equalToConstant: 33),
-            cameraButtonView.heightAnchor.constraint(equalToConstant: 33)
-        ])
+        imageView.clipsToBounds = true
+        imageView.bounds = CGRect(x: 0, y: 0, width: 100, height: 100)
+        imageView.layer.cornerRadius = imageView.bounds.height / 2
+        let tapGestureRecognizer = UITapGestureRecognizer(
+            target: self, action: #selector(profileImageViewTapped))
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(tapGestureRecognizer)
+        return imageView
+    }()
+    
+    private lazy var cameraButton: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: Constant.cameraImageName)
+        imageView.tintColor = FlipMateColor.gray1.color
+        imageView.backgroundColor = FlipMateColor.gray3.color
+        imageView.contentMode = .center
+        imageView.layoutMargins = .init(top: 8, left: 16, bottom: 8, right: 16)
+        imageView.clipsToBounds = true
+        imageView.bounds = CGRect(x: 0, y: 0, width: 33, height: 33)
+        imageView.layer.cornerRadius = imageView.bounds.height / 2
         return imageView
     }()
     
@@ -92,6 +97,7 @@ final class SignUpViewController: BaseViewController {
         
         let subViews = [
             profileImageView,
+            cameraButton,
             nickNameTextField,
             signUpButton
         ]
@@ -106,6 +112,11 @@ final class SignUpViewController: BaseViewController {
             profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             profileImageView.widthAnchor.constraint(equalToConstant: 100),
             profileImageView.heightAnchor.constraint(equalToConstant: 100),
+            
+            cameraButton.widthAnchor.constraint(equalToConstant: 33),
+            cameraButton.heightAnchor.constraint(equalToConstant: 33),
+            cameraButton.trailingAnchor.constraint(equalTo: profileImageView.trailingAnchor),
+            cameraButton.bottomAnchor.constraint(equalTo: profileImageView.bottomAnchor),
             
             nickNameTextField.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 16),
             nickNameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
