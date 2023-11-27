@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhotosUI
 
 final class SignUpViewController: BaseViewController {
     
@@ -83,6 +84,7 @@ final class SignUpViewController: BaseViewController {
         button.clipsToBounds = true
         button.layer.cornerRadius = 15
         button.isEnabled = false
+        button.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -138,6 +140,63 @@ final class SignUpViewController: BaseViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+}
+
+// MARK: - Selector Methods
+private extension SignUpViewController {
+    @objc
+    func profileImageViewTapped() {
+        // 이미지 픽커 처리
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 1
+        configuration.filter = .images
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+    
+    @objc
+    func signUpButtonTapped() {
+        // 회원가입 처리
+    }
+}
+
+// MARK: - PHPickerViewControllerDelegate
+extension SignUpViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        
+        // 유저가 이미지 선택하지 않음
+        guard let itemProvider = results.first?.itemProvider else {
+            FMLogger.general.log("empty result: 유저가 이미지 선택하지 않음")
+            return
+        }
+        
+        // 이미지 로드 실패
+        guard itemProvider.canLoadObject(ofClass: UIImage.self) else {
+            FMLogger.general.error("ERROR: 이미지 로드 불가능")
+            return
+        }
+        
+        // 이미지 처리하기
+        let previousImage = profileImageView.image
+        itemProvider.loadObject(ofClass: UIImage.self) {[weak self] (image, error) in
+            if error != nil {
+                FMLogger.general.error("ERROR: 이미지 로드 중 에러 : \(error)")
+                return
+            }
+            // 이미지 저장
+            DispatchQueue.main.async {
+                guard let self = self,
+                      let image = image as? UIImage,
+                      self.profileImageView.image == previousImage else {
+                    FMLogger.general.error("ERROR: 이미지 저장 실패")
+                    return
+                }
+                self.profileImageView.image = image
+            }
+        }
     }
 }
 
