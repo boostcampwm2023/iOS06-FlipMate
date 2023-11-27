@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { IsEmail, IsString, Length } from 'class-validator';
+import { IsEmail, IsOptional, IsString, Length } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { StudyLogs } from 'src/study-logs/study-logs.entity';
 import { Categories } from 'src/categories/categories.entity';
@@ -43,7 +43,8 @@ export class UsersModel {
   @Column({
     nullable: true,
   })
-  image_url: string;
+  @IsOptional()
+  image_url?: string;
 
   @Column({
     type: 'enum',

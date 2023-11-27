@@ -2,8 +2,6 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UsersModel } from './entity/users.entity';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -12,12 +10,11 @@ export class UsersService {
     private usersRepository: Repository<UsersModel>,
   ) {}
 
-  async createUser(user: CreateUserDto): Promise<UsersModel> {
+  async createUser(user: UsersModel): Promise<UsersModel> {
     try {
       const userObject = this.usersRepository.create({
         nickname: user.nickname,
         email: user.email,
-        image_url: user.image_url,
       });
       return await this.usersRepository.save(userObject);
     } catch (error) {
@@ -30,15 +27,19 @@ export class UsersService {
     }
   }
 
-  async updateUser(user_id: number, user: UpdateUserDto): Promise<UsersModel> {
+  async updateUser(
+    user_id: number,
+    user: UsersModel,
+    image_url?: string,
+  ): Promise<UsersModel> {
     const selectedUser = await this.usersRepository.findOne({
       where: { id: user_id },
     });
     if (user.nickname) {
       selectedUser.nickname = user.nickname;
     }
-    if (user.image_url) {
-      selectedUser.image_url = user.image_url;
+    if (image_url) {
+      selectedUser.image_url = image_url;
     }
 
     const updatedUser = await this.usersRepository.save(selectedUser);

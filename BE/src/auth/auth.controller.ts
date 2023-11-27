@@ -1,5 +1,4 @@
 import { AuthService } from './auth.service';
-
 import {
   Controller,
   Get,
@@ -9,6 +8,8 @@ import {
   Post,
   Body,
   Patch,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
@@ -16,6 +17,7 @@ import { AccessTokenGuard } from './guard/bearer-token.guard';
 import { User } from 'src/users/decorator/user.decorator';
 import {
   ApiBearerAuth,
+  ApiConsumes,
   ApiExcludeEndpoint,
   ApiOperation,
   ApiResponse,
@@ -24,6 +26,7 @@ import {
 import { UsersService } from 'src/users/users.service';
 import { UpdateUserDto } from 'src/users/dto/update-user.dto';
 import { UsersModel } from 'src/users/entity/users.entity';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('로그인 페이지')
 @Controller('auth')
@@ -60,7 +63,9 @@ export class AuthController {
 
   @Patch('info')
   @UseGuards(AccessTokenGuard)
+  @UseInterceptors(FileInterceptor('image'))
   @ApiOperation({ summary: '유저 정보 설정 (완)' })
+  @ApiConsumes('multipart/form-data')
   @ApiResponse({ status: 200, description: '프로필 변경 성공' })
   @ApiResponse({ status: 400, description: '잘못된 요청' })
   @ApiResponse({ status: 401, description: '인증 실패' })
@@ -68,7 +73,17 @@ export class AuthController {
   patchUser(
     @User('id') user_id: number,
     @Body() user: UpdateUserDto,
+    @UploadedFile() file: S3UploadedFile,
   ): Promise<UsersModel> {
-    return this.usersService.updateUser(user_id, user);
+    const image_url = file?.key.replace('public/', '');
+    return this.usersService.updateUser(user_id, user as UsersModel, image_url);
   }
+}
+
+interface S3UploadedFile extends Express.Multer.File {
+  bucket: string;
+  key: string;
+  location: string;
+  etag: string;
+  versionId?: string;
 }
