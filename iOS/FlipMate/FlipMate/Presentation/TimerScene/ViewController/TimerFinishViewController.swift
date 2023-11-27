@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class TimerFinishViewController: BaseViewController {
     private enum Constant {
@@ -16,6 +17,11 @@ final class TimerFinishViewController: BaseViewController {
         static let learningTime = "00:00:00"
     }
     
+    // MARK: - Properties
+    private let viewModel: TimerFinishViewModelProtocol
+    private var cancellables = Set<AnyCancellable>()
+    
+    // MARK: - UI Components
     private lazy var backgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = FlipMateColor.gray1.color
@@ -40,6 +46,7 @@ final class TimerFinishViewController: BaseViewController {
         button.setTitleColor(.white, for: .normal)
         button.layer.borderColor = FlipMateColor.gray2.color?.cgColor
         button.layer.borderWidth = 1
+        button.addTarget(self, action: #selector(saveButtonDidTapped), for: .touchUpInside)
         return button
     }()
     
@@ -51,6 +58,8 @@ final class TimerFinishViewController: BaseViewController {
         button.setTitleColor(.white, for: .normal)
         button.layer.borderColor = FlipMateColor.gray2.color?.cgColor
         button.layer.borderWidth = 1
+        button.addTarget(self, action: #selector(cancleButtonDidTapped), for: .touchUpInside)
+
         return button
     }()
     
@@ -77,6 +86,16 @@ final class TimerFinishViewController: BaseViewController {
         label.textColor = .label
         return label
     }()
+
+    // MARK: - init
+    init(viewModel: TimerFinishViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("Don't use storyboard")
+    }
     
     // MARK: - Life Cycle
     override func configureUI() {
@@ -126,9 +145,35 @@ final class TimerFinishViewController: BaseViewController {
             cancleButton.heightAnchor.constraint(equalTo: finishView.heightAnchor, multiplier: 0.2)
         ])
     }
+    
+    override func bind() {
+        viewModel.learningTimePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] learningTime in
+                guard let self = self else { return }
+                self.learningTimeContentLabel.text = learningTime.secondsToStringTime()
+            }
+            .store(in: &cancellables)
+    }
 }
 
-@available(iOS 17.0, *)
-#Preview {
-    TimerFinishViewController()
+private extension TimerFinishViewController {
+    @objc func saveButtonDidTapped() {
+        viewModel.saveButtonDidTapped()
+    }
+    
+    @objc func cancleButtonDidTapped() {
+        viewModel.cancleButtonDidTapped()
+    }
 }
+
+private extension TimerFinishViewController {
+    func updateLearningTime(time: Int) {
+        learningTimeContentLabel.text = time.secondsToStringTime()
+    }
+}
+
+//@available(iOS 17.0, *)
+//#Preview {
+//    TimerFinishViewController(viewModel: TimerFinishViewModel())
+//}
