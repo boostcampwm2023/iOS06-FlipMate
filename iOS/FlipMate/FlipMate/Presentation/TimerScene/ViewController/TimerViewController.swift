@@ -160,14 +160,6 @@ final class TimerViewController: BaseViewController {
             }
             .store(in: &cancellables)
         
-        timerViewModel.isPresentingCategoryPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] in
-                guard let self = self else { return }
-                self.pushtCategorySettingViewController()
-            }
-            .store(in: &cancellables)
-        
         deviceMotionManager.orientationDidChangePublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] newOrientation in
@@ -218,15 +210,6 @@ private extension TimerViewController {
         } else {
             feedbackManager.startFaceupFeedback()
         }
-    }
-    
-    func pushtCategorySettingViewController() {
-        let categorySettingViewController = CategorySettingViewController(
-            viewModel: CategoryViewModel(
-                useCase: DefaultCategoryUseCase(
-                    repository: DefaultCategoryRepository(
-                        provider: Provider(urlSession: URLSession.shared)))))
-        navigationController?.pushViewController(categorySettingViewController, animated: true)
     }
 }
 
