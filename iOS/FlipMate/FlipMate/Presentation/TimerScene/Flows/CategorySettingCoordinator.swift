@@ -36,7 +36,7 @@ final class CategoryFlowCoordinator: Coordinator {
         let categoryModifyViewController = dependencies.makeCategoryModifyViewController(
             purpose: purpose,
             category: category)
-        navigationController.present(categoryModifyViewController, animated: true)
+        navigationController.pushViewController(categoryModifyViewController, animated: true)
     }
     
     func didFinishCategorySetting() {
