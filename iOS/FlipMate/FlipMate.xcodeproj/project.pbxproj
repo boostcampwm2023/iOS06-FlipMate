@@ -55,6 +55,8 @@
 		2C88DD0F2B14C22C000B4686 /* TimerFinishViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD0E2B14C22C000B4686 /* TimerFinishViewModel.swift */; };
 		2C88DD112B14C50F000B4686 /* DefaultTimerFinishUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD102B14C50F000B4686 /* DefaultTimerFinishUseCase.swift */; };
 		2C88DD132B14C51B000B4686 /* TimerFinishUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD122B14C51B000B4686 /* TimerFinishUseCase.swift */; };
+		2C9F61F72B14EFA200AE63F9 /* CategoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61F62B14EFA200AE63F9 /* CategoryManager.swift */; };
+		2C9F61F92B14F33600AE63F9 /* CategoryManagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61F82B14F33600AE63F9 /* CategoryManagable.swift */; };
 		2CE84EEF2B0B742A00E2FB71 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */; };
 		2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */; };
 		2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF42B0B783800E2FB71 /* UICollectionViewCell++Extension.swift */; };
@@ -181,6 +183,8 @@
 		2C88DD0E2B14C22C000B4686 /* TimerFinishViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishViewModel.swift; sourceTree = "<group>"; };
 		2C88DD102B14C50F000B4686 /* DefaultTimerFinishUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimerFinishUseCase.swift; sourceTree = "<group>"; };
 		2C88DD122B14C51B000B4686 /* TimerFinishUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishUseCase.swift; sourceTree = "<group>"; };
+		2C9F61F62B14EFA200AE63F9 /* CategoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManager.swift; sourceTree = "<group>"; };
+		2C9F61F82B14F33600AE63F9 /* CategoryManagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagable.swift; sourceTree = "<group>"; };
 		2CA80839AC9EFDD4BAA10C67 /* Pods_FlipMate_FlipMateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate_FlipMateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView++Extension.swift"; sourceTree = "<group>"; };
@@ -474,6 +478,14 @@
 			path = Flows;
 			sourceTree = "<group>";
 		};
+		2C9F61F52B14EA9800AE63F9 /* CategoryManager */ = {
+			isa = PBXGroup;
+			children = (
+				2C9F61F62B14EFA200AE63F9 /* CategoryManager.swift */,
+			);
+			path = CategoryManager;
+			sourceTree = "<group>";
+		};
 		48114A3517087E7FD0C9546F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -703,6 +715,7 @@
 		600908FE2AFCDF8D0065DFFB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				2C9F61F52B14EA9800AE63F9 /* CategoryManager */,
 				2C801D812B04C62900A7ABAE /* TimerManager */,
 				EDC851D72B05C357009031EA /* DeviceMotionManager */,
 				2C43A0D62B037BA50005596A /* FeedbackManager */,
@@ -727,6 +740,7 @@
 			isa = PBXGroup;
 			children = (
 				2C6717F72B0535A8004D118D /* Int++Extension.swift */,
+				2C9F61F82B14F33600AE63F9 /* CategoryManagable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1163,6 +1177,7 @@
 				ED3595B22B0C83D700558FAA /* TimerStartResponseDTO.swift in Sources */,
 				2C5CDA582B025426007AFC57 /* FlipMateFont.swift in Sources */,
 				60DE493D2B05DEA400ACE6DD /* FlipMateLogger.swift in Sources */,
+				2C9F61F72B14EFA200AE63F9 /* CategoryManager.swift in Sources */,
 				2C88DCF62B124292000B4686 /* TimerSceneDIContainer.swift in Sources */,
 				2C2F21802B0F4DA600B45BA8 /* MockURLSession.swift in Sources */,
 				2C801D802B04B68900A7ABAE /* TimerUseCase.swift in Sources */,
@@ -1202,6 +1217,7 @@
 				2CE84EF72B0B7F3C00E2FB71 /* CategorySettingSection.swift in Sources */,
 				2C88DD112B14C50F000B4686 /* DefaultTimerFinishUseCase.swift in Sources */,
 				2C3430AD2B0DDF25008CBC85 /* DefaultTimerRepository.swift in Sources */,
+				2C9F61F92B14F33600AE63F9 /* CategoryManagable.swift in Sources */,
 				2C6717F82B0535A8004D118D /* Int++Extension.swift in Sources */,
 				ED3595B92B0C88A300558FAA /* TimerFinishResponseDTO.swift in Sources */,
 				608646552B0DDC3900B0C1BC /* CategoryRequestDTO.swift in Sources */,

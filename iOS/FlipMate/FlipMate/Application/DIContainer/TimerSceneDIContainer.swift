@@ -40,7 +40,8 @@ final class TimerSceneDIContainer: TimerFlowCoordinatorDependencies {
         return TimerViewModel(
             timerUseCase: makeTimerUseCase(),
             userInfoUserCase: makeUserInfoUseCase(),
-            actions: actions)
+            actions: actions,
+            categoryManager: dependencies.categoryManager)
     }
     
     func makeTimerUseCase() -> TimerUseCase {

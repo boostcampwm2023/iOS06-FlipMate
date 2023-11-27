@@ -26,7 +26,7 @@ protocol TimerViewModelInput {
 protocol TimerViewModelOutput {
     var isDeviceFaceDownPublisher: AnyPublisher<Bool, Never> { get }
     var totalTimePublisher: AnyPublisher<Int, Never> { get }
-    var categoryChangePublisher: AnyPublisher<[Category], Never> { get }
+    var categoryChangePublisher: AnyPublisher<Category, Never> { get }
     var categoriesPublisher: AnyPublisher<[Category], Never> { get }
 }
 
@@ -41,7 +41,7 @@ final class TimerViewModel: TimerViewModelProtocol {
     private var isDeviceFaceDownSubject = PassthroughSubject<Bool, Never>()
     private var isPresentingCategorySubject = PassthroughSubject<Void, Never>()
     private var totalTimeSubject = PassthroughSubject<Int, Never>()
-    private var categoryChangeSubject = PassthroughSubject<[Category], Never>()
+    private var categoryChangeSubject = PassthroughSubject<Category, Never>()
     private var categoriesSubject = PassthroughSubject<[Category], Never>()
 
     // MARK: Properties
@@ -50,15 +50,16 @@ final class TimerViewModel: TimerViewModelProtocol {
     private var timerState: TimerState = .notStarted
     private var cancellables = Set<AnyCancellable>()
     private var totalTime: Int = 0 // 총 공부 시간
-    private var categories = [Category]()
     private var selectedCategory: Category?
     private let actions: TimerViewModelActions?
+    private let categoryManager: CategoryManager
     
     // MARK: - init
-    init(timerUseCase: TimerUseCase, userInfoUserCase: StudyLogUseCase, actions: TimerViewModelActions? = nil) {
+    init(timerUseCase: TimerUseCase, userInfoUserCase: StudyLogUseCase, actions: TimerViewModelActions? = nil, categoryManager: CategoryManager) {
         self.timerUseCase = timerUseCase
         self.userInfoUserCase = userInfoUserCase
         self.actions = actions
+        self.categoryManager = categoryManager
     }
     
     // MARK: Output
@@ -74,12 +75,12 @@ final class TimerViewModel: TimerViewModelProtocol {
         return totalTimeSubject.eraseToAnyPublisher()
     }
     
-    var categoryChangePublisher: AnyPublisher<[Category], Never> {
+    var categoryChangePublisher: AnyPublisher<Category, Never> {
         return categoryChangeSubject.eraseToAnyPublisher()
     }
     
     var categoriesPublisher: AnyPublisher<[Category], Never> {
-        return categoriesSubject.eraseToAnyPublisher()
+        return categoryManager.categoryDidChangePublisher
     }
     
     // MARK: Input
@@ -110,7 +111,7 @@ final class TimerViewModel: TimerViewModelProtocol {
             } receiveValue: { [weak self] userInfo in
                 guard let self = self else { return }
                 self.totalTimeDidChange(time: userInfo.totalTime)
-                self.categoriesDidChange(categories: userInfo.category)
+                self.categoryManager.replace(categories: userInfo.category)
             }
             .store(in: &cancellables)
     }
@@ -122,6 +123,12 @@ final class TimerViewModel: TimerViewModelProtocol {
     
     func appendStudyEndLog(studyEndLog: StudyEndLog) {
         totalTimeDidChange(time: studyEndLog.learningTime)
+        guard let categoryId = studyEndLog.categoryId else { return }
+        guard let targetCategory = categoryManager.findCategory(categoryId: categoryId) else { return }
+        guard let studyTime = targetCategory.studyTime else { return }
+        let newCategory = Category(id: targetCategory.id, color: targetCategory.color, subject: targetCategory.subject, studyTime: studyTime + studyEndLog.learningTime)
+        selectedCategory = nil
+        categoryManager.change(category: newCategory)
     }
 }
 
@@ -152,9 +159,8 @@ private extension TimerViewModel {
         totalTimeSubject.send(totalTime)
     }
     
-    func categoriesDidChange(categories: [Category]) {
-        self.categories = categories
-        categoriesSubject.send(categories)
+    func changeCategory(category: Category) {
+        categoryManager.change(category: category)
     }
 }
 

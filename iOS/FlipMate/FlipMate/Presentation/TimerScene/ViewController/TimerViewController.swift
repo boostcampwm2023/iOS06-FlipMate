@@ -172,16 +172,6 @@ final class TimerViewController: BaseViewController {
             .sink { [weak self] categories in
                 guard let self = self else { return }
                 guard var snapShot = self.dataSource?.snapshot() else { return }
-                snapShot.appendItems(categories.map { CategorySettingItem.categoryCell($0) })
-                self.dataSource?.apply(snapShot)
-            }
-            .store(in: &cancellables)
-        
-        timerViewModel.categoryChangePublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] categories in
-                guard let self = self else { return }
-                guard var snapShot = self.dataSource?.snapshot() else { return }
                 let sections: [CategorySettingSection] = [.categorySection([])]
                 snapShot.deleteAllItems()
                 snapShot.appendSections(sections)
@@ -189,6 +179,10 @@ final class TimerViewController: BaseViewController {
                 self.dataSource?.apply(snapShot)
             }
             .store(in: &cancellables)
+        
+        // TODO: 특정 카테고리만 업데이트 구현
+//        timerViewModel.categoryChangePublisher
+            
     }
     
     func appendStudyEndLog(studyEndLog: StudyEndLog) {
@@ -250,6 +244,8 @@ private extension TimerViewController {
             case .categoryCell(let category):
                 let cell: CategoryListCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
                 cell.updateUI(category: category)
+                cell.updateShadow()
+                cell.setTimeLabelHidden(isHidden: false)
                 return cell
             }
         })
