@@ -8,6 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import { v4 } from 'uuid';
 import { GreenEyeResponse } from './interface/greeneye.interface';
 
+
 @Injectable()
 export class UsersService {
   constructor(
@@ -77,6 +78,7 @@ export class UsersService {
 
     return selectedUser;
   }
+
 
   async isNormalImage(image_url: string): Promise<boolean> {
     const THRESHOLD = 0.5;
