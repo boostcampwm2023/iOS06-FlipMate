@@ -26,7 +26,7 @@ export class MatesController {
   @Get()
   @UseGuards(AccessTokenGuard)
   @ApiBearerAuth()
-  @ApiOperation({ summary: '모든 친구들 조회하기' })
+  @ApiOperation({ summary: '모든 친구들 조회하기 (완)' })
   getMates(@User('id') user_id: number): Promise<MatesDto[]> {
     return this.matesService.getMates(user_id);
   }
@@ -45,7 +45,7 @@ export class MatesController {
   @ApiCreatedResponse({
     description: '친구가 성공적으로 구독되었습니다.',
   })
-  @ApiOperation({ summary: '친구 구독하기' })
+  @ApiOperation({ summary: '친구 구독하기 (완)' })
   createMate(
     @User('id') user_id: number,
     @Body('following_nickname') following_nickname: string,
@@ -56,7 +56,7 @@ export class MatesController {
   @Delete('')
   @UseGuards(AccessTokenGuard)
   @ApiBearerAuth()
-  @ApiOperation({ summary: '구독한 친구 구독 취소하기' })
+  @ApiOperation({ summary: '구독한 친구 구독 취소하기 (완)' })
   async deleteMate(
     @User('id') user_id: number,
     @Body('following_id') following_id: string,
