@@ -8,10 +8,28 @@
 import Foundation
 import Combine
 
-final class LoginViewModel {
+struct LoginViewModelActions {
+    let showTabBarController: () -> Void
+    let didFinishLogin: () -> Void
+}
+
+protocol LoginViewModelInput {
+    func didLogin()
+    func didFinishLogin()
+    func requestLogin(accessToken: String)
+}
+
+protocol LoginViewModelOutput { 
+    var isMemberPublisher: AnyPublisher<Bool?, Never> { get }
+}
+
+typealias LoginViewModelProtocol = LoginViewModelInput & LoginViewModelOutput
+
+final class LoginViewModel: LoginViewModelProtocol {
     // MARK: properties
     private let googleAuthUseCase: GoogleAuthUseCase
     private let cancellables: Set<AnyCancellable> = []
+    private let actions: LoginViewModelActions?
     
     private let isMemberSubject = CurrentValueSubject<Bool?, Never>(nil)
     
@@ -19,8 +37,18 @@ final class LoginViewModel {
         return isMemberSubject.eraseToAnyPublisher()
     }
     
-    init(googleAuthUseCase: GoogleAuthUseCase) {
+    init(googleAuthUseCase: GoogleAuthUseCase, actions: LoginViewModelActions? = nil) {
         self.googleAuthUseCase = googleAuthUseCase
+        self.actions = actions
+    }
+    
+    // MARK: - input
+    func didLogin() {
+        actions?.showTabBarController()
+    }
+    
+    func didFinishLogin() {
+        actions?.didFinishLogin()
     }
     
     func requestLogin(accessToken: String) {

@@ -8,9 +8,9 @@
 import Foundation
 
 final class DefaultCategoryRepository: CategoryRepository {
-    private let provider: Provider
+    private let provider: Providable
     
-    init(provider: Provider) {
+    init(provider: Providable) {
         self.provider = provider
     }
     

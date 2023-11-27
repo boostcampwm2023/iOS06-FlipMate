@@ -11,10 +11,6 @@ final class TabBarViewController: UITabBarController {
 
     private enum Constant {
         static let timerImageName = "timer"
-        static let socialNomalImageName = "person.3"
-        static let socialSelectedImageName = "person.3.fill"
-        static let chartNomalImageName = "chart.bar"
-        static let chartSelectedImageName = "chart.bar.fill"
         static let borderWidth: CGFloat = 1.0
         static let timerImageSize: CGFloat = 40
     }
@@ -36,7 +32,6 @@ final class TabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
         configureTabBar()
     }
 
@@ -55,29 +50,6 @@ final class TabBarViewController: UITabBarController {
 
 // MARK: - UI Setting
 private extension TabBarViewController {
-
-    func configureUI() {
-        let timerViewController = TimerViewController(timerViewModel: TimerViewModel(
-            timerUseCase: DefaultTimerUseCase(timerRepository: DefaultTimerRepository(provider: Provider(urlSession: URLSession.shared))),
-            userInfoUserCase: DefaultStudyLogUseCase(userInfoRepository: DefaultStudyLogRepository(provider: Provider(urlSession: URLSession.shared)))))
-        let socialViewController = SocialViewController()
-        let chartViewController = ChartViewController()
-
-        socialViewController.tabBarItem.image = UIImage(systemName: Constant.socialNomalImageName)
-        socialViewController.tabBarItem.selectedImage = UIImage(systemName: Constant.socialSelectedImageName)
-
-        chartViewController.tabBarItem.image = UIImage(systemName: Constant.chartNomalImageName)
-        chartViewController.tabBarItem.selectedImage = UIImage(systemName: Constant.chartSelectedImageName)
-
-        let navigationTimer = UINavigationController(rootViewController: timerViewController)
-        let navigationSocial = UINavigationController(rootViewController: socialViewController)
-        let navigationChart = UINavigationController(rootViewController: chartViewController)
-
-        setViewControllers([navigationSocial, navigationTimer, navigationChart], animated: false)
-
-        selectedIndex = 1
-    }
-
     func setupFrame() {
         var tabFrame = tabBar.frame
         tabFrame.size.height += 10
