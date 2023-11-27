@@ -9,9 +9,9 @@ import Foundation
 import Combine
 import OSLog
 
-
 struct TimerViewModelActions {
     let showCategorySettingViewController: () -> Void
+    let showTimerFinishViewController: (StudyEndLog) -> Void
 }
 
 protocol TimerViewModelInput {
@@ -20,6 +20,7 @@ protocol TimerViewModelInput {
     func deviceProximityDidChange(_ sender: Bool)
     func categorySettingButtoneDidTapped()
     func categoryDidSelected(category: Category)
+    func appendStudyEndLog(studyEndLog: StudyEndLog)
 }
 
 protocol TimerViewModelOutput {
@@ -118,6 +119,10 @@ final class TimerViewModel: TimerViewModelProtocol {
         FMLogger.timer.debug("\(category.subject)가 선택되었습니다.")
         selectedCategory = category
     }
+    
+    func appendStudyEndLog(studyEndLog: StudyEndLog) {
+        totalTimeDidChange(time: studyEndLog.learningTime)
+    }
 }
 
 // MARK: Private Methods
@@ -199,37 +204,10 @@ private extension TimerViewModel {
     
     /// 타이머 일시정지
     func suspendTimer() {
-        let categoryId = selectedCategory?.id
-        timerUseCase.suspendTimer(suspendTime: Date(), categoryId: categoryId)
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    FMLogger.timer.debug("공부 종료 API 요청 성공")
-                    return
-                case .failure(let error):
-                    FMLogger.timer.error("\(error.localizedDescription)")
-                }
-            } receiveValue: { [weak self] learningTime in
-                guard let self = self else { return }
-                self.timerState = .suspended
-                self.totalTime += learningTime
-                self.totalTimeSubject.send(self.totalTime)
-                guard let selectedCategory = selectedCategory,
-                      let categoryStudyTime = selectedCategory.studyTime,
-                      let categoryIndex = self.categories.firstIndex(of: selectedCategory) else { return }
-            
-                let newCategory = Category(
-                    id: selectedCategory.id, 
-                    color: selectedCategory.color,
-                    subject: selectedCategory.subject, 
-                    studyTime: categoryStudyTime + learningTime)
-                
-                categories[categoryIndex] = newCategory
-                categoryChangeSubject.send(categories)
-                self.selectedCategory = nil
-            }
-            .store(in: &cancellables)
+        let learningTime = timerUseCase.suspendTimer(suspendTime: Date())
+        let studyEndLog = StudyEndLog(learningTime: learningTime, endDate: Date(), categoryId: selectedCategory?.id)
+        self.timerState = .suspended
+        actions?.showTimerFinishViewController(studyEndLog)
     }
     
     /// 타이머 종료

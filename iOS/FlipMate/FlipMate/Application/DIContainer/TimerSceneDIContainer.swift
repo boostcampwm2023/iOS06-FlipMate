@@ -24,6 +24,18 @@ final class TimerSceneDIContainer: TimerFlowCoordinatorDependencies {
             timerViewModel: makeTimerViewModel(actions: actions))
     }
     
+    func makeTimerFinishViewController(actions: TimerFinishViewModelActions, studyEndLog: StudyEndLog) -> UIViewController {
+        return TimerFinishViewController(
+            viewModel: makeTimerFinishViewModel(studyEndLog: studyEndLog, actions: actions))
+    }
+    
+    func makeTimerFinishViewModel(studyEndLog: StudyEndLog, actions: TimerFinishViewModelActions) -> TimerFinishViewModel {
+        return TimerFinishViewModel(
+            studyEndLog: studyEndLog,
+            timerFinishUseCase: DefaultTimerFinishUseCase(timerRepository: makeTimerRepository()),
+            actions: actions)
+    }
+    
     func makeTimerViewModel(actions: TimerViewModelActions) -> TimerViewModelProtocol {
         return TimerViewModel(
             timerUseCase: makeTimerUseCase(),

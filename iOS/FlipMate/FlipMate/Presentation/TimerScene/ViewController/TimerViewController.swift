@@ -20,7 +20,7 @@ final class TimerViewController: BaseViewController {
     private var cancellables = Set<AnyCancellable>()
     private var userScreenBrightness: CGFloat = UIScreen.main.brightness
     private var dataSource: CateogoryDataSource?
-
+    
     // MARK: - init
     init(timerViewModel: TimerViewModelProtocol) {
         self.timerViewModel = timerViewModel
@@ -83,7 +83,6 @@ final class TimerViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         configureNotification()
         UIDevice.current.isProximityMonitoringEnabled = true
-        timerViewModel.viewDidLoad()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -190,6 +189,10 @@ final class TimerViewController: BaseViewController {
                 self.dataSource?.apply(snapShot)
             }
             .store(in: &cancellables)
+    }
+    
+    func appendStudyEndLog(studyEndLog: StudyEndLog) {
+        timerViewModel.appendStudyEndLog(studyEndLog: studyEndLog)
     }
 }
 
