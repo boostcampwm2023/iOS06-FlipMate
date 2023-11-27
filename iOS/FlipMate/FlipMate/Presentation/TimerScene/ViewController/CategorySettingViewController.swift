@@ -122,9 +122,7 @@ private extension CategorySettingViewController {
             guard let self = self,
                   let indexPath = self.collectionView.indexPathsForSelectedItems?.first else { return }
             guard let item = self.dataSource?.itemIdentifier(for: indexPath) else { return }
-            Task {
-                await self.deleteCategory(id: item.category.id)
-            }
+            showDeleteAlert()
         }
         
         let cancelAction = UIAlertAction(title: "취소", style: .cancel)
@@ -135,7 +133,30 @@ private extension CategorySettingViewController {
         
         self.present(actionSheet, animated: true)
     }
+    
+    @objc func showDeleteAlert() {
+        guard let indexPath = self.collectionView.indexPathsForSelectedItems?.first else { return }
+        guard let item = self.dataSource?.itemIdentifier(for: indexPath) else { return }
+        let alert = UIAlertController(title: "카테고리 삭제", 
+                                      message: "\(item.category.subject)을(를) 정말 삭제하시겠습니까?",
+                                      preferredStyle: .alert)
+        
+        let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { [weak self] _ in
+            guard let self = self else { return }
+            Task {
+                await self.deleteCategory(id: item.category.id)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true)
+    }
 }
+
 // MARK: - DiffableDataSource
 private extension CategorySettingViewController {
     func setDataSource() {
