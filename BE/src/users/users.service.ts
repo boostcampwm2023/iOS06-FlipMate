@@ -63,4 +63,12 @@ export class UsersService {
 
     return selectedUser;
   }
+
+  async findUserById(user_id: number): Promise<UsersModel> {
+    const selectedUser = await this.usersRepository.findOne({
+      where: { id: user_id },
+    });
+
+    return selectedUser;
+  }
 }
