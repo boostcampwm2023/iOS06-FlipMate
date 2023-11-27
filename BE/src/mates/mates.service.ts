@@ -52,9 +52,10 @@ export class MatesService {
       throw new BadRequestException('이미 친구 관계입니다.');
     }
 
-    const mate = new Mates();
-    mate.follower_id = user;
-    mate.following_id = following;
+    const mate = this.matesRepository.create({
+      follower_id: user,
+      following_id: following,
+    });
 
     const result = await this.matesRepository.save(mate);
     return this.entityToDto(result);
