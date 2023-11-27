@@ -13,17 +13,16 @@ final class CategoryColorSelectView: UIView {
         colorLabel.translatesAutoresizingMaskIntoConstraints = false
         colorLabel.textColor = .label
         colorLabel.font = FlipMateFont.mediumRegular.font
-        colorLabel.text = "# 000000"
+        colorLabel.text = "색상을 선택하세요"
         
         return colorLabel
     }()
     
-    private var colorCircle: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(systemName: "circle.fill")
-        
-        return imageView
+    private lazy var colorWell: UIColorWell = {
+        let colorWell = UIColorWell()
+        colorWell.translatesAutoresizingMaskIntoConstraints = false
+        colorWell.addTarget(self, action: #selector(colorWellChanged(_:)), for: .valueChanged)
+        return colorWell
     }()
     
     override init(frame: CGRect) {
@@ -39,13 +38,13 @@ final class CategoryColorSelectView: UIView {
 private extension CategoryColorSelectView {
     func configureUI() {
         addSubview(colorLabel)
-        addSubview(colorCircle)
+        addSubview(colorWell)
         self.backgroundColor = .systemBackground
         NSLayoutConstraint.activate([
-            colorCircle.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24.0),
-            colorCircle.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            colorCircle.widthAnchor.constraint(equalToConstant: 24.0),
-            colorCircle.heightAnchor.constraint(equalToConstant: 24.0)
+            colorWell.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24.0),
+            colorWell.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            colorWell.widthAnchor.constraint(equalToConstant: 24.0),
+            colorWell.heightAnchor.constraint(equalToConstant: 24.0)
         ])
         
         NSLayoutConstraint.activate([
@@ -55,6 +54,12 @@ private extension CategoryColorSelectView {
     }
 }
 
+// MARK: - objc function
+private extension CategoryColorSelectView {
+    @objc func colorWellChanged(_ sender: Any) {
+        colorLabel.text = colorWell.selectedColor?.toHexString()
+    }
+}
 @available(iOS 17.0, *)
 #Preview {
     CategoryColorSelectView()
