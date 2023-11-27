@@ -52,10 +52,10 @@ final class TimerViewModel: TimerViewModelProtocol {
     private var totalTime: Int = 0 // 총 공부 시간
     private var selectedCategory: Category?
     private let actions: TimerViewModelActions?
-    private let categoryManager: CategoryManager
+    private let categoryManager: CategoryManageable
     
     // MARK: - init
-    init(timerUseCase: TimerUseCase, userInfoUserCase: StudyLogUseCase, actions: TimerViewModelActions? = nil, categoryManager: CategoryManager) {
+    init(timerUseCase: TimerUseCase, userInfoUserCase: StudyLogUseCase, actions: TimerViewModelActions? = nil, categoryManager: CategoryManageable) {
         self.timerUseCase = timerUseCase
         self.userInfoUserCase = userInfoUserCase
         self.actions = actions
