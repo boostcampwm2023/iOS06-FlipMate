@@ -1,5 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { UsersModel } from 'src/users/entity/users.entity';
 import { UsersService } from 'src/users/users.service';
 
 @Injectable()
@@ -49,7 +50,7 @@ export class AuthService {
           id + Buffer.from(user.email + user.auth_type).toString('base64'),
         email: user.email,
         image_url: '',
-      };
+      } as UsersModel;
       const newUser = await this.usersService.createUser(userEntity);
       return {
         access_token: this.signToken(newUser),
