@@ -18,7 +18,7 @@ final class TimerFinishViewController: BaseViewController {
     
     private lazy var backgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = FlipMateColor.gray2.color
+        view.backgroundColor = FlipMateColor.gray1.color
         view.layer.opacity = 0.4
         view.isUserInteractionEnabled = true
         return view
@@ -27,6 +27,8 @@ final class TimerFinishViewController: BaseViewController {
     private lazy var finishView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
+        view.layer.borderColor = FlipMateColor.gray2.color?.cgColor
+        view.layer.borderWidth = 1
         return view
     }()
     
@@ -78,6 +80,8 @@ final class TimerFinishViewController: BaseViewController {
     
     // MARK: - Life Cycle
     override func configureUI() {
+        view.backgroundColor = .clear
+
         [backgroundView, finishView].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -89,10 +93,10 @@ final class TimerFinishViewController: BaseViewController {
         }
         
         NSLayoutConstraint.activate([
-            backgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             finishView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             finishView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
