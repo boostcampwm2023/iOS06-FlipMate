@@ -193,7 +193,7 @@ private extension CategoryModifyViewController {
 // MARK: objc function
 private extension CategoryModifyViewController {
     @objc func closeButtonTapped(_ sender: UIBarButtonItem) {
-        dismiss(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func doneButtonTapped(_ sender: UIBarButtonItem) {

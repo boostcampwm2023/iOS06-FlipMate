@@ -49,6 +49,10 @@ final class CategorySettingViewController: BaseViewController {
         }
     }
     
+    deinit {
+        viewModel.didFinishCategorySetting()
+    }
+    
     // MARK: - Configure UI
     override func configureUI() {
         view.addSubview(collectionView)
@@ -62,20 +66,6 @@ final class CategorySettingViewController: BaseViewController {
     }
     
     override func bind() {
-        viewModel.presentingCategoryModifyViewControllerPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.createCategoryButtonTapped()
-            }
-            .store(in: &cancellables)
-        
-        viewModel.tappedCategoryDataPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] category in
-                self?.updateCategoryTapped(with: category)
-            }
-            .store(in: &cancellables)
-        
         viewModel.categoriesPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] categories in
@@ -104,7 +94,10 @@ private extension CategorySettingViewController {
 // MARK: - CollectionViewDelegate
 extension CategorySettingViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.categoryTapped(at: indexPath.row)
+//        viewModel.categoryTapped(at: indexPath.row)
+        // 임시로 카테고리 클릭 시 수정화면으로 이동
+        guard let item = dataSource?.itemIdentifier(for: indexPath) else { return }
+        viewModel.updateCategoryTapped(category: item.category)
     }
 }
 
@@ -147,18 +140,8 @@ private extension CategorySettingViewController {
         dataSource?.apply(snapshot)
     }
     
-    func createCategoryButtonTapped() {
-        let presentingViewController = CategoryModifyViewController(
-            viewModel: self.viewModel, purpose: .create)
-        let navController = UINavigationController(rootViewController: presentingViewController)
-        present(navController, animated: true)
-    }
-    
     func updateCategoryTapped(with category: Category) {
-        let presentingViewController = CategoryModifyViewController(
-            viewModel: self.viewModel, purpose: .update, category: category)
-        let navController = UINavigationController(rootViewController: presentingViewController)
-        present(navController, animated: true)
+        viewModel.updateCategoryTapped(category: category)
     }
 }
 
@@ -187,11 +170,11 @@ private extension CategorySettingViewController {
     }
 }
 
-@available(iOS 17.0, *)
-#Preview {
-    CategorySettingViewController(
-        viewModel: CategoryViewModel(
-            useCase: DefaultCategoryUseCase(
-                repository: DefaultCategoryRepository(
-                    provider: Provider(urlSession: URLSession.shared)))))
-}
+//@available(iOS 17.0, *)
+//#Preview {
+//    CategorySettingViewController(
+//        viewModel: CategoryViewModel(
+//            useCase: DefaultCategoryUseCase(
+//                repository: DefaultCategoryRepository(
+//                    provider: Provider(urlSession: URLSession.shared)))))
+//}

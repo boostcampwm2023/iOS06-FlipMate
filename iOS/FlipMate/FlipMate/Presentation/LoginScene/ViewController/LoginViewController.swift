@@ -12,7 +12,7 @@ import GoogleSignIn
 final class LoginViewController: BaseViewController {
     
     // MARK: - Properties
-    private let loginViewModel: LoginViewModel
+    private let loginViewModel: LoginViewModelProtocol
     private var cancellables: Set<AnyCancellable> = []
     
     // MARK: - Constant
@@ -23,13 +23,17 @@ final class LoginViewController: BaseViewController {
     }
     
     // MARK: - Init
-    init(loginViewModel: LoginViewModel){
+    init(loginViewModel: LoginViewModelProtocol){
         self.loginViewModel = loginViewModel
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("Don't use storyboard")
+    }
+    
+    deinit {
+        loginViewModel.didFinishLogin()
     }
     
     // MARK: - UI Components
@@ -128,16 +132,13 @@ final class LoginViewController: BaseViewController {
     
     override func bind() {
         loginViewModel.isMemberPublisher
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] isMember in
                 guard let self = self else { return }
                 if let isMember = isMember {
                     if isMember {
                         FMLogger.device.log("타이머 창으로 이동합니다")
-                        DispatchQueue.main.async {
-                            let tabBarViewController = TabBarViewController()
-                            tabBarViewController.modalPresentationStyle = .fullScreen
-                            self.view.window?.rootViewController = tabBarViewController
-                        }
+                        loginViewModel.didLogin()
                     } else {
                         FMLogger.device.log("회원가입 창으로 이동합니다")
                     }
@@ -149,11 +150,8 @@ final class LoginViewController: BaseViewController {
 
 // MARK: - Objc func
 private extension LoginViewController {
-    // TODO: Condinator 패턴 도입 !?
     @objc func loginSkipButtonDidTapped() {
-        let tabBarViewController = TabBarViewController()
-        tabBarViewController.modalPresentationStyle = .fullScreen
-        view.window?.rootViewController = tabBarViewController
+        loginViewModel.didLogin()
     }
     
     @objc func handleGoogleLoginButton() {
@@ -170,7 +168,6 @@ private extension LoginViewController {
         }
     }
 }
-
 
 // MARK: - UIButton extension
 fileprivate extension UIButton {
