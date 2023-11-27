@@ -18,6 +18,7 @@ import { MatesService } from './mates.service';
 import { MatesDto } from './dto/response/mates.dto';
 import { StatusMessageDto } from './dto/response/status-message.dto';
 import { AccessTokenGuard } from 'src/auth/guard/bearer-token.guard';
+import { UsersModel } from 'src/users/entity/users.entity';
 
 @Controller('mates')
 @ApiTags('소셜 페이지')
@@ -47,10 +48,10 @@ export class MatesController {
   })
   @ApiOperation({ summary: '친구 구독하기 (완)' })
   createMate(
-    @User('id') user_id: number,
+    @User() user: UsersModel,
     @Body('following_nickname') following_nickname: string,
   ): Promise<MatesDto> {
-    return this.matesService.addMate(user_id, following_nickname);
+    return this.matesService.addMate(user, following_nickname);
   }
 
   @Delete('')
@@ -58,10 +59,10 @@ export class MatesController {
   @ApiBearerAuth()
   @ApiOperation({ summary: '구독한 친구 구독 취소하기 (완)' })
   async deleteMate(
-    @User('id') user_id: number,
-    @Body('following_id') following_id: string,
+    @User() user: UsersModel,
+    @Body('following_id') following_id: number,
   ): Promise<StatusMessageDto> {
-    await this.matesService.deleteMate(user_id, following_id);
+    await this.matesService.deleteMate(user, following_id);
 
     return {
       statusCode: 200,

@@ -26,17 +26,14 @@ export class MatesService {
   }
 
   async addMate(
-    user_id: number,
+    user: UsersModel,
     following_nickname: string,
   ): Promise<MatesDto> {
-    const user = await this.userRepository.findOne({
-      where: { id: user_id },
-    });
     const following = await this.userRepository.findOne({
       where: { nickname: following_nickname },
     });
 
-    if (user_id === following.id) {
+    if (user.id === following.id) {
       throw new BadRequestException('자신을 친구 추가 할 수 없습니다.');
     }
 
@@ -61,10 +58,13 @@ export class MatesService {
     return this.entityToDto(result);
   }
 
-  async deleteMate(user_id, following_id): Promise<void> {
+  async deleteMate(user: UsersModel, following_id: number): Promise<void> {
+    const following = await this.userRepository.findOne({
+      where: { id: following_id },
+    });
     const result = await this.matesRepository.delete({
-      follower_id: user_id,
-      following_id: following_id,
+      follower_id: user,
+      following_id: following,
     });
 
     if (result.affected === 0) {
