@@ -8,5 +8,5 @@
 import Foundation
 
 protocol GoogleAuthRepository {
-    func login(with accessToken: String) async throws -> GoogleAuthResponseDTO
+    func login(with accessToken: String) async throws -> User
 }
