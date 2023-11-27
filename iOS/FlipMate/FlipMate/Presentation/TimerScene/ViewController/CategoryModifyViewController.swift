@@ -52,15 +52,17 @@ final class CategoryModifyViewController: BaseViewController {
         return label
     }()
     
-    private lazy var categoryTitleTextView: CategoryTitleTextView = {
-        let textView = CategoryTitleTextView(placeholder: Constant.placeHolders[0])
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.layer.masksToBounds = true
-        textView.layer.cornerRadius = 6
-        textView.layer.borderColor = FlipMateColor.gray2.color?.cgColor
-        textView.layer.borderWidth = 1
+    private lazy var categoryTitleTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.delegate = self
+        textField.layer.masksToBounds = true
+        textField.layer.cornerRadius = 6
+        textField.layer.borderColor = FlipMateColor.gray2.color?.cgColor
+        textField.layer.borderWidth = 1
+        textField.clearButtonMode = .always
         
-        return textView
+        return textField
     }()
     
     private lazy var categoryColorSelectView: CategoryColorSelectView = {
@@ -99,9 +101,12 @@ final class CategoryModifyViewController: BaseViewController {
     override func configureUI() {
         view.backgroundColor = .systemBackground
         
+        categoryTitleTextField.placeholder = Constant.placeHolders[0]
+        categoryTitleTextField.addLeftPadding(width: 15)
+        
         let subViews = [
             firstSectionTitleLabel,
-            categoryTitleTextView,
+            categoryTitleTextField,
             secondSectionTitleLabel,
             categoryColorSelectView
         ]
@@ -118,17 +123,18 @@ final class CategoryModifyViewController: BaseViewController {
         ])
         
         NSLayoutConstraint.activate([
-            categoryTitleTextView.topAnchor.constraint(
+            categoryTitleTextField.topAnchor.constraint(
                 equalTo: firstSectionTitleLabel.bottomAnchor, constant: 12),
-            categoryTitleTextView.leadingAnchor.constraint(
+            categoryTitleTextField.leadingAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            categoryTitleTextView.trailingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
+            categoryTitleTextField.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
+            categoryTitleTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         NSLayoutConstraint.activate([
             secondSectionTitleLabel.topAnchor.constraint(
-                equalTo: categoryTitleTextView.bottomAnchor, constant: 60),
+                equalTo: categoryTitleTextField.bottomAnchor, constant: 60),
             secondSectionTitleLabel.leftAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 32)
         ])
@@ -141,7 +147,7 @@ final class CategoryModifyViewController: BaseViewController {
             categoryColorSelectView.trailingAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
             categoryColorSelectView.heightAnchor.constraint(
-                equalTo: categoryTitleTextView.heightAnchor)
+                equalTo: categoryTitleTextField.heightAnchor)
         ])
         
         if purpose == .update {
@@ -149,11 +155,16 @@ final class CategoryModifyViewController: BaseViewController {
                 FMLogger.general.error("가져온 카테고리 없음 에러")
                 return
             }
-            categoryTitleTextView.setText(text: category.subject)
+            setText(text: category.subject)
         }
     }
 }
-
+// MARK: UITextFieldDelegate
+extension CategoryModifyViewController: UITextFieldDelegate {
+    func setText(text: String) {
+        categoryTitleTextField.text = text
+    }
+}
 // MARK: Navigation Bar
 private extension CategoryModifyViewController {
     func setUpNavigation() {
@@ -190,7 +201,7 @@ private extension CategoryModifyViewController {
         if purpose == .create {
             Task {
                 do {
-                    guard let categoryTitle = categoryTitleTextView.text() else {
+                    guard let categoryTitle = categoryTitleTextField.text else {
                         FMLogger.general.error("빈 제목, 추가할 수 없음")
                         return
                     }
@@ -203,7 +214,7 @@ private extension CategoryModifyViewController {
         } else {
             Task {
                 do {
-                    guard let categoryTitle = categoryTitleTextView.text() else {
+                    guard let categoryTitle = categoryTitleTextField.text else {
                         FMLogger.general.error("빈 제목, 추가할 수 없음")
                         return
                     }
@@ -220,3 +231,7 @@ private extension CategoryModifyViewController {
         }
     }
 }
+//@available(iOS 17.0, *)
+//#Preview {
+//    CategoryModifyViewController(viewModel: CategoryViewModel(useCase: DefaultCategoryUseCase(repository: DefaultCategoryRepository(provider: Provider(urlSession: URLSession.shared)))), purpose: .create)
+//}
