@@ -5,10 +5,11 @@ import { AuthController } from './auth.controller';
 import { UsersModule } from 'src/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { GoogleStrategy } from './google.strategy';
+import { MulterModule } from '@nestjs/platform-express';
+import { multerConfig } from 'src/common/multer.config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -16,6 +17,11 @@ import { GoogleStrategy } from './google.strategy';
         secret: configService.get('JWT_SECRET'),
         signOptions: { expiresIn: configService.get('JWT_EXPIRES_IN') },
       }),
+    }),
+    MulterModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: multerConfig,
     }),
     UsersModule,
   ],

@@ -8,6 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import { v4 } from 'uuid';
 import { GreenEyeResponse } from './interface/greeneye.interface';
 
+
 @Injectable()
 export class UsersService {
   constructor(
@@ -16,12 +17,11 @@ export class UsersService {
     private config: ConfigService,
   ) {}
 
-  async createUser(user: CreateUserDto): Promise<UsersModel> {
+  async createUser(user: UsersModel): Promise<UsersModel> {
     try {
       const userObject = this.usersRepository.create({
         nickname: user.nickname,
         email: user.email,
-        image_url: user.image_url,
       });
       return await this.usersRepository.save(userObject);
     } catch (error) {
@@ -34,15 +34,19 @@ export class UsersService {
     }
   }
 
-  async updateUser(user_id: number, user: UpdateUserDto): Promise<UsersModel> {
+  async updateUser(
+    user_id: number,
+    user: UsersModel,
+    image_url?: string,
+  ): Promise<UsersModel> {
     const selectedUser = await this.usersRepository.findOne({
       where: { id: user_id },
     });
     if (user.nickname) {
       selectedUser.nickname = user.nickname;
     }
-    if (user.image_url) {
-      selectedUser.image_url = user.image_url;
+    if (image_url) {
+      selectedUser.image_url = image_url;
     }
 
     const updatedUser = await this.usersRepository.save(selectedUser);
@@ -66,6 +70,13 @@ export class UsersService {
 
     return selectedUser;
   }
+
+  async findUserById(user_id: number): Promise<UsersModel> {
+    const selectedUser = await this.usersRepository.findOne({
+      where: { id: user_id },
+    });
+
+    return selectedUser;
 
   async isNormalImage(image_url: string): Promise<boolean> {
     const THRESHOLD = 0.5;
@@ -109,5 +120,6 @@ export class UsersService {
     } catch (error) {
       throw new BadRequestException('이미지 검사 요청 실패');
     }
+
   }
 }
