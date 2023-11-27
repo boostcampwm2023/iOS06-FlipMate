@@ -51,6 +51,7 @@
 		2C88DD072B125781000B4686 /* TabBarDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD062B125781000B4686 /* TabBarDIContainer.swift */; };
 		2C88DD092B1274FA000B4686 /* CategorySettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */; };
 		2C88DD0B2B1340E4000B4686 /* CategoryDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */; };
+		2C88DD0D2B148E9B000B4686 /* TimerFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD0C2B148E9B000B4686 /* TimerFinishViewController.swift */; };
 		2CE84EEF2B0B742A00E2FB71 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */; };
 		2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */; };
 		2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF42B0B783800E2FB71 /* UICollectionViewCell++Extension.swift */; };
@@ -173,6 +174,7 @@
 		2C88DD062B125781000B4686 /* TabBarDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarDIContainer.swift; sourceTree = "<group>"; };
 		2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingCoordinator.swift; sourceTree = "<group>"; };
 		2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDIContainer.swift; sourceTree = "<group>"; };
+		2C88DD0C2B148E9B000B4686 /* TimerFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishViewController.swift; sourceTree = "<group>"; };
 		2CA80839AC9EFDD4BAA10C67 /* Pods_FlipMate_FlipMateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate_FlipMateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView++Extension.swift"; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 				601773E32B021E6000D175D9 /* TimerViewController.swift */,
 				2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */,
 				ED3595BC2B0DB29F00558FAA /* CategoryModifyViewController.swift */,
+				2C88DD0C2B148E9B000B4686 /* TimerFinishViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1164,6 +1167,7 @@
 				2C3430AB2B0DDB8D008CBC85 /* TimerEndpoints.swift in Sources */,
 				ED3842212B0F1CF9001E2803 /* User.swift in Sources */,
 				2C3430A12B0DA4E6008CBC85 /* BaseComponents.swift in Sources */,
+				2C88DD0D2B148E9B000B4686 /* TimerFinishViewController.swift in Sources */,
 				2C3430A12B0DA4E6008CBC85 /* BaseComponents.swift in Sources */,
 				2C2F21832B0F53B500B45BA8 /* StduyLogMock.swift in Sources */,
 				60F67C682B0E1785002C8BF3 /* CategoryUseCase.swift in Sources */,
