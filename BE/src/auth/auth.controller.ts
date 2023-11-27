@@ -74,13 +74,25 @@ export class AuthController {
   @ApiResponse({ status: 400, description: '잘못된 요청' })
   @ApiResponse({ status: 401, description: '인증 실패' })
   @ApiBearerAuth()
-  patchUser(
+  async patchUser(
     @User('id') user_id: number,
     @Body() user: UpdateUserDto,
     @UploadedFile() file: S3UploadedFile,
-  ): Promise<UsersModel> {
+  ): Promise<any> {
     const image_url = file?.key;
-    return this.usersService.updateUser(user_id, user as UsersModel, image_url);
+    const updatedUser = await this.usersService.updateUser(
+      user_id,
+      user as UsersModel,
+      image_url,
+    );
+    return {
+      nickname: updatedUser.nickname,
+      email: updatedUser.email,
+      image_url: path.join(
+        this.configService.get(ENV.CDN_ENDPOINT),
+        updatedUser.image_url,
+      ),
+    };
   }
 
   @Get('info')
