@@ -4,6 +4,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { StudyLogs } from 'src/study-logs/study-logs.entity';
 import { Categories } from 'src/categories/categories.entity';
 import { AuthTypeEnum } from '../const/auth-type.const';
+import { Mates } from 'src/mates/mates.entity';
 
 @Entity()
 export class UsersModel {
@@ -57,4 +58,10 @@ export class UsersModel {
 
   @OneToMany(() => Categories, (category) => category.user_id)
   categories: Categories[];
+
+  @OneToMany(() => Mates, (mate) => mate.follower_id)
+  follower: Mates[];
+
+  @OneToMany(() => Mates, (mate) => mate.following_id)
+  following: Mates[];
 }
