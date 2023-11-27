@@ -2,12 +2,19 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UsersModel } from './entity/users.entity';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { ConfigService } from '@nestjs/config';
+import { v4 } from 'uuid';
+import { GreenEyeResponse } from './interface/greeneye.interface';
+
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(UsersModel)
     private usersRepository: Repository<UsersModel>,
+    private config: ConfigService,
   ) {}
 
   async createUser(user: UsersModel): Promise<UsersModel> {
@@ -70,5 +77,49 @@ export class UsersService {
     });
 
     return selectedUser;
+
+  async isNormalImage(image_url: string): Promise<boolean> {
+    const THRESHOLD = 0.5;
+    const response = await this.requestClovaGreenEye(image_url);
+    const result = response.images[0].result;
+    const message = response.images[0].message;
+    if (message !== 'SUCCESS') {
+      throw new BadRequestException('이미지 인식 실패');
+    }
+    const normalScore = result.normal.confidence;
+    const isNormal = normalScore > THRESHOLD ? true : false;
+
+    return isNormal;
+  }
+
+  async requestClovaGreenEye(image_url: string): Promise<GreenEyeResponse> {
+    const APIURL = this.config.get<string>('GREENEYE_URL');
+    const CLIENT_SECRET = this.config.get<string>('GREENEYE_SECRET');
+    const UUID = v4();
+    try {
+      const response = await fetch(APIURL, {
+        method: 'POST',
+        headers: {
+          'X-GREEN-EYE-SECRET': CLIENT_SECRET,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          version: 'V1',
+          requestId: UUID,
+          timestamp: Date.now(),
+          images: [
+            {
+              name: `${UUID}_profile`,
+              url: image_url,
+            },
+          ],
+        }),
+      });
+
+      return response.json();
+    } catch (error) {
+      throw new BadRequestException('이미지 검사 요청 실패');
+    }
+
   }
 }

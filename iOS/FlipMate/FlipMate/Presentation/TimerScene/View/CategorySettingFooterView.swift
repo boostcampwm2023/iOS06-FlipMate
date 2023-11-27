@@ -71,7 +71,6 @@ private extension CategorySettingFooterView {
 
 private extension CategorySettingFooterView {
     func configureGestureRecognizers() {
-        print("tapgesture added")
         tapGestureRecognizer.cancelsTouchesInView = false
         self.addGestureRecognizer(tapGestureRecognizer)
     }

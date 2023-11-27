@@ -14,7 +14,7 @@ final class DefaultGoogleAuthUseCase: GoogleAuthUseCase {
         self.repository = repository
     }
     
-    func googleLogin(accessToken: String) async throws -> GoogleAuthResponseDTO {
+    func googleLogin(accessToken: String) async throws -> User {
         return try await repository.login(with: accessToken)
     }
 }

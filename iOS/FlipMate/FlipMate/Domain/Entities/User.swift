@@ -8,5 +8,6 @@
 import Foundation
 
 struct User {
-    let accessToken: String?
+    let isMember: Bool
+    let accessToken: String
 }

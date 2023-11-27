@@ -41,6 +41,16 @@
 		2C801D7E2B04B65400A7ABAE /* DefaultTimerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C801D7D2B04B65400A7ABAE /* DefaultTimerUseCase.swift */; };
 		2C801D802B04B68900A7ABAE /* TimerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C801D7F2B04B68900A7ABAE /* TimerUseCase.swift */; };
 		2C801D832B04C64F00A7ABAE /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C801D822B04C64F00A7ABAE /* TimerManager.swift */; };
+		2C88DCF22B124238000B4686 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */; };
+		2C88DCF42B124272000B4686 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF32B124272000B4686 /* AppDIContainer.swift */; };
+		2C88DCF62B124292000B4686 /* TimerSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF52B124292000B4686 /* TimerSceneDIContainer.swift */; };
+		2C88DCF92B1242DA000B4686 /* TimerFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF82B1242DA000B4686 /* TimerFlowCoordinator.swift */; };
+		2C88DCFB2B124451000B4686 /* LoginDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCFA2B124451000B4686 /* LoginDIContainer.swift */; };
+		2C88DCFE2B1244A6000B4686 /* LoginFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCFD2B1244A6000B4686 /* LoginFlowCoordinator.swift */; };
+		2C88DD052B1256D0000B4686 /* TabBarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD042B1256D0000B4686 /* TabBarFlowCoordinator.swift */; };
+		2C88DD072B125781000B4686 /* TabBarDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD062B125781000B4686 /* TabBarDIContainer.swift */; };
+		2C88DD092B1274FA000B4686 /* CategorySettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */; };
+		2C88DD0B2B1340E4000B4686 /* CategoryDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */; };
 		2CE84EEF2B0B742A00E2FB71 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */; };
 		2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */; };
 		2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF42B0B783800E2FB71 /* UICollectionViewCell++Extension.swift */; };
@@ -79,7 +89,6 @@
 		ED3595B72B0C887C00558FAA /* TimerFinishRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595B62B0C887C00558FAA /* TimerFinishRequestDTO.swift */; };
 		ED3595B92B0C88A300558FAA /* TimerFinishResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595B82B0C88A300558FAA /* TimerFinishResponseDTO.swift */; };
 		ED3595BD2B0DB29F00558FAA /* CategoryModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595BC2B0DB29F00558FAA /* CategoryModifyViewController.swift */; };
-		ED3595BF2B0DB68200558FAA /* CategoryTitleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595BE2B0DB68200558FAA /* CategoryTitleTextView.swift */; };
 		ED3595C12B0DC2F100558FAA /* CategoryColorSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */; };
 		ED38421B2B0F1B7E001E2803 /* GoogleAuthRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38421A2B0F1B7E001E2803 /* GoogleAuthRequestDTO.swift */; };
 		ED38421D2B0F1BE9001E2803 /* GoogleAuthEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38421C2B0F1BE9001E2803 /* GoogleAuthEndpoints.swift */; };
@@ -92,6 +101,8 @@
 		ED38422C2B0F4531001E2803 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422B2B0F4531001E2803 /* LoginViewModel.swift */; };
 		ED38422F2B0F747B001E2803 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422E2B0F747B001E2803 /* KeyChainManager.swift */; };
 		ED3842312B0F94E6001E2803 /* DefaultCategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842302B0F94E6001E2803 /* DefaultCategoryRepository.swift */; };
+		ED82F0072B126C95005BB32D /* UITextField++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F0062B126C95005BB32D /* UITextField++Extension.swift */; };
+		ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */; };
 		ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A7E2B06033F008FE1C5 /* Category.swift */; };
 		ED9B2A812B06048D008FE1C5 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */; };
 		EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851C62B021492009031EA /* TabBarViewController.swift */; };
@@ -152,6 +163,16 @@
 		2C801D7D2B04B65400A7ABAE /* DefaultTimerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimerUseCase.swift; sourceTree = "<group>"; };
 		2C801D7F2B04B68900A7ABAE /* TimerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerUseCase.swift; sourceTree = "<group>"; };
 		2C801D822B04C64F00A7ABAE /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
+		2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
+		2C88DCF32B124272000B4686 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
+		2C88DCF52B124292000B4686 /* TimerSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSceneDIContainer.swift; sourceTree = "<group>"; };
+		2C88DCF82B1242DA000B4686 /* TimerFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFlowCoordinator.swift; sourceTree = "<group>"; };
+		2C88DCFA2B124451000B4686 /* LoginDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDIContainer.swift; sourceTree = "<group>"; };
+		2C88DCFD2B1244A6000B4686 /* LoginFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFlowCoordinator.swift; sourceTree = "<group>"; };
+		2C88DD042B1256D0000B4686 /* TabBarFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowCoordinator.swift; sourceTree = "<group>"; };
+		2C88DD062B125781000B4686 /* TabBarDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarDIContainer.swift; sourceTree = "<group>"; };
+		2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingCoordinator.swift; sourceTree = "<group>"; };
+		2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDIContainer.swift; sourceTree = "<group>"; };
 		2CA80839AC9EFDD4BAA10C67 /* Pods_FlipMate_FlipMateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate_FlipMateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView++Extension.swift"; sourceTree = "<group>"; };
@@ -200,7 +221,6 @@
 		ED3595B62B0C887C00558FAA /* TimerFinishRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishRequestDTO.swift; sourceTree = "<group>"; };
 		ED3595B82B0C88A300558FAA /* TimerFinishResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishResponseDTO.swift; sourceTree = "<group>"; };
 		ED3595BC2B0DB29F00558FAA /* CategoryModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModifyViewController.swift; sourceTree = "<group>"; };
-		ED3595BE2B0DB68200558FAA /* CategoryTitleTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTitleTextView.swift; sourceTree = "<group>"; };
 		ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColorSelectView.swift; sourceTree = "<group>"; };
 		ED38421A2B0F1B7E001E2803 /* GoogleAuthRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthRequestDTO.swift; sourceTree = "<group>"; };
 		ED38421C2B0F1BE9001E2803 /* GoogleAuthEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthEndpoints.swift; sourceTree = "<group>"; };
@@ -213,6 +233,8 @@
 		ED38422B2B0F4531001E2803 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		ED38422E2B0F747B001E2803 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		ED3842302B0F94E6001E2803 /* DefaultCategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCategoryRepository.swift; sourceTree = "<group>"; };
+		ED82F0062B126C95005BB32D /* UITextField++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++Extension.swift"; sourceTree = "<group>"; };
+		ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor++Extension.swift"; sourceTree = "<group>"; };
 		ED9B2A7E2B06033F008FE1C5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		EDC851C62B021492009031EA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -301,6 +323,8 @@
 			isa = PBXGroup;
 			children = (
 				2C4D55AA2B033029006D7C26 /* UIView++Extension.swift */,
+				ED82F0062B126C95005BB32D /* UITextField++Extension.swift */,
+				ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -398,6 +422,48 @@
 			path = TimerManager;
 			sourceTree = "<group>";
 		};
+		2C88DCF72B1242C7000B4686 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				2C88DCF82B1242DA000B4686 /* TimerFlowCoordinator.swift */,
+				2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		2C88DCFC2B124498000B4686 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				2C88DCFD2B1244A6000B4686 /* LoginFlowCoordinator.swift */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		2C88DD012B1256B5000B4686 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				2C88DD032B1256C4000B4686 /* Flows */,
+				2C88DD022B1256BD000B4686 /* ViewController */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		2C88DD022B1256BD000B4686 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EDC851C62B021492009031EA /* TabBarViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2C88DD032B1256C4000B4686 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				2C88DD042B1256D0000B4686 /* TabBarFlowCoordinator.swift */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
 		48114A3517087E7FD0C9546F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -471,6 +537,7 @@
 		600908ED2AFCDB6E0065DFFB /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */,
 				600908BD2AFCD7DF0065DFFB /* AppDelegate.swift */,
 				600908BF2AFCD7DF0065DFFB /* SceneDelegate.swift */,
 				600909042AFCE0AB0065DFFB /* DIContainer */,
@@ -491,6 +558,7 @@
 		600908EF2AFCDBC90065DFFB /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				2C88DD012B1256B5000B4686 /* TabBar */,
 				2C2F21812B0F53AB00B45BA8 /* Mocks */,
 				600908F62AFCDDDC0065DFFB /* Splash */,
 				600908F42AFCDCFA0065DFFB /* LoginScene */,
@@ -499,7 +567,6 @@
 				600908F22AFCDCE10065DFFB /* SocialScene */,
 				600908F52AFCDD0A0065DFFB /* MyPageScene */,
 				600908FE2AFCDF8D0065DFFB /* Utils */,
-				EDC851C62B021492009031EA /* TabBarViewController.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -507,6 +574,7 @@
 		600908F12AFCDCD80065DFFB /* TimerScene */ = {
 			isa = PBXGroup;
 			children = (
+				2C88DCF72B1242C7000B4686 /* Flows */,
 				2C4D55B12B035476006D7C26 /* Model */,
 				EDC851D02B04EE74009031EA /* View */,
 				2C4D55AC2B0348D1006D7C26 /* ViewModel */,
@@ -534,6 +602,7 @@
 		600908F42AFCDCFA0065DFFB /* LoginScene */ = {
 			isa = PBXGroup;
 			children = (
+				2C88DCFC2B124498000B4686 /* Flows */,
 				2C5CDA492B0252C1007AFC57 /* Model */,
 				ED38422A2B0F451F001E2803 /* ViewModel */,
 				2C5CDA462B0252B2007AFC57 /* ViewController */,
@@ -675,6 +744,11 @@
 		600909042AFCE0AB0065DFFB /* DIContainer */ = {
 			isa = PBXGroup;
 			children = (
+				2C88DCF32B124272000B4686 /* AppDIContainer.swift */,
+				2C88DCF52B124292000B4686 /* TimerSceneDIContainer.swift */,
+				2C88DCFA2B124451000B4686 /* LoginDIContainer.swift */,
+				2C88DD062B125781000B4686 /* TabBarDIContainer.swift */,
+				2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -782,7 +856,6 @@
 			children = (
 				EDC851D12B04EE83009031EA /* CategoryListCollectionViewCell.swift */,
 				2CE84EF82B0B8A0B00E2FB71 /* CategorySettingFooterView.swift */,
-				ED3595BE2B0DB68200558FAA /* CategoryTitleTextView.swift */,
 				ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */,
 			);
 			path = View;
@@ -1062,6 +1135,9 @@
 				2C4D55B02B0348FB006D7C26 /* TimerViewModel.swift in Sources */,
 				ED3842252B0F1DDA001E2803 /* DefaultGoogleAuthUseCase.swift in Sources */,
 				2C801D7E2B04B65400A7ABAE /* DefaultTimerUseCase.swift in Sources */,
+				2C88DCFB2B124451000B4686 /* LoginDIContainer.swift in Sources */,
+				2C88DD072B125781000B4686 /* TabBarDIContainer.swift in Sources */,
+				2C88DD092B1274FA000B4686 /* CategorySettingCoordinator.swift in Sources */,
 				2C4D55AB2B033029006D7C26 /* UIView++Extension.swift in Sources */,
 				60F67C6A2B0E1868002C8BF3 /* DefaultCategoryUseCase.swift in Sources */,
 				2C5CDA4B2B0252C1007AFC57 /* LoginType.swift in Sources */,
@@ -1075,11 +1151,15 @@
 				ED3595B22B0C83D700558FAA /* TimerStartResponseDTO.swift in Sources */,
 				2C5CDA582B025426007AFC57 /* FlipMateFont.swift in Sources */,
 				60DE493D2B05DEA400ACE6DD /* FlipMateLogger.swift in Sources */,
+				2C88DCF62B124292000B4686 /* TimerSceneDIContainer.swift in Sources */,
 				2C2F21802B0F4DA600B45BA8 /* MockURLSession.swift in Sources */,
 				2C801D802B04B68900A7ABAE /* TimerUseCase.swift in Sources */,
 				6086464E2B0DDA1300B0C1BC /* CategoryRepository.swift in Sources */,
 				2C2F21782B0F4CCC00B45BA8 /* StudyLog.swift in Sources */,
+				ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */,
+				2C88DCFE2B1244A6000B4686 /* LoginFlowCoordinator.swift in Sources */,
 				601773E42B021E6000D175D9 /* TimerViewController.swift in Sources */,
+				2C88DCF92B1242DA000B4686 /* TimerFlowCoordinator.swift in Sources */,
 				600908C22AFCD7DF0065DFFB /* ViewController.swift in Sources */,
 				2C3430AB2B0DDB8D008CBC85 /* TimerEndpoints.swift in Sources */,
 				ED3842212B0F1CF9001E2803 /* User.swift in Sources */,
@@ -1087,12 +1167,12 @@
 				2C3430A12B0DA4E6008CBC85 /* BaseComponents.swift in Sources */,
 				2C2F21832B0F53B500B45BA8 /* StduyLogMock.swift in Sources */,
 				60F67C682B0E1785002C8BF3 /* CategoryUseCase.swift in Sources */,
+				2C88DCF42B124272000B4686 /* AppDIContainer.swift in Sources */,
 				2C5CDA5B2B025440007AFC57 /* ChartViewController.swift in Sources */,
 				6057A58D2B0C7F0F00EE58E8 /* Requestable.swift in Sources */,
 				2C3430A72B0DD0F6008CBC85 /* TimerRepsoitory.swift in Sources */,
 				6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */,
 				ED38422F2B0F747B001E2803 /* KeyChainManager.swift in Sources */,
-				ED3595BF2B0DB68200558FAA /* CategoryTitleTextView.swift in Sources */,
 				ED3842292B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift in Sources */,
 				600908BE2AFCD7DF0065DFFB /* AppDelegate.swift in Sources */,
 				2CE84EFB2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift in Sources */,
@@ -1101,6 +1181,7 @@
 				ED3595A92B0C7F3500558FAA /* HTTPMethod.swift in Sources */,
 				ED38421D2B0F1BE9001E2803 /* GoogleAuthEndpoints.swift in Sources */,
 				2C5CDA562B025426007AFC57 /* BaseViewController.swift in Sources */,
+				ED82F0072B126C95005BB32D /* UITextField++Extension.swift in Sources */,
 				2C3430992B0C8427008CBC85 /* Provider.swift in Sources */,
 				2C2F21702B0F429800B45BA8 /* StudyLogResponseDTO.swift in Sources */,
 				2C2F216E2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift in Sources */,
@@ -1118,6 +1199,7 @@
 				2C2F21762B0F440D00B45BA8 /* StudyLogEndpoints.swift in Sources */,
 				2C4D55B32B035484006D7C26 /* DeviceOrientation.swift in Sources */,
 				ED3842272B0F1E0C001E2803 /* GoogleAuthUseCase.swift in Sources */,
+				2C88DCF22B124238000B4686 /* AppFlowCoordinator.swift in Sources */,
 				EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */,
 				2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */,
 				2C5CDA572B025426007AFC57 /* FlipMateColor.swift in Sources */,
@@ -1126,11 +1208,13 @@
 				2C3430B12B0DE3D0008CBC85 /* Date++Extension.swift in Sources */,
 				2C2F217E2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift in Sources */,
 				2C5CDA4F2B025403007AFC57 /* SocialViewController.swift in Sources */,
+				2C88DD052B1256D0000B4686 /* TabBarFlowCoordinator.swift in Sources */,
 				ED9B2A812B06048D008FE1C5 /* CategoryViewModel.swift in Sources */,
 				60DE49402B05E67200ACE6DD /* FlipMateConstant.swift in Sources */,
 				ED3842232B0F1D70001E2803 /* GoogleAuthRepostiory.swift in Sources */,
 				2C801D832B04C64F00A7ABAE /* TimerManager.swift in Sources */,
 				2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */,
+				2C88DD0B2B1340E4000B4686 /* CategoryDIContainer.swift in Sources */,
 				ED3842312B0F94E6001E2803 /* DefaultCategoryRepository.swift in Sources */,
 				ED3595C12B0DC2F100558FAA /* CategoryColorSelectView.swift in Sources */,
 				ED38421B2B0F1B7E001E2803 /* GoogleAuthRequestDTO.swift in Sources */,

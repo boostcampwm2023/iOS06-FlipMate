@@ -9,6 +9,11 @@ import Foundation
 import Combine
 import OSLog
 
+
+struct TimerViewModelActions {
+    let showCategorySettingViewController: () -> Void
+}
+
 protocol TimerViewModelInput {
     func viewDidLoad()
     func deviceOrientationDidChange(_ sender: DeviceOrientation)
@@ -19,7 +24,6 @@ protocol TimerViewModelInput {
 
 protocol TimerViewModelOutput {
     var isDeviceFaceDownPublisher: AnyPublisher<Bool, Never> { get }
-    var isPresentingCategoryPublisher: AnyPublisher<Void, Never> { get }
     var totalTimePublisher: AnyPublisher<Int, Never> { get }
     var categoryChangePublisher: AnyPublisher<[Category], Never> { get }
     var categoriesPublisher: AnyPublisher<[Category], Never> { get }
@@ -47,11 +51,13 @@ final class TimerViewModel: TimerViewModelProtocol {
     private var totalTime: Int = 0 // 총 공부 시간
     private var categories = [Category]()
     private var selectedCategory: Category?
+    private let actions: TimerViewModelActions?
     
     // MARK: - init
-    init(timerUseCase: TimerUseCase, userInfoUserCase: StudyLogUseCase) {
+    init(timerUseCase: TimerUseCase, userInfoUserCase: StudyLogUseCase, actions: TimerViewModelActions? = nil) {
         self.timerUseCase = timerUseCase
         self.userInfoUserCase = userInfoUserCase
+        self.actions = actions
     }
     
     // MARK: Output
@@ -87,7 +93,7 @@ final class TimerViewModel: TimerViewModelProtocol {
     }
     
     func categorySettingButtoneDidTapped() {
-        isPresentingCategorySubject.send(())
+        actions?.showCategorySettingViewController()
     }
     
     func viewDidLoad() {
