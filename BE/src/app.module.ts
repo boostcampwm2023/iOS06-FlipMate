@@ -14,6 +14,7 @@ import { PassportModule } from '@nestjs/passport';
 import { AuthModule } from './auth/auth.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { Mates } from './mates/mates.entity';
 
 @Module({
   imports: [
@@ -33,7 +34,7 @@ import { join } from 'path';
         username: config.get<string>('DATABASE_USERNAME'),
         password: config.get<string>('DATABASE_PASSWORD'),
         database: config.get<string>('DATABASE_NAME'),
-        entities: [StudyLogs, Categories, UsersModel],
+        entities: [StudyLogs, Categories, UsersModel, Mates],
         synchronize: true,
       }),
       inject: [ConfigService],
