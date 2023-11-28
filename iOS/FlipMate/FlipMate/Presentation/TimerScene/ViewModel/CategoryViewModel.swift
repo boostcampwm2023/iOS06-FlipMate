@@ -18,7 +18,7 @@ protocol CategoryViewModelInput {
     func createCategoryTapped()
     func updateCategoryTapped(category: Category)
     func createCategory(name: String, colorCode: String) async throws
-    func updateCategory(of id: Int, newName: String, newColorCode: String) async throws
+    func updateCategory(of id: Int, newName: String, newColorCode: String, studyTime: Int?) async throws
     func deleteCategory(of id: Int) async throws
     func didFinishCategorySetting()
     func modifyCloseButtonTapped()
@@ -73,13 +73,13 @@ final class CategoryViewModel: CategoryViewModelProtocol {
     
     func createCategory(name: String, colorCode: String) async throws {
         let newCategoryID = try await useCase.createCategory(name: name, colorCode: colorCode)
-        let newCategory = Category(id: newCategoryID, color: colorCode, subject: name)
+        let newCategory = Category(id: newCategoryID, color: colorCode, subject: name, studyTime: 0)
         categoryMananger.append(category: newCategory)
     }
     
-    func updateCategory(of id: Int, newName: String, newColorCode: String) async throws {
+    func updateCategory(of id: Int, newName: String, newColorCode: String, studyTime: Int?) async throws {
         try await useCase.updateCategory(of: id, newName: newName, newColorCode: newColorCode)
-        let updateCategory = Category(id: id, color: newColorCode, subject: newName)
+        let updateCategory = Category(id: id, color: newColorCode, subject: newName, studyTime: studyTime ?? 0)
         categoryMananger.change(category: updateCategory)
     }
     

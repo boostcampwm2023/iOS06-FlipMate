@@ -225,7 +225,8 @@ private extension CategoryModifyViewController {
                     try await viewModel.updateCategory(of: category.id, 
                                                        newName: categoryTitle,
                                                        newColorCode: categoryColorSelectView.colorLabel.text 
-                                                       ?? "000000FF")
+                                                       ?? "000000FF",
+                                                       studyTime: category.studyTime)
                 } catch let error {
                     FMLogger.general.error("카테고리 추가 중 에러 \(error)")
                 }
