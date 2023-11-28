@@ -27,12 +27,16 @@ typealias CategoryModifyViewModelProtocol = CategoryModifyViewModelInput & Categ
 
 final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
 
+    // MARK: - Subject
     private lazy var selectedCategorySubject = CurrentValueSubject<Category?, Never>(selectedCategory)
 
+    // MARK: - Properites
     private var categoryMananger: CategoryManageable
     private let useCase: CategoryUseCase
     private let actions: CategoryModifyViewModelActions?
     private let selectedCategory: Category?
+    
+    // MARK: - init
     
     init(useCase: CategoryUseCase, categoryManager: CategoryManageable, actions: CategoryModifyViewModelActions? = nil, selectedCategory: Category? = nil) {
         self.useCase = useCase
@@ -41,10 +45,12 @@ final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
         self.selectedCategory = selectedCategory
     }
     
+    // MARK: - Output
     var selectedCategoryPublisher: AnyPublisher<Category?, Never> {
         return selectedCategorySubject.eraseToAnyPublisher()
     }
     
+    // MARK: - Input
     func createCategory(name: String, colorCode: String?) async throws {
         let colorCode = colorCode ?? "000000FF"
         let newCategoryID = try await useCase.createCategory(name: name, colorCode: colorCode)
