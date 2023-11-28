@@ -59,6 +59,9 @@
 		2C9F61F92B14F33600AE63F9 /* CategoryManagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61F82B14F33600AE63F9 /* CategoryManagable.swift */; };
 		2C9F61FB2B15C96100AE63F9 /* CategoryModifyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61FA2B15C96100AE63F9 /* CategoryModifyViewModel.swift */; };
 		2C9F61FE2B15F48600AE63F9 /* FriendAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61FD2B15F48600AE63F9 /* FriendAddViewController.swift */; };
+		2C9F62012B1601F200AE63F9 /* MyNickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62002B1601F200AE63F9 /* MyNickNameView.swift */; };
+		2C9F62032B16021E00AE63F9 /* FriendSearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62022B16021E00AE63F9 /* FriendSearchResultView.swift */; };
+		2C9F62052B160B3900AE63F9 /* NoResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62042B160B3900AE63F9 /* NoResultView.swift */; };
 		2CE84EEF2B0B742A00E2FB71 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */; };
 		2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */; };
 		2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF42B0B783800E2FB71 /* UICollectionViewCell++Extension.swift */; };
@@ -189,6 +192,9 @@
 		2C9F61F82B14F33600AE63F9 /* CategoryManagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagable.swift; sourceTree = "<group>"; };
 		2C9F61FA2B15C96100AE63F9 /* CategoryModifyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModifyViewModel.swift; sourceTree = "<group>"; };
 		2C9F61FD2B15F48600AE63F9 /* FriendAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddViewController.swift; sourceTree = "<group>"; };
+		2C9F62002B1601F200AE63F9 /* MyNickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNickNameView.swift; sourceTree = "<group>"; };
+		2C9F62022B16021E00AE63F9 /* FriendSearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchResultView.swift; sourceTree = "<group>"; };
+		2C9F62042B160B3900AE63F9 /* NoResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultView.swift; sourceTree = "<group>"; };
 		2CA80839AC9EFDD4BAA10C67 /* Pods_FlipMate_FlipMateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate_FlipMateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView++Extension.swift"; sourceTree = "<group>"; };
@@ -492,6 +498,16 @@
 			path = CategoryManager;
 			sourceTree = "<group>";
 		};
+		2C9F61FF2B1601E800AE63F9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2C9F62002B1601F200AE63F9 /* MyNickNameView.swift */,
+				2C9F62022B16021E00AE63F9 /* FriendSearchResultView.swift */,
+				2C9F62042B160B3900AE63F9 /* NoResultView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		48114A3517087E7FD0C9546F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -614,6 +630,7 @@
 		600908F22AFCDCE10065DFFB /* SocialScene */ = {
 			isa = PBXGroup;
 			children = (
+				2C9F61FF2B1601E800AE63F9 /* View */,
 				2C5CDA4D2B0253F5007AFC57 /* ViewController */,
 			);
 			path = SocialScene;
@@ -1196,6 +1213,7 @@
 				601773E42B021E6000D175D9 /* TimerViewController.swift in Sources */,
 				2C88DCF92B1242DA000B4686 /* TimerFlowCoordinator.swift in Sources */,
 				600908C22AFCD7DF0065DFFB /* ViewController.swift in Sources */,
+				2C9F62032B16021E00AE63F9 /* FriendSearchResultView.swift in Sources */,
 				2C3430AB2B0DDB8D008CBC85 /* TimerEndpoints.swift in Sources */,
 				ED3842212B0F1CF9001E2803 /* User.swift in Sources */,
 				2C3430A12B0DA4E6008CBC85 /* BaseComponents.swift in Sources */,
@@ -1205,6 +1223,7 @@
 				60F67C682B0E1785002C8BF3 /* CategoryUseCase.swift in Sources */,
 				2C88DCF42B124272000B4686 /* AppDIContainer.swift in Sources */,
 				2C5CDA5B2B025440007AFC57 /* ChartViewController.swift in Sources */,
+				2C9F62012B1601F200AE63F9 /* MyNickNameView.swift in Sources */,
 				6057A58D2B0C7F0F00EE58E8 /* Requestable.swift in Sources */,
 				2C3430A72B0DD0F6008CBC85 /* TimerRepsoitory.swift in Sources */,
 				6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */,
@@ -1215,6 +1234,7 @@
 				ED3595B72B0C887C00558FAA /* TimerFinishRequestDTO.swift in Sources */,
 				2C2F217A2B0F4CF900B45BA8 /* StudyLogUseCase.swift in Sources */,
 				ED3595A92B0C7F3500558FAA /* HTTPMethod.swift in Sources */,
+				2C9F62052B160B3900AE63F9 /* NoResultView.swift in Sources */,
 				ED38421D2B0F1BE9001E2803 /* GoogleAuthEndpoints.swift in Sources */,
 				2C5CDA562B025426007AFC57 /* BaseViewController.swift in Sources */,
 				2C9F61FB2B15C96100AE63F9 /* CategoryModifyViewModel.swift in Sources */,
