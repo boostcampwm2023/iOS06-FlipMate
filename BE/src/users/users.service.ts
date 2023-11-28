@@ -78,9 +78,9 @@ export class UsersService {
     return selectedUser;
   }
 
-  async isNormalImage(image_url: string): Promise<boolean> {
+  async isNormalImage(image: Express.Multer.File): Promise<boolean> {
     const THRESHOLD = 0.5;
-    const response = await this.requestClovaGreenEye(image_url);
+    const response = await this.requestClovaGreenEye(image);
     const result = response.images[0].result;
     const message = response.images[0].message;
     if (message !== 'SUCCESS') {
@@ -92,7 +92,7 @@ export class UsersService {
     return isNormal;
   }
 
-  async requestClovaGreenEye(image_url: string): Promise<GreenEyeResponse> {
+  async requestClovaGreenEye(image: Express.Multer.File): Promise<GreenEyeResponse> {
     const APIURL = this.config.get<string>('GREENEYE_URL');
     const CLIENT_SECRET = this.config.get<string>('GREENEYE_SECRET');
     const UUID = v4();
@@ -110,7 +110,7 @@ export class UsersService {
           images: [
             {
               name: `${UUID}_profile`,
-              url: image_url,
+              data: image.buffer.toString('base64'),
             },
           ],
         }),
