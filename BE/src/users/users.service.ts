@@ -21,6 +21,7 @@ export class UsersService {
       const userObject = this.usersRepository.create({
         nickname: user.nickname,
         email: user.email,
+        image_url: null,
       });
       return await this.usersRepository.save(userObject);
     } catch (error) {
@@ -82,7 +83,6 @@ export class UsersService {
     const THRESHOLD = 0.5;
     const response = await this.requestClovaGreenEye(image);
     const result = response.images[0].result;
-    console.log(result);
     const message = response.images[0].message;
     if (message !== 'SUCCESS') {
       throw new BadRequestException('이미지 인식 실패');

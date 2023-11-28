@@ -114,7 +114,7 @@ export class AuthController {
       email: user.email,
       image_url: path.join(
         this.configService.get(ENV.CDN_ENDPOINT),
-        user.image_url,
+        user.image_url ?? 'default.png',
       ),
     };
   }
