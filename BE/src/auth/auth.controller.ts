@@ -10,6 +10,7 @@ import {
   Patch,
   UseInterceptors,
   UploadedFile,
+  BadRequestException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
@@ -79,6 +80,10 @@ export class AuthController {
     @Body() user: UpdateUserDto,
     @UploadedFile() file: Express.Multer.File,
   ): Promise<any> {
+    const isNomal = await this.usersService.isNormalImage(file);
+    if (!isNomal) {
+      throw new BadRequestException('유해한 이미지 입니다!!');
+    }
     const image_url = await this.usersService.s3Upload(file);
     const updatedUser = await this.usersService.updateUser(
       user_id,

@@ -82,6 +82,7 @@ export class UsersService {
     const THRESHOLD = 0.5;
     const response = await this.requestClovaGreenEye(image);
     const result = response.images[0].result;
+    console.log(result);
     const message = response.images[0].message;
     if (message !== 'SUCCESS') {
       throw new BadRequestException('이미지 인식 실패');
