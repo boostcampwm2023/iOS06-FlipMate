@@ -22,6 +22,8 @@ final class CategoryColorSelectView: UIView {
         let colorWell = UIColorWell()
         colorWell.translatesAutoresizingMaskIntoConstraints = false
         colorWell.addTarget(self, action: #selector(colorWellChanged(_:)), for: .valueChanged)
+        colorWell.selectedColor = .black
+        
         return colorWell
     }()
     
@@ -39,7 +41,6 @@ private extension CategoryColorSelectView {
     func configureUI() {
         addSubview(colorLabel)
         addSubview(colorWell)
-        colorWell.selectedColor = .black
         self.backgroundColor = .systemBackground
         NSLayoutConstraint.activate([
             colorWell.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24.0),

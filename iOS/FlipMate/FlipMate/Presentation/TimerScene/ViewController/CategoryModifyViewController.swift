@@ -197,7 +197,6 @@ private extension CategoryModifyViewController {
     }
     
     @objc func doneButtonTapped(_ sender: UIBarButtonItem) {
-        // TODO: 색깔 선택 기능 미구현
         if purpose == .create {
             Task {
                 do {
@@ -236,4 +235,3 @@ private extension CategoryModifyViewController {
         self.navigationController?.popViewController(animated: true)
     }
 }
-
