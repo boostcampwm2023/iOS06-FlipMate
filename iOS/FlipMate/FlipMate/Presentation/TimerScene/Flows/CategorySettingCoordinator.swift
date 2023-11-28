@@ -9,7 +9,7 @@ import UIKit
 
 protocol CategoryFlowCoordinatorDependencies {
     func makeCategorySettingViewController(actions: CategoryViewModelActions) -> UIViewController
-    func makeCategoryModifyViewController(purpose: CategoryPurpose, category: Category?) -> UIViewController
+    func makeCategoryModifyViewController(purpose: CategoryPurpose, category: Category?, actions: CategoryViewModelActions) -> UIViewController
 }
 
 final class CategoryFlowCoordinator: Coordinator {
@@ -26,19 +26,29 @@ final class CategoryFlowCoordinator: Coordinator {
     func start() {
         let actions = CategoryViewModelActions(
             showModifyCategory: showCategoryModifyVieWController,
-            didFinishCategorySetting: didFinishCategorySetting)
+            didFinishCategorySetting: didFinishCategorySetting,
+            didFinishCategoryModify: didFinishCategoryModify)
         let viewController = dependencies.makeCategorySettingViewController(actions: actions)
         navigationController.pushViewController(viewController, animated: true)
     }
     
     private func showCategoryModifyVieWController(purpose: CategoryPurpose, category: Category? = nil) {
+        let actions = CategoryViewModelActions(
+            showModifyCategory: showCategoryModifyVieWController,
+            didFinishCategorySetting: didFinishCategorySetting,
+            didFinishCategoryModify: didFinishCategoryModify)
         let categoryModifyViewController = dependencies.makeCategoryModifyViewController(
             purpose: purpose,
-            category: category)
+            category: category,
+            actions: actions)
         navigationController.pushViewController(categoryModifyViewController, animated: true)
     }
     
     func didFinishCategorySetting() {
         parentCoordinator?.childDidFinish(self)
+    }
+    
+    func didFinishCategoryModify() {
+        navigationController.popViewController(animated: true)
     }
 }

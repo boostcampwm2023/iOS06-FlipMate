@@ -11,6 +11,7 @@ import Combine
 struct CategoryViewModelActions {
     let showModifyCategory: (CategoryPurpose, Category?) -> Void
     let didFinishCategorySetting: () -> Void
+    let didFinishCategoryModify: () -> Void
 }
 
 protocol CategoryViewModelInput {
@@ -20,6 +21,8 @@ protocol CategoryViewModelInput {
     func updateCategory(of id: Int, newName: String, newColorCode: String) async throws
     func deleteCategory(of id: Int) async throws
     func didFinishCategorySetting()
+    func modifyCloseButtonTapped()
+    func modifyDoneButtonTapped()
 }
 
 protocol CategoryViewModelOutput {
@@ -58,6 +61,14 @@ final class CategoryViewModel: CategoryViewModelProtocol {
     
     func didFinishCategorySetting() {
         actions?.didFinishCategorySetting()
+    }
+    
+    func modifyDoneButtonTapped() {
+        actions?.didFinishCategoryModify()
+    }
+    
+    func modifyCloseButtonTapped() {
+        actions?.didFinishCategoryModify()
     }
     
     func createCategory(name: String, colorCode: String) async throws {

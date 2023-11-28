@@ -35,10 +35,11 @@ final class CategoryDIContainer: CategoryFlowCoordinatorDependencies {
     
     func makeCategoryModifyViewController(
         purpose: CategoryPurpose,
-        category: Category? = nil
+        category: Category? = nil,
+        actions: CategoryViewModelActions
     ) -> UIViewController {
         return CategoryModifyViewController(
-            viewModel: makeCategoryViewModel(),
+            viewModel: makeCategoryViewModel(actions: actions),
             purpose: purpose,
             category: category)
     }

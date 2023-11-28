@@ -193,7 +193,7 @@ private extension CategoryModifyViewController {
 // MARK: objc function
 private extension CategoryModifyViewController {
     @objc func closeButtonTapped(_ sender: UIBarButtonItem) {
-        self.navigationController?.popViewController(animated: true)
+        viewModel.modifyCloseButtonTapped()
     }
     
     @objc func doneButtonTapped(_ sender: UIBarButtonItem) {
@@ -231,7 +231,6 @@ private extension CategoryModifyViewController {
                 }
             }
         }
-        
-        self.navigationController?.popViewController(animated: true)
+        viewModel.modifyDoneButtonTapped()
     }
 }
