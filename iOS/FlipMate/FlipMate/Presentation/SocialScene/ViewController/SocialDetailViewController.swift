@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 final class SocialDetailViewController: BaseViewController {
     private enum Constant {
@@ -157,10 +158,17 @@ final class SocialDetailViewController: BaseViewController {
         return stackView
     }()
     
+    private var chartView: UIView = {
+        let view = UIView()
+        
+        return view
+    }()
+    
     // MARK: - View Life Cycles
     override func configureUI() {
         setStudyLogStackView()
         setStudyTimeStackView()
+        setChart()
         
         [profileImageView, nickNameLabel, unfollowButton, divider, studyLogStackView, studyTimeStackView].forEach {
             view.addSubview($0)
@@ -199,6 +207,13 @@ final class SocialDetailViewController: BaseViewController {
             studyTimeStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
             studyTimeStackView.heightAnchor.constraint(equalToConstant: 120)
         ])
+        
+        NSLayoutConstraint.activate([
+            chartView.topAnchor.constraint(equalTo: studyLogStackView.bottomAnchor, constant: 40),
+            chartView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
+            chartView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
+            chartView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+        ])
     }
 }
 
@@ -213,6 +228,17 @@ private extension SocialDetailViewController {
         [dailyStudyTimeLabel, weeklyStudyTimeLabel, monthlyStudyTimeLabel].forEach {
             studyTimeStackView.addArrangedSubview($0)
         }
+    }
+    
+    func setChart() {
+        let socialChartView = SocialChartView()
+        let hostingController = UIHostingController(rootView: socialChartView)
+        addChild(hostingController)
+        guard let newChartView = hostingController.view else { return }
+        self.chartView = newChartView
+        self.view.addSubview(newChartView)
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        hostingController.didMove(toParent: self)
     }
 }
 
