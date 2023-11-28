@@ -62,6 +62,7 @@
 		2C9F62012B1601F200AE63F9 /* MyNickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62002B1601F200AE63F9 /* MyNickNameView.swift */; };
 		2C9F62032B16021E00AE63F9 /* FriendSearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62022B16021E00AE63F9 /* FriendSearchResultView.swift */; };
 		2C9F62052B160B3900AE63F9 /* NoResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62042B160B3900AE63F9 /* NoResultView.swift */; };
+		2C9F62082B16398D00AE63F9 /* FreindAddResultViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62072B16398D00AE63F9 /* FreindAddResultViewProtocol.swift */; };
 		2CE84EEF2B0B742A00E2FB71 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */; };
 		2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */; };
 		2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF42B0B783800E2FB71 /* UICollectionViewCell++Extension.swift */; };
@@ -195,6 +196,7 @@
 		2C9F62002B1601F200AE63F9 /* MyNickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNickNameView.swift; sourceTree = "<group>"; };
 		2C9F62022B16021E00AE63F9 /* FriendSearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchResultView.swift; sourceTree = "<group>"; };
 		2C9F62042B160B3900AE63F9 /* NoResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultView.swift; sourceTree = "<group>"; };
+		2C9F62072B16398D00AE63F9 /* FreindAddResultViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreindAddResultViewProtocol.swift; sourceTree = "<group>"; };
 		2CA80839AC9EFDD4BAA10C67 /* Pods_FlipMate_FlipMateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate_FlipMateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView++Extension.swift"; sourceTree = "<group>"; };
@@ -508,6 +510,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		2C9F62062B16397400AE63F9 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				2C9F62072B16398D00AE63F9 /* FreindAddResultViewProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		48114A3517087E7FD0C9546F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -630,6 +640,7 @@
 		600908F22AFCDCE10065DFFB /* SocialScene */ = {
 			isa = PBXGroup;
 			children = (
+				2C9F62062B16397400AE63F9 /* Protocol */,
 				2C9F61FF2B1601E800AE63F9 /* View */,
 				2C5CDA4D2B0253F5007AFC57 /* ViewController */,
 			);
@@ -1275,6 +1286,7 @@
 				2C801D832B04C64F00A7ABAE /* TimerManager.swift in Sources */,
 				2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */,
 				2C88DD0B2B1340E4000B4686 /* CategoryDIContainer.swift in Sources */,
+				2C9F62082B16398D00AE63F9 /* FreindAddResultViewProtocol.swift in Sources */,
 				ED3842312B0F94E6001E2803 /* DefaultCategoryRepository.swift in Sources */,
 				ED3595C12B0DC2F100558FAA /* CategoryColorSelectView.swift in Sources */,
 				ED38421B2B0F1B7E001E2803 /* GoogleAuthRequestDTO.swift in Sources */,
