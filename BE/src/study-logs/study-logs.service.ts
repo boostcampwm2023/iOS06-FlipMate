@@ -15,7 +15,16 @@ export class StudyLogsService {
     private studyLogsRepository: Repository<StudyLogs>,
   ) {}
 
-  async create(
+  async createStartLog(
+    studyLogsData: StudyLogsCreateDto,
+    user_id: number,
+  ): Promise<void> {
+    const { created_at } = studyLogsData;
+    const res = new Map();
+    res.set(user_id, created_at);
+  }
+
+  async createFinishLog(
     studyLogsData: StudyLogsCreateDto,
     user_id: number,
   ): Promise<StudyLogsDto> {
@@ -37,7 +46,8 @@ export class StudyLogsService {
   }
 
   calculateStartDay(created_at: Date, learning_time: number): Date {
-    const standardMS = 5 * 60 * 60 * 1000;
+    const STANDARD = 0;
+    const standardMS = STANDARD * 60 * 60 * 1000;
     const millisecond =
       created_at.getTime() - learning_time * 1000 - standardMS;
     const started_at = new Date(millisecond);
