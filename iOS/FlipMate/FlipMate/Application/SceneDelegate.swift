@@ -8,8 +8,6 @@
 import UIKit
 import GoogleSignIn
 
-final class CategoryManager { }
-
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let appDIContainer = AppDIContainer()
     var appFlowCoordinator: AppFlowCoordinator?

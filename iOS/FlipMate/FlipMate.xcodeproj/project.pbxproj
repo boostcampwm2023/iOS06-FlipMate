@@ -51,6 +51,12 @@
 		2C88DD072B125781000B4686 /* TabBarDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD062B125781000B4686 /* TabBarDIContainer.swift */; };
 		2C88DD092B1274FA000B4686 /* CategorySettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */; };
 		2C88DD0B2B1340E4000B4686 /* CategoryDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */; };
+		2C88DD0D2B148E9B000B4686 /* TimerFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD0C2B148E9B000B4686 /* TimerFinishViewController.swift */; };
+		2C88DD0F2B14C22C000B4686 /* TimerFinishViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD0E2B14C22C000B4686 /* TimerFinishViewModel.swift */; };
+		2C88DD112B14C50F000B4686 /* DefaultTimerFinishUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD102B14C50F000B4686 /* DefaultTimerFinishUseCase.swift */; };
+		2C88DD132B14C51B000B4686 /* TimerFinishUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD122B14C51B000B4686 /* TimerFinishUseCase.swift */; };
+		2C9F61F72B14EFA200AE63F9 /* CategoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61F62B14EFA200AE63F9 /* CategoryManager.swift */; };
+		2C9F61F92B14F33600AE63F9 /* CategoryManagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61F82B14F33600AE63F9 /* CategoryManagable.swift */; };
 		2CE84EEF2B0B742A00E2FB71 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */; };
 		2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */; };
 		2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF42B0B783800E2FB71 /* UICollectionViewCell++Extension.swift */; };
@@ -173,6 +179,12 @@
 		2C88DD062B125781000B4686 /* TabBarDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarDIContainer.swift; sourceTree = "<group>"; };
 		2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingCoordinator.swift; sourceTree = "<group>"; };
 		2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDIContainer.swift; sourceTree = "<group>"; };
+		2C88DD0C2B148E9B000B4686 /* TimerFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishViewController.swift; sourceTree = "<group>"; };
+		2C88DD0E2B14C22C000B4686 /* TimerFinishViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishViewModel.swift; sourceTree = "<group>"; };
+		2C88DD102B14C50F000B4686 /* DefaultTimerFinishUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimerFinishUseCase.swift; sourceTree = "<group>"; };
+		2C88DD122B14C51B000B4686 /* TimerFinishUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishUseCase.swift; sourceTree = "<group>"; };
+		2C9F61F62B14EFA200AE63F9 /* CategoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManager.swift; sourceTree = "<group>"; };
+		2C9F61F82B14F33600AE63F9 /* CategoryManagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagable.swift; sourceTree = "<group>"; };
 		2CA80839AC9EFDD4BAA10C67 /* Pods_FlipMate_FlipMateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate_FlipMateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView++Extension.swift"; sourceTree = "<group>"; };
@@ -334,6 +346,7 @@
 			children = (
 				2C4D55AF2B0348FB006D7C26 /* TimerViewModel.swift */,
 				ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */,
+				2C88DD0E2B14C22C000B4686 /* TimerFinishViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -344,6 +357,7 @@
 				601773E32B021E6000D175D9 /* TimerViewController.swift */,
 				2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */,
 				ED3595BC2B0DB29F00558FAA /* CategoryModifyViewController.swift */,
+				2C88DD0C2B148E9B000B4686 /* TimerFinishViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -462,6 +476,14 @@
 				2C88DD042B1256D0000B4686 /* TabBarFlowCoordinator.swift */,
 			);
 			path = Flows;
+			sourceTree = "<group>";
+		};
+		2C9F61F52B14EA9800AE63F9 /* CategoryManager */ = {
+			isa = PBXGroup;
+			children = (
+				2C9F61F62B14EFA200AE63F9 /* CategoryManager.swift */,
+			);
+			path = CategoryManager;
 			sourceTree = "<group>";
 		};
 		48114A3517087E7FD0C9546F /* Pods */ = {
@@ -693,6 +715,7 @@
 		600908FE2AFCDF8D0065DFFB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				2C9F61F52B14EA9800AE63F9 /* CategoryManager */,
 				2C801D812B04C62900A7ABAE /* TimerManager */,
 				EDC851D72B05C357009031EA /* DeviceMotionManager */,
 				2C43A0D62B037BA50005596A /* FeedbackManager */,
@@ -717,6 +740,7 @@
 			isa = PBXGroup;
 			children = (
 				2C6717F72B0535A8004D118D /* Int++Extension.swift */,
+				2C9F61F82B14F33600AE63F9 /* CategoryManagable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -771,6 +795,7 @@
 				60F67C692B0E1868002C8BF3 /* DefaultCategoryUseCase.swift */,
 				2C2F216D2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift */,
 				ED3842242B0F1DDA001E2803 /* DefaultGoogleAuthUseCase.swift */,
+				2C88DD102B14C50F000B4686 /* DefaultTimerFinishUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -782,6 +807,7 @@
 				60F67C672B0E1785002C8BF3 /* CategoryUseCase.swift */,
 				2C2F21792B0F4CF900B45BA8 /* StudyLogUseCase.swift */,
 				ED3842262B0F1E0C001E2803 /* GoogleAuthUseCase.swift */,
+				2C88DD122B14C51B000B4686 /* TimerFinishUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1151,12 +1177,14 @@
 				ED3595B22B0C83D700558FAA /* TimerStartResponseDTO.swift in Sources */,
 				2C5CDA582B025426007AFC57 /* FlipMateFont.swift in Sources */,
 				60DE493D2B05DEA400ACE6DD /* FlipMateLogger.swift in Sources */,
+				2C9F61F72B14EFA200AE63F9 /* CategoryManager.swift in Sources */,
 				2C88DCF62B124292000B4686 /* TimerSceneDIContainer.swift in Sources */,
 				2C2F21802B0F4DA600B45BA8 /* MockURLSession.swift in Sources */,
 				2C801D802B04B68900A7ABAE /* TimerUseCase.swift in Sources */,
 				6086464E2B0DDA1300B0C1BC /* CategoryRepository.swift in Sources */,
 				2C2F21782B0F4CCC00B45BA8 /* StudyLog.swift in Sources */,
 				ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */,
+				2C88DD132B14C51B000B4686 /* TimerFinishUseCase.swift in Sources */,
 				2C88DCFE2B1244A6000B4686 /* LoginFlowCoordinator.swift in Sources */,
 				601773E42B021E6000D175D9 /* TimerViewController.swift in Sources */,
 				2C88DCF92B1242DA000B4686 /* TimerFlowCoordinator.swift in Sources */,
@@ -1164,6 +1192,7 @@
 				2C3430AB2B0DDB8D008CBC85 /* TimerEndpoints.swift in Sources */,
 				ED3842212B0F1CF9001E2803 /* User.swift in Sources */,
 				2C3430A12B0DA4E6008CBC85 /* BaseComponents.swift in Sources */,
+				2C88DD0D2B148E9B000B4686 /* TimerFinishViewController.swift in Sources */,
 				2C3430A12B0DA4E6008CBC85 /* BaseComponents.swift in Sources */,
 				2C2F21832B0F53B500B45BA8 /* StduyLogMock.swift in Sources */,
 				60F67C682B0E1785002C8BF3 /* CategoryUseCase.swift in Sources */,
@@ -1186,7 +1215,9 @@
 				2C2F21702B0F429800B45BA8 /* StudyLogResponseDTO.swift in Sources */,
 				2C2F216E2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift in Sources */,
 				2CE84EF72B0B7F3C00E2FB71 /* CategorySettingSection.swift in Sources */,
+				2C88DD112B14C50F000B4686 /* DefaultTimerFinishUseCase.swift in Sources */,
 				2C3430AD2B0DDF25008CBC85 /* DefaultTimerRepository.swift in Sources */,
+				2C9F61F92B14F33600AE63F9 /* CategoryManagable.swift in Sources */,
 				2C6717F82B0535A8004D118D /* Int++Extension.swift in Sources */,
 				ED3595B92B0C88A300558FAA /* TimerFinishResponseDTO.swift in Sources */,
 				608646552B0DDC3900B0C1BC /* CategoryRequestDTO.swift in Sources */,
@@ -1197,6 +1228,7 @@
 				2C3430972B0C7ED8008CBC85 /* EndPoint.swift in Sources */,
 				608646592B0DE61200B0C1BC /* CategoryEndpoints.swift in Sources */,
 				2C2F21762B0F440D00B45BA8 /* StudyLogEndpoints.swift in Sources */,
+				2C88DD0F2B14C22C000B4686 /* TimerFinishViewModel.swift in Sources */,
 				2C4D55B32B035484006D7C26 /* DeviceOrientation.swift in Sources */,
 				ED3842272B0F1E0C001E2803 /* GoogleAuthUseCase.swift in Sources */,
 				2C88DCF22B124238000B4686 /* AppFlowCoordinator.swift in Sources */,
