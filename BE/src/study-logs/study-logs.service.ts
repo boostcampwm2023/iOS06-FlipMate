@@ -7,25 +7,22 @@ import { UsersModel } from 'src/users/entity/users.entity';
 import { Categories } from 'src/categories/categories.entity';
 import { StudyLogsDto } from './dto/response/study-logs.dto';
 import { transformDate } from 'src/common/utils';
-import { RedisClientType, createClient } from 'redis';
+import { RedisService } from 'src/common/redis.service';
 
 @Injectable()
 export class StudyLogsService {
-  private client: RedisClientType;
   constructor(
     @InjectRepository(StudyLogs)
     private studyLogsRepository: Repository<StudyLogs>,
-  ) {
-    this.client = createClient();
-    this.client.connect();
-  }
+    private redisService: RedisService,
+  ) {}
 
   async createStartLog(
     studyLogsData: StudyLogsCreateDto,
     user_id: number,
   ): Promise<void> {
     const { created_at } = studyLogsData;
-    this.client.set(`${user_id}`, `${created_at}`);
+    this.redisService.set(`${user_id}`, `${created_at}`);
   }
 
   async createFinishLog(
