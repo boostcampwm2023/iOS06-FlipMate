@@ -28,7 +28,7 @@ final class FriendAddViewController: BaseViewController {
         static let height: CGFloat = 1
     }
     
-    private enum containerViewConstant {
+    private enum ContainerViewConstant {
         static let top: CGFloat = 15
         static let leading: CGFloat = 40
         static let trailing: CGFloat = -40
@@ -87,9 +87,9 @@ final class FriendAddViewController: BaseViewController {
             separatorLineView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: SeparatorLineConstant.trailing),
             separatorLineView.heightAnchor.constraint(equalToConstant: SeparatorLineConstant.height),
             
-            containerView.topAnchor.constraint(equalTo: separatorLineView.bottomAnchor, constant: containerViewConstant.top),
-            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: containerViewConstant.leading),
-            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: containerViewConstant.trailing),
+            containerView.topAnchor.constraint(equalTo: separatorLineView.bottomAnchor, constant: ContainerViewConstant.top),
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: ContainerViewConstant.leading),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: ContainerViewConstant.trailing),
             containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
