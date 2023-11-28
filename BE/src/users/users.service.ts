@@ -34,6 +34,16 @@ export class UsersService {
     }
   }
 
+  async getUserProfileByNickname(nickname: string): Promise<string> {
+    const user = await this.usersRepository.findOne({
+      where: { nickname },
+    });
+    if (!user) {
+      throw new BadRequestException('해당 유저가 존재하지 않습니다.');
+    }
+    return user.image_url;
+  }
+
   async updateUser(
     user_id: number,
     user: UsersModel,

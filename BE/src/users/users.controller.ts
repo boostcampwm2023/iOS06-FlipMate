@@ -32,4 +32,28 @@ export class UsersController {
   async validateNickname(@Query('nickname') nickname: string): Promise<object> {
     return this.usersService.isUniqueNickname(nickname);
   }
+
+  @Get('/profile')
+  @ApiOperation({ summary: '유저 프로필 조회 (완)' })
+  @ApiQuery({
+    name: 'nickname',
+    example: '어린콩',
+    required: true,
+    type: String,
+    description: '검증할 유저 닉네임',
+  })
+  @ApiOkResponse({
+    type: String,
+    description: '유저 프로필 이미지 url',
+  })
+  @ApiBadRequestResponse({
+    description: '잘못된 요청',
+  })
+  async getUserProfileByNickname(
+    @Query('nickname') nickname: string,
+  ): Promise<object> {
+    return {
+      image_url: await this.usersService.getUserProfileByNickname(nickname),
+    };
+  }
 }
