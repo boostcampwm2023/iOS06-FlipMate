@@ -44,9 +44,6 @@ final class CategorySettingViewController: BaseViewController {
         setDataSource()
         setDelegate()
         setSnapshot()
-        Task {
-            await readCategories()
-        }
     }
     
     deinit {
@@ -77,25 +74,6 @@ final class CategorySettingViewController: BaseViewController {
                 self.dataSource?.apply(snapShot)
             }
             .store(in: &cancellables)
-    }
-}
-
-// MARK: - ViewModel Functions
-private extension CategorySettingViewController {
-    func readCategories() async {
-        do {
-            try await viewModel.readCategories()
-        } catch let error {
-            FMLogger.general.error("카테고리 읽는 중 에러 발생 : \(error)")
-        }
-    }
-    
-    func deleteCategory(id: Int) async {
-        do {
-            try await viewModel.deleteCategory(of: id)
-        } catch let error {
-            FMLogger.general.error("카테고리 삭제 중 에러 발생 : \(error)")
-        }
     }
 }
 
@@ -148,6 +126,7 @@ private extension CategorySettingViewController {
                     let cell: CategoryListCollectionViewCell = collectionView
                         .dequeueReusableCell(for: indexPath)
                     cell.updateUI(category: category)
+                    cell.setTimeLabelHidden(isHidden: true)
                     return cell
                 }
             })
@@ -235,7 +214,7 @@ private extension CategorySettingViewController {
         let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { [weak self] _ in
             guard let self = self else { return }
             Task {
-                await self.deleteCategory(id: item.category.id)
+                try await self.viewModel.deleteCategory(of: item.category.id)
             }
         }
         

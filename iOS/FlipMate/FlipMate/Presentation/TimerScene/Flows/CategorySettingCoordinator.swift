@@ -26,8 +26,7 @@ final class CategoryFlowCoordinator: Coordinator {
     func start() {
         let actions = CategoryViewModelActions(
             showModifyCategory: showCategoryModifyVieWController,
-            didFinishCategorySetting: didFinishCategorySetting
-        )
+            didFinishCategorySetting: didFinishCategorySetting)
         let viewController = dependencies.makeCategorySettingViewController(actions: actions)
         navigationController.pushViewController(viewController, animated: true)
     }

@@ -52,12 +52,16 @@ final class CategoryListCollectionViewCell: UICollectionViewCell {
     
     func updateShadow() {
         if isSelected {
-            backgroundColor = FlipMateColor.gray3.color
+            backgroundColor = FlipMateColor.gray2.color
             setShadow()
         } else {
             backgroundColor = .systemBackground
             layer.shadowOpacity = 0
         }
+    }
+    
+    func setTimeLabelHidden(isHidden: Bool) {
+        timeLabel.isHidden = isHidden
     }
 }
 
