@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FirendAddViewController: BaseViewController {
+final class FriendAddViewController: BaseViewController {
     // MARK: - Constant
     private enum NameTextFieldConstant {
         static let top: CGFloat = 20
@@ -28,10 +28,17 @@ final class FirendAddViewController: BaseViewController {
         static let height: CGFloat = 1
     }
     
+    private enum containerViewConstant {
+        static let top: CGFloat = 15
+        static let leading: CGFloat = 40
+        static let trailing: CGFloat = -40
+    }
+
     // MARK: - UI Components
     private lazy var nickNameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = NameTextFieldConstant.placeholder
+        textField.becomeFirstResponder()
         return textField
     }()
     
@@ -48,14 +55,20 @@ final class FirendAddViewController: BaseViewController {
         return view
     }()
     
+    private let containerView = UIView()
+    private let myNickNameView = MyNickNameView()
+    private let noResultView = NoResultView()
+    private let friendSearchResultView = FriendSearchResultView()
+    
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateResultView(myNickNameView)
     }
     
     // MARK: - Configure UI
     override func configureUI() {
-        [nickNameTextField, nickNameCountLabel, separatorLineView].forEach {
+        [nickNameTextField, nickNameCountLabel, separatorLineView, containerView].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -72,13 +85,33 @@ final class FirendAddViewController: BaseViewController {
             separatorLineView.topAnchor.constraint(equalTo: nickNameTextField.bottomAnchor, constant: SeparatorLineConstant.top),
             separatorLineView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: SeparatorLineConstant.leading),
             separatorLineView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: SeparatorLineConstant.trailing),
-            separatorLineView.heightAnchor.constraint(equalToConstant: SeparatorLineConstant.height)
+            separatorLineView.heightAnchor.constraint(equalToConstant: SeparatorLineConstant.height),
+            
+            containerView.topAnchor.constraint(equalTo: separatorLineView.bottomAnchor, constant: containerViewConstant.top),
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: containerViewConstant.leading),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: containerViewConstant.trailing),
+            containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+}
+
+// MARK: - Private Methods
+private extension FriendAddViewController {
+    func updateResultView(_ resultView: FreindAddResultViewProtocol) {
+        containerView.subviews.forEach { $0.removeFromSuperview() }
+        containerView.addSubview(resultView)
+        resultView.translatesAutoresizingMaskIntoConstraints = false
         
+        NSLayoutConstraint.activate([
+            resultView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            resultView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            resultView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            resultView.heightAnchor.constraint(equalToConstant: resultView.height())
+        ])
     }
 }
 
 @available(iOS 17.0, *)
 #Preview {
-    FirendAddViewController()
+    FriendAddViewController()
 }

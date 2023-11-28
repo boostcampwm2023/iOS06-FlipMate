@@ -16,7 +16,7 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
     
     private enum ProfileImageConstant {
         static let cornerRadius: CGFloat = 50
-        static let top: CGFloat = 20
+        static let top: CGFloat = 30
         static let width: CGFloat = 100
         static let height: CGFloat = 100
     }
