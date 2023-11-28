@@ -17,20 +17,18 @@ export class LoggingInterceptor implements NestInterceptor {
     const response = ctx.getResponse();
     const { method, url, body } = request;
 
-    this.logger.debug(
-      `[Request] Method: ${method}, URL: ${url}, Body: ${JSON.stringify(body)}`,
+    this.logger.debug(`[Request] ${method} ${url} \n ${JSON.stringify(body)}`);
+    return next.handle().pipe(
+      tap((body) => {
+        const requestToResponse: `${number}ms` = `${
+          Date.now() - request.now
+        }ms`;
+        this.logger.debug(
+          `[Response] ${
+            response.statusCode
+          } ${requestToResponse} \n ${JSON.stringify(body)} \n`,
+        );
+      }),
     );
-
-    return next
-      .handle()
-      .pipe(
-        tap((body) =>
-          this.logger.debug(
-            `[Response] Status: ${response.statusCode}, Body: ${JSON.stringify(
-              body,
-            )}`,
-          ),
-        ),
-      );
   }
 }

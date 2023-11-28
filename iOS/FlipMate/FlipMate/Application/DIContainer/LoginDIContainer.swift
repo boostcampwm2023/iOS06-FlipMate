@@ -10,7 +10,7 @@ import UIKit
 final class LoginDIContainer: LoginFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
-        let categoryManager: CategoryManager
+        let categoryManager: CategoryManageable
     }
     
     private let dependencies: Dependencies

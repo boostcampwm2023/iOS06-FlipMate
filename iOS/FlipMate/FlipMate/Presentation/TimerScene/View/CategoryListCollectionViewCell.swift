@@ -28,10 +28,12 @@ final class CategoryListCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private let colorCircle: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "circle.fill")
-        return imageView
+    private let colorCircle: UIView = {
+        let view = UIView()
+        view.layer.borderColor = FlipMateColor.gray2.color?.cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 12
+        return view
     }()
     
     override init(frame: CGRect) {
@@ -46,17 +48,22 @@ final class CategoryListCollectionViewCell: UICollectionViewCell {
     
     func updateUI(category: Category) {
         subjectLabel.text = category.subject
+        colorCircle.backgroundColor = UIColor(hexString: category.color)
         timeLabel.text = category.studyTime?.secondsToStringTime()
     }
     
     func updateShadow() {
         if isSelected {
-            backgroundColor = FlipMateColor.gray3.color
+            backgroundColor = FlipMateColor.gray2.color
             setShadow()
         } else {
             backgroundColor = .systemBackground
             layer.shadowOpacity = 0
         }
+    }
+    
+    func setTimeLabelHidden(isHidden: Bool) {
+        timeLabel.isHidden = isHidden
     }
 }
 

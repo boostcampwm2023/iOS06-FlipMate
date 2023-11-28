@@ -15,7 +15,7 @@ protocol TimerUseCase {
     /// 타이머 재개
     func resumeTimer(resumeTime: Date, categoryId: Int?) -> AnyPublisher<Void, NetworkError>
     /// 타이머 일시정지
-    func suspendTimer(suspendTime: Date, categoryId: Int?) -> AnyPublisher<Int, NetworkError>
+    func suspendTimer(suspendTime: Date) -> Int
     /// 타이머 종료
     func stopTimer()
 }

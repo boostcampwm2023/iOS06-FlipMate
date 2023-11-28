@@ -9,7 +9,7 @@ import UIKit
 
 final class AppDIContainer {
     lazy var provider: Provider = Provider(urlSession: URLSession.shared)
-    lazy var categoryManager: CategoryManager = CategoryManager()
+    lazy var categoryManager: CategoryManageable = CategoryManager(categories: [])
     
     func makeTabBarDIContainer() -> TabBarDIContainer {
         let dependencies = TabBarDIContainer.Dependencies(
