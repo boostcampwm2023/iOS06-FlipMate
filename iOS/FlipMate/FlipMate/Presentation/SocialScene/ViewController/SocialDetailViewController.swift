@@ -9,45 +9,13 @@ import UIKit
 
 final class SocialDetailViewController: BaseViewController {
     private enum Constant {
-        static let userLogInStatus = "접속 중"
-        static let userLogOutStatus = "21h 25m 전"
         static let dailyStudyLog = "오늘 학습 시간"
         static let weeklyStudyLog = "주간 학습 시간"
         static let monthlyStudyLog = "월간 학습 시간"
+        static let unfollow = "팔로우 취소"
     }
     
     // MARK: - UI Components
-    private lazy var backgroundView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = FlipMateColor.gray1.color
-        view.layer.opacity = 0.4
-        view.isUserInteractionEnabled = true
-        
-        return view
-    }()
-    
-    private lazy var detailView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemBackground
-        view.layer.borderColor = FlipMateColor.gray2.color?.cgColor
-        view.layer.borderWidth = 1
-        view.layer.cornerRadius = 20
-        
-        return view
-    }()
-    private lazy var closeImage: UIImageView = {
-        let imageView = UIImageView()
-        
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(systemName: "x.circle")
-        imageView.tintColor = FlipMateColor.darkBlue.color
-        
-        return imageView
-    }()
-    
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         
@@ -63,35 +31,34 @@ final class SocialDetailViewController: BaseViewController {
         let label = UILabel()
         
         label.text = "닉네임"
-        label.font = FlipMateFont.largeBold.font
+        label.font = FlipMateFont.mediumBold.font
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         
         return label
     }()
     
-    private lazy var userStatusLabel: UILabel = {
-        let label = UILabel()
+    private lazy var unfollowButton: UIButton = {
+        let button = UIButton()
         
-        label.text = Constant.userLogInStatus
-        label.font = FlipMateFont.mediumRegular.font
-        label.textColor = FlipMateColor.gray2.color
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        
-        return label
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(Constant.unfollow, for: .normal)
+        button.backgroundColor = FlipMateColor.darkBlue.color
+        button.titleLabel?.font = FlipMateFont.mediumBold.font
+        button.setTitleColor(.white, for: .normal)
+        button.layer.borderColor = FlipMateColor.gray2.color?.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 8
+        // button.addTarget(self, action: #selector(unfollowButtonDidTapped), for: .touchUpInside)
+        return button
     }()
     
-    private lazy var userInfoStackView: UIStackView = {
-        let stackView = UIStackView()
+    private lazy var divider: UIView = {
+        let divider = UIView()
+        divider.backgroundColor = .gray
+        divider.translatesAutoresizingMaskIntoConstraints = false
         
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.distribution = .fillProportionally
-        stackView.spacing = 5
-        
-        return stackView
+        return divider
     }()
     
     private lazy var dailyStudyLogLabel: UILabel = {
@@ -137,7 +104,7 @@ final class SocialDetailViewController: BaseViewController {
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
-        stackView.spacing = 12
+        stackView.spacing = 1
         
         return stackView
     }()
@@ -189,69 +156,53 @@ final class SocialDetailViewController: BaseViewController {
         
         return stackView
     }()
+    
     // MARK: - View Life Cycles
     override func configureUI() {
-        view.backgroundColor = .clear
-        
-        setUserInfoStackView()
         setStudyLogStackView()
         setStudyTimeStackView()
         
-        [profileImageView, userInfoStackView, studyLogStackView, studyTimeStackView, closeImage].forEach {
-            detailView.addSubview($0)
-        }
-        
-        [backgroundView, detailView].forEach {
+        [profileImageView, nickNameLabel, unfollowButton, divider, studyLogStackView, studyTimeStackView].forEach {
             view.addSubview($0)
         }
         
         NSLayoutConstraint.activate([
-            backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            profileImageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 36),
+            profileImageView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
+            profileImageView.heightAnchor.constraint(equalToConstant: 50),
+            profileImageView.widthAnchor.constraint(equalToConstant: 50),
             
-            detailView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            detailView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            detailView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
-            detailView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
-            detailView.heightAnchor.constraint(equalToConstant: 360),
+            nickNameLabel.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor),
+            nickNameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 8),
+            nickNameLabel.widthAnchor.constraint(equalToConstant: 80),
+            nickNameLabel.heightAnchor.constraint(equalToConstant: 25),
             
-            closeImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            closeImage.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -90),
-            closeImage.heightAnchor.constraint(equalToConstant: 72),
-            closeImage.widthAnchor.constraint(equalToConstant: 72)
+            unfollowButton.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor),
+            unfollowButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            unfollowButton.widthAnchor.constraint(equalToConstant: 96),
+            unfollowButton.heightAnchor.constraint(equalToConstant: 34)
         ])
         
         NSLayoutConstraint.activate([
-            profileImageView.topAnchor.constraint(equalTo: detailView.topAnchor, constant: 36),
-            profileImageView.leadingAnchor.constraint(equalTo: detailView.leadingAnchor, constant: 72),
-            profileImageView.heightAnchor.constraint(equalToConstant: 110),
-            
-            userInfoStackView.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor),
-            userInfoStackView.trailingAnchor.constraint(equalTo: detailView.trailingAnchor, constant: -60),
-            userInfoStackView.heightAnchor.constraint(equalToConstant: 90)
+            divider.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 16),
+            divider.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            divider.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            divider.heightAnchor.constraint(equalToConstant: 1)
         ])
         
         NSLayoutConstraint.activate([
-            studyLogStackView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 32),
-            studyLogStackView.leadingAnchor.constraint(equalTo: detailView.leadingAnchor, constant: 40),
+            studyLogStackView.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 32),
+            studyLogStackView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
             studyLogStackView.heightAnchor.constraint(equalToConstant: 120),
             
             studyTimeStackView.topAnchor.constraint(equalTo: studyLogStackView.topAnchor),
-            studyTimeStackView.trailingAnchor.constraint(equalTo: detailView.trailingAnchor, constant: -40),
+            studyTimeStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
             studyTimeStackView.heightAnchor.constraint(equalToConstant: 120)
         ])
     }
 }
 
 private extension SocialDetailViewController {
-    func setUserInfoStackView() {
-        [nickNameLabel, userStatusLabel].forEach {
-            userInfoStackView.addArrangedSubview($0)
-        }
-    }
-    
     func setStudyLogStackView() {
         [dailyStudyLogLabel, weeklyStudyLogLabel, monthlyStudyLogLabel].forEach {
             studyLogStackView.addArrangedSubview($0)
