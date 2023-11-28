@@ -5,10 +5,11 @@ import { StudyLogs } from './study-logs.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from 'src/auth/auth.module';
 import { UsersModule } from 'src/users/users.module';
+import { RedisService } from 'src/common/redis.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([StudyLogs]), AuthModule, UsersModule],
-  providers: [StudyLogsService],
+  providers: [StudyLogsService, RedisService],
   controllers: [StudyLogsController, StatsController],
 })
 export class StudyLogsModule {}
