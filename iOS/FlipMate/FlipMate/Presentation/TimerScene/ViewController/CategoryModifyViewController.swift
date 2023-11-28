@@ -197,7 +197,6 @@ private extension CategoryModifyViewController {
     }
     
     @objc func doneButtonTapped(_ sender: UIBarButtonItem) {
-        // TODO: 색깔 선택 기능 미구현
         if purpose == .create {
             Task {
                 do {
@@ -205,8 +204,9 @@ private extension CategoryModifyViewController {
                         FMLogger.general.error("빈 제목, 추가할 수 없음")
                         return
                     }
-                    try await viewModel.createCategory(name: categoryTitle, colorCode: "FFFFFFFF")
-                    dismiss(animated: true)
+                    try await viewModel.createCategory(name: categoryTitle,
+                                                       colorCode: categoryColorSelectView.colorLabel.text 
+                                                       ?? "000000FF")
                 } catch let error {
                     FMLogger.general.error("카테고리 추가 중 에러 \(error)")
                 }
@@ -222,16 +222,16 @@ private extension CategoryModifyViewController {
                         FMLogger.general.error("가져온 카테고리 없음 에러")
                         return
                     }
-                    try await viewModel.updateCategory(of: category.id, newName: categoryTitle, newColorCode: "FFFFFFFF")
-                    dismiss(animated: true)
+                    try await viewModel.updateCategory(of: category.id, 
+                                                       newName: categoryTitle,
+                                                       newColorCode: categoryColorSelectView.colorLabel.text 
+                                                       ?? "000000FF")
                 } catch let error {
                     FMLogger.general.error("카테고리 추가 중 에러 \(error)")
                 }
             }
         }
+        
+        self.navigationController?.popViewController(animated: true)
     }
 }
-//@available(iOS 17.0, *)
-//#Preview {
-//    CategoryModifyViewController(viewModel: CategoryViewModel(useCase: DefaultCategoryUseCase(repository: DefaultCategoryRepository(provider: Provider(urlSession: URLSession.shared)))), purpose: .create)
-//}
