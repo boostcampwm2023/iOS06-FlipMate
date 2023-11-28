@@ -10,6 +10,7 @@ import {
   Patch,
   UseInterceptors,
   UploadedFile,
+  BadRequestException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
@@ -77,9 +78,13 @@ export class AuthController {
   async patchUser(
     @User('id') user_id: number,
     @Body() user: UpdateUserDto,
-    @UploadedFile() file: S3UploadedFile,
+    @UploadedFile() file: Express.Multer.File,
   ): Promise<any> {
-    const image_url = file?.key;
+    const isNomal = await this.usersService.isNormalImage(file);
+    if (!isNomal) {
+      throw new BadRequestException('유해한 이미지 입니다!!');
+    }
+    const image_url = await this.usersService.s3Upload(file);
     const updatedUser = await this.usersService.updateUser(
       user_id,
       user as UsersModel,
@@ -109,16 +114,8 @@ export class AuthController {
       email: user.email,
       image_url: path.join(
         this.configService.get(ENV.CDN_ENDPOINT),
-        user.image_url,
+        user.image_url ?? 'default.png',
       ),
     };
   }
-}
-
-interface S3UploadedFile extends Express.Multer.File {
-  bucket: string;
-  key: string;
-  location: string;
-  etag: string;
-  versionId?: string;
 }
