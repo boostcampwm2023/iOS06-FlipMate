@@ -6,6 +6,8 @@ import { ConfigService } from '@nestjs/config';
 import { v4 } from 'uuid';
 import { GreenEyeResponse } from './interface/greeneye.interface';
 import { S3Service } from 'src/common/s3.service';
+import * as path from 'path';
+import { ENV } from 'src/common/const/env-keys.const';
 
 @Injectable()
 export class UsersService {
@@ -41,7 +43,10 @@ export class UsersService {
     if (!user) {
       throw new BadRequestException('해당 유저가 존재하지 않습니다.');
     }
-    return user.image_url;
+    return path.join(
+      this.config.get(ENV.CDN_ENDPOINT),
+      user.image_url ?? 'default.png',
+    );
   }
 
   async updateUser(
