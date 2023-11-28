@@ -58,6 +58,7 @@
 		2C9F61F72B14EFA200AE63F9 /* CategoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61F62B14EFA200AE63F9 /* CategoryManager.swift */; };
 		2C9F61F92B14F33600AE63F9 /* CategoryManagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61F82B14F33600AE63F9 /* CategoryManagable.swift */; };
 		2C9F61FB2B15C96100AE63F9 /* CategoryModifyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61FA2B15C96100AE63F9 /* CategoryModifyViewModel.swift */; };
+		2C9F61FE2B15F48600AE63F9 /* FriendAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61FD2B15F48600AE63F9 /* FriendAddViewController.swift */; };
 		2CE84EEF2B0B742A00E2FB71 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */; };
 		2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */; };
 		2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF42B0B783800E2FB71 /* UICollectionViewCell++Extension.swift */; };
@@ -187,6 +188,7 @@
 		2C9F61F62B14EFA200AE63F9 /* CategoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManager.swift; sourceTree = "<group>"; };
 		2C9F61F82B14F33600AE63F9 /* CategoryManagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagable.swift; sourceTree = "<group>"; };
 		2C9F61FA2B15C96100AE63F9 /* CategoryModifyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModifyViewModel.swift; sourceTree = "<group>"; };
+		2C9F61FD2B15F48600AE63F9 /* FriendAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddViewController.swift; sourceTree = "<group>"; };
 		2CA80839AC9EFDD4BAA10C67 /* Pods_FlipMate_FlipMateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate_FlipMateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView++Extension.swift"; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 			isa = PBXGroup;
 			children = (
 				2C5CDA4E2B025403007AFC57 /* SocialViewController.swift */,
+				2C9F61FD2B15F48600AE63F9 /* FriendAddViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1188,6 +1191,7 @@
 				2C2F21782B0F4CCC00B45BA8 /* StudyLog.swift in Sources */,
 				ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */,
 				2C88DD132B14C51B000B4686 /* TimerFinishUseCase.swift in Sources */,
+				2C9F61FE2B15F48600AE63F9 /* FriendAddViewController.swift in Sources */,
 				2C88DCFE2B1244A6000B4686 /* LoginFlowCoordinator.swift in Sources */,
 				601773E42B021E6000D175D9 /* TimerViewController.swift in Sources */,
 				2C88DCF92B1242DA000B4686 /* TimerFlowCoordinator.swift in Sources */,
