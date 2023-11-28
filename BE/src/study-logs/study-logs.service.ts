@@ -39,6 +39,7 @@ export class StudyLogsService {
       category_id: category,
     });
     const savedStudyLog = await this.studyLogsRepository.save(studyLog);
+    await this.redisService.del(`${user_id}`);
     return this.entityToDto(savedStudyLog);
   }
 
