@@ -29,19 +29,32 @@ final class CategoryDIContainer: CategoryFlowCoordinatorDependencies {
         )
     }
     
+    func makeCategoryModifyViewModel(actions: CategoryModifyViewModelActions? = nil, selectedCategory: Category? = nil) -> CategoryModifyViewModelProtocol {
+        return CategoryModifyViewModel(
+            useCase: DefaultCategoryUseCase(
+                repository: DefaultCategoryRepository(
+                    provider: dependencies.provider)),
+            categoryManager: dependencies.categoryManager,
+            actions: actions,
+            selectedCategory: selectedCategory
+        )
+    }
+    
     func makeCategorySettingViewController(actions: CategoryViewModelActions) -> UIViewController {
         return CategorySettingViewController(viewModel: makeCategoryViewModel(actions: actions))
     }
     
+    // TODO: CategoryModifyViewModel 만들어서 ViewController 생성
     func makeCategoryModifyViewController(
         purpose: CategoryPurpose,
-        category: Category? = nil,
-        actions: CategoryViewModelActions
+        actions: CategoryModifyViewModelActions,
+        selectedCategory: Category? = nil
     ) -> UIViewController {
         return CategoryModifyViewController(
-            viewModel: makeCategoryViewModel(actions: actions),
-            purpose: purpose,
-            category: category)
+            viewModel: makeCategoryModifyViewModel(
+                actions: actions,
+                selectedCategory: selectedCategory),
+            purpose: purpose)
     }
     
     func makeCategoryFlowCoordinator(
