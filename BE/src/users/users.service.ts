@@ -2,17 +2,17 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UsersModel } from './entity/users.entity';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { ConfigService } from '@nestjs/config';
 import { v4 } from 'uuid';
 import { GreenEyeResponse } from './interface/greeneye.interface';
+import { S3Service } from 'src/common/s3.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(UsersModel)
     private usersRepository: Repository<UsersModel>,
+    private s3Service: S3Service,
     private config: ConfigService,
   ) {}
 
@@ -92,7 +92,9 @@ export class UsersService {
     return isNormal;
   }
 
-  async requestClovaGreenEye(image: Express.Multer.File): Promise<GreenEyeResponse> {
+  async requestClovaGreenEye(
+    image: Express.Multer.File,
+  ): Promise<GreenEyeResponse> {
     const APIURL = this.config.get<string>('GREENEYE_URL');
     const CLIENT_SECRET = this.config.get<string>('GREENEYE_SECRET');
     const UUID = v4();
@@ -120,5 +122,9 @@ export class UsersService {
     } catch (error) {
       throw new BadRequestException('이미지 검사 요청 실패');
     }
+  }
+
+  async s3Upload(file: Express.Multer.File): Promise<string> {
+    return this.s3Service.uploadFile(file);
   }
 }

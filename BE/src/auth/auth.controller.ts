@@ -77,9 +77,9 @@ export class AuthController {
   async patchUser(
     @User('id') user_id: number,
     @Body() user: UpdateUserDto,
-    @UploadedFile() file: S3UploadedFile,
+    @UploadedFile() file: Express.Multer.File,
   ): Promise<any> {
-    const image_url = file?.key;
+    const image_url = await this.usersService.s3Upload(file);
     const updatedUser = await this.usersService.updateUser(
       user_id,
       user as UsersModel,
@@ -113,12 +113,4 @@ export class AuthController {
       ),
     };
   }
-}
-
-interface S3UploadedFile extends Express.Multer.File {
-  bucket: string;
-  key: string;
-  location: string;
-  etag: string;
-  versionId?: string;
 }
