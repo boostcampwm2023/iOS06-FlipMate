@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 final class CategoryColorSelectView: UIView {
-    var colorLabel: UILabel = {
+    private var colorSubject = PassthroughSubject<String, Never>()
+    
+    private var colorLabel: UILabel = {
         let colorLabel = UILabel()
         colorLabel.translatesAutoresizingMaskIntoConstraints = false
         colorLabel.textColor = .label
@@ -35,6 +38,15 @@ final class CategoryColorSelectView: UIView {
     required init?(coder: NSCoder) {
         fatalError("Don't use storyboard")
     }
+    
+    func colorValue() -> String? {
+        return colorLabel.text
+    }
+    
+    func updateColor(color: String) {
+        colorWell.selectedColor = UIColor(hexString: color)
+        colorLabel.text = color
+    }
 }
 
 private extension CategoryColorSelectView {
@@ -59,8 +71,10 @@ private extension CategoryColorSelectView {
 // MARK: - objc function
 private extension CategoryColorSelectView {
     @objc func colorWellChanged(_ sender: Any) {
-        colorLabel.text = colorWell.selectedColor?.toHexString() }
+        colorLabel.text = colorWell.selectedColor?.toHexString()
+    }
 }
+
 @available(iOS 17.0, *)
 #Preview {
     CategoryColorSelectView()

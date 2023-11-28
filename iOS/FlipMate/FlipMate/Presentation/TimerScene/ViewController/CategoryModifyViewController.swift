@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 enum CategoryPurpose {
     case create
@@ -27,9 +28,7 @@ final class CategoryModifyViewController: BaseViewController {
         static let placeHolders: [String] = ["이름을 입력해주세요", "색상을 선택해주세요"]
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: UI Components
     private lazy var firstSectionTitleLabel: UILabel = {
@@ -55,7 +54,6 @@ final class CategoryModifyViewController: BaseViewController {
     private lazy var categoryTitleTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.delegate = self
         textField.layer.masksToBounds = true
         textField.layer.cornerRadius = 6
         textField.layer.borderColor = FlipMateColor.gray2.color?.cgColor
@@ -76,14 +74,12 @@ final class CategoryModifyViewController: BaseViewController {
         return colorView
     }()
     
-    private let viewModel: CategoryViewModelProtocol
+    private let viewModel: CategoryModifyViewModelProtocol
     private let purpose: CategoryPurpose
-    private let category: Category?
     
-    init(viewModel: CategoryViewModelProtocol, purpose: CategoryPurpose, category: Category? = nil) {
+    init(viewModel: CategoryModifyViewModelProtocol, purpose: CategoryPurpose) {
         self.viewModel = viewModel
         self.purpose = purpose
-        self.category = category
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -149,22 +145,24 @@ final class CategoryModifyViewController: BaseViewController {
             categoryColorSelectView.heightAnchor.constraint(
                 equalTo: categoryTitleTextField.heightAnchor)
         ])
-        
-        if purpose == .update {
-            guard let category = category else {
-                FMLogger.general.error("가져온 카테고리 없음 에러")
-                return
+    }
+    
+    override func bind() {
+        viewModel.selectedCategoryPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] category in
+                guard let self = self, let category = category else { return }
+                categoryTitleTextField.text = category.subject
+                categoryColorSelectView.updateColor(color: category.color)
             }
-            setText(text: category.subject)
-        }
+            .store(in: &cancellables)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }
-// MARK: UITextFieldDelegate
-extension CategoryModifyViewController: UITextFieldDelegate {
-    func setText(text: String) {
-        categoryTitleTextField.text = text
-    }
-}
+
 // MARK: Navigation Bar
 private extension CategoryModifyViewController {
     func setUpNavigation() {
@@ -193,20 +191,23 @@ private extension CategoryModifyViewController {
 // MARK: objc function
 private extension CategoryModifyViewController {
     @objc func closeButtonTapped(_ sender: UIBarButtonItem) {
-        self.navigationController?.popViewController(animated: true)
+        viewModel.modifyCloseButtonTapped()
     }
     
     @objc func doneButtonTapped(_ sender: UIBarButtonItem) {
+        guard let categoryTitle = categoryTitleTextField.text else {
+            FMLogger.general.error("빈 제목, 추가할 수 없음")
+            return
+        }
+         
+        let colorCode = categoryColorSelectView.colorValue()
+        let name = categoryTitle
+
         if purpose == .create {
             Task {
                 do {
-                    guard let categoryTitle = categoryTitleTextField.text else {
-                        FMLogger.general.error("빈 제목, 추가할 수 없음")
-                        return
-                    }
-                    try await viewModel.createCategory(name: categoryTitle,
-                                                       colorCode: categoryColorSelectView.colorLabel.text 
-                                                       ?? "000000FF")
+                    try await viewModel.createCategory(name: name,
+                                                       colorCode: colorCode)
                 } catch let error {
                     FMLogger.general.error("카테고리 추가 중 에러 \(error)")
                 }
@@ -214,24 +215,13 @@ private extension CategoryModifyViewController {
         } else {
             Task {
                 do {
-                    guard let categoryTitle = categoryTitleTextField.text else {
-                        FMLogger.general.error("빈 제목, 추가할 수 없음")
-                        return
-                    }
-                    guard let category = category else {
-                        FMLogger.general.error("가져온 카테고리 없음 에러")
-                        return
-                    }
-                    try await viewModel.updateCategory(of: category.id, 
-                                                       newName: categoryTitle,
-                                                       newColorCode: categoryColorSelectView.colorLabel.text 
-                                                       ?? "000000FF")
+                    try await viewModel.updateCategory(newName: name,
+                                                       newColorCode: colorCode)
                 } catch let error {
                     FMLogger.general.error("카테고리 추가 중 에러 \(error)")
                 }
             }
         }
-        
-        self.navigationController?.popViewController(animated: true)
+        viewModel.modifyDoneButtonTapped()
     }
 }
