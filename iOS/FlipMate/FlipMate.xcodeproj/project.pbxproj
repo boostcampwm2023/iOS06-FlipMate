@@ -108,6 +108,7 @@
 		ED38422C2B0F4531001E2803 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422B2B0F4531001E2803 /* LoginViewModel.swift */; };
 		ED38422F2B0F747B001E2803 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422E2B0F747B001E2803 /* KeyChainManager.swift */; };
 		ED3842312B0F94E6001E2803 /* DefaultCategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842302B0F94E6001E2803 /* DefaultCategoryRepository.swift */; };
+		ED68659D2B15E928001A2AAD /* SocialDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED68659C2B15E928001A2AAD /* SocialDetailViewController.swift */; };
 		ED82F0072B126C95005BB32D /* UITextField++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F0062B126C95005BB32D /* UITextField++Extension.swift */; };
 		ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */; };
 		ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A7E2B06033F008FE1C5 /* Category.swift */; };
@@ -247,6 +248,7 @@
 		ED38422B2B0F4531001E2803 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		ED38422E2B0F747B001E2803 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		ED3842302B0F94E6001E2803 /* DefaultCategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCategoryRepository.swift; sourceTree = "<group>"; };
+		ED68659C2B15E928001A2AAD /* SocialDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDetailViewController.swift; sourceTree = "<group>"; };
 		ED82F0062B126C95005BB32D /* UITextField++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++Extension.swift"; sourceTree = "<group>"; };
 		ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor++Extension.swift"; sourceTree = "<group>"; };
 		ED9B2A7E2B06033F008FE1C5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 			isa = PBXGroup;
 			children = (
 				2C5CDA4E2B025403007AFC57 /* SocialViewController.swift */,
+				ED68659C2B15E928001A2AAD /* SocialDetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -611,6 +614,7 @@
 		600908F22AFCDCE10065DFFB /* SocialScene */ = {
 			isa = PBXGroup;
 			children = (
+				ED68659E2B15EAAA001A2AAD /* View */,
 				2C5CDA4D2B0253F5007AFC57 /* ViewController */,
 			);
 			path = SocialScene;
@@ -878,6 +882,13 @@
 				ED38422B2B0F4531001E2803 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ED68659E2B15EAAA001A2AAD /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		EDC851D02B04EE74009031EA /* View */ = {
@@ -1240,6 +1251,7 @@
 				2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */,
 				2C5CDA572B025426007AFC57 /* FlipMateColor.swift in Sources */,
 				2C2F217C2B0F4D4000B45BA8 /* StudyLogRepository.swift in Sources */,
+				ED68659D2B15E928001A2AAD /* SocialDetailViewController.swift in Sources */,
 				600908C02AFCD7DF0065DFFB /* SceneDelegate.swift in Sources */,
 				2C3430B12B0DE3D0008CBC85 /* Date++Extension.swift in Sources */,
 				2C2F217E2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift in Sources */,
