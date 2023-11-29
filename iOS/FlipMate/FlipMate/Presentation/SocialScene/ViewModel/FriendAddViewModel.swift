@@ -10,8 +10,8 @@ import Combine
 
 protocol FriendAddViewModelInput {
     func nicknameDidChange(at nickname: String)
-    func didFollowFriend(at nickName: String)
-    func didSearchFriend(at nickName: String)
+    func didFollowFriend()
+    func didSearchFriend()
 }
 
 protocol FriendAddViewModelOutput {
@@ -31,10 +31,14 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     private var nicknameCountSubject = PassthroughSubject<Int, Never>()
     
     // MARK: - Properties
+    private var cancellables = Set<AnyCancellable>()
     private let myNickname: String
+    private var friendNickname: String = ""
+    private let friendUseCase: FriendUseCase
     
-    init(myNickname: String) {
+    init(myNickname: String, friendUseCase: FriendUseCase) {
         self.myNickname = myNickname
+        self.friendUseCase = friendUseCase
     }
     
     // MARK: - output
@@ -55,16 +59,43 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     }
 
     // MARK: - Input
-    func didFollowFriend(at nickName: String) {
-        // useCase 호출
+    func didFollowFriend() {
+        friendUseCase.follow(at: friendNickname)
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    FMLogger.friend.debug("친구 요청 성공")
+                case .failure(let error):
+                    FMLogger.friend.error("친구 요청 에러 발생 \(error)")
+                }
+            } receiveValue: { _ in
+                // TODO: - Coordinator로 화면 전환
+            }
+            .store(in: &cancellables)
     }
     
-    func didSearchFriend(at nickName: String) {
-        // useCase 호출
-        searchResultSubject.send(Friend(nickName: nickName, profileImageURL: ""))
+    func didSearchFriend() {
+        friendUseCase.search(at: friendNickname)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                guard let self = self else { return }
+                switch completion {
+                case .finished:
+                    FMLogger.friend.debug("친구 검색 성공")
+                case .failure(let error):
+                    FMLogger.friend.error("친구 검색 에러 발생 \(error.localizedDescription)")
+                    self.searchErrorSubject.send()
+                }
+            } receiveValue: { [weak self] profileimageURL in
+                guard let self = self else { return }
+                self.searchResultSubject.send(Friend(nickName: friendNickname, profileImageURL: profileimageURL))
+            }
+            .store(in: &cancellables)
     }
     
     func nicknameDidChange(at nickname: String) {
+        friendNickname = nickname
         nicknameCountSubject.send(nickname.count)
     }
 }

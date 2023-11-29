@@ -143,6 +143,14 @@ final class FriendAddViewController: BaseViewController {
                 self.myNickNameView.updateUI(nickname: myNickname)
             }
             .store(in: &cancellables)
+        
+        friendSearchResultView.tapPublisher()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                self.viewModel.didFollowFriend()
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -160,6 +168,10 @@ private extension FriendAddViewController {
             resultView.heightAnchor.constraint(equalToConstant: resultView.height())
         ])
     }
+    
+    func setGesture() {
+        
+    }
 }
 
 extension FriendAddViewController: UITextFieldDelegate {
@@ -170,11 +182,7 @@ extension FriendAddViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let nickname = textField.text else { return false }
-        viewModel.didSearchFriend(at: nickname)
+        viewModel.didSearchFriend()
         return true
     }
-}
-@available(iOS 17.0, *)
-#Preview {
-    FriendAddViewController(viewModel: FriendAddViewModel(myNickname: "iOS개발용"))
 }
