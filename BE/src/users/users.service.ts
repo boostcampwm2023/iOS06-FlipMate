@@ -8,6 +8,7 @@ import { GreenEyeResponse } from './interface/greeneye.interface';
 import { S3Service } from 'src/common/s3.service';
 import * as path from 'path';
 import { ENV } from 'src/common/const/env-keys.const';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -51,7 +52,7 @@ export class UsersService {
 
   async updateUser(
     user_id: number,
-    user: UsersModel,
+    user: UpdateUserDto,
     image_url?: string,
   ): Promise<UsersModel> {
     const selectedUser = await this.usersRepository.findOne({

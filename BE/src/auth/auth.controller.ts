@@ -26,7 +26,6 @@ import {
 } from '@nestjs/swagger';
 import { UsersService } from 'src/users/users.service';
 import { UpdateUserDto } from 'src/users/dto/update-user.dto';
-import { UsersModel } from 'src/users/entity/users.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ConfigService } from '@nestjs/config';
 import * as path from 'path';
@@ -80,14 +79,17 @@ export class AuthController {
     @Body() user: UpdateUserDto,
     @UploadedFile() file: Express.Multer.File,
   ): Promise<any> {
-    const isNomal = await this.usersService.isNormalImage(file);
-    if (!isNomal) {
-      throw new BadRequestException('유해한 이미지 입니다!!');
+    let image_url: string;
+    if (file) {
+      const isNomal = await this.usersService.isNormalImage(file);
+      if (!isNomal) {
+        throw new BadRequestException('유해한 이미지 입니다!!');
+      }
+      image_url = await this.usersService.s3Upload(file);
     }
-    const image_url = await this.usersService.s3Upload(file);
     const updatedUser = await this.usersService.updateUser(
       user_id,
-      user as UsersModel,
+      user,
       image_url,
     );
     return {
