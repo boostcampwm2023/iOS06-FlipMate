@@ -65,7 +65,6 @@ export class StudyLogsService {
     const startMoment = moment(start_date);
     const diffDays = moment(end_date).diff(startMoment, 'days');
     const result = Array.from({ length: diffDays }, () => 0);
-    console.log(diffDays);
     const daily_sums = await this.studyLogsRepository
       .createQueryBuilder('study_logs')
       .select('study_logs.date', 'date')
