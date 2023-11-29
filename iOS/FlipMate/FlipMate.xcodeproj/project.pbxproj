@@ -63,6 +63,8 @@
 		2C9F62032B16021E00AE63F9 /* FriendSearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62022B16021E00AE63F9 /* FriendSearchResultView.swift */; };
 		2C9F62052B160B3900AE63F9 /* NoResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62042B160B3900AE63F9 /* NoResultView.swift */; };
 		2C9F62082B16398D00AE63F9 /* FreindAddResultViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62072B16398D00AE63F9 /* FreindAddResultViewProtocol.swift */; };
+		2C9F620B2B171C8300AE63F9 /* FriendAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F620A2B171C8300AE63F9 /* FriendAddViewModel.swift */; };
+		2C9F620D2B17241200AE63F9 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F620C2B17241200AE63F9 /* Friend.swift */; };
 		2CE84EEF2B0B742A00E2FB71 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */; };
 		2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */; };
 		2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF42B0B783800E2FB71 /* UICollectionViewCell++Extension.swift */; };
@@ -197,6 +199,8 @@
 		2C9F62022B16021E00AE63F9 /* FriendSearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchResultView.swift; sourceTree = "<group>"; };
 		2C9F62042B160B3900AE63F9 /* NoResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultView.swift; sourceTree = "<group>"; };
 		2C9F62072B16398D00AE63F9 /* FreindAddResultViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreindAddResultViewProtocol.swift; sourceTree = "<group>"; };
+		2C9F620A2B171C8300AE63F9 /* FriendAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddViewModel.swift; sourceTree = "<group>"; };
+		2C9F620C2B17241200AE63F9 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		2CA80839AC9EFDD4BAA10C67 /* Pods_FlipMate_FlipMateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate_FlipMateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView++Extension.swift"; sourceTree = "<group>"; };
@@ -518,6 +522,14 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		2C9F62092B171C4D00AE63F9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2C9F620A2B171C8300AE63F9 /* FriendAddViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		48114A3517087E7FD0C9546F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -642,6 +654,7 @@
 			children = (
 				2C9F62062B16397400AE63F9 /* Protocol */,
 				2C9F61FF2B1601E800AE63F9 /* View */,
+				2C9F62092B171C4D00AE63F9 /* ViewModel */,
 				2C5CDA4D2B0253F5007AFC57 /* ViewController */,
 			);
 			path = SocialScene;
@@ -817,6 +830,7 @@
 				ED9B2A7E2B06033F008FE1C5 /* Category.swift */,
 				2C2F21772B0F4CCC00B45BA8 /* StudyLog.swift */,
 				ED3842202B0F1CF9001E2803 /* User.swift */,
+				2C9F620C2B17241200AE63F9 /* Friend.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1202,6 +1216,7 @@
 				60F67C6A2B0E1868002C8BF3 /* DefaultCategoryUseCase.swift in Sources */,
 				2C5CDA4B2B0252C1007AFC57 /* LoginType.swift in Sources */,
 				600195A02B0DFA3900F02BA4 /* StatusResponseDTO.swift in Sources */,
+				2C9F620D2B17241200AE63F9 /* Friend.swift in Sources */,
 				60F6FD732B0B5E130057CE0B /* SignUpViewController.swift in Sources */,
 				2CE84EEF2B0B742A00E2FB71 /* CategorySettingViewController.swift in Sources */,
 				ED3595B02B0C82C800558FAA /* TimerStartRequestDTO.swift in Sources */,
@@ -1216,6 +1231,7 @@
 				2C2F21802B0F4DA600B45BA8 /* MockURLSession.swift in Sources */,
 				2C801D802B04B68900A7ABAE /* TimerUseCase.swift in Sources */,
 				6086464E2B0DDA1300B0C1BC /* CategoryRepository.swift in Sources */,
+				2C9F620B2B171C8300AE63F9 /* FriendAddViewModel.swift in Sources */,
 				2C2F21782B0F4CCC00B45BA8 /* StudyLog.swift in Sources */,
 				ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */,
 				2C88DD132B14C51B000B4686 /* TimerFinishUseCase.swift in Sources */,
