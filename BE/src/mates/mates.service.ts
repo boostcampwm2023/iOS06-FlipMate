@@ -8,6 +8,7 @@ import { Mates } from './mates.entity';
 import { Repository } from 'typeorm';
 import { MatesDto } from './dto/response/mates.dto';
 import { UsersModel } from 'src/users/entity/users.entity';
+import { RedisService } from 'src/common/redis.service';
 
 @Injectable()
 export class MatesService {
@@ -16,13 +17,29 @@ export class MatesService {
     private matesRepository: Repository<Mates>,
     @InjectRepository(UsersModel)
     private userRepository: Repository<UsersModel>,
+    private redisService: RedisService,
   ) {}
 
-  async getMates(user_id: number): Promise<MatesDto[]> {
+  async getMates(user_id: number): Promise<object> {
     const result = await this.matesRepository.find({
       where: { follower_id: { id: user_id } },
     });
-    return result.map((mate) => this.entityToDto(mate));
+    return {
+      following_ids: result.map((mate) => mate.following_id.id),
+    };
+  }
+
+  async getMatesStatus(user_id: number): Promise<object[]> {
+    const result = await this.matesRepository.find({
+      where: { follower_id: { id: user_id } },
+    });
+    const userIds = result.map(({ following_id: { id } }) => id);
+    return Promise.all(
+      userIds.map(async (id) => {
+        const started_at = await this.redisService.get(`${id}`);
+        return { id, started_at };
+      }),
+    );
   }
 
   async addMate(
@@ -33,7 +50,7 @@ export class MatesService {
       where: { nickname: following_nickname },
     });
 
-    if (user.id === following.id) {
+    if (user.id === following?.id) {
       throw new BadRequestException('자신을 친구 추가 할 수 없습니다.');
     }
 
