@@ -64,7 +64,7 @@ struct Provider: Providable {
         }
         
         guard 200..<300 ~= response.statusCode else {
-            FMLogger.general.error("에러 코드 : \(response.statusCode)\n내용: \(response.description)")
+            FMLogger.general.error("에러 코드 : \(response.statusCode)\n내용 : \(HTTPURLResponse.localizedString(forStatusCode: response.statusCode))")
             throw NetworkError.statusCodeError
         }
         
