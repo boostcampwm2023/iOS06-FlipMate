@@ -9,6 +9,9 @@ import { Repository } from 'typeorm';
 import { MatesDto } from './dto/response/mates.dto';
 import { UsersModel } from 'src/users/entity/users.entity';
 import { RedisService } from 'src/common/redis.service';
+import { getImageUrl } from 'src/common/utils';
+import { ConfigService } from '@nestjs/config';
+import { ENV } from 'src/common/const/env-keys.const';
 
 @Injectable()
 export class MatesService {
@@ -18,15 +21,36 @@ export class MatesService {
     @InjectRepository(UsersModel)
     private userRepository: Repository<UsersModel>,
     private redisService: RedisService,
+    private configService: ConfigService,
   ) {}
 
-  async getMates(user_id: number): Promise<object> {
-    const result = await this.matesRepository.find({
-      where: { follower_id: { id: user_id } },
-    });
-    return {
-      following_ids: result.map((mate) => mate.following_id.id),
-    };
+  async getMates(user_id: number, date: string): Promise<object[]> {
+    const studyTimeByFollowing = await this.userRepository.query(
+      `
+        SELECT u.id, u.nickname, u.image_url, COALESCE(SUM(s.learning_time), 0) AS total_time
+        FROM users_model u
+        LEFT JOIN mates m ON m.following_id = u.id
+        LEFT JOIN study_logs s ON s.user_id = u.id AND s.date = ?
+        WHERE m.follower_id = ? 
+        GROUP BY u.id
+        ORDER BY total_time DESC
+      `,
+      [date, user_id],
+    );
+    return Promise.all(
+      studyTimeByFollowing.map(async (record) => {
+        const started_at = await this.redisService.get(`${record.id}`);
+        return {
+          ...record,
+          image_url: getImageUrl(
+            this.configService.get(ENV.CDN_ENDPOINT),
+            record.image_url,
+          ),
+          total_time: parseInt(record.total_time),
+          started_at,
+        };
+      }),
+    );
   }
 
   async getMatesStatus(user_id: number): Promise<object[]> {

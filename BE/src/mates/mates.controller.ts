@@ -6,12 +6,14 @@ import {
   Post,
   Body,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
   ApiOperation,
+  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 import { User } from 'src/users/decorator/user.decorator';
@@ -31,9 +33,17 @@ export class MatesController {
   @ApiCreatedResponse({
     description: 'OK',
   })
+  @ApiQuery({
+    name: 'date',
+    example: '2023-11-22',
+    description: '날짜',
+  })
   @ApiOperation({ summary: '모든 친구들 조회하기 (완)' })
-  getMates(@User('id') user_id: number): Promise<object> {
-    return this.matesService.getMates(user_id);
+  getMates(
+    @User('id') user_id: number,
+    @Query('date') date: string,
+  ): Promise<object> {
+    return this.matesService.getMates(user_id, date);
   }
 
   @Get('/status')

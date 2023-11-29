@@ -10,6 +10,7 @@ import {
   UseInterceptors,
   UploadedFile,
   BadRequestException,
+  Patch,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
@@ -27,8 +28,8 @@ import { UsersService } from 'src/users/users.service';
 import { UpdateUserDto } from 'src/users/dto/update-user.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ConfigService } from '@nestjs/config';
-import * as path from 'path';
 import { ENV } from 'src/common/const/env-keys.const';
+import { getImageUrl } from 'src/common/utils';
 
 @ApiTags('로그인 페이지')
 @Controller('auth')
@@ -64,7 +65,7 @@ export class AuthController {
     res.redirect('/');
   }
 
-  @Post('info')
+  @Patch('info')
   @UseGuards(AccessTokenGuard)
   @UseInterceptors(FileInterceptor('image'))
   @ApiOperation({ summary: '유저 정보 설정 (완)' })
@@ -79,7 +80,6 @@ export class AuthController {
     @UploadedFile() file: Express.Multer.File,
   ): Promise<any> {
     let image_url: string;
-    console.log(file);
     if (file) {
       const isNomal = await this.usersService.isNormalImage(file);
       if (!isNomal) {
@@ -95,12 +95,10 @@ export class AuthController {
     return {
       nickname: updatedUser.nickname,
       email: updatedUser.email,
-      image_url: updatedUser.image_url
-        ? path.join(
-            this.configService.get(ENV.CDN_ENDPOINT),
-            updatedUser.image_url,
-          )
-        : null,
+      image_url: getImageUrl(
+        this.configService.get(ENV.CDN_ENDPOINT),
+        updatedUser.image_url,
+      ),
     };
   }
 
@@ -116,9 +114,10 @@ export class AuthController {
     return {
       nickname: user.nickname,
       email: user.email,
-      image_url: user.image_url
-        ? path.join(this.configService.get(ENV.CDN_ENDPOINT), user.image_url)
-        : null,
+      image_url: getImageUrl(
+        this.configService.get(ENV.CDN_ENDPOINT),
+        user.image_url,
+      ),
     };
   }
 }
