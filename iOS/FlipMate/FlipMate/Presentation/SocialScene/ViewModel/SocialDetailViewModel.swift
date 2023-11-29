@@ -16,6 +16,6 @@ typealias SocialDetailViewModelProtocol = SocialDetailViewModelInput
 
 final class SocialDetailViewModel: SocialDetailViewModelProtocol {
     func didUnfollowFriend() {
-        <#code#>
+        
     }
 }
