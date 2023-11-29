@@ -17,7 +17,11 @@ final class DefaultSignUpRepository: SignUpRepository {
     func checkIfNickNameIsDuplicated(_ nickName: String) async throws -> Bool {
         let endpoint = SignUpEndpoints.nickNameValidation(nickName)
         let response = try await provider.request(with: endpoint)
-        return response.isUnique
+        if response.isUnique {
+            return false
+        } else {
+            return true
+        }
     }
     
     // API 필요

@@ -15,7 +15,7 @@ protocol SignUpViewModelInput {
 }
 
 protocol SignUpViewModelOutput {
-    var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Never> { get }
+    var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Error> { get }
     var isSafeProfileImagePublisher: AnyPublisher<Bool, Error> { get }
     var isSignUpCompletedPublisher: AnyPublisher<Void, Error> { get }
 }
@@ -27,7 +27,7 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     private let useCase: SignUpUseCase
     
     // MARK: - Subjects
-    var isValidNickNameSubject = PassthroughSubject<NickNameValidationState, Never>()
+    var isValidNickNameSubject = PassthroughSubject<NickNameValidationState, Error>()
     var isSafeProfileImageSubject = PassthroughSubject<Bool, Error>()
     var isSignUpCompletedSubject = PassthroughSubject<Void, Error>()
     
@@ -37,9 +37,15 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     
     // MARK: - Input
     func nickNameChanged(_ newNickName: String) {
-        let nickNameValidationStatus = useCase.isNickNameValid(newNickName)
-        print(nickNameValidationStatus)
-        isValidNickNameSubject.send(nickNameValidationStatus)
+        Task {
+            do {
+                let nickNameValidationStatus = try await useCase.isNickNameValid(newNickName)
+                print(nickNameValidationStatus)
+                isValidNickNameSubject.send(nickNameValidationStatus)
+            } catch let error {
+                isValidNickNameSubject.send(completion: .failure(error))
+            }
+        }
     }
     
     func profileImageChanged(_ newImageData: Data) {
@@ -65,7 +71,7 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     }
     
     // MARK: - Output
-    var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Never> {
+    var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Error> {
         return isValidNickNameSubject
             .eraseToAnyPublisher()
     }
@@ -90,7 +96,7 @@ enum NickNameValidationState {
     var message: String {
         switch self {
         case .valid:
-            return ""
+            return "사용 가능한 닉네임 입니다."
         case .lengthViolation:
             return "닉네임이 20자를 초과했습니다."
         case .emptyViolation:

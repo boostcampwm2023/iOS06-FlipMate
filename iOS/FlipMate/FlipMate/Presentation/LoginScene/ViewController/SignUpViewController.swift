@@ -98,6 +98,7 @@ final class SignUpViewController: BaseViewController {
     
     private let viewModel: SignUpViewModelProtocol
     private var cancellables = Set<AnyCancellable>()
+    private var typingTimer: Timer?
     
     init(viewModel: SignUpViewModelProtocol) {
         self.viewModel = viewModel
@@ -167,10 +168,18 @@ final class SignUpViewController: BaseViewController {
         self.view.endEditing(true)
     }
     
+    // MARK: - Viewmodel Binding
     override func bind() {
         viewModel.isValidNickNamePublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] state in
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    FMLogger.general.error("닉네임 유효성 검사 중 에러 : \(error)")
+                }
+            } receiveValue: { [weak self] state in
                 FMLogger.general.log("닉네임 유효성 상태 : \(state.message)")
                 switch state {
                 case .valid:
@@ -192,15 +201,21 @@ final class SignUpViewController: BaseViewController {
                 }
             }
             .store(in: &cancellables)
-//        
-//        viewModel.isSignUpCompletedPublisher
-//            .receive(on: DispatchQueue.main)
-//            .sink { <#Subscribers.Completion<Error>#> in
-//                <#code#>
-//            } receiveValue: { <#Void#> in
-//                <#code#>
-//            }
-//            .store(in: &cancellables)
+        
+        viewModel.isSignUpCompletedPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                switch completion {
+                case .finished:
+                    self?.signUpButton.isEnabled = true
+                case .failure(let error):
+                    FMLogger.general.error("회원가입 도중 에러 : \(error)")
+                    self?.signUpButton.isEnabled = true
+                }
+            } receiveValue: { [weak self] _ in
+                self?.signUpButton.isEnabled = true
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -208,8 +223,28 @@ final class SignUpViewController: BaseViewController {
 private extension SignUpViewController {
     @objc
     func nickNameTextFieldChanged(_ sender: UITextField) {
+        signUpButton.isEnabled = false
         guard let text = sender.text else {
             FMLogger.user.log("닉네임 텍스트필드 내용 없음")
+            return
+        }
+        
+        if typingTimer != nil {
+            typingTimer?.invalidate()
+            typingTimer = nil
+        }
+        
+        typingTimer = Timer.scheduledTimer(
+            timeInterval: 2,
+            target: self,
+            selector: #selector(waitedTwoSeconds(_:)),
+            userInfo: text,
+            repeats: false)
+    }
+    
+    @objc
+    func waitedTwoSeconds(_ sender: Timer) {
+        guard let text = sender.userInfo as? String else {
             return
         }
         viewModel.nickNameChanged(text)
@@ -229,6 +264,7 @@ private extension SignUpViewController {
     // 회원가입 처리
     @objc
     func signUpButtonTapped() {
+        signUpButton.isEnabled = false
         let userName = nickNameTextField.text ?? ""
         guard let imageData = profileImageView.image?.jpegData(compressionQuality: 1) else {
             FMLogger.general.error("no profile image selected")
