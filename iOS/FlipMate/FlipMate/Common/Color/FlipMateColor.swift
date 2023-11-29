@@ -13,6 +13,7 @@ enum FlipMateColor {
     case gray2
     case gray3
     case gray4
+    case gray5
     case tabBarColor
     case tabBarLayerColor
     case warningRed
@@ -30,6 +31,8 @@ enum FlipMateColor {
             return UIColor(named: "Gray3")
         case .gray4:
             return UIColor(named: "Gray4")
+        case .gray5:
+            return UIColor(named: "Gray5")
         case .tabBarColor:
             return UIColor(named: "TabBarColor")
         case .tabBarLayerColor:

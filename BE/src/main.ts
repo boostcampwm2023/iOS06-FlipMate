@@ -7,6 +7,7 @@ import { readFileSync } from 'fs';
 import { WinstonModule } from 'nest-winston';
 import { loggerConfig } from './common/logging.config';
 import { LoggingInterceptor } from './common/logging.interceptor';
+import { HttpExceptionFilter } from './common/exception-filter/http-exception-filter';
 
 async function bootstrap() {
   const configService = new ConfigService();
@@ -36,6 +37,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalInterceptors(new LoggingInterceptor());
+  app.useGlobalFilters(new HttpExceptionFilter());
 
   await app.listen(configService.get<number>('PORT') || 3000);
 }

@@ -10,7 +10,7 @@ import UIKit
 final class TimerSceneDIContainer: TimerFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
-        let categoryManager: CategoryManager
+        let categoryManager: CategoryManageable
     }
     
     private let dependencies: Dependencies
@@ -24,11 +24,24 @@ final class TimerSceneDIContainer: TimerFlowCoordinatorDependencies {
             timerViewModel: makeTimerViewModel(actions: actions))
     }
     
+    func makeTimerFinishViewController(actions: TimerFinishViewModelActions, studyEndLog: StudyEndLog) -> UIViewController {
+        return TimerFinishViewController(
+            viewModel: makeTimerFinishViewModel(studyEndLog: studyEndLog, actions: actions))
+    }
+    
+    func makeTimerFinishViewModel(studyEndLog: StudyEndLog, actions: TimerFinishViewModelActions) -> TimerFinishViewModel {
+        return TimerFinishViewModel(
+            studyEndLog: studyEndLog,
+            timerFinishUseCase: DefaultTimerFinishUseCase(timerRepository: makeTimerRepository()),
+            actions: actions)
+    }
+    
     func makeTimerViewModel(actions: TimerViewModelActions) -> TimerViewModelProtocol {
         return TimerViewModel(
             timerUseCase: makeTimerUseCase(),
             userInfoUserCase: makeUserInfoUseCase(),
-            actions: actions)
+            actions: actions,
+            categoryManager: dependencies.categoryManager)
     }
     
     func makeTimerUseCase() -> TimerUseCase {

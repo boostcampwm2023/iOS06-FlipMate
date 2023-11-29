@@ -11,7 +11,7 @@ final class TabBarDIContainer: TabBarFlowCoordinatorDependencies {
     
     struct Dependencies {
         let provider: Providable
-        let categoryManager: CategoryManager
+        let categoryManager: CategoryManageable
     }
     
     private let dependencies: Dependencies

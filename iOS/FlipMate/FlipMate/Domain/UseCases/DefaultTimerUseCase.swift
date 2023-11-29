@@ -27,14 +27,10 @@ class DefaultTimerUseCase: TimerUseCase {
         return timerRepository.startTimer(startTime: resumeTime, categoryId: categoryId)
     }
 
-    func suspendTimer(suspendTime: Date, categoryId: Int?) -> AnyPublisher<Int, NetworkError> {
+    func suspendTimer(suspendTime: Date) -> Int {
         let totalTime = timerManager.totalTime
         timerManager.suspend()
-        return timerRepository.finishTimer(endTime: suspendTime, learningTime: totalTime, categoryId: categoryId)
-            .map { response -> Int in
-                return totalTime
-            }
-            .eraseToAnyPublisher()
+        return totalTime
     }
 
     func stopTimer() {

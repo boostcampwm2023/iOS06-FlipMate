@@ -29,7 +29,8 @@ final class CategorySettingFooterView: UICollectionReusableView {
         return button
     }()
     
-    private lazy var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(footerViewSelected))
+    private lazy var tapGestureRecognizer = UITapGestureRecognizer(target: self, 
+                                                                   action: #selector(footerViewSelected))
     private var subject = PassthroughSubject<Void, Never>()
     var cancellable: AnyCancellable?
     

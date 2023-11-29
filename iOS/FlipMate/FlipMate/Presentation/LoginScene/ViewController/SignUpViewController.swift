@@ -108,7 +108,7 @@ final class SignUpViewController: BaseViewController {
     required init?(coder: NSCoder) {
         fatalError()
     }
-    
+
     // MARK: - View Life Cycles
     override func viewDidLayoutSubviews() {
         drawTextFieldUnderline()

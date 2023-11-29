@@ -37,7 +37,9 @@ export class Categories {
   })
   color_code: string;
 
-  @ManyToOne(() => UsersModel, (user) => user.categories)
+  @ManyToOne(() => UsersModel, (user) => user.categories, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'user_id' })
   user_id: UsersModel;
 
