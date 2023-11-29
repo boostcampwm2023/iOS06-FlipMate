@@ -12,6 +12,8 @@ import { RedisService } from 'src/common/redis.service';
 import { getImageUrl } from 'src/common/utils';
 import { ConfigService } from '@nestjs/config';
 import { ENV } from 'src/common/const/env-keys.const';
+import { StudyLogsService } from 'src/study-logs/study-logs.service';
+import * as moment from 'moment';
 
 @Injectable()
 export class MatesService {
@@ -22,7 +24,33 @@ export class MatesService {
     private userRepository: Repository<UsersModel>,
     private redisService: RedisService,
     private configService: ConfigService,
+    private studyLogsService: StudyLogsService,
   ) {}
+
+  async getMateAndMyStats(
+    user_id: number,
+    following_id: number,
+    date: string,
+  ): Promise<object> {
+    const start_date = moment(date).subtract(6, 'days').format('YYYY-MM-DD');
+    const my_daily_data = await this.studyLogsService.calculateTotalTimes(
+      user_id,
+      start_date,
+      date,
+    );
+    const following_daily_data =
+      await this.studyLogsService.calculateTotalTimes(
+        following_id,
+        start_date,
+        date,
+      );
+    // 랭킹1위 카테고리 조회 로직 - ToDo
+    return {
+      my_daily_data,
+      following_daily_data,
+      following_primary_category: null,
+    };
+  }
 
   async getMates(user_id: number, date: string): Promise<object[]> {
     const studyTimeByFollowing = await this.userRepository.query(

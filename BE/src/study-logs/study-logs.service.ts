@@ -8,6 +8,7 @@ import { Categories } from 'src/categories/categories.entity';
 import { StudyLogsDto } from './dto/response/study-logs.dto';
 import { transformDate } from 'src/common/utils';
 import { RedisService } from 'src/common/redis.service';
+import * as moment from 'moment';
 
 @Injectable()
 export class StudyLogsService {
@@ -56,17 +57,32 @@ export class StudyLogsService {
     return started_at;
   }
 
-  private async calculateTotalTime(
+  async calculateTotalTimes(
     user_id: number,
-    date: string,
-  ): Promise<number> {
-    const sum = await this.studyLogsRepository
+    start_date: string,
+    end_date: string,
+  ): Promise<number[]> {
+    const startMoment = moment(start_date);
+    const diffDays = moment(end_date).diff(startMoment, 'days');
+    const result = Array.from({ length: diffDays }, () => 0);
+    console.log(diffDays);
+    const daily_sums = await this.studyLogsRepository
       .createQueryBuilder('study_logs')
-      .select('SUM(study_logs.learning_time)', 'sum')
+      .select('study_logs.date', 'date')
+      .addSelect('SUM(study_logs.learning_time)', 'daily_sum')
       .where('study_logs.user_id = :user_id', { user_id })
-      .andWhere('study_logs.date = :date', { date })
-      .getRawOne();
-    return parseInt(sum?.sum ?? 0);
+      .andWhere('study_logs.date BETWEEN :start_date AND :end_date', {
+        start_date,
+        end_date,
+      })
+      .groupBy('study_logs.date')
+      .orderBy('study_logs.date', 'ASC')
+      .getRawMany();
+
+    daily_sums.forEach(({ date, daily_sum }) => {
+      result[moment(date).diff(startMoment, 'days')] = +daily_sum;
+    });
+    return result;
   }
 
   async groupByCategory(user_id: number, date: string): Promise<object> {
@@ -96,7 +112,7 @@ export class StudyLogsService {
     }));
 
     const result = {
-      total_time: await this.calculateTotalTime(user_id, date),
+      total_time: (await this.calculateTotalTimes(user_id, date, date))[0],
       categories,
     };
     return result;
