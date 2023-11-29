@@ -64,9 +64,15 @@ export class UsersService {
     if (image_url) {
       selectedUser.image_url = image_url;
     }
-
-    const updatedUser = await this.usersRepository.save(selectedUser);
-    return updatedUser;
+    try {
+      const updatedUser = await this.usersRepository.save(selectedUser);
+      return updatedUser;
+    } catch (error) {
+      if (error.code === 'ER_DUP_ENTRY' || error.errno === 1062) {
+        throw new BadRequestException('닉네임이 이미 사용 중입니다.');
+      }
+      throw error;
+    }
   }
 
   async isUniqueNickname(nickname: string): Promise<object> {
