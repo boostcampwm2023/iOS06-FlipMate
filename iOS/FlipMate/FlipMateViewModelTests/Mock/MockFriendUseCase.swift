@@ -52,7 +52,6 @@ final class FailMockFriendUseCase: FriendUseCase {
     }
     
     func search(at nickname: String) -> AnyPublisher<String, NetworkError> {
-        print("??")
         return Fail(error: NetworkError.statusCodeError).eraseToAnyPublisher()
     }
 }

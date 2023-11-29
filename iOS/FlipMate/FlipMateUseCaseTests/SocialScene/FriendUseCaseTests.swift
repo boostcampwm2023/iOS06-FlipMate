@@ -8,7 +8,6 @@
 import Foundation
 import XCTest
 import Combine
-@testable import FlipMate
 
 final class FriendUseCaseTests: XCTestCase {
     private var friendUseCase: FriendUseCase!

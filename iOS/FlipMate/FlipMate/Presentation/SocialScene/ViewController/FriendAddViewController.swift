@@ -35,6 +35,10 @@ final class FriendAddViewController: BaseViewController {
         static let trailing: CGFloat = -40
     }
     
+    private enum Constant {
+        static let maxLength = 15
+    }
+    
     // MARK: - Properties
     private let viewModel: FriendAddViewModelProtocol
     private var cancellables = Set<AnyCancellable>()
@@ -132,7 +136,7 @@ final class FriendAddViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] count in
                 guard let self = self else { return }
-                self.nickNameCountLabel.text = "\(count)/10"
+                self.nickNameCountLabel.text = "\(count)/\(Constant.maxLength)"
             }
             .store(in: &cancellables)
         
@@ -177,6 +181,11 @@ private extension FriendAddViewController {
 extension FriendAddViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let nickname = textField.text else { return }
+        guard nickname.count <= Constant.maxLength else {
+            textField.deleteBackward()
+            textField.resignFirstResponder()
+            return
+        }
         viewModel.nicknameDidChange(at: nickname)
     }
     
