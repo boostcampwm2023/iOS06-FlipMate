@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 import PhotosUI
 
 final class SignUpViewController: BaseViewController {
@@ -15,8 +16,7 @@ final class SignUpViewController: BaseViewController {
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(systemName: Constant.profileImageName)
-        imageView.tintColor = FlipMateColor.darkBlue.color
+        imageView.image = UIImage(resource: .defaultProfile)
         imageView.clipsToBounds = true
         imageView.bounds = CGRect(x: 0, y: 0, width: 100, height: 100)
         imageView.layer.cornerRadius = imageView.bounds.height / 2
@@ -46,7 +46,15 @@ final class SignUpViewController: BaseViewController {
         textField.textAlignment = .center
         textField.font = FlipMateFont.mediumRegular.font
         textField.placeholder = Constant.nickNameTextFieldPlaceHolderText
+        textField.addTarget(self, action: #selector(nickNameTextFieldChanged(_:)), for: .editingChanged)
         return textField
+    }()
+    
+    private lazy var nickNameValidationStateLabel: UILabel = {
+        let label = UILabel()
+        label.font = FlipMateFont.smallBold.font
+        label.textColor = FlipMateColor.warningRed.color
+        return label
     }()
     
     private lazy var textFieldUnderline: UIView = {
@@ -88,6 +96,18 @@ final class SignUpViewController: BaseViewController {
         return button
     }()
     
+    private let viewModel: SignUpViewModelProtocol
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: SignUpViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+    
     // MARK: - View Life Cycles
     override func viewDidLayoutSubviews() {
         drawTextFieldUnderline()
@@ -101,6 +121,7 @@ final class SignUpViewController: BaseViewController {
             profileImageView,
             cameraButton,
             nickNameTextField,
+            nickNameValidationStateLabel,
             signUpButton
         ]
         
@@ -124,6 +145,10 @@ final class SignUpViewController: BaseViewController {
             nickNameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nickNameTextField.widthAnchor.constraint(equalToConstant: 220),
             
+            nickNameValidationStateLabel.topAnchor.constraint(equalTo: nickNameTextField.bottomAnchor, constant: 16),
+            nickNameValidationStateLabel.leadingAnchor.constraint(equalTo: nickNameTextField.leadingAnchor),
+            nickNameValidationStateLabel.trailingAnchor.constraint(equalTo: nickNameTextField.trailingAnchor),
+            
             signUpButton.bottomAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
             signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -141,13 +166,58 @@ final class SignUpViewController: BaseViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
+    override func bind() {
+        viewModel.isValidNickNamePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] state in
+                FMLogger.general.log("닉네임 유효성 상태 : \(state.message)")
+                switch state {
+                case .valid:
+                    self?.nickNameValidationStateLabel.text = state.message
+                    self?.nickNameValidationStateLabel.textColor = FlipMateColor.approveGreen.color
+                    self?.signUpButton.isEnabled = true
+                case .lengthViolation:
+                    self?.nickNameValidationStateLabel.text = state.message
+                    self?.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
+                    self?.signUpButton.isEnabled = false
+                case .emptyViolation:
+                    self?.nickNameValidationStateLabel.text = state.message
+                    self?.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
+                    self?.signUpButton.isEnabled = false
+                case .duplicated:
+                    self?.nickNameValidationStateLabel.text = state.message
+                    self?.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
+                    self?.signUpButton.isEnabled = false
+                }
+            }
+            .store(in: &cancellables)
+//        
+//        viewModel.isSignUpCompletedPublisher
+//            .receive(on: DispatchQueue.main)
+//            .sink { <#Subscribers.Completion<Error>#> in
+//                <#code#>
+//            } receiveValue: { <#Void#> in
+//                <#code#>
+//            }
+//            .store(in: &cancellables)
+    }
 }
 
 // MARK: - Selector Methods
 private extension SignUpViewController {
     @objc
+    func nickNameTextFieldChanged(_ sender: UITextField) {
+        guard let text = sender.text else {
+            FMLogger.user.log("닉네임 텍스트필드 내용 없음")
+            return
+        }
+        viewModel.nickNameChanged(text)
+    }
+    
+    // 이미지 픽커 처리
+    @objc
     func profileImageViewTapped() {
-        // 이미지 픽커 처리
         var configuration = PHPickerConfiguration()
         configuration.selectionLimit = 1
         configuration.filter = .images
@@ -156,9 +226,15 @@ private extension SignUpViewController {
         present(picker, animated: true)
     }
     
+    // 회원가입 처리
     @objc
     func signUpButtonTapped() {
-        // 회원가입 처리
+        let userName = nickNameTextField.text ?? ""
+        guard let imageData = profileImageView.image?.jpegData(compressionQuality: 1) else {
+            FMLogger.general.error("no profile image selected")
+            return
+        }
+        viewModel.signUpButtonTapped(userName: userName, profileImageData: imageData)
     }
 }
 
@@ -207,9 +283,4 @@ private extension SignUpViewController {
         static let cameraImageName = "camera.fill"
         static let nickNameTextFieldPlaceHolderText = "닉네임을 입력해 주세요"
     }
-}
-
-@available(iOS 17, *)
-#Preview {
-    SignUpViewController()
 }
