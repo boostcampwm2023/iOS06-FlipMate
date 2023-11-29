@@ -116,6 +116,8 @@
 		ED68659D2B15E928001A2AAD /* SocialDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED68659C2B15E928001A2AAD /* SocialDetailViewController.swift */; };
 		ED6865A22B162B8F001A2AAD /* SocialChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865A12B162B8F001A2AAD /* SocialChartView.swift */; };
 		ED6865A42B1649ED001A2AAD /* String++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865A32B1649ED001A2AAD /* String++Extension.swift */; };
+		ED6865A72B17932F001A2AAD /* FriendChartRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865A62B17932F001A2AAD /* FriendChartRequestDTO.swift */; };
+		ED6865A92B17933C001A2AAD /* FriendChartResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865A82B17933C001A2AAD /* FriendChartResponseDTO.swift */; };
 		ED82F0072B126C95005BB32D /* UITextField++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F0062B126C95005BB32D /* UITextField++Extension.swift */; };
 		ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */; };
 		ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A7E2B06033F008FE1C5 /* Category.swift */; };
@@ -263,6 +265,8 @@
 		ED68659C2B15E928001A2AAD /* SocialDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDetailViewController.swift; sourceTree = "<group>"; };
 		ED6865A12B162B8F001A2AAD /* SocialChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialChartView.swift; sourceTree = "<group>"; };
 		ED6865A32B1649ED001A2AAD /* String++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String++Extension.swift"; sourceTree = "<group>"; };
+		ED6865A62B17932F001A2AAD /* FriendChartRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendChartRequestDTO.swift; sourceTree = "<group>"; };
+		ED6865A82B17933C001A2AAD /* FriendChartResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendChartResponseDTO.swift; sourceTree = "<group>"; };
 		ED82F0062B126C95005BB32D /* UITextField++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++Extension.swift"; sourceTree = "<group>"; };
 		ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor++Extension.swift"; sourceTree = "<group>"; };
 		ED9B2A7E2B06033F008FE1C5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -747,6 +751,7 @@
 			isa = PBXGroup;
 			children = (
 				6001959F2B0DFA3900F02BA4 /* StatusResponseDTO.swift */,
+				ED6865A52B1792CD001A2AAD /* SocialScene */,
 				ED3842192B0F1B66001E2803 /* LoginScene */,
 				ED3595AE2B0C82A200558FAA /* TimerScene */,
 				608646512B0DDBCC00B0C1BC /* Category */,
@@ -926,6 +931,15 @@
 				ED6865A12B162B8F001A2AAD /* SocialChartView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		ED6865A52B1792CD001A2AAD /* SocialScene */ = {
+			isa = PBXGroup;
+			children = (
+				ED6865A62B17932F001A2AAD /* FriendChartRequestDTO.swift */,
+				ED6865A82B17933C001A2AAD /* FriendChartResponseDTO.swift */,
+			);
+			path = SocialScene;
 			sourceTree = "<group>";
 		};
 		EDC851D02B04EE74009031EA /* View */ = {
@@ -1239,6 +1253,7 @@
 				2C9F61FE2B15F48600AE63F9 /* FriendAddViewController.swift in Sources */,
 				2C88DCFE2B1244A6000B4686 /* LoginFlowCoordinator.swift in Sources */,
 				601773E42B021E6000D175D9 /* TimerViewController.swift in Sources */,
+				ED6865A92B17933C001A2AAD /* FriendChartResponseDTO.swift in Sources */,
 				2C88DCF92B1242DA000B4686 /* TimerFlowCoordinator.swift in Sources */,
 				600908C22AFCD7DF0065DFFB /* ViewController.swift in Sources */,
 				2C9F62032B16021E00AE63F9 /* FriendSearchResultView.swift in Sources */,
@@ -1296,6 +1311,7 @@
 				2C2F217C2B0F4D4000B45BA8 /* StudyLogRepository.swift in Sources */,
 				ED68659D2B15E928001A2AAD /* SocialDetailViewController.swift in Sources */,
 				600908C02AFCD7DF0065DFFB /* SceneDelegate.swift in Sources */,
+				ED6865A72B17932F001A2AAD /* FriendChartRequestDTO.swift in Sources */,
 				2C3430B12B0DE3D0008CBC85 /* Date++Extension.swift in Sources */,
 				2C2F217E2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift in Sources */,
 				2C5CDA4F2B025403007AFC57 /* SocialViewController.swift in Sources */,
