@@ -7,7 +7,6 @@ import {
   Res,
   Post,
   Body,
-  Patch,
   UseInterceptors,
   UploadedFile,
   BadRequestException,
@@ -65,7 +64,7 @@ export class AuthController {
     res.redirect('/');
   }
 
-  @Patch('info')
+  @Post('info')
   @UseGuards(AccessTokenGuard)
   @UseInterceptors(FileInterceptor('image'))
   @ApiOperation({ summary: '유저 정보 설정 (완)' })
@@ -80,6 +79,7 @@ export class AuthController {
     @UploadedFile() file: Express.Multer.File,
   ): Promise<any> {
     let image_url: string;
+    console.log(file);
     if (file) {
       const isNomal = await this.usersService.isNormalImage(file);
       if (!isNomal) {
@@ -95,10 +95,12 @@ export class AuthController {
     return {
       nickname: updatedUser.nickname,
       email: updatedUser.email,
-      image_url: path.join(
-        this.configService.get(ENV.CDN_ENDPOINT),
-        updatedUser.image_url,
-      ),
+      image_url: updatedUser.image_url
+        ? path.join(
+            this.configService.get(ENV.CDN_ENDPOINT),
+            updatedUser.image_url,
+          )
+        : null,
     };
   }
 
@@ -114,10 +116,9 @@ export class AuthController {
     return {
       nickname: user.nickname,
       email: user.email,
-      image_url: path.join(
-        this.configService.get(ENV.CDN_ENDPOINT),
-        user.image_url ?? 'default.png',
-      ),
+      image_url: user.image_url
+        ? path.join(this.configService.get(ENV.CDN_ENDPOINT), user.image_url)
+        : null,
     };
   }
 }
