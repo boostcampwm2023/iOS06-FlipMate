@@ -84,6 +84,22 @@
 		2C9F623D2B1756E400AE63F9 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F620C2B17241200AE63F9 /* Friend.swift */; };
 		2C9F623E2B1756EB00AE63F9 /* FlipMateLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE493C2B05DEA400ACE6DD /* FlipMateLogger.swift */; };
 		2C9F623F2B1756FE00AE63F9 /* FlipMateConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE493F2B05E67200ACE6DD /* FlipMateConstant.swift */; };
+		2C9F62422B176A0400AE63F9 /* FriendUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62402B1769FD00AE63F9 /* FriendUseCaseTests.swift */; };
+		2C9F62432B176A9000AE63F9 /* DefaultFriendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62102B17363400AE63F9 /* DefaultFriendUseCase.swift */; };
+		2C9F62442B176AA500AE63F9 /* DefaultFriendRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62142B1736BE00AE63F9 /* DefaultFriendRepository.swift */; };
+		2C9F62472B176AEC00AE63F9 /* MockFriendRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62462B176AEC00AE63F9 /* MockFriendRepository.swift */; };
+		2C9F62482B176AEE00AE63F9 /* MockFriendRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62462B176AEC00AE63F9 /* MockFriendRepository.swift */; };
+		2C9F62492B176F6300AE63F9 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430982B0C8427008CBC85 /* Provider.swift */; };
+		2C9F624A2B176FD900AE63F9 /* URLSessionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34309A2B0C8674008CBC85 /* URLSessionable.swift */; };
+		2C9F624B2B176FDC00AE63F9 /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595AA2B0C81B800558FAA /* Responsable.swift */; };
+		2C9F624C2B176FE800AE63F9 /* FriendFollowReqeustDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62212B173AB500AE63F9 /* FriendFollowReqeustDTO.swift */; };
+		2C9F624D2B176FEA00AE63F9 /* FriendEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62252B1742D200AE63F9 /* FriendEndpoints.swift */; };
+		2C9F624E2B176FEF00AE63F9 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430962B0C7ED8008CBC85 /* EndPoint.swift */; };
+		2C9F624F2B176FF200AE63F9 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58C2B0C7F0F00EE58E8 /* Requestable.swift */; };
+		2C9F62502B176FFC00AE63F9 /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A22B0DA5A5008CBC85 /* HTTPHeader.swift */; };
+		2C9F62512B176FFE00AE63F9 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595A82B0C7F3500558FAA /* HTTPMethod.swift */; };
+		2C9F62532B17700500AE63F9 /* BaseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A02B0DA4E6008CBC85 /* BaseComponents.swift */; };
+		2C9F62542B17701300AE63F9 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422E2B0F747B001E2803 /* KeyChainManager.swift */; };
 		2CE84EEF2B0B742A00E2FB71 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */; };
 		2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */; };
 		2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF42B0B783800E2FB71 /* UICollectionViewCell++Extension.swift */; };
@@ -228,6 +244,8 @@
 		2C9F62252B1742D200AE63F9 /* FriendEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendEndpoints.swift; sourceTree = "<group>"; };
 		2C9F622E2B17505B00AE63F9 /* FriendAddViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddViewModelTests.swift; sourceTree = "<group>"; };
 		2C9F62362B17517100AE63F9 /* MockFriendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFriendUseCase.swift; sourceTree = "<group>"; };
+		2C9F62402B1769FD00AE63F9 /* FriendUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendUseCaseTests.swift; sourceTree = "<group>"; };
+		2C9F62462B176AEC00AE63F9 /* MockFriendRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFriendRepository.swift; sourceTree = "<group>"; };
 		2CA80839AC9EFDD4BAA10C67 /* Pods_FlipMate_FlipMateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate_FlipMateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView++Extension.swift"; sourceTree = "<group>"; };
@@ -568,6 +586,7 @@
 		2C9F62272B174FC200AE63F9 /* FlipMateUseCaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				2C9F62452B176AD100AE63F9 /* Mock */,
 				2C9F62292B17500B00AE63F9 /* SocialScene */,
 			);
 			path = FlipMateUseCaseTests;
@@ -585,6 +604,7 @@
 		2C9F62292B17500B00AE63F9 /* SocialScene */ = {
 			isa = PBXGroup;
 			children = (
+				2C9F62402B1769FD00AE63F9 /* FriendUseCaseTests.swift */,
 			);
 			path = SocialScene;
 			sourceTree = "<group>";
@@ -601,6 +621,14 @@
 			isa = PBXGroup;
 			children = (
 				2C9F62362B17517100AE63F9 /* MockFriendUseCase.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		2C9F62452B176AD100AE63F9 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				2C9F62462B176AEC00AE63F9 /* MockFriendRepository.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -1315,6 +1343,7 @@
 				2C9F620F2B1735C700AE63F9 /* FriendUseCase.swift in Sources */,
 				2C801D802B04B68900A7ABAE /* TimerUseCase.swift in Sources */,
 				6086464E2B0DDA1300B0C1BC /* CategoryRepository.swift in Sources */,
+				2C9F62472B176AEC00AE63F9 /* MockFriendRepository.swift in Sources */,
 				2C9F620B2B171C8300AE63F9 /* FriendAddViewModel.swift in Sources */,
 				2C2F21782B0F4CCC00B45BA8 /* StudyLog.swift in Sources */,
 				ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */,
@@ -1404,17 +1433,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C9F62442B176AA500AE63F9 /* DefaultFriendRepository.swift in Sources */,
 				2C9F62312B1750A300AE63F9 /* FriendAddViewModel.swift in Sources */,
+				2C9F62492B176F6300AE63F9 /* Provider.swift in Sources */,
+				2C9F624B2B176FDC00AE63F9 /* Responsable.swift in Sources */,
+				2C9F62542B17701300AE63F9 /* KeyChainManager.swift in Sources */,
+				2C9F624E2B176FEF00AE63F9 /* EndPoint.swift in Sources */,
+				2C9F62422B176A0400AE63F9 /* FriendUseCaseTests.swift in Sources */,
 				2C9F62392B1756BC00AE63F9 /* NetworkError.swift in Sources */,
 				2C9F62382B17517B00AE63F9 /* MockFriendUseCase.swift in Sources */,
+				2C9F62512B176FFE00AE63F9 /* HTTPMethod.swift in Sources */,
+				2C9F624D2B176FEA00AE63F9 /* FriendEndpoints.swift in Sources */,
 				2C9F623C2B1756D800AE63F9 /* UserProfileResposeDTO.swift in Sources */,
 				600908D52AFCD7E00065DFFB /* NetworkServiceTests.swift in Sources */,
+				2C9F62482B176AEE00AE63F9 /* MockFriendRepository.swift in Sources */,
+				2C9F62502B176FFC00AE63F9 /* HTTPHeader.swift in Sources */,
 				2C9F623B2B1756D500AE63F9 /* StatusResponseDTO.swift in Sources */,
 				2C9F623E2B1756EB00AE63F9 /* FlipMateLogger.swift in Sources */,
 				2C9F62302B17508500AE63F9 /* FriendAddViewModelTests.swift in Sources */,
+				2C9F62432B176A9000AE63F9 /* DefaultFriendUseCase.swift in Sources */,
+				2C9F624F2B176FF200AE63F9 /* Requestable.swift in Sources */,
 				2C9F623D2B1756E400AE63F9 /* Friend.swift in Sources */,
+				2C9F62532B17700500AE63F9 /* BaseComponents.swift in Sources */,
 				2C9F623F2B1756FE00AE63F9 /* FlipMateConstant.swift in Sources */,
 				2C9F62352B17515800AE63F9 /* FriendRepository.swift in Sources */,
+				2C9F624A2B176FD900AE63F9 /* URLSessionable.swift in Sources */,
+				2C9F624C2B176FE800AE63F9 /* FriendFollowReqeustDTO.swift in Sources */,
 				2C9F62342B17514D00AE63F9 /* FriendUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
