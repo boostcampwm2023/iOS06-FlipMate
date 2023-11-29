@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
     // MARK: - Costants
@@ -33,6 +34,10 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
         static let cornerRadius: CGFloat = 10
     }
     
+    // MARK: - Properties
+    private var tapSubject = PassthroughSubject<Void, Never>()
+
+    
     // MARK: - UI Components
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -55,6 +60,7 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = FlipMateColor.darkBlue.color
         button.layer.cornerRadius = FlowButtonConstant.cornerRadius
+        button.addTarget(self, action: #selector(followButtonDidTapped), for: .touchUpInside)
         return button
     }()
     
@@ -74,6 +80,10 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
     
     func updateUI(friend: Friend) {
         self.nickNameLabel.text = friend.nickName
+    }
+    
+    func tapPublisher() -> AnyPublisher<Void, Never> {
+        return tapSubject.eraseToAnyPublisher()
     }
 }
 
@@ -102,5 +112,12 @@ private extension FriendSearchResultView {
             flowButton.widthAnchor.constraint(equalToConstant: FlowButtonConstant.width),
             flowButton.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
+    }
+}
+
+// MARK: - Objc func
+private extension FriendSearchResultView {
+    @objc func followButtonDidTapped() {
+        tapSubject.send()
     }
 }
