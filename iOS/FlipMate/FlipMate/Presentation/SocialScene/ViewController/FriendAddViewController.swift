@@ -36,7 +36,7 @@ final class FriendAddViewController: BaseViewController {
     }
     
     private enum Constant {
-        static let maxLength = 15
+        static let maxLength = 10
     }
     
     // MARK: - Properties
