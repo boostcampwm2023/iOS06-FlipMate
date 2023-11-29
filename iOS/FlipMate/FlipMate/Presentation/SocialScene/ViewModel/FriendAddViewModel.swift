@@ -15,8 +15,9 @@ protocol FriendAddViewModelInput {
 }
 
 protocol FriendAddViewModelOutput {
+    var myNicknamePublihser: AnyPublisher<String, Never> { get }
     var searchFreindPublisher: AnyPublisher<Friend, Never> { get }
-    var searchErrorPublisher: AnyPublisher<String, Never> { get }
+    var searchErrorPublisher: AnyPublisher<Void, Never> { get }
     var nicknameCountPublisher: AnyPublisher<Int, Never> { get }
 }
 
@@ -24,16 +25,24 @@ typealias FriendAddViewModelProtocol = FriendAddViewModelInput & FriendAddViewMo
 
 final class FriendAddViewModel: FriendAddViewModelProtocol {
     // MARK: - Subject
-    var searchResultSubject = PassthroughSubject<Friend, Never>()
-    var searchErrorSubject = PassthroughSubject<String, Never>()
-    var nicknameCountSubject = PassthroughSubject<Int, Never>()
+    private lazy var myNicknameSubject = CurrentValueSubject<String, Never>(myNickname)
+    private var searchResultSubject = PassthroughSubject<Friend, Never>()
+    private var searchErrorSubject = PassthroughSubject<Void, Never>()
+    private var nicknameCountSubject = PassthroughSubject<Int, Never>()
+    
+    // MARK: - Properties
+    private let myNickname: String
+    
+    init(myNickname: String) {
+        self.myNickname = myNickname
+    }
     
     // MARK: - output
     var searchFreindPublisher: AnyPublisher<Friend, Never> {
         return searchResultSubject.eraseToAnyPublisher()
     }
     
-    var searchErrorPublisher: AnyPublisher<String, Never> {
+    var searchErrorPublisher: AnyPublisher<Void, Never> {
         return searchErrorSubject.eraseToAnyPublisher()
     }
     
@@ -41,6 +50,10 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
         return nicknameCountSubject.eraseToAnyPublisher()
     }
     
+    var myNicknamePublihser: AnyPublisher<String, Never> {
+        return myNicknameSubject.eraseToAnyPublisher()
+    }
+
     // MARK: - Input
     func didFollowFriend(at nickName: String) {
         // useCase 호출
@@ -49,7 +62,6 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     func didSearchFriend(at nickName: String) {
         // useCase 호출
         searchResultSubject.send(Friend(nickName: nickName, profileImageURL: ""))
-        searchErrorSubject.send("검색결과가 없습니다.")
     }
     
     func nicknameDidChange(at nickname: String) {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class FriendAddViewController: BaseViewController {
     // MARK: - Constant
@@ -33,12 +34,17 @@ final class FriendAddViewController: BaseViewController {
         static let leading: CGFloat = 40
         static let trailing: CGFloat = -40
     }
+    
+    // MARK: - Properties
+    private let viewModel: FriendAddViewModelProtocol
+    private var cancellables = Set<AnyCancellable>()
 
     // MARK: - UI Components
     private lazy var nickNameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = NameTextFieldConstant.placeholder
         textField.becomeFirstResponder()
+        textField.delegate = self
         return textField
     }()
     
@@ -59,6 +65,16 @@ final class FriendAddViewController: BaseViewController {
     private let myNickNameView = MyNickNameView()
     private let noResultView = NoResultView()
     private let friendSearchResultView = FriendSearchResultView()
+    
+    // MARK: - init
+    init(viewModel: FriendAddViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("Don't use storyboard")
+    }
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -93,6 +109,41 @@ final class FriendAddViewController: BaseViewController {
             containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+    
+    override func bind() {
+        viewModel.searchFreindPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] friend in
+                guard let self = self else { return }
+                self.friendSearchResultView.updateUI(friend: friend)
+                self.updateResultView(friendSearchResultView)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.searchErrorPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                self.updateResultView(noResultView)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.nicknameCountPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] count in
+                guard let self = self else { return }
+                self.nickNameCountLabel.text = "\(count)/10"
+            }
+            .store(in: &cancellables)
+        
+        viewModel.myNicknamePublihser
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] myNickname in
+                guard let self = self else { return }
+                self.myNickNameView.updateUI(nickname: myNickname)
+            }
+            .store(in: &cancellables)
+    }
 }
 
 // MARK: - Private Methods
@@ -111,7 +162,19 @@ private extension FriendAddViewController {
     }
 }
 
+extension FriendAddViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let nickname = textField.text else { return }
+        viewModel.nicknameDidChange(at: nickname)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let nickname = textField.text else { return false }
+        viewModel.didSearchFriend(at: nickname)
+        return true
+    }
+}
 @available(iOS 17.0, *)
 #Preview {
-    FriendAddViewController()
+    FriendAddViewController(viewModel: FriendAddViewModel(myNickname: "iOS개발용"))
 }

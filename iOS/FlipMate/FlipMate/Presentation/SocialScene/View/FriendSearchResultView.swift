@@ -71,6 +71,10 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
     func height() -> CGFloat {
         return Constant.height
     }
+    
+    func updateUI(friend: Friend) {
+        self.nickNameLabel.text = friend.nickName
+    }
 }
 
 // MARK: - Private Methods
@@ -99,10 +103,4 @@ private extension FriendSearchResultView {
             flowButton.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
-}
-
-
-@available(iOS 17.0, *)
-#Preview {
-    FriendAddViewController()
 }
