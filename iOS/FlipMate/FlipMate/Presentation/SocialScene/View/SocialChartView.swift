@@ -14,6 +14,8 @@ struct SocialChartView: View {
             if #available(iOS 16.0, *) {
                 Chart(mockSeriesData) { series in
                     ForEach(series.studyLog) { time in
+                        PointMark(x: .value("날짜", time.weekday, unit: .day),
+                                 y: .value("학습 시간", time.studyTime))
                         LineMark(x: .value("날짜", time.weekday, unit: .day),
                                  y: .value("학습 시간", time.studyTime))
                     }.foregroundStyle(by: .value("사용자", series.user))}
