@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FriendChartRequestDTO: Encodable {
+struct SocialDetailRequestDTO: Encodable {
     let followingID: Int
     let date: String
     

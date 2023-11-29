@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FriendChartResponseDTO: Decodable {
+struct SocialDetailResponseDTO: Decodable {
     let myData: [Int]
     let followingData: [Int]
     let primaryCategory: String
