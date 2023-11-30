@@ -129,6 +129,7 @@
 		60243EF02B05D24D0098A92F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 60243EEF2B05D24D0098A92F /* .swiftlint.yml */; };
 		6057A58D2B0C7F0F00EE58E8 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58C2B0C7F0F00EE58E8 /* Requestable.swift */; };
 		6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58E2B0C801300EE58E8 /* NetworkError.swift */; };
+		606990572B18918B00E5730F /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606990562B18918B00E5730F /* MyPageViewController.swift */; };
 		6086464E2B0DDA1300B0C1BC /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086464D2B0DDA1300B0C1BC /* CategoryRepository.swift */; };
 		608646552B0DDC3900B0C1BC /* CategoryRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646542B0DDC3900B0C1BC /* CategoryRequestDTO.swift */; };
 		608646572B0DE31800B0C1BC /* CategoryResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646562B0DE31800B0C1BC /* CategoryResponseDTO.swift */; };
@@ -302,6 +303,7 @@
 		60243EEF2B05D24D0098A92F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		6057A58C2B0C7F0F00EE58E8 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		6057A58E2B0C801300EE58E8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		606990562B18918B00E5730F /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		6086464D2B0DDA1300B0C1BC /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
 		608646542B0DDC3900B0C1BC /* CategoryRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRequestDTO.swift; sourceTree = "<group>"; };
 		608646562B0DE31800B0C1BC /* CategoryResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryResponseDTO.swift; sourceTree = "<group>"; };
@@ -833,6 +835,7 @@
 		600908F52AFCDD0A0065DFFB /* MyPageScene */ = {
 			isa = PBXGroup;
 			children = (
+				606990562B18918B00E5730F /* MyPageViewController.swift */,
 			);
 			path = MyPageScene;
 			sourceTree = "<group>";
@@ -1503,6 +1506,7 @@
 				2C6717F82B0535A8004D118D /* Int++Extension.swift in Sources */,
 				ED3595B92B0C88A300558FAA /* TimerFinishResponseDTO.swift in Sources */,
 				608646552B0DDC3900B0C1BC /* CategoryRequestDTO.swift in Sources */,
+				606990572B18918B00E5730F /* MyPageViewController.swift in Sources */,
 				ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */,
 				ED3595BD2B0DB29F00558FAA /* CategoryModifyViewController.swift in Sources */,
 				2C34309B2B0C8674008CBC85 /* URLSessionable.swift in Sources */,
