@@ -6,12 +6,14 @@ import {
   Post,
   Body,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
   ApiOperation,
+  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 import { User } from 'src/users/decorator/user.decorator';
@@ -31,9 +33,17 @@ export class MatesController {
   @ApiCreatedResponse({
     description: 'OK',
   })
+  @ApiQuery({
+    name: 'date',
+    example: '2023-11-22',
+    description: '날짜',
+  })
   @ApiOperation({ summary: '모든 친구들 조회하기 (완)' })
-  getMates(@User('id') user_id: number): Promise<object> {
-    return this.matesService.getMates(user_id);
+  getMates(
+    @User('id') user_id: number,
+    @Query('date') date: string,
+  ): Promise<object> {
+    return this.matesService.getMates(user_id, date);
   }
 
   @Get('/status')
@@ -44,12 +54,21 @@ export class MatesController {
     return this.matesService.getMatesStatus(user_id);
   }
 
-  @Get('/:mate_id/stats')
+  @Get('/:following_id/stats')
   @UseGuards(AccessTokenGuard)
+  @ApiQuery({
+    name: 'date',
+    example: '2023-11-22',
+    description: '날짜',
+  })
   @ApiBearerAuth()
   @ApiOperation({ summary: '특정 친구의 통계 조회하기' })
-  getMateStats(@Param('mate_id') id: string) {
-    id;
+  getMateStats(
+    @User('id') user_id: number,
+    @Param('following_id') following_id: number,
+    @Query('date') date: string,
+  ): Promise<object> {
+    return this.matesService.getMateAndMyStats(user_id, following_id, date);
   }
 
   @Post()
