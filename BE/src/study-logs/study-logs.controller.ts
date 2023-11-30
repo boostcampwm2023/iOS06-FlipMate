@@ -10,9 +10,9 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { StudyLogsCreateDto } from './dto/request/create-study-logs.dto';
-import { StudyLogsDto } from './dto/response/study-logs.dto';
 import { AccessTokenGuard } from 'src/auth/guard/bearer-token.guard';
 import { User } from 'src/users/decorator/user.decorator';
+import { ResponseDto } from 'src/common/response.dto';
 
 @ApiTags('타이머 페이지')
 @Controller('study-logs')
@@ -30,18 +30,22 @@ export class StudyLogsController {
     description: '잘못된 요청입니다.',
   })
   @ApiBearerAuth()
-  createStudyLogs(
+  async createStudyLogs(
     @User('id') userId: number,
     @Body() studyLogsData: StudyLogsCreateDto,
-  ): Promise<StudyLogsDto> {
-    const { created_at, learning_time } = studyLogsData;
+  ): Promise<ResponseDto> {
+    const { created_at, learning_time, type } = studyLogsData;
+    if (type === 'start') {
+      await this.studyLogsService.createStartLog(studyLogsData, userId);
+      return new ResponseDto(200, 'OK');
+    }
     studyLogsData.date = this.studyLogsService.calculateStartDay(
       new Date(created_at),
       learning_time,
     );
-    return this.studyLogsService.create(studyLogsData, userId);
+    await this.studyLogsService.createFinishLog(studyLogsData, userId);
+    return new ResponseDto(200, 'OK');
   }
-
   @Get()
   @UseGuards(AccessTokenGuard)
   @ApiOperation({ summary: '학습시간 조회 (완)' })

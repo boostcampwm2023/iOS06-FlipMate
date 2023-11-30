@@ -20,3 +20,16 @@ extension Date {
         return formatter.string(from: self)
     }
 }
+
+extension DateFormatter {
+    static let FMDateFormat: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        /// locale & timezone
+        // formatter.locale = Locale(identifier: "LOCALE")
+        // formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
+        return formatter
+    }()
+}

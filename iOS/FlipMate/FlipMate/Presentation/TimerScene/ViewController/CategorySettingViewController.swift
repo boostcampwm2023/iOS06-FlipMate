@@ -44,9 +44,6 @@ final class CategorySettingViewController: BaseViewController {
         setDataSource()
         setDelegate()
         setSnapshot()
-        Task {
-            await readCategories()
-        }
     }
     
     deinit {
@@ -77,27 +74,53 @@ final class CategorySettingViewController: BaseViewController {
                 self.dataSource?.apply(snapShot)
             }
             .store(in: &cancellables)
-    }
-}
-
-// MARK: - ViewModel Functions
-private extension CategorySettingViewController {
-    func readCategories() async {
-        do {
-            try await viewModel.readCategories()
-        } catch let error {
-            FMLogger.general.error("카테고리 읽는 중 에러 발생 : \(error)")
-        }
+        
+        viewModel.selectedCategoryPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] category in
+                guard let self = self else { return }
+                showActionSheet(with: category)
+            }
+            .store(in: &cancellables)
+            
     }
 }
 
 // MARK: - CollectionViewDelegate
 extension CategorySettingViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        viewModel.categoryTapped(at: indexPath.row)
-        // 임시로 카테고리 클릭 시 수정화면으로 이동
-        guard let item = dataSource?.itemIdentifier(for: indexPath) else { return }
-        viewModel.updateCategoryTapped(category: item.category)
+        guard let indexPath = self.collectionView.indexPathsForSelectedItems?.first else { return }
+        guard let item = self.dataSource?.itemIdentifier(for: indexPath) else { return }
+        viewModel.cellDidTapped(category: item.category)
+    }
+}
+
+// MARK: - objc function
+private extension CategorySettingViewController {
+    func showActionSheet(with category: Category) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let actions = createActionSheet(with: category)
+        
+        for action in actions {
+                actionSheet.addAction(action)
+            }
+        
+        self.present(actionSheet, animated: true)
+    }
+    
+    func showDeleteAlert(with category: Category) {
+        let alert = UIAlertController(title: "카테고리 삭제",
+                                      message: "\(category.subject)을(를) 정말 삭제하시겠습니까?",
+                                      preferredStyle: .alert)
+        
+        let actions = createDeleteAlert(with: category)
+        
+        for action in actions {
+                alert.addAction(action)
+            }
+        
+        self.present(alert, animated: true)
     }
 }
 
@@ -112,6 +135,7 @@ private extension CategorySettingViewController {
                     let cell: CategoryListCollectionViewCell = collectionView
                         .dequeueReusableCell(for: indexPath)
                     cell.updateUI(category: category)
+                    cell.setTimeLabelHidden(isHidden: true)
                     return cell
                 }
             })
@@ -170,11 +194,35 @@ private extension CategorySettingViewController {
     }
 }
 
-//@available(iOS 17.0, *)
-//#Preview {
-//    CategorySettingViewController(
-//        viewModel: CategoryViewModel(
-//            useCase: DefaultCategoryUseCase(
-//                repository: DefaultCategoryRepository(
-//                    provider: Provider(urlSession: URLSession.shared)))))
-//}
+// MARK: - Alert function
+
+private extension CategorySettingViewController {
+    func createActionSheet(with category: Category) -> [UIAlertAction] {
+        let modifyAction = UIAlertAction(title: "카테고리 수정", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            self.viewModel.updateCategoryTapped(category: category)
+        }
+        
+        let deleteAction = UIAlertAction(title: "카테고리 삭제", style: .destructive) { [weak self] _ in
+            guard let self = self else { return }
+            showDeleteAlert(with: category)
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        
+        return [modifyAction, deleteAction, cancelAction]
+    }
+    
+    func createDeleteAlert(with category: Category) -> [UIAlertAction] {
+        let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { [weak self] _ in
+            guard let self = self else { return }
+            Task {
+                try await self.viewModel.deleteCategory(of: category.id)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        
+        return [deleteAction, cancelAction]
+    }
+}

@@ -1,5 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { UsersModel } from 'src/users/entity/users.entity';
 import { UsersService } from 'src/users/users.service';
 
 @Injectable()
@@ -40,7 +41,6 @@ export class AuthService {
   }
 
   public async loginWithGoogle(user) {
-    console.log(user.email);
     const prevUser = await this.usersService.findUserByEmail(user.email);
     if (!prevUser) {
       const id = user.email.split('@')[0];
@@ -48,8 +48,7 @@ export class AuthService {
         nickname:
           id + Buffer.from(user.email + user.auth_type).toString('base64'),
         email: user.email,
-        image_url: '',
-      };
+      } as UsersModel;
       const newUser = await this.usersService.createUser(userEntity);
       return {
         access_token: this.signToken(newUser),

@@ -10,7 +10,7 @@ import Foundation
 /// Timer 기능 API 통신을 위한 Endpoint을 생성해주는 객체
 struct TimerEndpoints {
     /// Timer 시작 Endpoint을 생성해주는 메소드
-    static func startTimer(with timerStartRequestDTO: TimerStartRequestDTO) -> EndPoint<TimerStartResponseDTO> {
+    static func startTimer(with timerStartRequestDTO: TimerStartRequestDTO) -> EndPoint<StatusResponseDTO> {
         let encoder = JSONEncoder()
         let data = try? encoder.encode(timerStartRequestDTO)
         return EndPoint(
@@ -21,7 +21,7 @@ struct TimerEndpoints {
         )
     }
     /// Timer 종료 Endpoint을 생성해주는 메소드
-    static func stopTimer(with timerFinishRequestDTO: TimerFinishRequestDTO) -> EndPoint<TimerFinishResponseDTO> {
+    static func stopTimer(with timerFinishRequestDTO: TimerFinishRequestDTO) -> EndPoint<StatusResponseDTO> {
         let encoder = JSONEncoder()
         let data = try? encoder.encode(timerFinishRequestDTO)
         return EndPoint(

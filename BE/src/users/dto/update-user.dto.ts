@@ -8,15 +8,17 @@ export class UpdateUserDto extends PartialType(UsersModel) {
     type: 'string',
     example: '어린콩',
     description: '닉네임',
+    required: false,
   })
   @IsOptional()
   nickname?: string;
 
   @ApiProperty({
     type: 'string',
-    example: 'https://sldkjfds/dsflkdsjf.png',
-    description: '이미지 링크',
+    format: 'binary',
+    description: '이미지 파일',
+    required: false,
   })
   @IsOptional()
-  image_url?: string;
+  image?: Express.Multer.File;
 }

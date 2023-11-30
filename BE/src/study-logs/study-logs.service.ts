@@ -7,15 +7,25 @@ import { UsersModel } from 'src/users/entity/users.entity';
 import { Categories } from 'src/categories/categories.entity';
 import { StudyLogsDto } from './dto/response/study-logs.dto';
 import { transformDate } from 'src/common/utils';
+import { RedisService } from 'src/common/redis.service';
 
 @Injectable()
 export class StudyLogsService {
   constructor(
     @InjectRepository(StudyLogs)
     private studyLogsRepository: Repository<StudyLogs>,
+    private redisService: RedisService,
   ) {}
 
-  async create(
+  async createStartLog(
+    studyLogsData: StudyLogsCreateDto,
+    user_id: number,
+  ): Promise<void> {
+    const { created_at } = studyLogsData;
+    this.redisService.set(`${user_id}`, `${created_at}`);
+  }
+
+  async createFinishLog(
     studyLogsData: StudyLogsCreateDto,
     user_id: number,
   ): Promise<StudyLogsDto> {
@@ -29,6 +39,7 @@ export class StudyLogsService {
       category_id: category,
     });
     const savedStudyLog = await this.studyLogsRepository.save(studyLog);
+    await this.redisService.del(`${user_id}`);
     return this.entityToDto(savedStudyLog);
   }
 
@@ -37,7 +48,8 @@ export class StudyLogsService {
   }
 
   calculateStartDay(created_at: Date, learning_time: number): Date {
-    const standardMS = 5 * 60 * 60 * 1000;
+    const STANDARD = 0;
+    const standardMS = STANDARD * 60 * 60 * 1000;
     const millisecond =
       created_at.getTime() - learning_time * 1000 - standardMS;
     const started_at = new Date(millisecond);
