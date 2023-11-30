@@ -9,10 +9,12 @@ import SwiftUI
 import Charts
 
 struct SocialChartView: View {
+    @ObservedObject var viewModel: ViewModel
+    
     var body: some View {
         VStack {
             if #available(iOS 16.0, *) {
-                Chart(mockSeriesData) { series in
+                Chart(viewModel.mockSeriesData) { series in
                     ForEach(series.studyLog) { time in
                         PointMark(x: .value("날짜", time.weekday, unit: .day),
                                  y: .value("학습 시간", time.studyTime))
@@ -23,6 +25,48 @@ struct SocialChartView: View {
                 Text("iOS 16.0 이상 버전부터 차트 기능 사용 가능")
             }
         }.padding()
+    }
+}
+
+extension SocialChartView {
+    class ViewModel: ObservableObject {
+        @Published private var socialChart: SocialChart = .init(myData: [], friendData: [], primaryCategory: nil)
+        
+        lazy var mockMyData: [StudyTime] = {
+            guard socialChart.myData.count >= 7 else {
+                return Array(repeating: StudyTime(weekday: Date(), studyTime: 0), count: 7)
+            }
+            
+            return [
+                .init(weekday: Date(timeIntervalSinceNow: -86400 * 6), studyTime: socialChart.myData[0]),
+                .init(weekday: Date(timeIntervalSinceNow: -86400 * 5), studyTime: socialChart.myData[1]),
+                .init(weekday: Date(timeIntervalSinceNow: -86400 * 4), studyTime: socialChart.myData[2]),
+                .init(weekday: Date(timeIntervalSinceNow: -86400 * 3), studyTime: socialChart.myData[3]),
+                .init(weekday: Date(timeIntervalSinceNow: -86400 * 2), studyTime: socialChart.myData[4]),
+                .init(weekday: Date(timeIntervalSinceNow: -86400), studyTime: socialChart.myData[5]),
+                .init(weekday: Date(), studyTime: socialChart.myData[6])
+            ]
+        }()
+        
+        lazy var mockFriendData: [StudyTime] = {
+            guard socialChart.friendData.count >= 7 else {
+                return Array(repeating: StudyTime(weekday: Date(), studyTime: 0), count: 7)
+            }
+            return [
+                .init(weekday: Date(timeIntervalSinceNow: -86400 * 6), studyTime: socialChart.friendData[0]),
+                .init(weekday: Date(timeIntervalSinceNow: -86400 * 5), studyTime: socialChart.friendData[1]),
+                .init(weekday: Date(timeIntervalSinceNow: -86400 * 4), studyTime: socialChart.friendData[2]),
+                .init(weekday: Date(timeIntervalSinceNow: -86400 * 3), studyTime: socialChart.friendData[3]),
+                .init(weekday: Date(timeIntervalSinceNow: -86400 * 2), studyTime: socialChart.friendData[4]),
+                .init(weekday: Date(timeIntervalSinceNow: -86400), studyTime: socialChart.friendData[5]),
+                .init(weekday: Date(), studyTime: socialChart.friendData[6])
+            ]
+        }()
+        
+        lazy var mockSeriesData: [Series] = [
+            .init(user: "나", studyLog: mockMyData),
+            .init(user: "친구", studyLog: mockFriendData)
+        ]
     }
 }
 
@@ -41,31 +85,6 @@ struct Series: Identifiable {
     let studyLog: [StudyTime]
 }
 
-let mockSeriesData: [Series] = [
-    .init(user: "나", studyLog: mockMyData),
-    .init(user: "친구", studyLog: mockFriendData)
-]
-
-let mockMyData: [StudyTime] = [
-    .init(weekday: "2023-11-20".stringToDate()!, studyTime: 234),
-    .init(weekday: "2023-11-21".stringToDate()!, studyTime: 123),
-    .init(weekday: "2023-11-22".stringToDate()!, studyTime: 0),
-    .init(weekday: "2023-11-23".stringToDate()!, studyTime: 399),
-    .init(weekday: "2023-11-24".stringToDate()!, studyTime: 184),
-    .init(weekday: "2023-11-25".stringToDate()!, studyTime: 92),
-    .init(weekday: "2023-11-26".stringToDate()!, studyTime: 321)
-]
-
-let mockFriendData: [StudyTime] = [
-    .init(weekday: "2023-11-20".stringToDate()!, studyTime: 164),
-    .init(weekday: "2023-11-21".stringToDate()!, studyTime: 121),
-    .init(weekday: "2023-11-22".stringToDate()!, studyTime: 125),
-    .init(weekday: "2023-11-23".stringToDate()!, studyTime: 144),
-    .init(weekday: "2023-11-24".stringToDate()!, studyTime: 152),
-    .init(weekday: "2023-11-25".stringToDate()!, studyTime: 133),
-    .init(weekday: "2023-11-26".stringToDate()!, studyTime: 184)
-]
-
 #Preview {
-    SocialChartView()
+    SocialChartView(viewModel: SocialChartView.ViewModel())
 }
