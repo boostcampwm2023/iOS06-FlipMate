@@ -9,6 +9,7 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 import { UsersModel } from 'src/users/entity/users.entity';
 import { StudyLogs } from 'src/study-logs/study-logs.entity';
+import { IsString, Length, Matches } from 'class-validator';
 
 @Entity()
 export class Categories {
@@ -24,6 +25,8 @@ export class Categories {
     type: 'char',
     length: 50,
   })
+  @IsString()
+  @Length(1, 50)
   name: string;
 
   @ApiProperty({
@@ -35,6 +38,9 @@ export class Categories {
     type: 'char',
     length: 8,
   })
+  @IsString()
+  @Length(1, 8)
+  @Matches(/^[0-9A-F]{1,8}$/i, {message: '올바른 색상 코드가 아닙니다.'})
   color_code: string;
 
   @ManyToOne(() => UsersModel, (user) => user.categories, {
