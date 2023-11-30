@@ -71,11 +71,9 @@ final class SignUpViewModel: SignUpViewModelProtocol {
             do {
                 try await useCase.signUpUser(nickName: userName, profileImageData: profileImageData)
                 isSignUpCompletedSubject.send()
-                guard let actions = actions else {
-                    FMLogger.general.error("no actions")
-                    return
+                DispatchQueue.main.async {
+                    self.actions?.didFinishSignUp()
                 }
-                actions.didFinishSignUp()
             } catch let error {
                 errorSubject.send(error)
             }
