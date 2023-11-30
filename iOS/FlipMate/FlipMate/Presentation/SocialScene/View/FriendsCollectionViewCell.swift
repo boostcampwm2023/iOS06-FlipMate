@@ -13,7 +13,7 @@ final class FriendsCollectionViewCell: UICollectionViewCell {
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(resource: .group135)
+        imageView.image = UIImage(resource: .defaultProfile)
         imageView.clipsToBounds = true
         imageView.bounds = CGRect(x: 0, y: 0, width: 90, height: 90)
         imageView.layer.cornerRadius = imageView.bounds.height / 2
@@ -92,7 +92,7 @@ final class FriendsCollectionViewCell: UICollectionViewCell {
             image = UIImage(data: data)
         } else {
             // url 오류 있으면 기본 이미지 보여주기
-            image = UIImage(resource: .group135)
+            image = UIImage(resource: .defaultProfile)
         }
         
         DispatchQueue.main.async {
@@ -107,7 +107,7 @@ final class FriendsCollectionViewCell: UICollectionViewCell {
 private extension FriendsCollectionViewCell {
     enum Constant {
         static let defaultNickName = "닉네임"
-        static let defaultTime = "00:00:00""
+        static let defaultTime = "00:00:00"
     }
 }
 
