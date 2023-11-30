@@ -8,6 +8,8 @@
 import Foundation
 
 struct Friend {
+    let id: Int?
     let nickName: String
-    let profileImageURL: String
+    let profileImageURL: String?
+    let totalTime: Int?
 }
