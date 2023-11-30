@@ -11,5 +11,6 @@ import { RedisService } from 'src/common/redis.service';
   imports: [TypeOrmModule.forFeature([StudyLogs]), AuthModule, UsersModule],
   providers: [StudyLogsService, RedisService],
   controllers: [StudyLogsController, StatsController],
+  exports: [StudyLogsService, TypeOrmModule],
 })
 export class StudyLogsModule {}

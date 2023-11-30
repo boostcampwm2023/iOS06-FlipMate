@@ -6,9 +6,9 @@ import { ConfigService } from '@nestjs/config';
 import { v4 } from 'uuid';
 import { GreenEyeResponse } from './interface/greeneye.interface';
 import { S3Service } from 'src/common/s3.service';
-import * as path from 'path';
 import { ENV } from 'src/common/const/env-keys.const';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { getImageUrl } from 'src/common/utils';
 
 @Injectable()
 export class UsersService {
@@ -44,10 +44,7 @@ export class UsersService {
     if (!user) {
       throw new BadRequestException('해당 유저가 존재하지 않습니다.');
     }
-    return path.join(
-      this.config.get(ENV.CDN_ENDPOINT),
-      user.image_url ?? 'default.png',
-    );
+    return getImageUrl(this.config.get(ENV.CDN_ENDPOINT), user.image_url);
   }
 
   async updateUser(
@@ -64,9 +61,15 @@ export class UsersService {
     if (image_url) {
       selectedUser.image_url = image_url;
     }
-
-    const updatedUser = await this.usersRepository.save(selectedUser);
-    return updatedUser;
+    try {
+      const updatedUser = await this.usersRepository.save(selectedUser);
+      return updatedUser;
+    } catch (error) {
+      if (error.code === 'ER_DUP_ENTRY' || error.errno === 1062) {
+        throw new BadRequestException('닉네임이 이미 사용 중입니다.');
+      }
+      throw error;
+    }
   }
 
   async isUniqueNickname(nickname: string): Promise<object> {

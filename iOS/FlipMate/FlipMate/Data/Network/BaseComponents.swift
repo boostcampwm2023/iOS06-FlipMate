@@ -17,4 +17,5 @@ enum Paths {
     static let googleApp = "/auth/google/app"
     static let studylogs = "/study-logs"
     static let friend = "/mates"
+    static let user = "/user"
 }
