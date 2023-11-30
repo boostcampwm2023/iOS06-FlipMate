@@ -9,6 +9,7 @@ import UIKit
 
 protocol LoginFlowCoordinatorDependencies {
     func makeLoginViewController(actions: LoginViewModelActions) -> UIViewController
+    func makeSignUpViewController(actions: SignUpViewModelActions) -> UIViewController
     func makeTabBarDIContainer() -> TabBarDIContainer
 }
 
@@ -18,7 +19,7 @@ final class LoginFlowCoordinator: Coordinator {
     
     private var navigationViewController: UINavigationController
     private let dependencies: LoginFlowCoordinatorDependencies
-        
+    
     init(navigationViewController: UINavigationController, dependencies: LoginFlowCoordinatorDependencies) {
         self.navigationViewController = navigationViewController
         self.dependencies = dependencies
@@ -26,11 +27,19 @@ final class LoginFlowCoordinator: Coordinator {
     
     func start() {
         let actions = LoginViewModelActions(
+            showSignUpViewController: showSignUpController,
             showTabBarController: showTabBarController,
-            didFinishLogin: didFinishLogin
+            skippedLogin: showTabBarController
         )
         let viewController = dependencies.makeLoginViewController(actions: actions)
         navigationViewController.viewControllers = [viewController]
+    }
+    
+    private func showSignUpController() {
+        let actions = SignUpViewModelActions(
+            didFinishSignUp: showTabBarController)
+        let signUpController = dependencies.makeSignUpViewController(actions: actions)
+        navigationViewController.pushViewController(signUpController, animated: true)
     }
     
     private func showTabBarController() {
@@ -40,9 +49,5 @@ final class LoginFlowCoordinator: Coordinator {
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
         coordinator.start()
-    }
-    
-    func didFinishLogin() {
-        parentCoordinator?.childDidFinish(self)
     }
 }

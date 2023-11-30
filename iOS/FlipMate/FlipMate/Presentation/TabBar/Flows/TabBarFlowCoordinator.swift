@@ -60,7 +60,7 @@ final class TabBarFlowCoordinator: Coordinator {
         coordinator.start()
         return navigationViewController
     }
-
+    
     private func makeChartViewController() -> UINavigationController {
         let navigationViewController = UINavigationController()
         navigationViewController.tabBarItem.image = UIImage(

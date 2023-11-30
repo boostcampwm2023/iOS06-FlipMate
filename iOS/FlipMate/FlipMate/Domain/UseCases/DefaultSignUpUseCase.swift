@@ -19,7 +19,7 @@ final class DefaultSignUpUseCase: SignUpUseCase {
     
     func isNickNameValid(_ nickName: String) async throws -> NickNameValidationState {
         let isDuplicated = try await repository.checkIfNickNameIsDuplicated(nickName)
-        guard isDuplicated else {
+        guard !isDuplicated else {
             return .duplicated
         }
         let validationState = validator.checkNickNameValidationState(nickName)

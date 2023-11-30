@@ -42,7 +42,7 @@ final class TimerFlowCoordinator: Coordinator {
         childCoordinators.append(coordinator)
     }
     
-    private func showTimerFinishViewController(studyEndLog: StudyEndLog) -> Void {
+    private func showTimerFinishViewController(studyEndLog: StudyEndLog) {
         let actions = TimerFinishViewModelActions(
             didSaveStudyEndLog: didSaveStudyEndLog,
             didCancleStudyEndLog: didCancleStudyEndLog)

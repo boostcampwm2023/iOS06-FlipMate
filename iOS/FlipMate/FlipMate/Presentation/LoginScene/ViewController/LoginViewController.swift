@@ -32,10 +32,6 @@ final class LoginViewController: BaseViewController {
         fatalError("Don't use storyboard")
     }
     
-    deinit {
-        loginViewModel.didFinishLogin()
-    }
-    
     // MARK: - UI Components
     private var logoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -63,7 +59,7 @@ final class LoginViewController: BaseViewController {
         return label
     }()
     
-    private var googleLoginButton: UIButton = {
+    private lazy var googleLoginButton: UIButton = {
         let button = UIButton()
         button.setLoginButton(type: .google)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -89,9 +85,7 @@ final class LoginViewController: BaseViewController {
     }()
     
     // MARK: - Life Cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+
     
     // MARK: - UI Setting
     override func configureUI() {
@@ -138,9 +132,10 @@ final class LoginViewController: BaseViewController {
                 if let isMember = isMember {
                     if isMember {
                         FMLogger.device.log("타이머 창으로 이동합니다")
-                        loginViewModel.didLogin()
+                        loginViewModel.didFinishLoginAndIsMember()
                     } else {
                         FMLogger.device.log("회원가입 창으로 이동합니다")
+                        loginViewModel.didFinishLoginAndIsNotMember()
                     }
                 }
             }
@@ -151,7 +146,7 @@ final class LoginViewController: BaseViewController {
 // MARK: - Objc func
 private extension LoginViewController {
     @objc func loginSkipButtonDidTapped() {
-        loginViewModel.didLogin()
+        loginViewModel.skippedLogin()
     }
     
     @objc func handleGoogleLoginButton() {

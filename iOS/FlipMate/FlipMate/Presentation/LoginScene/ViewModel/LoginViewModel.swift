@@ -9,13 +9,15 @@ import Foundation
 import Combine
 
 struct LoginViewModelActions {
+    let showSignUpViewController: () -> Void
     let showTabBarController: () -> Void
-    let didFinishLogin: () -> Void
+    let skippedLogin: () -> Void
 }
 
 protocol LoginViewModelInput {
-    func didLogin()
-    func didFinishLogin()
+    func skippedLogin()
+    func didFinishLoginAndIsMember()
+    func didFinishLoginAndIsNotMember()
     func requestLogin(accessToken: String)
 }
 
@@ -26,6 +28,7 @@ protocol LoginViewModelOutput {
 typealias LoginViewModelProtocol = LoginViewModelInput & LoginViewModelOutput
 
 final class LoginViewModel: LoginViewModelProtocol {
+
     // MARK: properties
     private let googleAuthUseCase: GoogleAuthUseCase
     private let cancellables: Set<AnyCancellable> = []
@@ -43,14 +46,18 @@ final class LoginViewModel: LoginViewModelProtocol {
     }
     
     // MARK: - input
-    func didLogin() {
+    func skippedLogin() {
+        actions?.skippedLogin()
+    }
+    
+    func didFinishLoginAndIsMember() {
         actions?.showTabBarController()
     }
     
-    func didFinishLogin() {
-        actions?.didFinishLogin()
+    func didFinishLoginAndIsNotMember() {
+        actions?.showSignUpViewController()
     }
-    
+
     func requestLogin(accessToken: String) {
         Task {
             do {
@@ -67,8 +74,8 @@ final class LoginViewModel: LoginViewModelProtocol {
                 } else {
                     FMLogger.user.log("나는 아직 회원이 아니야")
                 }
-            } catch {
-                FMLogger.general.error("로그인 중 에러 발생")
+            } catch let error {
+                FMLogger.general.error("로그인 중 에러 발생 : \(error)")
             }
         }
     }
