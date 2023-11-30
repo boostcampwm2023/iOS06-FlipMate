@@ -13,3 +13,16 @@ struct SocialChart {
     let primaryCategory: String?
 }
 
+struct StudyTime: Identifiable {
+    var id: UUID = UUID()
+    
+    let weekday: Date
+    let studyTime: Int
+}
+
+struct Series: Identifiable {
+    var id: UUID = UUID()
+    
+    let user: String
+    let studyLog: [StudyTime]
+}
