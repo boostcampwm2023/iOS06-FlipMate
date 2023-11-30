@@ -8,6 +8,10 @@
 import Foundation
 import Combine
 
+struct SignUpViewModelActions {
+    let didFinishSignUp: () -> Void
+}
+
 protocol SignUpViewModelInput {
     func nickNameChanged(_ newNickName: String)
     func profileImageChanged(_ newImageData: Data)
@@ -28,13 +32,15 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     private let useCase: SignUpUseCase
     
     // MARK: - Subjects
-    var isValidNickNameSubject = PassthroughSubject<NickNameValidationState, Never>()
-    var isSafeProfileImageSubject = PassthroughSubject<Bool, Never>()
-    var isSignUpCompletedSubject = PassthroughSubject<Void, Never>()
-    var errorSubject = PassthroughSubject<Error, Never>()
+    private var isValidNickNameSubject = PassthroughSubject<NickNameValidationState, Never>()
+    private var isSafeProfileImageSubject = PassthroughSubject<Bool, Never>()
+    private var isSignUpCompletedSubject = PassthroughSubject<Void, Never>()
+    private var errorSubject = PassthroughSubject<Error, Never>()
+    private let actions: SignUpViewModelActions?
     
-    init(usecase: SignUpUseCase) {
+    init(usecase: SignUpUseCase, actions: SignUpViewModelActions) {
         self.useCase = usecase
+        self.actions = actions
     }
     
     // MARK: - Input
@@ -65,6 +71,11 @@ final class SignUpViewModel: SignUpViewModelProtocol {
             do {
                 try await useCase.signUpUser(nickName: userName, profileImageData: profileImageData)
                 isSignUpCompletedSubject.send()
+                guard let actions = actions else {
+                    FMLogger.general.error("no actions")
+                    return
+                }
+                actions.didFinishSignUp()
             } catch let error {
                 errorSubject.send(error)
             }

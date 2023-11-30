@@ -27,15 +27,17 @@ final class TabBarFlowCoordinator: Coordinator {
     }
     
     func start() {
-        let tabBarController = dependencies.makeTabBarController()
-        tabBarController.setViewControllers(
-            [makeSocialViewController(), makeTimerViewContorller(), makeChartViewController()],
-            animated: false
-        )
-        navigationController.view.window?.rootViewController = tabBarController
-        navigationController.viewControllers = []
-        tabBarController.selectedIndex = 1
-        tabBarViewController = tabBarController
+        DispatchQueue.main.async {
+            let tabBarController = self.dependencies.makeTabBarController()
+            tabBarController.setViewControllers(
+                [self.makeSocialViewController(), self.makeTimerViewContorller(), self.makeChartViewController()],
+                animated: false
+            )
+            self.navigationController.isNavigationBarHidden = true
+            self.navigationController.viewControllers = [tabBarController]
+            tabBarController.selectedIndex = 1
+            self.tabBarViewController = tabBarController
+        }
     }
     
     private func makeTimerViewContorller() -> UINavigationController {
@@ -55,7 +57,7 @@ final class TabBarFlowCoordinator: Coordinator {
             systemName: Constant.socialSelectedImageName)
         return navigationViewController
     }
-
+    
     private func makeChartViewController() -> UINavigationController {
         let navigationViewController = UINavigationController()
         navigationViewController.tabBarItem.image = UIImage(

@@ -30,7 +30,9 @@ final class TimerFlowCoordinator: Coordinator {
             showTimerFinishViewController: showTimerFinishViewController)
         let viewController = dependencies.makeTimerViewController(actions: actions)
         timerViewController = viewController
-        navigationController.viewControllers = [viewController]
+        DispatchQueue.main.async {
+            self.navigationController.viewControllers = [viewController]
+        }
     }
     
     private func showCategorySettingViewController() {
@@ -42,7 +44,7 @@ final class TimerFlowCoordinator: Coordinator {
         childCoordinators.append(coordinator)
     }
     
-    private func showTimerFinishViewController(studyEndLog: StudyEndLog) -> Void {
+    private func showTimerFinishViewController(studyEndLog: StudyEndLog) {
         let actions = TimerFinishViewModelActions(
             didSaveStudyEndLog: didSaveStudyEndLog,
             didCancleStudyEndLog: didCancleStudyEndLog)
