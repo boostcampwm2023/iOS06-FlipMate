@@ -8,10 +8,16 @@
 import Foundation
 import Combine
 
+struct FriendAddViewModelActions {
+    var didCancleFriendAdd: () -> Void
+    var didSuccessFriendAdd: () -> Void
+}
+
 protocol FriendAddViewModelInput {
     func nicknameDidChange(at nickname: String)
     func didFollowFriend()
     func didSearchFriend()
+    func dismissButtonDidTapped()
 }
 
 protocol FriendAddViewModelOutput {
@@ -35,10 +41,12 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     private let myNickname: String
     private var friendNickname: String = ""
     private let friendUseCase: FriendUseCase
+    private let actions: FriendAddViewModelActions?
     
-    init(myNickname: String, friendUseCase: FriendUseCase) {
+    init(myNickname: String, friendUseCase: FriendUseCase, actions: FriendAddViewModelActions? = nil) {
         self.myNickname = myNickname
         self.friendUseCase = friendUseCase
+        self.actions = actions
     }
     
     // MARK: - output
@@ -69,8 +77,9 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
                 case .failure(let error):
                     FMLogger.friend.error("친구 요청 에러 발생 \(error)")
                 }
-            } receiveValue: { _ in
-                // TODO: - Coordinator로 화면 전환
+            } receiveValue: { [weak self] _ in
+                guard let self = self else { return }
+                self.actions?.didSuccessFriendAdd()
             }
             .store(in: &cancellables)
     }
@@ -97,5 +106,9 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     func nicknameDidChange(at nickname: String) {
         friendNickname = nickname
         nicknameCountSubject.send(nickname.count)
+    }
+    
+    func dismissButtonDidTapped() {
+        actions?.didCancleFriendAdd()
     }
 }

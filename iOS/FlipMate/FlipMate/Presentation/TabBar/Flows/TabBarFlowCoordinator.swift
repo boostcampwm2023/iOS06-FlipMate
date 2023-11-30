@@ -11,6 +11,7 @@ protocol TabBarFlowCoordinatorDependencies {
     func makeTabBarController() -> UITabBarController
     func makeTimerViewController() -> UIViewController
     func makeTimerDIContainer() -> TimerSceneDIContainer
+    func makeSocialDIContainer() -> SocialDIContainer
 }
 
 final class TabBarFlowCoordinator: Coordinator {
@@ -53,6 +54,10 @@ final class TabBarFlowCoordinator: Coordinator {
             systemName: Constant.socialNomalImageName)
         navigationViewController.tabBarItem.selectedImage = UIImage(
             systemName: Constant.socialSelectedImageName)
+        let socialDIContainer = dependencies.makeSocialDIContainer()
+        let coordinator = socialDIContainer.makeSocialFlowCoordinator(
+            navigationController: navigationViewController)
+        coordinator.start()
         return navigationViewController
     }
     

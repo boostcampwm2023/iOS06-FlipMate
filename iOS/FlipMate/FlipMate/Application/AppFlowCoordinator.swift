@@ -28,16 +28,21 @@ final class AppFlowCoordinator: Coordinator {
     private var navigationController: UINavigationController
     private let appDIContainer: AppDIContainer
     
-    // TODO: 추후 자동 로그인 로직 추가
-    var isLogginIn: Bool = false
-    
     init(navigationController: UINavigationController, appDIContainer: AppDIContainer) {
         self.navigationController = navigationController
         self.appDIContainer = appDIContainer
     }
     
     func start() {
-        if isLogginIn {
+        var isLoggedIn: Bool
+        
+        if let token = try? KeychainManager.getAccessToken() {
+            isLoggedIn = true
+        } else {
+            isLoggedIn = false
+        }
+        
+        if isLoggedIn {
             showTabBarViewController()
         } else {
             showLoginViewController()

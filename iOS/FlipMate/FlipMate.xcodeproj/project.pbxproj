@@ -100,6 +100,9 @@
 		2C9F62512B176FFE00AE63F9 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595A82B0C7F3500558FAA /* HTTPMethod.swift */; };
 		2C9F62532B17700500AE63F9 /* BaseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A02B0DA4E6008CBC85 /* BaseComponents.swift */; };
 		2C9F62542B17701300AE63F9 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422E2B0F747B001E2803 /* KeyChainManager.swift */; };
+		2CDCD03D2B1871E60080DCDE /* SocialDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD03C2B1871E60080DCDE /* SocialDIContainer.swift */; };
+		2CDCD0402B1872060080DCDE /* SocialFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD03F2B1872060080DCDE /* SocialFlowCoordinator.swift */; };
+		2CDCD0422B1873F60080DCDE /* SocialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0412B1873F60080DCDE /* SocialViewModel.swift */; };
 		2CE84EEF2B0B742A00E2FB71 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */; };
 		2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */; };
 		2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF42B0B783800E2FB71 /* UICollectionViewCell++Extension.swift */; };
@@ -266,6 +269,9 @@
 		2C9F62362B17517100AE63F9 /* MockFriendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFriendUseCase.swift; sourceTree = "<group>"; };
 		2C9F62402B1769FD00AE63F9 /* FriendUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendUseCaseTests.swift; sourceTree = "<group>"; };
 		2C9F62462B176AEC00AE63F9 /* MockFriendRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFriendRepository.swift; sourceTree = "<group>"; };
+		2CDCD03C2B1871E60080DCDE /* SocialDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDIContainer.swift; sourceTree = "<group>"; };
+		2CDCD03F2B1872060080DCDE /* SocialFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFlowCoordinator.swift; sourceTree = "<group>"; };
+		2CDCD0412B1873F60080DCDE /* SocialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewModel.swift; sourceTree = "<group>"; };
 		2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView++Extension.swift"; sourceTree = "<group>"; };
 		2CE84EF42B0B783800E2FB71 /* UICollectionViewCell++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell++Extension.swift"; sourceTree = "<group>"; };
@@ -663,6 +669,14 @@
 			path = Mock;
 			sourceTree = "<group>";
 		};
+		2CDCD03E2B1871FB0080DCDE /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				2CDCD03F2B1872060080DCDE /* SocialFlowCoordinator.swift */,
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
 		48114A3517087E7FD0C9546F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -786,6 +800,7 @@
 		600908F22AFCDCE10065DFFB /* SocialScene */ = {
 			isa = PBXGroup;
 			children = (
+				2CDCD03E2B1871FB0080DCDE /* Flow */,
 				ED6865AB2B1795E8001A2AAD /* ViewModel */,
 				2C9F62062B16397400AE63F9 /* Protocol */,
 				2C9F61FF2B1601E800AE63F9 /* View */,
@@ -965,6 +980,7 @@
 				2C88DCFA2B124451000B4686 /* LoginDIContainer.swift */,
 				2C88DD062B125781000B4686 /* TabBarDIContainer.swift */,
 				2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */,
+				2CDCD03C2B1871E60080DCDE /* SocialDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -1117,6 +1133,7 @@
 			isa = PBXGroup;
 			children = (
 				ED6865AC2B179600001A2AAD /* SocialDetailViewModel.swift */,
+				2CDCD0412B1873F60080DCDE /* SocialViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1404,6 +1421,7 @@
 				2C43A0D82B037BBC0005596A /* FeedbackManager.swift in Sources */,
 				ED3595AB2B0C81B800558FAA /* Responsable.swift in Sources */,
 				2C4D55B02B0348FB006D7C26 /* TimerViewModel.swift in Sources */,
+				2CDCD0422B1873F60080DCDE /* SocialViewModel.swift in Sources */,
 				601EB7452B14F86100C5B216 /* SignUpEndpoints.swift in Sources */,
 				ED3842252B0F1DDA001E2803 /* DefaultGoogleAuthUseCase.swift in Sources */,
 				601EB7412B14F39B00C5B216 /* SignUpRepository.swift in Sources */,
@@ -1417,6 +1435,7 @@
 				600195A02B0DFA3900F02BA4 /* StatusResponseDTO.swift in Sources */,
 				2C9F620D2B17241200AE63F9 /* Friend.swift in Sources */,
 				60F6FD732B0B5E130057CE0B /* SignUpViewController.swift in Sources */,
+				2CDCD0402B1872060080DCDE /* SocialFlowCoordinator.swift in Sources */,
 				2CE84EEF2B0B742A00E2FB71 /* CategorySettingViewController.swift in Sources */,
 				60A0B8E12B181C4900510299 /* Data++Extension.swift in Sources */,
 				ED3595B02B0C82C800558FAA /* TimerStartRequestDTO.swift in Sources */,
@@ -1530,6 +1549,7 @@
 				2C9F62242B173ADA00AE63F9 /* UserProfileResposeDTO.swift in Sources */,
 				EDC851D92B05C37C009031EA /* DeviceMotionManager.swift in Sources */,
 				2C9F62262B1742D200AE63F9 /* FriendEndpoints.swift in Sources */,
+				2CDCD03D2B1871E60080DCDE /* SocialDIContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

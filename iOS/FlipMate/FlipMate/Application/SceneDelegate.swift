@@ -35,7 +35,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         appFlowCoordinator?.start()
         window.makeKeyAndVisible()
-        try? KeychainManager.deleteAccessToken()
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
