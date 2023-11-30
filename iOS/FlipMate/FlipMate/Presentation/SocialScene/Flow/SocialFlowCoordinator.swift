@@ -8,35 +8,29 @@
 import Foundation
 import UIKit
 
-final class SocialDIContainer: SocialFlowCoordinatorDependencies {
-    struct Dependencies {
-        let provider: Providable
-    }
-    
-    private let dependencies: Dependencies
-    
-    init(dependencies: Dependencies) {
-        self.dependencies = dependencies
-    }
-    
-    func makeSocialFlowCoordinator(navigationController: UINavigationController) -> SocialFlowCoordinator {
-        return SocialFlowCoordinator(
-            dependencies: self,
-            navigationController: navigationController)
-    }
-    
-    func makeSocialViewController() -> UIViewController {
-        return SocialViewController()
-    }
-    
-    func makeFriendAddViewControlleR() -> UIViewController {
-        return FriendAddViewController(viewModel: FriendAddViewModel(
-            myNickname: "test",
-            friendUseCase: DefaultFriendUseCase(
-                repository: DefaultFriendRepository(
-                    provider: dependencies.provider))
-            )
-        )
-    }
+protocol SocialFlowCoordinatorDependencies {
+    func makeSocialFlowCoordinator(navigationController: UINavigationController) -> SocialFlowCoordinator
+    func makeSocialViewController() -> UIViewController
+    func makeFriendAddViewControlleR() -> UIViewController
 }
 
+final class SocialFlowCoordinator: Coordinator {
+    var childCoordinators: [Coordinator] = []
+    private var navigationController: UINavigationController
+    private var dependencies: SocialFlowCoordinatorDependencies
+    
+    init(dependencies: SocialFlowCoordinatorDependencies, navigationController: UINavigationController) {
+        self.dependencies = dependencies
+        self.navigationController = navigationController
+    }
+    
+    func start() {
+        let socialViewController = dependencies.makeSocialViewController()
+        navigationController.viewControllers = [socialViewController]
+    }
+    
+    private func showFreindAddViewController() {
+        let freindAddViewContorller = dependencies.makeFriendAddViewControlleR()
+        navigationController.pushViewController(freindAddViewContorller, animated: true)
+    }
+}
