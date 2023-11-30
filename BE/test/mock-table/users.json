@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "nickname": "어린콩",
+    "auth_type": "google",
+    "email": "yeim.dev@gmail.com",
+    "image_url": null
+  },
+  {
+    "id": 2,
+    "nickname": "어린콩2",
+    "auth_type": "google",
+    "email": "yeim.de@gmail.com",
+    "image_url": null
+  }
+]

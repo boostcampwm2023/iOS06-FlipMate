@@ -87,6 +87,9 @@ export class UsersService {
       where: { email },
     });
 
+    if (!selectedUser) {
+      throw new BadRequestException('해당 유저가 존재하지 않습니다.');
+    }
     return selectedUser;
   }
 
@@ -95,6 +98,9 @@ export class UsersService {
       where: { id: user_id },
     });
 
+    if (!selectedUser) {
+      throw new BadRequestException('해당 유저가 존재하지 않습니다.');
+    }
     return selectedUser;
   }
 

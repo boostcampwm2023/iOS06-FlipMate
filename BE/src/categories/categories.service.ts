@@ -1,35 +1,57 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Categories } from './categories.entity';
 import { CategoryCreateDto } from './dto/request/create-categories.dto';
 import { CategoryUpdateDto } from './dto/request/update-categories.dto';
 import { CategoryDto } from './dto/response/category.dto';
-import { UsersModel } from 'src/users/entity/users.entity';
+import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class CategoriesService {
   constructor(
     @InjectRepository(Categories)
     private categoriesRepository: Repository<Categories>,
+    private usersService: UsersService,
   ) {}
 
   async create(
     user_id: number,
     categoriesData: CategoryCreateDto,
   ): Promise<CategoryDto> {
-    const user = { id: user_id } as UsersModel;
+    if (!user_id || !categoriesData) {
+      throw new BadRequestException('인자의 형식이 잘못되었습니다.');
+    }
+    const user = await this.usersService.findUserById(user_id);
+    if (!user) {
+      throw new NotFoundException('해당 id의 유저가 존재하지 않습니다.');
+    }
+
     const category = this.categoriesRepository.create({
       ...categoriesData,
       user_id: user,
     });
+
     const savedCategory = await this.categoriesRepository.save(category);
     return this.entityToDto(savedCategory);
   }
 
   async findByUserId(user_id: number): Promise<CategoryDto[]> {
+    if (!user_id) {
+      throw new BadRequestException('인자의 형식이 잘못되었습니다.');
+    }
+
+    const user = await this.usersService.findUserById(user_id);
+    if (!user) {
+      throw new NotFoundException('해당 id의 유저가 존재하지 않습니다.');
+    }
+
     const categories = await this.categoriesRepository.find({
-      where: { user_id: { id: user_id } },
+      where: { user_id: { id: user.id } },
       relations: ['user_id'],
     });
     const categoryDto = categories.map((category) => {

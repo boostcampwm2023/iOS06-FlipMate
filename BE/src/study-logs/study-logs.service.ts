@@ -8,7 +8,7 @@ import { Categories } from 'src/categories/categories.entity';
 import { StudyLogsDto } from './dto/response/study-logs.dto';
 import { transformDate } from 'src/common/utils';
 import { RedisService } from 'src/common/redis.service';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Injectable()
 export class StudyLogsService {
