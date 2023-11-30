@@ -126,9 +126,9 @@ final class FriendAddViewController: BaseViewController {
     override func bind() {
         viewModel.searchFreindPublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] friend in
+            .sink { [weak self] friendSearchItem in
                 guard let self = self else { return }
-                self.friendSearchResultView.updateUI(friend: friend)
+                self.friendSearchResultView.updateUI(friendSearchItem: friendSearchItem)
                 self.updateResultView(friendSearchResultView)
             }
             .store(in: &cancellables)

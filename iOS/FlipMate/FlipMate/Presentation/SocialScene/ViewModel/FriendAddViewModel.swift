@@ -22,7 +22,7 @@ protocol FriendAddViewModelInput {
 
 protocol FriendAddViewModelOutput {
     var myNicknamePublihser: AnyPublisher<String, Never> { get }
-    var searchFreindPublisher: AnyPublisher<Friend, Never> { get }
+    var searchFreindPublisher: AnyPublisher<FreindSeacrhItem, Never> { get }
     var searchErrorPublisher: AnyPublisher<Void, Never> { get }
     var nicknameCountPublisher: AnyPublisher<Int, Never> { get }
 }
@@ -32,7 +32,7 @@ typealias FriendAddViewModelProtocol = FriendAddViewModelInput & FriendAddViewMo
 final class FriendAddViewModel: FriendAddViewModelProtocol {
     // MARK: - Subject
     private lazy var myNicknameSubject = CurrentValueSubject<String, Never>(myNickname)
-    private var searchResultSubject = PassthroughSubject<Friend, Never>()
+    private var searchResultSubject = PassthroughSubject<FreindSeacrhItem, Never>()
     private var searchErrorSubject = PassthroughSubject<Void, Never>()
     private var nicknameCountSubject = PassthroughSubject<Int, Never>()
     
@@ -50,7 +50,7 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     }
     
     // MARK: - output
-    var searchFreindPublisher: AnyPublisher<Friend, Never> {
+    var searchFreindPublisher: AnyPublisher<FreindSeacrhItem, Never> {
         return searchResultSubject.eraseToAnyPublisher()
     }
     
@@ -98,7 +98,10 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
                 }
             } receiveValue: { [weak self] profileimageURL in
                 guard let self = self else { return }
-                self.searchResultSubject.send(Friend(nickName: friendNickname, profileImageURL: profileimageURL))
+                self.searchResultSubject.send(FreindSeacrhItem(
+                    nickname: friendNickname,
+                    iamgeURL: profileimageURL)
+                )
             }
             .store(in: &cancellables)
     }
