@@ -517,6 +517,7 @@
 			isa = PBXGroup;
 			children = (
 				2C9F62002B1601F200AE63F9 /* MyNickNameView.swift */,
+				ED6865A12B162B8F001A2AAD /* SocialChartView.swift */,
 				2C9F62022B16021E00AE63F9 /* FriendSearchResultView.swift */,
 				2C9F62042B160B3900AE63F9 /* NoResultView.swift */,
 			);
@@ -654,7 +655,6 @@
 			isa = PBXGroup;
 			children = (
 				ED6865AB2B1795E8001A2AAD /* ViewModel */,
-				ED68659E2B15EAAA001A2AAD /* View */,
 				2C9F62062B16397400AE63F9 /* Protocol */,
 				2C9F61FF2B1601E800AE63F9 /* View */,
 				2C5CDA4D2B0253F5007AFC57 /* ViewController */,
@@ -927,14 +927,6 @@
 				ED38422B2B0F4531001E2803 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		ED68659E2B15EAAA001A2AAD /* View */ = {
-			isa = PBXGroup;
-			children = (
-				ED6865A12B162B8F001A2AAD /* SocialChartView.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		ED6865A52B1792CD001A2AAD /* SocialScene */ = {
