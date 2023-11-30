@@ -9,6 +9,6 @@ import Foundation
 import Combine
 
 protocol FriendRepository {
-    func follow(at nickname: String) -> AnyPublisher<StatusResponseDTO, NetworkError>
-    func search(at nickname: String) -> AnyPublisher<UserProfileResposeDTO, NetworkError>
+    func follow(at nickname: String) -> AnyPublisher<String, NetworkError>
+    func search(at nickname: String) -> AnyPublisher<String, NetworkError>
 }

@@ -17,17 +17,9 @@ final class DefaultFriendUseCase: FriendUseCase {
     
     func follow(at nickname: String) -> AnyPublisher<String, NetworkError> {
         return repository.follow(at: nickname)
-            .map { response -> String in
-                return response.message
-            }
-            .eraseToAnyPublisher()
     }
     
     func search(at nickname: String) -> AnyPublisher<String, NetworkError> {
         return repository.search(at: nickname)
-            .map { response -> String in
-                return response.profileImageURL
-            }
-            .eraseToAnyPublisher()
     }
 }

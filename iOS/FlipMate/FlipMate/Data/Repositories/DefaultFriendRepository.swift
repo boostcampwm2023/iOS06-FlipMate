@@ -16,14 +16,22 @@ final class DefaultFriendRepository: FriendRepository {
         self.provider = provider
     }
     
-    func follow(at nickname: String) -> AnyPublisher<StatusResponseDTO, NetworkError> {
+    func follow(at nickname: String) -> AnyPublisher<String, NetworkError> {
         let reqeustDTO = FriendFollowReqeustDTO(nickname: nickname)
         let endPoint = FriendEndpoints.followFriend(with: reqeustDTO)
         return provider.request(with: endPoint)
+            .map { response -> String in
+                return response.message
+            }
+            .eraseToAnyPublisher()
     }
     
-    func search(at nickname: String) -> AnyPublisher<UserProfileResposeDTO, NetworkError> {
+    func search(at nickname: String) -> AnyPublisher<String, NetworkError> {
         let endPoint = FriendEndpoints.searchFriend(at: nickname)
         return provider.request(with: endPoint)
+            .map { response -> String in
+                return response.profileImageURL
+            }
+            .eraseToAnyPublisher()
     }
 }
