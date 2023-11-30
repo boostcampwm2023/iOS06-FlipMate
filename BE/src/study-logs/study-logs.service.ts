@@ -111,9 +111,10 @@ export class StudyLogsService {
     }));
 
     const result = {
-      total_time: (await this.calculateTotalTimes(user_id, date, date))[0],
+      total_time: (await this.calculateTotalTimes(user_id, date, date))[0] ?? 0,
       categories,
     };
+
     return result;
   }
 
