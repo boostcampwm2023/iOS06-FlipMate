@@ -19,7 +19,15 @@ final class DefaultFriendUseCase: FriendUseCase {
         return repository.follow(at: nickname)
     }
     
+    func unfollow(at id: Int) -> AnyPublisher<String, NetworkError> {
+        return repository.unfollow(at: id)
+    }
+    
     func search(at nickname: String) -> AnyPublisher<String, NetworkError> {
         return repository.search(at: nickname)
+    }
+    
+    func getChartInfo(at id: Int) -> AnyPublisher<SocialChart, NetworkError> {
+        return repository.getChartInfo(at: id)
     }
 }

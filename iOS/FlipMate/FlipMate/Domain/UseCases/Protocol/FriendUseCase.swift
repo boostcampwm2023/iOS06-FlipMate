@@ -10,5 +10,7 @@ import Combine
 
 protocol FriendUseCase {
     func follow(at nickname: String) -> AnyPublisher<String, NetworkError>
+    func unfollow(at id: Int) -> AnyPublisher<String, NetworkError>
     func search(at nickname: String) -> AnyPublisher<String, NetworkError>
+    func getChartInfo(at id: Int) -> AnyPublisher<SocialChart, NetworkError>
 }

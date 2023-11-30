@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import Combine
 
 final class SocialDetailViewController: BaseViewController {
     private enum ComponentConstant {
@@ -85,7 +86,7 @@ final class SocialDetailViewController: BaseViewController {
         button.layer.borderColor = FlipMateColor.gray2.color?.cgColor
         button.layer.borderWidth = ComponentConstant.borderWidth
         button.layer.cornerRadius = ComponentConstant.cornerRadius
-        // button.addTarget(self, action: #selector(unfollowButtonDidTapped), for: .touchUpInside)
+         button.addTarget(self, action: #selector(unfollowButtonDidTapped), for: .touchUpInside)
         return button
     }()
     
@@ -199,6 +200,19 @@ final class SocialDetailViewController: BaseViewController {
         return view
     }()
     
+    // MARK: - Properties
+    private var viewModel: SocialDetailViewModelProtocol
+    
+    init(viewModel: SocialDetailViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("Don't use storyboard")
+    }
+    
     // MARK: - View Life Cycles
     override func configureUI() {
         setStudyLogStackView()
@@ -270,7 +284,7 @@ private extension SocialDetailViewController {
     }
     
     func setChart() {
-        let socialChartView = SocialChartView()
+        let socialChartView = SocialChartView(viewModel: SocialChartView.ViewModel())
         let hostingController = UIHostingController(rootView: socialChartView)
         addChild(hostingController)
         guard let newChartView = hostingController.view else { return }
@@ -281,7 +295,14 @@ private extension SocialDetailViewController {
     }
 }
 
-@available(iOS 17.0, *)
-#Preview {
-    SocialDetailViewController()
+private extension SocialDetailViewController {
+    @objc func unfollowButtonDidTapped() {
+        viewModel.didUnfollowFriend()
+    }
 }
+
+//    @available(iOS 17.0, *)
+//    #Preview {
+//        SocialDetailViewController(viewModel: SocialDetailViewModel(friendInfo: FriendInfo(friend: Friend(nickName: "hi", profileImageURL: "else"), id: 14, totalTime: 124), friendUseCase: DefaultFriendUseCase(repository: DefaultFriendRepository(provider: Provider(urlSession: URLSession.shared)))))
+//    }
+    
