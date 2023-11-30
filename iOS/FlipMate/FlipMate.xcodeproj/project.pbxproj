@@ -131,8 +131,8 @@
 		608646572B0DE31800B0C1BC /* CategoryResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646562B0DE31800B0C1BC /* CategoryResponseDTO.swift */; };
 		608646592B0DE61200B0C1BC /* CategoryEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646582B0DE61200B0C1BC /* CategoryEndpoints.swift */; };
 		6096F91E2B04F3CA00D0B972 /* FaceDown.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 6096F91D2B04F3CA00D0B972 /* FaceDown.ahap */; };
-		60C2F2862B172D6900EBDD78 /* FriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2F2852B172D6900EBDD78 /* FriendsCollectionViewCell.swift */; };
 		60A0B8E12B181C4900510299 /* Data++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A0B8E02B181C4900510299 /* Data++Extension.swift */; };
+		60C2F2862B172D6900EBDD78 /* FriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2F2852B172D6900EBDD78 /* FriendsCollectionViewCell.swift */; };
 		60DE493D2B05DEA400ACE6DD /* FlipMateLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE493C2B05DEA400ACE6DD /* FlipMateLogger.swift */; };
 		60DE49402B05E67200ACE6DD /* FlipMateConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE493F2B05E67200ACE6DD /* FlipMateConstant.swift */; };
 		60DFDDD92B14FD7800FEF98A /* StatusResponseWithErrorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DFDDD82B14FD7800FEF98A /* StatusResponseWithErrorDTO.swift */; };
@@ -266,7 +266,6 @@
 		2C9F62362B17517100AE63F9 /* MockFriendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFriendUseCase.swift; sourceTree = "<group>"; };
 		2C9F62402B1769FD00AE63F9 /* FriendUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendUseCaseTests.swift; sourceTree = "<group>"; };
 		2C9F62462B176AEC00AE63F9 /* MockFriendRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFriendRepository.swift; sourceTree = "<group>"; };
-		2CA80839AC9EFDD4BAA10C67 /* Pods_FlipMate_FlipMateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate_FlipMateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView++Extension.swift"; sourceTree = "<group>"; };
 		2CE84EF42B0B783800E2FB71 /* UICollectionViewCell++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell++Extension.swift"; sourceTree = "<group>"; };
@@ -302,8 +301,8 @@
 		608646562B0DE31800B0C1BC /* CategoryResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryResponseDTO.swift; sourceTree = "<group>"; };
 		608646582B0DE61200B0C1BC /* CategoryEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEndpoints.swift; sourceTree = "<group>"; };
 		6096F91D2B04F3CA00D0B972 /* FaceDown.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = FaceDown.ahap; sourceTree = "<group>"; };
-		60C2F2852B172D6900EBDD78 /* FriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewCell.swift; sourceTree = "<group>"; };
 		60A0B8E02B181C4900510299 /* Data++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data++Extension.swift"; sourceTree = "<group>"; };
+		60C2F2852B172D6900EBDD78 /* FriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewCell.swift; sourceTree = "<group>"; };
 		60DE493C2B05DEA400ACE6DD /* FlipMateLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipMateLogger.swift; sourceTree = "<group>"; };
 		60DE493F2B05E67200ACE6DD /* FlipMateConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipMateConstant.swift; sourceTree = "<group>"; };
 		60DFDDD82B14FD7800FEF98A /* StatusResponseWithErrorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusResponseWithErrorDTO.swift; sourceTree = "<group>"; };
@@ -1048,6 +1047,14 @@
 			path = Constant;
 			sourceTree = "<group>";
 		};
+		60DFDDDC2B16383900FEF98A /* NickNameValidator */ = {
+			isa = PBXGroup;
+			children = (
+				60DFDDDD2B16384500FEF98A /* NickNameValidator.swift */,
+			);
+			path = NickNameValidator;
+			sourceTree = "<group>";
+		};
 		8323E91B4E0224828FF69A42 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1056,14 +1063,7 @@
 				2A07EAC691AD64BBA3FD43FE /* Pods_FlipMateTests.framework */,
 			);
 			name = Frameworks;
-        };
-		60DFDDDC2B16383900FEF98A /* NickNameValidator */ = {
-			isa = PBXGroup;
-			children = (
-				60DFDDDD2B16384500FEF98A /* NickNameValidator.swift */,
-			);
-			path = NickNameValidator;
-			sourceTree = "<group>";
+			sourceTree = "<unknown>";
 		};
 		ED3595AE2B0C82A200558FAA /* TimerScene */ = {
 			isa = PBXGroup;

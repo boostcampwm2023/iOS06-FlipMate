@@ -26,8 +26,9 @@ final class LoginFlowCoordinator: Coordinator {
     
     func start() {
         let actions = LoginViewModelActions(
+            showSignUpViewController: showSignUpController,
             showTabBarController: showTabBarController,
-            didFinishLogin: didFinishLogin
+            skippedLogin: showTabBarController
         )
         let viewController = dependencies.makeLoginViewController(actions: actions)
         navigationViewController.viewControllers = [viewController]
