@@ -90,6 +90,7 @@ final class SocialViewController: BaseViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(items)
         self.diffableDataSource.apply(snapshot, animatingDifferences: true)
+        configureNavigationBarItems()
     }
         
     // MARK: - Configure UI
