@@ -31,6 +31,12 @@ struct Provider: Providable {
                     }
                     
                     guard 200..<300 ~= response.statusCode else {
+                        do {
+                            let errorResult = try JSONDecoder().decode(StatusResponseWithErrorDTO.self, from: data)
+                            FMLogger.general.error("에러 코드 : \(errorResult.statusCode)\n내용 : \(errorResult.message)")
+                        } catch {
+                            FMLogger.general.error("에러 코드 : \(response.statusCode)\n내용 : \(HTTPURLResponse.localizedString(forStatusCode: response.statusCode))")
+                        }
                         throw NetworkError.statusCodeError
                     }
                     
@@ -64,7 +70,12 @@ struct Provider: Providable {
         }
         
         guard 200..<300 ~= response.statusCode else {
-            FMLogger.general.error("에러 코드 : \(response.statusCode)\n내용 : \(HTTPURLResponse.localizedString(forStatusCode: response.statusCode))")
+            do {
+                let errorResult = try JSONDecoder().decode(StatusResponseWithErrorDTO.self, from: data)
+                FMLogger.general.error("에러 코드 : \(errorResult.statusCode)\n내용 : \(errorResult.message)")
+            } catch {
+                FMLogger.general.error("에러 코드 : \(response.statusCode)\n내용 : \(HTTPURLResponse.localizedString(forStatusCode: response.statusCode))")
+            }
             throw NetworkError.statusCodeError
         }
         
