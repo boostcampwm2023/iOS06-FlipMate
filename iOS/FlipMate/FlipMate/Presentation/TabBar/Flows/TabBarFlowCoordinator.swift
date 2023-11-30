@@ -66,7 +66,7 @@ final class TabBarFlowCoordinator: Coordinator {
         navigationViewController.tabBarItem.image = UIImage(
             systemName: Constant.chartNomalImageName)
         navigationViewController.tabBarItem.selectedImage = UIImage(
-            systemName: Constant.socialSelectedImageName)
+            systemName: Constant.chartSelectedImageName)
         return navigationViewController
     }
     
