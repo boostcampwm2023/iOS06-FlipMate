@@ -19,21 +19,10 @@ struct SignUpEndpoints {
     static func userSignUp(nickName: String, profileImageData: Data) -> EndPoint<SignUpResponseDTO> {
         let boundary = "\(UUID().uuidString)"
         let contentType = "multipart/form-data; boundary=\(boundary)"
-        var body = Data()
-        
-        // nickname 추가
-        body.append("--\(boundary)\r\n".data(using: .utf8)!)
-        body.append("Content-Disposition: form-data; name=\"nickname\"\r\n\r\n".data(using: .utf8)!)
-        body.append(nickName.data(using: .utf8)!)
-        body.append("\r\n".data(using: .utf8)!)
-        
-        // 이미지 데이터 추가
-        body.append("--\(boundary)\r\n".data(using: .utf8)!)
-        body.append("Content-Disposition: form-data; name=\"image\"; filename=\"profileImage.jpeg\"\r\n".data(using: .utf8)!)
-        body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
-        body.append(profileImageData)
-        body.append("\r\n".data(using: .utf8)!)
-        body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+        let body = Data.makeMultiPartRequestBody(
+            userName: nickName,
+            jpegImageData: profileImageData,
+            boundary: boundary)
         
         return EndPoint(
             baseURL: BaseURL.flipmateDomain,

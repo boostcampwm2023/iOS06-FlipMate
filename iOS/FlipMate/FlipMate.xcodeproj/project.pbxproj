@@ -82,6 +82,7 @@
 		608646572B0DE31800B0C1BC /* CategoryResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646562B0DE31800B0C1BC /* CategoryResponseDTO.swift */; };
 		608646592B0DE61200B0C1BC /* CategoryEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646582B0DE61200B0C1BC /* CategoryEndpoints.swift */; };
 		6096F91E2B04F3CA00D0B972 /* FaceDown.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 6096F91D2B04F3CA00D0B972 /* FaceDown.ahap */; };
+		60A0B8E12B181C4900510299 /* Data++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A0B8E02B181C4900510299 /* Data++Extension.swift */; };
 		60DE493D2B05DEA400ACE6DD /* FlipMateLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE493C2B05DEA400ACE6DD /* FlipMateLogger.swift */; };
 		60DE49402B05E67200ACE6DD /* FlipMateConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE493F2B05E67200ACE6DD /* FlipMateConstant.swift */; };
 		60DFDDD92B14FD7800FEF98A /* StatusResponseWithErrorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DFDDD82B14FD7800FEF98A /* StatusResponseWithErrorDTO.swift */; };
@@ -220,6 +221,7 @@
 		608646562B0DE31800B0C1BC /* CategoryResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryResponseDTO.swift; sourceTree = "<group>"; };
 		608646582B0DE61200B0C1BC /* CategoryEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEndpoints.swift; sourceTree = "<group>"; };
 		6096F91D2B04F3CA00D0B972 /* FaceDown.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = FaceDown.ahap; sourceTree = "<group>"; };
+		60A0B8E02B181C4900510299 /* Data++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data++Extension.swift"; sourceTree = "<group>"; };
 		60DE493C2B05DEA400ACE6DD /* FlipMateLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipMateLogger.swift; sourceTree = "<group>"; };
 		60DE493F2B05E67200ACE6DD /* FlipMateConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipMateConstant.swift; sourceTree = "<group>"; };
 		60DFDDD82B14FD7800FEF98A /* StatusResponseWithErrorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusResponseWithErrorDTO.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 				2C4D55AA2B033029006D7C26 /* UIView++Extension.swift */,
 				ED82F0062B126C95005BB32D /* UITextField++Extension.swift */,
 				ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */,
+				60A0B8E02B181C4900510299 /* Data++Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1184,6 +1187,7 @@
 				600195A02B0DFA3900F02BA4 /* StatusResponseDTO.swift in Sources */,
 				60F6FD732B0B5E130057CE0B /* SignUpViewController.swift in Sources */,
 				2CE84EEF2B0B742A00E2FB71 /* CategorySettingViewController.swift in Sources */,
+				60A0B8E12B181C4900510299 /* Data++Extension.swift in Sources */,
 				ED3595B02B0C82C800558FAA /* TimerStartRequestDTO.swift in Sources */,
 				2C5CDA482B0252B2007AFC57 /* LoginViewController.swift in Sources */,
 				601EB73D2B14D67600C5B216 /* SignUpUseCase.swift in Sources */,
