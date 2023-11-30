@@ -31,20 +31,18 @@ typealias FriendAddViewModelProtocol = FriendAddViewModelInput & FriendAddViewMo
 
 final class FriendAddViewModel: FriendAddViewModelProtocol {
     // MARK: - Subject
-    private lazy var myNicknameSubject = CurrentValueSubject<String, Never>(myNickname)
+    private lazy var myNicknameSubject = CurrentValueSubject<String, Never>(UserInfoStorage.nickname)
     private var searchResultSubject = PassthroughSubject<FreindSeacrhItem, Never>()
     private var searchErrorSubject = PassthroughSubject<Void, Never>()
     private var nicknameCountSubject = PassthroughSubject<Int, Never>()
     
     // MARK: - Properties
     private var cancellables = Set<AnyCancellable>()
-    private let myNickname: String
     private var friendNickname: String = ""
     private let friendUseCase: FriendUseCase
     private let actions: FriendAddViewModelActions?
     
-    init(myNickname: String, friendUseCase: FriendUseCase, actions: FriendAddViewModelActions? = nil) {
-        self.myNickname = myNickname
+    init(friendUseCase: FriendUseCase, actions: FriendAddViewModelActions? = nil) {
         self.friendUseCase = friendUseCase
         self.actions = actions
     }

@@ -13,12 +13,14 @@ struct SocialViewModelActions {
 }
 
 protocol SocialViewModelInput {
+    func viewDidLoad()
     func viewWillAppear()
     func freindAddButtonDidTapped()
 }
 
 protocol SocialViewModelOutput {
     var freindsPublisher: AnyPublisher<[Friend], Never> { get }
+    var nicknamePublisher: AnyPublisher<String, Never> { get }
 }
 
 typealias SocialViewModelProtocol = SocialViewModelInput & SocialViewModelOutput
@@ -26,6 +28,7 @@ typealias SocialViewModelProtocol = SocialViewModelInput & SocialViewModelOutput
 final class SocialViewModel: SocialViewModelProtocol {
     // MARK: - Subject
     private var freindsSubject = PassthroughSubject<[Friend], Never>()
+    private var nicknameSubject = CurrentValueSubject<String, Never>(UserInfoStorage.nickname)
     
     // MARK: - Properties
     private var cancellables = Set<AnyCancellable>()
@@ -43,9 +46,22 @@ final class SocialViewModel: SocialViewModelProtocol {
         return freindsSubject.eraseToAnyPublisher()
     }
     
+    var nicknamePublisher: AnyPublisher<String, Never> {
+        return nicknameSubject.eraseToAnyPublisher()
+    }
+    
     // MARK: - Input
     func freindAddButtonDidTapped() {
         actions?.showFriendAddViewController()
+    }
+    
+    func viewDidLoad() {
+        UserInfoStorage.$nickname
+            .sink { [weak self] nickName in
+                guard let self = self else { return }
+                self.nicknameSubject.send(nickName)
+            }
+            .store(in: &cancellables)
     }
     
     func viewWillAppear() {
@@ -63,6 +79,5 @@ final class SocialViewModel: SocialViewModelProtocol {
                 self.freindsSubject.send(freinds)
             }
             .store(in: &cancellables)
-
     }
 }

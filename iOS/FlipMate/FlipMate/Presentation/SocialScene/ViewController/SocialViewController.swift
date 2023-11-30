@@ -157,6 +157,8 @@ final class SocialViewController: BaseViewController {
     }
     
     override func bind() {
+        viewModel.viewDidLoad()
+        
         viewModel.freindsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] friends in
@@ -170,6 +172,14 @@ final class SocialViewController: BaseViewController {
                     isOnline: true)}
                 )
                 self.diffableDataSource.apply(snapshot, animatingDifferences: true)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.nicknamePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] nickname in
+                guard let self = self else { return }
+                self.userNameLabel.text = nickname
             }
             .store(in: &cancellables)
     }
