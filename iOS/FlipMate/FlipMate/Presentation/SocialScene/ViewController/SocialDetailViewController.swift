@@ -14,9 +14,8 @@ final class SocialDetailViewController: BaseViewController {
         static let nicknameLabel = "닉네임"
         static let dailyStudyLog = "오늘 학습 시간"
         static let weeklyStudyLog = "주간 학습 시간"
-        static let monthlyStudyLog = "월간 학습 시간"
+        static let primaryCategory = "최근 집중 분야"
         static let unfollow = "팔로우 취소"
-        static let profileImage = "person.crop.circle.fill"
         static let borderWidth: CGFloat = 1
         static let cornerRadius: CGFloat = 8
         static let spacing1: CGFloat = 1
@@ -55,11 +54,10 @@ final class SocialDetailViewController: BaseViewController {
     // MARK: - UI Components
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
-        
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = FlipMateColor.gray2.color
+        imageView.layer.cornerRadius = LayoutConstant.profileImageWidth / 2
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(systemName: ComponentConstant.profileImage)
-        imageView.tintColor = FlipMateColor.darkBlue.color
         
         return imageView
     }()
@@ -67,7 +65,7 @@ final class SocialDetailViewController: BaseViewController {
     private lazy var nickNameLabel: UILabel = {
         let label = UILabel()
         
-        label.text = ComponentConstant.nicknameLabel
+        label.text = friendInfo.friend.nickName
         label.font = FlipMateFont.mediumBold.font
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -122,14 +120,14 @@ final class SocialDetailViewController: BaseViewController {
         return label
     }()
     
-    private lazy var monthlyStudyLogLabel: UILabel = {
+    private lazy var primaryCategoryDescriptionLabel: UILabel = {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = FlipMateFont.mediumRegular.font
         label.textColor = .label
         label.textAlignment = .center
-        label.text = ComponentConstant.monthlyStudyLog
+        label.text = ComponentConstant.primaryCategory
         
         return label
     }()
@@ -153,7 +151,11 @@ final class SocialDetailViewController: BaseViewController {
         label.font = FlipMateFont.mediumBold.font
         label.textColor = FlipMateColor.gray2.color
         label.textAlignment = .right
-        label.text = "9H 12m"
+        if friendInfo.totalTime >= 3600 {
+            label.text = "\(friendInfo.totalTime / 3600)H \(friendInfo.totalTime % 3600 / 60)m"
+        } else {
+            label.text = "\(friendInfo.totalTime / 60)m"
+        }
         
         return label
     }()
@@ -165,19 +167,32 @@ final class SocialDetailViewController: BaseViewController {
         label.font = FlipMateFont.mediumRegular.font
         label.textColor = FlipMateColor.gray2.color
         label.textAlignment = .right
-        label.text = "45H 36m"
+        let seconds = viewModel.socialChart.myData.reduce(0, { $0 + $1 })
+        if seconds > 3600 {
+            label.text = "\(seconds / 3600)H \(seconds % 3600 / 60)m"
+        } else {
+            label.text = "\(seconds / 3600)m"
+        }
         
         return label
     }()
     
-    private lazy var monthlyStudyTimeLabel: UILabel = {
+    private lazy var primaryCategoryLabel: UILabel = {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = FlipMateFont.mediumRegular.font
-        label.textColor = FlipMateColor.gray2.color
+        label.font = FlipMateFont.mediumBold.font
         label.textAlignment = .right
-        label.text = "175H"
+        if let primary = viewModel.socialChart.primaryCategory {
+            label.backgroundColor = FlipMateColor.darkBlue.color
+            label.textColor = .white
+            label.layer.masksToBounds = true
+            label.layer.cornerRadius = ComponentConstant.cornerRadius
+            label.text = viewModel.socialChart.primaryCategory
+        } else {
+            label.textColor = FlipMateColor.gray2.color
+            label.text = "없음"
+        }
         
         return label
     }()
@@ -189,7 +204,7 @@ final class SocialDetailViewController: BaseViewController {
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
-        stackView.spacing = ComponentConstant.spacing2
+        stackView.spacing = ComponentConstant.spacing1
         
         return stackView
     }()
@@ -201,12 +216,13 @@ final class SocialDetailViewController: BaseViewController {
     }()
     
     // MARK: - Properties
-    private var viewModel: SocialDetailViewModelProtocol
+    private var viewModel: SocialDetailViewModel
+    private let friendInfo: FriendInfo
     
-    init(viewModel: SocialDetailViewModelProtocol) {
+    init(viewModel: SocialDetailViewModel, friendInfo: FriendInfo) {
         self.viewModel = viewModel
+        self.friendInfo = friendInfo
         super.init(nibName: nil, bundle: nil)
-
     }
     
     required init?(coder: NSCoder) {
@@ -258,7 +274,7 @@ final class SocialDetailViewController: BaseViewController {
             studyTimeStackView.topAnchor.constraint(equalTo: studyLogStackView.topAnchor),
             studyTimeStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, 
                                                          constant: LayoutConstant.studyTimeTrailing),
-            studyTimeStackView.heightAnchor.constraint(equalToConstant: LayoutConstant.studyTimeHeight)
+            studyTimeStackView.heightAnchor.constraint(equalTo: studyLogStackView.heightAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -268,23 +284,27 @@ final class SocialDetailViewController: BaseViewController {
             chartView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: LayoutConstant.chartBottom)
         ])
     }
+    
+    override func bind() {
+        viewModel.viewDidLoad()
+    }
 }
 
 private extension SocialDetailViewController {
     func setStudyLogStackView() {
-        [dailyStudyLogLabel, weeklyStudyLogLabel, monthlyStudyLogLabel].forEach {
+        [dailyStudyLogLabel, weeklyStudyLogLabel, primaryCategoryDescriptionLabel].forEach {
             studyLogStackView.addArrangedSubview($0)
         }
     }
     
     func setStudyTimeStackView() {
-        [dailyStudyTimeLabel, weeklyStudyTimeLabel, monthlyStudyTimeLabel].forEach {
+        [dailyStudyTimeLabel, weeklyStudyTimeLabel, primaryCategoryLabel].forEach {
             studyTimeStackView.addArrangedSubview($0)
         }
     }
     
     func setChart() {
-        let socialChartView = SocialChartView(viewModel: SocialChartView.ViewModel())
+        let socialChartView = SocialChartView(viewModel: viewModel)
         let hostingController = UIHostingController(rootView: socialChartView)
         addChild(hostingController)
         guard let newChartView = hostingController.view else { return }
@@ -301,8 +321,9 @@ private extension SocialDetailViewController {
     }
 }
 
-//    @available(iOS 17.0, *)
-//    #Preview {
-//        SocialDetailViewController(viewModel: SocialDetailViewModel(friendInfo: FriendInfo(friend: Friend(nickName: "hi", profileImageURL: "else"), id: 14, totalTime: 124), friendUseCase: DefaultFriendUseCase(repository: DefaultFriendRepository(provider: Provider(urlSession: URLSession.shared)))))
-//    }
+    @available(iOS 17.0, *)
+    #Preview {
+//
+        SocialDetailViewController(viewModel: SocialDetailViewModel(friendInfo: .init(friend: .init(nickName: "llsls", profileImageURL: "https:/oygb596c1711.edge.naverncp.com/IMG_a5a1e3b7-14d1-4909-ac01-d612162a9184"), id: 342, totalTime: 2353), friendUseCase: DefaultFriendUseCase(repository: DefaultFriendRepository(provider: Provider(urlSession: URLSession.shared)))), friendInfo: .init(friend: .init(nickName: "llsls", profileImageURL: "https:/oygb596c1711.edge.naverncp.com/IMG_a5a1e3b7-14d1-4909-ac01-d612162a9184"), id: 342, totalTime: 2353))
+    }
     
