@@ -172,14 +172,7 @@ final class SignUpViewController: BaseViewController {
     override func bind() {
         viewModel.isValidNickNamePublisher
             .receive(on: DispatchQueue.main)
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    FMLogger.general.error("닉네임 유효성 검사 중 에러 : \(error)")
-                }
-            } receiveValue: { [weak self] state in
+            .sink { [weak self] state in
                 FMLogger.general.log("닉네임 유효성 상태 : \(state.message)")
                 switch state {
                 case .valid:
@@ -204,16 +197,16 @@ final class SignUpViewController: BaseViewController {
         
         viewModel.isSignUpCompletedPublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] completion in
-                switch completion {
-                case .finished:
-                    self?.signUpButton.isEnabled = true
-                case .failure(let error):
-                    FMLogger.general.error("회원가입 도중 에러 : \(error)")
-                    self?.signUpButton.isEnabled = true
-                }
-            } receiveValue: { [weak self] _ in
+            .sink { [weak self] _ in
                 self?.signUpButton.isEnabled = true
+            }
+            .store(in: &cancellables)
+        
+        viewModel.errorPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] error in
+                FMLogger.general.error("SignUpViewModel에서 에러")
+                self?.signUpButton.isEnabled = false
             }
             .store(in: &cancellables)
     }

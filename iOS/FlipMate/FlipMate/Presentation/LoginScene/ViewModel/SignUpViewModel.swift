@@ -15,9 +15,10 @@ protocol SignUpViewModelInput {
 }
 
 protocol SignUpViewModelOutput {
-    var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Error> { get }
-    var isSafeProfileImagePublisher: AnyPublisher<Bool, Error> { get }
-    var isSignUpCompletedPublisher: AnyPublisher<Void, Error> { get }
+    var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Never> { get }
+    var isSafeProfileImagePublisher: AnyPublisher<Bool, Never> { get }
+    var isSignUpCompletedPublisher: AnyPublisher<Void, Never> { get }
+    var errorPublisher: AnyPublisher<Error, Never> { get }
 }
 
 typealias SignUpViewModelProtocol = SignUpViewModelInput & SignUpViewModelOutput
@@ -27,9 +28,10 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     private let useCase: SignUpUseCase
     
     // MARK: - Subjects
-    var isValidNickNameSubject = PassthroughSubject<NickNameValidationState, Error>()
-    var isSafeProfileImageSubject = PassthroughSubject<Bool, Error>()
-    var isSignUpCompletedSubject = PassthroughSubject<Void, Error>()
+    var isValidNickNameSubject = PassthroughSubject<NickNameValidationState, Never>()
+    var isSafeProfileImageSubject = PassthroughSubject<Bool, Never>()
+    var isSignUpCompletedSubject = PassthroughSubject<Void, Never>()
+    var errorSubject = PassthroughSubject<Error, Never>()
     
     init(usecase: SignUpUseCase) {
         self.useCase = usecase
@@ -42,7 +44,7 @@ final class SignUpViewModel: SignUpViewModelProtocol {
                 let nickNameValidationStatus = try await useCase.isNickNameValid(newNickName)
                 isValidNickNameSubject.send(nickNameValidationStatus)
             } catch let error {
-                isValidNickNameSubject.send(completion: .failure(error))
+                errorSubject.send(error)
             }
         }
     }
@@ -53,7 +55,7 @@ final class SignUpViewModel: SignUpViewModelProtocol {
                 let isSafe = try await useCase.isSafeProfileImage(newImageData)
                 isSafeProfileImageSubject.send(isSafe)
             } catch let error {
-                isSafeProfileImageSubject.send(completion: .failure(error))
+                errorSubject.send(error)
             }
         }
     }
@@ -64,24 +66,29 @@ final class SignUpViewModel: SignUpViewModelProtocol {
                 try await useCase.signUpUser(nickName: userName, profileImageData: profileImageData)
                 isSignUpCompletedSubject.send()
             } catch let error {
-                isSignUpCompletedSubject.send(completion: .failure(error))
+                errorSubject.send(error)
             }
         }
     }
     
     // MARK: - Output
-    var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Error> {
+    var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Never> {
         return isValidNickNameSubject
             .eraseToAnyPublisher()
     }
     
-    var isSafeProfileImagePublisher: AnyPublisher<Bool, Error> {
+    var isSafeProfileImagePublisher: AnyPublisher<Bool, Never> {
         return isSafeProfileImageSubject
             .eraseToAnyPublisher()
     }
     
-    var isSignUpCompletedPublisher: AnyPublisher<Void, Error> {
+    var isSignUpCompletedPublisher: AnyPublisher<Void, Never> {
         return isSignUpCompletedSubject
+            .eraseToAnyPublisher()
+    }
+    
+    var errorPublisher: AnyPublisher<Error, Never> {
+        return errorSubject
             .eraseToAnyPublisher()
     }
 }
