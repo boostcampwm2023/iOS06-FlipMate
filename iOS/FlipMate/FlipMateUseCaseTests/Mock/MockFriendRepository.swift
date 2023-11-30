@@ -19,11 +19,11 @@ final class MockFriendRepository: FriendRepository {
         self.responseType = reponseType
     }
     
-    func follow(at nickname: String) -> AnyPublisher<StatusResponseDTO, NetworkError> {
+    func follow(at nickname: String) -> AnyPublisher<String, NetworkError> {
         
         if responseType == .success {
             let response = StatusResponseDTO(statusCode: 200, message: "성공")
-            return Just(response).eraseToAnyPublisher()
+            return Just(response.message).eraseToAnyPublisher()
                 .setFailureType(to: NetworkError.self)
                 .eraseToAnyPublisher()
         } else {
@@ -31,10 +31,10 @@ final class MockFriendRepository: FriendRepository {
         }
     }
     
-    func search(at nickname: String) -> AnyPublisher<UserProfileResposeDTO, NetworkError> {
+    func search(at nickname: String) -> AnyPublisher<String, NetworkError> {
         if responseType == .success {
             let response = UserProfileResposeDTO(profileImageURL: "https://flipmate.site:3000")
-            return Just(response).eraseToAnyPublisher()
+            return Just(response.profileImageURL).eraseToAnyPublisher()
                 .setFailureType(to: NetworkError.self)
                 .eraseToAnyPublisher()
         } else {

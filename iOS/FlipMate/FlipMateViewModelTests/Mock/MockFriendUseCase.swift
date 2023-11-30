@@ -43,16 +43,3 @@ final class MockFriendUseCase: FriendUseCase {
     }
 }
 
-final class FailMockFriendUseCase: FriendUseCase {
-    var followSubject = PassthroughSubject<String, NetworkError>()
-    
-    func follow(at nickname: String) -> AnyPublisher<String, NetworkError> {
-        followSubject.send("success")
-        return followSubject.eraseToAnyPublisher()
-    }
-    
-    func search(at nickname: String) -> AnyPublisher<String, NetworkError> {
-        return Fail(error: NetworkError.statusCodeError).eraseToAnyPublisher()
-    }
-}
-

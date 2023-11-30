@@ -27,7 +27,7 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
         static let top: CGFloat = 15
     }
     
-    private enum FlowButtonConstant {
+    private enum FollowButtonConstant {
         static let title = "친구추가"
         static let top: CGFloat = 15
         static let width: CGFloat = 90
@@ -54,12 +54,12 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
         return label
     }()
     
-    private lazy var flowButton: UIButton = {
+    private lazy var followButton: UIButton = {
         let button = UIButton()
-        button.setTitle(FlowButtonConstant.title, for: .normal)
+        button.setTitle(FollowButtonConstant.title, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = FlipMateColor.darkBlue.color
-        button.layer.cornerRadius = FlowButtonConstant.cornerRadius
+        button.layer.cornerRadius = FollowButtonConstant.cornerRadius
         button.addTarget(self, action: #selector(followButtonDidTapped), for: .touchUpInside)
         return button
     }()
@@ -94,7 +94,7 @@ private extension FriendSearchResultView {
         backgroundColor = FlipMateColor.gray3.color
         layer.cornerRadius = Constant.cornerRadius
 
-        [profileImageView, nickNameLabel, flowButton].forEach {
+        [profileImageView, nickNameLabel, followButton].forEach {
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -108,9 +108,9 @@ private extension FriendSearchResultView {
             nickNameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: NickNameLabelConstant.top),
             nickNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            flowButton.topAnchor.constraint(equalTo: nickNameLabel.bottomAnchor, constant: FlowButtonConstant.top),
-            flowButton.widthAnchor.constraint(equalToConstant: FlowButtonConstant.width),
-            flowButton.centerXAnchor.constraint(equalTo: centerXAnchor)
+            followButton.topAnchor.constraint(equalTo: nickNameLabel.bottomAnchor, constant: FollowButtonConstant.top),
+            followButton.widthAnchor.constraint(equalToConstant: FollowButtonConstant.width),
+            followButton.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
 }
