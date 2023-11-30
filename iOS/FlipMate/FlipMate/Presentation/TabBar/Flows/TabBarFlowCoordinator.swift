@@ -27,15 +27,15 @@ final class TabBarFlowCoordinator: Coordinator {
     }
     
     func start() {
-        let tabBarController = self.dependencies.makeTabBarController()
+        let tabBarController = dependencies.makeTabBarController()
         tabBarController.setViewControllers(
-            [self.makeSocialViewController(), self.makeTimerViewContorller(), self.makeChartViewController()],
+            [makeSocialViewController(), makeTimerViewContorller(), makeChartViewController()],
             animated: false
         )
-        self.navigationController.isNavigationBarHidden = true
-        self.navigationController.viewControllers = [tabBarController]
+        navigationController.isNavigationBarHidden = true
+        navigationController.viewControllers = [tabBarController]
         tabBarController.selectedIndex = 1
-        self.tabBarViewController = tabBarController
+        tabBarViewController = tabBarController
     }
     
     private func makeTimerViewContorller() -> UINavigationController {
