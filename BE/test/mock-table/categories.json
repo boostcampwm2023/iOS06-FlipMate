@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "백준",
+    "color_code": "FFFFFF",
+    "user_id": 1
+  },
+  {
+    "id": 2,
+    "name": "과학",
+    "color_code": "BBBBBB",
+    "user_id": 1
+  }
+]

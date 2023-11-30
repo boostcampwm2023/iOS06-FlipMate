@@ -1,7 +1,7 @@
-import * as path from 'path';
+import  path from 'path';
 import { BadRequestException } from '@nestjs/common';
 import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer-options.interface';
-import * as multer from 'multer';
+import  multer from 'multer';
 
 export const multerConfig = (): MulterOptions => {
   const storage = multer.memoryStorage();

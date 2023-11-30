@@ -1,4 +1,4 @@
-import * as winston from 'winston';
+import  winston from 'winston';
 
 const customFormat = winston.format.printf(
   ({ level, message, timestamp, context }) => {
