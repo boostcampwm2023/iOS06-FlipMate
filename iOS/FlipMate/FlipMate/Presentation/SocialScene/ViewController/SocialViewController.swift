@@ -24,7 +24,7 @@ final class SocialViewController: BaseViewController {
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(resource: .group135)
+        imageView.image = UIImage(resource: .defaultProfile)
         imageView.clipsToBounds = true
         imageView.bounds = CGRect(x: 0, y: 0, width: 90, height: 90)
         imageView.layer.cornerRadius = imageView.bounds.height / 2
