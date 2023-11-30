@@ -26,7 +26,7 @@ final class FriendsCollectionViewCell: UICollectionViewCell {
     private lazy var userNameLabel: UILabel = {
         let label = UILabel()
         label.font = FlipMateFont.mediumBold.font
-        label.text = "닉네임"
+        label.text = Constant.defaultNickName
         label.textColor = .label
         label.textAlignment = .center
         return label
@@ -35,7 +35,7 @@ final class FriendsCollectionViewCell: UICollectionViewCell {
     private lazy var learningTimeLabel: UILabel = {
         let label = UILabel()
         label.font = FlipMateFont.mediumBold.font
-        label.text = "00:00:00"
+        label.text = Constant.defaultTime
         label.textColor = .label
         label.textAlignment = .center
         return label
@@ -101,6 +101,13 @@ final class FriendsCollectionViewCell: UICollectionViewCell {
             self.learningTimeLabel.text = friend.time
             self.profileImageView.layer.borderColor = friend.isOnline ? UIColor.green.cgColor : UIColor.red.cgColor
         }
+    }
+}
+
+private extension FriendsCollectionViewCell {
+    enum Constant {
+        static let defaultNickName = "닉네임"
+        static let defaultTime = "00:00:00""
     }
 }
 
