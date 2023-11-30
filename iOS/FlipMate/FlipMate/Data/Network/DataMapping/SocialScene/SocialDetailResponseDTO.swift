@@ -10,7 +10,7 @@ import Foundation
 struct SocialDetailResponseDTO: Decodable {
     let myData: [Int]
     let followingData: [Int]
-    let primaryCategory: String
+    let primaryCategory: String?
     
     private enum CodingKeys: String, CodingKey {
         case myData = "my_daily_data"
