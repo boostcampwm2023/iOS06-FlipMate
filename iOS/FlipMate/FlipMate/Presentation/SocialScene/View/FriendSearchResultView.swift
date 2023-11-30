@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
     // MARK: - Costants
@@ -26,12 +27,16 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
         static let top: CGFloat = 15
     }
     
-    private enum FlowButtonConstant {
+    private enum FollowButtonConstant {
         static let title = "친구추가"
         static let top: CGFloat = 15
         static let width: CGFloat = 90
         static let cornerRadius: CGFloat = 10
     }
+    
+    // MARK: - Properties
+    private var tapSubject = PassthroughSubject<Void, Never>()
+
     
     // MARK: - UI Components
     private lazy var profileImageView: UIImageView = {
@@ -49,12 +54,13 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
         return label
     }()
     
-    private lazy var flowButton: UIButton = {
+    private lazy var followButton: UIButton = {
         let button = UIButton()
-        button.setTitle(FlowButtonConstant.title, for: .normal)
+        button.setTitle(FollowButtonConstant.title, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = FlipMateColor.darkBlue.color
-        button.layer.cornerRadius = FlowButtonConstant.cornerRadius
+        button.layer.cornerRadius = FollowButtonConstant.cornerRadius
+        button.addTarget(self, action: #selector(followButtonDidTapped), for: .touchUpInside)
         return button
     }()
     
@@ -71,6 +77,14 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
     func height() -> CGFloat {
         return Constant.height
     }
+    
+    func updateUI(friend: Friend) {
+        self.nickNameLabel.text = friend.nickName
+    }
+    
+    func tapPublisher() -> AnyPublisher<Void, Never> {
+        return tapSubject.eraseToAnyPublisher()
+    }
 }
 
 // MARK: - Private Methods
@@ -80,7 +94,7 @@ private extension FriendSearchResultView {
         backgroundColor = FlipMateColor.gray3.color
         layer.cornerRadius = Constant.cornerRadius
 
-        [profileImageView, nickNameLabel, flowButton].forEach {
+        [profileImageView, nickNameLabel, followButton].forEach {
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -94,15 +108,16 @@ private extension FriendSearchResultView {
             nickNameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: NickNameLabelConstant.top),
             nickNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            flowButton.topAnchor.constraint(equalTo: nickNameLabel.bottomAnchor, constant: FlowButtonConstant.top),
-            flowButton.widthAnchor.constraint(equalToConstant: FlowButtonConstant.width),
-            flowButton.centerXAnchor.constraint(equalTo: centerXAnchor)
+            followButton.topAnchor.constraint(equalTo: nickNameLabel.bottomAnchor, constant: FollowButtonConstant.top),
+            followButton.widthAnchor.constraint(equalToConstant: FollowButtonConstant.width),
+            followButton.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
 }
 
-
-@available(iOS 17.0, *)
-#Preview {
-    FriendAddViewController()
+// MARK: - Objc func
+private extension FriendSearchResultView {
+    @objc func followButtonDidTapped() {
+        tapSubject.send()
+    }
 }

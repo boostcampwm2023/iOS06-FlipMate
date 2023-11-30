@@ -9,6 +9,11 @@ import { Repository } from 'typeorm';
 import { MatesDto } from './dto/response/mates.dto';
 import { UsersModel } from 'src/users/entity/users.entity';
 import { RedisService } from 'src/common/redis.service';
+import { getImageUrl } from 'src/common/utils';
+import { ConfigService } from '@nestjs/config';
+import { ENV } from 'src/common/const/env-keys.const';
+import { StudyLogsService } from 'src/study-logs/study-logs.service';
+import * as moment from 'moment';
 
 @Injectable()
 export class MatesService {
@@ -18,15 +23,62 @@ export class MatesService {
     @InjectRepository(UsersModel)
     private userRepository: Repository<UsersModel>,
     private redisService: RedisService,
+    private configService: ConfigService,
+    private studyLogsService: StudyLogsService,
   ) {}
 
-  async getMates(user_id: number): Promise<object> {
-    const result = await this.matesRepository.find({
-      where: { follower_id: { id: user_id } },
-    });
+  async getMateAndMyStats(
+    user_id: number,
+    following_id: number,
+    date: string,
+  ): Promise<object> {
+    const start_date = moment(date).subtract(6, 'days').format('YYYY-MM-DD');
+    const my_daily_data = await this.studyLogsService.calculateTotalTimes(
+      user_id,
+      start_date,
+      date,
+    );
+    const following_daily_data =
+      await this.studyLogsService.calculateTotalTimes(
+        following_id,
+        start_date,
+        date,
+      );
+    // 랭킹1위 카테고리 조회 로직 - ToDo
     return {
-      following_ids: result.map((mate) => mate.following_id.id),
+      my_daily_data,
+      following_daily_data,
+      following_primary_category: null,
     };
+  }
+
+  async getMates(user_id: number, date: string): Promise<object[]> {
+    const studyTimeByFollowing = await this.userRepository.query(
+      `
+        SELECT u.id, u.nickname, u.image_url, COALESCE(SUM(s.learning_time), 0) AS total_time
+        FROM users_model u
+        LEFT JOIN mates m ON m.following_id = u.id
+        LEFT JOIN study_logs s ON s.user_id = u.id AND s.date = ?
+        WHERE m.follower_id = ? 
+        GROUP BY u.id
+        ORDER BY total_time DESC
+      `,
+      [date, user_id],
+    );
+    return Promise.all(
+      studyTimeByFollowing.map(async (record) => {
+        const started_at = await this.redisService.get(`${record.id}`);
+        return {
+          ...record,
+          image_url: getImageUrl(
+            this.configService.get(ENV.CDN_ENDPOINT),
+            record.image_url,
+          ),
+          total_time: parseInt(record.total_time),
+          started_at,
+        };
+      }),
+    );
   }
 
   async getMatesStatus(user_id: number): Promise<object[]> {

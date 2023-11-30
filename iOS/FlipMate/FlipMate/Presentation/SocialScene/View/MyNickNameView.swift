@@ -45,6 +45,10 @@ final class MyNickNameView: UIView, FreindAddResultViewProtocol {
     func height() -> CGFloat {
         return Constant.height
     }
+    
+    func updateUI(nickname: String) {
+        nickNameContentLabel.text = nickname
+    }
 }
 
 // MARK: - Private Method
