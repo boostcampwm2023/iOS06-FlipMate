@@ -23,7 +23,8 @@ final class DefaultSocialRepository: SocialRepository {
                     id: $0.id,
                     nickName: $0.nickname,
                     profileImageURL: $0.imageURL,
-                    totalTime: $0.totalTime)
+                    totalTime: $0.totalTime,
+                    isStuding: $0.startTime != nil ? true: false)
                 }
             }
             .eraseToAnyPublisher()

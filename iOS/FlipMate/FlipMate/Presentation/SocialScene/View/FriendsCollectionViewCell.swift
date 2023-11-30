@@ -91,7 +91,7 @@ final class FriendsCollectionViewCell: UICollectionViewCell {
         profileImageView.image = image
         userNameLabel.text = friend.name
         learningTimeLabel.text = friend.time?.secondsToStringTime()
-        profileImageView.layer.borderColor = friend.isOnline ? UIColor.green.cgColor : UIColor.red.cgColor
+        profileImageView.layer.borderColor = friend.isStuding ? UIColor.green.cgColor : UIColor.red.cgColor
         
     }
 }

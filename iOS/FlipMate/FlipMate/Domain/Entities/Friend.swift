@@ -12,4 +12,5 @@ struct Friend {
     let nickName: String
     let profileImageURL: String?
     let totalTime: Int?
+    let isStuding: Bool
 }

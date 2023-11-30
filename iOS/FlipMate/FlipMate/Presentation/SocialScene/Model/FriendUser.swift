@@ -15,5 +15,5 @@ struct FriendUser: Hashable {
     let profileImageURL: String?
     let name: String
     let time: Int?
-    var isOnline: Bool
+    var isStuding: Bool
 }
