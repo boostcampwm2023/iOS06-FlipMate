@@ -22,6 +22,7 @@ import { MatesDto } from './dto/response/mates.dto';
 import { StatusMessageDto } from './dto/response/status-message.dto';
 import { AccessTokenGuard } from 'src/auth/guard/bearer-token.guard';
 import { UsersModel } from 'src/users/entity/users.entity';
+import { ResponseDto } from 'src/common/response.dto';
 
 @Controller('mates')
 @ApiTags('소셜 페이지')
@@ -89,13 +90,14 @@ export class MatesController {
     },
   })
   @ApiOperation({ summary: '친구 구독하기 (완)' })
-  createMate(
+  async createMate(
     @User() user: UsersModel,
     @Body('following_nickname') following_nickname: string,
-  ): Promise<MatesDto> {
-    return this.matesService.addMate(user, following_nickname);
-  }
-
+  ): Promise<ResponseDto> {
+    await this.matesService.addMate(user, following_nickname);
+    return { statusCode: 201, message: '친구가 성공적으로 구독되었습니다.' };
+  } 
+  
   @Delete('')
   @UseGuards(AccessTokenGuard)
   @ApiBearerAuth()
