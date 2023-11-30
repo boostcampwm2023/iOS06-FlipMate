@@ -16,6 +16,8 @@ enum Paths {
     static let categories = "/categories"
     static let googleApp = "/auth/google/app"
     static let studylogs = "/study-logs"
+    static let authInfo = "/auth/info"
+    static let nickNameValidation = "/user/nickname-validation"
     static let friend = "/mates"
     static let user = "/user"
 }
