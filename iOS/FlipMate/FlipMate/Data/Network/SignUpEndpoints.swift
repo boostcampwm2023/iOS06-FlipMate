@@ -21,9 +21,6 @@ struct SignUpEndpoints {
         let contentType = "multipart/form-data; boundary=\(boundary)"
         var body = Data()
         
-        print(nickName)
-        print(profileImageData)
-        
         // nickname 추가
         body.append("--\(boundary)\r\n".data(using: .utf8)!)
         body.append("Content-Disposition: form-data; name=\"nickname\"\r\n\r\n".data(using: .utf8)!)

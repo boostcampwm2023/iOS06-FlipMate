@@ -40,7 +40,6 @@ final class SignUpViewModel: SignUpViewModelProtocol {
         Task {
             do {
                 let nickNameValidationStatus = try await useCase.isNickNameValid(newNickName)
-                print(nickNameValidationStatus)
                 isValidNickNameSubject.send(nickNameValidationStatus)
             } catch let error {
                 isValidNickNameSubject.send(completion: .failure(error))
