@@ -32,7 +32,9 @@ final class SocialFlowCoordinator: Coordinator {
     }
     
     private func showFreindAddViewController() {
-        let actions = FriendAddViewModelActions(didCancleFriendAdd: dismissFreindAddViewController)
+        let actions = FriendAddViewModelActions(
+            didCancleFriendAdd: dismissFreindAddViewController,
+            didSuccessFriendAdd: dismissFreindAddViewController)
         let freindAddViewContorller = dependencies.makeFriendAddViewController(actions: actions)
         let firendNavigationController = UINavigationController(rootViewController: freindAddViewContorller)
         firendNavigationController.modalPresentationStyle = .fullScreen

@@ -10,6 +10,7 @@ import Combine
 
 struct FriendAddViewModelActions {
     var didCancleFriendAdd: () -> Void
+    var didSuccessFriendAdd: () -> Void
 }
 
 protocol FriendAddViewModelInput {
@@ -76,8 +77,9 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
                 case .failure(let error):
                     FMLogger.friend.error("친구 요청 에러 발생 \(error)")
                 }
-            } receiveValue: { _ in
-                // TODO: - Coordinator로 화면 전환
+            } receiveValue: { [weak self] _ in
+                guard let self = self else { return }
+                self.actions?.didSuccessFriendAdd()
             }
             .store(in: &cancellables)
     }
