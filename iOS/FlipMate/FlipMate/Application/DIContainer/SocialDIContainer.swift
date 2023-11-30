@@ -39,7 +39,6 @@ final class SocialDIContainer: SocialFlowCoordinatorDependencies {
     
     func makeFriendAddViewController(actions: FriendAddViewModelActions) -> UIViewController {
         return FriendAddViewController(viewModel: FriendAddViewModel(
-            myNickname: "test",
             friendUseCase: DefaultFriendUseCase(
                 repository: DefaultFriendRepository(
                     provider: dependencies.provider)),
