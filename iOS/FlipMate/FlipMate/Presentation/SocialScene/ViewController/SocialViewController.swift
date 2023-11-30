@@ -177,7 +177,7 @@ final class SocialViewController: BaseViewController {
 private extension SocialViewController {
     @objc
     func myPageButtonTapped() {
-        
+        self.navigationController?.pushViewController(MyPageViewController(), animated: true)
     }
     
     @objc
