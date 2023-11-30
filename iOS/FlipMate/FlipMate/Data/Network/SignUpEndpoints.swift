@@ -9,7 +9,7 @@ import Foundation
 
 struct SignUpEndpoints {
     static func nickNameValidation(_ nickName: String) -> EndPoint<NickNameValidationResponseDTO> {
-        let path = Paths.nickNameValidation + "?nickName=\(nickName)"
+        let path = Paths.nickNameValidation + "?nickname=\(nickName)"
         return EndPoint(
             baseURL: BaseURL.flipmateDomain,
             path: path,
