@@ -32,8 +32,8 @@ final class TabBarFlowCoordinator: Coordinator {
             [makeSocialViewController(), makeTimerViewContorller(), makeChartViewController()],
             animated: false
         )
-        navigationController.view.window?.rootViewController = tabBarController
-        navigationController.viewControllers = []
+        navigationController.isNavigationBarHidden = true
+        navigationController.viewControllers = [tabBarController]
         tabBarController.selectedIndex = 1
         tabBarViewController = tabBarController
     }
