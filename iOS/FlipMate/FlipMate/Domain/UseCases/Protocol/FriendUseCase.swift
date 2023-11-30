@@ -10,5 +10,5 @@ import Combine
 
 protocol FriendUseCase {
     func follow(at nickname: String) -> AnyPublisher<String, NetworkError>
-    func search(at nickname: String) -> AnyPublisher<String, NetworkError>
+    func search(at nickname: String) -> AnyPublisher<String?, NetworkError>
 }

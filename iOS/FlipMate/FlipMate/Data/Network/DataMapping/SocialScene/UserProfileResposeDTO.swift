@@ -8,7 +8,7 @@
 import Foundation
 
 struct UserProfileResposeDTO: Decodable {
-    let profileImageURL: String
+    let profileImageURL: String?
     
     private enum CodingKeys: String, CodingKey {
         case profileImageURL = "image_url"

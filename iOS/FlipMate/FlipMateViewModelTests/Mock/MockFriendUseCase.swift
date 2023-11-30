@@ -15,7 +15,7 @@ enum ResponseType {
 
 final class MockFriendUseCase: FriendUseCase {
     private var followSubject = CurrentValueSubject<String, NetworkError>("success")
-    private var searchSubject = CurrentValueSubject<String, NetworkError>("https://flipmate.site:3000")
+    private var searchSubject = CurrentValueSubject<String?, NetworkError>("https://flipmate.site:3000")
     
     private var type: ResponseType
     
@@ -35,7 +35,7 @@ final class MockFriendUseCase: FriendUseCase {
         return followSubject.eraseToAnyPublisher()
     }
     
-    func search(at nickname: String) -> AnyPublisher<String, NetworkError> {
+    func search(at nickname: String) -> AnyPublisher<String?, NetworkError> {
         if type == .failure {
             return Fail(error: NetworkError.statusCodeError).eraseToAnyPublisher()
         }

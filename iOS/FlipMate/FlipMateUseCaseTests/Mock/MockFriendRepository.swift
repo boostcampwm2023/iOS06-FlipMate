@@ -31,7 +31,7 @@ final class MockFriendRepository: FriendRepository {
         }
     }
     
-    func search(at nickname: String) -> AnyPublisher<String, NetworkError> {
+    func search(at nickname: String) -> AnyPublisher<String?, NetworkError> {
         if responseType == .success {
             let response = UserProfileResposeDTO(profileImageURL: "https://flipmate.site:3000")
             return Just(response.profileImageURL).eraseToAnyPublisher()
