@@ -8,13 +8,14 @@
 import Foundation
 
 struct FriendEndpoints {
-    static func followFriend(with firendFollowRequestDTO: FriendFollowReqeustDTO) -> EndPoint<StatusResponseDTO> {
+    static func followFriend(with friendFollowRequestDTO: FriendFollowReqeustDTO) -> EndPoint<StatusResponseDTO> {
         let encoder = JSONEncoder()
-        let data = try? encoder.encode(firendFollowRequestDTO)
+        let data = try? encoder.encode(friendFollowRequestDTO)
         return EndPoint(
             baseURL: BaseURL.flipmateDomain,
             path: Paths.friend,
-            method: .post)
+            method: .post,
+            data: data)
     }
     
     static func searchFriend(at nickname: String) -> EndPoint<UserProfileResposeDTO> {
