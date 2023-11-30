@@ -8,10 +8,15 @@
 import Foundation
 import Combine
 
+struct FriendAddViewModelActions {
+    var didCancleFriendAdd: () -> Void
+}
+
 protocol FriendAddViewModelInput {
     func nicknameDidChange(at nickname: String)
     func didFollowFriend()
     func didSearchFriend()
+    func dismissButtonDidTapped()
 }
 
 protocol FriendAddViewModelOutput {
@@ -35,10 +40,12 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     private let myNickname: String
     private var friendNickname: String = ""
     private let friendUseCase: FriendUseCase
+    private let actions: FriendAddViewModelActions?
     
-    init(myNickname: String, friendUseCase: FriendUseCase) {
+    init(myNickname: String, friendUseCase: FriendUseCase, actions: FriendAddViewModelActions? = nil) {
         self.myNickname = myNickname
         self.friendUseCase = friendUseCase
+        self.actions = actions
     }
     
     // MARK: - output
@@ -97,5 +104,9 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     func nicknameDidChange(at nickname: String) {
         friendNickname = nickname
         nicknameCountSubject.send(nickname.count)
+    }
+    
+    func dismissButtonDidTapped() {
+        actions?.didCancleFriendAdd()
     }
 }

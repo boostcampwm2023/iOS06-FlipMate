@@ -10,8 +10,8 @@ import UIKit
 
 protocol SocialFlowCoordinatorDependencies {
     func makeSocialFlowCoordinator(navigationController: UINavigationController) -> SocialFlowCoordinator
-    func makeSocialViewController() -> UIViewController
-    func makeFriendAddViewControlleR() -> UIViewController
+    func makeSocialViewController(actions: SocialViewModelActions) -> UIViewController
+    func makeFriendAddViewController(actions: FriendAddViewModelActions) -> UIViewController
 }
 
 final class SocialFlowCoordinator: Coordinator {
@@ -25,12 +25,22 @@ final class SocialFlowCoordinator: Coordinator {
     }
     
     func start() {
-        let socialViewController = dependencies.makeSocialViewController()
+        let actions = SocialViewModelActions(
+            showFriendAddViewController: showFreindAddViewController)
+        let socialViewController = dependencies.makeSocialViewController(actions: actions)
         navigationController.viewControllers = [socialViewController]
     }
     
     private func showFreindAddViewController() {
-        let freindAddViewContorller = dependencies.makeFriendAddViewControlleR()
-        navigationController.pushViewController(freindAddViewContorller, animated: true)
+        let actions = FriendAddViewModelActions(didCancleFriendAdd: dismissFreindAddViewController)
+        let freindAddViewContorller = dependencies.makeFriendAddViewController(actions: actions)
+        let firendNavigationController = UINavigationController(rootViewController: freindAddViewContorller)
+        firendNavigationController.modalPresentationStyle = .fullScreen
+        navigationController.present(firendNavigationController, animated: true)
+    }
+    
+    private func dismissFreindAddViewController() {
+        navigationController.dismiss(animated: true)
     }
 }
+
