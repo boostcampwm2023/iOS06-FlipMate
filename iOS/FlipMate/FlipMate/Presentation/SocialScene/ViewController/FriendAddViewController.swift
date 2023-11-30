@@ -65,6 +65,14 @@ final class FriendAddViewController: BaseViewController {
         return view
     }()
     
+    private lazy var dismissButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("닫기", for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        button.addTarget(self, action: #selector(dismissButtonDidTapped), for: .touchUpInside)
+        return button
+    }()
+    
     private let containerView = UIView()
     private let myNickNameView = MyNickNameView()
     private let noResultView = NoResultView()
@@ -84,6 +92,7 @@ final class FriendAddViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateResultView(myNickNameView)
+        configureNavigationBar()
     }
     
     // MARK: - Configure UI
@@ -173,11 +182,21 @@ private extension FriendAddViewController {
         ])
     }
     
-    func setGesture() {
-        
+    func configureNavigationBar() {
+        navigationItem.title = "친구추가"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: dismissButton)
     }
 }
 
+// MARK: - Objc func
+private extension FriendAddViewController {
+    @objc func dismissButtonDidTapped() {
+        viewModel.dismissButtonDidTapped()
+    }
+}
+
+
+// MARK: - UITextFieldDelegate
 extension FriendAddViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let nickname = textField.text else { return }

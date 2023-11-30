@@ -71,6 +71,17 @@ final class SocialViewController: BaseViewController {
     // MARK: - Properties
     typealias DiffableDataSource = UICollectionViewDiffableDataSource<Section, FriendUser>
     private var diffableDataSource: DiffableDataSource!
+    private let viewModel: SocialViewModelProtocol
+    
+    // MARK: - init
+    init(viewModel: SocialViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("Don't use Storyboard")
+    }
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -90,6 +101,7 @@ final class SocialViewController: BaseViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(items)
         self.diffableDataSource.apply(snapshot, animatingDifferences: true)
+        configureNavigationBarItems()
     }
         
     // MARK: - Configure UI
@@ -170,7 +182,7 @@ private extension SocialViewController {
     
     @objc
     func addFriendButtonTapped() {
-        
+        viewModel.freindAddButtonDidTapped()
     }
 }
 
@@ -186,7 +198,7 @@ private extension SocialViewController {
     }
 }
 
-@available(iOS 17, *)
-#Preview {
-    SocialViewController()
-}
+//@available(iOS 17, *)
+//#Preview {
+//    SocialViewController()
+//}

@@ -33,6 +33,13 @@ final class TabBarDIContainer: TabBarFlowCoordinatorDependencies {
         return TimerSceneDIContainer(dependencies: dependencies)
     }
     
+    func makeSocialDIContainer() -> SocialDIContainer {
+        let dependencies = SocialDIContainer.Dependencies(
+            provider: dependencies.provider)
+        
+        return SocialDIContainer(dependencies: dependencies)
+    }
+    
     func makeTimerViewController() -> UIViewController {
         return UIViewController()
     }
