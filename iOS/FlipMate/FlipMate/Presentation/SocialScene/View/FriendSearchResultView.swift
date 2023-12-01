@@ -78,8 +78,9 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
         return Constant.height
     }
     
-    func updateUI(friend: Friend) {
-        self.nickNameLabel.text = friend.nickName
+    func updateUI(friendSearchItem: FreindSeacrhItem) {
+        nickNameLabel.text = friendSearchItem.nickname
+        profileImageView.image = UIImage(resource: .defaultProfile)
     }
     
     func tapPublisher() -> AnyPublisher<Void, Never> {

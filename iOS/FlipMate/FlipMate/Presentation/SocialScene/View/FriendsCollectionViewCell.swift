@@ -86,21 +86,13 @@ final class FriendsCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(friend: FriendUser) {
-        var image: UIImage!
+        // TODO: - 이미지 캐싱
+        let image = UIImage(resource: .defaultProfile)
+        profileImageView.image = image
+        userNameLabel.text = friend.name
+        learningTimeLabel.text = friend.time?.secondsToStringTime()
+        profileImageView.layer.borderColor = friend.isStuding ? UIColor.green.cgColor : UIColor.red.cgColor
         
-        if let url = URL(string: friend.profileImageURL), let data = try? Data(contentsOf: url) {
-            image = UIImage(data: data)
-        } else {
-            // url 오류 있으면 기본 이미지 보여주기
-            image = UIImage(resource: .defaultProfile)
-        }
-        
-        DispatchQueue.main.async {
-            self.profileImageView.image = image
-            self.userNameLabel.text = friend.name
-            self.learningTimeLabel.text = friend.time
-            self.profileImageView.layer.borderColor = friend.isOnline ? UIColor.green.cgColor : UIColor.red.cgColor
-        }
     }
 }
 

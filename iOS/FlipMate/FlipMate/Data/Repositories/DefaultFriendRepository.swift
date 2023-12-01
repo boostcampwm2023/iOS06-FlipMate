@@ -26,10 +26,10 @@ final class DefaultFriendRepository: FriendRepository {
             .eraseToAnyPublisher()
     }
     
-    func search(at nickname: String) -> AnyPublisher<String, NetworkError> {
+    func search(at nickname: String) -> AnyPublisher<String?, NetworkError> {
         let endPoint = FriendEndpoints.searchFriend(at: nickname)
         return provider.request(with: endPoint)
-            .map { response -> String in
+            .map { response -> String? in
                 return response.profileImageURL
             }
             .eraseToAnyPublisher()

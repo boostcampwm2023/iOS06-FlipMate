@@ -6,17 +6,7 @@
 //
 
 import UIKit
-
-enum Section: CaseIterable {
-    case main
-}
-
-struct FriendUser: Hashable {
-    let profileImageURL: String
-    let name: String
-    let time: String
-    var isOnline: Bool
-}
+import Combine
 
 final class SocialViewController: BaseViewController {
     
@@ -71,6 +61,7 @@ final class SocialViewController: BaseViewController {
     // MARK: - Properties
     typealias DiffableDataSource = UICollectionViewDiffableDataSource<Section, FriendUser>
     private var diffableDataSource: DiffableDataSource!
+    private var cancellables = Set<AnyCancellable>()
     private let viewModel: SocialViewModelProtocol
     
     // MARK: - init
@@ -86,26 +77,19 @@ final class SocialViewController: BaseViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = Constant.title
         configureDiffableDataSource()
-        // TODO: 테스트를 위한 임시 데이터 지우고 뷰모델과 연동하기
-        let items = [
-            FriendUser(profileImageURL: "", name: "hid", time: "17:00", isOnline: true),
-            FriendUser(profileImageURL: "", name: "hie", time: "17:00", isOnline: true),
-            FriendUser(profileImageURL: "", name: "hif", time: "17:00", isOnline: true),
-            FriendUser(profileImageURL: "", name: "hix", time: "17:00", isOnline: true),
-            FriendUser(profileImageURL: "", name: "hiz", time: "17:00", isOnline: true),
-            FriendUser(profileImageURL: "", name: "hiy", time: "17:00", isOnline: true)
-        ]
-        var snapshot = NSDiffableDataSourceSnapshot<Section, FriendUser>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(items)
-        self.diffableDataSource.apply(snapshot, animatingDifferences: true)
         configureNavigationBarItems()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.viewWillAppear()
     }
         
     // MARK: - Configure UI
     override func configureUI() {
+        title = Constant.title
+        
         let subviews = [
             profileImageView,
             userNameLabel,
@@ -170,6 +154,34 @@ final class SocialViewController: BaseViewController {
         addFriendButton.tintColor = .label
         navigationItem.leftBarButtonItem = myPageButton
         navigationItem.rightBarButtonItem = addFriendButton
+    }
+    
+    override func bind() {
+        viewModel.viewDidLoad()
+        
+        viewModel.freindsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] friends in
+                guard let self = self else { return }
+                var snapshot = NSDiffableDataSourceSnapshot<Section, FriendUser>()
+                snapshot.appendSections([.main])
+                snapshot.appendItems(friends.map { FriendUser(
+                    profileImageURL: $0.profileImageURL,
+                    name: $0.nickName,
+                    time: $0.totalTime,
+                    isStuding: $0.isStuding)}
+                )
+                self.diffableDataSource.apply(snapshot, animatingDifferences: true)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.nicknamePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] nickname in
+                guard let self = self else { return }
+                self.userNameLabel.text = nickname
+            }
+            .store(in: &cancellables)
     }
 }
 

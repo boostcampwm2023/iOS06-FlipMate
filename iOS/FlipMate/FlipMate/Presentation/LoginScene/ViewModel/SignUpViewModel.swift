@@ -71,6 +71,7 @@ final class SignUpViewModel: SignUpViewModelProtocol {
             do {
                 try await useCase.signUpUser(nickName: userName, profileImageData: profileImageData)
                 isSignUpCompletedSubject.send()
+                UserInfoStorage.nickname = userName
                 DispatchQueue.main.async {
                     self.actions?.didFinishSignUp()
                 }
