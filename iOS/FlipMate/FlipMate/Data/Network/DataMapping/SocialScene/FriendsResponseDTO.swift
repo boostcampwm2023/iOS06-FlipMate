@@ -12,7 +12,7 @@ struct FriendsResponseDTO: Decodable {
     var nickname: String
     var imageURL: String?
     var totalTime: Int
-    var startTime: Int?
+    var startTime: String?
     
     private enum CodingKeys: String, CodingKey {
         case id, nickname
