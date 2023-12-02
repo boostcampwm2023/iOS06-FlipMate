@@ -38,7 +38,10 @@ final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
     
     // MARK: - init
     
-    init(useCase: CategoryUseCase, categoryManager: CategoryManageable, actions: CategoryModifyViewModelActions? = nil, selectedCategory: Category? = nil) {
+    init(useCase: CategoryUseCase,
+         categoryManager: CategoryManageable,
+         actions: CategoryModifyViewModelActions? = nil,
+         selectedCategory: Category? = nil) {
         self.useCase = useCase
         self.categoryMananger = categoryManager
         self.actions = actions

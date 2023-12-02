@@ -35,7 +35,8 @@ struct Provider: Providable {
                             let errorResult = try JSONDecoder().decode(StatusResponseWithErrorDTO.self, from: data)
                             FMLogger.general.error("에러 코드 : \(errorResult.statusCode)\n내용 : \(errorResult.message)")
                         } catch {
-                            FMLogger.general.error("에러 코드 : \(response.statusCode)\n내용 : \(HTTPURLResponse.localizedString(forStatusCode: response.statusCode))")
+                            let responseDescription = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
+                            FMLogger.general.error("에러 코드 : \(response.statusCode)\n내용 : \(responseDescription))")
                         }
                         throw NetworkError.statusCodeError
                     }
@@ -62,7 +63,7 @@ struct Provider: Providable {
         }
     }
     
-    func request<E: RequestResponseable>(with endpoint: E) async throws -> E.Response where E : Requestable, E : Responsable {
+    func request<E: RequestResponseable>(with endpoint: E) async throws -> E.Response where E: Requestable, E: Responsable {
         let urlRequest = try endpoint.makeURLRequest()
         let (data, response) = try await urlSession.response(for: urlRequest)
         guard let response = response as? HTTPURLResponse else {
@@ -88,5 +89,3 @@ struct Provider: Providable {
         return responseData
     }
 }
-
-

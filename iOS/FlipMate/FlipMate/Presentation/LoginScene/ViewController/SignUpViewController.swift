@@ -205,7 +205,7 @@ final class SignUpViewController: BaseViewController {
         viewModel.errorPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
-                FMLogger.general.error("SignUpViewModel에서 에러")
+                FMLogger.general.error("SignUpViewModel에서 에러: \(error)")
                 self?.signUpButton.isEnabled = false
             }
             .store(in: &cancellables)

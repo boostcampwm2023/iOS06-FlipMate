@@ -14,4 +14,3 @@ struct FriendFollowReqeustDTO: Encodable {
         case nickname = "following_nickname"
     }
 }
-

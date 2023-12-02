@@ -10,7 +10,7 @@ import Combine
 import OSLog
 
 final class TimerViewController: BaseViewController {
-    typealias CateogoryDataSource = UICollectionViewDiffableDataSource<CategorySettingSection,CategorySettingItem>
+    typealias CateogoryDataSource = UICollectionViewDiffableDataSource<CategorySettingSection, CategorySettingItem>
     typealias Snapshot = NSDiffableDataSourceSnapshot<CategorySettingSection, CategorySettingItem>
     
     // MARK: - Properties
@@ -87,8 +87,11 @@ final class TimerViewController: BaseViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         deviceMotionManager.stopDeviceMotion()
-        NotificationCenter.default.removeObserver(self)
         UIDevice.current.isProximityMonitoringEnabled = false
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - setup UI
@@ -114,7 +117,7 @@ final class TimerViewController: BaseViewController {
             divider.topAnchor.constraint(equalTo: timerLabel.bottomAnchor, constant: 30),
             divider.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             divider.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            divider.heightAnchor.constraint(equalToConstant: 1),
+            divider.heightAnchor.constraint(equalToConstant: 1)
         ])
         
         NSLayoutConstraint.activate([
@@ -181,8 +184,8 @@ final class TimerViewController: BaseViewController {
             .store(in: &cancellables)
         
         // TODO: 특정 카테고리만 업데이트 구현
-//        timerViewModel.categoryChangePublisher
-            
+        //        timerViewModel.categoryChangePublisher
+        
     }
     
     func appendStudyEndLog(studyEndLog: StudyEndLog) {
@@ -213,7 +216,11 @@ private extension TimerViewController {
 // MARK: Detecting FaceDown Method
 private extension TimerViewController {
     func configureNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(proximityDidChange(_:)), name: UIDevice.proximityStateDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(proximityDidChange(_:)),
+            name: UIDevice.proximityStateDidChangeNotification,
+            object: nil)
         deviceMotionManager.startDeviceMotion()
     }
     
@@ -261,14 +268,18 @@ private extension TimerViewController {
 
 // MARK: CollectionView function
 extension TimerViewController: UICollectionViewDelegateFlowLayout {
-
+    
     /// cell size
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.size.width - 20, height: 58)
     }
     
     /// 위아래 간격
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
 }
@@ -286,7 +297,7 @@ extension TimerViewController: UICollectionViewDelegate {
         cell.updateShadow()
     }
 }
-        
+
 // MARK: - Constants
 private extension TimerViewController {
     enum Constant {
@@ -295,8 +306,3 @@ private extension TimerViewController {
         static let categoryManageButtonTitle = "관리"
     }
 }
-
-//@available(iOS 17.0, *)
-//#Preview {
-//    TimerViewController(timerViewModel: TimerViewModel(timerUseCase: DefaultTimerUseCase()), feedbackManager: FeedbackManager())
-//}

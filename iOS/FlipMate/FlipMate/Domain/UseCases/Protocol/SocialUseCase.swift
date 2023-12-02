@@ -11,4 +11,3 @@ import Combine
 protocol SocialUseCase {
     func getMyFriend(date: Date) -> AnyPublisher<[Friend], NetworkError>
 }
-

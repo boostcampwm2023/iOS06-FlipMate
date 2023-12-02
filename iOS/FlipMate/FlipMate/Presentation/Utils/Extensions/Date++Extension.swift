@@ -26,7 +26,7 @@ extension DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         
-        /// locale & timezone
+        // locale & timezone
         // formatter.locale = Locale(identifier: "LOCALE")
         // formatter.timeZone = TimeZone(secondsFromGMT: 0)
         

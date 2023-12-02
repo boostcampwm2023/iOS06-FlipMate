@@ -45,4 +45,3 @@ final class SocialFlowCoordinator: Coordinator {
         navigationController.dismiss(animated: true)
     }
 }
-

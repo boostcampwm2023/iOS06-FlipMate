@@ -126,7 +126,11 @@ final class TimerViewModel: TimerViewModelProtocol {
         guard let categoryId = studyEndLog.categoryId else { return }
         guard let targetCategory = categoryManager.findCategory(categoryId: categoryId) else { return }
         guard let studyTime = targetCategory.studyTime else { return }
-        let newCategory = Category(id: targetCategory.id, color: targetCategory.color, subject: targetCategory.subject, studyTime: studyTime + studyEndLog.learningTime)
+        let newCategory = Category(
+            id: targetCategory.id,
+            color: targetCategory.color,
+            subject: targetCategory.subject,
+            studyTime: studyTime + studyEndLog.learningTime)
         selectedCategory = nil
         categoryManager.change(category: newCategory)
     }

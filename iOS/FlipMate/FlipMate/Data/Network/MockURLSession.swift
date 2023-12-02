@@ -23,7 +23,10 @@ class MockURLSession: URLSessionable {
     }
     
     func response(for request: URLRequest) -> AnyPublisher<APIResponse, URLError> {
-        let status = response.urlResponse as! HTTPURLResponse
+        guard let status = response.urlResponse as? HTTPURLResponse else {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+        }
+        
         let httpResponse = HTTPURLResponse(
             url: request.url!,
             statusCode: status.statusCode,
@@ -41,7 +44,10 @@ class MockURLSession: URLSessionable {
     }
     
     func response(for request: URLRequest) async throws -> APIResponse {
-        let status = response.urlResponse as! HTTPURLResponse
+        guard let status = response.urlResponse as? HTTPURLResponse else {
+            throw URLError(.badURL)
+        }
+        
         let httpResponse = HTTPURLResponse(
             url: request.url!,
             statusCode: status.statusCode,

@@ -37,7 +37,6 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
     // MARK: - Properties
     private var tapSubject = PassthroughSubject<Void, Never>()
 
-    
     // MARK: - UI Components
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()

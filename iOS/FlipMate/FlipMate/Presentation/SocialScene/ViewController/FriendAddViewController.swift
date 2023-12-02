@@ -195,7 +195,6 @@ private extension FriendAddViewController {
     }
 }
 
-
 // MARK: - UITextFieldDelegate
 extension FriendAddViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {

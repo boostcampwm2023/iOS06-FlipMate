@@ -23,7 +23,9 @@ final class TimerManager {
     private var startTime: TimeInterval = 0.0
 
     private lazy var timer: DispatchSourceTimer = {
-        let timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "kr.codesquad.boostcamp8.FlipMate.backgroundTimer", qos: .userInteractive))
+        let timer = DispatchSource.makeTimerSource(
+            flags: [],
+            queue: DispatchQueue(label: "kr.codesquad.boostcamp8.FlipMate.backgroundTimer", qos: .userInteractive))
         timer.schedule(deadline: .now(), repeating: .microseconds(100))
         timer.setEventHandler { [weak self] in
             guard let self = self else { return }
