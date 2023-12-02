@@ -46,15 +46,5 @@ type_name:
   max_length:
     warning: 40
     error: 50
-  excluded: iPhone
-  allowed_symbols: ["_"]
-
-identifier_name:
-  min_length:
-    wraning: 4
-  excluded:
-    - id
-    - URL
-    - GlobalAPIKey
 
 reporter: "xcode"
