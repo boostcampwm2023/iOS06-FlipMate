@@ -9,7 +9,7 @@ import UIKit
 
 extension UIColor {
     convenience init?(hexString: String) {
-        var hexSanitized = hexString.trimmingCharacters(in: .whitespacesAndNewlines)
+        let hexSanitized = hexString.trimmingCharacters(in: .whitespacesAndNewlines)
         var rgb: UInt64 = 0
         
         guard Scanner(string: hexSanitized).scanHexInt64(&rgb) else {
@@ -29,10 +29,10 @@ extension UIColor {
             return "FFFFFFFF"
         }
         
-        var red = components[0]
-        var green = components[1]
-        var blue = components[2]
-        var alpha = components[3]
+        let red = components[0]
+        let green = components[1]
+        let blue = components[2]
+        let alpha = components[3]
         
         let hexString = String(format: "%02lX%02lX%02lX%02lX", lroundf(Float(red * 255)),
                                lroundf(Float(green * 255)), lroundf(Float(blue * 255)),

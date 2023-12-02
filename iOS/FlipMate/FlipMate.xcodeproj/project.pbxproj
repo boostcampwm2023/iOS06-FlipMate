@@ -20,7 +20,6 @@
 		2C3430972B0C7ED8008CBC85 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430962B0C7ED8008CBC85 /* EndPoint.swift */; };
 		2C3430992B0C8427008CBC85 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430982B0C8427008CBC85 /* Provider.swift */; };
 		2C34309B2B0C8674008CBC85 /* URLSessionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34309A2B0C8674008CBC85 /* URLSessionable.swift */; };
-		2C3430A12B0DA4E6008CBC85 /* BaseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A02B0DA4E6008CBC85 /* BaseComponents.swift */; };
 		2C3430A32B0DA5A5008CBC85 /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A22B0DA5A5008CBC85 /* HTTPHeader.swift */; };
 		2C3430A72B0DD0F6008CBC85 /* TimerRepsoitory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A62B0DD0F6008CBC85 /* TimerRepsoitory.swift */; };
 		2C3430AB2B0DDB8D008CBC85 /* TimerEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430AA2B0DDB8D008CBC85 /* TimerEndpoints.swift */; };
@@ -145,6 +144,7 @@
 		60243EF02B05D24D0098A92F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 60243EEF2B05D24D0098A92F /* .swiftlint.yml */; };
 		6057A58D2B0C7F0F00EE58E8 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58C2B0C7F0F00EE58E8 /* Requestable.swift */; };
 		6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58E2B0C801300EE58E8 /* NetworkError.swift */; };
+		605B95FA2B1B50BB00739FAB /* BaseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A02B0DA4E6008CBC85 /* BaseComponents.swift */; };
 		606990572B18918B00E5730F /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606990562B18918B00E5730F /* MyPageViewController.swift */; };
 		6086464E2B0DDA1300B0C1BC /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086464D2B0DDA1300B0C1BC /* CategoryRepository.swift */; };
 		608646552B0DDC3900B0C1BC /* CategoryRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646542B0DDC3900B0C1BC /* CategoryRequestDTO.swift */; };
@@ -1439,6 +1439,7 @@
 		};
 		EDA976DF2AFCF727003F8687 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1483,6 +1484,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				605B95FA2B1B50BB00739FAB /* BaseComponents.swift in Sources */,
 				2C3430A32B0DA5A5008CBC85 /* HTTPHeader.swift in Sources */,
 				ED6865BA2B1CEA0F001A2AAD /* SocialChart.swift in Sources */,
 				EDC851D22B04EE83009031EA /* CategoryListCollectionViewCell.swift in Sources */,
@@ -1542,11 +1544,9 @@
 				2C9F62032B16021E00AE63F9 /* FriendSearchResultView.swift in Sources */,
 				2C3430AB2B0DDB8D008CBC85 /* TimerEndpoints.swift in Sources */,
 				ED3842212B0F1CF9001E2803 /* User.swift in Sources */,
-				2C3430A12B0DA4E6008CBC85 /* BaseComponents.swift in Sources */,
 				2CDCD0462B1889040080DCDE /* DefaultSocialUseCase.swift in Sources */,
 				2C5E34BC2B1B430D00FD481B /* FreindStatusResponseDTO.swift in Sources */,
 				2C88DD0D2B148E9B000B4686 /* TimerFinishViewController.swift in Sources */,
-				2C3430A12B0DA4E6008CBC85 /* BaseComponents.swift in Sources */,
 				2C2F21832B0F53B500B45BA8 /* StduyLogMock.swift in Sources */,
 				2CDCD0442B1887200080DCDE /* SocialUseCase.swift in Sources */,
 				60F67C682B0E1785002C8BF3 /* CategoryUseCase.swift in Sources */,
