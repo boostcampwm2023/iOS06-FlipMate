@@ -19,4 +19,3 @@ final class DefaultStudyLogUseCase: StudyLogUseCase {
         return userInfoRepository.getUserInfo()
     }
 }
-

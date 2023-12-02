@@ -29,7 +29,8 @@ final class CategoryDIContainer: CategoryFlowCoordinatorDependencies {
         )
     }
     
-    func makeCategoryModifyViewModel(actions: CategoryModifyViewModelActions? = nil, selectedCategory: Category? = nil) -> CategoryModifyViewModelProtocol {
+    func makeCategoryModifyViewModel(actions: CategoryModifyViewModelActions? = nil,
+                                     selectedCategory: Category? = nil) -> CategoryModifyViewModelProtocol {
         return CategoryModifyViewModel(
             useCase: DefaultCategoryUseCase(
                 repository: DefaultCategoryRepository(

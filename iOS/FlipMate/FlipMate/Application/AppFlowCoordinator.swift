@@ -14,11 +14,9 @@ protocol Coordinator: AnyObject {
 
 extension Coordinator {
     func childDidFinish(_ child: Coordinator?) {
-        for (index, coordinator) in childCoordinators.enumerated() {
-            if coordinator === child {
-                childCoordinators.remove(at: index)
-                break
-            }
+        for (index, coordinator) in childCoordinators.enumerated() where coordinator === child {
+            childCoordinators.remove(at: index)
+            break
         }
     }
 }
@@ -36,7 +34,7 @@ final class AppFlowCoordinator: Coordinator {
     func start() {
         var isLoggedIn: Bool
         
-        if let token = try? KeychainManager.getAccessToken() {
+        if (try? KeychainManager.getAccessToken()) != nil {
             isLoggedIn = true
         } else {
             isLoggedIn = false
@@ -46,9 +44,9 @@ final class AppFlowCoordinator: Coordinator {
             showTabBarViewController()
         } else {
             showLoginViewController()
-        }        
+        }
     }
-
+    
     private func showLoginViewController() {
         let loginDIContainer = appDIContainer.makeLoginDiContainer()
         let coordinator = loginDIContainer.makeLoginFlowCoordinator(

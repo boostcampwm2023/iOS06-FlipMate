@@ -51,4 +51,3 @@ final class DeviceMotionManager {
         self.motion.stopDeviceMotionUpdates()
     }
 }
-

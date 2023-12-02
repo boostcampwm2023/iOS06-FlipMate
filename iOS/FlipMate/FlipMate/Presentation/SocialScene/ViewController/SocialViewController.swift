@@ -264,8 +264,3 @@ private extension SocialViewController {
         static let title = "소셜"
     }
 }
-
-//@available(iOS 17, *)
-//#Preview {
-//    SocialViewController()
-//}
