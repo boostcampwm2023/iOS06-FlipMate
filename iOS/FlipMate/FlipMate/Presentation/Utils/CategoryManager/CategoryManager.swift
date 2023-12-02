@@ -29,14 +29,14 @@ final class CategoryManager: CategoryManageable {
     }
     
     func change(category: Category) {
-        guard let targetCategory = categories.filter { $0.id == category.id }.first else { return }
+        guard let targetCategory = categories.filter({ $0.id == category.id }).first else { return }
         guard let targetIndex = categories.firstIndex(of: targetCategory) else { return }
         categories[targetIndex] = category
         categoryDidChangeSubject.send(categories)
     }
     
     func removeCategory(categoryId: Int) {
-        guard let targetCategory = categories.filter { $0.id == categoryId }.first else { return }
+        guard let targetCategory = categories.filter({ $0.id == categoryId }).first else { return }
         guard let targetIndex = categories.firstIndex(of: targetCategory) else { return }
         categories.remove(at: targetIndex)
         categoryDidChangeSubject.send(categories)
@@ -48,7 +48,7 @@ final class CategoryManager: CategoryManageable {
     }
     
     func findCategory(categoryId: Int) -> Category? {
-        guard let targetCategory = categories.filter { $0.id == categoryId }.first else { return nil }
+        guard let targetCategory = categories.filter({ $0.id == categoryId }).first else { return nil }
         guard let targetIndex = categories.firstIndex(of: targetCategory) else { return nil }
         return categories[targetIndex]
     }
