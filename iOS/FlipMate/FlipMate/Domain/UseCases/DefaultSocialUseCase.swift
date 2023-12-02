@@ -18,4 +18,8 @@ final class DefaultSocialUseCase: SocialUseCase {
     func getMyFriend(date: Date) -> AnyPublisher<[Friend], NetworkError> {
         return repsoitory.getMyFriend(date: date)
     }
+    
+    func fetchMyFriend() -> AnyPublisher<[FriendStatus], NetworkError> {
+        return repsoitory.fetchMyFriend()
+    }
 }
