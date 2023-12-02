@@ -763,8 +763,6 @@
 				60243EEF2B05D24D0098A92F /* .swiftlint.yml */,
 				600908BC2AFCD7DF0065DFFB /* FlipMate */,
 				600908D32AFCD7E00065DFFB /* FlipMateTests */,
-				2C9F62282B174FDB00AE63F9 /* FlipMateViewModelTests */,
-				2C9F62272B174FC200AE63F9 /* FlipMateUseCaseTests */,
 				600908DD2AFCD7E00065DFFB /* FlipMateUITests */,
 				600908BB2AFCD7DF0065DFFB /* Products */,
 				48114A3517087E7FD0C9546F /* Pods */,
@@ -802,6 +800,8 @@
 			isa = PBXGroup;
 			children = (
 				600908D42AFCD7E00065DFFB /* NetworkServiceTests.swift */,
+				2C9F62282B174FDB00AE63F9 /* FlipMateViewModelTests */,
+				2C9F62272B174FC200AE63F9 /* FlipMateUseCaseTests */,
 			);
 			path = FlipMateTests;
 			sourceTree = "<group>";
