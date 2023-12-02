@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		139317938D03F987290694F1 /* Pods_FlipMateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A07EAC691AD64BBA3FD43FE /* Pods_FlipMateTests.framework */; };
+		0A814BC3CFA46D0501C8B894 /* Pods_FlipMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288FECD685A9C6B6E481147C /* Pods_FlipMate.framework */; };
 		2C2F216E2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F216D2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift */; };
 		2C2F21702B0F429800B45BA8 /* StudyLogResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F216F2B0F429800B45BA8 /* StudyLogResponseDTO.swift */; };
 		2C2F21762B0F440D00B45BA8 /* StudyLogEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F21752B0F440D00B45BA8 /* StudyLogEndpoints.swift */; };
@@ -119,6 +119,8 @@
 		2CE84EF72B0B7F3C00E2FB71 /* CategorySettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF62B0B7F3C00E2FB71 /* CategorySettingSection.swift */; };
 		2CE84EF92B0B8A0B00E2FB71 /* CategorySettingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF82B0B8A0B00E2FB71 /* CategorySettingFooterView.swift */; };
 		2CE84EFB2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EFA2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift */; };
+		2DD8D73E476DE7C9EAF99CD3 /* Pods_FlipMate_FlipMateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4022DA62BEB41D4AE6C12507 /* Pods_FlipMate_FlipMateUITests.framework */; };
+		429B3DF652F07625CAB531EF /* Pods_FlipMateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B285F39D7D27E5C564F4D31 /* Pods_FlipMateTests.framework */; };
 		600195A02B0DFA3900F02BA4 /* StatusResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6001959F2B0DFA3900F02BA4 /* StatusResponseDTO.swift */; };
 		600908BE2AFCD7DF0065DFFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908BD2AFCD7DF0065DFFB /* AppDelegate.swift */; };
 		600908C02AFCD7DF0065DFFB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908BF2AFCD7DF0065DFFB /* SceneDelegate.swift */; };
@@ -155,8 +157,6 @@
 		60F67C682B0E1785002C8BF3 /* CategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F67C672B0E1785002C8BF3 /* CategoryUseCase.swift */; };
 		60F67C6A2B0E1868002C8BF3 /* DefaultCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F67C692B0E1868002C8BF3 /* DefaultCategoryUseCase.swift */; };
 		60F6FD732B0B5E130057CE0B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F6FD722B0B5E130057CE0B /* SignUpViewController.swift */; };
-		77DE67EBDCCF3A5E1B14BBA5 /* Pods_FlipMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0272263E35B945A4DEF7B776 /* Pods_FlipMate.framework */; };
-		B4977CE68498D0BF754AA5BD /* Pods_FlipMate_FlipMateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAF49C159E2C18C346F64AB /* Pods_FlipMate_FlipMateUITests.framework */; };
 		ED3595A92B0C7F3500558FAA /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595A82B0C7F3500558FAA /* HTTPMethod.swift */; };
 		ED3595AB2B0C81B800558FAA /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595AA2B0C81B800558FAA /* Responsable.swift */; };
 		ED3595B02B0C82C800558FAA /* TimerStartRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595AF2B0C82C800558FAA /* TimerStartRequestDTO.swift */; };
@@ -209,9 +209,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0272263E35B945A4DEF7B776 /* Pods_FlipMate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		12EE9F6FD2A00EF0A1B6CDBA /* Pods-FlipMate-FlipMateUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate-FlipMateUITests.release.xcconfig"; path = "Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests.release.xcconfig"; sourceTree = "<group>"; };
-		2A07EAC691AD64BBA3FD43FE /* Pods_FlipMateTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMateTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22B8C8EC4954AA20D64D3139 /* Pods-FlipMate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate.release.xcconfig"; path = "Target Support Files/Pods-FlipMate/Pods-FlipMate.release.xcconfig"; sourceTree = "<group>"; };
+		288FECD685A9C6B6E481147C /* Pods_FlipMate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B285F39D7D27E5C564F4D31 /* Pods_FlipMateTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMateTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C2F216D2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStudyLogUseCase.swift; sourceTree = "<group>"; };
 		2C2F216F2B0F429800B45BA8 /* StudyLogResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogResponseDTO.swift; sourceTree = "<group>"; };
 		2C2F21752B0F440D00B45BA8 /* StudyLogEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogEndpoints.swift; sourceTree = "<group>"; };
@@ -300,6 +300,8 @@
 		2CE84EF62B0B7F3C00E2FB71 /* CategorySettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingSection.swift; sourceTree = "<group>"; };
 		2CE84EF82B0B8A0B00E2FB71 /* CategorySettingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingFooterView.swift; sourceTree = "<group>"; };
 		2CE84EFA2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView++Extension.swift"; sourceTree = "<group>"; };
+		3CDE44797543C08CA812941B /* Pods-FlipMate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate.debug.xcconfig"; path = "Target Support Files/Pods-FlipMate/Pods-FlipMate.debug.xcconfig"; sourceTree = "<group>"; };
+		4022DA62BEB41D4AE6C12507 /* Pods_FlipMate_FlipMateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate_FlipMateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6001959F2B0DFA3900F02BA4 /* StatusResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusResponseDTO.swift; sourceTree = "<group>"; };
 		600908BA2AFCD7DF0065DFFB /* FlipMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlipMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		600908BD2AFCD7DF0065DFFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -340,12 +342,10 @@
 		60F67C672B0E1785002C8BF3 /* CategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryUseCase.swift; sourceTree = "<group>"; };
 		60F67C692B0E1868002C8BF3 /* DefaultCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCategoryUseCase.swift; sourceTree = "<group>"; };
 		60F6FD722B0B5E130057CE0B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		6F672D4DF20127D788092247 /* Pods-FlipMate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate.debug.xcconfig"; path = "Target Support Files/Pods-FlipMate/Pods-FlipMate.debug.xcconfig"; sourceTree = "<group>"; };
-		95A914EF47E9E19A43837872 /* Pods-FlipMate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate.release.xcconfig"; path = "Target Support Files/Pods-FlipMate/Pods-FlipMate.release.xcconfig"; sourceTree = "<group>"; };
-		97454EF779AB22C3ED8642D4 /* Pods-FlipMateTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMateTests.release.xcconfig"; path = "Target Support Files/Pods-FlipMateTests/Pods-FlipMateTests.release.xcconfig"; sourceTree = "<group>"; };
-		9AAF49C159E2C18C346F64AB /* Pods_FlipMate_FlipMateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate_FlipMateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7E38DB7AB23A6281FAA3F33 /* Pods-FlipMate-FlipMateUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate-FlipMateUITests.debug.xcconfig"; path = "Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		D5382AB5D18362B42BA1DF99 /* Pods-FlipMateTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMateTests.debug.xcconfig"; path = "Target Support Files/Pods-FlipMateTests/Pods-FlipMateTests.debug.xcconfig"; sourceTree = "<group>"; };
+		65D7B3C8248401D64CA3EF90 /* Pods-FlipMateTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMateTests.release.xcconfig"; path = "Target Support Files/Pods-FlipMateTests/Pods-FlipMateTests.release.xcconfig"; sourceTree = "<group>"; };
+		8ED331B3B7BDE8C6BB68666F /* Pods-FlipMate-FlipMateUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate-FlipMateUITests.debug.xcconfig"; path = "Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D2F176F76D65D7B591BA21B0 /* Pods-FlipMate-FlipMateUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate-FlipMateUITests.release.xcconfig"; path = "Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E627FDBCC589BEB94FCC114A /* Pods-FlipMateTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMateTests.debug.xcconfig"; path = "Target Support Files/Pods-FlipMateTests/Pods-FlipMateTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED3595A82B0C7F3500558FAA /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		ED3595AA2B0C81B800558FAA /* Responsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responsable.swift; sourceTree = "<group>"; };
 		ED3595AF2B0C82C800558FAA /* TimerStartRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStartRequestDTO.swift; sourceTree = "<group>"; };
@@ -385,7 +385,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77DE67EBDCCF3A5E1B14BBA5 /* Pods_FlipMate.framework in Frameworks */,
+				0A814BC3CFA46D0501C8B894 /* Pods_FlipMate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,7 +393,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				139317938D03F987290694F1 /* Pods_FlipMateTests.framework in Frameworks */,
+				429B3DF652F07625CAB531EF /* Pods_FlipMateTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,13 +401,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4977CE68498D0BF754AA5BD /* Pods_FlipMate_FlipMateUITests.framework in Frameworks */,
+				2DD8D73E476DE7C9EAF99CD3 /* Pods_FlipMate_FlipMateUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03C3410571D585C249FC9CC2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				288FECD685A9C6B6E481147C /* Pods_FlipMate.framework */,
+				4022DA62BEB41D4AE6C12507 /* Pods_FlipMate_FlipMateUITests.framework */,
+				2B285F39D7D27E5C564F4D31 /* Pods_FlipMateTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2C2F21812B0F53AB00B45BA8 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -722,12 +732,12 @@
 		48114A3517087E7FD0C9546F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6F672D4DF20127D788092247 /* Pods-FlipMate.debug.xcconfig */,
-				95A914EF47E9E19A43837872 /* Pods-FlipMate.release.xcconfig */,
-				C7E38DB7AB23A6281FAA3F33 /* Pods-FlipMate-FlipMateUITests.debug.xcconfig */,
-				12EE9F6FD2A00EF0A1B6CDBA /* Pods-FlipMate-FlipMateUITests.release.xcconfig */,
-				D5382AB5D18362B42BA1DF99 /* Pods-FlipMateTests.debug.xcconfig */,
-				97454EF779AB22C3ED8642D4 /* Pods-FlipMateTests.release.xcconfig */,
+				3CDE44797543C08CA812941B /* Pods-FlipMate.debug.xcconfig */,
+				22B8C8EC4954AA20D64D3139 /* Pods-FlipMate.release.xcconfig */,
+				8ED331B3B7BDE8C6BB68666F /* Pods-FlipMate-FlipMateUITests.debug.xcconfig */,
+				D2F176F76D65D7B591BA21B0 /* Pods-FlipMate-FlipMateUITests.release.xcconfig */,
+				E627FDBCC589BEB94FCC114A /* Pods-FlipMateTests.debug.xcconfig */,
+				65D7B3C8248401D64CA3EF90 /* Pods-FlipMateTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -741,7 +751,7 @@
 				600908DD2AFCD7E00065DFFB /* FlipMateUITests */,
 				600908BB2AFCD7DF0065DFFB /* Products */,
 				48114A3517087E7FD0C9546F /* Pods */,
-				8323E91B4E0224828FF69A42 /* Frameworks */,
+				03C3410571D585C249FC9CC2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1122,16 +1132,6 @@
 			path = NickNameValidator;
 			sourceTree = "<group>";
 		};
-		8323E91B4E0224828FF69A42 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0272263E35B945A4DEF7B776 /* Pods_FlipMate.framework */,
-				9AAF49C159E2C18C346F64AB /* Pods_FlipMate_FlipMateUITests.framework */,
-				2A07EAC691AD64BBA3FD43FE /* Pods_FlipMateTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<unknown>";
-		};
 		ED3595AE2B0C82A200558FAA /* TimerScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -1214,12 +1214,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 600908E42AFCD7E00065DFFB /* Build configuration list for PBXNativeTarget "FlipMate" */;
 			buildPhases = (
-				E77A634DBCC960FF03F73591 /* [CP] Check Pods Manifest.lock */,
+				3B2ECF2F6D77722EA459E586 /* [CP] Check Pods Manifest.lock */,
 				600908B62AFCD7DF0065DFFB /* Sources */,
 				600908B72AFCD7DF0065DFFB /* Frameworks */,
 				600908B82AFCD7DF0065DFFB /* Resources */,
 				EDA976DF2AFCF727003F8687 /* ShellScript */,
-				1A36A37FC54F2A3C6B3C669A /* [CP] Embed Pods Frameworks */,
+				1F2BCCF4CE2BA0D364B4392D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1234,7 +1234,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 600908E72AFCD7E00065DFFB /* Build configuration list for PBXNativeTarget "FlipMateTests" */;
 			buildPhases = (
-				A84E71C7199AAFB1CB931C55 /* [CP] Check Pods Manifest.lock */,
+				7F7839FD31222BA31A3D6910 /* [CP] Check Pods Manifest.lock */,
 				600908CC2AFCD7E00065DFFB /* Sources */,
 				600908CD2AFCD7E00065DFFB /* Frameworks */,
 				600908CE2AFCD7E00065DFFB /* Resources */,
@@ -1253,11 +1253,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 600908EA2AFCD7E00065DFFB /* Build configuration list for PBXNativeTarget "FlipMateUITests" */;
 			buildPhases = (
-				EB620FD6BA39904B68446CEE /* [CP] Check Pods Manifest.lock */,
+				F5288B62D09351759D05C46B /* [CP] Check Pods Manifest.lock */,
 				600908D62AFCD7E00065DFFB /* Sources */,
 				600908D72AFCD7E00065DFFB /* Frameworks */,
 				600908D82AFCD7E00065DFFB /* Resources */,
-				18A17D135002D9A8F3744924 /* [CP] Embed Pods Frameworks */,
+				146D8B9E4271FADF89BEA2B7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1341,7 +1341,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		18A17D135002D9A8F3744924 /* [CP] Embed Pods Frameworks */ = {
+		146D8B9E4271FADF89BEA2B7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1358,7 +1358,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1A36A37FC54F2A3C6B3C669A /* [CP] Embed Pods Frameworks */ = {
+		1F2BCCF4CE2BA0D364B4392D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1375,29 +1375,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FlipMate/Pods-FlipMate-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A84E71C7199AAFB1CB931C55 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FlipMateTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E77A634DBCC960FF03F73591 /* [CP] Check Pods Manifest.lock */ = {
+		3B2ECF2F6D77722EA459E586 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1419,7 +1397,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EB620FD6BA39904B68446CEE /* [CP] Check Pods Manifest.lock */ = {
+		7F7839FD31222BA31A3D6910 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1434,7 +1412,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FlipMate-FlipMateUITests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-FlipMateTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1457,6 +1435,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		F5288B62D09351759D05C46B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FlipMate-FlipMateUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1806,7 +1806,7 @@
 		};
 		600908E52AFCD7E00065DFFB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F672D4DF20127D788092247 /* Pods-FlipMate.debug.xcconfig */;
+			baseConfigurationReference = 3CDE44797543C08CA812941B /* Pods-FlipMate.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1841,7 +1841,7 @@
 		};
 		600908E62AFCD7E00065DFFB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 95A914EF47E9E19A43837872 /* Pods-FlipMate.release.xcconfig */;
+			baseConfigurationReference = 22B8C8EC4954AA20D64D3139 /* Pods-FlipMate.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1876,7 +1876,7 @@
 		};
 		600908E82AFCD7E00065DFFB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D5382AB5D18362B42BA1DF99 /* Pods-FlipMateTests.debug.xcconfig */;
+			baseConfigurationReference = E627FDBCC589BEB94FCC114A /* Pods-FlipMateTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1898,7 +1898,7 @@
 		};
 		600908E92AFCD7E00065DFFB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 97454EF779AB22C3ED8642D4 /* Pods-FlipMateTests.release.xcconfig */;
+			baseConfigurationReference = 65D7B3C8248401D64CA3EF90 /* Pods-FlipMateTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1920,7 +1920,7 @@
 		};
 		600908EB2AFCD7E00065DFFB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C7E38DB7AB23A6281FAA3F33 /* Pods-FlipMate-FlipMateUITests.debug.xcconfig */;
+			baseConfigurationReference = 8ED331B3B7BDE8C6BB68666F /* Pods-FlipMate-FlipMateUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1941,7 +1941,7 @@
 		};
 		600908EC2AFCD7E00065DFFB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 12EE9F6FD2A00EF0A1B6CDBA /* Pods-FlipMate-FlipMateUITests.release.xcconfig */;
+			baseConfigurationReference = D2F176F76D65D7B591BA21B0 /* Pods-FlipMate-FlipMateUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
