@@ -16,4 +16,11 @@ struct SocialEndpoints {
             method: .get)
         
     }
+    
+    static func fetchMyFriend() -> EndPoint<[FriendStatusResponseDTO]> {
+        return EndPoint(
+            baseURL: BaseURL.flipmateDomain,
+            path: Paths.friend + "/status",
+            method: .get)
+    }
 }
