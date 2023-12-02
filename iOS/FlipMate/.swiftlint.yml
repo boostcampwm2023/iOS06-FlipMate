@@ -1,13 +1,8 @@
-# By default, SwiftLint uses a set of sensible default rules you can adjust:
-disabled_rules: # rule identifiers turned on by default to exclude from running
+disabled_rules:
   - trailing_whitespace
-opt_in_rules: # some rules are turned off by default, so you need to opt-in
-  - empty_count # find all the available rules by running: `swiftlint rules`
-
-# Alternatively, specify all rules explicitly by uncommenting this option:
-# only_rules: # delete `disabled_rules` & `opt_in_rules` if using this
-#   - empty_parameters
-#   - vertical_whitespace
+  - todo
+opt_in_rules:
+  - empty_count
 
 analyzer_rules: # rules run by `swiftlint analyze`
   - explicit_self
@@ -16,6 +11,7 @@ included: # case-sensitive paths to include during linting. `--path` is ignored 
 excluded: # case-sensitive paths to ignore during linting. Takes precedence over `included`
   - Carthage
   - Pods
+  - FlipMateTests
 
 # If true, SwiftLint will not fail if no lintable files are found.
 allow_zero_lintable_files: false
@@ -23,36 +19,41 @@ allow_zero_lintable_files: false
 # If true, SwiftLint will treat all warnings as errors.
 strict: false
 
-# configurable rules can be customized from this configuration file
-# binary rules can set their severity level
-force_cast: warning # implicitly
+force_cast: warning
 force_try:
-  severity: warning # explicitly
-# rules that have both warning and error levels, can set just the warning level
-# implicitly
+  severity: warning
+
+# 줄 길이 150으로 제한
 line_length: 150
-# they can set both implicitly with an array
+
+# 타입 네스팅 3 level에 경고 띄우기. (2 level 까지만 권장)
+nesting:
+  type_level:
+    warning: 3
+    error: 4
+
 type_body_length:
   - 300 # warning
   - 400 # error
-# or they can set both explicitly
+
 file_length:
   warning: 500
   error: 1200
-# naming rules can set warnings/errors for min_length and max_length
-# additionally they can set excluded names
+
 type_name:
-  min_length: 4 # only warning
-  max_length: # warning and error
+  min_length: 4
+  max_length:
     warning: 40
     error: 50
-  excluded: iPhone # excluded via string
-  allowed_symbols: ["_"] # these are allowed in type names
+  excluded: iPhone
+  allowed_symbols: ["_"]
+
 identifier_name:
-  min_length: # only min_length
-    wraning: 4 # only error
-  excluded: # excluded via string array
+  min_length:
+    wraning: 4
+  excluded:
     - id
     - URL
     - GlobalAPIKey
-reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, codeclimate, junit, html, emoji, sonarqube, markdown, github-actions-logging, summary)
+
+reporter: "xcode"
