@@ -108,7 +108,6 @@
 		2CDCD0482B18893A0080DCDE /* SocialRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0472B18893A0080DCDE /* SocialRepository.swift */; };
 		2CDCD04A2B18895E0080DCDE /* DefaultSocialRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0492B18895E0080DCDE /* DefaultSocialRepository.swift */; };
 		2CDCD04C2B18899A0080DCDE /* SocialEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD04B2B18899A0080DCDE /* SocialEndpoints.swift */; };
-		2CDCD0562B18C8960080DCDE /* UserEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0552B18C8960080DCDE /* UserEndpoints.swift */; };
 		2CDCD0642B18CEDF0080DCDE /* FriendsResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0632B18CEDF0080DCDE /* FriendsResponseDTO.swift */; };
 		2CDCD0672B18D0330080DCDE /* FriendUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0662B18D0330080DCDE /* FriendUser.swift */; };
 		2CDCD0692B18D0D10080DCDE /* FriendSearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0682B18D0D10080DCDE /* FriendSearchItem.swift */; };
@@ -739,8 +738,6 @@
 				60243EEF2B05D24D0098A92F /* .swiftlint.yml */,
 				600908BC2AFCD7DF0065DFFB /* FlipMate */,
 				600908D32AFCD7E00065DFFB /* FlipMateTests */,
-				2C9F62282B174FDB00AE63F9 /* FlipMateViewModelTests */,
-				2C9F62272B174FC200AE63F9 /* FlipMateUseCaseTests */,
 				600908DD2AFCD7E00065DFFB /* FlipMateUITests */,
 				600908BB2AFCD7DF0065DFFB /* Products */,
 				48114A3517087E7FD0C9546F /* Pods */,
@@ -778,6 +775,8 @@
 			isa = PBXGroup;
 			children = (
 				600908D42AFCD7E00065DFFB /* NetworkServiceTests.swift */,
+				2C9F62282B174FDB00AE63F9 /* FlipMateViewModelTests */,
+				2C9F62272B174FC200AE63F9 /* FlipMateUseCaseTests */,
 			);
 			path = FlipMateTests;
 			sourceTree = "<group>";
@@ -907,7 +906,6 @@
 				600908FA2AFCDF0F0065DFFB /* Repositories */,
 				600908FC2AFCDF2F0065DFFB /* Network */,
 				600909022AFCDFEA0065DFFB /* Persistants */,
-				2CDCD05D2B18C9BE0080DCDE /* DefaultUserInfoRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
