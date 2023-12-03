@@ -863,7 +863,6 @@
 		600908F32AFCDCE70065DFFB /* ChartScene */ = {
 			isa = PBXGroup;
 			children = (
-				ED6865AA2B1795DD001A2AAD /* New Group */,
 				2C5CDA592B025435007AFC57 /* ViewController */,
 			);
 			path = ChartScene;
@@ -1177,13 +1176,6 @@
 			children = (
 			);
 			path = SocialScene;
-			sourceTree = "<group>";
-		};
-		ED6865AA2B1795DD001A2AAD /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		ED6865AB2B1795E8001A2AAD /* ViewModel */ = {
