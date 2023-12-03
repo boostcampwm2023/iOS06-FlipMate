@@ -21,16 +21,29 @@ final class TimerManager {
     private var state: TimerState = .suspended
     private(set) var totalTime: Int = 0
     private var startTime: TimeInterval = 0.0
-
+    private var handler: (() -> Void)?
+    private var timeInterval: DispatchTimeInterval
+    
     private lazy var timer: DispatchSourceTimer = {
         let timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "kr.codesquad.boostcamp8.FlipMate.backgroundTimer", qos: .userInteractive))
-        timer.schedule(deadline: .now(), repeating: .microseconds(100))
-        timer.setEventHandler { [weak self] in
-            guard let self = self else { return }
-            self.increaseTotalTime()
+        timer.schedule(deadline: .now(), repeating: timeInterval)
+
+        guard let handler else {
+            timer.setEventHandler { [weak self] in
+                guard let self = self else { return }
+                self.increaseTotalTime()
+            }
+            return timer
         }
+        
+        timer.setEventHandler(handler: handler)
         return timer
     }()
+    
+    init(timeInterval: DispatchTimeInterval = .microseconds(100), handler: (() -> Void)? = nil) {
+        self.handler = handler
+        self.timeInterval = timeInterval
+    }
     
     // MARK: - deinit
     deinit {
@@ -38,7 +51,7 @@ final class TimerManager {
     }
     
     /// 타이머를 시작합니다.
-    func start(startTime: Date) {
+    func start(startTime: Date = Date()) {
         self.startTime = startTime.timeIntervalSince1970
         state = .resumed
         timer.activate()
@@ -46,7 +59,7 @@ final class TimerManager {
     }
     
     /// 타이머를 재개합니다.
-    func resume(resumeTime: Date) {
+    func resume(resumeTime: Date = Date()) {
         guard state == .suspended else { return }
         self.startTime = resumeTime.timeIntervalSince1970
         state = .resumed
