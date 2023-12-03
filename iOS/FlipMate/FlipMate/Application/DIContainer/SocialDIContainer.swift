@@ -45,4 +45,11 @@ final class SocialDIContainer: SocialFlowCoordinatorDependencies {
             actions: actions)
         )
     }
+    
+    func makeSocialDetailViewController(actions: SocialDetailViewModelActions) -> UIViewController {
+        return SocialDetailViewController(viewModel: SocialDetailViewModel(friendUseCase: DefaultFriendUseCase(
+            repository: DefaultFriendRepository(
+                provider: dependencies.provider)), actions: actions)
+            )
+    }
 }
