@@ -44,20 +44,14 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
     }
     
     func startPolling(friendsStatus: [FriendStatus]) {
-        self.updateLearningFriendsBeforeStop(friendsStatus: friendsStatus)
-        self.updateStopFriends(friendsStatus: friendsStatus)
-        timerState = .resumed
-        if timerState == .notStarted {
-            timerManager.start()
-        } else {
-            timerManager.resume()
-        }
+        updateLearningFriendsBeforeStop(friendsStatus: friendsStatus)
+        updateStopFriends(friendsStatus: friendsStatus)
+        startTimer()
     }
     
     func stopPolling() {
         updateFriendArray = []
-        timerState = .suspended
-        timerManager.suspend()
+        stopTimer()
     }
     
     func updateLearningFriendsBeforeLearning(friendsStatus: [FriendStatus]) {
@@ -69,6 +63,7 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
             let currentLearningTime = Int(Date().timeIntervalSince(date))
             updateFriendArray.append(UpdateFriend(id: friend.id, currentLearningTime: currentLearningTime))
         }
+        startTimer()
     }
 
     private func updateLearningFriendsBeforeStop(friendsStatus: [FriendStatus]) {
@@ -153,5 +148,19 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
     private func increaseLearningTime() {
         updateLearningFriends.send(updateFriendArray)
         updateFriendArray.forEach { $0.currentLearningTime += 1 }
+    }
+    
+    private func startTimer() {
+        timerState = .resumed
+        if timerState == .notStarted {
+            timerManager.start()
+        } else {
+            timerManager.resume()
+        }
+    }
+    
+    private func stopTimer() {
+        timerState = .suspended
+        timerManager.suspend()
     }
 }

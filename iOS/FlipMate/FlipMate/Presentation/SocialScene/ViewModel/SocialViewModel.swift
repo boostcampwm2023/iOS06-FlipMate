@@ -110,10 +110,16 @@ private extension SocialViewModel {
             } receiveValue: { [weak self] freinds in
                 guard let self = self else { return }
                 self.freindsSubject.send(freinds)
-                self.friendStatusPollingManager.updateLearningFriendsBeforeLearning(friendsStatus: freinds.map { FriendStatus(id: $0.id, totalTime: $0.totalTime, startedTime: $0.startedTime)})
                 let preFriendStatusArray = freinds.map { FriendStatus(id: $0.id, totalTime: $0.totalTime, startedTime: $0.startedTime)}
                 self.friendStatusPollingManager.update(preFriendStatusArray: preFriendStatusArray)
-
+                self.friendStatusPollingManager.updateLearningFriendsBeforeLearning(
+                    friendsStatus: freinds.map {
+                        FriendStatus(
+                            id: $0.id,
+                            totalTime: $0.totalTime,
+                            startedTime: $0.startedTime)
+                    }
+                )
             }
             .store(in: &cancellables)
     }
