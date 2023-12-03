@@ -74,7 +74,6 @@ final class SocialViewModel: SocialViewModelProtocol {
     
     func viewDidLoad() {
         getUserProfile()
-        getFriendState()
     }
     
     func viewWillAppear() {
