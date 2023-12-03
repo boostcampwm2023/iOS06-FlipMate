@@ -8,9 +8,13 @@
 import Foundation
 import Combine
 
+struct StopFriend {
+    let id: Int
+    let totalTime: Int
+}
 protocol FriendStatusPollingManageable {
     var updateLearningPublihser: AnyPublisher<[UpdateFriend], Never> { get }
-    var updateStopFriendsPublisher: AnyPublisher<[Int], Never> { get }
+    var updateStopFriendsPublisher: AnyPublisher<[StopFriend], Never> { get }
     
     func update(preFriendStatusArray: [FriendStatus])
     func startPolling(friendsStatus: [FriendStatus])
@@ -25,13 +29,13 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
     private lazy var timerManager = TimerManager(timeInterval: .seconds(1), handler: increaseLearningTime)
     
     private var updateLearningFriends = PassthroughSubject<[UpdateFriend], Never>()
-    private var updateStopFriends = PassthroughSubject<[Int], Never>()
+    private var updateStopFriends = PassthroughSubject<[StopFriend], Never>()
     
     var updateLearningPublihser: AnyPublisher<[UpdateFriend], Never> {
         return updateLearningFriends.eraseToAnyPublisher()
     }
     
-    var updateStopFriendsPublisher: AnyPublisher<[Int], Never> {
+    var updateStopFriendsPublisher: AnyPublisher<[StopFriend], Never> {
         return updateStopFriends.eraseToAnyPublisher()
     }
     
@@ -80,7 +84,7 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
     
     private func updateStopFriends(friendsStatus: [FriendStatus]) {
         let stopFreindsBeforeLearning = findStopFriendsbeforeLearning(friendsStatus: friendsStatus)
-        stopCurrentLearningTime(stopIdList: stopFreindsBeforeLearning)
+        stopCurrentLearningTime(stopIdList: stopFreindsBeforeLearning, friendsStatus: friendsStatus)
     }
     
     // 공부끝 -> 공부중
@@ -133,15 +137,21 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
         updateFriendArray.remove(at: index)
     }
     
-    private func stopCurrentLearningTime(stopIdList: [Int]) {
-        stopIdList.forEach {
-            removeUpdateFriendsArray(at: $0)
+    private func stopCurrentLearningTime(stopIdList: [Int], friendsStatus: [FriendStatus]) {
+        if stopIdList.isEmpty { return }
+        var stopFriendArray = [StopFriend]()
+        
+        for id in stopIdList {
+            guard let totalTime = friendsStatus.filter { $0.id == id }.first?.totalTime else { continue }
+            removeUpdateFriendsArray(at: id)
+            stopFriendArray.append(StopFriend(id: id, totalTime: totalTime))
         }
-        updateStopFriends.send(stopIdList)
+        
+        updateStopFriends.send(stopFriendArray)
     }
     
     private func increaseLearningTime() {
-        updateFriendArray.forEach { $0.currentLearningTime += 1 }
         updateLearningFriends.send(updateFriendArray)
+        updateFriendArray.forEach { $0.currentLearningTime += 1 }
     }
 }
