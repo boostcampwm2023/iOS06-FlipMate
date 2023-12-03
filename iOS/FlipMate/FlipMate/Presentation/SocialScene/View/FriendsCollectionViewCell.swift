@@ -63,6 +63,13 @@ final class FriendsCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         FMLogger.appLifeCycle.log("prepare for reuse")
+        initUI()
+    }
+    
+    private func initUI() {
+        currentLearningTimeLabel.text = nil
+        profileImageView.image = nil
+        profileImageView.layer.borderColor = UIColor.red.cgColor
     }
     
     private func configureUI() {
