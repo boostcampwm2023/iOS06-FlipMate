@@ -9,5 +9,6 @@ import Foundation
 
 struct FriendStatus: Hashable {
     let id: Int
+    let totalTime: Int
     let startedTime: String?
 }

@@ -23,7 +23,7 @@ protocol SocialViewModelOutput {
     var freindsPublisher: AnyPublisher<[Friend], Never> { get }
     var nicknamePublisher: AnyPublisher<String, Never> { get }
     var updateFriendStatus: AnyPublisher<[UpdateFriend], Never> { get }
-    var stopFriendStatus: AnyPublisher<[Int], Never> { get }
+    var stopFriendStatus: AnyPublisher<[StopFriend], Never> { get }
 }
 
 typealias SocialViewModelProtocol = SocialViewModelInput & SocialViewModelOutput
@@ -33,7 +33,7 @@ final class SocialViewModel: SocialViewModelProtocol {
     private var freindsSubject = PassthroughSubject<[Friend], Never>()
     private var nicknameSubject = CurrentValueSubject<String, Never>(UserInfoStorage.nickname)
     private var updateFriendSubject = PassthroughSubject<[UpdateFriend], Never>()
-    private var stopFriendSubject = PassthroughSubject<[Int], Never>()
+    private var stopFriendSubject = PassthroughSubject<[StopFriend], Never>()
     
     // MARK: - Properties
     private var cancellables = Set<AnyCancellable>()
@@ -63,7 +63,7 @@ final class SocialViewModel: SocialViewModelProtocol {
         return friendStatusPollingManager.updateLearningPublihser.eraseToAnyPublisher()
     }
     
-    var stopFriendStatus: AnyPublisher<[Int], Never> {
+    var stopFriendStatus: AnyPublisher<[StopFriend], Never> {
         return friendStatusPollingManager.updateStopFriendsPublisher.eraseToAnyPublisher()
     }
     
@@ -110,8 +110,8 @@ private extension SocialViewModel {
             } receiveValue: { [weak self] freinds in
                 guard let self = self else { return }
                 self.freindsSubject.send(freinds)
-                self.friendStatusPollingManager.updateLearningFriendsBeforeLearning(friendsStatus: freinds.map { FriendStatus(id: $0.id, startedTime: $0.startedTime)})
-                let preFriendStatusArray = freinds.map { FriendStatus(id: $0.id, startedTime: $0.startedTime)}
+                self.friendStatusPollingManager.updateLearningFriendsBeforeLearning(friendsStatus: freinds.map { FriendStatus(id: $0.id, totalTime: $0.totalTime, startedTime: $0.startedTime)})
+                let preFriendStatusArray = freinds.map { FriendStatus(id: $0.id, totalTime: $0.totalTime, startedTime: $0.startedTime)}
                 self.friendStatusPollingManager.update(preFriendStatusArray: preFriendStatusArray)
 
             }
@@ -119,7 +119,7 @@ private extension SocialViewModel {
     }
     
     func fetchFriendStatus() {
-        socialUseCase.fetchMyFriend()
+        socialUseCase.fetchMyFriend(date: Date())
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {

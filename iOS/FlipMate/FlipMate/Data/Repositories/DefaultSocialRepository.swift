@@ -31,14 +31,15 @@ final class DefaultSocialRepository: SocialRepository {
             .eraseToAnyPublisher()
     }
     
-    func fetchMyFriend() -> AnyPublisher<[FriendStatus], NetworkError> {
-        let endpoint = SocialEndpoints.fetchMyFriend()
+    func fetchMyFriend(date: Date) -> AnyPublisher<[FriendStatus], NetworkError> {
+        let endpoint = SocialEndpoints.fetchMyFriend(date: date)
         return provider.request(with: endpoint)
             .map { response -> [FriendStatus] in
                 return response.map {
                     FriendStatus(
                         id: $0.id,
-                        startedTime: $0.startedTime
+                        totalTime: $0.totalTime,
+                        startedTime: $0.startTime
                     )
                 }
             }

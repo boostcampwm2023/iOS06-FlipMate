@@ -113,8 +113,9 @@ final class FriendsCollectionViewCell: UICollectionViewCell {
         currentLearningTimeLabel.text = "+ " + currentLeaningTime.secondsToStringTime()
     }
     
-    func stopLearningTime() {
+    func stopLearningTime(_ totalTime: Int) {
         profileImageView.layer.borderColor = UIColor.red.cgColor
+        learningTimeLabel.text = totalTime.secondsToStringTime()
         currentLearningTimeLabel.text = nil
     }
 }

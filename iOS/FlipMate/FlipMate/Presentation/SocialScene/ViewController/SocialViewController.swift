@@ -223,14 +223,14 @@ private extension SocialViewController {
         }
     }
     
-    func stopLearningTime(stopFriends: [Int]) {
+    func stopLearningTime(stopFriends: [StopFriend]) {
         guard let snpshot = diffableDataSource?.snapshot() else { return }
         let items = snpshot.itemIdentifiers
         for item in items {
             guard let indexPath = diffableDataSource.indexPath(for: item) else { continue }
             guard let cell = friendsCollectionView.cellForItem(at: indexPath) as? FriendsCollectionViewCell else { continue }
-            guard let friend = stopFriends.filter { $0 == item.id }.first else { continue }
-            cell.stopLearningTime()
+            guard let friend = stopFriends.filter { $0.id == item.id }.first else { continue }
+            cell.stopLearningTime(friend.totalTime)
         }
     }
 }

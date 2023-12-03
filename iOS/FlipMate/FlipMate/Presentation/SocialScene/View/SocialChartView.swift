@@ -47,23 +47,23 @@ let mockSeriesData: [Series] = [
 ]
 
 let mockMyData: [StudyTime] = [
-    .init(weekday: "2023-11-20".stringToDate()!, studyTime: 234),
-    .init(weekday: "2023-11-21".stringToDate()!, studyTime: 123),
-    .init(weekday: "2023-11-22".stringToDate()!, studyTime: 0),
-    .init(weekday: "2023-11-23".stringToDate()!, studyTime: 399),
-    .init(weekday: "2023-11-24".stringToDate()!, studyTime: 184),
-    .init(weekday: "2023-11-25".stringToDate()!, studyTime: 92),
-    .init(weekday: "2023-11-26".stringToDate()!, studyTime: 321)
+    .init(weekday: "2023-11-20".stringToDate(.yyyyMMdd)!, studyTime: 234),
+    .init(weekday: "2023-11-21".stringToDate(.yyyyMMdd)!, studyTime: 123),
+    .init(weekday: "2023-11-22".stringToDate(.yyyyMMdd)!, studyTime: 0),
+    .init(weekday: "2023-11-23".stringToDate(.yyyyMMdd)!, studyTime: 399),
+    .init(weekday: "2023-11-24".stringToDate(.yyyyMMdd)!, studyTime: 184),
+    .init(weekday: "2023-11-25".stringToDate(.yyyyMMdd)!, studyTime: 92),
+    .init(weekday: "2023-11-26".stringToDate(.yyyyMMdd)!, studyTime: 321)
 ]
 
 let mockFriendData: [StudyTime] = [
-    .init(weekday: "2023-11-20".stringToDate()!, studyTime: 164),
-    .init(weekday: "2023-11-21".stringToDate()!, studyTime: 121),
-    .init(weekday: "2023-11-22".stringToDate()!, studyTime: 125),
-    .init(weekday: "2023-11-23".stringToDate()!, studyTime: 144),
-    .init(weekday: "2023-11-24".stringToDate()!, studyTime: 152),
-    .init(weekday: "2023-11-25".stringToDate()!, studyTime: 133),
-    .init(weekday: "2023-11-26".stringToDate()!, studyTime: 184)
+    .init(weekday: "2023-11-20".stringToDate(.yyyyMMdd)!, studyTime: 164),
+    .init(weekday: "2023-11-21".stringToDate(.yyyyMMdd)!, studyTime: 121),
+    .init(weekday: "2023-11-22".stringToDate(.yyyyMMdd)!, studyTime: 125),
+    .init(weekday: "2023-11-23".stringToDate(.yyyyMMdd)!, studyTime: 144),
+    .init(weekday: "2023-11-24".stringToDate(.yyyyMMdd)!, studyTime: 152),
+    .init(weekday: "2023-11-25".stringToDate(.yyyyMMdd)!, studyTime: 133),
+    .init(weekday: "2023-11-26".stringToDate(.yyyyMMdd)!, studyTime: 184)
 ]
 
 #Preview {
