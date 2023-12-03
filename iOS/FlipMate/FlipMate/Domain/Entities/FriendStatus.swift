@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FriendStatus {
+struct FriendStatus: Hashable {
     let id: Int
     let startedTime: String?
 }

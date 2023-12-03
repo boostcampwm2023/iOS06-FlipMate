@@ -9,7 +9,7 @@ import UIKit
 
 final class FriendsCollectionViewCell: UICollectionViewCell {
     static let identifier = "FriendsCollectionViewCell"
-    
+    // MAKR: UI Components
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -41,6 +41,15 @@ final class FriendsCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    private lazy var currentLearningTimeLabel: UILabel = {
+        let label = UILabel()
+        label.font = FlipMateFont.mediumBold.font
+        label.textColor = .green
+        label.textAlignment = .center
+        return label
+    }()
+    
+    // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
@@ -50,6 +59,7 @@ final class FriendsCollectionViewCell: UICollectionViewCell {
         fatalError("이 뷰는 스토리보드에서 사용할 수 없습니다")
     }
     
+    // MARK: - Life cycle
     override func prepareForReuse() {
         super.prepareForReuse()
         FMLogger.appLifeCycle.log("prepare for reuse")
@@ -59,7 +69,8 @@ final class FriendsCollectionViewCell: UICollectionViewCell {
         let subViews = [
             profileImageView,
             userNameLabel,
-            learningTimeLabel
+            learningTimeLabel,
+            currentLearningTimeLabel
         ]
         
         subViews.forEach {
@@ -81,7 +92,10 @@ final class FriendsCollectionViewCell: UICollectionViewCell {
             learningTimeLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 4),
             learningTimeLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             learningTimeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            learningTimeLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            learningTimeLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            
+            currentLearningTimeLabel.topAnchor.constraint(equalTo: learningTimeLabel.bottomAnchor, constant: 5),
+            currentLearningTimeLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
     
@@ -90,9 +104,18 @@ final class FriendsCollectionViewCell: UICollectionViewCell {
         let image = UIImage(resource: .defaultProfile)
         profileImageView.image = image
         userNameLabel.text = friend.name
-        learningTimeLabel.text = friend.time?.secondsToStringTime()
+        learningTimeLabel.text = friend.totalTime?.secondsToStringTime()
         profileImageView.layer.borderColor = friend.isStuding ? UIColor.green.cgColor : UIColor.red.cgColor
-        
+    }
+    
+    func updateLearningTime(_ currentLeaningTime: Int) {
+        profileImageView.layer.borderColor = UIColor.green.cgColor
+        currentLearningTimeLabel.text = "+ " + currentLeaningTime.secondsToStringTime()
+    }
+    
+    func stopLearningTime() {
+        profileImageView.layer.borderColor = UIColor.red.cgColor
+        currentLearningTimeLabel.text = nil
     }
 }
 

@@ -12,8 +12,9 @@ enum Section: CaseIterable {
 }
 
 struct FriendUser: Hashable {
+    let id: Int?
     let profileImageURL: String?
     let name: String
-    let time: Int?
-    var isStuding: Bool
+    let totalTime: Int?
+    let isStuding: Bool
 }

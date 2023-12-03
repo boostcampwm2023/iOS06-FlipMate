@@ -85,7 +85,12 @@ final class SocialViewController: BaseViewController {
         super.viewWillAppear(animated)
         viewModel.viewWillAppear()
     }
-        
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.viewWillDisappear()
+    }
+    
     // MARK: - Configure UI
     override func configureUI() {
         title = Constant.title
@@ -166,9 +171,10 @@ final class SocialViewController: BaseViewController {
                 var snapshot = NSDiffableDataSourceSnapshot<Section, FriendUser>()
                 snapshot.appendSections([.main])
                 snapshot.appendItems(friends.map { FriendUser(
+                    id: $0.id,
                     profileImageURL: $0.profileImageURL,
                     name: $0.nickName,
-                    time: $0.totalTime,
+                    totalTime: $0.totalTime,
                     isStuding: $0.isStuding)}
                 )
                 self.diffableDataSource.apply(snapshot, animatingDifferences: true)
@@ -182,6 +188,50 @@ final class SocialViewController: BaseViewController {
                 self.userNameLabel.text = nickname
             }
             .store(in: &cancellables)
+        
+        viewModel.updateFriendStatus
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] updateFreinds in
+                guard let self = self else { return }
+                self.updateLearningTime(updateFreinds: updateFreinds)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.stopFriendStatus
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] stopFriends in
+                guard let self = self else { return }
+                self.stopLearningTime(stopFriends: stopFriends)
+            }
+            .store(in: &cancellables)
+    }
+}
+
+// MARK: - private Methods
+private extension SocialViewController {
+    func updateLearningTime(updateFreinds: [UpdateFriend]) {
+        guard let snapshot = diffableDataSource?.snapshot() else { return }
+        let items = snapshot.itemIdentifiers
+        for item in items {
+            guard let indexPath = diffableDataSource.indexPath(for: item) else {
+                continue }
+            guard let cell = friendsCollectionView.cellForItem(at: indexPath) as? FriendsCollectionViewCell else {
+                continue }
+            guard let friend = updateFreinds.filter { $0.id == item.id }.first else {
+                continue }
+            cell.updateLearningTime(friend.currentLearningTime)
+        }
+    }
+    
+    func stopLearningTime(stopFriends: [Int]) {
+        guard let snpshot = diffableDataSource?.snapshot() else { return }
+        let items = snpshot.itemIdentifiers
+        for item in items {
+            guard let indexPath = diffableDataSource.indexPath(for: item) else { continue }
+            guard let cell = friendsCollectionView.cellForItem(at: indexPath) as? FriendsCollectionViewCell else { continue }
+            guard let friend = stopFriends.filter { $0 == item.id }.first else { continue }
+            cell.stopLearningTime()
+        }
     }
 }
 

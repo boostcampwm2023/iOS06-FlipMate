@@ -24,18 +24,19 @@ final class DefaultSocialRepository: SocialRepository {
                     nickName: $0.nickname,
                     profileImageURL: $0.imageURL,
                     totalTime: $0.totalTime,
+                    startedTime: $0.startTime,
                     isStuding: $0.startTime != nil ? true: false)
                 }
             }
             .eraseToAnyPublisher()
     }
     
-    func fetchMyFriend() -> AnyPublisher<[FriendState], NetworkError> {
+    func fetchMyFriend() -> AnyPublisher<[FriendStatus], NetworkError> {
         let endpoint = SocialEndpoints.fetchMyFriend()
         return provider.request(with: endpoint)
-            .map { response -> [FriendState] in
+            .map { response -> [FriendStatus] in
                 return response.map {
-                    FriendState(
+                    FriendStatus(
                         id: $0.id,
                         startedTime: $0.startedTime
                     )
