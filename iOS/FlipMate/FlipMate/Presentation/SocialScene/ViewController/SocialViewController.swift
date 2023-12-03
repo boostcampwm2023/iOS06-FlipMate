@@ -51,7 +51,7 @@ final class SocialViewController: BaseViewController {
         layout.sectionInset = UIEdgeInsets(top: 24, left: 16, bottom: 0, right: 16)
         layout.minimumLineSpacing = 16
         layout.minimumInteritemSpacing = 16
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width / 3.0 - 32, height: 150)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width / 3.0 - 32, height: 170)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(FriendsCollectionViewCell.self)
         collectionView.delegate = self
