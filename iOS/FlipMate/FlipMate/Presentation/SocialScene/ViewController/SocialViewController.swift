@@ -59,7 +59,7 @@ final class SocialViewController: BaseViewController {
     }()
     
     // MARK: - Properties
-    typealias DiffableDataSource = UICollectionViewDiffableDataSource<Section, FriendUser>
+    typealias DiffableDataSource = UICollectionViewDiffableDataSource<Section, Friend>
     private var diffableDataSource: DiffableDataSource!
     private var cancellables = Set<AnyCancellable>()
     private let viewModel: SocialViewModelProtocol
@@ -163,12 +163,13 @@ final class SocialViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] friends in
                 guard let self = self else { return }
-                var snapshot = NSDiffableDataSourceSnapshot<Section, FriendUser>()
+                var snapshot = NSDiffableDataSourceSnapshot<Section, Friend>()
                 snapshot.appendSections([.main])
-                snapshot.appendItems(friends.map { FriendUser(
+                snapshot.appendItems(friends.map { Friend(
+                    id: $0.id,
+                    nickName: $0.nickName,
                     profileImageURL: $0.profileImageURL,
-                    name: $0.nickName,
-                    time: $0.totalTime,
+                    totalTime: $0.totalTime,
                     isStuding: $0.isStuding)}
                 )
                 self.diffableDataSource.apply(snapshot, animatingDifferences: true)
@@ -200,7 +201,11 @@ private extension SocialViewController {
 
 // MARK: - UICollectionViewDelegate
 extension SocialViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let indexPath = friendsCollectionView.indexPathsForSelectedItems?.first else { return }
+        guard let item = self.diffableDataSource?.itemIdentifier(for: indexPath) else { return }
+        viewModel.friendCellDidTapped(friend: item)
+    }
 }
 
 // MARK: - Constants
