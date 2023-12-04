@@ -15,6 +15,8 @@ export class StudyLogsService {
   constructor(
     @InjectRepository(StudyLogs)
     private studyLogsRepository: Repository<StudyLogs>,
+    @InjectRepository(UsersModel)
+    private usersRepository: Repository<UsersModel>,
     private redisService: RedisService,
   ) {}
 
@@ -134,7 +136,8 @@ export class StudyLogsService {
       [date],
     );
     const rank = result.findIndex((user) => user.user_id === userId) + 1;
-    return (rank / result.length) * 100;
+    const userCount = await this.usersRepository.count();
+    return (rank / userCount) * 100;
   }
 
   entityToDto(studyLog: StudyLogs): StudyLogsDto {
