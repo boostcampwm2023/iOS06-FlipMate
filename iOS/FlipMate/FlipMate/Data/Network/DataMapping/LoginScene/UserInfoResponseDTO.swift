@@ -8,12 +8,12 @@
 import Foundation
 
 struct UserInfoResponseDTO: Decodable {
-    let nickName: String
+    let nickname: String
     let email: String
-    let imageURL: String
+    let imageURL: String?
     
     private enum CodingKeys: String, CodingKey {
-        case nickName = "nickname"
+        case nickname
         case email
         case imageURL = "image_url"
     }
