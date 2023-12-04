@@ -12,7 +12,7 @@ protocol SocialFlowCoordinatorDependencies {
     func makeSocialFlowCoordinator(navigationController: UINavigationController) -> SocialFlowCoordinator
     func makeSocialViewController(actions: SocialViewModelActions) -> UIViewController
     func makeFriendAddViewController(actions: FriendAddViewModelActions) -> UIViewController
-    func makeSocialDetailViewController(actions: SocialDetailViewModelActions) -> UIViewController
+    func makeSocialDetailViewController(actions: SocialDetailViewModelActions, friend: Friend) -> UIViewController
 }
 
 final class SocialFlowCoordinator: Coordinator {
@@ -47,11 +47,11 @@ final class SocialFlowCoordinator: Coordinator {
     
     func showSocialDetailViewController(friend: Friend) {
         let actions = SocialDetailViewModelActions(didFinishUnfollow: didFinishUnfollow)
-        let socialDetailViewController = dependencies.makeSocialDetailViewController(actions: actions)
+        let socialDetailViewController = dependencies.makeSocialDetailViewController(actions: actions, friend: friend)
         navigationController.pushViewController(socialDetailViewController, animated: true)
     }
     
     func didFinishUnfollow() {
-        navigationController.dismiss(animated: true)
+        navigationController.popViewController(animated: true)
     }
 }

@@ -21,8 +21,8 @@ final class SocialDetailViewModel: ObservableObject {
     private let friendUseCase: FriendUseCase
     private let actions: SocialDetailViewModelActions?
     
-    init(friendUseCase: FriendUseCase, actions: SocialDetailViewModelActions? = nil) {
-        self.friend = Friend(id: 1000, nickName: "임시친구", profileImageURL: nil, totalTime: 1041, isStuding: false)
+    init(friend: Friend, friendUseCase: FriendUseCase, actions: SocialDetailViewModelActions? = nil) {
+        self.friend = friend
         self.friendUseCase = friendUseCase
         self.actions = actions
     }
