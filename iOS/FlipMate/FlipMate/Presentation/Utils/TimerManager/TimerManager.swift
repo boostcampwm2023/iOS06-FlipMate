@@ -50,9 +50,9 @@ final class TimerManager {
     }
     
     // MARK: - deinit
-    deinit {
-        timer.cancel()
-    }
+//    deinit {
+//        timer.cancel()
+//    }
     
     /// 타이머를 시작합니다.
     func start(startTime: Date = Date()) {

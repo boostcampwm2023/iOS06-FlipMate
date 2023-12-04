@@ -17,7 +17,7 @@ protocol SocialFlowCoordinatorDependencies {
 
 final class SocialFlowCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
-    private var navigationController: UINavigationController
+    private weak var navigationController: UINavigationController?
     private var dependencies: SocialFlowCoordinatorDependencies
     
     init(dependencies: SocialFlowCoordinatorDependencies, navigationController: UINavigationController) {
@@ -30,7 +30,7 @@ final class SocialFlowCoordinator: Coordinator {
             showFriendAddViewController: showFreindAddViewController,
             showSocialDetailViewController: showSocialDetailViewController)
         let socialViewController = dependencies.makeSocialViewController(actions: actions)
-        navigationController.viewControllers = [socialViewController]
+        navigationController?.viewControllers = [socialViewController]
     }
     
     private func showFreindAddViewController() {
@@ -40,20 +40,20 @@ final class SocialFlowCoordinator: Coordinator {
         let freindAddViewContorller = dependencies.makeFriendAddViewController(actions: actions)
         let firendNavigationController = UINavigationController(rootViewController: freindAddViewContorller)
         firendNavigationController.modalPresentationStyle = .fullScreen
-        navigationController.present(firendNavigationController, animated: true)
+        navigationController?.present(firendNavigationController, animated: true)
     }
     
     private func dismissFreindAddViewController() {
-        navigationController.dismiss(animated: true)
+        navigationController?.dismiss(animated: true)
     }
     
     func showSocialDetailViewController(friend: Friend) {
         let actions = SocialDetailViewModelActions(didFinishUnfollow: didFinishUnfollow)
         let socialDetailViewController = dependencies.makeSocialDetailViewController(actions: actions, friend: friend)
-        navigationController.pushViewController(socialDetailViewController, animated: true)
+        navigationController?.pushViewController(socialDetailViewController, animated: true)
     }
     
     func didFinishUnfollow() {
-        navigationController.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 }
