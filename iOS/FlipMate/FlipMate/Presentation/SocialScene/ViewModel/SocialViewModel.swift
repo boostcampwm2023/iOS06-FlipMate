@@ -10,6 +10,7 @@ import Combine
 
 struct SocialViewModelActions {
     var showFriendAddViewController: () -> Void
+    var showSocialDetailViewController: (Friend) -> Void
 }
 
 protocol SocialViewModelInput {
@@ -17,6 +18,7 @@ protocol SocialViewModelInput {
     func viewWillAppear()
     func viewWillDisappear()
     func freindAddButtonDidTapped()
+    func friendCellDidTapped(friend: Friend)
 }
 
 protocol SocialViewModelOutput {
@@ -70,6 +72,10 @@ final class SocialViewModel: SocialViewModelProtocol {
     // MARK: - Input
     func freindAddButtonDidTapped() {
         actions?.showFriendAddViewController()
+    }
+    
+    func friendCellDidTapped(friend: Friend) {
+        actions?.showSocialDetailViewController(friend)
     }
     
     func viewDidLoad() {
