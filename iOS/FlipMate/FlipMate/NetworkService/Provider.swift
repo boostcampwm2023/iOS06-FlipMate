@@ -16,9 +16,11 @@ protocol Providable {
 struct Provider: Providable {
     private let jsonDecoder = JSONDecoder()
     private var urlSession: URLSessionable
+    private let signOutManager: SignOutManagerProtocol
     
-    init(urlSession: URLSessionable) {
+    init(urlSession: URLSessionable, signOutManager: SignOutManagerProtocol) {
         self.urlSession = urlSession
+        self.signOutManager = signOutManager
     }
     
     func request<E: RequestResponseable>(with endpoint: E) -> AnyPublisher<E.Response, NetworkError> {
@@ -32,6 +34,11 @@ struct Provider: Providable {
                     
                     guard 200..<300 ~= response.statusCode else {
                         do {
+                            if response.statusCode == 401 {
+                                FMLogger.general.error("토큰이 만료되어 로그인 화면으로 이동합니다.")
+                                signOutManager.signOut()
+                            }
+                            
                             let errorResult = try JSONDecoder().decode(StatusResponseWithErrorDTO.self, from: data)
                             FMLogger.general.error("에러 코드 : \(errorResult.statusCode)\n내용 : \(errorResult.message)")
                         } catch {
@@ -72,8 +79,14 @@ struct Provider: Providable {
         
         guard 200..<300 ~= response.statusCode else {
             do {
+                if response.statusCode == 401 {
+                    FMLogger.general.error("토큰이 만료되어 로그인 화면으로 이동합니다.")
+                    signOutManager.signOut()
+                }
+                
                 let errorResult = try JSONDecoder().decode(StatusResponseWithErrorDTO.self, from: data)
                 FMLogger.general.error("에러 코드 : \(errorResult.statusCode)\n내용 : \(errorResult.message)")
+                
             } catch {
                 FMLogger.general.error("에러 코드 : \(response.statusCode)\n내용 : \(HTTPURLResponse.localizedString(forStatusCode: response.statusCode))")
             }
