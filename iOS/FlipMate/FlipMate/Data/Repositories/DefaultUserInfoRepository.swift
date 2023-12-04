@@ -20,7 +20,7 @@ final class DefaultUserInfoRepository: UserInfoRepository {
         return provider.request(with: endpoint)
             .map { response -> UserInfo in
                 return UserInfo(
-                    name: response.nickName,
+                    name: response.nickname,
                     profileImageURL: response.imageURL,
                     email: response.email)
             }

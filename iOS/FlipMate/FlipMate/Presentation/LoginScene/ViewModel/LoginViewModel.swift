@@ -31,7 +31,8 @@ final class LoginViewModel: LoginViewModelProtocol {
 
     // MARK: properties
     private let googleAuthUseCase: GoogleAuthUseCase
-    private let cancellables: Set<AnyCancellable> = []
+    private let userInfoUseCase: UserInfoUseCase
+    private var cancellables: Set<AnyCancellable> = []
     private let actions: LoginViewModelActions?
     
     private let isMemberSubject = CurrentValueSubject<Bool?, Never>(nil)
@@ -40,8 +41,9 @@ final class LoginViewModel: LoginViewModelProtocol {
         return isMemberSubject.eraseToAnyPublisher()
     }
     
-    init(googleAuthUseCase: GoogleAuthUseCase, actions: LoginViewModelActions? = nil) {
+    init(googleAuthUseCase: GoogleAuthUseCase, userInfoUseCase: UserInfoUseCase, actions: LoginViewModelActions? = nil) {
         self.googleAuthUseCase = googleAuthUseCase
+        self.userInfoUseCase = userInfoUseCase
         self.actions = actions
     }
     
@@ -51,7 +53,23 @@ final class LoginViewModel: LoginViewModelProtocol {
     }
     
     func didFinishLoginAndIsMember() {
-        actions?.showTabBarController()
+        userInfoUseCase.getUserInfo()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                guard let self = self else { return }
+                switch completion {
+                case .finished:
+                    self.actions?.showTabBarController()
+                    FMLogger.user.debug("사용자 정보를 받아오는데 성공하였습니다.")
+                case .failure(let error):
+                    FMLogger.user.error("사용자 정보를 받아오는데 실패하였습니다. \(error.localizedDescription)")
+                }
+            } receiveValue: { userInfo in
+                UserInfoStorage.nickname = userInfo.name
+                UserInfoStorage.profileImageURL = userInfo.profileImageURL
+            }
+            .store(in: &cancellables)
+//        actions?.showTabBarController()
     }
     
     func didFinishLoginAndIsNotMember() {

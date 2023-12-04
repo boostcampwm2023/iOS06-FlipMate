@@ -24,8 +24,10 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
             loginViewModel: LoginViewModel(
                 googleAuthUseCase: DefaultGoogleAuthUseCase(
                     repository: DefaultGoogleAuthRepository(
-                        provider: dependencies.provider)
-                ),
+                        provider: dependencies.provider)),
+                userInfoUseCase: DefaultUserInfoUseCase(
+                    repository: DefaultUserInfoRepository(
+                        provider: dependencies.provider)),
                 actions: actions
             )
         )
