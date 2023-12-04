@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ChartLogResponseDTO: Decodable {
+struct DailyChartLogResponseDTO: Decodable {
     let todayTime: Int
     let categories: [CategoryDTO]?
     let percentage: Int
@@ -19,7 +19,7 @@ struct ChartLogResponseDTO: Decodable {
     }
 }
 
-extension ChartLogResponseDTO {
+extension DailyChartLogResponseDTO {
     struct CategoryDTO: Decodable {
         let id: Int
         let name: String
