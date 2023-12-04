@@ -21,7 +21,7 @@ struct FriendEndpoints {
     static func unfollowFreind(with friendUnfollowRequestDTO: FriendUnfollowRequestDTO) -> EndPoint<StatusResponseDTO> {
         let encoder = JSONEncoder()
         let data = try? encoder.encode(friendUnfollowRequestDTO)
-        return EndPoint (baseURL: BaseURL.flipmateDomain, path: Paths.friend, method: .delete, data: data)
+        return EndPoint(baseURL: BaseURL.flipmateDomain, path: Paths.friend, method: .delete, data: data)
     }
     
     static func searchFriend(at nickname: String) -> EndPoint<UserProfileResposeDTO> {
@@ -32,9 +32,7 @@ struct FriendEndpoints {
     }
     
     static func loadFriendData(with socialDetailRequestDTO: SocialDetailRequestDTO) -> EndPoint<SocialDetailResponseDTO> {
-        let encoder = JSONEncoder()
-        let data = try? encoder.encode(socialDetailRequestDTO)
-        let path = Paths.friend + "/\(socialDetailRequestDTO.followingID)" + "/stats"
-        return EndPoint(baseURL: BaseURL.flipmateDomain, path: path, method: .get, data: data)
+        let path = Paths.friend + "/\(socialDetailRequestDTO.followingID)" + "/stats" + "?date=\(socialDetailRequestDTO.date)"
+        return EndPoint(baseURL: BaseURL.flipmateDomain, path: path, method: .get)
     }
 }
