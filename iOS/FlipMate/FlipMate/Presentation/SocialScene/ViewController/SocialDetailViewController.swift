@@ -46,10 +46,10 @@ final class SocialDetailViewController: BaseViewController {
         static let studyTimeTrailing: CGFloat = -30
         static let studyTimeHeight: CGFloat = 120
         
-        static let chartTop: CGFloat = 40
-        static let chartLeading: CGFloat = 30
-        static let chartTrailing: CGFloat = -30
-        static let chartBottom: CGFloat = -20
+        static let chartTop: CGFloat = 30
+        static let chartLeading: CGFloat = 8
+        static let chartTrailing: CGFloat = -8
+        static let chartBottom: CGFloat = -30
     }
 
     // MARK: - UI Components
