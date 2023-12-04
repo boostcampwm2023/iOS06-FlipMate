@@ -108,7 +108,6 @@
 		2CDCD0482B18893A0080DCDE /* SocialRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0472B18893A0080DCDE /* SocialRepository.swift */; };
 		2CDCD04A2B18895E0080DCDE /* DefaultSocialRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0492B18895E0080DCDE /* DefaultSocialRepository.swift */; };
 		2CDCD04C2B18899A0080DCDE /* SocialEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD04B2B18899A0080DCDE /* SocialEndpoints.swift */; };
-		2CDCD0562B18C8960080DCDE /* UserEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0552B18C8960080DCDE /* UserEndpoints.swift */; };
 		2CDCD0642B18CEDF0080DCDE /* FriendsResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0632B18CEDF0080DCDE /* FriendsResponseDTO.swift */; };
 		2CDCD0672B18D0330080DCDE /* FriendUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0662B18D0330080DCDE /* FriendUser.swift */; };
 		2CDCD0692B18D0D10080DCDE /* FriendSearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0682B18D0D10080DCDE /* FriendSearchItem.swift */; };
@@ -183,6 +182,8 @@
 		ED6865A72B17932F001A2AAD /* SocialDetailRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865A62B17932F001A2AAD /* SocialDetailRequestDTO.swift */; };
 		ED6865A92B17933C001A2AAD /* SocialDetailResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865A82B17933C001A2AAD /* SocialDetailResponseDTO.swift */; };
 		ED6865AD2B179600001A2AAD /* SocialDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865AC2B179600001A2AAD /* SocialDetailViewModel.swift */; };
+		ED6865B82B1CE820001A2AAD /* FriendUnfollowRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865B72B1CE820001A2AAD /* FriendUnfollowRequestDTO.swift */; };
+		ED6865BA2B1CEA0F001A2AAD /* SocialChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865B92B1CEA0F001A2AAD /* SocialChart.swift */; };
 		ED82F0072B126C95005BB32D /* UITextField++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F0062B126C95005BB32D /* UITextField++Extension.swift */; };
 		ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */; };
 		ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A7E2B06033F008FE1C5 /* Category.swift */; };
@@ -372,6 +373,8 @@
 		ED6865A62B17932F001A2AAD /* SocialDetailRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDetailRequestDTO.swift; sourceTree = "<group>"; };
 		ED6865A82B17933C001A2AAD /* SocialDetailResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDetailResponseDTO.swift; sourceTree = "<group>"; };
 		ED6865AC2B179600001A2AAD /* SocialDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDetailViewModel.swift; sourceTree = "<group>"; };
+		ED6865B72B1CE820001A2AAD /* FriendUnfollowRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendUnfollowRequestDTO.swift; sourceTree = "<group>"; };
+		ED6865B92B1CEA0F001A2AAD /* SocialChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialChart.swift; sourceTree = "<group>"; };
 		ED82F0062B126C95005BB32D /* UITextField++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++Extension.swift"; sourceTree = "<group>"; };
 		ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor++Extension.swift"; sourceTree = "<group>"; };
 		ED9B2A7E2B06033F008FE1C5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -640,7 +643,10 @@
 			children = (
 				2C9F62212B173AB500AE63F9 /* FriendFollowReqeustDTO.swift */,
 				2C9F62232B173ADA00AE63F9 /* UserProfileResposeDTO.swift */,
+				ED6865A82B17933C001A2AAD /* SocialDetailResponseDTO.swift */,
+				ED6865A62B17932F001A2AAD /* SocialDetailRequestDTO.swift */,
 				2CDCD0632B18CEDF0080DCDE /* FriendsResponseDTO.swift */,
+				ED6865B72B1CE820001A2AAD /* FriendUnfollowRequestDTO.swift */,
 			);
 			path = SocialScene;
 			sourceTree = "<group>";
@@ -857,7 +863,6 @@
 		600908F32AFCDCE70065DFFB /* ChartScene */ = {
 			isa = PBXGroup;
 			children = (
-				ED6865AA2B1795DD001A2AAD /* New Group */,
 				2C5CDA592B025435007AFC57 /* ViewController */,
 			);
 			path = ChartScene;
@@ -907,7 +912,6 @@
 				600908FA2AFCDF0F0065DFFB /* Repositories */,
 				600908FC2AFCDF2F0065DFFB /* Network */,
 				600909022AFCDFEA0065DFFB /* Persistants */,
-				2CDCD05D2B18C9BE0080DCDE /* DefaultUserInfoRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1042,6 +1046,7 @@
 				2C2F21772B0F4CCC00B45BA8 /* StudyLog.swift */,
 				ED3842202B0F1CF9001E2803 /* User.swift */,
 				2C9F620C2B17241200AE63F9 /* Friend.swift */,
+				ED6865B92B1CEA0F001A2AAD /* SocialChart.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1169,17 +1174,8 @@
 		ED6865A52B1792CD001A2AAD /* SocialScene */ = {
 			isa = PBXGroup;
 			children = (
-				ED6865A62B17932F001A2AAD /* SocialDetailRequestDTO.swift */,
-				ED6865A82B17933C001A2AAD /* SocialDetailResponseDTO.swift */,
 			);
 			path = SocialScene;
-			sourceTree = "<group>";
-		};
-		ED6865AA2B1795DD001A2AAD /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		ED6865AB2B1795E8001A2AAD /* ViewModel */ = {
@@ -1468,6 +1464,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C3430A32B0DA5A5008CBC85 /* HTTPHeader.swift in Sources */,
+				ED6865BA2B1CEA0F001A2AAD /* SocialChart.swift in Sources */,
 				EDC851D22B04EE83009031EA /* CategoryListCollectionViewCell.swift in Sources */,
 				2C9F62222B173AB500AE63F9 /* FriendFollowReqeustDTO.swift in Sources */,
 				ED38422C2B0F4531001E2803 /* LoginViewModel.swift in Sources */,
@@ -1518,6 +1515,7 @@
 				2C88DCFE2B1244A6000B4686 /* LoginFlowCoordinator.swift in Sources */,
 				601773E42B021E6000D175D9 /* TimerViewController.swift in Sources */,
 				ED6865A92B17933C001A2AAD /* SocialDetailResponseDTO.swift in Sources */,
+				ED6865B82B1CE820001A2AAD /* FriendUnfollowRequestDTO.swift in Sources */,
 				2C88DCF92B1242DA000B4686 /* TimerFlowCoordinator.swift in Sources */,
 				60DFDDDE2B16384500FEF98A /* NickNameValidator.swift in Sources */,
 				600908C22AFCD7DF0065DFFB /* ViewController.swift in Sources */,

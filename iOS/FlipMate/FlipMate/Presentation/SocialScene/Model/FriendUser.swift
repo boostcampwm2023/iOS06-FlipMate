@@ -10,10 +10,3 @@ import Foundation
 enum Section: CaseIterable {
     case main
 }
-
-struct FriendUser: Hashable {
-    let profileImageURL: String?
-    let name: String
-    let time: Int?
-    var isStuding: Bool
-}
