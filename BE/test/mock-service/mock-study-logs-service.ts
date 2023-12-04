@@ -6,7 +6,7 @@ export class MockStudyLogsService {
 
   calculateTotalTimes(id, start_date, end_date) {
     const startMoment = moment(start_date);
-    const diffDays = moment(end_date).diff(startMoment, 'days');
+    const diffDays = moment(end_date).diff(startMoment, 'days') + 1;
     const result = Array.from({ length: diffDays }, () => 0);
     console.log(result);
     const daily_sums = this.data
