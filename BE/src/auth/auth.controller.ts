@@ -29,7 +29,7 @@ import { UpdateUserDto } from 'src/users/dto/update-user.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ConfigService } from '@nestjs/config';
 import { ENV } from 'src/common/const/env-keys.const';
-import { getImageUrl } from 'src/common/utils';
+import { getImageUrl } from 'src/common/utils/utils';
 
 @ApiTags('로그인 페이지')
 @Controller('auth')

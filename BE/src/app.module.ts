@@ -4,40 +4,24 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { StudyLogsModule } from './study-logs/study-logs.module';
-import { StudyLogs } from './study-logs/study-logs.entity';
-import { Categories } from './categories/categories.entity';
 import { CategoriesModule } from './categories/categories.module';
 import { MatesModule } from './mates/mates.module';
 import { UsersModule } from './users/users.module';
-import { UsersModel } from './users/entity/users.entity';
 import { PassportModule } from '@nestjs/passport';
 import { AuthModule } from './auth/auth.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
-import { Mates } from './mates/mates.entity';
-import { LoggingMiddleware } from './common/logging.middleware';
+import { LoggingMiddleware } from './common/middleware/logging.middleware';
+import { typeormConfig } from './common/config/typeorm.config';
+import { staticConfig } from './common/config/static.config';
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../../..', 'apps'),
-      serveRoot: '/',
-      renderPath: '/',
-    }),
+    ServeStaticModule.forRoot(staticConfig),
     ConfigModule.forRoot({
       isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
-      useFactory: (config: ConfigService) => ({
-        type: 'mysql',
-        host: config.get<string>('DATABASE_HOST'),
-        port: config.get<number>('DATABASE_PORT'),
-        username: config.get<string>('DATABASE_USERNAME'),
-        password: config.get<string>('DATABASE_PASSWORD'),
-        database: config.get<string>('DATABASE_NAME'),
-        entities: [StudyLogs, Categories, UsersModel, Mates],
-        synchronize: true,
-      }),
+      useFactory: typeormConfig,
       inject: [ConfigService],
     }),
     StudyLogsModule,

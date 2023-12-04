@@ -8,7 +8,7 @@ import { GreenEyeResponse } from './interface/greeneye.interface';
 import { S3Service } from 'src/common/s3.service';
 import { ENV } from 'src/common/const/env-keys.const';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { getImageUrl } from 'src/common/utils';
+import { getImageUrl } from 'src/common/utils/utils';
 
 @Injectable()
 export class UsersService {
@@ -115,8 +115,8 @@ export class UsersService {
   async requestClovaGreenEye(
     image: Express.Multer.File,
   ): Promise<GreenEyeResponse> {
-    const APIURL = this.config.get<string>('GREENEYE_URL');
-    const CLIENT_SECRET = this.config.get<string>('GREENEYE_SECRET');
+    const APIURL = this.config.get<string>(ENV.GREENEYE_URL);
+    const CLIENT_SECRET = this.config.get<string>(ENV.GREENEYE_SECRET);
     const UUID = v4();
     try {
       const response = await fetch(APIURL, {
