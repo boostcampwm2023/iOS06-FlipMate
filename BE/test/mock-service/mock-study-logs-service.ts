@@ -8,7 +8,6 @@ export class MockStudyLogsService {
     const startMoment = moment(start_date);
     const diffDays = moment(end_date).diff(startMoment, 'days') + 1;
     const result = Array.from({ length: diffDays }, () => 0);
-    console.log(result);
     const daily_sums = this.data
       .filter(
         (studyLog) =>
@@ -21,7 +20,6 @@ export class MockStudyLogsService {
         acc[index] += cur.learning_time;
         return acc;
       }, result);
-    console.log(daily_sums);
     return daily_sums;
   }
 }

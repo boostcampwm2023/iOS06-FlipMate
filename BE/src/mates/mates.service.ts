@@ -33,7 +33,6 @@ export class MatesService {
     date: string,
   ): Promise<object> {
     const start_date = moment(date).subtract(6, 'days').format('YYYY-MM-DD');
-    console.log(start_date, date);
     const my_daily_data = await this.studyLogsService.calculateTotalTimes(
       user_id,
       start_date,

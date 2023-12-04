@@ -145,4 +145,13 @@ describe('MatesService', () => {
       });
     });
   });
+
+  it('학습 시간이 존재하지 않는 경우 모든 값이 0인 배열을 반환한다.', async () => {
+    const result = await service.getMateAndMyStats(1, 2, '2023-12-29');
+    expect(result).toStrictEqual({
+      my_daily_data: [0, 0, 0, 0, 0, 0, 0],
+      following_daily_data: [0, 0, 0, 0, 0, 0, 0],
+      following_primary_category: null,
+    });
+  });
 });
