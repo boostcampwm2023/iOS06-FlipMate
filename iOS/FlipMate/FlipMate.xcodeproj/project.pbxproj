@@ -193,6 +193,8 @@
 		ED6865C12B1E3B48001A2AAD /* WeeklyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865C02B1E3B48001A2AAD /* WeeklyChartView.swift */; };
 		ED6865C42B1E4303001A2AAD /* DailyChartLogResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865C32B1E4303001A2AAD /* DailyChartLogResponseDTO.swift */; };
 		ED6865C62B1E438B001A2AAD /* ChartEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865C52B1E438B001A2AAD /* ChartEndpoints.swift */; };
+		ED6865C82B1E44B1001A2AAD /* ChartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865C72B1E44B1001A2AAD /* ChartRepository.swift */; };
+		ED6865CA2B1E454E001A2AAD /* DefaultChartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865C92B1E454E001A2AAD /* DefaultChartRepository.swift */; };
 		ED82F0072B126C95005BB32D /* UITextField++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F0062B126C95005BB32D /* UITextField++Extension.swift */; };
 		ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */; };
 		ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A7E2B06033F008FE1C5 /* Category.swift */; };
@@ -392,6 +394,8 @@
 		ED6865C02B1E3B48001A2AAD /* WeeklyChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyChartView.swift; sourceTree = "<group>"; };
 		ED6865C32B1E4303001A2AAD /* DailyChartLogResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyChartLogResponseDTO.swift; sourceTree = "<group>"; };
 		ED6865C52B1E438B001A2AAD /* ChartEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartEndpoints.swift; sourceTree = "<group>"; };
+		ED6865C72B1E44B1001A2AAD /* ChartRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartRepository.swift; sourceTree = "<group>"; };
+		ED6865C92B1E454E001A2AAD /* DefaultChartRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChartRepository.swift; sourceTree = "<group>"; };
 		ED82F0062B126C95005BB32D /* UITextField++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++Extension.swift"; sourceTree = "<group>"; };
 		ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor++Extension.swift"; sourceTree = "<group>"; };
 		ED9B2A7E2B06033F008FE1C5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -957,23 +961,16 @@
 		600908FA2AFCDF0F0065DFFB /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				600908FB2AFCDF180065DFFB /* Utils */,
+				ED3842282B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift */,
 				2C3430AC2B0DDF25008CBC85 /* DefaultTimerRepository.swift */,
 				2C2F217D2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift */,
 				ED3842302B0F94E6001E2803 /* DefaultCategoryRepository.swift */,
 				601EB7422B14F83400C5B216 /* DefaultSignUpRepository.swift */,
 				2C9F62142B1736BE00AE63F9 /* DefaultFriendRepository.swift */,
 				2CDCD0492B18895E0080DCDE /* DefaultSocialRepository.swift */,
+				ED6865C92B1E454E001A2AAD /* DefaultChartRepository.swift */,
 			);
 			path = Repositories;
-			sourceTree = "<group>";
-		};
-		600908FB2AFCDF180065DFFB /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				ED3842282B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift */,
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		600908FC2AFCDF2F0065DFFB /* Network */ = {
@@ -1132,6 +1129,7 @@
 				601EB7402B14F39B00C5B216 /* SignUpRepository.swift */,
 				2C9F62122B17366200AE63F9 /* FriendRepository.swift */,
 				2CDCD0472B18893A0080DCDE /* SocialRepository.swift */,
+				ED6865C72B1E44B1001A2AAD /* ChartRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1609,6 +1607,7 @@
 				ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */,
 				ED3595BD2B0DB29F00558FAA /* CategoryModifyViewController.swift in Sources */,
 				2C34309B2B0C8674008CBC85 /* URLSessionable.swift in Sources */,
+				ED6865C82B1E44B1001A2AAD /* ChartRepository.swift in Sources */,
 				2CE84EF92B0B8A0B00E2FB71 /* CategorySettingFooterView.swift in Sources */,
 				601EB7472B14F97700C5B216 /* NickNameValidationResponseDTO.swift in Sources */,
 				2C3430972B0C7ED8008CBC85 /* EndPoint.swift in Sources */,
@@ -1618,6 +1617,7 @@
 				ED6865BD2B1DEE3D001A2AAD /* DailyChartView.swift in Sources */,
 				601EB73B2B148F9A00C5B216 /* SignUpViewModel.swift in Sources */,
 				2C5E34BE2B1B51CB00FD481B /* FriendStatus.swift in Sources */,
+				ED6865CA2B1E454E001A2AAD /* DefaultChartRepository.swift in Sources */,
 				ED6865A42B1649ED001A2AAD /* String++Extension.swift in Sources */,
 				2C87C2772B1C789A00A26313 /* FriendStatusPollingManager.swift in Sources */,
 				ED6865C62B1E438B001A2AAD /* ChartEndpoints.swift in Sources */,

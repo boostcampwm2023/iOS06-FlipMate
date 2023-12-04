@@ -12,7 +12,7 @@ struct StudyLog {
     var category: [Category]
 }
 
-struct StudyChart {
-    var studyLog: [StudyLog]
+struct ChartLog {
+    var studyLog: StudyLog
     var percentage: Int
 }

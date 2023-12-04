@@ -8,11 +8,10 @@
 import Foundation
 
 struct ChartEndpoints {
-    static func fetchDailyLog(date: Date) -> EndPoint<[DailyChartLogResponseDTO]> {
+    static func fetchDailyLog(date: Date) -> EndPoint<DailyChartLogResponseDTO> {
         return EndPoint(
             baseURL: BaseURL.flipmateDomain,
             path: Paths.studylogs + "?date=\(date.dateToString(format: .yyyyMMdd))",
             method: .get)
-        
     }
 }
