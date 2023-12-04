@@ -93,6 +93,8 @@ describe('CategoriesService', () => {
         BadRequestException,
       );
     });
+
+    it.todo('카테고리는 최대 10개까지 추가할 수 있다');
   });
 
   describe('.findByUserId()', () => {
