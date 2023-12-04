@@ -10,7 +10,7 @@ import Foundation
 struct SignUpResponseDTO: Decodable {
     let nickName: String
     let email: String
-    let imageURL: String
+    let imageURL: String?
     
     private enum CodingKeys: String, CodingKey {
         case nickName = "nickname"
