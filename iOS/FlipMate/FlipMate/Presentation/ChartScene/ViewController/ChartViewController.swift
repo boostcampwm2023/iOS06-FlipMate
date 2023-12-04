@@ -8,5 +8,88 @@
 import UIKit
 
 final class ChartViewController: BaseViewController {
+    private let segmentedControl: UISegmentedControl = {
+        let segmentedControl = ChartSegmentedControl(items: ["일간", "주간"])
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: FlipMateColor.gray2.color as Any, 
+            .font: FlipMateFont.mediumRegular.font], for: .normal)
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: FlipMateColor.darkBlue.color as Any, 
+            .font: FlipMateFont.mediumBold.font], for: .selected)
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        
+        return segmentedControl
+    }()
+    
+    private let dailyChartView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .green
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private let weeklyChartView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .yellow
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    var shouldHideDailyChartView: Bool? {
+        didSet {
+            guard let shouldHideDailyChartView = self.shouldHideDailyChartView else { return }
+            dailyChartView.isHidden = shouldHideDailyChartView
+            weeklyChartView.isHidden = !dailyChartView.isHidden
+        }
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setSegmentControll()
+    }
+    
+    override func configureUI() {
+        super.configureUI()
+        
+        self.view.addSubview(self.segmentedControl)
+        self.view.addSubview(self.dailyChartView)
+        self.view.addSubview(self.weeklyChartView)
+        
+        NSLayoutConstraint.activate([
+            segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
+            segmentedControl.heightAnchor.constraint(equalToConstant: 50),
+            segmentedControl.widthAnchor.constraint(equalToConstant: 140)
+        ])
+        NSLayoutConstraint.activate([
+            dailyChartView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 30),
+            dailyChartView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 25),
+            dailyChartView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -25),
+            dailyChartView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
+        ])
+        NSLayoutConstraint.activate([
+            weeklyChartView.topAnchor.constraint(equalTo: dailyChartView.topAnchor),
+            weeklyChartView.leadingAnchor.constraint(equalTo: dailyChartView.leadingAnchor),
+            weeklyChartView.trailingAnchor.constraint(equalTo: dailyChartView.trailingAnchor),
+            weeklyChartView.bottomAnchor.constraint(equalTo: dailyChartView.bottomAnchor)
+        ])
+    }
+}
 
+private extension ChartViewController {
+    func setSegmentControll() {
+        segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
+        segmentedControl.selectedSegmentIndex = 0
+        self.didChangeValue(segment: self.segmentedControl)
+    }
+}
+
+private extension ChartViewController {
+    @objc func didChangeValue(segment: UISegmentedControl) {
+        shouldHideDailyChartView = segment.selectedSegmentIndex != 0
+    }
+}
+
+@available(iOS 17.0, *)
+#Preview {
+    ChartViewController()
 }

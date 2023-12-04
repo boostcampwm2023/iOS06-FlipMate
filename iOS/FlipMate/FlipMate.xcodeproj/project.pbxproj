@@ -189,6 +189,7 @@
 		ED6865B82B1CE820001A2AAD /* FriendUnfollowRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865B72B1CE820001A2AAD /* FriendUnfollowRequestDTO.swift */; };
 		ED6865BA2B1CEA0F001A2AAD /* SocialChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865B92B1CEA0F001A2AAD /* SocialChart.swift */; };
 		ED6865BD2B1DEE3D001A2AAD /* DailyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865BC2B1DEE3D001A2AAD /* DailyChartView.swift */; };
+		ED6865BF2B1E2FA6001A2AAD /* ChartSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865BE2B1E2FA6001A2AAD /* ChartSegmentedControl.swift */; };
 		ED82F0072B126C95005BB32D /* UITextField++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F0062B126C95005BB32D /* UITextField++Extension.swift */; };
 		ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */; };
 		ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A7E2B06033F008FE1C5 /* Category.swift */; };
@@ -385,6 +386,7 @@
 		ED6865B72B1CE820001A2AAD /* FriendUnfollowRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendUnfollowRequestDTO.swift; sourceTree = "<group>"; };
 		ED6865B92B1CEA0F001A2AAD /* SocialChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialChart.swift; sourceTree = "<group>"; };
 		ED6865BC2B1DEE3D001A2AAD /* DailyChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyChartView.swift; sourceTree = "<group>"; };
+		ED6865BE2B1E2FA6001A2AAD /* ChartSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartSegmentedControl.swift; sourceTree = "<group>"; };
 		ED82F0062B126C95005BB32D /* UITextField++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++Extension.swift"; sourceTree = "<group>"; };
 		ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor++Extension.swift"; sourceTree = "<group>"; };
 		ED9B2A7E2B06033F008FE1C5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -1214,6 +1216,7 @@
 			isa = PBXGroup;
 			children = (
 				ED6865BC2B1DEE3D001A2AAD /* DailyChartView.swift */,
+				ED6865BE2B1E2FA6001A2AAD /* ChartSegmentedControl.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1528,6 +1531,7 @@
 				601EB73D2B14D67600C5B216 /* SignUpUseCase.swift in Sources */,
 				608646572B0DE31800B0C1BC /* CategoryResponseDTO.swift in Sources */,
 				ED38421F2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift in Sources */,
+				ED6865BF2B1E2FA6001A2AAD /* ChartSegmentedControl.swift in Sources */,
 				ED3595B22B0C83D700558FAA /* TimerStartResponseDTO.swift in Sources */,
 				2C5CDA582B025426007AFC57 /* FlipMateFont.swift in Sources */,
 				2CDCD04C2B18899A0080DCDE /* SocialEndpoints.swift in Sources */,
