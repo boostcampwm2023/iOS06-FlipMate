@@ -146,6 +146,7 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
     }
     
     private func increaseLearningTime() {
+        if updateFriendArray.isEmpty { return }
         updateLearningFriends.send(updateFriendArray)
         updateFriendArray.forEach { $0.currentLearningTime += 1 }
     }
