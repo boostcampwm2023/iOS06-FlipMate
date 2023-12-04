@@ -10,5 +10,11 @@
     "name": "과학",
     "color_code": "BBBBBB",
     "user_id": 1
+  },
+  {
+    "id": 3,
+    "name": "수학",
+    "color_code": "CCCCCC",
+    "user_id": 4
   }
 ]

@@ -33,6 +33,7 @@ export class MatesService {
     date: string,
   ): Promise<object> {
     const start_date = moment(date).subtract(6, 'days').format('YYYY-MM-DD');
+    console.log(start_date, date);
     const my_daily_data = await this.studyLogsService.calculateTotalTimes(
       user_id,
       start_date,
@@ -85,7 +86,7 @@ export class MatesService {
     const result = await this.matesRepository.find({
       where: { follower_id: { id: user_id } },
     });
-    const userIds = result.map(({ following_id: { id } }) => id);
+    const userIds = result.map((following) => following.following_id);
     return Promise.all(
       userIds.map(async (id) => {
         const started_at = await this.redisService.get(`${id}`);
@@ -131,12 +132,17 @@ export class MatesService {
     const following = await this.userRepository.findOne({
       where: { id: following_id },
     });
+
+    if (!following) {
+      throw new NotFoundException('해당 유저는 존재하지 않습니다.');
+    }
+
     const result = await this.matesRepository.delete({
       follower_id: user,
       following_id: following,
     });
 
-    if (result.affected === 0) {
+    if (!result) {
       throw new NotFoundException('해당 친구 관계는 존재하지 않습니다.');
     }
   }
