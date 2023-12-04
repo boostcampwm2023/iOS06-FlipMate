@@ -141,7 +141,7 @@ export class StudyLogsService {
       [startDate, endDate],
     );
     const rank = result.findIndex((user) => user.user_id === userId) + 1;
-    if (rank) {
+    if (!rank) {
       return 100;
     }
     const userCount = await this.usersRepository.count();
