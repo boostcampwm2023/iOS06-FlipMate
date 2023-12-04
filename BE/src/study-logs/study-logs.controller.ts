@@ -15,6 +15,7 @@ import { AccessTokenGuard } from 'src/auth/guard/bearer-token.guard';
 import { User } from 'src/users/decorator/user.decorator';
 import { ResponseDto } from 'src/common/response.dto';
 import { dailyStatDto } from './dto/response/daily-stat.dto';
+import moment from 'moment';
 
 @ApiTags('타이머 페이지')
 @Controller('study-logs')
@@ -100,13 +101,42 @@ export class StatsController {
     );
     return {
       ...studyLogData,
-      percentage: await this.studyLogsService.calculatePercentage(userId, date),
+      percentage: await this.studyLogsService.calculatePercentage(
+        userId,
+        date,
+        date,
+      ),
     };
   }
 
   @Get('/weekly')
+  @UseGuards(AccessTokenGuard)
+  @ApiQuery({
+    name: 'date',
+    example: '2023-11-22',
+    description: '통계 조회 할 날짜',
+  })
   @ApiOperation({ summary: '주간 통계 조회하기' })
-  getWeeklyStats() {}
+  async getWeeklyStats(
+    @User('id') userId: number,
+    @Query('date') date: string,
+  ) {
+    const start_date = moment(date).subtract(6, 'days').format('YYYY-MM-DD');
+    const sevenDaysData = await this.studyLogsService.calculateTotalTimes(
+      userId,
+      start_date,
+      date,
+    );
+    return {
+      ...sevenDaysData,
+      primary_category: null,
+      percentage: await this.studyLogsService.calculatePercentage(
+        userId,
+        start_date,
+        date,
+      ),
+    };
+  }
 
   @Get('/monthly')
   @ApiOperation({ summary: '주간 통계 조회하기' })

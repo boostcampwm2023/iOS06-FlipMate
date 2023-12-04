@@ -125,18 +125,25 @@ export class StudyLogsService {
     this.studyLogsRepository.delete({ user_id: { id: id } });
   }
 
-  async calculatePercentage(userId: number, date: string): Promise<number> {
+  async calculatePercentage(
+    userId: number,
+    startDate: string,
+    endDate: string,
+  ): Promise<number> {
     const result = await this.studyLogsRepository.query(
       `
       SELECT user_id, SUM(learning_time) AS total_time
       FROM study_logs
-      WHERE date = ?
+      WHERE date BETWEEN ? AND ?
       GROUP BY user_id
       ORDER BY total_time DESC;
     `,
-      [date],
+      [startDate, endDate],
     );
     const rank = result.findIndex((user) => user.user_id === userId) + 1;
+    if (rank) {
+      return 100;
+    }
     const userCount = await this.usersRepository.count();
     return (rank / userCount) * 100;
   }
