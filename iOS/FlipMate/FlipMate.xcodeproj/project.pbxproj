@@ -44,6 +44,7 @@
 		2C801D832B04C64F00A7ABAE /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C801D822B04C64F00A7ABAE /* TimerManager.swift */; };
 		2C87C2772B1C789A00A26313 /* FriendStatusPollingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2762B1C789A00A26313 /* FriendStatusPollingManager.swift */; };
 		2C87C2792B1C794000A26313 /* UpdateFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2782B1C794000A26313 /* UpdateFriend.swift */; };
+		2C87C27B2B1DF11000A26313 /* UserInfoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C27A2B1DF11000A26313 /* UserInfoResponseDTO.swift */; };
 		2C88DCF22B124238000B4686 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */; };
 		2C88DCF42B124272000B4686 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF32B124272000B4686 /* AppDIContainer.swift */; };
 		2C88DCF62B124292000B4686 /* TimerSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF52B124292000B4686 /* TimerSceneDIContainer.swift */; };
@@ -255,6 +256,7 @@
 		2C801D822B04C64F00A7ABAE /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		2C87C2762B1C789A00A26313 /* FriendStatusPollingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendStatusPollingManager.swift; sourceTree = "<group>"; };
 		2C87C2782B1C794000A26313 /* UpdateFriend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFriend.swift; sourceTree = "<group>"; };
+		2C87C27A2B1DF11000A26313 /* UserInfoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponseDTO.swift; sourceTree = "<group>"; };
 		2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		2C88DCF32B124272000B4686 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		2C88DCF52B124292000B4686 /* TimerSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSceneDIContainer.swift; sourceTree = "<group>"; };
@@ -298,7 +300,6 @@
 		2CDCD0472B18893A0080DCDE /* SocialRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialRepository.swift; sourceTree = "<group>"; };
 		2CDCD0492B18895E0080DCDE /* DefaultSocialRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSocialRepository.swift; sourceTree = "<group>"; };
 		2CDCD04B2B18899A0080DCDE /* SocialEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialEndpoints.swift; sourceTree = "<group>"; };
-		2CDCD0552B18C8960080DCDE /* UserEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEndpoints.swift; sourceTree = "<group>"; };
 		2CDCD0632B18CEDF0080DCDE /* FriendsResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsResponseDTO.swift; sourceTree = "<group>"; };
 		2CDCD0662B18D0330080DCDE /* FriendUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendUser.swift; sourceTree = "<group>"; };
 		2CDCD0682B18D0D10080DCDE /* FriendSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchItem.swift; sourceTree = "<group>"; };
@@ -979,7 +980,6 @@
 				2C2F217F2B0F4DA600B45BA8 /* MockURLSession.swift */,
 				2C9F62252B1742D200AE63F9 /* FriendEndpoints.swift */,
 				2CDCD04B2B18899A0080DCDE /* SocialEndpoints.swift */,
-				2CDCD0552B18C8960080DCDE /* UserEndpoints.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1178,6 +1178,7 @@
 				ED38421E2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift */,
 				601EB7462B14F97700C5B216 /* NickNameValidationResponseDTO.swift */,
 				60DFDDDA2B14FE0100FEF98A /* SignUpResponseDTO.swift */,
+				2C87C27A2B1DF11000A26313 /* UserInfoResponseDTO.swift */,
 			);
 			path = LoginScene;
 			sourceTree = "<group>";
@@ -1585,6 +1586,7 @@
 				606990572B18918B00E5730F /* MyPageViewController.swift in Sources */,
 				ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */,
 				ED3595BD2B0DB29F00558FAA /* CategoryModifyViewController.swift in Sources */,
+				2C87C27B2B1DF11000A26313 /* UserInfoResponseDTO.swift in Sources */,
 				2C34309B2B0C8674008CBC85 /* URLSessionable.swift in Sources */,
 				2CE84EF92B0B8A0B00E2FB71 /* CategorySettingFooterView.swift in Sources */,
 				601EB7472B14F97700C5B216 /* NickNameValidationResponseDTO.swift in Sources */,
