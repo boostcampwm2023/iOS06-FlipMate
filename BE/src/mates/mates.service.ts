@@ -9,7 +9,7 @@ import { Repository } from 'typeorm';
 import { MatesDto } from './dto/response/mates.dto';
 import { UsersModel } from 'src/users/entity/users.entity';
 import { RedisService } from 'src/common/redis.service';
-import { getImageUrl } from 'src/common/utils';
+import { getImageUrl } from 'src/common/utils/utils';
 import { ConfigService } from '@nestjs/config';
 import { ENV } from 'src/common/const/env-keys.const';
 import { StudyLogsService } from 'src/study-logs/study-logs.service';

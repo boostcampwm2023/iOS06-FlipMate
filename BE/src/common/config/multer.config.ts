@@ -1,7 +1,7 @@
-import  path from 'path';
+import path from 'path';
 import { BadRequestException } from '@nestjs/common';
 import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer-options.interface';
-import  multer from 'multer';
+import multer from 'multer';
 
 export const multerConfig = (): MulterOptions => {
   const storage = multer.memoryStorage();
@@ -15,7 +15,6 @@ export const multerConfig = (): MulterOptions => {
     }
     return callback(null, true);
   };
-
   const limits = { fileSize: 1024 * 1024 * 10 }; //10MB
 
   return {

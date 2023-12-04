@@ -1,4 +1,4 @@
-import  path from 'path';
+import path from 'path';
 
 export function transformDate(date: Date): string {
   const year = date.getFullYear();

@@ -6,7 +6,7 @@ import { StudyLogsCreateDto } from './dto/request/create-study-logs.dto';
 import { UsersModel } from 'src/users/entity/users.entity';
 import { Categories } from 'src/categories/categories.entity';
 import { StudyLogsDto } from './dto/response/study-logs.dto';
-import { transformDate } from 'src/common/utils';
+import { transformDate } from 'src/common/utils/utils';
 import { RedisService } from 'src/common/redis.service';
 import moment from 'moment';
 
@@ -49,6 +49,7 @@ export class StudyLogsService {
   }
 
   calculateStartDay(created_at: Date, learning_time: number): Date {
+    console.log(created_at.toLocaleString());
     const STANDARD = 0;
     const standardMS = STANDARD * 60 * 60 * 1000;
     const millisecond =
