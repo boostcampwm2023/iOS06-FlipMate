@@ -122,13 +122,14 @@ export class StatsController {
     @Query('date') date: string,
   ) {
     const start_date = moment(date).subtract(6, 'days').format('YYYY-MM-DD');
-    const sevenDaysData = await this.studyLogsService.calculateTotalTimes(
+    const daily_data = await this.studyLogsService.calculateTotalTimes(
       userId,
       start_date,
       date,
     );
     return {
-      ...sevenDaysData,
+      daily_data: daily_data,
+      total_time: daily_data.reduce((acc, cur) => acc + cur, 0),
       primary_category: null,
       percentage: await this.studyLogsService.calculatePercentage(
         userId,
