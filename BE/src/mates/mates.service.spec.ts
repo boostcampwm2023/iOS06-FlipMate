@@ -73,6 +73,8 @@ describe('MatesService', () => {
       });
     });
 
+    it.todo('친구는 최대 10명까지 추가할 수 있다.');
+
     it('자신을 친구 추가 할 수 없다.', async () => {
       expect(service.addMate(user, '어린콩')).rejects.toThrow(
         BadRequestException,

@@ -110,6 +110,14 @@ export class MatesService {
       throw new NotFoundException('해당 유저는 존재하지 않습니다.');
     }
 
+    const matesCount = await this.matesRepository.count({
+      where: { follower_id: user },
+    });
+
+    if (matesCount >= 10) {
+      throw new BadRequestException('친구는 최대 10명까지 추가할 수 있습니다.');
+    }
+
     const isExist = await this.matesRepository.findOne({
       where: { follower_id: user, following_id: following },
     });
