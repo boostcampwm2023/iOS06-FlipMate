@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 final class ChartViewController: BaseViewController {
     private let segmentedControl: UISegmentedControl = {
@@ -19,15 +20,13 @@ final class ChartViewController: BaseViewController {
         return segmentedControl
     }()
     
-    private let dailyChartView: UIView = {
+    private var dailyChartView: UIView = {
         let view = UIView()
-        view.backgroundColor = .green
-        view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
     }()
     
-    private let weeklyChartView: UIView = {
+    private var weeklyChartView: UIView = {
         let view = UIView()
         view.backgroundColor = .yellow
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -45,10 +44,12 @@ final class ChartViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setSegmentControll()
+        
     }
     
     override func configureUI() {
         super.configureUI()
+        setDailyChart()
         
         self.view.addSubview(self.segmentedControl)
         self.view.addSubview(self.dailyChartView)
@@ -80,6 +81,17 @@ private extension ChartViewController {
         segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
         segmentedControl.selectedSegmentIndex = 0
         self.didChangeValue(segment: self.segmentedControl)
+    }
+    
+    func setDailyChart() {
+        let dailyChartView = DailyChartView()
+        let hostingController = UIHostingController(rootView: dailyChartView)
+        addChild(hostingController)
+        guard let newChartView = hostingController.view else { return }
+        self.dailyChartView = newChartView
+        self.view.addSubview(newChartView)
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        hostingController.didMove(toParent: self)
     }
 }
 

@@ -8,15 +8,14 @@
 import SwiftUI
 import Charts
 
-struct DailyChartView: View {
+struct WeeklyChartView: View {
     @State var date = Date()
     var totalTime: Int = 25230
     var body: some View {
         VStack {
-            DatePicker("", selection: $date, displayedComponents: [.date])
             if #available(iOS 17.0, *) {
                 Chart {
-                    ForEach(dailyData, id: \.subject) { category in
+                    ForEach(weeklyData, id: \.subject) { category in
                         SectorMark(angle: .value("시간", category.studyTime ?? 0), innerRadius: .ratio(0.65), angularInset: 3.0)
                             .foregroundStyle(by: .value("카테고리", category.subject))
                             .cornerRadius(10.0)
@@ -30,24 +29,20 @@ struct DailyChartView: View {
                 .frame(height: 500)
                 .chartBackground { _ in
                     VStack {
-                        Text("총 학습 시간").font(.callout)
+                        Text("오늘의 학습 시간").font(.callout)
                             .foregroundStyle(.secondary)
-                        Text("\(totalTime.secondsToStringTime())").font(.system(size: 36))}
+                        Text("\(totalTime)s").font(.system(size: 36))}
                 }
             } else if #available(iOS 16.0, *) {
-                    Text("총 학습 시간").font(.callout)
-                        .foregroundStyle(.secondary)
-                    Text("\(totalTime.secondsToStringTime())").font(.system(size: 36))
-        
-                    Chart {
-                        ForEach(dailyData, id: \.subject) { category in
-                            BarMark(x: .value("시간", Float(category.studyTime ?? 0) / 60), y: .value("카테고리", category.subject))
-                                .foregroundStyle(by: .value("", category.color))
+                Chart {
+                    ForEach(weeklyData, id: \.subject) { category in
+                        BarMark(x: .value("시간", Float(category.studyTime ?? 0) / 60), y: .value("카테고리", category.subject))
+                            .foregroundStyle(by: .value("", category.color))
                         }
                     }
-                    .chartLegend(.hidden)
-                    .frame(height: 400)
-                    .chartXAxisLabel("분 (m)")
+                .chartLegend(.hidden)
+                .frame(height: 300)
+                .chartXAxisLabel("분 (m)")
             } else {
                 Text("iOS 16.0 이상 버전부터 차트 기능 사용 가능")
             }
@@ -55,7 +50,7 @@ struct DailyChartView: View {
     }
 }
 
-let dailyData: [Category] = [.init(id: 1, color: "1591FFFF", subject: "요리", studyTime: 1241),
+let weeklyData: [Category] = [.init(id: 1, color: "1591FFFF", subject: "요리", studyTime: 1241),
                         .init(id: 2, color: "295AA5FF", subject: "김장", studyTime: 675),
                         .init(id: 3, color: "000000FF", subject: "제빵", studyTime: 51),
                         .init(id: 4, color: "66FF00FF", subject: "도둑질", studyTime: 964),
@@ -64,5 +59,5 @@ let dailyData: [Category] = [.init(id: 1, color: "1591FFFF", subject: "요리", 
                         .init(id: 7, color: "638109FF", subject: "공부", studyTime: 40)]
 
 #Preview {
-    DailyChartView()
+    WeeklyChartView()
 }
