@@ -16,4 +16,11 @@ struct SocialEndpoints {
             method: .get)
         
     }
+    
+    static func fetchMyFriend(date: Date) -> EndPoint<[FriendsResponseDTO]> {
+        return EndPoint(
+            baseURL: BaseURL.flipmateDomain,
+            path: Paths.friend + "?date=\(date.dateToString(format: .yyyyMMdd))",
+            method: .get)
+    }
 }

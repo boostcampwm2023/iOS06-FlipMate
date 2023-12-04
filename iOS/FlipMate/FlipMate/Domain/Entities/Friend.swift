@@ -8,9 +8,10 @@
 import Foundation
 
 struct Friend: Hashable {
-    let id: Int?
+    let id: Int
     let nickName: String
     let profileImageURL: String?
-    let totalTime: Int?
+    let totalTime: Int
+    let startedTime: String?
     let isStuding: Bool
 }

@@ -37,10 +37,14 @@
 		2C5CDA572B025426007AFC57 /* FlipMateColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA532B025426007AFC57 /* FlipMateColor.swift */; };
 		2C5CDA582B025426007AFC57 /* FlipMateFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA552B025426007AFC57 /* FlipMateFont.swift */; };
 		2C5CDA5B2B025440007AFC57 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA5A2B025440007AFC57 /* ChartViewController.swift */; };
+		2C5E34BC2B1B430D00FD481B /* FreindStatusResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E34BB2B1B430D00FD481B /* FreindStatusResponseDTO.swift */; };
+		2C5E34BE2B1B51CB00FD481B /* FriendStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E34BD2B1B51CB00FD481B /* FriendStatus.swift */; };
 		2C6717F82B0535A8004D118D /* Int++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6717F72B0535A8004D118D /* Int++Extension.swift */; };
 		2C801D7E2B04B65400A7ABAE /* DefaultTimerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C801D7D2B04B65400A7ABAE /* DefaultTimerUseCase.swift */; };
 		2C801D802B04B68900A7ABAE /* TimerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C801D7F2B04B68900A7ABAE /* TimerUseCase.swift */; };
 		2C801D832B04C64F00A7ABAE /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C801D822B04C64F00A7ABAE /* TimerManager.swift */; };
+		2C87C2772B1C789A00A26313 /* FriendStatusPollingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2762B1C789A00A26313 /* FriendStatusPollingManager.swift */; };
+		2C87C2792B1C794000A26313 /* UpdateFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2782B1C794000A26313 /* UpdateFriend.swift */; };
 		2C88DCF22B124238000B4686 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */; };
 		2C88DCF42B124272000B4686 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF32B124272000B4686 /* AppDIContainer.swift */; };
 		2C88DCF62B124292000B4686 /* TimerSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF52B124292000B4686 /* TimerSceneDIContainer.swift */; };
@@ -243,10 +247,14 @@
 		2C5CDA532B025426007AFC57 /* FlipMateColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlipMateColor.swift; sourceTree = "<group>"; };
 		2C5CDA552B025426007AFC57 /* FlipMateFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlipMateFont.swift; sourceTree = "<group>"; };
 		2C5CDA5A2B025440007AFC57 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
+		2C5E34BB2B1B430D00FD481B /* FreindStatusResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreindStatusResponseDTO.swift; sourceTree = "<group>"; };
+		2C5E34BD2B1B51CB00FD481B /* FriendStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendStatus.swift; sourceTree = "<group>"; };
 		2C6717F72B0535A8004D118D /* Int++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int++Extension.swift"; sourceTree = "<group>"; };
 		2C801D7D2B04B65400A7ABAE /* DefaultTimerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimerUseCase.swift; sourceTree = "<group>"; };
 		2C801D7F2B04B68900A7ABAE /* TimerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerUseCase.swift; sourceTree = "<group>"; };
 		2C801D822B04C64F00A7ABAE /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
+		2C87C2762B1C789A00A26313 /* FriendStatusPollingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendStatusPollingManager.swift; sourceTree = "<group>"; };
+		2C87C2782B1C794000A26313 /* UpdateFriend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFriend.swift; sourceTree = "<group>"; };
 		2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		2C88DCF32B124272000B4686 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		2C88DCF52B124292000B4686 /* TimerSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSceneDIContainer.swift; sourceTree = "<group>"; };
@@ -560,6 +568,14 @@
 			path = TimerManager;
 			sourceTree = "<group>";
 		};
+		2C87C2752B1C788700A26313 /* FriendStatusPollingManager */ = {
+			isa = PBXGroup;
+			children = (
+				2C87C2762B1C789A00A26313 /* FriendStatusPollingManager.swift */,
+			);
+			path = FriendStatusPollingManager;
+			sourceTree = "<group>";
+		};
 		2C88DCF72B1242C7000B4686 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
@@ -646,6 +662,7 @@
 				ED6865A82B17933C001A2AAD /* SocialDetailResponseDTO.swift */,
 				ED6865A62B17932F001A2AAD /* SocialDetailRequestDTO.swift */,
 				2CDCD0632B18CEDF0080DCDE /* FriendsResponseDTO.swift */,
+				2C5E34BB2B1B430D00FD481B /* FreindStatusResponseDTO.swift */,
 				ED6865B72B1CE820001A2AAD /* FriendUnfollowRequestDTO.swift */,
 			);
 			path = SocialScene;
@@ -714,6 +731,7 @@
 			children = (
 				2CDCD0662B18D0330080DCDE /* FriendUser.swift */,
 				2CDCD0682B18D0D10080DCDE /* FriendSearchItem.swift */,
+				2C87C2782B1C794000A26313 /* UpdateFriend.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -973,6 +991,7 @@
 		600908FE2AFCDF8D0065DFFB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				2C87C2752B1C788700A26313 /* FriendStatusPollingManager */,
 				60DFDDDC2B16383900FEF98A /* NickNameValidator */,
 				2C9F61F52B14EA9800AE63F9 /* CategoryManager */,
 				2C801D812B04C62900A7ABAE /* TimerManager */,
@@ -1046,6 +1065,7 @@
 				2C2F21772B0F4CCC00B45BA8 /* StudyLog.swift */,
 				ED3842202B0F1CF9001E2803 /* User.swift */,
 				2C9F620C2B17241200AE63F9 /* Friend.swift */,
+				2C5E34BD2B1B51CB00FD481B /* FriendStatus.swift */,
 				ED6865B92B1CEA0F001A2AAD /* SocialChart.swift */,
 			);
 			path = Entities;
@@ -1524,6 +1544,7 @@
 				ED3842212B0F1CF9001E2803 /* User.swift in Sources */,
 				2C3430A12B0DA4E6008CBC85 /* BaseComponents.swift in Sources */,
 				2CDCD0462B1889040080DCDE /* DefaultSocialUseCase.swift in Sources */,
+				2C5E34BC2B1B430D00FD481B /* FreindStatusResponseDTO.swift in Sources */,
 				2C88DD0D2B148E9B000B4686 /* TimerFinishViewController.swift in Sources */,
 				2C3430A12B0DA4E6008CBC85 /* BaseComponents.swift in Sources */,
 				2C2F21832B0F53B500B45BA8 /* StduyLogMock.swift in Sources */,
@@ -1572,7 +1593,9 @@
 				60DFDDD92B14FD7800FEF98A /* StatusResponseWithErrorDTO.swift in Sources */,
 				2C2F21762B0F440D00B45BA8 /* StudyLogEndpoints.swift in Sources */,
 				601EB73B2B148F9A00C5B216 /* SignUpViewModel.swift in Sources */,
+				2C5E34BE2B1B51CB00FD481B /* FriendStatus.swift in Sources */,
 				ED6865A42B1649ED001A2AAD /* String++Extension.swift in Sources */,
+				2C87C2772B1C789A00A26313 /* FriendStatusPollingManager.swift in Sources */,
 				2C88DD0F2B14C22C000B4686 /* TimerFinishViewModel.swift in Sources */,
 				2C4D55B32B035484006D7C26 /* DeviceOrientation.swift in Sources */,
 				ED3842272B0F1E0C001E2803 /* GoogleAuthUseCase.swift in Sources */,
@@ -1612,6 +1635,7 @@
 				EDC851D92B05C37C009031EA /* DeviceMotionManager.swift in Sources */,
 				2C9F62262B1742D200AE63F9 /* FriendEndpoints.swift in Sources */,
 				2CDCD03D2B1871E60080DCDE /* SocialDIContainer.swift in Sources */,
+				2C87C2792B1C794000A26313 /* UpdateFriend.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

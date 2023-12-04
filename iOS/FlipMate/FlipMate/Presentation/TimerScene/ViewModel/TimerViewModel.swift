@@ -9,6 +9,13 @@ import Foundation
 import Combine
 import OSLog
 
+enum TimerState {
+    case suspended // 타이머 일시정지 상태
+    case resumed // 타이머 작동 상태
+    case cancled // 타이머 종료 상태
+    case notStarted // 타이머 시작안된 상태
+}
+
 struct TimerViewModelActions {
     let showCategorySettingViewController: () -> Void
     let showTimerFinishViewController: (StudyEndLog) -> Void
@@ -219,14 +226,5 @@ private extension TimerViewModel {
     /// 타이머 종료
     func stopTimer() {
         timerUseCase.stopTimer()
-    }
-}
-
-private extension TimerViewModel {
-    enum TimerState {
-        case suspended // 타이머 일시정지 상태
-        case resumed // 타이머 작동 상태
-        case cancled // 타이머 종료 상태
-        case notStarted // 타이머 시작안된 상태
     }
 }

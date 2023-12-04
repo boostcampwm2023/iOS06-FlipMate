@@ -33,7 +33,3 @@ struct SocialChartView: View {
         }.padding()
     }
 }
-
-#Preview {
-    SocialChartView(viewModel: SocialDetailViewModel(friendUseCase: DefaultFriendUseCase(repository: DefaultFriendRepository(provider: Provider(urlSession: URLSession.shared)))))
-}

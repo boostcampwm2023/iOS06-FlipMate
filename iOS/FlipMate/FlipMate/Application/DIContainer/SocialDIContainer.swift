@@ -31,8 +31,8 @@ final class SocialDIContainer: SocialFlowCoordinatorDependencies {
                 actions: actions,
                 socialUseCase: DefaultSocialUseCase(
                     repsoitory: DefaultSocialRepository(
-                        provider: dependencies.provider)
-                )
+                        provider: dependencies.provider)),
+                friendStatusPollingManager: FriendStatusPollingManager()
             )
         )
     }
