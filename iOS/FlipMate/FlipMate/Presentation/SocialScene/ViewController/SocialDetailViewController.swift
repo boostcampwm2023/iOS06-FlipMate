@@ -290,7 +290,7 @@ final class SocialDetailViewController: BaseViewController {
             .sink { [weak self] friend in
                 guard let self = self else { return }
                 self.nickNameLabel.text = friend.nickName
-                self.dailyStudyTimeLabel.text = friend.totalTime?.secondsToStringTime()
+                self.dailyStudyTimeLabel.text = friend.totalTime.secondsToStringTime()
             }
             .store(in: &cancellables)
     }

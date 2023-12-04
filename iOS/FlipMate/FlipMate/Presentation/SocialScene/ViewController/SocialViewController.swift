@@ -175,6 +175,7 @@ final class SocialViewController: BaseViewController {
                     nickName: $0.nickName,
                     profileImageURL: $0.profileImageURL,
                     totalTime: $0.totalTime,
+                    startedTime: $0.startedTime,
                     isStuding: $0.isStuding)}
                 )
                 self.diffableDataSource.apply(snapshot, animatingDifferences: true)
