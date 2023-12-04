@@ -195,6 +195,8 @@
 		ED6865C62B1E438B001A2AAD /* ChartEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865C52B1E438B001A2AAD /* ChartEndpoints.swift */; };
 		ED6865C82B1E44B1001A2AAD /* ChartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865C72B1E44B1001A2AAD /* ChartRepository.swift */; };
 		ED6865CA2B1E454E001A2AAD /* DefaultChartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865C92B1E454E001A2AAD /* DefaultChartRepository.swift */; };
+		ED6865CC2B1E494D001A2AAD /* ChartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865CB2B1E494D001A2AAD /* ChartUseCase.swift */; };
+		ED6865CE2B1E49A6001A2AAD /* DefaultChartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865CD2B1E49A6001A2AAD /* DefaultChartUseCase.swift */; };
 		ED82F0072B126C95005BB32D /* UITextField++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F0062B126C95005BB32D /* UITextField++Extension.swift */; };
 		ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */; };
 		ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A7E2B06033F008FE1C5 /* Category.swift */; };
@@ -396,6 +398,8 @@
 		ED6865C52B1E438B001A2AAD /* ChartEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartEndpoints.swift; sourceTree = "<group>"; };
 		ED6865C72B1E44B1001A2AAD /* ChartRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartRepository.swift; sourceTree = "<group>"; };
 		ED6865C92B1E454E001A2AAD /* DefaultChartRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChartRepository.swift; sourceTree = "<group>"; };
+		ED6865CB2B1E494D001A2AAD /* ChartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartUseCase.swift; sourceTree = "<group>"; };
+		ED6865CD2B1E49A6001A2AAD /* DefaultChartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChartUseCase.swift; sourceTree = "<group>"; };
 		ED82F0062B126C95005BB32D /* UITextField++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++Extension.swift"; sourceTree = "<group>"; };
 		ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor++Extension.swift"; sourceTree = "<group>"; };
 		ED9B2A7E2B06033F008FE1C5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -1100,6 +1104,7 @@
 				2C88DD102B14C50F000B4686 /* DefaultTimerFinishUseCase.swift */,
 				2C9F62102B17363400AE63F9 /* DefaultFriendUseCase.swift */,
 				2CDCD0452B1889040080DCDE /* DefaultSocialUseCase.swift */,
+				ED6865CD2B1E49A6001A2AAD /* DefaultChartUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1115,6 +1120,7 @@
 				2C88DD122B14C51B000B4686 /* TimerFinishUseCase.swift */,
 				2C9F620E2B1735C700AE63F9 /* FriendUseCase.swift */,
 				2CDCD0432B1887200080DCDE /* SocialUseCase.swift */,
+				ED6865CB2B1E494D001A2AAD /* ChartUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1639,6 +1645,7 @@
 				2C3430B12B0DE3D0008CBC85 /* Date++Extension.swift in Sources */,
 				2C9F62152B1736BE00AE63F9 /* DefaultFriendRepository.swift in Sources */,
 				2CDCD0672B18D0330080DCDE /* FriendUser.swift in Sources */,
+				ED6865CC2B1E494D001A2AAD /* ChartUseCase.swift in Sources */,
 				2C2F217E2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift in Sources */,
 				2C5CDA4F2B025403007AFC57 /* SocialViewController.swift in Sources */,
 				2C88DD052B1256D0000B4686 /* TabBarFlowCoordinator.swift in Sources */,
@@ -1660,6 +1667,7 @@
 				2C9F62242B173ADA00AE63F9 /* UserProfileResposeDTO.swift in Sources */,
 				EDC851D92B05C37C009031EA /* DeviceMotionManager.swift in Sources */,
 				2C9F62262B1742D200AE63F9 /* FriendEndpoints.swift in Sources */,
+				ED6865CE2B1E49A6001A2AAD /* DefaultChartUseCase.swift in Sources */,
 				2CDCD03D2B1871E60080DCDE /* SocialDIContainer.swift in Sources */,
 				2C87C2792B1C794000A26313 /* UpdateFriend.swift in Sources */,
 			);
