@@ -15,6 +15,8 @@ export class StudyLogsService {
   constructor(
     @InjectRepository(StudyLogs)
     private studyLogsRepository: Repository<StudyLogs>,
+    @InjectRepository(UsersModel)
+    private usersRepository: Repository<UsersModel>,
     private redisService: RedisService,
   ) {}
 
@@ -121,6 +123,22 @@ export class StudyLogsService {
 
   async deleteRowsByUserId(id: number): Promise<void> {
     this.studyLogsRepository.delete({ user_id: { id: id } });
+  }
+
+  async calculatePercentage(userId: number, date: string): Promise<number> {
+    const result = await this.studyLogsRepository.query(
+      `
+      SELECT user_id, SUM(learning_time) AS total_time
+      FROM study_logs
+      WHERE date = ?
+      GROUP BY user_id
+      ORDER BY total_time DESC;
+    `,
+      [date],
+    );
+    const rank = result.findIndex((user) => user.user_id === userId) + 1;
+    const userCount = await this.usersRepository.count();
+    return (rank / userCount) * 100;
   }
 
   entityToDto(studyLog: StudyLogs): StudyLogsDto {
