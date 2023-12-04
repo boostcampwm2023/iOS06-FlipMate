@@ -38,7 +38,7 @@ final class FriendUseCaseTests: XCTestCase {
                 case .finished:
                     return
                 case .failure(_):
-                    XCTFail()
+                    XCTFail("네트워크 에러 발생, 테스트 실패")
                 }
             } receiveValue: { response in
                 XCTAssertEqual(response, "성공")

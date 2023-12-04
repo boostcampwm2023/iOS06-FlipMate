@@ -23,7 +23,7 @@ final class LoginViewController: BaseViewController {
     }
     
     // MARK: - Init
-    init(loginViewModel: LoginViewModelProtocol){
+    init(loginViewModel: LoginViewModelProtocol) {
         self.loginViewModel = loginViewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -84,9 +84,6 @@ final class LoginViewController: BaseViewController {
         return button
     }()
     
-    // MARK: - Life Cycle
-
-    
     // MARK: - UI Setting
     override func configureUI() {
         view.backgroundColor = .systemBackground
@@ -120,7 +117,7 @@ final class LoginViewController: BaseViewController {
             appleLoginButton.heightAnchor.constraint(equalToConstant: 44),
             
             loginSkipButton.topAnchor.constraint(equalTo: appleLoginButton.bottomAnchor, constant: 20),
-            loginSkipButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loginSkipButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
     
@@ -177,8 +174,3 @@ fileprivate extension UIButton {
         self.setShadow()
     }
 }
-
-//@available(iOS 17, *)
-//#Preview {
-//    LoginViewController()
-//}

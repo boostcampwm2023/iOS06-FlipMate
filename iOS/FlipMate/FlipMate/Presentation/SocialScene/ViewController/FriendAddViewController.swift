@@ -195,7 +195,6 @@ private extension FriendAddViewController {
     }
 }
 
-
 // MARK: - UITextFieldDelegate
 extension FriendAddViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
@@ -209,7 +208,7 @@ extension FriendAddViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let nickname = textField.text else { return false }
+        guard textField.text != nil else { return false }
         viewModel.didSearchFriend()
         return true
     }

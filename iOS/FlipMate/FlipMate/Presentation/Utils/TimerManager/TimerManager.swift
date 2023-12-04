@@ -98,7 +98,6 @@ private extension TimerManager {
         let fourNumber = String(format: "%.4f", diffTime).split(separator: ".").map { String($0) }.last!
         if fourNumber == "0000" {
             totalTime += 1
-            let time = String(self.totalTime)
             FMLogger.device.debug("경과시간: \(diffTime)")
         }
     }

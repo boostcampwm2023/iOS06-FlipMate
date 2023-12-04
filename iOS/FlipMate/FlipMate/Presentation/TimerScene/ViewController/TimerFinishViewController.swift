@@ -172,8 +172,3 @@ private extension TimerFinishViewController {
         learningTimeContentLabel.text = time.secondsToStringTime()
     }
 }
-
-//@available(iOS 17.0, *)
-//#Preview {
-//    TimerFinishViewController(viewModel: TimerFinishViewModel())
-//}

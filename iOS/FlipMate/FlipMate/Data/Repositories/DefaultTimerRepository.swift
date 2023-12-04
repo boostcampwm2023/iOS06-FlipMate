@@ -35,7 +35,7 @@ extension DefaultTimerRepository: TimerRepsoitory {
         let endpoint = TimerEndpoints.startTimer(with: requestDTO)
         
         return provider.request(with: endpoint)
-            .map { response -> Void in
+            .map { _ in
                 return ()
             }
             .eraseToAnyPublisher()
@@ -55,7 +55,7 @@ extension DefaultTimerRepository: TimerRepsoitory {
         let endpoint = TimerEndpoints.stopTimer(with: requestDTO)
     
         return provider.request(with: endpoint)
-            .map { response -> Void in
+            .map { _ in
                 return ()
             }
             .eraseToAnyPublisher()

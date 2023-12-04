@@ -25,4 +25,3 @@ final class DefaultStudyLogRepository: StudyLogRepository {
             .eraseToAnyPublisher()
     }
 }
-

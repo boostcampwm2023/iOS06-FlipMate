@@ -38,13 +38,13 @@ final class DefaultCategoryRepository: CategoryRepository {
             name: newName,
             colorCode: newColorCode)
         let endpoint = CategoryEndpoints.updateCategory(id: id, category: categoryDTO)
-        let updatedCategory = try await provider.request(with: endpoint)
+        _ = try await provider.request(with: endpoint)
         FMLogger.general.log("카테고리 업데이트 완료")
     }
     
     func deleteCategory(id: Int) async throws {
         let endpoint = CategoryEndpoints.deleteCategory(id: id)
-        let status = try await provider.request(with: endpoint)
+        _ = try await provider.request(with: endpoint)
         FMLogger.general.log("카테고리 삭제 완료")
     }
 }

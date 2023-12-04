@@ -12,8 +12,8 @@ PODS:
   - GTMAppAuth (2.0.0):
     - AppAuth/Core (~> 1.6)
     - GTMSessionFetcher/Core (< 4.0, >= 1.5)
-  - GTMSessionFetcher/Core (3.1.1)
-  - SwiftLint (0.53.0)
+  - GTMSessionFetcher/Core (3.2.0)
+  - SwiftLint (0.54.0)
 
 DEPENDENCIES:
   - GoogleSignIn
@@ -31,9 +31,9 @@ SPEC CHECKSUMS:
   AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
   GoogleSignIn: b232380cf495a429b8095d3178a8d5855b42e842
   GTMAppAuth: 99fb010047ba3973b7026e45393f51f27ab965ae
-  GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
-  SwiftLint: 5ce4d6a8ff83f1b5fd5ad5dbf30965d35af65e44
+  GTMSessionFetcher: 41b9ef0b4c08a6db4b7eb51a21ae5183ec99a2c8
+  SwiftLint: c1de071d9d08c8aba837545f6254315bc900e211
 
-PODFILE CHECKSUM: c8a4934ccc945019132d8470afd969c9d00a55e8
+PODFILE CHECKSUM: 61d2cba5b24cc50a19d1e1d880b6f691be26db22
 
 COCOAPODS: 1.14.3

@@ -17,7 +17,6 @@ final class FriendAddViewModelTests: XCTestCase {
     
     override func setUpWithError() throws {
         self.viewModel = FriendAddViewModel(
-            myNickname: "임현규",
             friendUseCase: mockUseCase)
     }
     
@@ -54,7 +53,6 @@ final class FriendAddViewModelTests: XCTestCase {
 
         self.viewModel.didSearchFriend()
 
-        
         wait(for: [expectation], timeout: 5)
     }
     
