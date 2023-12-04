@@ -48,13 +48,10 @@ final class SocialFlowCoordinator: Coordinator {
     func showSocialDetailViewController(friend: Friend) {
         let actions = SocialDetailViewModelActions(didFinishUnfollow: didFinishUnfollow)
         let socialDetailViewController = dependencies.makeSocialDetailViewController(actions: actions)
-        let detailNavigationController = UINavigationController(rootViewController: socialDetailViewController)
-        detailNavigationController.modalPresentationStyle = .fullScreen
-        navigationController.present(detailNavigationController, animated: true)
+        navigationController.pushViewController(socialDetailViewController, animated: true)
     }
     
     func didFinishUnfollow() {
         navigationController.dismiss(animated: true)
     }
 }
-
