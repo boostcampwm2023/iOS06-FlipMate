@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import Combine
 
 final class SocialDetailViewController: BaseViewController {
     private enum ComponentConstant {
@@ -50,6 +51,10 @@ final class SocialDetailViewController: BaseViewController {
         static let chartTrailing: CGFloat = -30
         static let chartBottom: CGFloat = -20
     }
+    
+    // MARK: - Properties
+    private var cancellables = Set<AnyCancellable>()
+
     // MARK: - UI Components
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -65,7 +70,6 @@ final class SocialDetailViewController: BaseViewController {
     private lazy var nickNameLabel: UILabel = {
         let label = UILabel()
         
-        label.text = friend.nickName
         label.font = FlipMateFont.mediumBold.font
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -151,12 +155,7 @@ final class SocialDetailViewController: BaseViewController {
         label.font = FlipMateFont.mediumBold.font
         label.textColor = FlipMateColor.gray2.color
         label.textAlignment = .right
-        guard let time = friend.totalTime else { return label }
-        if time >= 3600 {
-            label.text = "\(time / 3600)H \(time % 3600 / 60)m"
-        } else {
-            label.text = "\(time / 60)m"
-        }
+
         return label
     }()
     
@@ -217,11 +216,9 @@ final class SocialDetailViewController: BaseViewController {
     
     // MARK: - Properties
     private var viewModel: SocialDetailViewModel
-    private let friend: Friend
     
     init(viewModel: SocialDetailViewModel) {
         self.viewModel = viewModel
-        self.friend = viewModel.friend
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -287,6 +284,15 @@ final class SocialDetailViewController: BaseViewController {
     
     override func bind() {
         viewModel.viewDidLoad()
+        
+        viewModel.friendPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] friend in
+                guard let self = self else { return }
+                self.nickNameLabel.text = friend.nickName
+                self.dailyStudyTimeLabel.text = friend.totalTime?.secondsToStringTime()
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -320,7 +326,7 @@ private extension SocialDetailViewController {
         viewModel.didUnfollowFriend()
     }
 }
-@available(iOS 17.0, *)
-#Preview {
-    SocialDetailViewController(viewModel: SocialDetailViewModel(friendUseCase: DefaultFriendUseCase(repository: DefaultFriendRepository(provider: Provider(urlSession: URLSession.shared)))))
-}
+//@available(iOS 17.0, *)
+//#Preview {
+//    SocialDetailViewController(viewModel: SocialDetailViewModel(friendUseCase: DefaultFriendUseCase(repository: DefaultFriendRepository(provider: Provider(urlSession: URLSession.shared)))))
+//}

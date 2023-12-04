@@ -17,9 +17,17 @@ final class SocialDetailViewModel: ObservableObject {
     @Published var userSeries: [Series] = []
     
     private var cancellables = Set<AnyCancellable>()
-    let friend: Friend
+    private let friend: Friend
     private let friendUseCase: FriendUseCase
     private let actions: SocialDetailViewModelActions?
+    
+    // MARK: - Subject
+    private lazy var friendSubject = CurrentValueSubject<Friend, Never>(friend)
+    
+    // MARK: - Publisher
+    var friendPublisher: AnyPublisher<Friend, Never> {
+        return friendSubject.eraseToAnyPublisher()
+    }
     
     init(friend: Friend, friendUseCase: FriendUseCase, actions: SocialDetailViewModelActions? = nil) {
         self.friend = friend
