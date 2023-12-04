@@ -44,7 +44,7 @@ final class TabBarDIContainer: TabBarFlowCoordinatorDependencies {
         return UIViewController()
     }
     
-    func makeTabBarFlowCoordinator(navigationController: UINavigationController) -> TabBarFlowCoordinator {
+    func makeTabBarFlowCoordinator(navigationController: UINavigationController?) -> TabBarFlowCoordinator {
         return TabBarFlowCoordinator(
             navigationController: navigationController,
             dependencies: self
