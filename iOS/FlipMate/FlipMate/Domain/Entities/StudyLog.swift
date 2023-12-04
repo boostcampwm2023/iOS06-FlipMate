@@ -11,3 +11,8 @@ struct StudyLog {
     var totalTime: Int
     var category: [Category]
 }
+
+struct StudyChart {
+    var studyLog: [StudyLog]
+    var percentage: Int
+}
