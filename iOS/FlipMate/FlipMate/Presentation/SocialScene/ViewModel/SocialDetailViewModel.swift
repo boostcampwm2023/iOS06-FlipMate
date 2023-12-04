@@ -36,7 +36,7 @@ final class SocialDetailViewModel: ObservableObject {
     }
     
     func viewDidLoad() {
-        friendUseCase.loadChart(at: friend.id ?? 0)
+        friendUseCase.loadChart(at: friend.id)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -46,37 +46,15 @@ final class SocialDetailViewModel: ObservableObject {
                     FMLogger.friend.error("차트 조회 실패 \(error.localizedDescription)")
                 }
             } receiveValue: { [weak self] chartInfo in
-                guard let self = self, chartInfo.myData.count >= 7, chartInfo.friendData.count >= 7 else { return }
+                guard let self = self else { return }
                 self.socialChart = chartInfo
-                let myChartData: [StudyTime] = [
-                    StudyTime(weekday: Date(timeIntervalSinceNow: -86400 * 6), studyTime: chartInfo.myData[0]),
-                    StudyTime(weekday: Date(timeIntervalSinceNow: -86400 * 5), studyTime: chartInfo.myData[1]),
-                    StudyTime(weekday: Date(timeIntervalSinceNow: -86400 * 4), studyTime: chartInfo.myData[2]),
-                    StudyTime(weekday: Date(timeIntervalSinceNow: -86400 * 3), studyTime: chartInfo.myData[3]),
-                    StudyTime(weekday: Date(timeIntervalSinceNow: -86400 * 2), studyTime: chartInfo.myData[4]),
-                    StudyTime(weekday: Date(timeIntervalSinceNow: -86400), studyTime: chartInfo.myData[5]),
-                    StudyTime(weekday: Date(), studyTime: chartInfo.myData[6])
-                ]
-                
-                let friendChartData: [StudyTime] = [
-                    StudyTime(weekday: Date(timeIntervalSinceNow: -86400 * 6), studyTime: chartInfo.friendData[0]),
-                    StudyTime(weekday: Date(timeIntervalSinceNow: -86400 * 5), studyTime: chartInfo.friendData[1]),
-                    StudyTime(weekday: Date(timeIntervalSinceNow: -86400 * 4), studyTime: chartInfo.friendData[2]),
-                    StudyTime(weekday: Date(timeIntervalSinceNow: -86400 * 3), studyTime: chartInfo.friendData[3]),
-                    StudyTime(weekday: Date(timeIntervalSinceNow: -86400 * 2), studyTime: chartInfo.friendData[4]),
-                    StudyTime(weekday: Date(timeIntervalSinceNow: -86400), studyTime: chartInfo.friendData[5]),
-                    StudyTime(weekday: Date(), studyTime: chartInfo.friendData[6])
-                ]
-                
-                let newSeries: [Series] = [Series(user: "나", studyTime: myChartData), Series(user: "친구", studyTime: friendChartData)]
-                
-                self.userSeries = newSeries
+                self.handleChartInfo(socialChart)
             }
             .store(in: &cancellables)
     }
     
     func didUnfollowFriend() {
-        friendUseCase.unfollow(at: friend.id ?? 0)
+        friendUseCase.unfollow(at: friend.id)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -90,5 +68,25 @@ final class SocialDetailViewModel: ObservableObject {
                 self.actions?.didFinishUnfollow()
             }
             .store(in: &cancellables)
+    }
+}
+
+private extension SocialDetailViewModel {
+    func handleChartInfo(_ chartInfo: SocialChart) {
+        guard chartInfo.myData.count >= 7, chartInfo.friendData.count >= 7 else { return }
+        
+        let myChartData = generateStudyTimeData(from: chartInfo.myData)
+        let friendChartData = generateStudyTimeData(from: chartInfo.friendData)
+        
+        let newSeries: [Series] = [Series(user: "나", studyTime: myChartData),
+                                   Series(user: "친구", studyTime: friendChartData)]
+        
+        self.userSeries = newSeries
+    }
+    
+    func generateStudyTimeData(from data: [Int]) -> [StudyTime] {
+        return (0..<7).map { index in
+            StudyTime(weekday: Date(timeIntervalSinceNow: -86400 * Double(6 - index)), studyTime: data[index])
+        }
     }
 }
