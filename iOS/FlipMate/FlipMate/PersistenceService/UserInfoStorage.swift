@@ -10,6 +10,6 @@ import Foundation
 struct UserInfoStorage {
     @UserDefault(key: "nickname", defaultValue: "")
     static var nickname: String
-    @UserDefault(key: "imageData", defaultValue: Data.init())
-    static var imageData: Data?
+    @UserDefault(key: "profileImageURL", defaultValue: "")
+    static var profileImageURL: String?
 }
