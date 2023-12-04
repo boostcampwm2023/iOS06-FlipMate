@@ -66,10 +66,9 @@ final class LoginViewModel: LoginViewModelProtocol {
                 }
             } receiveValue: { userInfo in
                 UserInfoStorage.nickname = userInfo.name
-                UserInfoStorage.profileImageURL = userInfo.profileImageURL
+                UserInfoStorage.profileImageURL = userInfo.profileImageURL ?? ""
             }
             .store(in: &cancellables)
-//        actions?.showTabBarController()
     }
     
     func didFinishLoginAndIsNotMember() {

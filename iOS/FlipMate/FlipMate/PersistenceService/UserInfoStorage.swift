@@ -11,5 +11,5 @@ struct UserInfoStorage {
     @UserDefault(key: "nickname", defaultValue: "")
     static var nickname: String
     @UserDefault(key: "profileImageURL", defaultValue: "")
-    static var profileImageURL: String?
+    static var profileImageURL: String
 }
