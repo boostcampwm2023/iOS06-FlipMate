@@ -63,7 +63,7 @@ export class StudyLogsService {
     end_date: string,
   ): Promise<number[]> {
     const startMoment = moment(start_date);
-    const diffDays = moment(end_date).diff(startMoment, 'days');
+    const diffDays = moment(end_date).diff(startMoment, 'days') + 1;
     const result = Array.from({ length: diffDays }, () => 0);
     const daily_sums = await this.studyLogsRepository
       .createQueryBuilder('study_logs')

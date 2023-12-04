@@ -12,5 +12,12 @@
     "auth_type": "google",
     "email": "yeim.de@gmail.com",
     "image_url": null
+  },
+  {
+    "id": 3,
+    "nickname": "어린콩3",
+    "auth_type": "google",
+    "email": "yeim.d@gmail.com",
+    "image_url": null
   }
 ]
