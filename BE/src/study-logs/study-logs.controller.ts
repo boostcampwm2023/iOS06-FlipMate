@@ -5,6 +5,7 @@ import {
   ApiBadRequestResponse,
   ApiBearerAuth,
   ApiCreatedResponse,
+  ApiOkResponse,
   ApiOperation,
   ApiQuery,
   ApiTags,
@@ -13,6 +14,7 @@ import { StudyLogsCreateDto } from './dto/request/create-study-logs.dto';
 import { AccessTokenGuard } from 'src/auth/guard/bearer-token.guard';
 import { User } from 'src/users/decorator/user.decorator';
 import { ResponseDto } from 'src/common/response.dto';
+import { dailyStatDto } from './dto/response/daily-stat.dto';
 
 @ApiTags('타이머 페이지')
 @Controller('study-logs')
@@ -73,14 +75,33 @@ export class StudyLogsController {
 @ApiTags('통계 페이지')
 @Controller('/study-logs/stats')
 export class StatsController {
+  constructor(private readonly studyLogsService: StudyLogsService) {}
+
   @Get()
+  @UseGuards(AccessTokenGuard)
   @ApiOperation({ summary: '일간 통계 조회하기' })
-  getStats(
-    @Query('year') year: number,
-    @Query('month') month: number,
-    @Query('day') day: number,
-  ) {
-    return { year, month, day };
+  @ApiOkResponse({
+    type: dailyStatDto,
+    description: '일간 통계 조회 성공',
+  })
+  @ApiBadRequestResponse({
+    description: '잘못된 요청입니다.',
+  })
+  @ApiQuery({
+    name: 'date',
+    example: '2023-11-22',
+    description: '통계 조회 할 날짜',
+  })
+  @ApiBearerAuth()
+  async getStats(@User('id') userId: number, @Query('date') date: string) {
+    const studyLogData = await this.studyLogsService.groupByCategory(
+      userId,
+      date,
+    );
+    return {
+      ...studyLogData,
+      percentage: await this.studyLogsService.calculatePercentage(userId, date),
+    };
   }
 
   @Get('/weekly')

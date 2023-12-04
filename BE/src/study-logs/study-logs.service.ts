@@ -122,6 +122,21 @@ export class StudyLogsService {
     this.studyLogsRepository.delete({ user_id: { id: id } });
   }
 
+  async calculatePercentage(userId: number, date: string): Promise<number> {
+    const result = await this.studyLogsRepository.query(
+      `
+      SELECT user_id, SUM(learning_time) AS total_time
+      FROM study_logs
+      WHERE date = ?
+      GROUP BY user_id
+      ORDER BY total_time DESC;
+    `,
+      [date],
+    );
+    const rank = result.findIndex((user) => user.user_id === userId) + 1;
+    return (rank / result.length) * 100;
+  }
+
   entityToDto(studyLog: StudyLogs): StudyLogsDto {
     const { id, date, created_at, type, learning_time, user_id, category_id } =
       studyLog;
