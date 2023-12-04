@@ -46,9 +46,13 @@ final class ChartSegmentedControl: UISegmentedControl {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        let linePosition = (self.bounds.width / CGFloat(self.numberOfSegments)) * CGFloat(self.selectedSegmentIndex)
-        UIView.animate(withDuration: 0.5, animations: {
+        var linePosition: CGFloat
+        if selectedSegmentIndex == 0 {
+            linePosition = (self.bounds.width / CGFloat(self.numberOfSegments)) * CGFloat(self.selectedSegmentIndex)
+        } else {
+            linePosition = (self.bounds.width / CGFloat(self.numberOfSegments)) * CGFloat(self.selectedSegmentIndex) + 5
+        }
+        UIView.animate(withDuration: 0.3, animations: {
             self.segmentView.frame.origin.x = linePosition
             }
         )
