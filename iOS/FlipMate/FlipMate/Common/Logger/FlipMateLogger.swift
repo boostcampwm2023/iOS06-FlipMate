@@ -16,4 +16,5 @@ enum FMLogger {
     static let appLifeCycle = Logger(subsystem: FMConstant.bundleID, category: "appLifeCycle")
     static let timer = Logger(subsystem: FMConstant.bundleID, category: "timer")
     static let friend = Logger(subsystem: FMConstant.bundleID, category: "friend")
+    static let chart = Logger(subsystem: FMConstant.bundleID, category: "chart")
 }

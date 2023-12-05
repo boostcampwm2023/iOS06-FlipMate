@@ -20,5 +20,4 @@ enum Paths {
     static let nickNameValidation = "/user/nickname-validation"
     static let friend = "/mates"
     static let user = "/user"
-    static let studyLogs = "/study-logs"
 }
