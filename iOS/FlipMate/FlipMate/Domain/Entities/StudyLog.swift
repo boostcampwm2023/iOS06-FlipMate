@@ -16,5 +16,5 @@ struct ChartLog: Identifiable {
     let id: UUID = UUID()
     
     var studyLog: StudyLog
-    var percentage: Int
+    var percentage: Double
 }

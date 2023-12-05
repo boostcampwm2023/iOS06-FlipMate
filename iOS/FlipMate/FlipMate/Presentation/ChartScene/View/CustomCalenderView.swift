@@ -24,7 +24,9 @@ struct CustomCalenderView: View {
             .padding(.horizontal, 25)
         }
         .onChange(of: selectedDate) { newDate in
-            viewModel.selectedDateDidChange(newDate: newDate)
+            Task {
+                try await viewModel.selectedDateDidChange(newDate: newDate)
+            }
         }
     }
     

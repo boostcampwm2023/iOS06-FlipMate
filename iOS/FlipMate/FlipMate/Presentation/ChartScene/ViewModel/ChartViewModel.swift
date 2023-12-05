@@ -24,7 +24,17 @@ final class ChartViewModel: ObservableObject {
         self.actions = actions
     }
     
-    func selectedDateDidChange(newDate: Date) {
-        FMLogger.chart.log("\(newDate)로 날짜 바뀌었네?")
+    func selectedDateDidChange(newDate: Date) async throws {
+        FMLogger.chart.log("\(self.dailyChartLog.studyLog.totalTime)")
+        try await fetchDailyData(date: newDate)
+    }
+}
+
+private extension ChartViewModel {
+    func fetchDailyData(date: Date) async throws {
+        let newDailyChartLog = try await chartUseCase.fetchDailyChartLog(at: date)
+        DispatchQueue.main.async {
+            self.dailyChartLog = newDailyChartLog
+        }
     }
 }
