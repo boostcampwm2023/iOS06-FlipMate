@@ -13,6 +13,7 @@ protocol SocialFlowCoordinatorDependencies {
     func makeSocialViewController(actions: SocialViewModelActions) -> UIViewController
     func makeFriendAddViewController(actions: FriendAddViewModelActions) -> UIViewController
     func makeSocialDetailViewController(actions: SocialDetailViewModelActions, friend: Friend) -> UIViewController
+    func makeMyPageViewController() -> UIViewController
 }
 
 final class SocialFlowCoordinator: Coordinator {
@@ -28,7 +29,8 @@ final class SocialFlowCoordinator: Coordinator {
     func start() {
         let actions = SocialViewModelActions(
             showFriendAddViewController: showFreindAddViewController,
-            showSocialDetailViewController: showSocialDetailViewController)
+            showSocialDetailViewController: showSocialDetailViewController,
+            showMyPageViewController: showMyPageViewController)
         let socialViewController = dependencies.makeSocialViewController(actions: actions)
         navigationController?.viewControllers = [socialViewController]
     }
@@ -51,6 +53,11 @@ final class SocialFlowCoordinator: Coordinator {
         let actions = SocialDetailViewModelActions(didFinishUnfollow: didFinishUnfollow)
         let socialDetailViewController = dependencies.makeSocialDetailViewController(actions: actions, friend: friend)
         navigationController?.pushViewController(socialDetailViewController, animated: true)
+    }
+    
+    func showMyPageViewController() {
+        let myPageViewController = dependencies.makeMyPageViewController()
+        navigationController?.pushViewController(myPageViewController, animated: true)
     }
     
     func didFinishUnfollow() {
