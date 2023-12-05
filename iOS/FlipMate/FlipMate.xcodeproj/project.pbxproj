@@ -194,6 +194,15 @@
 		ED6865AD2B179600001A2AAD /* SocialDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865AC2B179600001A2AAD /* SocialDetailViewModel.swift */; };
 		ED6865B82B1CE820001A2AAD /* FriendUnfollowRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865B72B1CE820001A2AAD /* FriendUnfollowRequestDTO.swift */; };
 		ED6865BA2B1CEA0F001A2AAD /* SocialChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865B92B1CEA0F001A2AAD /* SocialChart.swift */; };
+		ED6865BD2B1DEE3D001A2AAD /* DailyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865BC2B1DEE3D001A2AAD /* DailyChartView.swift */; };
+		ED6865BF2B1E2FA6001A2AAD /* ChartSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865BE2B1E2FA6001A2AAD /* ChartSegmentedControl.swift */; };
+		ED6865C12B1E3B48001A2AAD /* WeeklyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865C02B1E3B48001A2AAD /* WeeklyChartView.swift */; };
+		ED6865C42B1E4303001A2AAD /* DailyChartLogResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865C32B1E4303001A2AAD /* DailyChartLogResponseDTO.swift */; };
+		ED6865C62B1E438B001A2AAD /* ChartEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865C52B1E438B001A2AAD /* ChartEndpoints.swift */; };
+		ED6865C82B1E44B1001A2AAD /* ChartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865C72B1E44B1001A2AAD /* ChartRepository.swift */; };
+		ED6865CA2B1E454E001A2AAD /* DefaultChartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865C92B1E454E001A2AAD /* DefaultChartRepository.swift */; };
+		ED6865CC2B1E494D001A2AAD /* ChartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865CB2B1E494D001A2AAD /* ChartUseCase.swift */; };
+		ED6865CE2B1E49A6001A2AAD /* DefaultChartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865CD2B1E49A6001A2AAD /* DefaultChartUseCase.swift */; };
 		ED82F0072B126C95005BB32D /* UITextField++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F0062B126C95005BB32D /* UITextField++Extension.swift */; };
 		ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */; };
 		ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A7E2B06033F008FE1C5 /* Category.swift */; };
@@ -394,6 +403,15 @@
 		ED6865AC2B179600001A2AAD /* SocialDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDetailViewModel.swift; sourceTree = "<group>"; };
 		ED6865B72B1CE820001A2AAD /* FriendUnfollowRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendUnfollowRequestDTO.swift; sourceTree = "<group>"; };
 		ED6865B92B1CEA0F001A2AAD /* SocialChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialChart.swift; sourceTree = "<group>"; };
+		ED6865BC2B1DEE3D001A2AAD /* DailyChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyChartView.swift; sourceTree = "<group>"; };
+		ED6865BE2B1E2FA6001A2AAD /* ChartSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartSegmentedControl.swift; sourceTree = "<group>"; };
+		ED6865C02B1E3B48001A2AAD /* WeeklyChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyChartView.swift; sourceTree = "<group>"; };
+		ED6865C32B1E4303001A2AAD /* DailyChartLogResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyChartLogResponseDTO.swift; sourceTree = "<group>"; };
+		ED6865C52B1E438B001A2AAD /* ChartEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartEndpoints.swift; sourceTree = "<group>"; };
+		ED6865C72B1E44B1001A2AAD /* ChartRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartRepository.swift; sourceTree = "<group>"; };
+		ED6865C92B1E454E001A2AAD /* DefaultChartRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChartRepository.swift; sourceTree = "<group>"; };
+		ED6865CB2B1E494D001A2AAD /* ChartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartUseCase.swift; sourceTree = "<group>"; };
+		ED6865CD2B1E49A6001A2AAD /* DefaultChartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChartUseCase.swift; sourceTree = "<group>"; };
 		ED82F0062B126C95005BB32D /* UITextField++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++Extension.swift"; sourceTree = "<group>"; };
 		ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor++Extension.swift"; sourceTree = "<group>"; };
 		ED9B2A7E2B06033F008FE1C5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -902,6 +920,7 @@
 		600908F32AFCDCE70065DFFB /* ChartScene */ = {
 			isa = PBXGroup;
 			children = (
+				ED6865BB2B1DEE2A001A2AAD /* View */,
 				2C5CDA592B025435007AFC57 /* ViewController */,
 			);
 			path = ChartScene;
@@ -958,7 +977,7 @@
 		600908FA2AFCDF0F0065DFFB /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				600908FB2AFCDF180065DFFB /* Utils */,
+				ED3842282B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift */,
 				2C3430AC2B0DDF25008CBC85 /* DefaultTimerRepository.swift */,
 				2C2F217D2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift */,
 				ED3842302B0F94E6001E2803 /* DefaultCategoryRepository.swift */,
@@ -966,16 +985,9 @@
 				2C9F62142B1736BE00AE63F9 /* DefaultFriendRepository.swift */,
 				2CDCD0492B18895E0080DCDE /* DefaultSocialRepository.swift */,
 				2C87C27C2B1DF1C300A26313 /* DefaultUserInfoRepository.swift */,
+				ED6865C92B1E454E001A2AAD /* DefaultChartRepository.swift */,
 			);
 			path = Repositories;
-			sourceTree = "<group>";
-		};
-		600908FB2AFCDF180065DFFB /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				ED3842282B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift */,
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		600908FC2AFCDF2F0065DFFB /* Network */ = {
@@ -991,6 +1003,7 @@
 				2C2F217F2B0F4DA600B45BA8 /* MockURLSession.swift */,
 				2C9F62252B1742D200AE63F9 /* FriendEndpoints.swift */,
 				2CDCD04B2B18899A0080DCDE /* SocialEndpoints.swift */,
+				ED6865C52B1E438B001A2AAD /* ChartEndpoints.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1000,7 +1013,7 @@
 			children = (
 				6001959F2B0DFA3900F02BA4 /* StatusResponseDTO.swift */,
 				60DFDDD82B14FD7800FEF98A /* StatusResponseWithErrorDTO.swift */,
-				ED6865A52B1792CD001A2AAD /* SocialScene */,
+				ED6865C22B1E42AC001A2AAD /* ChartScene */,
 				ED3842192B0F1B66001E2803 /* LoginScene */,
 				ED3595AE2B0C82A200558FAA /* TimerScene */,
 				2C9F62162B1736F200AE63F9 /* SocialScene */,
@@ -1106,6 +1119,7 @@
 				2C9F62102B17363400AE63F9 /* DefaultFriendUseCase.swift */,
 				2CDCD0452B1889040080DCDE /* DefaultSocialUseCase.swift */,
 				2C87C2842B1DF32A00A26313 /* DefaultUserInfoUseCase.swift */,
+				ED6865CD2B1E49A6001A2AAD /* DefaultChartUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1122,6 +1136,7 @@
 				2C9F620E2B1735C700AE63F9 /* FriendUseCase.swift */,
 				2CDCD0432B1887200080DCDE /* SocialUseCase.swift */,
 				2C87C2822B1DF30E00A26313 /* UserInfoUseCase.swift */,
+				ED6865CB2B1E494D001A2AAD /* ChartUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1137,6 +1152,7 @@
 				2C9F62122B17366200AE63F9 /* FriendRepository.swift */,
 				2CDCD0472B18893A0080DCDE /* SocialRepository.swift */,
 				2C87C27E2B1DF2A800A26313 /* UserInfoRepository.swift */,
+				ED6865C72B1E44B1001A2AAD /* ChartRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1207,13 +1223,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		ED6865A52B1792CD001A2AAD /* SocialScene */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SocialScene;
-			sourceTree = "<group>";
-		};
 		ED6865AB2B1795E8001A2AAD /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1221,6 +1230,24 @@
 				2CDCD0412B1873F60080DCDE /* SocialViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ED6865BB2B1DEE2A001A2AAD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED6865BC2B1DEE3D001A2AAD /* DailyChartView.swift */,
+				ED6865C02B1E3B48001A2AAD /* WeeklyChartView.swift */,
+				ED6865BE2B1E2FA6001A2AAD /* ChartSegmentedControl.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ED6865C22B1E42AC001A2AAD /* ChartScene */ = {
+			isa = PBXGroup;
+			children = (
+				ED6865C32B1E4303001A2AAD /* DailyChartLogResponseDTO.swift */,
+			);
+			path = ChartScene;
 			sourceTree = "<group>";
 		};
 		EDC851D02B04EE74009031EA /* View */ = {
@@ -1534,6 +1561,7 @@
 				601EB73D2B14D67600C5B216 /* SignUpUseCase.swift in Sources */,
 				608646572B0DE31800B0C1BC /* CategoryResponseDTO.swift in Sources */,
 				ED38421F2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift in Sources */,
+				ED6865BF2B1E2FA6001A2AAD /* ChartSegmentedControl.swift in Sources */,
 				ED3595B22B0C83D700558FAA /* TimerStartResponseDTO.swift in Sources */,
 				2C5CDA582B025426007AFC57 /* FlipMateFont.swift in Sources */,
 				2CDCD04C2B18899A0080DCDE /* SocialEndpoints.swift in Sources */,
@@ -1570,6 +1598,7 @@
 				2C88DCF42B124272000B4686 /* AppDIContainer.swift in Sources */,
 				2C5CDA5B2B025440007AFC57 /* ChartViewController.swift in Sources */,
 				2C9F62012B1601F200AE63F9 /* MyNickNameView.swift in Sources */,
+				ED6865C12B1E3B48001A2AAD /* WeeklyChartView.swift in Sources */,
 				6057A58D2B0C7F0F00EE58E8 /* Requestable.swift in Sources */,
 				601EB73F2B14F37300C5B216 /* DefaultSignUpUseCase.swift in Sources */,
 				2C87C2852B1DF32A00A26313 /* DefaultUserInfoUseCase.swift in Sources */,
@@ -1606,20 +1635,25 @@
 				ED3595BD2B0DB29F00558FAA /* CategoryModifyViewController.swift in Sources */,
 				2C87C27B2B1DF11000A26313 /* UserInfoResponseDTO.swift in Sources */,
 				2C34309B2B0C8674008CBC85 /* URLSessionable.swift in Sources */,
+				ED6865C82B1E44B1001A2AAD /* ChartRepository.swift in Sources */,
 				2CE84EF92B0B8A0B00E2FB71 /* CategorySettingFooterView.swift in Sources */,
 				601EB7472B14F97700C5B216 /* NickNameValidationResponseDTO.swift in Sources */,
 				2C3430972B0C7ED8008CBC85 /* EndPoint.swift in Sources */,
 				608646592B0DE61200B0C1BC /* CategoryEndpoints.swift in Sources */,
 				60DFDDD92B14FD7800FEF98A /* StatusResponseWithErrorDTO.swift in Sources */,
 				2C2F21762B0F440D00B45BA8 /* StudyLogEndpoints.swift in Sources */,
+				ED6865BD2B1DEE3D001A2AAD /* DailyChartView.swift in Sources */,
 				601EB73B2B148F9A00C5B216 /* SignUpViewModel.swift in Sources */,
 				2C5E34BE2B1B51CB00FD481B /* FriendStatus.swift in Sources */,
 				2C87C2812B1DF2C000A26313 /* UserInfo.swift in Sources */,
+				ED6865CA2B1E454E001A2AAD /* DefaultChartRepository.swift in Sources */,
 				ED6865A42B1649ED001A2AAD /* String++Extension.swift in Sources */,
 				2C87C2772B1C789A00A26313 /* FriendStatusPollingManager.swift in Sources */,
+				ED6865C62B1E438B001A2AAD /* ChartEndpoints.swift in Sources */,
 				2C88DD0F2B14C22C000B4686 /* TimerFinishViewModel.swift in Sources */,
 				2C4D55B32B035484006D7C26 /* DeviceOrientation.swift in Sources */,
 				ED3842272B0F1E0C001E2803 /* GoogleAuthUseCase.swift in Sources */,
+				ED6865C42B1E4303001A2AAD /* DailyChartLogResponseDTO.swift in Sources */,
 				ED6865A22B162B8F001A2AAD /* SocialChartView.swift in Sources */,
 				2C88DCF22B124238000B4686 /* AppFlowCoordinator.swift in Sources */,
 				2C9F62112B17363400AE63F9 /* DefaultFriendUseCase.swift in Sources */,
@@ -1634,6 +1668,7 @@
 				2C3430B12B0DE3D0008CBC85 /* Date++Extension.swift in Sources */,
 				2C9F62152B1736BE00AE63F9 /* DefaultFriendRepository.swift in Sources */,
 				2CDCD0672B18D0330080DCDE /* FriendUser.swift in Sources */,
+				ED6865CC2B1E494D001A2AAD /* ChartUseCase.swift in Sources */,
 				2C2F217E2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift in Sources */,
 				2C5CDA4F2B025403007AFC57 /* SocialViewController.swift in Sources */,
 				2C88DD052B1256D0000B4686 /* TabBarFlowCoordinator.swift in Sources */,
@@ -1656,6 +1691,7 @@
 				2C9F62242B173ADA00AE63F9 /* UserProfileResposeDTO.swift in Sources */,
 				EDC851D92B05C37C009031EA /* DeviceMotionManager.swift in Sources */,
 				2C9F62262B1742D200AE63F9 /* FriendEndpoints.swift in Sources */,
+				ED6865CE2B1E49A6001A2AAD /* DefaultChartUseCase.swift in Sources */,
 				2CDCD03D2B1871E60080DCDE /* SocialDIContainer.swift in Sources */,
 				2C87C2792B1C794000A26313 /* UpdateFriend.swift in Sources */,
 			);
