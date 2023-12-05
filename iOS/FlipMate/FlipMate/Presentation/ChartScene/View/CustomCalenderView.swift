@@ -66,9 +66,11 @@ struct CustomCalenderView: View {
                     }
                     .frame(width: 30, height: 30)
                     .padding(5)
-                    .background(calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) ? (colorScheme == .dark ? .white : .darkBlue) : Color.clear)
+                    .background(calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) ? 
+                                (colorScheme == .dark ? .white : .darkBlue) : Color.clear)
                     .cornerRadius(16)
-                    .foregroundColor(calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) ? (colorScheme == .dark ? .black : .white) : (colorScheme == .dark ? .white : .black))
+                    .foregroundColor(calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) ? (colorScheme == .dark ? .black : .white) : 
+                                        (colorScheme == .dark ? .white : .black))
                     .onTapGesture {
                         selectedDate = date
                     }
@@ -79,13 +81,19 @@ struct CustomCalenderView: View {
     
     private var blurView: some View {
         HStack {
-            LinearGradient(gradient: Gradient(colors: [(colorScheme == .dark ? Color.black.opacity(1) : Color.white.opacity(1)), (colorScheme == .dark ? Color.black.opacity(0) : Color.white.opacity(0))]), startPoint: .leading, endPoint: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/)
+            LinearGradient(gradient: 
+                            Gradient(colors: [(colorScheme == .dark ? Color.black.opacity(1) : Color.white.opacity(1)), 
+                                              (colorScheme == .dark ? Color.black.opacity(0) : Color.white.opacity(0))]),
+                           startPoint: .leading, endPoint: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/)
                 .frame(width: 20)
                 .edgesIgnoringSafeArea(.leading)
             
             Spacer()
             
-            LinearGradient(gradient: Gradient(colors: [(colorScheme == .dark ? Color.black.opacity(1) : Color.white.opacity(1)), (colorScheme == .dark ? Color.black.opacity(0) : Color.white.opacity(0))]), startPoint: .trailing, endPoint: .leading)
+            LinearGradient(gradient: 
+                            Gradient(colors: [(colorScheme == .dark ? Color.black.opacity(1) : Color.white.opacity(1)),
+                                                       (colorScheme == .dark ? Color.black.opacity(0) : Color.white.opacity(0))]), 
+                           startPoint: .trailing, endPoint: .leading)
                 .frame(width: 20)
                 .edgesIgnoringSafeArea(.leading)
         }
@@ -108,19 +116,6 @@ private extension CustomCalenderView {
         let dateFormatter = DateFormatter()
         dateFormatter.setLocalizedDateFormatFromTemplate("E")
         return dateFormatter.string(from: date)
-    }
-}
-
-struct Theme {
-    static func myBackGroundColor(forScheme scheme: ColorScheme) -> Color {
-        let lightColor = Color.white
-        let darkColor = Color.black
-        
-        switch scheme {
-        case .light: return lightColor
-        case .dark: return darkColor
-        @unknown default: return lightColor
-        }
     }
 }
 
