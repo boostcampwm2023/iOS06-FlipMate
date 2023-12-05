@@ -240,7 +240,7 @@ private extension SocialViewController {
 private extension SocialViewController {
     @objc
     func myPageButtonTapped() {
-        self.navigationController?.pushViewController(MyPageViewController(), animated: true)
+        self.navigationController?.pushViewController(MyPageViewController(viewModel: MyPageViewModel()), animated: true)
     }
     
     @objc
