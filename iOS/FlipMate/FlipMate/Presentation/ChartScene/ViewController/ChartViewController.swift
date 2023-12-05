@@ -28,8 +28,6 @@ final class ChartViewController: BaseViewController {
     
     private var weeklyChartView: UIView = {
         let view = UIView()
-        view.backgroundColor = .yellow
-        view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
     }()
@@ -55,6 +53,7 @@ final class ChartViewController: BaseViewController {
     override func configureUI() {
         super.configureUI()
         setDailyChart()
+        setWeeklyChart()
         
         self.view.addSubview(self.segmentedControl)
         self.view.addSubview(self.dailyChartView)
@@ -94,6 +93,17 @@ private extension ChartViewController {
         addChild(hostingController)
         guard let newChartView = hostingController.view else { return }
         self.dailyChartView = newChartView
+        self.view.addSubview(newChartView)
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        hostingController.didMove(toParent: self)
+    }
+    
+    func setWeeklyChart() {
+        let weeklyChartView = WeeklyChartView(viewModel: ChartViewModel(chartUseCase: DefaultChartUseCase(repository: DefaultChartRepository(provider: Provider(urlSession: URLSession.shared))), actions: nil))
+        let hostingController = UIHostingController(rootView: weeklyChartView)
+        addChild(hostingController)
+        guard let newChartView = hostingController.view else { return }
+        self.weeklyChartView = newChartView
         self.view.addSubview(newChartView)
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
         hostingController.didMove(toParent: self)

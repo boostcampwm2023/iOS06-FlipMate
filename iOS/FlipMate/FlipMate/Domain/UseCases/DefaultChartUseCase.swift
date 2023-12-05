@@ -14,7 +14,7 @@ final class DefaultChartUseCase: ChartUseCase {
         self.repository = repository
     }
     
-    func fetchDailyChartLog(at date: Date) async throws -> DailyChartLog {
+    func fetchDailyChartLog(at date: Date) async throws -> CategoryChartLog {
         var chartLog = try await repository.fetchDailyLog(date: date)
         
         var etcTime = chartLog.studyLog.category.reduce(0) { (result, category) in

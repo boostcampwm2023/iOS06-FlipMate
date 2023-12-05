@@ -12,7 +12,7 @@ struct StudyLog {
     var category: [Category]
 }
 
-struct DailyChartLog: Identifiable {
+struct CategoryChartLog: Identifiable {
     let id: UUID = UUID()
     
     var studyLog: StudyLog
@@ -23,7 +23,14 @@ struct WeeklyChartLog: Identifiable {
     let id: UUID = UUID()
     
     var totalTime: Int
-    var dailyData: [Int]
+    var dailyData: [DailyData]
     var primaryCategory: String?
     var percentage: Double
+}
+
+struct DailyData: Identifiable {
+    let id: UUID = UUID()
+    
+    var day: String
+    var studyTime: Int
 }

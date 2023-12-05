@@ -14,7 +14,7 @@ final class DefaultChartRepository: ChartRepository {
         self.provider = provider
     }
     
-    func fetchDailyLog(date: Date) async throws -> DailyChartLog {
+    func fetchDailyLog(date: Date) async throws -> CategoryChartLog {
         let endpoint = ChartEndpoints.fetchDailyLog(date: date)
         let responseDTO = try await provider.request(with: endpoint)
         
@@ -22,13 +22,36 @@ final class DefaultChartRepository: ChartRepository {
             return Category(id: dto.id, color: dto.color, subject: dto.name, studyTime: dto.todayTime)
         } ?? []
         
-        return DailyChartLog(studyLog: StudyLog(totalTime: responseDTO.todayTime, category: categories), percentage: responseDTO.percentage)
+        return CategoryChartLog(studyLog: StudyLog(totalTime: responseDTO.todayTime, category: categories), percentage: responseDTO.percentage)
     }
     
     func fetchWeeklyLog() async throws -> WeeklyChartLog {
         let endpoint = ChartEndpoints.fetchWeeklyLog()
         let responseDTO = try await provider.request(with: endpoint)
         
-        return WeeklyChartLog(totalTime: responseDTO.totalTime, dailyData: responseDTO.dailyData, primaryCategory: responseDTO.primaryCategory, percentage: responseDTO.percentage)
+        let transformedDailyData: [DailyData] = responseDTO.dailyData.enumerated().map { index, studyTime in
+            let dayIndex = responseDTO.dailyData.count - 1 - index
+            let dayOfWeekString = dayOfWeek(at: dateForDayIndex(dayIndex))
+            return DailyData(day: dayOfWeekString, studyTime: studyTime)
+        }
+        
+        return WeeklyChartLog(totalTime: responseDTO.totalTime, dailyData: transformedDailyData, primaryCategory: responseDTO.primaryCategory, percentage: responseDTO.percentage)
     }
+}
+
+private extension DefaultChartRepository {
+    func dayOfWeek(at date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE"
+        let dayOfWeekString = dateFormatter.string(from: date)
+
+        return dayOfWeekString
+    }
+    
+    func dateForDayIndex(_ index: Int) -> Date {
+            let calendar = Calendar.current
+            let today = calendar.startOfDay(for: Date())
+            let day = calendar.date(byAdding: .day, value: -index, to: today)!
+            return day
+        }
 }

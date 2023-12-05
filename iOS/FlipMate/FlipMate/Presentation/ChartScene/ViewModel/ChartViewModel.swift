@@ -13,7 +13,7 @@ struct ChartViewModelActions {
 }
 
 final class ChartViewModel: ObservableObject {
-    @Published var dailyChartLog: DailyChartLog = .init(studyLog: StudyLog(totalTime: 0, category: []), percentage: 0)
+    @Published var dailyChartLog: CategoryChartLog = .init(studyLog: StudyLog(totalTime: 0, category: []), percentage: 0)
     @Published var weeklyChartLog: WeeklyChartLog = .init(totalTime: 0, dailyData: [], percentage: 0)
     
     private var cancellables = Set<AnyCancellable>()
@@ -26,7 +26,6 @@ final class ChartViewModel: ObservableObject {
     }
     
     func selectedDateDidChange(newDate: Date) async throws {
-        FMLogger.chart.log("\(self.dailyChartLog.studyLog.totalTime)")
         try await fetchDailyData(date: newDate)
     }
 }
