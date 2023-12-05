@@ -93,7 +93,7 @@ final class SocialViewController: BaseViewController {
     
     // MARK: - Configure UI
     override func configureUI() {
-        title = Constant.title
+        navigationItem.title = Constant.title
         
         let subviews = [
             profileImageView,

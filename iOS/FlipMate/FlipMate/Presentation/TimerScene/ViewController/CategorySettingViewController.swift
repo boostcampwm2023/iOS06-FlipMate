@@ -52,6 +52,7 @@ final class CategorySettingViewController: BaseViewController {
     
     // MARK: - Configure UI
     override func configureUI() {
+        title = Constant.title
         view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
@@ -224,5 +225,11 @@ private extension CategorySettingViewController {
         let cancelAction = UIAlertAction(title: "취소", style: .cancel)
         
         return [deleteAction, cancelAction]
+    }
+}
+
+private extension CategorySettingViewController {
+    enum Constant {
+        static let title = "카테고리 관리"
     }
 }
