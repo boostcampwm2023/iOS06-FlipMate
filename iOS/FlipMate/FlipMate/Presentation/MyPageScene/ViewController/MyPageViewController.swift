@@ -226,6 +226,8 @@ extension MyPageViewController: UITableViewDelegate {
         if indexPath.section == 3, indexPath.row == 0 {
             // 계정 탈퇴 탭
         }
+        
+        myPageTableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
