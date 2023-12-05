@@ -23,7 +23,6 @@ struct DailyChartView: View {
                             .annotation(position: .overlay) {
                                 Text("\(category.studyTime ?? 0)")
                                     .font(.headline)
-                                    .foregroundStyle(.darkBlue)
                             }
                     }
                 }

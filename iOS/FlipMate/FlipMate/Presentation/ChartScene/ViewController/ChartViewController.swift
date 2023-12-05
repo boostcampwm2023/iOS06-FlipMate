@@ -13,7 +13,7 @@ final class ChartViewController: BaseViewController {
         let segmentedControl = ChartSegmentedControl(items: ["일간", "주간"])
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: FlipMateColor.gray2.color as Any, 
             .font: FlipMateFont.mediumRegular.font], for: .normal)
-        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: FlipMateColor.darkBlue.color as Any, 
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.label, 
             .font: FlipMateFont.mediumBold.font], for: .selected)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         
