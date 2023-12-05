@@ -275,6 +275,7 @@ final class SocialDetailViewController: BaseViewController {
                 guard let self = self else { return }
                 self.nickNameLabel.text = friend.nickName
                 self.dailyStudyTimeLabel.text = friend.totalTime.secondsToStringTime()
+                self.profileImageView.setImage(url: friend.profileImageURL)
             }
             .store(in: &cancellables)
         

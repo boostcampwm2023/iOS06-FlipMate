@@ -50,6 +50,10 @@
 		2C87C2812B1DF2C000A26313 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2802B1DF2C000A26313 /* UserInfo.swift */; };
 		2C87C2832B1DF30E00A26313 /* UserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2822B1DF30E00A26313 /* UserInfoUseCase.swift */; };
 		2C87C2852B1DF32A00A26313 /* DefaultUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2842B1DF32A00A26313 /* DefaultUserInfoUseCase.swift */; };
+		2C87C2912B1F212200A26313 /* ImageDownLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2902B1F212200A26313 /* ImageDownLoader.swift */; };
+		2C87C2932B1F344500A26313 /* UIImageView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2922B1F344500A26313 /* UIImageView++Extension.swift */; };
+		2C87C2952B1F345800A26313 /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2942B1F345800A26313 /* ImageFetcher.swift */; };
+		2C87C2972B1F346700A26313 /* ImageDownLoaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2962B1F346700A26313 /* ImageDownLoaderError.swift */; };
 		2C88DCF22B124238000B4686 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */; };
 		2C88DCF42B124272000B4686 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF32B124272000B4686 /* AppDIContainer.swift */; };
 		2C88DCF62B124292000B4686 /* TimerSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF52B124292000B4686 /* TimerSceneDIContainer.swift */; };
@@ -276,6 +280,10 @@
 		2C87C2802B1DF2C000A26313 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		2C87C2822B1DF30E00A26313 /* UserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoUseCase.swift; sourceTree = "<group>"; };
 		2C87C2842B1DF32A00A26313 /* DefaultUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserInfoUseCase.swift; sourceTree = "<group>"; };
+		2C87C2902B1F212200A26313 /* ImageDownLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownLoader.swift; sourceTree = "<group>"; };
+		2C87C2922B1F344500A26313 /* UIImageView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView++Extension.swift"; sourceTree = "<group>"; };
+		2C87C2942B1F345800A26313 /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
+		2C87C2962B1F346700A26313 /* ImageDownLoaderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownLoaderError.swift; sourceTree = "<group>"; };
 		2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		2C88DCF32B124272000B4686 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		2C88DCF52B124292000B4686 /* TimerSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSceneDIContainer.swift; sourceTree = "<group>"; };
@@ -613,6 +621,16 @@
 				2C87C2762B1C789A00A26313 /* FriendStatusPollingManager.swift */,
 			);
 			path = FriendStatusPollingManager;
+			sourceTree = "<group>";
+		};
+		2C87C28F2B1F210F00A26313 /* ImageDownloader */ = {
+			isa = PBXGroup;
+			children = (
+				2C87C2902B1F212200A26313 /* ImageDownLoader.swift */,
+				2C87C2942B1F345800A26313 /* ImageFetcher.swift */,
+				2C87C2962B1F346700A26313 /* ImageDownLoaderError.swift */,
+			);
+			path = ImageDownloader;
 			sourceTree = "<group>";
 		};
 		2C88DCF72B1242C7000B4686 /* Flows */ = {
@@ -1025,6 +1043,7 @@
 		600908FE2AFCDF8D0065DFFB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				2C87C28F2B1F210F00A26313 /* ImageDownloader */,
 				2C87C2752B1C788700A26313 /* FriendStatusPollingManager */,
 				60DFDDDC2B16383900FEF98A /* NickNameValidator */,
 				2C9F61F52B14EA9800AE63F9 /* CategoryManager */,
@@ -1045,6 +1064,7 @@
 				2C3430B02B0DE3D0008CBC85 /* Date++Extension.swift */,
 				2CE84EFA2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift */,
 				ED6865A32B1649ED001A2AAD /* String++Extension.swift */,
+				2C87C2922B1F344500A26313 /* UIImageView++Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1560,6 +1580,7 @@
 				2CDCD0482B18893A0080DCDE /* SocialRepository.swift in Sources */,
 				601EB73D2B14D67600C5B216 /* SignUpUseCase.swift in Sources */,
 				608646572B0DE31800B0C1BC /* CategoryResponseDTO.swift in Sources */,
+				2C87C2952B1F345800A26313 /* ImageFetcher.swift in Sources */,
 				ED38421F2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift in Sources */,
 				ED6865BF2B1E2FA6001A2AAD /* ChartSegmentedControl.swift in Sources */,
 				ED3595B22B0C83D700558FAA /* TimerStartResponseDTO.swift in Sources */,
@@ -1643,12 +1664,14 @@
 				60DFDDD92B14FD7800FEF98A /* StatusResponseWithErrorDTO.swift in Sources */,
 				2C2F21762B0F440D00B45BA8 /* StudyLogEndpoints.swift in Sources */,
 				ED6865BD2B1DEE3D001A2AAD /* DailyChartView.swift in Sources */,
+				2C87C2932B1F344500A26313 /* UIImageView++Extension.swift in Sources */,
 				601EB73B2B148F9A00C5B216 /* SignUpViewModel.swift in Sources */,
 				2C5E34BE2B1B51CB00FD481B /* FriendStatus.swift in Sources */,
 				2C87C2812B1DF2C000A26313 /* UserInfo.swift in Sources */,
 				ED6865CA2B1E454E001A2AAD /* DefaultChartRepository.swift in Sources */,
 				ED6865A42B1649ED001A2AAD /* String++Extension.swift in Sources */,
 				2C87C2772B1C789A00A26313 /* FriendStatusPollingManager.swift in Sources */,
+				2C87C2912B1F212200A26313 /* ImageDownLoader.swift in Sources */,
 				ED6865C62B1E438B001A2AAD /* ChartEndpoints.swift in Sources */,
 				2C88DD0F2B14C22C000B4686 /* TimerFinishViewModel.swift in Sources */,
 				2C4D55B32B035484006D7C26 /* DeviceOrientation.swift in Sources */,
@@ -1689,6 +1712,7 @@
 				60DFDDDB2B14FE0100FEF98A /* SignUpResponseDTO.swift in Sources */,
 				ED38421B2B0F1B7E001E2803 /* GoogleAuthRequestDTO.swift in Sources */,
 				2C9F62242B173ADA00AE63F9 /* UserProfileResposeDTO.swift in Sources */,
+				2C87C2972B1F346700A26313 /* ImageDownLoaderError.swift in Sources */,
 				EDC851D92B05C37C009031EA /* DeviceMotionManager.swift in Sources */,
 				2C9F62262B1742D200AE63F9 /* FriendEndpoints.swift in Sources */,
 				ED6865CE2B1E49A6001A2AAD /* DefaultChartUseCase.swift in Sources */,
