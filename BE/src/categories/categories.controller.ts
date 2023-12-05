@@ -23,6 +23,7 @@ import { CategoryUpdateDto } from './dto/request/update-categories.dto';
 import { CategoryDto } from './dto/response/category.dto';
 import { AccessTokenGuard } from 'src/auth/guard/bearer-token.guard';
 import { User } from 'src/users/decorator/user.decorator';
+import { ResponseDto } from 'src/common/response.dto';
 
 @ApiTags('카테고리 페이지')
 @Controller('categories')
@@ -90,7 +91,7 @@ export class CategoriesController {
   @Delete(':category_id')
   @UseGuards(AccessTokenGuard)
   @ApiBearerAuth()
-  @ApiOperation({ summary: '카테고리 삭제' })
+  @ApiOperation({ summary: '카테고리 삭제(완)' })
   @ApiParam({
     name: 'category_id',
     description: '카테고리 id',
@@ -98,6 +99,7 @@ export class CategoriesController {
     required: true,
   })
   @ApiCreatedResponse({
+    type: ResponseDto,
     description: '카테고리 삭제 성공',
   })
   @ApiBadRequestResponse({
@@ -106,11 +108,8 @@ export class CategoriesController {
   async deleteCategories(
     @User('id') user_id: number,
     @Param('category_id') category_id: number,
-  ): Promise<object> {
+  ): Promise<ResponseDto> {
     await this.categoriesService.remove(user_id, category_id);
-    return {
-      statusCode: 200,
-      message: '성공적으로 삭제되었습니다.',
-    };
+    return new ResponseDto(200, '성공적으로 삭제되었습니다.');
   }
 }
