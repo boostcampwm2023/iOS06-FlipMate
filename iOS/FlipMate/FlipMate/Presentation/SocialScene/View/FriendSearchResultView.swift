@@ -40,9 +40,10 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
     // MARK: - UI Components
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = FlipMateColor.gray2.color
         imageView.layer.cornerRadius = ProfileImageConstant.cornerRadius
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -79,7 +80,7 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
     
     func updateUI(friendSearchItem: FreindSeacrhItem) {
         nickNameLabel.text = friendSearchItem.nickname
-        profileImageView.image = UIImage(resource: .defaultProfile)
+        profileImageView.setImage(url: friendSearchItem.iamgeURL)
     }
     
     func tapPublisher() -> AnyPublisher<Void, Never> {

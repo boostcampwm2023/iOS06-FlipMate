@@ -59,6 +59,7 @@ final class SocialDetailViewController: BaseViewController {
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = FlipMateColor.gray2.color
         imageView.layer.cornerRadius = LayoutConstant.profileImageWidth / 2
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         return imageView
