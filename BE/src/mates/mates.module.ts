@@ -17,5 +17,6 @@ import { StudyLogsModule } from 'src/study-logs/study-logs.module';
   ],
   controllers: [MatesController],
   providers: [MatesService, RedisService],
+  exports: [MatesService],
 })
 export class MatesModule {}

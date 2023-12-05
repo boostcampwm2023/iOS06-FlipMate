@@ -46,7 +46,8 @@ export class AuthService {
       const id = user.email.split('@')[0];
       const userEntity = {
         nickname:
-          id + Buffer.from(user.email + user.auth_type).toString('base64'),
+          id.slice(0, 20) +
+          Buffer.from(user.email + user.auth_type).toString('base64'),
         email: user.email,
       } as UsersModel;
       const newUser = await this.usersService.createUser(userEntity);
