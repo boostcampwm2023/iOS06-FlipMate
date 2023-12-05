@@ -65,6 +65,10 @@ final class MyPageViewController: BaseViewController {
     // MARK: - View LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         viewModel.viewReady()
     }
     
@@ -110,7 +114,6 @@ final class MyPageViewController: BaseViewController {
         viewModel.nicknamePublisher
             .sink { nickname in
                 DispatchQueue.main.async {
-                    print(nickname)
                     self.userNicknameLabel.text = nickname
                 }
             }
@@ -188,9 +191,9 @@ extension MyPageViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // 프로필 설정 탭
+        // 프로필 수정 탭
         if indexPath.section == 0, indexPath.row == 0 {
-            navigationController?.pushViewController(ProfileSettingsViewController(viewModel: SignUpViewModel(usecase: DefaultSignUpUseCase(repository: DefaultSignUpRepository(provider: Provider(urlSession: URLSession.shared)), validator: NickNameValidator()), actions: SignUpViewModelActions(didFinishSignUp: {}))), animated: true)
+            navigationController?.pushViewController(ProfileSettingsViewController(viewModel: ProfileSettingsViewModel(usecase: DefaultProfileSettingsUseCase(repository: DefaultProfileSettingsRepository(provider: Provider(urlSession: URLSession.shared)), validator: NickNameValidator()), actions: ProfileSettingsViewModelActions(didFinishSignUp: {}))), animated: true)
         }
         
         if indexPath.section == 1 {

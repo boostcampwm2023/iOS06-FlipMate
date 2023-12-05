@@ -66,7 +66,7 @@ final class ProfileSettingsViewController: BaseViewController {
         return underline
     }()
     
-    private lazy var signUpButton: UIButton = {
+    private lazy var doneButton: UIButton = {
         let button = UIButton()
         if #available(iOS 15.0, *) {
             var configuration = UIButton.Configuration.filled()
@@ -94,11 +94,11 @@ final class ProfileSettingsViewController: BaseViewController {
         return button
     }()
     
-    private let viewModel: SignUpViewModelProtocol
+    private let viewModel: ProfileSettingsViewModelProtocol
     private var cancellables = Set<AnyCancellable>()
     private var typingTimer: Timer?
     
-    init(viewModel: SignUpViewModelProtocol) {
+    init(viewModel: ProfileSettingsViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -108,6 +108,12 @@ final class ProfileSettingsViewController: BaseViewController {
     }
     
     // MARK: - View Life Cycles
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        viewModel.viewReady()
+    }
+    
     override func viewDidLayoutSubviews() {
         drawTextFieldUnderline()
     }
@@ -121,7 +127,7 @@ final class ProfileSettingsViewController: BaseViewController {
             cameraButton,
             nickNameTextField,
             nickNameValidationStateLabel,
-            signUpButton
+            doneButton
         ]
         
         subViews.forEach {
@@ -148,12 +154,12 @@ final class ProfileSettingsViewController: BaseViewController {
             nickNameValidationStateLabel.leadingAnchor.constraint(equalTo: nickNameTextField.leadingAnchor),
             nickNameValidationStateLabel.trailingAnchor.constraint(equalTo: nickNameTextField.trailingAnchor),
             
-            signUpButton.bottomAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
-            signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            signUpButton.leadingAnchor.constraint(
+            doneButton.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -64),
+            doneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            doneButton.leadingAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
-            signUpButton.trailingAnchor.constraint(
+            doneButton.trailingAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32)
         ])
     }
@@ -168,6 +174,22 @@ final class ProfileSettingsViewController: BaseViewController {
     
     // MARK: - Viewmodel Binding
     override func bind() {
+        viewModel.nicknamePublisher
+            .sink { name in
+                DispatchQueue.main.async {
+                    self.nickNameTextField.text = name
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.imageDataPublisher
+            .sink { imageData in
+                DispatchQueue.main.async {
+                    self.profileImageView.image = UIImage(data: imageData)
+                }
+            }
+            .store(in: &cancellables)
+        
         viewModel.isValidNickNamePublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] state in
@@ -176,19 +198,27 @@ final class ProfileSettingsViewController: BaseViewController {
                 case .valid:
                     self?.nickNameValidationStateLabel.text = state.message
                     self?.nickNameValidationStateLabel.textColor = FlipMateColor.approveGreen.color
-                    self?.signUpButton.isEnabled = true
+                    self?.doneButton.isEnabled = true
                 case .lengthViolation:
                     self?.nickNameValidationStateLabel.text = state.message
                     self?.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                    self?.signUpButton.isEnabled = false
+                    self?.doneButton.isEnabled = false
                 case .emptyViolation:
                     self?.nickNameValidationStateLabel.text = state.message
                     self?.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                    self?.signUpButton.isEnabled = false
+                    self?.doneButton.isEnabled = false
                 case .duplicated:
                     self?.nickNameValidationStateLabel.text = state.message
                     self?.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                    self?.signUpButton.isEnabled = false
+                    self?.doneButton.isEnabled = false
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.isProfileImageChangedPublisher
+            .sink { [weak self] _ in
+                DispatchQueue.main.async {
+                    self?.doneButton.isEnabled = true
                 }
             }
             .store(in: &cancellables)
@@ -196,7 +226,8 @@ final class ProfileSettingsViewController: BaseViewController {
         viewModel.isSignUpCompletedPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.signUpButton.isEnabled = true
+                self?.doneButton.isEnabled = true
+                self?.navigationController?.popViewController(animated: true)
             }
             .store(in: &cancellables)
         
@@ -204,7 +235,7 @@ final class ProfileSettingsViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
                 FMLogger.general.error("SignUpViewModel에서 에러: \(error)")
-                self?.signUpButton.isEnabled = false
+                self?.doneButton.isEnabled = false
             }
             .store(in: &cancellables)
     }
@@ -214,7 +245,7 @@ final class ProfileSettingsViewController: BaseViewController {
 private extension ProfileSettingsViewController {
     @objc
     func nickNameTextFieldChanged(_ sender: UITextField) {
-        signUpButton.isEnabled = false
+        doneButton.isEnabled = false
         guard let text = sender.text else {
             FMLogger.user.log("닉네임 텍스트필드 내용 없음")
             return
@@ -255,7 +286,7 @@ private extension ProfileSettingsViewController {
     // 회원가입 처리
     @objc
     func signUpButtonTapped() {
-        signUpButton.isEnabled = false
+        doneButton.isEnabled = false
         let userName = nickNameTextField.text ?? ""
         guard let imageData = profileImageView.image?.jpegData(compressionQuality: 1) else {
             FMLogger.general.error("no profile image selected")
@@ -298,6 +329,7 @@ extension ProfileSettingsViewController: PHPickerViewControllerDelegate {
                     return
                 }
                 self.profileImageView.image = image
+                self.viewModel.profileImageChanged()
             }
         }
     }
@@ -306,7 +338,7 @@ extension ProfileSettingsViewController: PHPickerViewControllerDelegate {
 // MARK: - Constants
 private extension ProfileSettingsViewController {
     enum Constant {
-        static let title = "프로필 설정"
+        static let title = "프로필 수정"
         static let cameraImageName = "camera.fill"
         static let nickNameTextFieldPlaceHolderText = "닉네임을 입력해 주세요"
     }
