@@ -46,14 +46,11 @@ final class SocialDetailViewController: BaseViewController {
         static let studyTimeTrailing: CGFloat = -30
         static let studyTimeHeight: CGFloat = 120
         
-        static let chartTop: CGFloat = 40
-        static let chartLeading: CGFloat = 30
-        static let chartTrailing: CGFloat = -30
-        static let chartBottom: CGFloat = -20
+        static let chartTop: CGFloat = 30
+        static let chartLeading: CGFloat = 8
+        static let chartTrailing: CGFloat = -8
+        static let chartBottom: CGFloat = -30
     }
-    
-    // MARK: - Properties
-    private var cancellables = Set<AnyCancellable>()
 
     // MARK: - UI Components
     private lazy var profileImageView: UIImageView = {
@@ -163,15 +160,9 @@ final class SocialDetailViewController: BaseViewController {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = FlipMateFont.mediumRegular.font
+        label.font = FlipMateFont.mediumBold.font
         label.textColor = FlipMateColor.gray2.color
         label.textAlignment = .right
-        let seconds = viewModel.socialChart.myData.reduce(0, { $0 + $1 })
-        if seconds >= 3600 {
-            label.text = "\(seconds / 3600)H \(seconds % 3600 / 60)m"
-        } else {
-            label.text = "\(seconds / 3600)m"
-        }
         
         return label
     }()
@@ -182,16 +173,8 @@ final class SocialDetailViewController: BaseViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = FlipMateFont.mediumBold.font
         label.textAlignment = .right
-        if let primary = viewModel.socialChart.primaryCategory {
-            label.backgroundColor = FlipMateColor.darkBlue.color
-            label.textColor = .white
-            label.layer.masksToBounds = true
-            label.layer.cornerRadius = ComponentConstant.cornerRadius
-            label.text = viewModel.socialChart.primaryCategory
-        } else {
-            label.textColor = FlipMateColor.gray2.color
-            label.text = "없음"
-        }
+        label.textColor = FlipMateColor.gray2.color
+        label.text = "없음"
         
         return label
     }()
@@ -216,6 +199,7 @@ final class SocialDetailViewController: BaseViewController {
     
     // MARK: - Properties
     private var viewModel: SocialDetailViewModel
+    private var cancellables = Set<AnyCancellable>()
     
     init(viewModel: SocialDetailViewModel) {
         self.viewModel = viewModel
@@ -291,6 +275,16 @@ final class SocialDetailViewController: BaseViewController {
                 guard let self = self else { return }
                 self.nickNameLabel.text = friend.nickName
                 self.dailyStudyTimeLabel.text = friend.totalTime.secondsToStringTime()
+            }
+            .store(in: &cancellables)
+        
+        viewModel.$socialChart
+            .sink { [weak self] socialChart in
+                guard let self = self else { return }
+                self.weeklyStudyTimeLabel.text = socialChart.friendData.reduce(0, { $0 + $1 }).secondsToStringTime()
+                if let category = socialChart.primaryCategory {
+                    self.primaryCategoryLabel.text = category
+                }
             }
             .store(in: &cancellables)
     }
