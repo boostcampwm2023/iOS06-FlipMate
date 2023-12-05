@@ -12,7 +12,9 @@ struct StudyLog {
     var category: [Category]
 }
 
-struct ChartLog {
+struct ChartLog: Identifiable {
+    let id: UUID = UUID()
+    
     var studyLog: StudyLog
     var percentage: Int
 }
