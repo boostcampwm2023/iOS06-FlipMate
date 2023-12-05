@@ -26,7 +26,9 @@ final class SocialFlowCoordinator: Coordinator {
     }
     
     func start() {
-        let actions = SocialViewModelActions(showFriendAddViewController: showFreindAddViewController, showSocialDetailViewController: showSocialDetailViewController)
+        let actions = SocialViewModelActions(
+            showFriendAddViewController: showFreindAddViewController,
+            showSocialDetailViewController: showSocialDetailViewController)
         let socialViewController = dependencies.makeSocialViewController(actions: actions)
         navigationController.viewControllers = [socialViewController]
     }

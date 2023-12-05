@@ -191,27 +191,9 @@ final class ProfileSettingsViewController: BaseViewController {
             .store(in: &cancellables)
         
         viewModel.isValidNickNamePublisher
-            .receive(on: DispatchQueue.main)
             .sink { [weak self] state in
                 FMLogger.general.log("닉네임 유효성 상태 : \(state.message)")
-                switch state {
-                case .valid:
-                    self?.nickNameValidationStateLabel.text = state.message
-                    self?.nickNameValidationStateLabel.textColor = FlipMateColor.approveGreen.color
-                    self?.doneButton.isEnabled = true
-                case .lengthViolation:
-                    self?.nickNameValidationStateLabel.text = state.message
-                    self?.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                    self?.doneButton.isEnabled = false
-                case .emptyViolation:
-                    self?.nickNameValidationStateLabel.text = state.message
-                    self?.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                    self?.doneButton.isEnabled = false
-                case .duplicated:
-                    self?.nickNameValidationStateLabel.text = state.message
-                    self?.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                    self?.doneButton.isEnabled = false
-                }
+                self?.configureNickNameTextField(state)
             }
             .store(in: &cancellables)
         
@@ -238,6 +220,29 @@ final class ProfileSettingsViewController: BaseViewController {
                 self?.doneButton.isEnabled = false
             }
             .store(in: &cancellables)
+    }
+    
+    private func configureNickNameTextField(_ state: NickNameValidationState) {
+        DispatchQueue.main.async {
+            switch state {
+            case .valid:
+                self.nickNameValidationStateLabel.text = state.message
+                self.nickNameValidationStateLabel.textColor = FlipMateColor.approveGreen.color
+                self.doneButton.isEnabled = true
+            case .lengthViolation:
+                self.nickNameValidationStateLabel.text = state.message
+                self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
+                self.doneButton.isEnabled = false
+            case .emptyViolation:
+                self.nickNameValidationStateLabel.text = state.message
+                self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
+                self.doneButton.isEnabled = false
+            case .duplicated:
+                self.nickNameValidationStateLabel.text = state.message
+                self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
+                self.doneButton.isEnabled = false
+            }
+        }
     }
 }
 

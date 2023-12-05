@@ -63,10 +63,6 @@ final class MyPageViewController: BaseViewController {
     }
     
     // MARK: - View LifeCycles
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.viewReady()
@@ -193,7 +189,15 @@ extension MyPageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 프로필 수정 탭
         if indexPath.section == 0, indexPath.row == 0 {
-            navigationController?.pushViewController(ProfileSettingsViewController(viewModel: ProfileSettingsViewModel(usecase: DefaultProfileSettingsUseCase(repository: DefaultProfileSettingsRepository(provider: Provider(urlSession: URLSession.shared)), validator: NickNameValidator()), actions: ProfileSettingsViewModelActions(didFinishSignUp: {}))), animated: true)
+            navigationController?.pushViewController(
+                ProfileSettingsViewController(
+                    viewModel: ProfileSettingsViewModel(
+                        usecase: DefaultProfileSettingsUseCase(
+                            repository: DefaultProfileSettingsRepository(
+                                provider: Provider(urlSession: URLSession.shared)),
+                            validator: NickNameValidator()),
+                        actions: ProfileSettingsViewModelActions(didFinishSignUp: {}))),
+                animated: true)
         }
         
         if indexPath.section == 1 {
