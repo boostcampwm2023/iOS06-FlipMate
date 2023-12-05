@@ -13,7 +13,7 @@ struct DailyChartView: View {
     var totalTime: Int = 25230
     var body: some View {
         VStack {
-            DatePicker("", selection: $date, displayedComponents: [.date])
+            CustomCalenderView()
             if #available(iOS 17.0, *) {
                 Chart {
                     ForEach(dailyData, id: \.subject) { category in

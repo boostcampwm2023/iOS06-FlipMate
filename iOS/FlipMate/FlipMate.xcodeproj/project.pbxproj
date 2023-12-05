@@ -206,6 +206,7 @@
 		ED6865D02B1F1429001A2AAD /* ChartDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865CF2B1F1429001A2AAD /* ChartDIContainer.swift */; };
 		ED6865D32B1F1464001A2AAD /* ChartFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865D22B1F1464001A2AAD /* ChartFlowCoordinator.swift */; };
 		ED6865D62B1F14CF001A2AAD /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865D52B1F14CF001A2AAD /* ChartViewModel.swift */; };
+		ED6865D82B1F32EF001A2AAD /* CustomCalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865D72B1F32EF001A2AAD /* CustomCalenderView.swift */; };
 		ED82F0072B126C95005BB32D /* UITextField++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F0062B126C95005BB32D /* UITextField++Extension.swift */; };
 		ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */; };
 		ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A7E2B06033F008FE1C5 /* Category.swift */; };
@@ -418,6 +419,7 @@
 		ED6865CF2B1F1429001A2AAD /* ChartDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDIContainer.swift; sourceTree = "<group>"; };
 		ED6865D22B1F1464001A2AAD /* ChartFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFlowCoordinator.swift; sourceTree = "<group>"; };
 		ED6865D52B1F14CF001A2AAD /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
+		ED6865D72B1F32EF001A2AAD /* CustomCalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalenderView.swift; sourceTree = "<group>"; };
 		ED82F0062B126C95005BB32D /* UITextField++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++Extension.swift"; sourceTree = "<group>"; };
 		ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor++Extension.swift"; sourceTree = "<group>"; };
 		ED9B2A7E2B06033F008FE1C5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -1247,6 +1249,7 @@
 				ED6865BC2B1DEE3D001A2AAD /* DailyChartView.swift */,
 				ED6865C02B1E3B48001A2AAD /* WeeklyChartView.swift */,
 				ED6865BE2B1E2FA6001A2AAD /* ChartSegmentedControl.swift */,
+				ED6865D72B1F32EF001A2AAD /* CustomCalenderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1648,6 +1651,7 @@
 				2C3430992B0C8427008CBC85 /* Provider.swift in Sources */,
 				2C2F21702B0F429800B45BA8 /* StudyLogResponseDTO.swift in Sources */,
 				2C2F216E2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift in Sources */,
+				ED6865D82B1F32EF001A2AAD /* CustomCalenderView.swift in Sources */,
 				2CDCD06E2B18EB4B0080DCDE /* UserInfoStorage.swift in Sources */,
 				2CE84EF72B0B7F3C00E2FB71 /* CategorySettingSection.swift in Sources */,
 				2C88DD112B14C50F000B4686 /* DefaultTimerFinishUseCase.swift in Sources */,
