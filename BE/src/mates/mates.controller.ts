@@ -18,7 +18,6 @@ import {
 } from '@nestjs/swagger';
 import { User } from 'src/users/decorator/user.decorator';
 import { MatesService } from './mates.service';
-import { MatesDto } from './dto/response/mates.dto';
 import { StatusMessageDto } from './dto/response/status-message.dto';
 import { AccessTokenGuard } from 'src/auth/guard/bearer-token.guard';
 import { UsersModel } from 'src/users/entity/users.entity';
@@ -96,8 +95,8 @@ export class MatesController {
   ): Promise<ResponseDto> {
     await this.matesService.addMate(user, following_nickname);
     return { statusCode: 201, message: '친구가 성공적으로 구독되었습니다.' };
-  } 
-  
+  }
+
   @Delete('')
   @UseGuards(AccessTokenGuard)
   @ApiBearerAuth()

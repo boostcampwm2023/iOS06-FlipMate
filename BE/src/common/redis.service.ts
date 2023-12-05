@@ -8,8 +8,8 @@ export class RedisService {
     this.client = createClient();
     this.client.connect();
   }
-  set(key: string, value: string) {
-    this.client.set(key, value);
+  async set(key: string, value: string) {
+    await this.client.set(key, value);
   }
 
   get(key: string): Promise<string | null> {

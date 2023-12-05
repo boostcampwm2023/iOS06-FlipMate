@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { StudyLogs } from './study-logs.entity';
@@ -25,7 +25,7 @@ export class StudyLogsService {
     user_id: number,
   ): Promise<void> {
     const { created_at } = studyLogsData;
-    this.redisService.set(`${user_id}`, `${created_at}`);
+    await this.redisService.set(`${user_id}`, `${created_at}`);
   }
 
   async createFinishLog(
@@ -51,7 +51,6 @@ export class StudyLogsService {
   }
 
   calculateStartDay(created_at: Date, learning_time: number): Date {
-    console.log(created_at.toLocaleString());
     const STANDARD = 0;
     const standardMS = STANDARD * 60 * 60 * 1000;
     const millisecond =
@@ -65,21 +64,24 @@ export class StudyLogsService {
     start_date: string,
     end_date: string,
   ): Promise<number[]> {
+    if (!user_id || !start_date || !end_date) {
+      throw new BadRequestException('인자의 형식이 잘못되었습니다.');
+    }
     const startMoment = moment(start_date);
     const diffDays = moment(end_date).diff(startMoment, 'days') + 1;
+    if (diffDays <= 0) {
+      throw new BadRequestException('startDate는 endDate보다 작아야 합니다.');
+    }
     const result = Array.from({ length: diffDays }, () => 0);
-    const daily_sums = await this.studyLogsRepository
-      .createQueryBuilder('study_logs')
-      .select('study_logs.date', 'date')
-      .addSelect('SUM(study_logs.learning_time)', 'daily_sum')
-      .where('study_logs.user_id = :user_id', { user_id })
-      .andWhere('study_logs.date BETWEEN :start_date AND :end_date', {
-        start_date,
-        end_date,
-      })
-      .groupBy('study_logs.date')
-      .orderBy('study_logs.date', 'ASC')
-      .getRawMany();
+    const daily_sums = await this.studyLogsRepository.query(
+      `SELECT DATE(study_logs.date) as date, SUM(study_logs.learning_time) as daily_sum
+       FROM study_logs
+       WHERE study_logs.user_id = ?
+       AND study_logs.date BETWEEN ? AND ?
+       GROUP BY DATE(study_logs.date)
+       ORDER BY DATE(study_logs.date) ASC`,
+      [user_id, start_date, end_date],
+    );
 
     daily_sums.forEach(({ date, daily_sum }) => {
       result[moment(date).diff(startMoment, 'days')] = +daily_sum;

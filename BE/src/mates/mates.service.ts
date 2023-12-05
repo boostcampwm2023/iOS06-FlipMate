@@ -14,6 +14,7 @@ import { ConfigService } from '@nestjs/config';
 import { ENV } from 'src/common/const/env-keys.const';
 import { StudyLogsService } from 'src/study-logs/study-logs.service';
 import moment from 'moment';
+import { MATES_MAXIMUM } from 'src/common/const/service-var.const';
 
 @Injectable()
 export class MatesService {
@@ -114,8 +115,10 @@ export class MatesService {
       where: { follower_id: user },
     });
 
-    if (matesCount >= 10) {
-      throw new BadRequestException('친구는 최대 10명까지 추가할 수 있습니다.');
+    if (matesCount >= MATES_MAXIMUM) {
+      throw new BadRequestException(
+        `친구는 최대 ${MATES_MAXIMUM}명까지 추가할 수 있습니다.`,
+      );
     }
 
     const isExist = await this.matesRepository.findOne({
