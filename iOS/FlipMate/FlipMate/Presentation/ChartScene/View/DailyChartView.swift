@@ -32,6 +32,7 @@ struct DailyChartView: View {
                         Text("총 학습 시간").font(.callout)
                             .foregroundStyle(.secondary)
                         Text("\(totalTime.secondsToStringTime())").font(.system(size: 36))}
+                    .padding(.bottom, 20)
                 }
             } else if #available(iOS 16.0, *) {
                     Text("총 학습 시간").font(.callout)
