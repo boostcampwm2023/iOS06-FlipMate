@@ -16,7 +16,7 @@ final class SocialViewController: BaseViewController {
         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage(resource: .defaultProfile)
         imageView.clipsToBounds = true
-        imageView.bounds = CGRect(x: 0, y: 0, width: 90, height: 90)
+        imageView.bounds = CGRect(x: 0, y: 0, width: ProfileImageViewConstant.width, height: ProfileImageViewConstant.height)
         imageView.layer.cornerRadius = imageView.bounds.height / 2
         imageView.isUserInteractionEnabled = true
         return imageView
@@ -25,7 +25,7 @@ final class SocialViewController: BaseViewController {
     private lazy var userNameLabel: UILabel = {
         let label = UILabel()
         label.font = FlipMateFont.mediumBold.font
-        label.text = "닉네임"
+        label.text = UserNameLabelConstant.title
         label.textColor = .label
         label.textAlignment = .center
         return label
@@ -34,7 +34,7 @@ final class SocialViewController: BaseViewController {
     private lazy var learningTimeLabel: UILabel = {
         let label = UILabel()
         label.font = FlipMateFont.mediumBold.font
-        label.text = "00:00:00"
+        label.text = LearningTimeLabelConstant.title
         label.textColor = .label
         label.textAlignment = .center
         return label
@@ -54,10 +54,16 @@ final class SocialViewController: BaseViewController {
     
     private lazy var friendsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 24, left: 16, bottom: 0, right: 16)
-        layout.minimumLineSpacing = 16
-        layout.minimumInteritemSpacing = 16
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width / 3.0 - 32, height: 170)
+        layout.sectionInset = UIEdgeInsets(
+            top: layoutConstant.topInset,
+            left: layoutConstant.leftInset,
+            bottom: layoutConstant.bottomInset,
+            right: layoutConstant.rightInset)
+        layout.minimumLineSpacing = layoutConstant.lineSpacing
+        layout.minimumInteritemSpacing = layoutConstant.itemSpacing
+        layout.itemSize = CGSize(
+            width: UIScreen.main.bounds.width / layoutConstant.itemCountForLine - layoutConstant.itemSpacing * 2, 
+            height: layoutConstant.iemHeight)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(FriendsCollectionViewCell.self)
         collectionView.refreshControl = refreshControl
@@ -116,21 +122,21 @@ final class SocialViewController: BaseViewController {
         }
         
         NSLayoutConstraint.activate([
-            profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: ProfileImageViewConstant.top),
             profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profileImageView.widthAnchor.constraint(equalToConstant: 90),
-            profileImageView.heightAnchor.constraint(equalToConstant: 90),
+            profileImageView.widthAnchor.constraint(equalToConstant: ProfileImageViewConstant.width),
+            profileImageView.heightAnchor.constraint(equalToConstant: ProfileImageViewConstant.height),
             
-            userNameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 8),
+            userNameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: UserNameLabelConstant.bottom),
             userNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            learningTimeLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 4),
+            learningTimeLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: LearningTimeLabelConstant.bottom),
             learningTimeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            divider.topAnchor.constraint(equalTo: learningTimeLabel.bottomAnchor, constant: 24),
+            divider.topAnchor.constraint(equalTo: learningTimeLabel.bottomAnchor, constant: dividerConstant.bottom),
             divider.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             divider.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            divider.heightAnchor.constraint(equalToConstant: 1),
+            divider.heightAnchor.constraint(equalToConstant: dividerConstant.height),
             
             friendsCollectionView.topAnchor.constraint(equalTo: divider.bottomAnchor),
             friendsCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -275,5 +281,38 @@ extension SocialViewController: UICollectionViewDelegate {
 private extension SocialViewController {
     enum Constant {
         static let title = "소셜"
+    }
+
+    private enum layoutConstant {
+        static var topInset: CGFloat = 24
+        static var leftInset: CGFloat = 16
+        static var bottomInset: CGFloat = 42
+        static var rightInset: CGFloat = 16
+        
+        static var lineSpacing: CGFloat = 16
+        static var itemSpacing: CGFloat = 16
+        static var iemHeight: CGFloat = 179
+        static var itemCountForLine = 3.0
+    }
+    
+    private enum ProfileImageViewConstant {
+        static var width: CGFloat = 90
+        static var height: CGFloat = 90
+        static var top: CGFloat = 32
+    }
+    
+    private enum UserNameLabelConstant {
+        static var bottom: CGFloat = 8
+        static var title = "닉네임"
+    }
+    
+    private enum LearningTimeLabelConstant {
+        static var bottom: CGFloat = 8
+        static var title = "00:00:00"
+    }
+    
+    private enum dividerConstant {
+        static var bottom: CGFloat = 24
+        static var height: CGFloat = 1
     }
 }
