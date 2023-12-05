@@ -56,7 +56,7 @@ final class ChartViewController: BaseViewController {
         self.view.addSubview(self.weeklyChartView)
         
         NSLayoutConstraint.activate([
-            segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
             segmentedControl.heightAnchor.constraint(equalToConstant: 50),
             segmentedControl.widthAnchor.constraint(equalToConstant: 140)
@@ -84,7 +84,7 @@ private extension ChartViewController {
     }
     
     func setDailyChart() {
-        let dailyChartView = DailyChartView()
+        let dailyChartView = DailyChartView(viewModel: ChartViewModel(chartUseCase: DefaultChartUseCase(repository: DefaultChartRepository(provider: Provider(urlSession: URLSession.shared))), actions: nil))
         let hostingController = UIHostingController(rootView: dailyChartView)
         addChild(hostingController)
         guard let newChartView = hostingController.view else { return }

@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct CustomCalenderView: View {
-    @State private var selectedDate = Date()
+    @Binding var selectedDate: Date
+    @ObservedObject var viewModel: ChartViewModel
     @Environment(\.colorScheme) var colorScheme
     private let calendar = Calendar.current
     
@@ -21,6 +22,9 @@ struct CustomCalenderView: View {
             }
             .frame(height: 30)
             .padding(.horizontal, 25)
+        }
+        .onChange(of: selectedDate) { newDate in
+            viewModel.selectedDateDidChange(newDate: newDate)
         }
     }
     
@@ -73,6 +77,7 @@ struct CustomCalenderView: View {
                                         (colorScheme == .dark ? .white : .black))
                     .onTapGesture {
                         selectedDate = date
+                        
                     }
                 }
             }
@@ -117,8 +122,4 @@ private extension CustomCalenderView {
         dateFormatter.setLocalizedDateFormatFromTemplate("E")
         return dateFormatter.string(from: date)
     }
-}
-
-#Preview {
-    CustomCalenderView()
 }

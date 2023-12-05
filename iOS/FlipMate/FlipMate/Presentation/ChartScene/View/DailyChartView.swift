@@ -10,7 +10,7 @@ import Charts
 
 struct DailyChartView: View {
     @ObservedObject var viewModel: ChartViewModel
-    @State var date = Date()
+    @State private var selectedDate = Date()
     
     init(viewModel: ChartViewModel) {
         self.viewModel = viewModel
@@ -18,7 +18,7 @@ struct DailyChartView: View {
     
     var body: some View {
         VStack {
-            CustomCalenderView()
+            CustomCalenderView(selectedDate: $selectedDate, viewModel: viewModel)
             if #available(iOS 17.0, *) {
                 Chart {
                     ForEach(viewModel.dailyChartLog.studyLog.category, id: \.subject) { category in
