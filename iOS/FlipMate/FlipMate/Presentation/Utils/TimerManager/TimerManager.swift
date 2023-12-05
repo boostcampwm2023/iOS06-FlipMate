@@ -49,7 +49,7 @@ final class TimerManager {
     
     /// 타이머를 시작합니다.
     func start(startTime: Date = Date(), completion: (() -> Void)? = nil) {
-//        self.startTime = start.timeIntervalSince1970
+        self.startTime = startTime.timeIntervalSince1970
 
         guard let completion else {
             resume()
