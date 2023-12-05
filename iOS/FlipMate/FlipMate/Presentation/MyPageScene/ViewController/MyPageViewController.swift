@@ -190,7 +190,7 @@ extension MyPageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 프로필 설정 탭
         if indexPath.section == 0, indexPath.row == 0 {
-            
+            navigationController?.pushViewController(ProfileSettingsViewController(viewModel: SignUpViewModel(usecase: DefaultSignUpUseCase(repository: DefaultSignUpRepository(provider: Provider(urlSession: URLSession.shared)), validator: NickNameValidator()), actions: SignUpViewModelActions(didFinishSignUp: {}))), animated: true)
         }
         
         if indexPath.section == 1 {

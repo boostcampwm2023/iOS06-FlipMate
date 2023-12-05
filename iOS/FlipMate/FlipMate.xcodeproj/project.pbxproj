@@ -166,6 +166,7 @@
 		60DFDDDE2B16384500FEF98A /* NickNameValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DFDDDD2B16384500FEF98A /* NickNameValidator.swift */; };
 		60EB7F522B1EFEDA00F8C613 /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EB7F512B1EFEDA00F8C613 /* MyPageTableViewCell.swift */; };
 		60EB7F562B1F053800F8C613 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EB7F552B1F053800F8C613 /* MyPageViewModel.swift */; };
+		60EB7F5B2B1F19D900F8C613 /* ProfileSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EB7F5A2B1F19D900F8C613 /* ProfileSettingsViewController.swift */; };
 		60F67C682B0E1785002C8BF3 /* CategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F67C672B0E1785002C8BF3 /* CategoryUseCase.swift */; };
 		60F67C6A2B0E1868002C8BF3 /* DefaultCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F67C692B0E1868002C8BF3 /* DefaultCategoryUseCase.swift */; };
 		60F6FD732B0B5E130057CE0B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F6FD722B0B5E130057CE0B /* SignUpViewController.swift */; };
@@ -373,6 +374,7 @@
 		60DFDDDD2B16384500FEF98A /* NickNameValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameValidator.swift; sourceTree = "<group>"; };
 		60EB7F512B1EFEDA00F8C613 /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		60EB7F552B1F053800F8C613 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
+		60EB7F5A2B1F19D900F8C613 /* ProfileSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewController.swift; sourceTree = "<group>"; };
 		60F67C672B0E1785002C8BF3 /* CategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryUseCase.swift; sourceTree = "<group>"; };
 		60F67C692B0E1868002C8BF3 /* DefaultCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCategoryUseCase.swift; sourceTree = "<group>"; };
 		60F6FD722B0B5E130057CE0B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -1209,6 +1211,7 @@
 			isa = PBXGroup;
 			children = (
 				606990562B18918B00E5730F /* MyPageViewController.swift */,
+				60EB7F5A2B1F19D900F8C613 /* ProfileSettingsViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1572,6 +1575,7 @@
 				ED6865BA2B1CEA0F001A2AAD /* SocialChart.swift in Sources */,
 				EDC851D22B04EE83009031EA /* CategoryListCollectionViewCell.swift in Sources */,
 				2C9F62222B173AB500AE63F9 /* FriendFollowReqeustDTO.swift in Sources */,
+				60EB7F5B2B1F19D900F8C613 /* ProfileSettingsViewController.swift in Sources */,
 				ED38422C2B0F4531001E2803 /* LoginViewModel.swift in Sources */,
 				2C43A0D82B037BBC0005596A /* FeedbackManager.swift in Sources */,
 				ED3595AB2B0C81B800558FAA /* Responsable.swift in Sources */,
