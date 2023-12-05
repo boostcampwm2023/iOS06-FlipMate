@@ -8,5 +8,6 @@
 import Foundation
 
 protocol ChartRepository {
-    func fetchDailyLog(date: Date) async throws -> ChartLog
+    func fetchDailyLog(date: Date) async throws -> DailyChartLog
+    func fetchWeeklyLog() async throws -> WeeklyChartLog
 }

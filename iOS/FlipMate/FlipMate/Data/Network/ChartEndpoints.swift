@@ -14,4 +14,9 @@ struct ChartEndpoints {
             path: Paths.studylogs + "/stats" + "?date=\(date.dateToString(format: .yyyyMMdd))",
             method: .get)
     }
+    
+    static func fetchWeeklyLog() -> EndPoint<WeeklyChartLogResponseDTO> {
+        let date = Date()
+        return EndPoint(baseURL: BaseURL.flipmateDomain, path: Paths.studylogs + "/stats/weekly" + "?date=\(date.dateToString(format: .yyyyMMdd))", method: .get)
+    }
 }

@@ -13,7 +13,8 @@ struct ChartViewModelActions {
 }
 
 final class ChartViewModel: ObservableObject {
-    @Published var dailyChartLog: ChartLog = .init(studyLog: StudyLog(totalTime: 0, category: []), percentage: 0)
+    @Published var dailyChartLog: DailyChartLog = .init(studyLog: StudyLog(totalTime: 0, category: []), percentage: 0)
+    @Published var weeklyChartLog: WeeklyChartLog = .init(totalTime: 0, dailyData: [], percentage: 0)
     
     private var cancellables = Set<AnyCancellable>()
     private let chartUseCase: ChartUseCase
@@ -35,6 +36,13 @@ private extension ChartViewModel {
         let newDailyChartLog = try await chartUseCase.fetchDailyChartLog(at: date)
         DispatchQueue.main.async {
             self.dailyChartLog = newDailyChartLog
+        }
+    }
+    
+    func fetchWeeklyData() async throws {
+        let newWeeklyChartLog = try await chartUseCase.fetchWeeklyChartLog()
+        DispatchQueue.main.async {
+            self.weeklyChartLog = newWeeklyChartLog
         }
     }
 }

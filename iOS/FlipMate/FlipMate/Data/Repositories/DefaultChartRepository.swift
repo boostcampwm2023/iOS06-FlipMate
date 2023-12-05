@@ -14,7 +14,7 @@ final class DefaultChartRepository: ChartRepository {
         self.provider = provider
     }
     
-    func fetchDailyLog(date: Date) async throws -> ChartLog {
+    func fetchDailyLog(date: Date) async throws -> DailyChartLog {
         let endpoint = ChartEndpoints.fetchDailyLog(date: date)
         let responseDTO = try await provider.request(with: endpoint)
         
@@ -22,6 +22,13 @@ final class DefaultChartRepository: ChartRepository {
             return Category(id: dto.id, color: dto.color, subject: dto.name, studyTime: dto.todayTime)
         } ?? []
         
-        return ChartLog(studyLog: StudyLog(totalTime: responseDTO.todayTime, category: categories), percentage: responseDTO.percentage)
+        return DailyChartLog(studyLog: StudyLog(totalTime: responseDTO.todayTime, category: categories), percentage: responseDTO.percentage)
+    }
+    
+    func fetchWeeklyLog() async throws -> WeeklyChartLog {
+        let endpoint = ChartEndpoints.fetchWeeklyLog()
+        let responseDTO = try await provider.request(with: endpoint)
+        
+        return WeeklyChartLog(totalTime: responseDTO.totalTime, dailyData: responseDTO.dailyData, primaryCategory: responseDTO.primaryCategory, percentage: responseDTO.percentage)
     }
 }

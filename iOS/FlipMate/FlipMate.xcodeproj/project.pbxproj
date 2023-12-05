@@ -167,6 +167,7 @@
 		60F67C682B0E1785002C8BF3 /* CategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F67C672B0E1785002C8BF3 /* CategoryUseCase.swift */; };
 		60F67C6A2B0E1868002C8BF3 /* DefaultCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F67C692B0E1868002C8BF3 /* DefaultCategoryUseCase.swift */; };
 		60F6FD732B0B5E130057CE0B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F6FD722B0B5E130057CE0B /* SignUpViewController.swift */; };
+		ED1B3F292B1F8AA300FB9DBC /* WeeklyChartLogResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B3F282B1F8AA300FB9DBC /* WeeklyChartLogResponseDTO.swift */; };
 		ED3595A92B0C7F3500558FAA /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595A82B0C7F3500558FAA /* HTTPMethod.swift */; };
 		ED3595AB2B0C81B800558FAA /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595AA2B0C81B800558FAA /* Responsable.swift */; };
 		ED3595B02B0C82C800558FAA /* TimerStartRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595AF2B0C82C800558FAA /* TimerStartRequestDTO.swift */; };
@@ -380,6 +381,7 @@
 		8ED331B3B7BDE8C6BB68666F /* Pods-FlipMate-FlipMateUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate-FlipMateUITests.debug.xcconfig"; path = "Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D2F176F76D65D7B591BA21B0 /* Pods-FlipMate-FlipMateUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate-FlipMateUITests.release.xcconfig"; path = "Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E627FDBCC589BEB94FCC114A /* Pods-FlipMateTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMateTests.debug.xcconfig"; path = "Target Support Files/Pods-FlipMateTests/Pods-FlipMateTests.debug.xcconfig"; sourceTree = "<group>"; };
+		ED1B3F282B1F8AA300FB9DBC /* WeeklyChartLogResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyChartLogResponseDTO.swift; sourceTree = "<group>"; };
 		ED3595A82B0C7F3500558FAA /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		ED3595AA2B0C81B800558FAA /* Responsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responsable.swift; sourceTree = "<group>"; };
 		ED3595AF2B0C82C800558FAA /* TimerStartRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStartRequestDTO.swift; sourceTree = "<group>"; };
@@ -1258,6 +1260,7 @@
 			isa = PBXGroup;
 			children = (
 				ED6865C32B1E4303001A2AAD /* DailyChartLogResponseDTO.swift */,
+				ED1B3F282B1F8AA300FB9DBC /* WeeklyChartLogResponseDTO.swift */,
 			);
 			path = ChartScene;
 			sourceTree = "<group>";
@@ -1688,6 +1691,7 @@
 				2C88DCF22B124238000B4686 /* AppFlowCoordinator.swift in Sources */,
 				2C9F62112B17363400AE63F9 /* DefaultFriendUseCase.swift in Sources */,
 				2CDCD0642B18CEDF0080DCDE /* FriendsResponseDTO.swift in Sources */,
+				ED1B3F292B1F8AA300FB9DBC /* WeeklyChartLogResponseDTO.swift in Sources */,
 				EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */,
 				2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */,
 				2C5CDA572B025426007AFC57 /* FlipMateColor.swift in Sources */,
