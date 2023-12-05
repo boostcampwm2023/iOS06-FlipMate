@@ -26,12 +26,14 @@ struct DailyChartView: View {
                             .foregroundStyle(by: .value("카테고리", category.subject))
                             .cornerRadius(10.0)
                             .annotation(position: .overlay) {
-                                Text("\(category.studyTime ?? 0)")
-                                    .font(.headline)
+                                if category.studyTime != 0 {
+                                    Text("\(category.studyTime ?? 0)")
+                                        .font(.headline)
+                                }
                             }
                     }
                 }
-                .frame(height: 400)
+                .frame(height: 400 * (UIScreen.main.bounds.size.height / 844))
                 .chartBackground { _ in
                     VStack {
                         Text("총 학습 시간").font(.callout)
@@ -51,7 +53,7 @@ struct DailyChartView: View {
                         }
                     }
                     .chartLegend(.hidden)
-                    .frame(height: 400)
+                    .frame(height: 360 * (UIScreen.main.bounds.size.height / 844))
                     .chartXAxisLabel("분 (m)")
             } else {
                 Text("iOS 16.0 이상 버전부터 차트 기능 사용 가능")
@@ -60,6 +62,3 @@ struct DailyChartView: View {
     }
 }
 
-#Preview {
-    DailyChartView(viewModel: ChartViewModel(chartUseCase: DefaultChartUseCase(repository: DefaultChartRepository(provider: Provider(urlSession: URLSession.shared))), actions: ChartViewModelActions()))
-}
