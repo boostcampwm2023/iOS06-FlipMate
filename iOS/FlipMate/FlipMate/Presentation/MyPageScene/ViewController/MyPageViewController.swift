@@ -103,6 +103,9 @@ final class MyPageViewController: BaseViewController {
             myPageTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             myPageTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+        
+        self.navigationController?.navigationBar.tintColor = .label
+        self.navigationController?.navigationBar.topItem?.title = ""
     }
     
     // MARK: - Binding
