@@ -23,6 +23,8 @@ struct TimerViewModelActions {
 
 protocol TimerViewModelInput {
     func viewDidLoad()
+    func viewWillAppear()
+    func viewDidDisappear()
     func deviceOrientationDidChange(_ sender: DeviceOrientation)
     func deviceProximityDidChange(_ sender: Bool)
     func categorySettingButtoneDidTapped()
@@ -35,6 +37,7 @@ protocol TimerViewModelOutput {
     var totalTimePublisher: AnyPublisher<Int, Never> { get }
     var categoryChangePublisher: AnyPublisher<Category, Never> { get }
     var categoriesPublisher: AnyPublisher<[Category], Never> { get }
+    var deviceSettingEnabledPublisher: AnyPublisher<Bool, Never> { get }
 }
 
 typealias TimerViewModelProtocol = TimerViewModelInput & TimerViewModelOutput
@@ -50,7 +53,8 @@ final class TimerViewModel: TimerViewModelProtocol {
     private var totalTimeSubject = PassthroughSubject<Int, Never>()
     private var categoryChangeSubject = PassthroughSubject<Category, Never>()
     private var categoriesSubject = PassthroughSubject<[Category], Never>()
-
+    private var deviceSettingEnabledSubject = PassthroughSubject<Bool, Never>()
+    
     // MARK: Properties
     private var proximity: Bool?
     private var orientation: DeviceOrientation = .unknown
@@ -90,6 +94,10 @@ final class TimerViewModel: TimerViewModelProtocol {
         return categoryManager.categoryDidChangePublisher
     }
     
+    var deviceSettingEnabledPublisher: AnyPublisher<Bool, Never> {
+        return deviceSettingEnabledSubject.eraseToAnyPublisher()
+    }
+    
     // MARK: Input
     func deviceOrientationDidChange(_ sender: DeviceOrientation) {
         orientation = sender
@@ -121,6 +129,14 @@ final class TimerViewModel: TimerViewModelProtocol {
                 self.categoryManager.replace(categories: userInfo.category)
             }
             .store(in: &cancellables)
+    }
+    
+    func viewWillAppear() {
+        deviceSettingEnabledSubject.send(true)
+    }
+    
+    func viewDidDisappear() {
+        deviceSettingEnabledSubject.send(false)
     }
     
     func categoryDidSelected(category: Category) {
@@ -224,6 +240,7 @@ private extension TimerViewModel {
         let learningTime = timerUseCase.suspendTimer(suspendTime: Date())
         let studyEndLog = StudyEndLog(learningTime: learningTime, endDate: Date(), categoryId: selectedCategory?.id)
         self.timerState = .suspended
+        deviceSettingEnabledSubject.send(false)
         actions?.showTimerFinishViewController(studyEndLog)
     }
     
