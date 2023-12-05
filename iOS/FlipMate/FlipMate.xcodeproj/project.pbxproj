@@ -203,6 +203,9 @@
 		ED6865CA2B1E454E001A2AAD /* DefaultChartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865C92B1E454E001A2AAD /* DefaultChartRepository.swift */; };
 		ED6865CC2B1E494D001A2AAD /* ChartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865CB2B1E494D001A2AAD /* ChartUseCase.swift */; };
 		ED6865CE2B1E49A6001A2AAD /* DefaultChartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865CD2B1E49A6001A2AAD /* DefaultChartUseCase.swift */; };
+		ED6865D02B1F1429001A2AAD /* ChartDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865CF2B1F1429001A2AAD /* ChartDIContainer.swift */; };
+		ED6865D32B1F1464001A2AAD /* ChartFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865D22B1F1464001A2AAD /* ChartFlowCoordinator.swift */; };
+		ED6865D62B1F14CF001A2AAD /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865D52B1F14CF001A2AAD /* ChartViewModel.swift */; };
 		ED82F0072B126C95005BB32D /* UITextField++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F0062B126C95005BB32D /* UITextField++Extension.swift */; };
 		ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */; };
 		ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A7E2B06033F008FE1C5 /* Category.swift */; };
@@ -412,6 +415,9 @@
 		ED6865C92B1E454E001A2AAD /* DefaultChartRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChartRepository.swift; sourceTree = "<group>"; };
 		ED6865CB2B1E494D001A2AAD /* ChartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartUseCase.swift; sourceTree = "<group>"; };
 		ED6865CD2B1E49A6001A2AAD /* DefaultChartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChartUseCase.swift; sourceTree = "<group>"; };
+		ED6865CF2B1F1429001A2AAD /* ChartDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDIContainer.swift; sourceTree = "<group>"; };
+		ED6865D22B1F1464001A2AAD /* ChartFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFlowCoordinator.swift; sourceTree = "<group>"; };
+		ED6865D52B1F14CF001A2AAD /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		ED82F0062B126C95005BB32D /* UITextField++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++Extension.swift"; sourceTree = "<group>"; };
 		ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor++Extension.swift"; sourceTree = "<group>"; };
 		ED9B2A7E2B06033F008FE1C5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -920,6 +926,8 @@
 		600908F32AFCDCE70065DFFB /* ChartScene */ = {
 			isa = PBXGroup;
 			children = (
+				ED6865D12B1F1459001A2AAD /* Flow */,
+				ED6865D42B1F14C3001A2AAD /* ViewModel */,
 				ED6865BB2B1DEE2A001A2AAD /* View */,
 				2C5CDA592B025435007AFC57 /* ViewController */,
 			);
@@ -1088,6 +1096,7 @@
 				2C88DD062B125781000B4686 /* TabBarDIContainer.swift */,
 				2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */,
 				2CDCD03C2B1871E60080DCDE /* SocialDIContainer.swift */,
+				ED6865CF2B1F1429001A2AAD /* ChartDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -1248,6 +1257,22 @@
 				ED6865C32B1E4303001A2AAD /* DailyChartLogResponseDTO.swift */,
 			);
 			path = ChartScene;
+			sourceTree = "<group>";
+		};
+		ED6865D12B1F1459001A2AAD /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				ED6865D22B1F1464001A2AAD /* ChartFlowCoordinator.swift */,
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		ED6865D42B1F14C3001A2AAD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ED6865D52B1F14CF001A2AAD /* ChartViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		EDC851D02B04EE74009031EA /* View */ = {
@@ -1612,6 +1637,7 @@
 				2CE84EFB2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift in Sources */,
 				ED3595B72B0C887C00558FAA /* TimerFinishRequestDTO.swift in Sources */,
 				2C2F217A2B0F4CF900B45BA8 /* StudyLogUseCase.swift in Sources */,
+				ED6865D62B1F14CF001A2AAD /* ChartViewModel.swift in Sources */,
 				ED3595A92B0C7F3500558FAA /* HTTPMethod.swift in Sources */,
 				2C87C27D2B1DF1C300A26313 /* DefaultUserInfoRepository.swift in Sources */,
 				2C9F62052B160B3900AE63F9 /* NoResultView.swift in Sources */,
@@ -1666,6 +1692,7 @@
 				600908C02AFCD7DF0065DFFB /* SceneDelegate.swift in Sources */,
 				ED6865A72B17932F001A2AAD /* SocialDetailRequestDTO.swift in Sources */,
 				2C3430B12B0DE3D0008CBC85 /* Date++Extension.swift in Sources */,
+				ED6865D02B1F1429001A2AAD /* ChartDIContainer.swift in Sources */,
 				2C9F62152B1736BE00AE63F9 /* DefaultFriendRepository.swift in Sources */,
 				2CDCD0672B18D0330080DCDE /* FriendUser.swift in Sources */,
 				ED6865CC2B1E494D001A2AAD /* ChartUseCase.swift in Sources */,
@@ -1693,6 +1720,7 @@
 				2C9F62262B1742D200AE63F9 /* FriendEndpoints.swift in Sources */,
 				ED6865CE2B1E49A6001A2AAD /* DefaultChartUseCase.swift in Sources */,
 				2CDCD03D2B1871E60080DCDE /* SocialDIContainer.swift in Sources */,
+				ED6865D32B1F1464001A2AAD /* ChartFlowCoordinator.swift in Sources */,
 				2C87C2792B1C794000A26313 /* UpdateFriend.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

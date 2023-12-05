@@ -40,6 +40,12 @@ final class TabBarDIContainer: TabBarFlowCoordinatorDependencies {
         return SocialDIContainer(dependencies: dependencies)
     }
     
+    func makeChartDIContainer() -> ChartDIContainer {
+        let dependencies = ChartDIContainer.Dependencies(provider: dependencies.provider)
+        
+        return ChartDIContainer(dependencies: dependencies)
+    }
+    
     func makeTimerViewController() -> UIViewController {
         return UIViewController()
     }
