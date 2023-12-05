@@ -152,16 +152,11 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
     }
     
     private func startTimer() {
-        timerState = .resumed
-        if timerState == .notStarted {
-            timerManager.start()
-        } else {
-            timerManager.resume()
-        }
+        if updateFriendArray.isEmpty { return }
+        timerManager.start(completion: increaseLearningTime)
     }
     
     private func stopTimer() {
-        timerState = .suspended
-        timerManager.suspend()
+        timerManager.cancel()
     }
 }

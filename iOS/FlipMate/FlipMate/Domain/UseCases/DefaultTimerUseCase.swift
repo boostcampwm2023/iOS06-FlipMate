@@ -34,6 +34,6 @@ class DefaultTimerUseCase: TimerUseCase {
     }
 
     func stopTimer() {
-        timerManager.cancle()
+        timerManager.cancel()
     }
 }
