@@ -87,8 +87,8 @@ final class SocialViewController: BaseViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        viewModel.viewWillDisappear()
+        super.viewDidDisappear(animated)
+        viewModel.viewDidDisappear()
     }
     
     // MARK: - Configure UI
@@ -240,7 +240,7 @@ private extension SocialViewController {
 private extension SocialViewController {
     @objc
     func myPageButtonTapped() {
-        self.navigationController?.pushViewController(MyPageViewController(), animated: true)
+        viewModel.myPageButtonTapped()
     }
     
     @objc

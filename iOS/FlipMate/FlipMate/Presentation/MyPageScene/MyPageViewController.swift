@@ -35,6 +35,6 @@ final class MyPageViewController: BaseViewController {
     @objc
     func logoutButtonTapped() {
         _ = try? KeychainManager.deleteAccessToken()
-        exit(0)
+//        exit(0)
     }
 }
