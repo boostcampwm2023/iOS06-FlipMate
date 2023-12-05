@@ -19,6 +19,7 @@ protocol SocialViewModelInput {
     func viewWillDisappear()
     func freindAddButtonDidTapped()
     func friendCellDidTapped(friend: Friend)
+    func didRefresh()
 }
 
 protocol SocialViewModelOutput {
@@ -98,6 +99,10 @@ final class SocialViewModel: SocialViewModelProtocol {
         timerState = .suspended
         timerManager.suspend()
         friendStatusPollingManager.stopPolling()
+    }
+    
+    func didRefresh() {
+        fetchFriendStatus()
     }
 }
 

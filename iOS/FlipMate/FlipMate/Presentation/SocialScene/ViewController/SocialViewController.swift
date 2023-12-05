@@ -46,6 +46,12 @@ final class SocialViewController: BaseViewController {
         return divider
     }()
     
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshFreindsStatus), for: .valueChanged)
+        return refreshControl
+    }()
+    
     private lazy var friendsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 24, left: 16, bottom: 0, right: 16)
@@ -54,6 +60,7 @@ final class SocialViewController: BaseViewController {
         layout.itemSize = CGSize(width: UIScreen.main.bounds.width / 3.0 - 32, height: 170)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(FriendsCollectionViewCell.self)
+        collectionView.refreshControl = refreshControl
         collectionView.delegate = self
         return collectionView
     }()
@@ -246,6 +253,12 @@ private extension SocialViewController {
     @objc
     func addFriendButtonTapped() {
         viewModel.freindAddButtonDidTapped()
+    }
+    
+    @objc
+    func refreshFreindsStatus() {
+        viewModel.didRefresh()
+        friendsCollectionView.refreshControl?.endRefreshing()
     }
 }
 
