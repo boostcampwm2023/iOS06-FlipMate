@@ -8,7 +8,9 @@
 import Foundation
 
 struct StatusResponseWithErrorDTO: Decodable {
+    let statusCode: Int
     let message: String
     let error: String
-    let statusCode: Int
+    let path: String
+    let timestamp: String
 }
