@@ -55,15 +55,15 @@ final class SocialViewController: BaseViewController {
     private lazy var friendsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(
-            top: layoutConstant.topInset,
-            left: layoutConstant.leftInset,
-            bottom: layoutConstant.bottomInset,
-            right: layoutConstant.rightInset)
-        layout.minimumLineSpacing = layoutConstant.lineSpacing
-        layout.minimumInteritemSpacing = layoutConstant.itemSpacing
+            top: LayoutConstant.topInset,
+            left: LayoutConstant.leftInset,
+            bottom: LayoutConstant.bottomInset,
+            right: LayoutConstant.rightInset)
+        layout.minimumLineSpacing = LayoutConstant.lineSpacing
+        layout.minimumInteritemSpacing = LayoutConstant.itemSpacing
         layout.itemSize = CGSize(
-            width: UIScreen.main.bounds.width / layoutConstant.itemCountForLine - layoutConstant.itemSpacing * 2, 
-            height: layoutConstant.iemHeight)
+            width: UIScreen.main.bounds.width / LayoutConstant.itemCountForLine - LayoutConstant.itemSpacing * 2,
+            height: LayoutConstant.iemHeight)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(FriendsCollectionViewCell.self)
         collectionView.refreshControl = refreshControl
@@ -133,10 +133,10 @@ final class SocialViewController: BaseViewController {
             learningTimeLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: LearningTimeLabelConstant.bottom),
             learningTimeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            divider.topAnchor.constraint(equalTo: learningTimeLabel.bottomAnchor, constant: dividerConstant.bottom),
+            divider.topAnchor.constraint(equalTo: learningTimeLabel.bottomAnchor, constant: DividerConstant.bottom),
             divider.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             divider.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            divider.heightAnchor.constraint(equalToConstant: dividerConstant.height),
+            divider.heightAnchor.constraint(equalToConstant: DividerConstant.height),
             
             friendsCollectionView.topAnchor.constraint(equalTo: divider.bottomAnchor),
             friendsCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -291,7 +291,7 @@ private extension SocialViewController {
         static let title = "소셜"
     }
 
-    private enum layoutConstant {
+    private enum LayoutConstant {
         static var topInset: CGFloat = 24
         static var leftInset: CGFloat = 16
         static var bottomInset: CGFloat = 42
@@ -319,7 +319,7 @@ private extension SocialViewController {
         static var title = "00:00:00"
     }
     
-    private enum dividerConstant {
+    private enum DividerConstant {
         static var bottom: CGFloat = 24
         static var height: CGFloat = 1
     }

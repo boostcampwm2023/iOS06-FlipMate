@@ -641,6 +641,8 @@
 				2C87C2962B1F346700A26313 /* ImageDownLoaderError.swift */,
 			);
 			path = ImageDownloader;
+            sourceTree = "<group>";
+        };
 		2C87C28C2B1E315600A26313 /* SignOutManager */ = {
 			isa = PBXGroup;
 			children = (
