@@ -158,6 +158,9 @@ final class SignUpViewController: BaseViewController {
             signUpButton.trailingAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32)
         ])
+        
+        self.navigationController?.navigationBar.tintColor = .label
+        self.navigationController?.navigationBar.topItem?.title = ""
     }
     
     func drawTextFieldUnderline() {

@@ -13,6 +13,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { LoggingMiddleware } from './common/middleware/logging.middleware';
 import { typeormConfig } from './common/config/typeorm.config';
 import { staticConfig } from './common/config/static.config';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { staticConfig } from './common/config/static.config';
     UsersModule,
     PassportModule,
     AuthModule,
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [AppService],

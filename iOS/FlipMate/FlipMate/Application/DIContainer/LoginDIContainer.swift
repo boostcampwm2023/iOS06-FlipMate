@@ -36,8 +36,8 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
     func makeSignUpViewController(actions: SignUpViewModelActions) -> UIViewController {
         return SignUpViewController(
             viewModel: SignUpViewModel(
-                usecase: DefaultSignUpUseCase(
-                    repository: DefaultSignUpRepository(
+                usecase: DefaultProfileSettingsUseCase(
+                    repository: DefaultProfileSettingsRepository(
                         provider: dependencies.provider),
                     validator: NickNameValidator()),
                 actions: actions

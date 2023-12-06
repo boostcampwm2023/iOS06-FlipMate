@@ -7,8 +7,8 @@
 
 import Foundation
 
-protocol SignUpUseCase {
+protocol ProfileSettingsUseCase {
     func isNickNameValid(_ nickName: String) async throws -> NickNameValidationState
     func isSafeProfileImage(_ imageData: Data) async throws -> Bool
-    func signUpUser(nickName: String, profileImageData: Data) async throws
+    func setupProfileInfo(nickName: String, profileImageData: Data) async throws -> UserInfo
 }

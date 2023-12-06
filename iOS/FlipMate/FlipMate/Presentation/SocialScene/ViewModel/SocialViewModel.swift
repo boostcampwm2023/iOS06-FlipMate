@@ -11,19 +11,23 @@ import Combine
 struct SocialViewModelActions {
     var showFriendAddViewController: () -> Void
     var showSocialDetailViewController: (Friend) -> Void
+    var showMyPageViewController: () -> Void
 }
 
 protocol SocialViewModelInput {
     func viewDidLoad()
     func viewWillAppear()
-    func viewWillDisappear()
+    func viewDidDisappear()
     func freindAddButtonDidTapped()
     func friendCellDidTapped(friend: Friend)
+    func didRefresh()
+    func myPageButtonTapped()
 }
 
 protocol SocialViewModelOutput {
     var freindsPublisher: AnyPublisher<[Friend], Never> { get }
     var nicknamePublisher: AnyPublisher<String, Never> { get }
+    var profileImagePublisher: AnyPublisher<String, Never> { get }
     var updateFriendStatus: AnyPublisher<[UpdateFriend], Never> { get }
     var stopFriendStatus: AnyPublisher<[StopFriend], Never> { get }
 }
@@ -34,6 +38,7 @@ final class SocialViewModel: SocialViewModelProtocol {
     // MARK: - Subject
     private var freindsSubject = PassthroughSubject<[Friend], Never>()
     private var nicknameSubject = CurrentValueSubject<String, Never>(UserInfoStorage.nickname)
+    private var profileImageSubject = CurrentValueSubject<String, Never>(UserInfoStorage.profileImageURL)
     private var updateFriendSubject = PassthroughSubject<[UpdateFriend], Never>()
     private var stopFriendSubject = PassthroughSubject<[StopFriend], Never>()
     
@@ -61,6 +66,10 @@ final class SocialViewModel: SocialViewModelProtocol {
         return nicknameSubject.eraseToAnyPublisher()
     }
     
+    var profileImagePublisher: AnyPublisher<String, Never> {
+        return profileImageSubject.eraseToAnyPublisher()
+    }
+    
     var updateFriendStatus: AnyPublisher<[UpdateFriend], Never> {
         return friendStatusPollingManager.updateLearningPublihser.eraseToAnyPublisher()
     }
@@ -85,19 +94,21 @@ final class SocialViewModel: SocialViewModelProtocol {
     func viewWillAppear() {
         getFriendState()
         FMLogger.friend.debug("친구 상태 폴링 시작")
-        timerState = .resumed
-        if timerState == .notStarted {
-            timerManager.start(startTime: Date())
-        } else {
-            timerManager.resume(resumeTime: Date())
-        }
+        timerManager.start(completion: fetchFriendStatus)
     }
     
-    func viewWillDisappear() {
+    func viewDidDisappear() {
         FMLogger.friend.debug("친구 상태 폴링 종료")
-        timerState = .suspended
-        timerManager.suspend()
         friendStatusPollingManager.stopPolling()
+        timerManager.cancel()
+    }
+    
+    func myPageButtonTapped() {
+        actions?.showMyPageViewController()
+    }
+    
+    func didRefresh() {
+        fetchFriendStatus()
     }
 }
 
@@ -152,6 +163,13 @@ private extension SocialViewModel {
             .sink { [weak self] nickName in
                 guard let self = self else { return }
                 self.nicknameSubject.send(nickName)
+            }
+            .store(in: &cancellables)
+        
+        UserInfoStorage.$profileImageURL
+            .sink { [weak self] profileImageURL in
+                guard let self = self else { return }
+                self.profileImageSubject.send(profileImageURL)
             }
             .store(in: &cancellables)
     }

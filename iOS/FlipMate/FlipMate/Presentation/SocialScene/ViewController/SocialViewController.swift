@@ -16,7 +16,7 @@ final class SocialViewController: BaseViewController {
         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage(resource: .defaultProfile)
         imageView.clipsToBounds = true
-        imageView.bounds = CGRect(x: 0, y: 0, width: 90, height: 90)
+        imageView.bounds = CGRect(x: 0, y: 0, width: ProfileImageViewConstant.width, height: ProfileImageViewConstant.height)
         imageView.layer.cornerRadius = imageView.bounds.height / 2
         imageView.isUserInteractionEnabled = true
         return imageView
@@ -25,7 +25,7 @@ final class SocialViewController: BaseViewController {
     private lazy var userNameLabel: UILabel = {
         let label = UILabel()
         label.font = FlipMateFont.mediumBold.font
-        label.text = "닉네임"
+        label.text = UserNameLabelConstant.title
         label.textColor = .label
         label.textAlignment = .center
         return label
@@ -34,7 +34,7 @@ final class SocialViewController: BaseViewController {
     private lazy var learningTimeLabel: UILabel = {
         let label = UILabel()
         label.font = FlipMateFont.mediumBold.font
-        label.text = "00:00:00"
+        label.text = LearningTimeLabelConstant.title
         label.textColor = .label
         label.textAlignment = .center
         return label
@@ -46,14 +46,27 @@ final class SocialViewController: BaseViewController {
         return divider
     }()
     
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshFreindsStatus), for: .valueChanged)
+        return refreshControl
+    }()
+    
     private lazy var friendsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 24, left: 16, bottom: 0, right: 16)
-        layout.minimumLineSpacing = 16
-        layout.minimumInteritemSpacing = 16
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width / 3.0 - 32, height: 170)
+        layout.sectionInset = UIEdgeInsets(
+            top: LayoutConstant.topInset,
+            left: LayoutConstant.leftInset,
+            bottom: LayoutConstant.bottomInset,
+            right: LayoutConstant.rightInset)
+        layout.minimumLineSpacing = LayoutConstant.lineSpacing
+        layout.minimumInteritemSpacing = LayoutConstant.itemSpacing
+        layout.itemSize = CGSize(
+            width: UIScreen.main.bounds.width / LayoutConstant.itemCountForLine - LayoutConstant.itemSpacing * 2,
+            height: LayoutConstant.iemHeight)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(FriendsCollectionViewCell.self)
+        collectionView.refreshControl = refreshControl
         collectionView.delegate = self
         return collectionView
     }()
@@ -87,8 +100,8 @@ final class SocialViewController: BaseViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        viewModel.viewWillDisappear()
+        super.viewDidDisappear(animated)
+        viewModel.viewDidDisappear()
     }
     
     // MARK: - Configure UI
@@ -109,21 +122,21 @@ final class SocialViewController: BaseViewController {
         }
         
         NSLayoutConstraint.activate([
-            profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: ProfileImageViewConstant.top),
             profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profileImageView.widthAnchor.constraint(equalToConstant: 90),
-            profileImageView.heightAnchor.constraint(equalToConstant: 90),
+            profileImageView.widthAnchor.constraint(equalToConstant: ProfileImageViewConstant.width),
+            profileImageView.heightAnchor.constraint(equalToConstant: ProfileImageViewConstant.height),
             
-            userNameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 8),
+            userNameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: UserNameLabelConstant.bottom),
             userNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            learningTimeLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 4),
+            learningTimeLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: LearningTimeLabelConstant.bottom),
             learningTimeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            divider.topAnchor.constraint(equalTo: learningTimeLabel.bottomAnchor, constant: 24),
+            divider.topAnchor.constraint(equalTo: learningTimeLabel.bottomAnchor, constant: DividerConstant.bottom),
             divider.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             divider.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            divider.heightAnchor.constraint(equalToConstant: 1),
+            divider.heightAnchor.constraint(equalToConstant: DividerConstant.height),
             
             friendsCollectionView.topAnchor.constraint(equalTo: divider.bottomAnchor),
             friendsCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -190,6 +203,14 @@ final class SocialViewController: BaseViewController {
             }
             .store(in: &cancellables)
         
+        viewModel.profileImagePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] imageURL in
+                guard let self = self else { return }
+                self.profileImageView.setImage(url: imageURL)
+            }
+            .store(in: &cancellables)
+        
         viewModel.updateFriendStatus
             .receive(on: DispatchQueue.main)
             .sink { [weak self] updateFreinds in
@@ -218,7 +239,7 @@ private extension SocialViewController {
                 continue }
             guard let cell = friendsCollectionView.cellForItem(at: indexPath) as? FriendsCollectionViewCell else {
                 continue }
-            guard let friend = updateFreinds.filter { $0.id == item.id }.first else {
+            guard let friend = updateFreinds.filter({ $0.id == item.id }).first else {
                 continue }
             cell.updateLearningTime(friend.currentLearningTime)
         }
@@ -230,7 +251,7 @@ private extension SocialViewController {
         for item in items {
             guard let indexPath = diffableDataSource.indexPath(for: item) else { continue }
             guard let cell = friendsCollectionView.cellForItem(at: indexPath) as? FriendsCollectionViewCell else { continue }
-            guard let friend = stopFriends.filter { $0.id == item.id }.first else { continue }
+            guard let friend = stopFriends.filter({ $0.id == item.id }).first else { continue }
             cell.stopLearningTime(friend.totalTime)
         }
     }
@@ -240,12 +261,18 @@ private extension SocialViewController {
 private extension SocialViewController {
     @objc
     func myPageButtonTapped() {
-        self.navigationController?.pushViewController(MyPageViewController(), animated: true)
+        viewModel.myPageButtonTapped()
     }
     
     @objc
     func addFriendButtonTapped() {
         viewModel.freindAddButtonDidTapped()
+    }
+    
+    @objc
+    func refreshFreindsStatus() {
+        viewModel.didRefresh()
+        friendsCollectionView.refreshControl?.endRefreshing()
     }
 }
 
@@ -262,5 +289,38 @@ extension SocialViewController: UICollectionViewDelegate {
 private extension SocialViewController {
     enum Constant {
         static let title = "소셜"
+    }
+
+    private enum LayoutConstant {
+        static var topInset: CGFloat = 24
+        static var leftInset: CGFloat = 16
+        static var bottomInset: CGFloat = 42
+        static var rightInset: CGFloat = 16
+        
+        static var lineSpacing: CGFloat = 16
+        static var itemSpacing: CGFloat = 16
+        static var iemHeight: CGFloat = 179
+        static var itemCountForLine = 3.0
+    }
+    
+    private enum ProfileImageViewConstant {
+        static var width: CGFloat = 90
+        static var height: CGFloat = 90
+        static var top: CGFloat = 32
+    }
+    
+    private enum UserNameLabelConstant {
+        static var bottom: CGFloat = 8
+        static var title = "닉네임"
+    }
+    
+    private enum LearningTimeLabelConstant {
+        static var bottom: CGFloat = 8
+        static var title = "00:00:00"
+    }
+    
+    private enum DividerConstant {
+        static var bottom: CGFloat = 24
+        static var height: CGFloat = 1
     }
 }

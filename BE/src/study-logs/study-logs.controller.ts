@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { StudyLogsService } from './study-logs.service';
-import { StudyLogs } from './study-logs.entity';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
@@ -16,6 +15,8 @@ import { User } from 'src/users/decorator/user.decorator';
 import { ResponseDto } from 'src/common/response.dto';
 import { dailyStatDto } from './dto/response/daily-stat.dto';
 import moment from 'moment';
+import { weeklyStatDto } from './dto/response/weekly-stats.dto';
+import { TodayLogsDto } from './dto/response/today-logs.dto';
 
 @ApiTags('타이머 페이지')
 @Controller('study-logs')
@@ -53,7 +54,7 @@ export class StudyLogsController {
   @UseGuards(AccessTokenGuard)
   @ApiOperation({ summary: '학습시간 조회 (완)' })
   @ApiCreatedResponse({
-    type: StudyLogs,
+    type: TodayLogsDto,
     description: '학습 기록이 성공적으로 조회되었습니다.',
   })
   @ApiBadRequestResponse({
@@ -80,7 +81,7 @@ export class StatsController {
 
   @Get()
   @UseGuards(AccessTokenGuard)
-  @ApiOperation({ summary: '일간 통계 조회하기' })
+  @ApiOperation({ summary: '일간 통계 조회하기 (완)' })
   @ApiOkResponse({
     type: dailyStatDto,
     description: '일간 통계 조회 성공',
@@ -116,7 +117,12 @@ export class StatsController {
     example: '2023-11-22',
     description: '통계 조회 할 날짜',
   })
-  @ApiOperation({ summary: '주간 통계 조회하기' })
+  @ApiOkResponse({
+    type: weeklyStatDto,
+    description: '주간 통계 조회 성공',
+  })
+  @ApiOperation({ summary: '주간 통계 조회하기 (완)' })
+  @ApiBearerAuth()
   async getWeeklyStats(
     @User('id') userId: number,
     @Query('date') date: string,
@@ -140,6 +146,6 @@ export class StatsController {
   }
 
   @Get('/monthly')
-  @ApiOperation({ summary: '주간 통계 조회하기' })
+  @ApiOperation({ summary: '월간 통계 조회하기' })
   getMonthlyStats() {}
 }

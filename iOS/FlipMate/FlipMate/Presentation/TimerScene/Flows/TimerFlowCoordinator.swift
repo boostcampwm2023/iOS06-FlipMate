@@ -15,8 +15,8 @@ protocol TimerFlowCoordinatorDependencies {
 
 final class TimerFlowCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
-    private var navigationController: UINavigationController
-    private var timerViewController: TimerViewController?
+    private weak var navigationController: UINavigationController?
+    private weak var timerViewController: TimerViewController?
     private let dependencies: TimerFlowCoordinatorDependencies
     
     init(navigationController: UINavigationController, dependencies: TimerFlowCoordinatorDependencies) {
@@ -30,7 +30,7 @@ final class TimerFlowCoordinator: Coordinator {
             showTimerFinishViewController: showTimerFinishViewController)
         let viewController = dependencies.makeTimerViewController(actions: actions)
         timerViewController = viewController
-        navigationController.viewControllers = [viewController]
+        navigationController?.viewControllers = [viewController]
     }
     
     private func showCategorySettingViewController() {
@@ -49,15 +49,15 @@ final class TimerFlowCoordinator: Coordinator {
         let timerFinishViewController = dependencies.makeTimerFinishViewController(actions: actions, studyEndLog: studyEndLog)
         timerFinishViewController.modalPresentationStyle = .overFullScreen
         timerFinishViewController.modalTransitionStyle = .crossDissolve
-        navigationController.present(timerFinishViewController, animated: true)
+        navigationController?.present(timerFinishViewController, animated: true)
     }
     
     private func didSaveStudyEndLog(studyEndLog: StudyEndLog) {
-        navigationController.dismiss(animated: true)
+        navigationController?.dismiss(animated: true)
         timerViewController?.appendStudyEndLog(studyEndLog: studyEndLog)
     }
     
     private func didCancleStudyEndLog() {
-        navigationController.dismiss(animated: true)
+        navigationController?.dismiss(animated: true)
     }
 }

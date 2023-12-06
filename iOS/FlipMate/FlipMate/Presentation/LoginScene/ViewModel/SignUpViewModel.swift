@@ -29,7 +29,7 @@ typealias SignUpViewModelProtocol = SignUpViewModelInput & SignUpViewModelOutput
 
 final class SignUpViewModel: SignUpViewModelProtocol {
     // MARK: - Use Case
-    private let useCase: SignUpUseCase
+    private let useCase: ProfileSettingsUseCase
     
     // MARK: - Subjects
     private var isValidNickNameSubject = PassthroughSubject<NickNameValidationState, Never>()
@@ -38,7 +38,7 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     private var errorSubject = PassthroughSubject<Error, Never>()
     private let actions: SignUpViewModelActions?
     
-    init(usecase: SignUpUseCase, actions: SignUpViewModelActions) {
+    init(usecase: ProfileSettingsUseCase, actions: SignUpViewModelActions) {
         self.useCase = usecase
         self.actions = actions
     }
@@ -69,9 +69,10 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     func signUpButtonTapped(userName: String, profileImageData: Data) {
         Task {
             do {
-                try await useCase.signUpUser(nickName: userName, profileImageData: profileImageData)
+                let userInfo = try await useCase.setupProfileInfo(nickName: userName, profileImageData: profileImageData)
                 isSignUpCompletedSubject.send()
-                UserInfoStorage.nickname = userName
+                UserInfoStorage.nickname = userInfo.name
+                UserInfoStorage.profileImageURL = userInfo.profileImageURL ?? ""
                 DispatchQueue.main.async {
                     self.actions?.didFinishSignUp()
                 }
