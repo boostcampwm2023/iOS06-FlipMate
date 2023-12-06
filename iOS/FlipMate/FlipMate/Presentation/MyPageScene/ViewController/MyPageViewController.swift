@@ -197,7 +197,7 @@ extension MyPageViewController: UITableViewDelegate {
                     viewModel: ProfileSettingsViewModel(
                         usecase: DefaultProfileSettingsUseCase(
                             repository: DefaultProfileSettingsRepository(
-                                provider: Provider(urlSession: URLSession.shared)),
+                                provider: Provider(urlSession: URLSession.shared, signOutManager: SignOutManager())),
                             validator: NickNameValidator()),
                         actions: ProfileSettingsViewModelActions(didFinishSignUp: {}))),
                 animated: true)
