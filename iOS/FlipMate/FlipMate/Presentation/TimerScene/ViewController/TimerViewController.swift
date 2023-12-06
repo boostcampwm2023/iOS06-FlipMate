@@ -80,6 +80,7 @@ final class TimerViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        UIDevice.current.isProximityMonitoringEnabled = true
         configureNotification()
         timerViewModel.viewWillAppear()
     }
@@ -87,6 +88,8 @@ final class TimerViewController: BaseViewController {
     override func viewDidDisappear(_ animated: Bool) {
         deviceMotionManager.stopDeviceMotion()
         timerViewModel.viewDidDisappear()
+        UIDevice.current.isProximityMonitoringEnabled = false
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - setup UI
@@ -202,7 +205,6 @@ private extension TimerViewController {
     }
     
     func setDeviceSetting(isEnabled: Bool) {
-        UIDevice.current.isProximityMonitoringEnabled = isEnabled
         if isEnabled {
             deviceMotionManager.startDeviceMotion()
         } else {
