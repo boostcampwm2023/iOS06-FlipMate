@@ -16,9 +16,9 @@ protocol Providable {
 struct Provider: Providable {
     private let jsonDecoder = JSONDecoder()
     private var urlSession: URLSessionable
-    private let signOutManager: SignOutManagerProtocol
+    private let signOutManager: SignOutManagerProtocol?
     
-    init(urlSession: URLSessionable, signOutManager: SignOutManagerProtocol) {
+    init(urlSession: URLSessionable, signOutManager: SignOutManagerProtocol? = nil) {
         self.urlSession = urlSession
         self.signOutManager = signOutManager
     }
@@ -36,7 +36,7 @@ struct Provider: Providable {
                         do {
                             if response.statusCode == 401 {
                                 FMLogger.general.error("토큰이 만료되어 로그인 화면으로 이동합니다.")
-                                signOutManager.signOut()
+                                signOutManager?.signOut()
                             }
                             
                             let errorResult = try JSONDecoder().decode(StatusResponseWithErrorDTO.self, from: data)
@@ -81,7 +81,7 @@ struct Provider: Providable {
             do {
                 if response.statusCode == 401 {
                     FMLogger.general.error("토큰이 만료되어 로그인 화면으로 이동합니다.")
-                    signOutManager.signOut()
+                    signOutManager?.signOut()
                 }
                 
                 let errorResult = try JSONDecoder().decode(StatusResponseWithErrorDTO.self, from: data)
