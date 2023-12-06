@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0A814BC3CFA46D0501C8B894 /* Pods_FlipMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288FECD685A9C6B6E481147C /* Pods_FlipMate.framework */; };
+		2C1F2BBB2B20D8D60026C30B /* SocialUserInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */; };
+		2C1F2BBD2B20DA770026C30B /* ProfileHeaderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1F2BBC2B20DA770026C30B /* ProfileHeaderItem.swift */; };
 		2C2F216E2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F216D2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift */; };
 		2C2F21702B0F429800B45BA8 /* StudyLogResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F216F2B0F429800B45BA8 /* StudyLogResponseDTO.swift */; };
 		2C2F21762B0F440D00B45BA8 /* StudyLogEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F21752B0F440D00B45BA8 /* StudyLogEndpoints.swift */; };
@@ -44,13 +46,13 @@
 		2C801D832B04C64F00A7ABAE /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C801D822B04C64F00A7ABAE /* TimerManager.swift */; };
 		2C87C2772B1C789A00A26313 /* FriendStatusPollingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2762B1C789A00A26313 /* FriendStatusPollingManager.swift */; };
 		2C87C2792B1C794000A26313 /* UpdateFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2782B1C794000A26313 /* UpdateFriend.swift */; };
-		2C87C28E2B1E316800A26313 /* SignOutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C28D2B1E316800A26313 /* SignOutManager.swift */; };
 		2C87C27B2B1DF11000A26313 /* UserInfoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C27A2B1DF11000A26313 /* UserInfoResponseDTO.swift */; };
 		2C87C27D2B1DF1C300A26313 /* DefaultUserInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C27C2B1DF1C300A26313 /* DefaultUserInfoRepository.swift */; };
 		2C87C27F2B1DF2A800A26313 /* UserInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C27E2B1DF2A800A26313 /* UserInfoRepository.swift */; };
 		2C87C2812B1DF2C000A26313 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2802B1DF2C000A26313 /* UserInfo.swift */; };
 		2C87C2832B1DF30E00A26313 /* UserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2822B1DF30E00A26313 /* UserInfoUseCase.swift */; };
 		2C87C2852B1DF32A00A26313 /* DefaultUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2842B1DF32A00A26313 /* DefaultUserInfoUseCase.swift */; };
+		2C87C28E2B1E316800A26313 /* SignOutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C28D2B1E316800A26313 /* SignOutManager.swift */; };
 		2C87C2912B1F212200A26313 /* ImageDownLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2902B1F212200A26313 /* ImageDownLoader.swift */; };
 		2C87C2932B1F344500A26313 /* UIImageView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2922B1F344500A26313 /* UIImageView++Extension.swift */; };
 		2C87C2952B1F345800A26313 /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2942B1F345800A26313 /* ImageFetcher.swift */; };
@@ -247,6 +249,8 @@
 		22B8C8EC4954AA20D64D3139 /* Pods-FlipMate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate.release.xcconfig"; path = "Target Support Files/Pods-FlipMate/Pods-FlipMate.release.xcconfig"; sourceTree = "<group>"; };
 		288FECD685A9C6B6E481147C /* Pods_FlipMate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B285F39D7D27E5C564F4D31 /* Pods_FlipMateTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMateTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialUserInfoHeaderView.swift; sourceTree = "<group>"; };
+		2C1F2BBC2B20DA770026C30B /* ProfileHeaderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderItem.swift; sourceTree = "<group>"; };
 		2C2F216D2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStudyLogUseCase.swift; sourceTree = "<group>"; };
 		2C2F216F2B0F429800B45BA8 /* StudyLogResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogResponseDTO.swift; sourceTree = "<group>"; };
 		2C2F21752B0F440D00B45BA8 /* StudyLogEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogEndpoints.swift; sourceTree = "<group>"; };
@@ -284,13 +288,13 @@
 		2C801D822B04C64F00A7ABAE /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		2C87C2762B1C789A00A26313 /* FriendStatusPollingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendStatusPollingManager.swift; sourceTree = "<group>"; };
 		2C87C2782B1C794000A26313 /* UpdateFriend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFriend.swift; sourceTree = "<group>"; };
-		2C87C28D2B1E316800A26313 /* SignOutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignOutManager.swift; path = FlipMate/Presentation/Utils/SignOutManager.swift; sourceTree = SOURCE_ROOT; };
 		2C87C27A2B1DF11000A26313 /* UserInfoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponseDTO.swift; sourceTree = "<group>"; };
 		2C87C27C2B1DF1C300A26313 /* DefaultUserInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserInfoRepository.swift; sourceTree = "<group>"; };
 		2C87C27E2B1DF2A800A26313 /* UserInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRepository.swift; sourceTree = "<group>"; };
 		2C87C2802B1DF2C000A26313 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		2C87C2822B1DF30E00A26313 /* UserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoUseCase.swift; sourceTree = "<group>"; };
 		2C87C2842B1DF32A00A26313 /* DefaultUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserInfoUseCase.swift; sourceTree = "<group>"; };
+		2C87C28D2B1E316800A26313 /* SignOutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignOutManager.swift; path = FlipMate/Presentation/Utils/SignOutManager.swift; sourceTree = SOURCE_ROOT; };
 		2C87C2902B1F212200A26313 /* ImageDownLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownLoader.swift; sourceTree = "<group>"; };
 		2C87C2922B1F344500A26313 /* UIImageView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView++Extension.swift"; sourceTree = "<group>"; };
 		2C87C2942B1F345800A26313 /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
@@ -643,6 +647,14 @@
 			path = FriendStatusPollingManager;
 			sourceTree = "<group>";
 		};
+		2C87C28C2B1E315600A26313 /* SignOutManager */ = {
+			isa = PBXGroup;
+			children = (
+				2C87C28D2B1E316800A26313 /* SignOutManager.swift */,
+			);
+			path = SignOutManager;
+			sourceTree = "<group>";
+		};
 		2C87C28F2B1F210F00A26313 /* ImageDownloader */ = {
 			isa = PBXGroup;
 			children = (
@@ -651,14 +663,6 @@
 				2C87C2962B1F346700A26313 /* ImageDownLoaderError.swift */,
 			);
 			path = ImageDownloader;
-            sourceTree = "<group>";
-        };
-		2C87C28C2B1E315600A26313 /* SignOutManager */ = {
-			isa = PBXGroup;
-			children = (
-				2C87C28D2B1E316800A26313 /* SignOutManager.swift */,
-			);
-			path = SignOutManager;
 			sourceTree = "<group>";
 		};
 		2C88DCF72B1242C7000B4686 /* Flows */ = {
@@ -817,6 +821,7 @@
 				2CDCD0662B18D0330080DCDE /* FriendUser.swift */,
 				2CDCD0682B18D0D10080DCDE /* FriendSearchItem.swift */,
 				2C87C2782B1C794000A26313 /* UpdateFriend.swift */,
+				2C1F2BBC2B20DA770026C30B /* ProfileHeaderItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1327,6 +1332,7 @@
 				ED6865C02B1E3B48001A2AAD /* WeeklyChartView.swift */,
 				ED6865BE2B1E2FA6001A2AAD /* ChartSegmentedControl.swift */,
 				ED6865D72B1F32EF001A2AAD /* CustomCalenderView.swift */,
+				2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1764,12 +1770,14 @@
 				2C87C2772B1C789A00A26313 /* FriendStatusPollingManager.swift in Sources */,
 				2C87C2912B1F212200A26313 /* ImageDownLoader.swift in Sources */,
 				ED6865C62B1E438B001A2AAD /* ChartEndpoints.swift in Sources */,
+				2C1F2BBD2B20DA770026C30B /* ProfileHeaderItem.swift in Sources */,
 				2C88DD0F2B14C22C000B4686 /* TimerFinishViewModel.swift in Sources */,
 				2C4D55B32B035484006D7C26 /* DeviceOrientation.swift in Sources */,
 				ED3842272B0F1E0C001E2803 /* GoogleAuthUseCase.swift in Sources */,
 				ED6865C42B1E4303001A2AAD /* DailyChartLogResponseDTO.swift in Sources */,
 				ED6865A22B162B8F001A2AAD /* SocialChartView.swift in Sources */,
 				2C88DCF22B124238000B4686 /* AppFlowCoordinator.swift in Sources */,
+				2C1F2BBB2B20D8D60026C30B /* SocialUserInfoHeaderView.swift in Sources */,
 				2C9F62112B17363400AE63F9 /* DefaultFriendUseCase.swift in Sources */,
 				2CDCD0642B18CEDF0080DCDE /* FriendsResponseDTO.swift in Sources */,
 				ED1B3F292B1F8AA300FB9DBC /* WeeklyChartLogResponseDTO.swift in Sources */,
