@@ -20,6 +20,7 @@ protocol SocialViewModelInput {
     func viewDidDisappear()
     func freindAddButtonDidTapped()
     func friendCellDidTapped(friend: Friend)
+    func didRefresh()
     func myPageButtonTapped()
 }
 
@@ -104,6 +105,10 @@ final class SocialViewModel: SocialViewModelProtocol {
     
     func myPageButtonTapped() {
         actions?.showMyPageViewController()
+    }
+    
+    func didRefresh() {
+        fetchFriendStatus()
     }
 }
 
