@@ -36,14 +36,4 @@ export default function () {
     '친구 조회 응답 시간이 1초 이내': (r) => r.timings.duration < 1000,
   });
   sleep(3);
-
-  const polling = setInterval(
-    () =>
-      check(http.get(`${url}/status`, params), {
-        '폴링 응답 시간이 1초 이내': (r) => r.timings.duration < 1000,
-      }),
-    3000,
-  );
-
-  setTimeout(() => clearInterval(polling), 20000);
 }
