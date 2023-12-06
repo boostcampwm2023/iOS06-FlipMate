@@ -19,4 +19,9 @@ export class MockCategoriesRepository {
     );
     return Promise.resolve(categories);
   }
+
+  findOne({ where: { id } }): Promise<object> {
+    const category = this.data.find((category) => category.id === id);
+    return Promise.resolve(category);
+  }
 }
