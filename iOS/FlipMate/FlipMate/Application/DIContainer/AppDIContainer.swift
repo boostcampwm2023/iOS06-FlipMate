@@ -8,7 +8,8 @@
 import UIKit
 
 final class AppDIContainer {
-    lazy var provider: Provider = Provider(urlSession: URLSession.shared)
+    lazy var signOutManager: SignOutManagerProtocol = SignOutManager()
+    lazy var provider: Provider = Provider(urlSession: URLSession.shared, signOutManager: signOutManager)
     lazy var categoryManager: CategoryManageable = CategoryManager(categories: [])
     
     func makeTabBarDIContainer() -> TabBarDIContainer {

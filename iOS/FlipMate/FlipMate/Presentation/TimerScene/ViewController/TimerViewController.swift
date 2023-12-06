@@ -81,16 +81,12 @@ final class TimerViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         configureNotification()
-        UIDevice.current.isProximityMonitoringEnabled = true
+        timerViewModel.viewWillAppear()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         deviceMotionManager.stopDeviceMotion()
-        UIDevice.current.isProximityMonitoringEnabled = false
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+        timerViewModel.viewDidDisappear()
     }
     
     // MARK: - setup UI
@@ -181,9 +177,13 @@ final class TimerViewController: BaseViewController {
             }
             .store(in: &cancellables)
         
-        // TODO: 특정 카테고리만 업데이트 구현
-        //        timerViewModel.categoryChangePublisher
-        
+        timerViewModel.deviceSettingEnabledPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isEnabled in
+                print("넘어옵니다.", isEnabled)
+                self?.setDeviceSetting(isEnabled: isEnabled)
+            }
+            .store(in: &cancellables)
     }
     
     func appendStudyEndLog(studyEndLog: StudyEndLog) {
@@ -200,6 +200,15 @@ private extension TimerViewController {
             feedbackManager.startFaceupFeedback()
         }
     }
+    
+    func setDeviceSetting(isEnabled: Bool) {
+        UIDevice.current.isProximityMonitoringEnabled = isEnabled
+        if isEnabled {
+            deviceMotionManager.startDeviceMotion()
+        } else {
+            deviceMotionManager.stopDeviceMotion()
+        }
+    }
 }
 
 // MARK: Detecting FaceDown Method
@@ -210,7 +219,6 @@ private extension TimerViewController {
             selector: #selector(proximityDidChange(_:)),
             name: UIDevice.proximityStateDidChangeNotification,
             object: nil)
-        deviceMotionManager.startDeviceMotion()
     }
     
     func handleOrientationChange(_ orientation: UIDeviceOrientation) {

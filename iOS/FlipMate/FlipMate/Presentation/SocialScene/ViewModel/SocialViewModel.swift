@@ -11,14 +11,16 @@ import Combine
 struct SocialViewModelActions {
     var showFriendAddViewController: () -> Void
     var showSocialDetailViewController: (Friend) -> Void
+    var showMyPageViewController: () -> Void
 }
 
 protocol SocialViewModelInput {
     func viewDidLoad()
     func viewWillAppear()
-    func viewWillDisappear()
+    func viewDidDisappear()
     func freindAddButtonDidTapped()
     func friendCellDidTapped(friend: Friend)
+    func myPageButtonTapped()
 }
 
 protocol SocialViewModelOutput {
@@ -91,19 +93,17 @@ final class SocialViewModel: SocialViewModelProtocol {
     func viewWillAppear() {
         getFriendState()
         FMLogger.friend.debug("친구 상태 폴링 시작")
-        timerState = .resumed
-        if timerState == .notStarted {
-            timerManager.start(startTime: Date())
-        } else {
-            timerManager.resume(resumeTime: Date())
-        }
+        timerManager.start(completion: fetchFriendStatus)
     }
     
-    func viewWillDisappear() {
+    func viewDidDisappear() {
         FMLogger.friend.debug("친구 상태 폴링 종료")
-        timerState = .suspended
-        timerManager.suspend()
         friendStatusPollingManager.stopPolling()
+        timerManager.cancel()
+    }
+    
+    func myPageButtonTapped() {
+        actions?.showMyPageViewController()
     }
 }
 

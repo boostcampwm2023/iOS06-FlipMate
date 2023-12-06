@@ -52,4 +52,8 @@ final class SocialDIContainer: SocialFlowCoordinatorDependencies {
                 provider: dependencies.provider)), actions: actions)
             )
     }
+    
+    func makeMyPageViewController() -> UIViewController {
+        return MyPageViewController(viewModel: MyPageViewModel())
+    }
 }

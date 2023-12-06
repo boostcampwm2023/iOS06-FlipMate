@@ -10,6 +10,7 @@ import { CategoryCreateDto } from './dto/request/create-categories.dto';
 import { CategoryUpdateDto } from './dto/request/update-categories.dto';
 import { CategoryDto } from './dto/response/category.dto';
 import { UsersService } from 'src/users/users.service';
+import { CATEGORIES_MAXIMUM } from 'src/common/const/service-var.const';
 
 @Injectable()
 export class CategoriesService {
@@ -34,9 +35,9 @@ export class CategoriesService {
     const categoryCount = await this.categoriesRepository.count({
       where: { user_id: { id: user.id } },
     });
-    if (categoryCount >= 10) {
+    if (categoryCount >= CATEGORIES_MAXIMUM) {
       throw new BadRequestException(
-        '카테고리는 최대 10개까지 생성할 수 있습니다.',
+        `카테고리는 최대 ${CATEGORIES_MAXIMUM}개까지 생성할 수 있습니다.`,
       );
     }
 

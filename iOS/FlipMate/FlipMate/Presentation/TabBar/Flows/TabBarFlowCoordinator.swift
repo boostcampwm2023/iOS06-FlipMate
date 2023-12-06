@@ -18,11 +18,11 @@ final class TabBarFlowCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     weak var parentCoordinator: Coordinator?
     
-    private var navigationController: UINavigationController
+    weak var navigationController: UINavigationController?
     private weak var tabBarViewController: UITabBarController?
     private let dependencies: TabBarFlowCoordinatorDependencies
     
-    init(navigationController: UINavigationController, dependencies: TabBarFlowCoordinatorDependencies) {
+    init(navigationController: UINavigationController?, dependencies: TabBarFlowCoordinatorDependencies) {
         self.navigationController = navigationController
         self.dependencies = dependencies
     }
@@ -33,8 +33,8 @@ final class TabBarFlowCoordinator: Coordinator {
             [makeSocialViewController(), makeTimerViewContorller(), makeChartViewController()],
             animated: false
         )
-        navigationController.isNavigationBarHidden = true
-        navigationController.viewControllers = [tabBarController]
+        navigationController?.isNavigationBarHidden = true
+        navigationController?.viewControllers = [tabBarController]
         tabBarController.selectedIndex = 1
         tabBarViewController = tabBarController
     }
@@ -45,6 +45,7 @@ final class TabBarFlowCoordinator: Coordinator {
         let coordinator = timerSceneDIContainer.makeTimerFlowCoordinator(
             navigationController: navigationViewController)
         coordinator.start()
+        childCoordinators.append(coordinator)
         return navigationViewController
     }
     
@@ -58,6 +59,7 @@ final class TabBarFlowCoordinator: Coordinator {
         let coordinator = socialDIContainer.makeSocialFlowCoordinator(
             navigationController: navigationViewController)
         coordinator.start()
+        childCoordinators.append(coordinator)
         return navigationViewController
     }
     
