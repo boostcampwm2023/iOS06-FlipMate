@@ -57,7 +57,7 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
     func updateLearningFriendsBeforeLearning(friendsStatus: [FriendStatus]) {
         let learningFriendsBeforeLearning = findLearningFreindsBeforLearning(friendsStatus: friendsStatus)
         for id in learningFriendsBeforeLearning {
-            guard let friend = friendsStatus.filter { $0.id == id }.first else { return }
+            guard let friend = friendsStatus.filter({ $0.id == id }).first else { return }
             guard let startedTime = friend.startedTime else { continue }
             guard let date = startedTime.stringToDate(.yyyyMMddhhmmss) else { continue }
             let currentLearningTime = Int(Date().timeIntervalSince(date))
@@ -69,7 +69,7 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
     private func updateLearningFriendsBeforeStop(friendsStatus: [FriendStatus]) {
         let learningFriendsBeforeStop = findLearningFriendsBeforeStop(friendsStatus: friendsStatus)
         for id in learningFriendsBeforeStop {
-            guard let friend = friendsStatus.filter { $0.id == id }.first else { return }
+            guard let friend = friendsStatus.filter({ $0.id == id }).first else { return }
             guard let startedTime = friend.startedTime else { continue }
             guard let date = startedTime.stringToDate(.yyyyMMddhhmmss) else { continue }
             let currentLearningTime = Int(Date().timeIntervalSince(date))
@@ -127,7 +127,7 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
     }
     
     private func removeUpdateFriendsArray(at id: Int) {
-        guard let target = updateFriendArray.filter { $0.id == id }.first else { return }
+        guard let target = updateFriendArray.filter({ $0.id == id }).first else { return }
         guard let index = updateFriendArray.firstIndex(of: target) else { return }
         updateFriendArray.remove(at: index)
     }
@@ -137,7 +137,7 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
         var stopFriendArray = [StopFriend]()
         
         for id in stopIdList {
-            guard let totalTime = friendsStatus.filter { $0.id == id }.first?.totalTime else { continue }
+            guard let totalTime = friendsStatus.filter({ $0.id == id }).first?.totalTime else { continue }
             removeUpdateFriendsArray(at: id)
             stopFriendArray.append(StopFriend(id: id, totalTime: totalTime))
         }

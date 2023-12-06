@@ -218,7 +218,7 @@ private extension SocialViewController {
                 continue }
             guard let cell = friendsCollectionView.cellForItem(at: indexPath) as? FriendsCollectionViewCell else {
                 continue }
-            guard let friend = updateFreinds.filter { $0.id == item.id }.first else {
+            guard let friend = updateFreinds.filter({ $0.id == item.id }).first else {
                 continue }
             cell.updateLearningTime(friend.currentLearningTime)
         }
@@ -230,7 +230,7 @@ private extension SocialViewController {
         for item in items {
             guard let indexPath = diffableDataSource.indexPath(for: item) else { continue }
             guard let cell = friendsCollectionView.cellForItem(at: indexPath) as? FriendsCollectionViewCell else { continue }
-            guard let friend = stopFriends.filter { $0.id == item.id }.first else { continue }
+            guard let friend = stopFriends.filter({ $0.id == item.id }).first else { continue }
             cell.stopLearningTime(friend.totalTime)
         }
     }
@@ -240,7 +240,7 @@ private extension SocialViewController {
 private extension SocialViewController {
     @objc
     func myPageButtonTapped() {
-        self.navigationController?.pushViewController(MyPageViewController(), animated: true)
+        self.navigationController?.pushViewController(MyPageViewController(viewModel: MyPageViewModel()), animated: true)
     }
     
     @objc

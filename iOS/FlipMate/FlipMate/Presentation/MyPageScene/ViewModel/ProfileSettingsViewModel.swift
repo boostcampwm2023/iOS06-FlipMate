@@ -1,49 +1,70 @@
 //
-//  SignUpViewModel.swift
+//  ProfileSettingsViewModel.swift
 //  FlipMate
 //
-//  Created by 권승용 on 11/27/23.
+//  Created by 권승용 on 12/5/23.
 //
 
 import Foundation
 import Combine
 
-struct SignUpViewModelActions {
+struct ProfileSettingsViewModelActions {
     let didFinishSignUp: () -> Void
 }
 
-protocol SignUpViewModelInput {
+protocol ProfileSettingsViewModelInput {
+    func viewReady()
     func nickNameChanged(_ newNickName: String)
-    func profileImageChanged(_ newImageData: Data)
+    func profileImageChanged()
     func signUpButtonTapped(userName: String, profileImageData: Data)
 }
 
-protocol SignUpViewModelOutput {
+protocol ProfileSettingsViewModelOutput {
+    var nicknamePublisher: AnyPublisher<String, Never> { get }
+    var imageDataPublisher: AnyPublisher<Data, Never> { get }
     var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Never> { get }
-    var isSafeProfileImagePublisher: AnyPublisher<Bool, Never> { get }
+    var isProfileImageChangedPublisher: AnyPublisher<Void, Never> { get }
     var isSignUpCompletedPublisher: AnyPublisher<Void, Never> { get }
     var errorPublisher: AnyPublisher<Error, Never> { get }
 }
 
-typealias SignUpViewModelProtocol = SignUpViewModelInput & SignUpViewModelOutput
+typealias ProfileSettingsViewModelProtocol = ProfileSettingsViewModelInput & ProfileSettingsViewModelOutput
 
-final class SignUpViewModel: SignUpViewModelProtocol {
+final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     // MARK: - Use Case
     private let useCase: ProfileSettingsUseCase
     
     // MARK: - Subjects
+    private var nameSubject = PassthroughSubject<String, Never>()
+    private var imageDataSubject = PassthroughSubject<Data, Never>()
     private var isValidNickNameSubject = PassthroughSubject<NickNameValidationState, Never>()
-    private var isSafeProfileImageSubject = PassthroughSubject<Bool, Never>()
+    private var isProfileImageChangedSubject = PassthroughSubject<Void, Never>()
     private var isSignUpCompletedSubject = PassthroughSubject<Void, Never>()
     private var errorSubject = PassthroughSubject<Error, Never>()
-    private let actions: SignUpViewModelActions?
+    private let actions: ProfileSettingsViewModelActions?
     
-    init(usecase: ProfileSettingsUseCase, actions: SignUpViewModelActions) {
+    init(usecase: ProfileSettingsUseCase, actions: ProfileSettingsViewModelActions) {
         self.useCase = usecase
         self.actions = actions
     }
     
     // MARK: - Input
+    func viewReady() {
+        let nickname = UserInfoStorage.nickname
+        nameSubject.send(nickname)
+        guard let url = URL(string: UserInfoStorage.profileImageURL) else {
+            return
+        }
+        DispatchQueue.global().async {
+            do {
+                let data = try Data(contentsOf: url)
+                self.imageDataSubject.send(data)
+            } catch let error {
+                self.errorSubject.send(error)
+            }
+        }
+    }
+    
     func nickNameChanged(_ newNickName: String) {
         Task {
             do {
@@ -55,15 +76,8 @@ final class SignUpViewModel: SignUpViewModelProtocol {
         }
     }
     
-    func profileImageChanged(_ newImageData: Data) {
-        Task {
-            do {
-                let isSafe = try await useCase.isSafeProfileImage(newImageData)
-                isSafeProfileImageSubject.send(isSafe)
-            } catch let error {
-                errorSubject.send(error)
-            }
-        }
+    func profileImageChanged() {
+        isProfileImageChangedSubject.send()
     }
     
     func signUpButtonTapped(userName: String, profileImageData: Data) {
@@ -83,13 +97,20 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     }
     
     // MARK: - Output
+    var nicknamePublisher: AnyPublisher<String, Never> {
+        return nameSubject.eraseToAnyPublisher()
+    }
+    
+    var imageDataPublisher: AnyPublisher<Data, Never> {
+        return imageDataSubject.eraseToAnyPublisher()
+    }
     var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Never> {
         return isValidNickNameSubject
             .eraseToAnyPublisher()
     }
     
-    var isSafeProfileImagePublisher: AnyPublisher<Bool, Never> {
-        return isSafeProfileImageSubject
+    var isProfileImageChangedPublisher: AnyPublisher<Void, Never> {
+        return isProfileImageChangedSubject
             .eraseToAnyPublisher()
     }
     
@@ -101,25 +122,5 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     var errorPublisher: AnyPublisher<Error, Never> {
         return errorSubject
             .eraseToAnyPublisher()
-    }
-}
-
-enum NickNameValidationState {
-    case valid
-    case lengthViolation
-    case emptyViolation
-    case duplicated
-    
-    var message: String {
-        switch self {
-        case .valid:
-            return "사용 가능한 닉네임 입니다."
-        case .lengthViolation:
-            return "닉네임이 20자를 초과했습니다."
-        case .emptyViolation:
-            return "닉네임은 2자 이상 입력해야 합니다."
-        case .duplicated:
-            return "중복된 닉네임 입니다."
-        }
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DefaultSignUpRepository: SignUpRepository {
+final class DefaultProfileSettingsRepository: ProfileSettingsRepository {
     private let provider: Providable
     
     init(provider: Providable) {
@@ -26,9 +26,10 @@ final class DefaultSignUpRepository: SignUpRepository {
         return true
     }
     
-    func signUpNewUser(nickName: String, profileImageData: Data) async throws {
+    func setupNewProfileInfo(nickName: String, profileImageData: Data) async throws -> UserInfo {
         let endpoint = SignUpEndpoints.userSignUp(nickName: nickName, profileImageData: profileImageData)
         let response = try await provider.request(with: endpoint)
-        FMLogger.general.log("유저 회원가입 완료 : \(response.nickName)")
+        FMLogger.general.log("유저 정보 설정 완료 : \(response.nickName)")
+        return UserInfo(name: response.nickName, profileImageURL: response.imageURL, email: response.email)
     }
 }

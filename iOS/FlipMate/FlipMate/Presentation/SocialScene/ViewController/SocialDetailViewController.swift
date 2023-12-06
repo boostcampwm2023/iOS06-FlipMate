@@ -320,7 +320,3 @@ private extension SocialDetailViewController {
         viewModel.didUnfollowFriend()
     }
 }
-//@available(iOS 17.0, *)
-//#Preview {
-//    SocialDetailViewController(viewModel: SocialDetailViewModel(friendUseCase: DefaultFriendUseCase(repository: DefaultFriendRepository(provider: Provider(urlSession: URLSession.shared)))))
-//}
