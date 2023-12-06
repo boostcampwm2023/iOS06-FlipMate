@@ -20,7 +20,8 @@ final class TimerFinishViewController: BaseViewController {
     // MARK: - Properties
     private let viewModel: TimerFinishViewModelProtocol
     private var cancellables = Set<AnyCancellable>()
-    
+    private let deviceMotionManager = DeviceMotionManager.shared
+
     // MARK: - UI Components
     private lazy var backgroundView: UIView = {
         let view = UIView()
@@ -98,6 +99,10 @@ final class TimerFinishViewController: BaseViewController {
     }
     
     // MARK: - Life Cycle
+    override func viewDidDisappear(_ animated: Bool) {
+        deviceMotionManager.startDeviceMotion()
+    }
+    
     override func configureUI() {
         view.backgroundColor = .clear
 
