@@ -65,6 +65,14 @@ final class SocialDetailViewController: BaseViewController {
         return imageView
     }()
     
+    private lazy var dismissButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("닫기", for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        button.addTarget(self, action: #selector(dismissButtonDidTapped), for: .touchUpInside)
+        return button
+    }()
+    
     private lazy var nickNameLabel: UILabel = {
         let label = UILabel()
         
@@ -216,6 +224,7 @@ final class SocialDetailViewController: BaseViewController {
         setStudyLogStackView()
         setStudyTimeStackView()
         setChart()
+        configureNavigationBar()
         
         [profileImageView, nickNameLabel, unfollowButton, divider, studyLogStackView, studyTimeStackView].forEach {
             view.addSubview($0)
@@ -315,10 +324,19 @@ private extension SocialDetailViewController {
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
         hostingController.didMove(toParent: self)
     }
+    
+    func configureNavigationBar() {
+        navigationItem.title = "친구 상세"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: dismissButton)
+    }
 }
 
 private extension SocialDetailViewController {
     @objc func unfollowButtonDidTapped() {
         viewModel.didUnfollowFriend()
+    }
+    
+    @objc func dismissButtonDidTapped() {
+        viewModel.dismissButtonDidTapped()
     }
 }

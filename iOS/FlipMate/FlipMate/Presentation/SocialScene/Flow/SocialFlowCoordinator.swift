@@ -37,22 +37,24 @@ final class SocialFlowCoordinator: Coordinator {
     
     private func showFreindAddViewController() {
         let actions = FriendAddViewModelActions(
-            didCancleFriendAdd: dismissFreindAddViewController,
-            didSuccessFriendAdd: dismissFreindAddViewController)
+            didCancleFriendAdd: didTapCancelNavigationButton,
+            didSuccessFriendAdd: didTapCancelNavigationButton)
         let freindAddViewContorller = dependencies.makeFriendAddViewController(actions: actions)
         let firendNavigationController = UINavigationController(rootViewController: freindAddViewContorller)
         firendNavigationController.modalPresentationStyle = .fullScreen
         navigationController?.present(firendNavigationController, animated: true)
     }
     
-    private func dismissFreindAddViewController() {
+    private func didTapCancelNavigationButton() {
         navigationController?.dismiss(animated: true)
     }
     
     func showSocialDetailViewController(friend: Friend) {
-        let actions = SocialDetailViewModelActions(didFinishUnfollow: didFinishUnfollow)
+        let actions = SocialDetailViewModelActions(didCancelSocialDetail: didTapCancelNavigationButton, didFinishUnfollow: didFinishUnfollow)
         let socialDetailViewController = dependencies.makeSocialDetailViewController(actions: actions, friend: friend)
-        navigationController?.pushViewController(socialDetailViewController, animated: true)
+        let socialDetailNavigationController = UINavigationController(rootViewController: socialDetailViewController)
+        socialDetailNavigationController.modalPresentationStyle = .fullScreen
+        navigationController?.present(socialDetailNavigationController, animated: true)
     }
     
     func showMyPageViewController() {
