@@ -11,41 +11,6 @@ import Combine
 final class SocialViewController: BaseViewController {
     
     // MARK: - View Properties
-    private lazy var profileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(resource: .defaultProfile)
-        imageView.clipsToBounds = true
-        imageView.bounds = CGRect(x: 0, y: 0, width: ProfileImageViewConstant.width, height: ProfileImageViewConstant.height)
-        imageView.layer.cornerRadius = imageView.bounds.height / 2
-        imageView.isUserInteractionEnabled = true
-        return imageView
-    }()
-    
-    private lazy var userNameLabel: UILabel = {
-        let label = UILabel()
-        label.font = FlipMateFont.mediumBold.font
-        label.text = UserNameLabelConstant.title
-        label.textColor = .label
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private lazy var learningTimeLabel: UILabel = {
-        let label = UILabel()
-        label.font = FlipMateFont.mediumBold.font
-        label.text = LearningTimeLabelConstant.title
-        label.textColor = .label
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private lazy var divider: UIView = {
-        let divider = UIView()
-        divider.backgroundColor = .gray
-        return divider
-    }()
-    
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshFreindsStatus), for: .valueChanged)
@@ -64,8 +29,10 @@ final class SocialViewController: BaseViewController {
         layout.itemSize = CGSize(
             width: UIScreen.main.bounds.width / LayoutConstant.itemCountForLine - LayoutConstant.itemSpacing * 2,
             height: LayoutConstant.iemHeight)
+        layout.headerReferenceSize = CGSize(width: LayoutConstant.sectionWidth, height: LayoutConstant.sectionHeight)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(FriendsCollectionViewCell.self)
+        collectionView.register(SocialUserInfoHeaderView.self, kind: .header)
         collectionView.refreshControl = refreshControl
         collectionView.delegate = self
         return collectionView
@@ -73,6 +40,7 @@ final class SocialViewController: BaseViewController {
     
     // MARK: - Properties
     typealias DiffableDataSource = UICollectionViewDiffableDataSource<Section, Friend>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Friend>
     private var diffableDataSource: DiffableDataSource!
     private var cancellables = Set<AnyCancellable>()
     private let viewModel: SocialViewModelProtocol
@@ -92,11 +60,13 @@ final class SocialViewController: BaseViewController {
         super.viewDidLoad()
         configureDiffableDataSource()
         configureNavigationBarItems()
+        setSnapshot()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.viewWillAppear()
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -109,10 +79,6 @@ final class SocialViewController: BaseViewController {
         navigationItem.title = Constant.title
         
         let subviews = [
-            profileImageView,
-            userNameLabel,
-            learningTimeLabel,
-            divider,
             friendsCollectionView
         ]
         
@@ -122,23 +88,7 @@ final class SocialViewController: BaseViewController {
         }
         
         NSLayoutConstraint.activate([
-            profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: ProfileImageViewConstant.top),
-            profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profileImageView.widthAnchor.constraint(equalToConstant: ProfileImageViewConstant.width),
-            profileImageView.heightAnchor.constraint(equalToConstant: ProfileImageViewConstant.height),
-            
-            userNameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: UserNameLabelConstant.bottom),
-            userNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            learningTimeLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: LearningTimeLabelConstant.bottom),
-            learningTimeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            divider.topAnchor.constraint(equalTo: learningTimeLabel.bottomAnchor, constant: DividerConstant.bottom),
-            divider.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            divider.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            divider.heightAnchor.constraint(equalToConstant: DividerConstant.height),
-            
-            friendsCollectionView.topAnchor.constraint(equalTo: divider.bottomAnchor),
+            friendsCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             friendsCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             friendsCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             friendsCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -155,6 +105,14 @@ final class SocialViewController: BaseViewController {
             cell.configure(friend: friend)
             return cell
         }
+        
+        diffableDataSource?
+            .supplementaryViewProvider = { collectionView, kind, indexPath in
+                let header: SocialUserInfoHeaderView = collectionView
+                    .dequeueReusableView(for: indexPath, kind: kind)
+                
+                return header
+            }
     }
     
     private func configureNavigationBarItems() {
@@ -181,7 +139,7 @@ final class SocialViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] friends in
                 guard let self = self else { return }
-                var snapshot = NSDiffableDataSourceSnapshot<Section, Friend>()
+                var snapshot = Snapshot()
                 snapshot.appendSections([.main])
                 snapshot.appendItems(friends.map { Friend(
                     id: $0.id,
@@ -199,7 +157,8 @@ final class SocialViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] nickname in
                 guard let self = self else { return }
-                self.userNameLabel.text = nickname
+                guard let header = findHeader() else { return }
+                header.update(nickname: nickname)
             }
             .store(in: &cancellables)
         
@@ -207,7 +166,8 @@ final class SocialViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] imageURL in
                 guard let self = self else { return }
-                self.profileImageView.setImage(url: imageURL)
+                guard let header = findHeader() else { return }
+                header.update(profileImageURL: imageURL)
             }
             .store(in: &cancellables)
         
@@ -255,6 +215,20 @@ private extension SocialViewController {
             cell.stopLearningTime(friend.totalTime)
         }
     }
+    
+    func findHeader() -> SocialUserInfoHeaderView? {
+        guard let header = friendsCollectionView.visibleSupplementaryViews(
+            ofKind: UICollectionView.elementKindSectionHeader).first
+                as? SocialUserInfoHeaderView else { return nil }
+        return header
+    }
+    
+    func setSnapshot() {
+        var snapshot = Snapshot()
+        let sections: [Section] = [.main]
+        snapshot.appendSections(sections)
+        diffableDataSource?.apply(snapshot)
+    }
 }
 
 // MARK: - Selector methods
@@ -301,6 +275,9 @@ private extension SocialViewController {
         static var itemSpacing: CGFloat = 16
         static var iemHeight: CGFloat = 179
         static var itemCountForLine = 3.0
+        
+        static var sectionWidth: CGFloat = 50
+        static var sectionHeight: CGFloat = 200
     }
     
     private enum ProfileImageViewConstant {
