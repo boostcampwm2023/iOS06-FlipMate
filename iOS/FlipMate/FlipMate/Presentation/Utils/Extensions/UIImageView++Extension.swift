@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIImageView {
-    func downLoadImage(with url: String) async throws {
+    private func downLoadImage(with url: String) async throws {
         let image = try await ImageDownLoader.shared.image(from: url)
         self.image = image
     }
