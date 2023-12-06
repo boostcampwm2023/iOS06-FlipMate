@@ -96,7 +96,6 @@ final class ProfileSettingsViewController: BaseViewController {
     
     private let viewModel: ProfileSettingsViewModelProtocol
     private var cancellables = Set<AnyCancellable>()
-    private var typingTimer: Timer?
     
     init(viewModel: ProfileSettingsViewModelProtocol) {
         self.viewModel = viewModel
@@ -253,25 +252,6 @@ private extension ProfileSettingsViewController {
         doneButton.isEnabled = false
         guard let text = sender.text else {
             FMLogger.user.log("닉네임 텍스트필드 내용 없음")
-            return
-        }
-        
-        if typingTimer != nil {
-            typingTimer?.invalidate()
-            typingTimer = nil
-        }
-        
-        typingTimer = Timer.scheduledTimer(
-            timeInterval: 2,
-            target: self,
-            selector: #selector(waitedTwoSeconds(_:)),
-            userInfo: text,
-            repeats: false)
-    }
-    
-    @objc
-    func waitedTwoSeconds(_ sender: Timer) {
-        guard let text = sender.userInfo as? String else {
             return
         }
         viewModel.nickNameChanged(text)

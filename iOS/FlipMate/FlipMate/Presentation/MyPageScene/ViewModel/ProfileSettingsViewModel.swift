@@ -90,6 +90,20 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
                 DispatchQueue.main.async {
                     self.actions?.didFinishSignUp()
                 }
+            } catch let errorBody as APIError {
+                switch errorBody {
+                case .errorResponse(let response):
+                    switch response.statusCode {
+                        // 닉네임 중복
+                    case 40000:
+                        isValidNickNameSubject.send(.duplicated)
+                        // 이미지 유해함
+                    case 40001:
+                        break
+                    default:
+                        break
+                    }
+                }
             } catch let error {
                 errorSubject.send(error)
             }
