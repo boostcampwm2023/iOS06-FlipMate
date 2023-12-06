@@ -29,9 +29,11 @@ export class UsersService {
       return await this.usersRepository.save(userObject);
     } catch (error) {
       if (error.code === 'ER_DUP_ENTRY' || error.errno === 1062) {
-        throw new BadRequestException(
-          '닉네임 또는 이메일이 이미 사용 중입니다.',
-        );
+        throw new BadRequestException({
+          statusCode: 40000,
+          message: '닉네임 또는 이메일이 이미 사용 중입니다.',
+          error: 'Bad request',
+        });
       }
       throw error;
     }
@@ -66,7 +68,11 @@ export class UsersService {
       return updatedUser;
     } catch (error) {
       if (error.code === 'ER_DUP_ENTRY' || error.errno === 1062) {
-        throw new BadRequestException('닉네임이 이미 사용 중입니다.');
+        throw new BadRequestException({
+          statusCode: 40000,
+          message: '닉네임이 이미 사용 중입니다.',
+          error: 'Bad request',
+        });
       }
       throw error;
     }
@@ -104,7 +110,11 @@ export class UsersService {
     const result = response.images[0].result;
     const message = response.images[0].message;
     if (message !== 'SUCCESS') {
-      throw new BadRequestException('이미지 인식 실패');
+      throw new BadRequestException({
+        statusCode: 40002,
+        message: '이미지 인식 실패',
+        error: 'Bad request',
+      });
     }
     const normalScore = result.normal.confidence;
     const isNormal = normalScore > THRESHOLD ? true : false;
@@ -140,7 +150,11 @@ export class UsersService {
 
       return response.json();
     } catch (error) {
-      throw new BadRequestException('이미지 검사 요청 실패');
+      throw new BadRequestException({
+        statusCode: 40002,
+        message: '이미지 인식 실패',
+        error: 'Bad request',
+      });
     }
   }
 

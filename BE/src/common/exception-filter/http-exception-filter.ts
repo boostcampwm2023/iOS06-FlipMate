@@ -21,7 +21,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       : `0ms`;
 
     const errorResponse = {
-      statusCode: status,
+      statusCode: exception.getResponse()['statusCode'] || status,
       message: exception?.message,
       error: exception?.getResponse()['error'],
       path: request.url,
