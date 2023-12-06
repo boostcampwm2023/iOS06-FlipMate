@@ -79,11 +79,10 @@ final class LoginViewModel: LoginViewModelProtocol {
         Task {
             do {
                 let response = try await self.googleAuthUseCase.googleLogin(accessToken: accessToken)
-                isMemberSubject.send(response.isMember)
-                
+
                 // TODO: 추후 분기 처리 (회원가입 안했을 때 고려)
                 let accessToken = response.accessToken
-                try KeychainManager.saveAccessToken(token: accessToken)
+//                try KeychainManager.saveAccessToken(token: accessToken)
                 
                 if response.isMember {
                     FMLogger.user.log("나는 이미 회원이야")
@@ -91,6 +90,9 @@ final class LoginViewModel: LoginViewModelProtocol {
                 } else {
                     FMLogger.user.log("나는 아직 회원이 아니야")
                 }
+                
+                isMemberSubject.send(response.isMember)
+
             } catch let error {
                 FMLogger.general.error("로그인 중 에러 발생 : \(error)")
             }
