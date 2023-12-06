@@ -15,7 +15,7 @@ protocol MyPageViewModelInput {
 protocol MyPageViewModelOutput {
     var tableViewDataSourcePublisher: AnyPublisher<[[String]], Never> { get }
     var nicknamePublisher: AnyPublisher<String, Never> { get }
-    var imageDataPublisher: AnyPublisher<Data, Never> { get }
+    var imageURLPublisher: AnyPublisher<String, Never> { get }
     var errorPublisher: AnyPublisher<Error, Never> { get }
 }
 
@@ -31,25 +31,16 @@ final class MyPageViewModel: MyPageViewModelProtocol {
     
     private lazy var tableViewDataSourceSubject = CurrentValueSubject<[[String]], Never>(myPageDataSource)
     private var nicknameSubject = PassthroughSubject<String, Never>()
-    private var imageDataSubject = PassthroughSubject<Data, Never>()
+    private var imageURLSubject = PassthroughSubject<String, Never>()
     private var errorSubject = PassthroughSubject<Error, Never>()
     
     // MARK: - Input
     func viewReady() {
         tableViewDataSourceSubject.send(myPageDataSource)
         let nickname = UserInfoStorage.nickname
+        let imageURL = UserInfoStorage.profileImageURL
         nicknameSubject.send(nickname)
-        guard let url = URL(string: UserInfoStorage.profileImageURL) else {
-            return
-        }
-        DispatchQueue.global().async {
-            do {
-                let data = try Data(contentsOf: url)
-                self.imageDataSubject.send(data)
-            } catch let error {
-                self.errorSubject.send(error)
-            }
-        }
+        imageURLSubject.send(imageURL)
     }
     
     // MARK: - Output
@@ -61,8 +52,8 @@ final class MyPageViewModel: MyPageViewModelProtocol {
         return nicknameSubject.eraseToAnyPublisher()
     }
     
-    var imageDataPublisher: AnyPublisher<Data, Never> {
-        return imageDataSubject.eraseToAnyPublisher()
+    var imageURLPublisher: AnyPublisher<String, Never> {
+        return imageURLSubject.eraseToAnyPublisher()
     }
     
     var errorPublisher: AnyPublisher<Error, Never> {
