@@ -34,6 +34,9 @@ struct DailyChartView: View {
                                 }
                         }
                     }
+                    .chartForegroundStyleScale(domain: viewModel.dailyChartLog.studyLog.category.compactMap({ category in
+                        category.subject
+                    }), range: getColorArray(categories: viewModel.dailyChartLog.studyLog.category))
                     .frame(height: 400 * (UIScreen.main.bounds.size.height / 844))
                     .chartBackground { _ in
                         VStack {
@@ -61,6 +64,17 @@ struct DailyChartView: View {
                 }
             }
         }.padding()
+    }
+    
+    func getColorArray(categories: [Category]) -> [Color] {
+        let colorArray: [Color] = categories.map { category in
+            if let uiColor = UIColor(hexString: category.color) {
+                return Color(uiColor)
+            } else {
+                return Color.gray
+            }
+        }
+        return colorArray
     }
 }
 
