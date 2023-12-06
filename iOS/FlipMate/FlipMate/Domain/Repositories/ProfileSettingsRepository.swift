@@ -9,6 +9,5 @@ import Foundation
 
 protocol ProfileSettingsRepository {
     func checkIfNickNameIsDuplicated(_ nickName: String) async throws -> Bool
-    func checkProfileImageSafety(_ imageData: Data) async throws -> Bool
     func setupNewProfileInfo(nickName: String, profileImageData: Data) async throws -> UserInfo
 }

@@ -20,12 +20,6 @@ final class DefaultProfileSettingsRepository: ProfileSettingsRepository {
         return !response.isUnique
     }
     
-    // API 필요
-    func checkProfileImageSafety(_ imageData: Data) async throws -> Bool {
-        FMLogger.general.error("API 미구현, 항상 true 반환")
-        return true
-    }
-    
     func setupNewProfileInfo(nickName: String, profileImageData: Data) async throws -> UserInfo {
         let endpoint = SignUpEndpoints.userSignUp(nickName: nickName, profileImageData: profileImageData)
         let response = try await provider.request(with: endpoint)
