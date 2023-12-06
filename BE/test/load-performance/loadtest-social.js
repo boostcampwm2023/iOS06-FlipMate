@@ -1,7 +1,6 @@
 import { SharedArray } from 'k6/data';
 import http from 'k6/http';
-import { check, sleep, group } from 'k6';
-import { setInterval, setTimeout, clearInterval } from 'k6/experimental/timers';
+import { check, sleep } from 'k6';
 import moment from 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js';
 import faker from 'https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js';
 
