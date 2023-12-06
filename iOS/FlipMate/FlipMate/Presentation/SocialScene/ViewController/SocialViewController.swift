@@ -190,6 +190,14 @@ final class SocialViewController: BaseViewController {
             }
             .store(in: &cancellables)
         
+        viewModel.profileImagePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] imageURL in
+                guard let self = self else { return }
+                self.profileImageView.setImage(url: imageURL)
+            }
+            .store(in: &cancellables)
+        
         viewModel.updateFriendStatus
             .receive(on: DispatchQueue.main)
             .sink { [weak self] updateFreinds in

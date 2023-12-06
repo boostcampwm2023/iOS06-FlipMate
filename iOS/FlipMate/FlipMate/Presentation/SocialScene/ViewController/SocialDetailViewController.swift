@@ -59,6 +59,7 @@ final class SocialDetailViewController: BaseViewController {
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = FlipMateColor.gray2.color
         imageView.layer.cornerRadius = LayoutConstant.profileImageWidth / 2
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         return imageView
@@ -275,6 +276,7 @@ final class SocialDetailViewController: BaseViewController {
                 guard let self = self else { return }
                 self.nickNameLabel.text = friend.nickName
                 self.dailyStudyTimeLabel.text = friend.totalTime.secondsToStringTime()
+                self.profileImageView.setImage(url: friend.profileImageURL)
             }
             .store(in: &cancellables)
         
