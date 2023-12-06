@@ -207,6 +207,16 @@ final class ProfileSettingsViewController: BaseViewController {
             }
             .store(in: &cancellables)
         
+        viewModel.imageNotSafePublisher
+            .sink { [weak self] in
+                let alert = UIAlertController(title: "이 이미지는 사용할 수 없습니다.", message: "이미지 유해성이 확인되었습니다. 다른 이미지를 선택해 주세요.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default))
+                DispatchQueue.main.async {
+                    self?.present(alert, animated: true)
+                }
+            }
+            .store(in: &cancellables)
+        
         viewModel.isSignUpCompletedPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
