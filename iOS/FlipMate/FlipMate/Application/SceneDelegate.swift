@@ -62,7 +62,7 @@ private extension SceneDelegate {
     func receiveSignOut() {
         appDIContainer.signOutManager.signOutPublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] isSignOut in
+            .sink { [weak self] _ in
                 guard let self = self else { return }
                 self.resetAppFlowCoordinator()
                 self.appFlowCoordinator?.start()

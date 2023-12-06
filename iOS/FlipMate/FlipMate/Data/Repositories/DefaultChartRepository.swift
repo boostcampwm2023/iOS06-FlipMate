@@ -35,7 +35,11 @@ final class DefaultChartRepository: ChartRepository {
             return DailyData(day: dayOfWeekString, studyTime: studyTime)
         }
         
-        return WeeklyChartLog(totalTime: responseDTO.totalTime, dailyData: transformedDailyData, primaryCategory: responseDTO.primaryCategory, percentage: responseDTO.percentage)
+        return WeeklyChartLog(
+            totalTime: responseDTO.totalTime,
+            dailyData: transformedDailyData,
+            primaryCategory: responseDTO.primaryCategory,
+            percentage: responseDTO.percentage)
     }
 }
 
@@ -44,14 +48,17 @@ private extension DefaultChartRepository {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE"
         let dayOfWeekString = dateFormatter.string(from: date)
-
+        
         return dayOfWeekString
     }
     
     func dateForDayIndex(_ index: Int) -> Date {
-            let calendar = Calendar.current
-            let today = calendar.startOfDay(for: Date())
-            let day = calendar.date(byAdding: .day, value: -index, to: today)!
-            return day
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        guard let day = calendar.date(byAdding: .day, value: -index, to: today) else {
+            FMLogger.general.error("date 계산 실패")
+            return Date()
         }
+        return day
+    }
 }

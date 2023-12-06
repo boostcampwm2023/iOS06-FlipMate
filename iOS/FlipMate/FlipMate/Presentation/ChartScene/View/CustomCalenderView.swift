@@ -61,6 +61,7 @@ struct CustomCalenderView: View {
     
     @ViewBuilder
     private var dayView: some View {
+        // swiftlint:disable force_unwrapping
         let today = calendar.date(from: Calendar.current.dateComponents([.year, .month], from: selectedDate))!
         
         ScrollView(.horizontal, showsIndicators: false) {
@@ -90,6 +91,7 @@ struct CustomCalenderView: View {
                 }
             }
         }
+        // swiftlint:enable force_unwrapping
     }
     
     private var blurView: some View {
