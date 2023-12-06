@@ -9,44 +9,51 @@ import SwiftUI
 import Charts
 
 struct DailyChartView: View {
-    @State var date = Date()
-    var totalTime: Int = 25230
+    @ObservedObject var viewModel: ChartViewModel
+    @State private var selectedDate = Date()
+    
+    init(viewModel: ChartViewModel) {
+        self.viewModel = viewModel
+    }
+    
     var body: some View {
         VStack {
-            DatePicker("", selection: $date, displayedComponents: [.date])
+            CustomCalenderView(selectedDate: $selectedDate, viewModel: viewModel)
             if #available(iOS 17.0, *) {
                 Chart {
-                    ForEach(dailyData, id: \.subject) { category in
+                    ForEach(viewModel.dailyChartLog.studyLog.category, id: \.subject) { category in
                         SectorMark(angle: .value("시간", category.studyTime ?? 0), innerRadius: .ratio(0.65), angularInset: 3.0)
                             .foregroundStyle(by: .value("카테고리", category.subject))
                             .cornerRadius(10.0)
                             .annotation(position: .overlay) {
-                                Text("\(category.studyTime ?? 0)")
-                                    .font(.headline)
-                                    .foregroundStyle(.darkBlue)
+                                if category.studyTime != 0 {
+                                    Text("\(category.studyTime ?? 0)")
+                                        .font(.headline)
+                                }
                             }
                     }
                 }
-                .frame(height: 500)
+                .frame(height: 400 * (UIScreen.main.bounds.size.height / 844))
                 .chartBackground { _ in
                     VStack {
                         Text("총 학습 시간").font(.callout)
                             .foregroundStyle(.secondary)
-                        Text("\(totalTime.secondsToStringTime())").font(.system(size: 36))}
+                        Text("\(viewModel.dailyChartLog.studyLog.totalTime.secondsToStringTime())").font(.system(size: 36))}
+                    .padding(.bottom, 20)
                 }
             } else if #available(iOS 16.0, *) {
                     Text("총 학습 시간").font(.callout)
                         .foregroundStyle(.secondary)
-                    Text("\(totalTime.secondsToStringTime())").font(.system(size: 36))
+                    Text("\(viewModel.dailyChartLog.studyLog.totalTime.secondsToStringTime())").font(.system(size: 36))
         
                     Chart {
-                        ForEach(dailyData, id: \.subject) { category in
+                        ForEach(viewModel.dailyChartLog.studyLog.category, id: \.subject) { category in
                             BarMark(x: .value("시간", Float(category.studyTime ?? 0) / 60), y: .value("카테고리", category.subject))
                                 .foregroundStyle(by: .value("", category.color))
                         }
                     }
                     .chartLegend(.hidden)
-                    .frame(height: 400)
+                    .frame(height: 360 * (UIScreen.main.bounds.size.height / 844))
                     .chartXAxisLabel("분 (m)")
             } else {
                 Text("iOS 16.0 이상 버전부터 차트 기능 사용 가능")
@@ -55,14 +62,3 @@ struct DailyChartView: View {
     }
 }
 
-let dailyData: [Category] = [.init(id: 1, color: "1591FFFF", subject: "요리", studyTime: 1241),
-                        .init(id: 2, color: "295AA5FF", subject: "김장", studyTime: 675),
-                        .init(id: 3, color: "000000FF", subject: "제빵", studyTime: 51),
-                        .init(id: 4, color: "66FF00FF", subject: "도둑질", studyTime: 964),
-                        .init(id: 5, color: "FF000000", subject: "게임", studyTime: 549),
-                        .init(id: 6, color: "0000BBEE", subject: "티타임", studyTime: 440),
-                        .init(id: 7, color: "638109FF", subject: "공부", studyTime: 40)]
-
-#Preview {
-    DailyChartView()
-}

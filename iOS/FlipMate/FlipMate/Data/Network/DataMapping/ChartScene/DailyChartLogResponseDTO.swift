@@ -10,7 +10,7 @@ import Foundation
 struct DailyChartLogResponseDTO: Decodable {
     let todayTime: Int
     let categories: [CategoryDTO]?
-    let percentage: Int
+    let percentage: Double
     
     private enum CodingKeys: String, CodingKey {
         case todayTime = "total_time"

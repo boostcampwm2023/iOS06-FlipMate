@@ -12,6 +12,7 @@ protocol TabBarFlowCoordinatorDependencies {
     func makeTimerViewController() -> UIViewController
     func makeTimerDIContainer() -> TimerSceneDIContainer
     func makeSocialDIContainer() -> SocialDIContainer
+    func makeChartDIContainer() -> ChartDIContainer
 }
 
 final class TabBarFlowCoordinator: Coordinator {
@@ -69,6 +70,9 @@ final class TabBarFlowCoordinator: Coordinator {
             systemName: Constant.chartNomalImageName)
         navigationViewController.tabBarItem.selectedImage = UIImage(
             systemName: Constant.chartSelectedImageName)
+        let chartDIContainer = dependencies.makeChartDIContainer()
+        let coordinator = chartDIContainer.makeChartFlowCoordinator(navigationController: navigationViewController)
+        coordinator.start()
         return navigationViewController
     }
     
