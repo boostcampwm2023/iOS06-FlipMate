@@ -83,7 +83,11 @@ export class AuthController {
     if (file) {
       const isNomal = await this.usersService.isNormalImage(file);
       if (!isNomal) {
-        throw new BadRequestException('유해한 이미지 입니다!!');
+        throw new BadRequestException({
+          statusCode: 40001,
+          message: '유해한 이미지입니다.',
+          error: 'Bad Request',
+        });
       }
       image_url = await this.usersService.s3Upload(file);
     }
