@@ -28,6 +28,11 @@ final class ChartViewModel: ObservableObject {
     func selectedDateDidChange(newDate: Date) async throws {
         try await fetchDailyData(date: newDate)
     }
+    
+    func fetchTodayData() async throws {
+        let today = Date()
+        try await fetchDailyData(date: today)
+    }
 }
 
 private extension ChartViewModel {

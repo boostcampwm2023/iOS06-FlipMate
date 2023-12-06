@@ -23,6 +23,12 @@ struct CustomCalenderView: View {
             .frame(height: 30)
             .padding(.horizontal, 25)
         }
+        .onAppear {
+            Task {
+                try await viewModel.fetchTodayData()
+                selectedDate = Date()
+            }
+        }
         .onChange(of: selectedDate) { newDate in
             Task {
                 try await viewModel.selectedDateDidChange(newDate: newDate)
