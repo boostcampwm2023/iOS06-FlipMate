@@ -96,6 +96,7 @@ final class ProfileSettingsViewController: BaseViewController {
     
     private let viewModel: ProfileSettingsViewModelProtocol
     private var cancellables = Set<AnyCancellable>()
+    private var currentNicknameState: NickNameValidationState?
     
     init(viewModel: ProfileSettingsViewModelProtocol) {
         self.viewModel = viewModel
@@ -198,8 +199,10 @@ final class ProfileSettingsViewController: BaseViewController {
         
         viewModel.isProfileImageChangedPublisher
             .sink { [weak self] _ in
-                DispatchQueue.main.async {
-                    self?.doneButton.isEnabled = true
+                if self?.currentNicknameState == nil || self?.currentNicknameState == .valid {
+                    DispatchQueue.main.async {
+                        self?.doneButton.isEnabled = true
+                    }
                 }
             }
             .store(in: &cancellables)
@@ -222,6 +225,7 @@ final class ProfileSettingsViewController: BaseViewController {
     }
     
     private func configureNickNameTextField(_ state: NickNameValidationState) {
+        self.currentNicknameState = state
         DispatchQueue.main.async {
             switch state {
             case .valid:
