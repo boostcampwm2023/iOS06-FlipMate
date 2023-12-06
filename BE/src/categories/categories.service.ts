@@ -81,7 +81,6 @@ export class CategoriesService {
     }
     const category = await this.categoriesRepository.findOne({
       where: { id },
-      relations: ['user_id'],
     });
     if (!category) {
       throw new NotFoundException('해당 카테고리가 존재하지 않습니다.');
@@ -98,11 +97,20 @@ export class CategoriesService {
   }
 
   async remove(user_id: number, id: number): Promise<void> {
-    // todo - user_id를 검증
-    const result = await this.categoriesRepository.delete(id);
-    if (result.affected === 0) {
+    if (!user_id || !id) {
+      throw new BadRequestException('인자의 형식이 잘못되었습니다.');
+    }
+    const record = await this.categoriesRepository.findOne({ where: { id } });
+    if (!record) {
       throw new NotFoundException('해당 카테고리가 존재하지 않습니다.');
     }
+    if (record.user_id.id !== user_id) {
+      throw new UnauthorizedException(
+        '해당 유저가 카테고리를 소유하고 있지 않습니다.',
+      );
+    }
+
+    const result = await this.categoriesRepository.delete(id);
   }
 
   entityToDto(category: Categories): CategoryDto {

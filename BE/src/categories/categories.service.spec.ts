@@ -42,7 +42,7 @@ describe('CategoriesService', () => {
       const userId = 1;
       const result = await service.create(userId, normalData);
       expect(result).toStrictEqual({
-        category_id: 3,
+        category_id: 13,
         name: normalData.name,
         color_code: normalData.color_code,
       });
@@ -68,7 +68,12 @@ describe('CategoriesService', () => {
       );
     });
 
-    it.todo('카테고리는 최대 10개까지 추가할 수 있다');
+    it(`카테고리는 최대 10개까지 추가할 수 있다`, async () => {
+      const userId = 3;
+      expect(service.create(userId, normalData)).rejects.toThrow(
+        BadRequestException,
+      );
+    });
   });
 
   describe('.findByUserId()', () => {
@@ -143,18 +148,42 @@ describe('CategoriesService', () => {
       expect(service.update(1, normalData, nullCategoryId)).rejects.toThrow(
         BadRequestException,
       );
+      expect(service.update(nullUserId, normalData, 1)).rejects.toThrow(
+        BadRequestException,
+      );
     });
-
-    it.todo('');
   });
-  /**
-   * async update(
-      user_id: number,
-      categoriesData: CategoryUpdateDto,
-      id: number,
-    )
-   */
-  // update Method
 
-  // remove Method
+  describe('.remove()', () => {
+    it('유효한 데이터로 카테고리를 성공적으로 삭제해야 한다', async () => {
+      const userId = 1;
+      const categoryId = 1;
+      const result = await service.remove(userId, categoryId);
+      expect(result).toStrictEqual(undefined);
+    });
+    it('해당 카테고리가 존재하지 않으면 오류를 발생시켜야 한다', async () => {
+      const userId = 1;
+      const categoryId = 100;
+      expect(service.remove(userId, categoryId)).rejects.toThrow(
+        NotFoundException,
+      );
+    });
+    it('해당 유저가 카테고리를 소유하지 않으면 오류를 발생시켜야 한다', async () => {
+      const userId = 2;
+      expect(service.remove(userId, 1)).rejects.toThrow(UnauthorizedException);
+    });
+    it('유효하지 않은 파라미터에 대해 오류를 발생시켜야 한다', async () => {
+      const nullUserId = null;
+      const nullCategoryId = null;
+      expect(service.remove(nullUserId, nullCategoryId)).rejects.toThrow(
+        BadRequestException,
+      );
+      expect(service.remove(nullUserId, 1)).rejects.toThrow(
+        BadRequestException,
+      );
+      expect(service.remove(1, nullCategoryId)).rejects.toThrow(
+        BadRequestException,
+      );
+    });
+  });
 });
