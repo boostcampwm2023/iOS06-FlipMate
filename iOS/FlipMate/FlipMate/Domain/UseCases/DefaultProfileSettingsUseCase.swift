@@ -7,12 +7,12 @@
 
 import Foundation
 
-final class DefaultSignUpUseCase: SignUpUseCase {
+final class DefaultProfileSettingsUseCase: ProfileSettingsUseCase {
     
-    private let repository: SignUpRepository
+    private let repository: ProfileSettingsRepository
     private let validator: NickNameValidatable
     
-    init(repository: SignUpRepository, validator: NickNameValidatable) {
+    init(repository: ProfileSettingsRepository, validator: NickNameValidatable) {
         self.repository = repository
         self.validator = validator
     }
@@ -34,7 +34,7 @@ final class DefaultSignUpUseCase: SignUpUseCase {
         return try await repository.checkProfileImageSafety(imageData)
     }
     
-    func signUpUser(nickName: String, profileImageData: Data) async throws {
-        return try await repository.signUpNewUser(nickName: nickName, profileImageData: profileImageData)
+    func setupProfileInfo(nickName: String, profileImageData: Data) async throws -> UserInfo {
+        return try await repository.setupNewProfileInfo(nickName: nickName, profileImageData: profileImageData)
     }
 }

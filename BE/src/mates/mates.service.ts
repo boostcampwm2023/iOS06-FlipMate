@@ -86,7 +86,7 @@ export class MatesService {
     const result = await this.matesRepository.find({
       where: { follower_id: { id: user_id } },
     });
-    const userIds = result.map((following) => following.following_id);
+    const userIds = result.map((following) => following.following_id.id);
     return Promise.all(
       userIds.map(async (id) => {
         const started_at = await this.redisService.get(`${id}`);

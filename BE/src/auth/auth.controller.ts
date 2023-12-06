@@ -104,7 +104,7 @@ export class AuthController {
 
   @Get('info')
   @UseGuards(AccessTokenGuard)
-  @ApiOperation({ summary: '유저 정보 설정 (완)' })
+  @ApiOperation({ summary: '유저 정보 조회 (완)' })
   @ApiResponse({ status: 200, description: '프로필 조회 성공' })
   @ApiResponse({ status: 400, description: '잘못된 요청' })
   @ApiResponse({ status: 401, description: '인증 실패' })

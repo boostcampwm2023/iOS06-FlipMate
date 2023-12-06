@@ -17,7 +17,7 @@ final class LoginFlowCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     weak var parentCoordinator: Coordinator?
     
-    private var navigationViewController: UINavigationController
+    weak var navigationViewController: UINavigationController?
     private let dependencies: LoginFlowCoordinatorDependencies
     
     init(navigationViewController: UINavigationController, dependencies: LoginFlowCoordinatorDependencies) {
@@ -32,14 +32,14 @@ final class LoginFlowCoordinator: Coordinator {
             skippedLogin: showTabBarController
         )
         let viewController = dependencies.makeLoginViewController(actions: actions)
-        navigationViewController.viewControllers = [viewController]
+        navigationViewController?.viewControllers = [viewController]
     }
     
     private func showSignUpController() {
         let actions = SignUpViewModelActions(
             didFinishSignUp: showTabBarController)
         let signUpController = dependencies.makeSignUpViewController(actions: actions)
-        navigationViewController.pushViewController(signUpController, animated: true)
+        navigationViewController?.pushViewController(signUpController, animated: true)
     }
     
     private func showTabBarController() {

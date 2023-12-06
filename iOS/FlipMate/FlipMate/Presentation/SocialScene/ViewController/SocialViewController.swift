@@ -100,8 +100,8 @@ final class SocialViewController: BaseViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        viewModel.viewWillDisappear()
+        super.viewDidDisappear(animated)
+        viewModel.viewDidDisappear()
     }
     
     // MARK: - Configure UI
@@ -203,6 +203,14 @@ final class SocialViewController: BaseViewController {
             }
             .store(in: &cancellables)
         
+        viewModel.profileImagePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] imageURL in
+                guard let self = self else { return }
+                self.profileImageView.setImage(url: imageURL)
+            }
+            .store(in: &cancellables)
+        
         viewModel.updateFriendStatus
             .receive(on: DispatchQueue.main)
             .sink { [weak self] updateFreinds in
@@ -231,7 +239,7 @@ private extension SocialViewController {
                 continue }
             guard let cell = friendsCollectionView.cellForItem(at: indexPath) as? FriendsCollectionViewCell else {
                 continue }
-            guard let friend = updateFreinds.filter { $0.id == item.id }.first else {
+            guard let friend = updateFreinds.filter({ $0.id == item.id }).first else {
                 continue }
             cell.updateLearningTime(friend.currentLearningTime)
         }
@@ -243,7 +251,7 @@ private extension SocialViewController {
         for item in items {
             guard let indexPath = diffableDataSource.indexPath(for: item) else { continue }
             guard let cell = friendsCollectionView.cellForItem(at: indexPath) as? FriendsCollectionViewCell else { continue }
-            guard let friend = stopFriends.filter { $0.id == item.id }.first else { continue }
+            guard let friend = stopFriends.filter({ $0.id == item.id }).first else { continue }
             cell.stopLearningTime(friend.totalTime)
         }
     }
@@ -253,7 +261,7 @@ private extension SocialViewController {
 private extension SocialViewController {
     @objc
     func myPageButtonTapped() {
-        self.navigationController?.pushViewController(MyPageViewController(), animated: true)
+        viewModel.myPageButtonTapped()
     }
     
     @objc

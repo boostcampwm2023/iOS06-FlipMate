@@ -59,7 +59,7 @@ final class CategoryDIContainer: CategoryFlowCoordinatorDependencies {
     }
     
     func makeCategoryFlowCoordinator(
-        navigationController: UINavigationController
+        navigationController: UINavigationController?
     ) -> CategoryFlowCoordinator {
         return CategoryFlowCoordinator(
             navigationController: navigationController,

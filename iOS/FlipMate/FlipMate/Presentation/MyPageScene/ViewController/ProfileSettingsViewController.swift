@@ -1,18 +1,16 @@
 //
-//  SignUpViewController.swift
+//  ProfileSettingsViewController.swift
 //  FlipMate
 //
-//  Created by 권승용 on 11/20/23.
+//  Created by 권승용 on 12/5/23.
 //
 
 import UIKit
 import Combine
 import PhotosUI
 
-final class SignUpViewController: BaseViewController {
-    
+final class ProfileSettingsViewController: BaseViewController {
     // MARK: - View Properties
-    /// 프로필 이미지 뷰
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -68,7 +66,7 @@ final class SignUpViewController: BaseViewController {
         return underline
     }()
     
-    private lazy var signUpButton: UIButton = {
+    private lazy var doneButton: UIButton = {
         let button = UIButton()
         if #available(iOS 15.0, *) {
             var configuration = UIButton.Configuration.filled()
@@ -80,12 +78,12 @@ final class SignUpViewController: BaseViewController {
                 leading: 32,
                 bottom: 16,
                 trailing: 32)
-            configuration.attributedTitle = AttributedString("회원가입", attributes: titleContainer)
+            configuration.attributedTitle = AttributedString("완료", attributes: titleContainer)
             button.configuration = configuration
         } else {
             // iOS 14 지원
             button.contentEdgeInsets = UIEdgeInsets(top: 16, left: 32, bottom: 16, right: 32)
-            button.setTitle("회원가입", for: .normal)
+            button.setTitle("완료", for: .normal)
             button.titleLabel?.font = FlipMateFont.mediumBold.font
             button.backgroundColor = FlipMateColor.darkBlue.color
         }
@@ -96,11 +94,11 @@ final class SignUpViewController: BaseViewController {
         return button
     }()
     
-    private let viewModel: SignUpViewModelProtocol
+    private let viewModel: ProfileSettingsViewModelProtocol
     private var cancellables = Set<AnyCancellable>()
     private var typingTimer: Timer?
     
-    init(viewModel: SignUpViewModelProtocol) {
+    init(viewModel: ProfileSettingsViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -108,22 +106,28 @@ final class SignUpViewController: BaseViewController {
     required init?(coder: NSCoder) {
         fatalError()
     }
-
+    
     // MARK: - View Life Cycles
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        viewModel.viewReady()
+    }
+    
     override func viewDidLayoutSubviews() {
         drawTextFieldUnderline()
     }
     
     // MARK: - Configure UI
     override func configureUI() {
-        self.title = "회원가입"
+        self.title = Constant.title
         
         let subViews = [
             profileImageView,
             cameraButton,
             nickNameTextField,
             nickNameValidationStateLabel,
-            signUpButton
+            doneButton
         ]
         
         subViews.forEach {
@@ -150,17 +154,14 @@ final class SignUpViewController: BaseViewController {
             nickNameValidationStateLabel.leadingAnchor.constraint(equalTo: nickNameTextField.leadingAnchor),
             nickNameValidationStateLabel.trailingAnchor.constraint(equalTo: nickNameTextField.trailingAnchor),
             
-            signUpButton.bottomAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
-            signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            signUpButton.leadingAnchor.constraint(
+            doneButton.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -64),
+            doneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            doneButton.leadingAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
-            signUpButton.trailingAnchor.constraint(
+            doneButton.trailingAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32)
         ])
-        
-        self.navigationController?.navigationBar.tintColor = .label
-        self.navigationController?.navigationBar.topItem?.title = ""
     }
     
     func drawTextFieldUnderline() {
@@ -173,27 +174,33 @@ final class SignUpViewController: BaseViewController {
     
     // MARK: - Viewmodel Binding
     override func bind() {
+        viewModel.nicknamePublisher
+            .sink { name in
+                DispatchQueue.main.async {
+                    self.nickNameTextField.text = name
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.imageDataPublisher
+            .sink { imageData in
+                DispatchQueue.main.async {
+                    self.profileImageView.image = UIImage(data: imageData)
+                }
+            }
+            .store(in: &cancellables)
+        
         viewModel.isValidNickNamePublisher
-            .receive(on: DispatchQueue.main)
             .sink { [weak self] state in
                 FMLogger.general.log("닉네임 유효성 상태 : \(state.message)")
-                switch state {
-                case .valid:
-                    self?.nickNameValidationStateLabel.text = state.message
-                    self?.nickNameValidationStateLabel.textColor = FlipMateColor.approveGreen.color
-                    self?.signUpButton.isEnabled = true
-                case .lengthViolation:
-                    self?.nickNameValidationStateLabel.text = state.message
-                    self?.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                    self?.signUpButton.isEnabled = false
-                case .emptyViolation:
-                    self?.nickNameValidationStateLabel.text = state.message
-                    self?.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                    self?.signUpButton.isEnabled = false
-                case .duplicated:
-                    self?.nickNameValidationStateLabel.text = state.message
-                    self?.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                    self?.signUpButton.isEnabled = false
+                self?.configureNickNameTextField(state)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.isProfileImageChangedPublisher
+            .sink { [weak self] _ in
+                DispatchQueue.main.async {
+                    self?.doneButton.isEnabled = true
                 }
             }
             .store(in: &cancellables)
@@ -201,7 +208,8 @@ final class SignUpViewController: BaseViewController {
         viewModel.isSignUpCompletedPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.signUpButton.isEnabled = true
+                self?.doneButton.isEnabled = true
+                self?.navigationController?.popViewController(animated: true)
             }
             .store(in: &cancellables)
         
@@ -209,17 +217,40 @@ final class SignUpViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
                 FMLogger.general.error("SignUpViewModel에서 에러: \(error)")
-                self?.signUpButton.isEnabled = false
+                self?.doneButton.isEnabled = false
             }
             .store(in: &cancellables)
+    }
+    
+    private func configureNickNameTextField(_ state: NickNameValidationState) {
+        DispatchQueue.main.async {
+            switch state {
+            case .valid:
+                self.nickNameValidationStateLabel.text = state.message
+                self.nickNameValidationStateLabel.textColor = FlipMateColor.approveGreen.color
+                self.doneButton.isEnabled = true
+            case .lengthViolation:
+                self.nickNameValidationStateLabel.text = state.message
+                self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
+                self.doneButton.isEnabled = false
+            case .emptyViolation:
+                self.nickNameValidationStateLabel.text = state.message
+                self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
+                self.doneButton.isEnabled = false
+            case .duplicated:
+                self.nickNameValidationStateLabel.text = state.message
+                self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
+                self.doneButton.isEnabled = false
+            }
+        }
     }
 }
 
 // MARK: - Selector Methods
-private extension SignUpViewController {
+private extension ProfileSettingsViewController {
     @objc
     func nickNameTextFieldChanged(_ sender: UITextField) {
-        signUpButton.isEnabled = false
+        doneButton.isEnabled = false
         guard let text = sender.text else {
             FMLogger.user.log("닉네임 텍스트필드 내용 없음")
             return
@@ -260,7 +291,7 @@ private extension SignUpViewController {
     // 회원가입 처리
     @objc
     func signUpButtonTapped() {
-        signUpButton.isEnabled = false
+        doneButton.isEnabled = false
         let userName = nickNameTextField.text ?? ""
         guard let imageData = profileImageView.image?.jpegData(compressionQuality: 1) else {
             FMLogger.general.error("no profile image selected")
@@ -271,7 +302,7 @@ private extension SignUpViewController {
 }
 
 // MARK: - PHPickerViewControllerDelegate
-extension SignUpViewController: PHPickerViewControllerDelegate {
+extension ProfileSettingsViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
         
@@ -303,15 +334,16 @@ extension SignUpViewController: PHPickerViewControllerDelegate {
                     return
                 }
                 self.profileImageView.image = image
+                self.viewModel.profileImageChanged()
             }
         }
     }
 }
 
 // MARK: - Constants
-private extension SignUpViewController {
+private extension ProfileSettingsViewController {
     enum Constant {
-        static let profileImageName = "person.crop.circle.fill"
+        static let title = "프로필 수정"
         static let cameraImageName = "camera.fill"
         static let nickNameTextFieldPlaceHolderText = "닉네임을 입력해 주세요"
     }
