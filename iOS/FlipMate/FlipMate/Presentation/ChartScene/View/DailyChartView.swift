@@ -77,4 +77,3 @@ struct DailyChartView: View {
         return colorArray
     }
 }
-

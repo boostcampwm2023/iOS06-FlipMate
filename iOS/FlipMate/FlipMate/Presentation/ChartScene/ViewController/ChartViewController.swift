@@ -88,7 +88,11 @@ private extension ChartViewController {
     }
     
     func setDailyChart() {
-        let dailyChartView = DailyChartView(viewModel: ChartViewModel(chartUseCase: DefaultChartUseCase(repository: DefaultChartRepository(provider: Provider(urlSession: URLSession.shared))), actions: nil))
+        let dailyChartView = DailyChartView(
+            viewModel: ChartViewModel(
+                chartUseCase: DefaultChartUseCase(
+                    repository: DefaultChartRepository(
+                        provider: Provider(urlSession: URLSession.shared))), actions: nil))
         let hostingController = UIHostingController(rootView: dailyChartView)
         addChild(hostingController)
         guard let newChartView = hostingController.view else { return }
@@ -99,7 +103,12 @@ private extension ChartViewController {
     }
     
     func setWeeklyChart() {
-        let weeklyChartView = WeeklyChartView(viewModel: ChartViewModel(chartUseCase: DefaultChartUseCase(repository: DefaultChartRepository(provider: Provider(urlSession: URLSession.shared))), actions: nil))
+        let weeklyChartView = WeeklyChartView(
+            viewModel: ChartViewModel(
+                chartUseCase: DefaultChartUseCase(
+                    repository: DefaultChartRepository(
+                        provider: Provider(urlSession: URLSession.shared))),
+                actions: nil))
         let hostingController = UIHostingController(rootView: weeklyChartView)
         addChild(hostingController)
         guard let newChartView = hostingController.view else { return }

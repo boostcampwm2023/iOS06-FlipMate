@@ -50,5 +50,9 @@ struct WeeklyChartView: View {
 }
 
 #Preview {
-    WeeklyChartView(viewModel: ChartViewModel(chartUseCase: DefaultChartUseCase(repository: DefaultChartRepository(provider: Provider(urlSession: URLSession.shared)))))
+    WeeklyChartView(
+        viewModel: ChartViewModel(
+            chartUseCase: DefaultChartUseCase(
+                repository: DefaultChartRepository(
+                    provider: Provider(urlSession: URLSession.shared)))))
 }
