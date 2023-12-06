@@ -3,6 +3,6 @@ export class MockConfigService {
     CDN_ENDPOINT: 'http://cdn.com',
   };
   get(key: string) {
-    return this.ENV[key.split('.')[1]];
+    return this.ENV[key];
   }
 }
