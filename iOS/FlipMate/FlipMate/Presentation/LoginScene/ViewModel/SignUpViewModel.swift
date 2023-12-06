@@ -14,14 +14,13 @@ struct SignUpViewModelActions {
 
 protocol SignUpViewModelInput {
     func nickNameChanged(_ newNickName: String)
-    func profileImageChanged(_ newImageData: Data)
     func signUpButtonTapped(userName: String, profileImageData: Data)
 }
 
 protocol SignUpViewModelOutput {
     var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Never> { get }
-    var isSafeProfileImagePublisher: AnyPublisher<Bool, Never> { get }
     var isSignUpCompletedPublisher: AnyPublisher<Void, Never> { get }
+    var imageNotSafePublisher: AnyPublisher<Void, Never> { get }
     var errorPublisher: AnyPublisher<Error, Never> { get }
 }
 
@@ -35,6 +34,7 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     private var isValidNickNameSubject = PassthroughSubject<NickNameValidationState, Never>()
     private var isSafeProfileImageSubject = PassthroughSubject<Bool, Never>()
     private var isSignUpCompletedSubject = PassthroughSubject<Void, Never>()
+    private var imageNotSafeSubject = PassthroughSubject<Void, Never>()
     private var errorSubject = PassthroughSubject<Error, Never>()
     private let actions: SignUpViewModelActions?
     
@@ -55,17 +55,6 @@ final class SignUpViewModel: SignUpViewModelProtocol {
         }
     }
     
-    func profileImageChanged(_ newImageData: Data) {
-        Task {
-            do {
-                let isSafe = try await useCase.isSafeProfileImage(newImageData)
-                isSafeProfileImageSubject.send(isSafe)
-            } catch let error {
-                errorSubject.send(error)
-            }
-        }
-    }
-    
     func signUpButtonTapped(userName: String, profileImageData: Data) {
         Task {
             do {
@@ -75,6 +64,20 @@ final class SignUpViewModel: SignUpViewModelProtocol {
                 UserInfoStorage.profileImageURL = userInfo.profileImageURL ?? ""
                 DispatchQueue.main.async {
                     self.actions?.didFinishSignUp()
+                }
+            } catch let errorBody as APIError {
+                switch errorBody {
+                case .errorResponse(let response):
+                    switch response.statusCode {
+                    // 닉네임 중복
+                    case 40000:
+                        isValidNickNameSubject.send(.duplicated)
+                    // 이미지 유해함
+                    case 40001:
+                        imageNotSafeSubject.send()
+                    default:
+                        break
+                    }
                 }
             } catch let error {
                 errorSubject.send(error)
@@ -88,13 +91,13 @@ final class SignUpViewModel: SignUpViewModelProtocol {
             .eraseToAnyPublisher()
     }
     
-    var isSafeProfileImagePublisher: AnyPublisher<Bool, Never> {
-        return isSafeProfileImageSubject
+    var isSignUpCompletedPublisher: AnyPublisher<Void, Never> {
+        return isSignUpCompletedSubject
             .eraseToAnyPublisher()
     }
     
-    var isSignUpCompletedPublisher: AnyPublisher<Void, Never> {
-        return isSignUpCompletedSubject
+    var imageNotSafePublisher: AnyPublisher<Void, Never> {
+        return imageNotSafeSubject
             .eraseToAnyPublisher()
     }
     
