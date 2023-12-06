@@ -15,6 +15,60 @@
     "id": 3,
     "name": "수학",
     "color_code": "CCCCCC",
-    "user_id": 4
+    "user_id": 3
+  },
+  {
+    "id": 4,
+    "name": "영어",
+    "color_code": "DDDDDD",
+    "user_id": 3
+  },
+  {
+    "id": 5,
+    "name": "국어",
+    "color_code": "EEEEEE",
+    "user_id": 3
+  },
+  {
+    "id": 6,
+    "name": "사회",
+    "color_code": "FFFFFF",
+    "user_id": 3
+  },
+  {
+    "id": 7,
+    "name": "과학",
+    "color_code": "FFFFFF",
+    "user_id": 3
+  },
+  {
+    "id": 8,
+    "name": "수학",
+    "color_code": "CCCCCC",
+    "user_id": 3
+  },
+  {
+    "id": 9,
+    "name": "영어",
+    "color_code": "DDDDDD",
+    "user_id": 3
+  },
+  {
+    "id": 10,
+    "name": "국어",
+    "color_code": "EEEEEE",
+    "user_id": 3
+  },
+  {
+    "id": 11,
+    "name": "사회",
+    "color_code": "FFFFFF",
+    "user_id": 3
+  },
+  {
+    "id": 12,
+    "name": "과학",
+    "color_code": "FFFFFF",
+    "user_id": 3
   }
 ]
