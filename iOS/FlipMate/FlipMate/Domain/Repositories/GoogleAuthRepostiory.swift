@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol GoogleAuthRepository {
-    func login(with accessToken: String) async throws -> User
+protocol AuthenticationRepository {
+    func googleLogin(with accessToken: String) async throws -> User
 }

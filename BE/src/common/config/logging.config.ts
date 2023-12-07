@@ -2,7 +2,7 @@ import winston from 'winston';
 
 const customFormat = winston.format.printf(
   ({ level, message, timestamp, context }) => {
-    return `[Nest] ${process.pid} - ${timestamp} ${level} [${context}] ${message}`;
+    return `[p${process.pid}]${timestamp} ${level} [${context}] ${message}`;
   },
 );
 

@@ -38,15 +38,11 @@ export class StudyLogsController {
     @User('id') userId: number,
     @Body() studyLogsData: StudyLogsCreateDto,
   ): Promise<ResponseDto> {
-    const { created_at, learning_time, type } = studyLogsData;
+    const { type } = studyLogsData;
     if (type === 'start') {
       await this.studyLogsService.createStartLog(studyLogsData, userId);
       return new ResponseDto(200, 'OK');
     }
-    studyLogsData.date = this.studyLogsService.calculateStartDay(
-      new Date(created_at),
-      learning_time,
-    );
     await this.studyLogsService.createFinishLog(studyLogsData, userId);
     return new ResponseDto(200, 'OK');
   }

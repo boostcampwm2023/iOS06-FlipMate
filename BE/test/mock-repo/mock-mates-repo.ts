@@ -17,7 +17,12 @@ export class MockMatesRepository {
     const mates = this.data.filter(
       (mate) => mate.follower_id === where.follower_id.id,
     );
-    return Promise.resolve(mates);
+    const result = mates.map((mate) => ({
+      id: mate.id,
+      follower_id: { id: mate.follower_id },
+      following_id: { id: mate.following_id },
+    }));
+    return Promise.resolve(result);
   }
 
   findOne({
@@ -39,7 +44,13 @@ export class MockMatesRepository {
         mate.follower_id === follower_id.id &&
         mate.following_id === following_id.id,
     );
-
     return Promise.resolve(mate);
+  }
+
+  count({ where: { follower_id } }): Promise<number> {
+    const mates = this.data.filter(
+      (mate) => mate.follower_id === follower_id.id,
+    );
+    return Promise.resolve(mates.length);
   }
 }

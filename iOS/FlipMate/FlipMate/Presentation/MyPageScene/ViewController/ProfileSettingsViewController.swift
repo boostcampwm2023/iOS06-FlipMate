@@ -181,7 +181,6 @@ final class ProfileSettingsViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.doneButton.isEnabled = true
-                self?.navigationController?.popViewController(animated: true)
             }
             .store(in: &cancellables)
         

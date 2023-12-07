@@ -118,6 +118,8 @@ final class TimerViewModel: TimerViewModelProtocol {
     }
     
     func viewDidLoad() {
+        UserInfoStorage.totalTime = 0
+        
         userInfoUserCase.getUserInfo()
             .receive(on: DispatchQueue.main)
             .sink { complection in
@@ -181,8 +183,8 @@ private extension TimerViewModel {
     }
     
     func totalTimeDidChange(time: Int) {
-        totalTime += time
-        totalTimeSubject.send(totalTime)
+        UserInfoStorage.totalTime += time
+        totalTimeSubject.send(UserInfoStorage.totalTime)
     }
     
     func changeCategory(category: Category) {

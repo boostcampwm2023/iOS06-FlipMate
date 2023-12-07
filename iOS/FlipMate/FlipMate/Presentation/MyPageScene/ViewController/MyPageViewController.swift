@@ -10,31 +10,6 @@ import Combine
 
 final class MyPageViewController: BaseViewController {
     // MARK: - View Properties
-    private lazy var profileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(resource: .defaultProfile)
-        imageView.clipsToBounds = true
-        imageView.bounds = CGRect(x: 0, y: 0, width: 100, height: 100)
-        imageView.layer.cornerRadius = imageView.bounds.height / 2
-        imageView.isUserInteractionEnabled = true
-        return imageView
-    }()
-    
-    private lazy var userNicknameLabel: UILabel = {
-        let label = UILabel()
-        label.font = FlipMateFont.mediumRegular.font
-        label.text = UserInfoStorage.nickname
-        label.textColor = .label
-        return label
-    }()
-    
-    private let divider: UIView = {
-        let divider = UIView()
-        divider.backgroundColor = FlipMateColor.gray5.color
-        return divider
-    }()
-    
     private lazy var myPageTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.register(
@@ -45,6 +20,11 @@ final class MyPageViewController: BaseViewController {
         tableView.rowHeight = 55
         tableView.separatorStyle = .none
         return tableView
+    }()
+    
+    private lazy var myPageTableViewHeaderView: MyPageHeaderView = {
+        let header = MyPageHeaderView()
+        return header
     }()
     
     // MARK: - Properties
@@ -62,6 +42,10 @@ final class MyPageViewController: BaseViewController {
         fatalError("can't use this, no storyboard")
     }
     
+    deinit {
+        viewModel.viewEnded()
+    }
+    
     // MARK: - View LifeCycles
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -73,9 +57,6 @@ final class MyPageViewController: BaseViewController {
         title = Constant.title
         
         let subviews = [
-            profileImageView,
-            userNicknameLabel,
-            divider,
             myPageTableView
         ]
         
@@ -83,26 +64,16 @@ final class MyPageViewController: BaseViewController {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        
+      
         NSLayoutConstraint.activate([
-            profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profileImageView.widthAnchor.constraint(equalToConstant: 100),
-            profileImageView.heightAnchor.constraint(equalToConstant: 100),
-            
-            userNicknameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 8),
-            userNicknameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            divider.topAnchor.constraint(equalTo: userNicknameLabel.bottomAnchor, constant: 16),
-            divider.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            divider.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            divider.heightAnchor.constraint(equalToConstant: 1),
-            
-            myPageTableView.topAnchor.constraint(equalTo: divider.bottomAnchor),
+            myPageTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             myPageTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             myPageTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             myPageTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+        
+        myPageTableViewHeaderView.frame = CGRect(x: 0, y: 0, width: myPageTableView.bounds.width, height: 162)
+        myPageTableView.tableHeaderView = myPageTableViewHeaderView
         
         self.navigationController?.navigationBar.tintColor = .label
         self.navigationController?.navigationBar.topItem?.title = ""
@@ -114,7 +85,7 @@ final class MyPageViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] nickname in
                 guard let self = self else { return }
-                self.userNicknameLabel.text = nickname
+                self.myPageTableViewHeaderView.configureNickname(nickname)
             }
             .store(in: &cancellables)
         
@@ -122,7 +93,7 @@ final class MyPageViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] imageURL in
                 guard let self = self else { return }
-                self.profileImageView.setImage(url: imageURL)
+                self.myPageTableViewHeaderView.configureProfileImage(imageURL)
             }
             .store(in: &cancellables)
         
@@ -192,15 +163,7 @@ extension MyPageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 프로필 수정 탭
         if indexPath.section == 0, indexPath.row == 0 {
-            navigationController?.pushViewController(
-                ProfileSettingsViewController(
-                    viewModel: ProfileSettingsViewModel(
-                        usecase: DefaultProfileSettingsUseCase(
-                            repository: DefaultProfileSettingsRepository(
-                                provider: Provider(urlSession: URLSession.shared, signOutManager: SignOutManager())),
-                            validator: NickNameValidator()),
-                        actions: ProfileSettingsViewModelActions(didFinishSignUp: {}))),
-                animated: true)
+            viewModel.profileSettingsViewButtonTapped()
         }
         
         if indexPath.section == 1 {
@@ -228,8 +191,7 @@ extension MyPageViewController: UITableViewDelegate {
             
             // 로그아웃 탭
             if indexPath.row == 1 {
-                _ = try? KeychainManager.deleteAccessToken()
-                exit(0)
+                viewModel.signOutButtonTapped()
             }
         }
         

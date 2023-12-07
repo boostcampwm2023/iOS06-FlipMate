@@ -15,13 +15,18 @@ final class AppDIContainer {
     func makeTabBarDIContainer() -> TabBarDIContainer {
         let dependencies = TabBarDIContainer.Dependencies(
             provider: provider,
-            categoryManager: categoryManager)
+            categoryManager: categoryManager,
+            signOutManager: signOutManager
+        )
         
         return TabBarDIContainer(dependencies: dependencies)
     }
     
     func makeLoginDiContainer() -> LoginDIContainer {
-        let dependencies = LoginDIContainer.Dependencies(provider: provider, categoryManager: categoryManager)
+        let dependencies = LoginDIContainer.Dependencies(
+            provider: provider,
+            categoryManager: categoryManager,
+            signOutManager: signOutManager)
         
         return LoginDIContainer(dependencies: dependencies)
     }

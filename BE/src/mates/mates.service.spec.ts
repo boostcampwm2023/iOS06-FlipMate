@@ -11,15 +11,8 @@ import { ConfigService } from '@nestjs/config';
 import { RedisService } from 'src/common/redis.service';
 import { MockRedisService } from '../../test/mock-service/mock-redis-service';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
+import { MockConfigService } from '../../test/mock-service/mock-config-service';
 
-class MockConfigService {
-  private ENV = {
-    CDN_ENDPOINT: 'http://cdn.com',
-  };
-  get(key: string) {
-    return this.ENV[key.split('.')[1]];
-  }
-}
 describe('MatesService', () => {
   let service: MatesService;
 

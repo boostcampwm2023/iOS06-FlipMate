@@ -30,7 +30,7 @@ typealias LoginViewModelProtocol = LoginViewModelInput & LoginViewModelOutput
 final class LoginViewModel: LoginViewModelProtocol {
 
     // MARK: properties
-    private let googleAuthUseCase: GoogleAuthUseCase
+    private let googleAuthUseCase: AuthenticationUseCase
     private let userInfoUseCase: UserInfoUseCase
     private var cancellables: Set<AnyCancellable> = []
     private let actions: LoginViewModelActions?
@@ -41,7 +41,7 @@ final class LoginViewModel: LoginViewModelProtocol {
         return isMemberSubject.eraseToAnyPublisher()
     }
     
-    init(googleAuthUseCase: GoogleAuthUseCase, userInfoUseCase: UserInfoUseCase, actions: LoginViewModelActions? = nil) {
+    init(googleAuthUseCase: AuthenticationUseCase, userInfoUseCase: UserInfoUseCase, actions: LoginViewModelActions? = nil) {
         self.googleAuthUseCase = googleAuthUseCase
         self.userInfoUseCase = userInfoUseCase
         self.actions = actions
