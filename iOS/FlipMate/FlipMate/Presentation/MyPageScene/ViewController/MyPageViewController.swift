@@ -10,6 +10,14 @@ import Combine
 
 final class MyPageViewController: BaseViewController {
     // MARK: - View Properties
+    private lazy var dismissButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("닫기", for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        button.addTarget(self, action: #selector(dismissButtonDidTapped), for: .touchUpInside)
+        return button
+    }()
+    
     private lazy var myPageTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.register(
@@ -42,10 +50,6 @@ final class MyPageViewController: BaseViewController {
         fatalError("can't use this, no storyboard")
     }
     
-    deinit {
-        viewModel.viewEnded()
-    }
-    
     // MARK: - View LifeCycles
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -54,8 +58,6 @@ final class MyPageViewController: BaseViewController {
     
     // MARK: - UI Configurations
     override func configureUI() {
-        title = Constant.title
-        
         let subviews = [
             myPageTableView
         ]
@@ -77,6 +79,9 @@ final class MyPageViewController: BaseViewController {
         
         self.navigationController?.navigationBar.tintColor = .label
         self.navigationController?.navigationBar.topItem?.title = ""
+        
+        navigationItem.title = Constant.title
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: dismissButton)
     }
     
     // MARK: - Binding
@@ -111,6 +116,14 @@ final class MyPageViewController: BaseViewController {
                 FMLogger.general.error("에러 발생 : \(error)")
             }
             .store(in: &cancellables)
+    }
+}
+
+// MARK: - Objc func
+private extension MyPageViewController {
+    @objc
+    func dismissButtonDidTapped() {
+        viewModel.dismissButtonDidTapped()
     }
 }
 
