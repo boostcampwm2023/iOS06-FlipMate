@@ -23,7 +23,7 @@ final class DefaultChartUseCase: ChartUseCase {
         
         etcTime = chartLog.studyLog.totalTime - etcTime
         
-        let etcCategory = Category(id: 0, color: "FFFFFFFF", subject: "기타", studyTime: etcTime)
+        let etcCategory = Category(id: 0, color: "888888FF", subject: "기타", studyTime: etcTime)
             chartLog.studyLog.category.append(etcCategory)
         
         return chartLog
