@@ -60,7 +60,6 @@ final class TimerViewModel: TimerViewModelProtocol {
     private var orientation: DeviceOrientation = .unknown
     private var timerState: TimerState = .notStarted
     private var cancellables = Set<AnyCancellable>()
-    private var totalTime: Int = 0 // 총 공부 시간
     private var selectedCategory: Category?
     private let actions: TimerViewModelActions?
     private let categoryManager: CategoryManageable
@@ -114,6 +113,8 @@ final class TimerViewModel: TimerViewModelProtocol {
     }
     
     func viewDidLoad() {
+        UserInfoStorage.totalTime = 0
+        
         userInfoUserCase.getUserInfo()
             .receive(on: DispatchQueue.main)
             .sink { complection in
@@ -182,8 +183,8 @@ private extension TimerViewModel {
     }
     
     func totalTimeDidChange(time: Int) {
-        totalTime += time
-        totalTimeSubject.send(totalTime)
+        UserInfoStorage.totalTime += time
+        totalTimeSubject.send(UserInfoStorage.totalTime)
     }
     
     func changeCategory(category: Category) {

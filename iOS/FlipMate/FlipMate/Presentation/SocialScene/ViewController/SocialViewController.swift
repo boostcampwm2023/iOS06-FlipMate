@@ -171,6 +171,16 @@ final class SocialViewController: BaseViewController {
             }
             .store(in: &cancellables)
         
+        
+        viewModel.totalTimePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] totalTime in
+                guard let self = self else { return }
+                guard let header = findHeader() else { return }
+                header.update(learningTime: totalTime)
+            }
+            .store(in: &cancellables)
+        
         viewModel.updateFriendStatus
             .receive(on: DispatchQueue.main)
             .sink { [weak self] updateFreinds in

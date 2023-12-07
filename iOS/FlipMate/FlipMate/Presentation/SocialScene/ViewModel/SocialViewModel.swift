@@ -28,6 +28,7 @@ protocol SocialViewModelOutput {
     var freindsPublisher: AnyPublisher<[Friend], Never> { get }
     var nicknamePublisher: AnyPublisher<String, Never> { get }
     var profileImagePublisher: AnyPublisher<String, Never> { get }
+    var totalTimePublisher: AnyPublisher<Int, Never> { get }
     var updateFriendStatus: AnyPublisher<[UpdateFriend], Never> { get }
     var stopFriendStatus: AnyPublisher<[StopFriend], Never> { get }
 }
@@ -39,6 +40,7 @@ final class SocialViewModel: SocialViewModelProtocol {
     private var freindsSubject = PassthroughSubject<[Friend], Never>()
     private var nicknameSubject = CurrentValueSubject<String, Never>(UserInfoStorage.nickname)
     private var profileImageSubject = CurrentValueSubject<String, Never>(UserInfoStorage.profileImageURL)
+    private var totalTimeSubejct = CurrentValueSubject<Int, Never>(UserInfoStorage.totalTime)
     private var updateFriendSubject = PassthroughSubject<[UpdateFriend], Never>()
     private var stopFriendSubject = PassthroughSubject<[StopFriend], Never>()
     
@@ -68,6 +70,10 @@ final class SocialViewModel: SocialViewModelProtocol {
     
     var profileImagePublisher: AnyPublisher<String, Never> {
         return profileImageSubject.eraseToAnyPublisher()
+    }
+    
+    var totalTimePublisher: AnyPublisher<Int, Never> {
+        return totalTimeSubejct.eraseToAnyPublisher()
     }
     
     var updateFriendStatus: AnyPublisher<[UpdateFriend], Never> {
@@ -172,6 +178,14 @@ private extension SocialViewModel {
             .sink { [weak self] profileImageURL in
                 guard let self = self else { return }
                 self.profileImageSubject.send(profileImageURL)
+            }
+            .store(in: &cancellables)
+        
+        UserInfoStorage.$totalTime
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] totalTime in
+                guard let self = self else { return }
+                self.totalTimeSubejct.send(totalTime)
             }
             .store(in: &cancellables)
     }
