@@ -66,4 +66,8 @@ final class SocialFlowCoordinator: Coordinator {
         childCoordinators.append(coordinator)
         coordinator.start()
     }
+    
+    func didFinishUnfollow() {
+        navigationController?.popViewController(animated: true)
+    }
 }
