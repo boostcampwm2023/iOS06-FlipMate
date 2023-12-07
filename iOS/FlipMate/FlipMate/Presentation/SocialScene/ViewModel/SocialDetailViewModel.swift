@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 struct SocialDetailViewModelActions {
+    var didCancelSocialDetail: () -> Void
     var didFinishUnfollow: () -> Void
 }
 
@@ -68,6 +69,10 @@ final class SocialDetailViewModel: ObservableObject {
                 self.actions?.didFinishUnfollow()
             }
             .store(in: &cancellables)
+    }
+    
+    func dismissButtonDidTapped() {
+        actions?.didCancelSocialDetail()
     }
 }
 

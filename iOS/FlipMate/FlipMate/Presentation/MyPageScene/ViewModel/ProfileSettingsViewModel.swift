@@ -21,7 +21,7 @@ protocol ProfileSettingsViewModelInput {
 
 protocol ProfileSettingsViewModelOutput {
     var nicknamePublisher: AnyPublisher<String, Never> { get }
-    var imageDataPublisher: AnyPublisher<Data, Never> { get }
+    var imageURLPublisher: AnyPublisher<String, Never> { get }
     var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Never> { get }
     var isProfileImageChangedPublisher: AnyPublisher<Void, Never> { get }
     var imageNotSafePublisher: AnyPublisher<Void, Never> { get }
@@ -37,7 +37,7 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     
     // MARK: - Subjects
     private var nameSubject = PassthroughSubject<String, Never>()
-    private var imageDataSubject = PassthroughSubject<Data, Never>()
+    private var imageURLSubject = PassthroughSubject<String, Never>()
     private var isValidNickNameSubject = PassthroughSubject<NickNameValidationState, Never>()
     private var isProfileImageChangedSubject = PassthroughSubject<Void, Never>()
     private var imageNotSafeSubject = PassthroughSubject<Void, Never>()
@@ -53,18 +53,9 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     // MARK: - Input
     func viewReady() {
         let nickname = UserInfoStorage.nickname
+        let imageURL = UserInfoStorage.profileImageURL
         nameSubject.send(nickname)
-        guard let url = URL(string: UserInfoStorage.profileImageURL) else {
-            return
-        }
-        DispatchQueue.global().async {
-            do {
-                let data = try Data(contentsOf: url)
-                self.imageDataSubject.send(data)
-            } catch let error {
-                self.errorSubject.send(error)
-            }
-        }
+        imageURLSubject.send(imageURL)
     }
     
     func nickNameChanged(_ newNickName: String) {
@@ -117,8 +108,8 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
         return nameSubject.eraseToAnyPublisher()
     }
     
-    var imageDataPublisher: AnyPublisher<Data, Never> {
-        return imageDataSubject.eraseToAnyPublisher()
+    var imageURLPublisher: AnyPublisher<String, Never> {
+        return imageURLSubject.eraseToAnyPublisher()
     }
     
     var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Never> {

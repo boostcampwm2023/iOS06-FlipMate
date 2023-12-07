@@ -9,8 +9,11 @@ export const multerConfig = (): MulterOptions => {
     const ext = path.extname(file.originalname);
     if (ext !== '.jpg' && ext !== '.jpeg' && ext !== '.png') {
       return callback(
-        new BadRequestException('jpg/jpeg/png 파일만 업로드 가능합니다!'),
-        false,
+        new BadRequestException({
+          statusCode: 40002,
+          message: 'jpg/jpeg/png 파일만 업로드 가능합니다!',
+          error: 'Bad Request',
+        }),
       );
     }
     return callback(null, true);

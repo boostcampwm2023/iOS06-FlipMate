@@ -40,10 +40,11 @@ export class Categories {
   })
   @IsString()
   @Length(1, 8)
-  @Matches(/^[0-9A-F]{1,8}$/i, {message: '올바른 색상 코드가 아닙니다.'})
+  @Matches(/^[0-9A-F]{1,8}$/i, { message: '올바른 색상 코드가 아닙니다.' })
   color_code: string;
 
   @ManyToOne(() => UsersModel, (user) => user.categories, {
+    eager: true,
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'user_id' })

@@ -175,29 +175,32 @@ final class ProfileSettingsViewController: BaseViewController {
     // MARK: - Viewmodel Binding
     override func bind() {
         viewModel.nicknamePublisher
-            .sink { name in
-                DispatchQueue.main.async {
-                    self.nickNameTextField.text = name
-                }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] name in
+                guard let self = self else { return }
+                self.nickNameTextField.text = name
             }
             .store(in: &cancellables)
         
-        viewModel.imageDataPublisher
-            .sink { imageData in
-                DispatchQueue.main.async {
-                    self.profileImageView.image = UIImage(data: imageData)
-                }
+        viewModel.imageURLPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] imageURL in
+                guard let self = self else { return }
+                self.profileImageView.setImage(url: imageURL)
             }
             .store(in: &cancellables)
         
         viewModel.isValidNickNamePublisher
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] state in
+                guard let self = self else { return }
                 FMLogger.general.log("닉네임 유효성 상태 : \(state.message)")
-                self?.configureNickNameTextField(state)
+                self.configureNickNameTextField(state)
             }
             .store(in: &cancellables)
         
         viewModel.isProfileImageChangedPublisher
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 if self?.currentNicknameState == nil || self?.currentNicknameState == .valid {
                     DispatchQueue.main.async {

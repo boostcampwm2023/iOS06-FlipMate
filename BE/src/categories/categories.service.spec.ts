@@ -2,40 +2,14 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CategoriesService } from './categories.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Categories } from './categories.entity';
-import categoriesData from '../../test/mock-table/categories.json';
-import usersData from '../../test/mock-table/users.json';
-import { BadRequestException, NotFoundException } from '@nestjs/common';
-import { UsersModel } from 'src/users/entity/users.entity';
+import {
+  BadRequestException,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
-
-class MockCategoriesRepository {
-  private data = categoriesData;
-  create(entity: object): object {
-    return {
-      id: this.data.length + 1,
-      ...entity,
-    };
-  }
-
-  save(entity: object): Promise<object> {
-    return Promise.resolve(entity);
-  }
-
-  find({ where: { user_id } }): Promise<object> {
-    const categories = this.data.filter(
-      (category) => category.user_id === user_id.id,
-    );
-    return Promise.resolve(categories);
-  }
-}
-
-class MockUsersService {
-  private data: UsersModel[] = usersData as UsersModel[];
-  findUserById(user_id: number): Promise<object> {
-    const user = this.data.find((user) => user.id === user_id);
-    return Promise.resolve(user);
-  }
-}
+import { MockCategoriesRepository } from '../../test/mock-repo/mock-categories-repo';
+import { MockUsersService } from '../../test/mock-service/mock-user-service';
 
 describe('CategoriesService', () => {
   let service: CategoriesService;
@@ -68,7 +42,7 @@ describe('CategoriesService', () => {
       const userId = 1;
       const result = await service.create(userId, normalData);
       expect(result).toStrictEqual({
-        category_id: 3,
+        category_id: 13,
         name: normalData.name,
         color_code: normalData.color_code,
       });
@@ -94,7 +68,12 @@ describe('CategoriesService', () => {
       );
     });
 
-    it.todo('카테고리는 최대 10개까지 추가할 수 있다');
+    it(`카테고리는 최대 10개까지 추가할 수 있다`, async () => {
+      const userId = 3;
+      expect(service.create(userId, normalData)).rejects.toThrow(
+        BadRequestException,
+      );
+    });
   });
 
   describe('.findByUserId()', () => {
@@ -125,20 +104,86 @@ describe('CategoriesService', () => {
   });
 
   describe('.update()', () => {
-    it.todo('');
-    it.todo('');
-    it.todo('');
-    it.todo('');
-    it.todo('');
+    const normalData = { name: 'Test Category', color_code: 'FFFFFFFF' };
+    it('유효한 데이터로 카테고리를 성공적으로 수정해야 한다', async () => {
+      const result = await service.update(1, normalData, 1);
+      expect(result).toStrictEqual({
+        category_id: 1,
+        name: normalData.name,
+        color_code: normalData.color_code,
+      });
+    });
+    it('해당 카테고리가 존재하지 않으면 오류를 발생시켜야 한다', async () => {
+      const userId = 1;
+      const categoryId = 100;
+      expect(service.update(userId, normalData, categoryId)).rejects.toThrow(
+        NotFoundException,
+      );
+    });
+    it('해당 유저가 카테고리를 소유하지 않으면 오류를 발생시켜야 한다', async () => {
+      const userId = 2;
+      expect(service.update(userId, normalData, 1)).rejects.toThrow(
+        UnauthorizedException,
+      );
+    });
+    it('유효하지 않은 파라미터에 대해 오류를 발생시켜야 한다', async () => {
+      const nullUserId = null;
+      const nullData = null;
+      const nullCategoryId = null;
+      expect(
+        service.update(nullUserId, nullData, nullCategoryId),
+      ).rejects.toThrow(BadRequestException);
+      expect(
+        service.update(nullUserId, normalData, nullCategoryId),
+      ).rejects.toThrow(BadRequestException);
+      expect(service.update(nullUserId, nullData, 1)).rejects.toThrow(
+        BadRequestException,
+      );
+      expect(service.update(1, nullData, nullCategoryId)).rejects.toThrow(
+        BadRequestException,
+      );
+      expect(service.update(1, nullData, 1)).rejects.toThrow(
+        BadRequestException,
+      );
+      expect(service.update(1, normalData, nullCategoryId)).rejects.toThrow(
+        BadRequestException,
+      );
+      expect(service.update(nullUserId, normalData, 1)).rejects.toThrow(
+        BadRequestException,
+      );
+    });
   });
-  /**
-   * async update(
-      user_id: number,
-      categoriesData: CategoryUpdateDto,
-      id: number,
-    )
-   */
-  // update Method
 
-  // remove Method
+  describe('.remove()', () => {
+    it('유효한 데이터로 카테고리를 성공적으로 삭제해야 한다', async () => {
+      const userId = 1;
+      const categoryId = 1;
+      const result = await service.remove(userId, categoryId);
+      expect(result).toStrictEqual(undefined);
+    });
+    it('해당 카테고리가 존재하지 않으면 오류를 발생시켜야 한다', async () => {
+      const userId = 1;
+      const categoryId = 100;
+      expect(service.remove(userId, categoryId)).rejects.toThrow(
+        NotFoundException,
+      );
+    });
+    it('해당 유저가 카테고리를 소유하지 않으면 오류를 발생시켜야 한다', async () => {
+      const userId = 2;
+      expect(service.remove(userId, 1)).rejects.toThrow(UnauthorizedException);
+    });
+    it('유효하지 않은 파라미터에 대해 오류를 발생시켜야 한다', async () => {
+      const nullUserId = null;
+      const nullCategoryId = null;
+      expect(service.remove(nullUserId, nullCategoryId)).rejects.toThrow(
+        BadRequestException,
+      );
+      expect(service.remove(nullUserId, 1)).rejects.toThrow(
+        BadRequestException,
+      );
+      expect(service.remove(1, nullCategoryId)).rejects.toThrow(
+        BadRequestException,
+      );
+    });
+  });
 });

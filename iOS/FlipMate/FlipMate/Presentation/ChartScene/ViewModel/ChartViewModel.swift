@@ -33,6 +33,10 @@ final class ChartViewModel: ObservableObject {
         let today = Date()
         try await fetchDailyData(date: today)
     }
+    
+    func showWeeklyChart() async throws {
+        try await fetchWeeklyData()
+    }
 }
 
 private extension ChartViewModel {

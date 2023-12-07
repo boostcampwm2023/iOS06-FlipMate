@@ -111,18 +111,18 @@ final class MyPageViewController: BaseViewController {
     // MARK: - Binding
     override func bind() {
         viewModel.nicknamePublisher
-            .sink { nickname in
-                DispatchQueue.main.async {
-                    self.userNicknameLabel.text = nickname
-                }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] nickname in
+                guard let self = self else { return }
+                self.userNicknameLabel.text = nickname
             }
             .store(in: &cancellables)
         
-        viewModel.imageDataPublisher
-            .sink { imageData in
-                DispatchQueue.main.async {
-                    self.profileImageView.image = UIImage(data: imageData)
-                }
+        viewModel.imageURLPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] imageURL in
+                guard let self = self else { return }
+                self.profileImageView.setImage(url: imageURL)
             }
             .store(in: &cancellables)
         
