@@ -9,9 +9,7 @@ import Foundation
 import Combine
 
 struct MyPageViewModelActions {
-    let didTapBackButton: () -> Void
     let showProfileSettingsView: () -> Void
-    let didTapSignOut: () -> Void
 }
 
 protocol MyPageViewModelInput {

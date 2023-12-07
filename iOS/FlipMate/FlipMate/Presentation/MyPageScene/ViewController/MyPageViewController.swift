@@ -193,15 +193,16 @@ extension MyPageViewController: UITableViewDelegate {
         // 프로필 수정 탭
         // TODO: 코디네이터 패턴 적용
         if indexPath.section == 0, indexPath.row == 0 {
-            navigationController?.pushViewController(
-                ProfileSettingsViewController(
-                    viewModel: ProfileSettingsViewModel(
-                        usecase: DefaultProfileSettingsUseCase(
-                            repository: DefaultProfileSettingsRepository(
-                                provider: Provider(urlSession: URLSession.shared, signOutManager: SignOutManager.shared)),
-                            validator: NickNameValidator()),
-                        actions: ProfileSettingsViewModelActions(didFinishSignUp: {}))),
-                animated: true)
+            viewModel.profileSettingsViewButtonTapped()
+//            navigationController?.pushViewController(
+//                ProfileSettingsViewController(
+//                    viewModel: ProfileSettingsViewModel(
+//                        usecase: DefaultProfileSettingsUseCase(
+//                            repository: DefaultProfileSettingsRepository(
+//                                provider: Provider(urlSession: URLSession.shared, signOutManager: SignOutManager.shared)),
+//                            validator: NickNameValidator()),
+//                        actions: ProfileSettingsViewModelActions(didFinishSignUp: {}))),
+//                animated: true)
         }
         
         if indexPath.section == 1 {

@@ -5,7 +5,6 @@
 //  Created by 임현규 on 2023/11/30.
 //
 
-import Foundation
 import UIKit
 
 final class SocialDIContainer: SocialFlowCoordinatorDependencies {
@@ -53,12 +52,7 @@ final class SocialDIContainer: SocialFlowCoordinatorDependencies {
             )
     }
     
-    func makeMyPageViewController() -> UIViewController {
-        return MyPageViewController(
-            viewModel: MyPageViewModel(
-                authenticationUseCase: DefaultAuthenticationUseCase(
-                    repository: DefaultAuthenticationRepository(
-                        provider: dependencies.provider),
-                    signoutManager: SignOutManager.shared)))
+    func makeMyPageDIContainer() -> MyPageDIContainer {
+        return MyPageDIContainer(dependencies: MyPageDIContainer.Dependencies(provider: dependencies.provider))
     }
 }
