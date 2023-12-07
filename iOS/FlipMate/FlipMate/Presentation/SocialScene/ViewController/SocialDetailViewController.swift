@@ -239,6 +239,8 @@ final class SocialDetailViewController: BaseViewController {
     }
     
     // MARK: - View Life Cycles
+    
+    // swiftlint:disable function_body_length
     override func configureUI() {
         setStudyLogStackView()
         setStudyTimeStackView()
@@ -314,6 +316,8 @@ final class SocialDetailViewController: BaseViewController {
             chartView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstant.chartTrailing),
             chartView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: LayoutConstant.chartBottom)
         ])
+        
+        // swiftlint:enable function_body_length
     }
     
     override func bind() {
