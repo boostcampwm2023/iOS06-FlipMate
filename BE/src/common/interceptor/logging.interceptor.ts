@@ -17,9 +17,8 @@ export class LoggingInterceptor implements NestInterceptor {
     const response = ctx.getResponse();
     const { method, url, body } = request;
     this.logger.debug(
-      `[📩 Req#${request.id.slice(0, 8)}] ${method} ${url} ${
-        request.user.nickname
-      }#${request.user.id}\n${JSON.stringify(body)}`,
+      `[📩 Req#${request.id.slice(0, 8)}] ${method} ${url} ${request.user
+        ?.nickname}#${request.user?.id}\n${JSON.stringify(body)}`,
     );
     return next.handle().pipe(
       tap((body) => {
