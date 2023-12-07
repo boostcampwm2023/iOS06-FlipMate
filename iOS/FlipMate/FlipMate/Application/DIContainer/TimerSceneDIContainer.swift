@@ -40,6 +40,7 @@ final class TimerSceneDIContainer: TimerFlowCoordinatorDependencies {
         return TimerViewModel(
             timerUseCase: makeTimerUseCase(),
             userInfoUserCase: makeUserInfoUseCase(),
+            studingPingUseCase: makeStudingPingUseCase(),
             actions: actions,
             categoryManager: dependencies.categoryManager)
     }
@@ -50,6 +51,10 @@ final class TimerSceneDIContainer: TimerFlowCoordinatorDependencies {
     
     func makeUserInfoUseCase() -> StudyLogUseCase {
         return DefaultStudyLogUseCase(userInfoRepository: makeUserInfoRespository())
+    }
+    
+    func makeStudingPingUseCase() -> StudingPingUseCase {
+        return DefaultStudingPingUseCase(repository: makeUserInfoRespository())
     }
     
     func makeTimerRepository() -> TimerRepsoitory {
