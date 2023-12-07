@@ -50,7 +50,7 @@ final class SocialViewModel: SocialViewModelProtocol {
     private let socialUseCase: SocialUseCase
     private var timerState: TimerState = .notStarted
     private var friendStatusPollingManager: FriendStatusPollingManageable
-    private lazy var timerManager: TimerManager = .init(timeInterval: .seconds(5), handler: fetchFriendStatus)
+    private lazy var timerManager: TimerManager = .init(timeInterval: .seconds(4), handler: fetchFriendStatus)
     
     // MARK: - init
     init(actions: SocialViewModelActions? = nil, socialUseCase: SocialUseCase, friendStatusPollingManager: FriendStatusPollingManageable) {

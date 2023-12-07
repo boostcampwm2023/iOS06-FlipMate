@@ -133,25 +133,9 @@ final class SocialViewController: BaseViewController {
     }
     
     override func bind() {
-        viewModel.viewDidLoad()
+        bindFriendsRelatedPublisher()
         
-        viewModel.freindsPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] friends in
-                guard let self = self else { return }
-                var snapshot = Snapshot()
-                snapshot.appendSections([.main])
-                snapshot.appendItems(friends.map { Friend(
-                    id: $0.id,
-                    nickName: $0.nickName,
-                    profileImageURL: $0.profileImageURL,
-                    totalTime: $0.totalTime,
-                    startedTime: $0.startedTime,
-                    isStuding: $0.isStuding)}
-                )
-                self.diffableDataSource.apply(snapshot, animatingDifferences: true)
-            }
-            .store(in: &cancellables)
+        viewModel.viewDidLoad()
         
         viewModel.nicknamePublisher
             .receive(on: DispatchQueue.main)
@@ -171,13 +155,32 @@ final class SocialViewController: BaseViewController {
             }
             .store(in: &cancellables)
         
-        
         viewModel.totalTimePublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] totalTime in
                 guard let self = self else { return }
                 guard let header = findHeader() else { return }
                 header.update(learningTime: totalTime)
+            }
+            .store(in: &cancellables)
+    }
+    
+    func bindFriendsRelatedPublisher() {
+        viewModel.freindsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] friends in
+                guard let self = self else { return }
+                var snapshot = Snapshot()
+                snapshot.appendSections([.main])
+                snapshot.appendItems(friends.map { Friend(
+                    id: $0.id,
+                    nickName: $0.nickName,
+                    profileImageURL: $0.profileImageURL,
+                    totalTime: $0.totalTime,
+                    startedTime: $0.startedTime,
+                    isStuding: $0.isStuding)}
+                )
+                self.diffableDataSource.apply(snapshot, animatingDifferences: true)
             }
             .store(in: &cancellables)
         

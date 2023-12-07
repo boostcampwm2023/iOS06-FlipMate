@@ -17,6 +17,7 @@ final class MyPageFlowCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     weak var parentCoordinator: Coordinator?
     private weak var navigationController: UINavigationController?
+    private var myPageNavigationController: UINavigationController!
     private var dependencies: MyPageFlowCoordinatorDependencies
     
     init(dependencies: MyPageFlowCoordinatorDependencies, navigationController: UINavigationController?) {
@@ -27,12 +28,19 @@ final class MyPageFlowCoordinator: Coordinator {
     func start() {
         let actions = MyPageViewModelActions(
             showProfileSettingsView: showProfileSettingsView,
-            viewDidFinish: releaseViewFromMemory
+            viewDidFinish: dismissView
             )
         let myPageViewControlelr = dependencies.makeMyPageViewController(actions: actions)
-        navigationController?.pushViewController(myPageViewControlelr, animated: true)
+        myPageNavigationController = UINavigationController(rootViewController: myPageViewControlelr)
+        myPageNavigationController.modalPresentationStyle = .fullScreen
+     
+        navigationController?.present(myPageNavigationController, animated: true)
     }
     
+    private func dismissView() {
+        navigationController?.dismiss(animated: true)
+        releaseViewFromMemory()
+    }
     private func releaseViewFromMemory() {
         parentCoordinator?.childDidFinish(self)
     }
@@ -42,7 +50,8 @@ final class MyPageFlowCoordinator: Coordinator {
             didFinishSignUp: didFinishSignUp
         )
         let profileSettingsViewControlelr = dependencies.makeProfileSettingsViewController(actions: actions)
-        navigationController?.pushViewController(profileSettingsViewControlelr, animated: true)
+        myPageNavigationController.pushViewController(profileSettingsViewControlelr, animated: true)
+//        navigationController?.pushViewController(profileSettingsViewControlelr, animated: true)
     }
     
     private func didFinishSignUp() {
