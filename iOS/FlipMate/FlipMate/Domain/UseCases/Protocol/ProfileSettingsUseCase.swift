@@ -9,6 +9,5 @@ import Foundation
 
 protocol ProfileSettingsUseCase {
     func isNickNameValid(_ nickName: String) async throws -> NickNameValidationState
-    func isSafeProfileImage(_ imageData: Data) async throws -> Bool
     func setupProfileInfo(nickName: String, profileImageData: Data) async throws -> UserInfo
 }

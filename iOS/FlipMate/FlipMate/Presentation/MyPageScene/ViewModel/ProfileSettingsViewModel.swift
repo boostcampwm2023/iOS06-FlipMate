@@ -24,6 +24,7 @@ protocol ProfileSettingsViewModelOutput {
     var imageURLPublisher: AnyPublisher<String, Never> { get }
     var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Never> { get }
     var isProfileImageChangedPublisher: AnyPublisher<Void, Never> { get }
+    var imageNotSafePublisher: AnyPublisher<Void, Never> { get }
     var isSignUpCompletedPublisher: AnyPublisher<Void, Never> { get }
     var errorPublisher: AnyPublisher<Error, Never> { get }
 }
@@ -39,6 +40,7 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     private var imageURLSubject = PassthroughSubject<String, Never>()
     private var isValidNickNameSubject = PassthroughSubject<NickNameValidationState, Never>()
     private var isProfileImageChangedSubject = PassthroughSubject<Void, Never>()
+    private var imageNotSafeSubject = PassthroughSubject<Void, Never>()
     private var isSignUpCompletedSubject = PassthroughSubject<Void, Never>()
     private var errorSubject = PassthroughSubject<Error, Never>()
     private let actions: ProfileSettingsViewModelActions?
@@ -81,6 +83,20 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
                 DispatchQueue.main.async {
                     self.actions?.didFinishSignUp()
                 }
+            } catch let errorBody as APIError {
+                switch errorBody {
+                case .errorResponse(let response):
+                    switch response.statusCode {
+                        // 닉네임 중복
+                    case 40000:
+                        isValidNickNameSubject.send(.duplicated)
+                        // 이미지 유해함
+                    case 40001:
+                        imageNotSafeSubject.send()
+                    default:
+                        break
+                    }
+                }
             } catch let error {
                 errorSubject.send(error)
             }
@@ -95,6 +111,7 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     var imageURLPublisher: AnyPublisher<String, Never> {
         return imageURLSubject.eraseToAnyPublisher()
     }
+    
     var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Never> {
         return isValidNickNameSubject
             .eraseToAnyPublisher()
@@ -102,6 +119,11 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     
     var isProfileImageChangedPublisher: AnyPublisher<Void, Never> {
         return isProfileImageChangedSubject
+            .eraseToAnyPublisher()
+    }
+    
+    var imageNotSafePublisher: AnyPublisher<Void, Never> {
+        return imageNotSafeSubject
             .eraseToAnyPublisher()
     }
     

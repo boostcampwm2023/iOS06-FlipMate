@@ -28,7 +28,7 @@ struct Provider: Providable {
             let urlReqeust = try endpoint.makeURLRequest()
             return urlSession.response(for: urlReqeust)
                 .tryMap { data, response in
-                    guard let response = response as? HTTPURLResponse else { 
+                    guard let response = response as? HTTPURLResponse else {
                         throw NetworkError.invalidResponse
                     }
                     
@@ -86,11 +86,13 @@ struct Provider: Providable {
                 
                 let errorResult = try JSONDecoder().decode(StatusResponseWithErrorDTO.self, from: data)
                 FMLogger.general.error("에러 코드 : \(errorResult.statusCode)\n내용 : \(errorResult.message)")
-                
+                throw APIError.errorResponse(errorResult)
+            } catch let error as APIError {
+                throw error
             } catch {
                 FMLogger.general.error("에러 코드 : \(response.statusCode)\n내용 : \(HTTPURLResponse.localizedString(forStatusCode: response.statusCode))")
+                throw NetworkError.statusCodeError
             }
-            throw NetworkError.statusCodeError
         }
         
         guard !data.isEmpty else {
@@ -101,4 +103,8 @@ struct Provider: Providable {
         let responseData = try decoder.decode(E.Response.self, from: data)
         return responseData
     }
+}
+
+enum APIError: Error {
+    case errorResponse(StatusResponseWithErrorDTO)
 }

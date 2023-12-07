@@ -96,7 +96,7 @@ final class ProfileSettingsViewController: BaseViewController {
     
     private let viewModel: ProfileSettingsViewModelProtocol
     private var cancellables = Set<AnyCancellable>()
-    private var typingTimer: Timer?
+    private var currentNicknameState: NickNameValidationState?
     
     init(viewModel: ProfileSettingsViewModelProtocol) {
         self.viewModel = viewModel
@@ -202,7 +202,21 @@ final class ProfileSettingsViewController: BaseViewController {
         viewModel.isProfileImageChangedPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.doneButton.isEnabled = true
+                if self?.currentNicknameState == nil || self?.currentNicknameState == .valid {
+                    DispatchQueue.main.async {
+                        self?.doneButton.isEnabled = true
+                    }
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.imageNotSafePublisher
+            .sink { [weak self] in
+                let alert = UIAlertController(title: "이 이미지는 사용할 수 없습니다.", message: "이미지 유해성이 확인되었습니다. 다른 이미지를 선택해 주세요.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default))
+                DispatchQueue.main.async {
+                    self?.present(alert, animated: true)
+                }
             }
             .store(in: &cancellables)
         
@@ -224,6 +238,7 @@ final class ProfileSettingsViewController: BaseViewController {
     }
     
     private func configureNickNameTextField(_ state: NickNameValidationState) {
+        self.currentNicknameState = state
         DispatchQueue.main.async {
             switch state {
             case .valid:
@@ -254,25 +269,6 @@ private extension ProfileSettingsViewController {
         doneButton.isEnabled = false
         guard let text = sender.text else {
             FMLogger.user.log("닉네임 텍스트필드 내용 없음")
-            return
-        }
-        
-        if typingTimer != nil {
-            typingTimer?.invalidate()
-            typingTimer = nil
-        }
-        
-        typingTimer = Timer.scheduledTimer(
-            timeInterval: 2,
-            target: self,
-            selector: #selector(waitedTwoSeconds(_:)),
-            userInfo: text,
-            repeats: false)
-    }
-    
-    @objc
-    func waitedTwoSeconds(_ sender: Timer) {
-        guard let text = sender.userInfo as? String else {
             return
         }
         viewModel.nickNameChanged(text)

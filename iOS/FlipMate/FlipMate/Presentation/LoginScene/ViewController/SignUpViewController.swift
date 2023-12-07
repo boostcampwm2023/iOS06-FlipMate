@@ -98,7 +98,6 @@ final class SignUpViewController: BaseViewController {
     
     private let viewModel: SignUpViewModelProtocol
     private var cancellables = Set<AnyCancellable>()
-    private var typingTimer: Timer?
     
     init(viewModel: SignUpViewModelProtocol) {
         self.viewModel = viewModel
@@ -174,44 +173,63 @@ final class SignUpViewController: BaseViewController {
     // MARK: - Viewmodel Binding
     override func bind() {
         viewModel.isValidNickNamePublisher
-            .receive(on: DispatchQueue.main)
             .sink { [weak self] state in
                 FMLogger.general.log("닉네임 유효성 상태 : \(state.message)")
-                switch state {
-                case .valid:
-                    self?.nickNameValidationStateLabel.text = state.message
-                    self?.nickNameValidationStateLabel.textColor = FlipMateColor.approveGreen.color
-                    self?.signUpButton.isEnabled = true
-                case .lengthViolation:
-                    self?.nickNameValidationStateLabel.text = state.message
-                    self?.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                    self?.signUpButton.isEnabled = false
-                case .emptyViolation:
-                    self?.nickNameValidationStateLabel.text = state.message
-                    self?.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                    self?.signUpButton.isEnabled = false
-                case .duplicated:
-                    self?.nickNameValidationStateLabel.text = state.message
-                    self?.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                    self?.signUpButton.isEnabled = false
+                DispatchQueue.main.async {
+                    self?.configureNickNameTextField(state)
                 }
             }
             .store(in: &cancellables)
         
         viewModel.isSignUpCompletedPublisher
-            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.signUpButton.isEnabled = true
+                DispatchQueue.main.async {
+                    self?.signUpButton.isEnabled = true
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.imageNotSafePublisher
+            .sink { [weak self] in
+                let alert = UIAlertController(title: "이 이미지는 사용할 수 없습니다.", message: "이미지 유해성이 확인되었습니다. 다른 이미지를 선택해 주세요.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default))
+                DispatchQueue.main.async {
+                    self?.present(alert, animated: true)
+                }
             }
             .store(in: &cancellables)
         
         viewModel.errorPublisher
-            .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
                 FMLogger.general.error("SignUpViewModel에서 에러: \(error)")
-                self?.signUpButton.isEnabled = false
+                    DispatchQueue.main.async {
+                    self?.signUpButton.isEnabled = false
+                }
             }
             .store(in: &cancellables)
+    }
+    
+    private func configureNickNameTextField(_ state: NickNameValidationState) {
+        DispatchQueue.main.async {
+            switch state {
+            case .valid:
+                self.nickNameValidationStateLabel.text = state.message
+                self.nickNameValidationStateLabel.textColor = FlipMateColor.approveGreen.color
+                self.signUpButton.isEnabled = true
+            case .lengthViolation:
+                self.nickNameValidationStateLabel.text = state.message
+                self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
+                self.signUpButton.isEnabled = false
+            case .emptyViolation:
+                self.nickNameValidationStateLabel.text = state.message
+                self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
+                self.signUpButton.isEnabled = false
+            case .duplicated:
+                self.nickNameValidationStateLabel.text = state.message
+                self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
+                self.signUpButton.isEnabled = false
+            }
+        }
     }
 }
 
@@ -222,25 +240,6 @@ private extension SignUpViewController {
         signUpButton.isEnabled = false
         guard let text = sender.text else {
             FMLogger.user.log("닉네임 텍스트필드 내용 없음")
-            return
-        }
-        
-        if typingTimer != nil {
-            typingTimer?.invalidate()
-            typingTimer = nil
-        }
-        
-        typingTimer = Timer.scheduledTimer(
-            timeInterval: 2,
-            target: self,
-            selector: #selector(waitedTwoSeconds(_:)),
-            userInfo: text,
-            repeats: false)
-    }
-    
-    @objc
-    func waitedTwoSeconds(_ sender: Timer) {
-        guard let text = sender.userInfo as? String else {
             return
         }
         viewModel.nickNameChanged(text)

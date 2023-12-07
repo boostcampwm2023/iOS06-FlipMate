@@ -18,20 +18,8 @@ final class DefaultProfileSettingsUseCase: ProfileSettingsUseCase {
     }
     
     func isNickNameValid(_ nickName: String) async throws -> NickNameValidationState {
-        let isDuplicated = try await repository.checkIfNickNameIsDuplicated(nickName)
-        guard !isDuplicated else {
-            return .duplicated
-        }
         let validationState = validator.checkNickNameValidationState(nickName)
         return validationState
-    }
-    
-    func isNickNameDuplicated(_ nickName: String) async throws -> Bool {
-        return try await repository.checkIfNickNameIsDuplicated(nickName)
-    }
-    
-    func isSafeProfileImage(_ imageData: Data) async throws -> Bool {
-        return try await repository.checkProfileImageSafety(imageData)
     }
     
     func setupProfileInfo(nickName: String, profileImageData: Data) async throws -> UserInfo {
