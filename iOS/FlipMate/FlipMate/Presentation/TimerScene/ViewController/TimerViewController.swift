@@ -30,6 +30,10 @@ final class TimerViewController: BaseViewController {
         fatalError("Don't use storyboard")
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     /// 오늘 학습한 총 시간 타이머
     private lazy var timerLabel: UILabel = {
         let label = UILabel()
@@ -89,7 +93,6 @@ final class TimerViewController: BaseViewController {
         deviceMotionManager.stopDeviceMotion()
         timerViewModel.viewDidDisappear()
         UIDevice.current.isProximityMonitoringEnabled = false
-        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - setup UI
