@@ -12,4 +12,6 @@ struct UserInfoStorage {
     static var nickname: String
     @UserDefault(key: "profileImageURL", defaultValue: "")
     static var profileImageURL: String
+    @UserDefault(key: "totalTime", defaultValue: "")
+    static var totalTime: String
 }
