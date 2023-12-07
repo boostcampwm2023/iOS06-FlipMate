@@ -60,7 +60,7 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
             guard let friend = friendsStatus.filter({ $0.id == id }).first else { return }
             guard let startedTime = friend.startedTime else { continue }
             guard let date = startedTime.stringToDate(.yyyyMMddhhmmss) else { continue }
-            let currentLearningTime = Int(Date().timeIntervalSince(date))
+            let currentLearningTime = Int(Date().timeIntervalSince(date)) - 1
             updateFriendArray.append(UpdateFriend(id: friend.id, currentLearningTime: currentLearningTime))
         }
         startTimer()
@@ -72,7 +72,7 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
             guard let friend = friendsStatus.filter({ $0.id == id }).first else { return }
             guard let startedTime = friend.startedTime else { continue }
             guard let date = startedTime.stringToDate(.yyyyMMddhhmmss) else { continue }
-            let currentLearningTime = Int(Date().timeIntervalSince(date))
+            let currentLearningTime = Int(Date().timeIntervalSince(date)) - 1
             updateFriendArray.append(UpdateFriend(id: friend.id, currentLearningTime: currentLearningTime))
         }
     }
@@ -153,10 +153,13 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
     
     private func startTimer() {
         if updateFriendArray.isEmpty { return }
+        if timerState == .resumed { return }
         timerManager.start(completion: increaseLearningTime)
+        timerState = .resumed
     }
     
     private func stopTimer() {
         timerManager.cancel()
+        timerState = .cancled
     }
 }

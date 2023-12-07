@@ -92,7 +92,9 @@ private extension ChartViewController {
             viewModel: ChartViewModel(
                 chartUseCase: DefaultChartUseCase(
                     repository: DefaultChartRepository(
-                        provider: Provider(urlSession: URLSession.shared))), actions: nil))
+                        provider: Provider(
+                            urlSession: URLSession.shared))),
+                actions: nil))
         let hostingController = UIHostingController(rootView: dailyChartView)
         addChild(hostingController)
         guard let newChartView = hostingController.view else { return }
