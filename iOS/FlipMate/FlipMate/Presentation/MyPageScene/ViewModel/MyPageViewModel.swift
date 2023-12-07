@@ -8,8 +8,16 @@
 import Foundation
 import Combine
 
+struct MyPageViewModelActions {
+    let didTapBackButton: () -> Void
+    let showProfileSettingsView: () -> Void
+    let didTapSignOut: () -> Void
+}
+
 protocol MyPageViewModelInput {
     func viewReady()
+    func profileSettingsViewButtonTapped()
+    func signOutButtonTapped()
 }
 
 protocol MyPageViewModelOutput {
@@ -29,10 +37,20 @@ final class MyPageViewModel: MyPageViewModelProtocol {
         ["계정 탈퇴"]
     ]
     
+    // MARK: - Subjects
     private lazy var tableViewDataSourceSubject = CurrentValueSubject<[[String]], Never>(myPageDataSource)
     private var nicknameSubject = PassthroughSubject<String, Never>()
     private var imageURLSubject = PassthroughSubject<String, Never>()
     private var errorSubject = PassthroughSubject<Error, Never>()
+    
+    // MARK: - Properties
+    private let useCase: AuthenticationUseCase
+    private let actions: MyPageViewModelActions?
+    
+    init(authenticationUseCase: AuthenticationUseCase, actions: MyPageViewModelActions? = nil) {
+        self.useCase = authenticationUseCase
+        self.actions = actions
+    }
     
     // MARK: - Input
     func viewReady() {
@@ -41,6 +59,15 @@ final class MyPageViewModel: MyPageViewModelProtocol {
         let imageURL = UserInfoStorage.profileImageURL
         nicknameSubject.send(nickname)
         imageURLSubject.send(imageURL)
+    }
+    
+    func profileSettingsViewButtonTapped() {
+        actions?.showProfileSettingsView()
+    }
+    
+    func signOutButtonTapped() {
+        useCase.signOut()
+        // TODO: 코디네이터가 담당해야 할 것 같다...? 뷰의 이동이기 때문,,
     }
     
     // MARK: - Output

@@ -22,9 +22,9 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
     func makeLoginViewController(actions: LoginViewModelActions) -> UIViewController {
         return LoginViewController(
             loginViewModel: LoginViewModel(
-                googleAuthUseCase: DefaultGoogleAuthUseCase(
-                    repository: DefaultGoogleAuthRepository(
-                        provider: dependencies.provider)),
+                googleAuthUseCase: DefaultAuthenticationUseCase(
+                    repository: DefaultAuthenticationRepository(
+                        provider: dependencies.provider), signoutManager: SignOutManager.shared),
                 userInfoUseCase: DefaultUserInfoUseCase(
                     repository: DefaultUserInfoRepository(
                         provider: dependencies.provider)),
