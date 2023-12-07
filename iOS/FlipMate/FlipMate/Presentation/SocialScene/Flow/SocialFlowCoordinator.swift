@@ -37,20 +37,22 @@ final class SocialFlowCoordinator: Coordinator {
     
     private func showFreindAddViewController() {
         let actions = FriendAddViewModelActions(
-            didCancleFriendAdd: didTapCancelNavigationButton,
-            didSuccessFriendAdd: didTapCancelNavigationButton)
+            didCancleFriendAdd: dismissNavigationController,
+            didSuccessFriendAdd: dismissNavigationController)
         let freindAddViewContorller = dependencies.makeFriendAddViewController(actions: actions)
         let firendNavigationController = UINavigationController(rootViewController: freindAddViewContorller)
         firendNavigationController.modalPresentationStyle = .fullScreen
         navigationController?.present(firendNavigationController, animated: true)
     }
     
-    private func didTapCancelNavigationButton() {
+    private func dismissNavigationController() {
         navigationController?.dismiss(animated: true)
     }
     
     func showSocialDetailViewController(friend: Friend) {
-        let actions = SocialDetailViewModelActions(didCancelSocialDetail: didTapCancelNavigationButton, didFinishUnfollow: didFinishUnfollow)
+        let actions = SocialDetailViewModelActions(
+            didCancelSocialDetail: dismissNavigationController,
+            didFinishUnfollow: dismissNavigationController)
         let socialDetailViewController = dependencies.makeSocialDetailViewController(actions: actions, friend: friend)
         let socialDetailNavigationController = UINavigationController(rootViewController: socialDetailViewController)
         socialDetailNavigationController.modalPresentationStyle = .fullScreen
@@ -60,9 +62,5 @@ final class SocialFlowCoordinator: Coordinator {
     func showMyPageViewController() {
         let myPageViewController = dependencies.makeMyPageViewController()
         navigationController?.pushViewController(myPageViewController, animated: true)
-    }
-    
-    func didFinishUnfollow() {
-        navigationController?.popViewController(animated: true)
     }
 }
