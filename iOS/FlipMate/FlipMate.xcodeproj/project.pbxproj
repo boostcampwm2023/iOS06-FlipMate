@@ -154,6 +154,7 @@
 		601EB7432B14F83400C5B216 /* DefaultProfileSettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601EB7422B14F83400C5B216 /* DefaultProfileSettingsRepository.swift */; };
 		601EB7452B14F86100C5B216 /* SignUpEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601EB7442B14F86100C5B216 /* SignUpEndpoints.swift */; };
 		601EB7472B14F97700C5B216 /* NickNameValidationResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601EB7462B14F97700C5B216 /* NickNameValidationResponseDTO.swift */; };
+		6020C7642B21C1D400F58AD0 /* MyPageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6020C7632B21C1D400F58AD0 /* MyPageHeaderView.swift */; };
 		60243EF02B05D24D0098A92F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 60243EEF2B05D24D0098A92F /* .swiftlint.yml */; };
 		60459D472B21A17C00A80AF7 /* MyPageFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60459D462B21A17C00A80AF7 /* MyPageFlowCoordinator.swift */; };
 		60459D492B21A28400A80AF7 /* MyPageDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60459D482B21A28400A80AF7 /* MyPageDIContainer.swift */; };
@@ -378,6 +379,7 @@
 		601EB7422B14F83400C5B216 /* DefaultProfileSettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileSettingsRepository.swift; sourceTree = "<group>"; };
 		601EB7442B14F86100C5B216 /* SignUpEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEndpoints.swift; sourceTree = "<group>"; };
 		601EB7462B14F97700C5B216 /* NickNameValidationResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameValidationResponseDTO.swift; sourceTree = "<group>"; };
+		6020C7632B21C1D400F58AD0 /* MyPageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageHeaderView.swift; sourceTree = "<group>"; };
 		60243EEF2B05D24D0098A92F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		60459D462B21A17C00A80AF7 /* MyPageFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFlowCoordinator.swift; sourceTree = "<group>"; };
 		60459D482B21A28400A80AF7 /* MyPageDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDIContainer.swift; sourceTree = "<group>"; };
@@ -1259,6 +1261,7 @@
 			isa = PBXGroup;
 			children = (
 				60EB7F512B1EFEDA00F8C613 /* MyPageTableViewCell.swift */,
+				6020C7632B21C1D400F58AD0 /* MyPageHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1699,6 +1702,7 @@
 				2C2F21782B0F4CCC00B45BA8 /* StudyLog.swift in Sources */,
 				ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */,
 				2C88DD132B14C51B000B4686 /* TimerFinishUseCase.swift in Sources */,
+				6020C7642B21C1D400F58AD0 /* MyPageHeaderView.swift in Sources */,
 				2C9F61FE2B15F48600AE63F9 /* FriendAddViewController.swift in Sources */,
 				2C88DCFE2B1244A6000B4686 /* LoginFlowCoordinator.swift in Sources */,
 				601773E42B021E6000D175D9 /* TimerViewController.swift in Sources */,
