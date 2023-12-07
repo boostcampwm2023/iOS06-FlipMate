@@ -15,13 +15,14 @@ protocol TabBarFlowCoordinatorDependencies {
     func makeChartDIContainer() -> ChartDIContainer
 }
 
-final class TabBarFlowCoordinator: Coordinator {
+final class TabBarFlowCoordinator: NSObject, Coordinator {
     var childCoordinators: [Coordinator] = []
     weak var parentCoordinator: Coordinator?
     
     weak var navigationController: UINavigationController?
     private weak var tabBarViewController: UITabBarController?
     private let dependencies: TabBarFlowCoordinatorDependencies
+    private var socialViewController: UINavigationController?
     
     init(navigationController: UINavigationController?, dependencies: TabBarFlowCoordinatorDependencies) {
         self.navigationController = navigationController
@@ -30,8 +31,9 @@ final class TabBarFlowCoordinator: Coordinator {
     
     func start() {
         let tabBarController = dependencies.makeTabBarController()
+        tabBarController.delegate = self
         tabBarController.setViewControllers(
-            [makeSocialViewController(), makeTimerViewContorller(), makeChartViewController()],
+            [setSocialViewController(), makeTimerViewContorller(), makeChartViewController()],
             animated: false
         )
         navigationController?.isNavigationBarHidden = true
@@ -64,6 +66,14 @@ final class TabBarFlowCoordinator: Coordinator {
         return navigationViewController
     }
     
+    private func setSocialViewController() -> UINavigationController {
+        let navigationViewController = UINavigationController()
+        navigationViewController.tabBarItem.image = UIImage(
+            systemName: Constant.socialNomalImageName)
+        navigationViewController.tabBarItem.selectedImage = UIImage(
+            systemName: Constant.socialSelectedImageName)
+        return navigationViewController
+    }
     private func makeChartViewController() -> UINavigationController {
         let navigationViewController = UINavigationController()
         navigationViewController.tabBarItem.image = UIImage(
@@ -81,5 +91,19 @@ final class TabBarFlowCoordinator: Coordinator {
         static let socialSelectedImageName = "person.3.fill"
         static let chartNomalImageName = "chart.bar"
         static let chartSelectedImageName = "chart.bar.fill"
+    }
+}
+
+extension TabBarFlowCoordinator: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if let index = tabBarController.viewControllers?.firstIndex(of: viewController) {
+            if index == 0 && socialViewController == nil {
+                socialViewController = makeSocialViewController()
+                guard let socialViewController else { return }
+                tabBarController.viewControllers?[index] = socialViewController
+            } else {
+                return
+            }
+        }
     }
 }
