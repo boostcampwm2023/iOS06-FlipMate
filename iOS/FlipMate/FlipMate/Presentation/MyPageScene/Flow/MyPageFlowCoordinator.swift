@@ -26,10 +26,15 @@ final class MyPageFlowCoordinator: Coordinator {
     
     func start() {
         let actions = MyPageViewModelActions(
-            showProfileSettingsView: showProfileSettingsView
+            showProfileSettingsView: showProfileSettingsView,
+            viewDidFinish: releaseViewFromMemory
             )
         let myPageViewControlelr = dependencies.makeMyPageViewController(actions: actions)
         navigationController?.pushViewController(myPageViewControlelr, animated: true)
+    }
+    
+    private func releaseViewFromMemory() {
+        parentCoordinator?.childDidFinish(self)
     }
     
     private func showProfileSettingsView() {
@@ -40,7 +45,7 @@ final class MyPageFlowCoordinator: Coordinator {
         navigationController?.pushViewController(profileSettingsViewControlelr, animated: true)
     }
     
-    func didFinishSignUp() {
+    private func didFinishSignUp() {
         navigationController?.popViewController(animated: true)
     }
 }

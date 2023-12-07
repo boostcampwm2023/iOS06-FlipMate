@@ -10,12 +10,14 @@ import Combine
 
 struct MyPageViewModelActions {
     let showProfileSettingsView: () -> Void
+    let viewDidFinish: () -> Void
 }
 
 protocol MyPageViewModelInput {
     func viewReady()
     func profileSettingsViewButtonTapped()
     func signOutButtonTapped()
+    func viewEnded()
 }
 
 protocol MyPageViewModelOutput {
@@ -66,6 +68,10 @@ final class MyPageViewModel: MyPageViewModelProtocol {
     func signOutButtonTapped() {
         useCase.signOut()
         // TODO: 코디네이터가 담당해야 할 것 같다...? 뷰의 이동이기 때문,,
+    }
+    
+    func viewEnded() {
+        actions?.viewDidFinish()
     }
     
     // MARK: - Output
