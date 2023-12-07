@@ -15,11 +15,14 @@ final class SocialDetailViewController: BaseViewController {
         static let dailyStudyLog = "오늘 학습 시간"
         static let weeklyStudyLog = "주간 학습 시간"
         static let primaryCategory = "최근 집중 분야"
+        static let primaryCategoryNil = "없음"
         static let unfollow = "팔로우 취소"
         static let borderWidth: CGFloat = 1
         static let cornerRadius: CGFloat = 8
         static let spacing1: CGFloat = 1
         static let spacing2: CGFloat = 12
+        static let cancelNavigationButton = "닫기"
+        static let navigationTitle = "친구 상세"
     }
     
     private enum LayoutConstant {
@@ -67,7 +70,7 @@ final class SocialDetailViewController: BaseViewController {
     
     private lazy var dismissButton: UIButton = {
         let button = UIButton()
-        button.setTitle("닫기", for: .normal)
+        button.setTitle(ComponentConstant.cancelNavigationButton, for: .normal)
         button.setTitleColor(.label, for: .normal)
         button.addTarget(self, action: #selector(dismissButtonDidTapped), for: .touchUpInside)
         return button
@@ -183,7 +186,7 @@ final class SocialDetailViewController: BaseViewController {
         label.font = FlipMateFont.mediumBold.font
         label.textAlignment = .right
         label.textColor = FlipMateColor.gray2.color
-        label.text = "없음"
+        label.text = ComponentConstant.primaryCategoryNil
         
         return label
     }()
@@ -326,7 +329,7 @@ private extension SocialDetailViewController {
     }
     
     func configureNavigationBar() {
-        navigationItem.title = "친구 상세"
+        navigationItem.title = ComponentConstant.navigationTitle
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: dismissButton)
     }
 }
