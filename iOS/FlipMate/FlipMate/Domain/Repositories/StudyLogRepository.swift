@@ -10,4 +10,5 @@ import Combine
 
 protocol StudyLogRepository {
     func getUserInfo() -> AnyPublisher<StudyLog, NetworkError>
+    func studingPing() async throws
 }

@@ -116,6 +116,8 @@
 		2C9F62512B176FFE00AE63F9 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595A82B0C7F3500558FAA /* HTTPMethod.swift */; };
 		2C9F62532B17700500AE63F9 /* BaseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A02B0DA4E6008CBC85 /* BaseComponents.swift */; };
 		2C9F62542B17701300AE63F9 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422E2B0F747B001E2803 /* KeyChainManager.swift */; };
+		2CD272F32B21C748000CB9E5 /* StudingPingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD272F22B21C748000CB9E5 /* StudingPingUseCase.swift */; };
+		2CD272F52B21C789000CB9E5 /* DefaultStudingPingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD272F42B21C789000CB9E5 /* DefaultStudingPingUseCase.swift */; };
 		2CDCD03D2B1871E60080DCDE /* SocialDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD03C2B1871E60080DCDE /* SocialDIContainer.swift */; };
 		2CDCD0402B1872060080DCDE /* SocialFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD03F2B1872060080DCDE /* SocialFlowCoordinator.swift */; };
 		2CDCD0422B1873F60080DCDE /* SocialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0412B1873F60080DCDE /* SocialViewModel.swift */; };
@@ -337,6 +339,8 @@
 		2C9F62362B17517100AE63F9 /* MockFriendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFriendUseCase.swift; sourceTree = "<group>"; };
 		2C9F62402B1769FD00AE63F9 /* FriendUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendUseCaseTests.swift; sourceTree = "<group>"; };
 		2C9F62462B176AEC00AE63F9 /* MockFriendRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFriendRepository.swift; sourceTree = "<group>"; };
+		2CD272F22B21C748000CB9E5 /* StudingPingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudingPingUseCase.swift; sourceTree = "<group>"; };
+		2CD272F42B21C789000CB9E5 /* DefaultStudingPingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStudingPingUseCase.swift; sourceTree = "<group>"; };
 		2CDCD03C2B1871E60080DCDE /* SocialDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDIContainer.swift; sourceTree = "<group>"; };
 		2CDCD03F2B1872060080DCDE /* SocialFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFlowCoordinator.swift; sourceTree = "<group>"; };
 		2CDCD0412B1873F60080DCDE /* SocialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewModel.swift; sourceTree = "<group>"; };
@@ -1187,6 +1191,7 @@
 				2CDCD0452B1889040080DCDE /* DefaultSocialUseCase.swift */,
 				2C87C2842B1DF32A00A26313 /* DefaultUserInfoUseCase.swift */,
 				ED6865CD2B1E49A6001A2AAD /* DefaultChartUseCase.swift */,
+				2CD272F42B21C789000CB9E5 /* DefaultStudingPingUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1204,6 +1209,7 @@
 				2CDCD0432B1887200080DCDE /* SocialUseCase.swift */,
 				2C87C2822B1DF30E00A26313 /* UserInfoUseCase.swift */,
 				ED6865CB2B1E494D001A2AAD /* ChartUseCase.swift */,
+				2CD272F22B21C748000CB9E5 /* StudingPingUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1667,6 +1673,7 @@
 				2C801D7E2B04B65400A7ABAE /* DefaultTimerUseCase.swift in Sources */,
 				2C88DCFB2B124451000B4686 /* LoginDIContainer.swift in Sources */,
 				2C88DD072B125781000B4686 /* TabBarDIContainer.swift in Sources */,
+				2CD272F52B21C789000CB9E5 /* DefaultStudingPingUseCase.swift in Sources */,
 				2C88DD092B1274FA000B4686 /* CategorySettingCoordinator.swift in Sources */,
 				2C4D55AB2B033029006D7C26 /* UIView++Extension.swift in Sources */,
 				2CDCD06C2B18E6960080DCDE /* UserDefault.swift in Sources */,
@@ -1819,6 +1826,7 @@
 				2C88DD0B2B1340E4000B4686 /* CategoryDIContainer.swift in Sources */,
 				2C87C27F2B1DF2A800A26313 /* UserInfoRepository.swift in Sources */,
 				2C9F62082B16398D00AE63F9 /* FreindAddResultViewProtocol.swift in Sources */,
+				2CD272F32B21C748000CB9E5 /* StudingPingUseCase.swift in Sources */,
 				ED3842312B0F94E6001E2803 /* DefaultCategoryRepository.swift in Sources */,
 				ED6865AD2B179600001A2AAD /* SocialDetailViewModel.swift in Sources */,
 				2CDCD04A2B18895E0080DCDE /* DefaultSocialRepository.swift in Sources */,

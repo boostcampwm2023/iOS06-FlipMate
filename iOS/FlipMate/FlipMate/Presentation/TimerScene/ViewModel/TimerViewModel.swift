@@ -46,6 +46,7 @@ final class TimerViewModel: TimerViewModelProtocol {
     // MARK: UseCase
     private var timerUseCase: TimerUseCase
     private var userInfoUserCase: StudyLogUseCase
+    private var studingPingUseCase: StudingPingUseCase
     
     // MARK: Subject
     private var isDeviceFaceDownSubject = PassthroughSubject<Bool, Never>()
@@ -60,14 +61,18 @@ final class TimerViewModel: TimerViewModelProtocol {
     private var orientation: DeviceOrientation = .unknown
     private var timerState: TimerState = .notStarted
     private var cancellables = Set<AnyCancellable>()
+    private var totalTime: Int = 0 // 총 공부 시간
+    private var increaseTime: Int = -1
     private var selectedCategory: Category?
     private let actions: TimerViewModelActions?
     private let categoryManager: CategoryManageable
+    private lazy var timerManager = TimerManager(timeInterval: .seconds(1), handler: increaseTotalTime)
     
     // MARK: - init
-    init(timerUseCase: TimerUseCase, userInfoUserCase: StudyLogUseCase, actions: TimerViewModelActions? = nil, categoryManager: CategoryManageable) {
+    init(timerUseCase: TimerUseCase, userInfoUserCase: StudyLogUseCase, studingPingUseCase: StudingPingUseCase, actions: TimerViewModelActions? = nil, categoryManager: CategoryManageable) {
         self.timerUseCase = timerUseCase
         self.userInfoUserCase = userInfoUserCase
+        self.studingPingUseCase = studingPingUseCase
         self.actions = actions
         self.categoryManager = categoryManager
     }
@@ -168,17 +173,12 @@ private extension TimerViewModel {
         if orientation == DeviceOrientation.faceDown && proximity == true {
             FMLogger.user.debug("디바이스가 face down 상태입니다.")
             isDeviceFaceDownSubject.send(true)
-            if timerState == .notStarted {
-                startTimer()
-            } else {
-                resumeTimer()
-            }
+            startTimer()
         } else {
             guard timerState == .resumed else { return }
-            
             FMLogger.user.debug("디바이스가 face up 상태입니다.")
             isDeviceFaceDownSubject.send(false)
-            suspendTimer()
+            stopTimer()
         }
     }
     
@@ -210,43 +210,30 @@ private extension TimerViewModel {
                 }
             } receiveValue: { [weak self] _ in
                 guard let self = self else { return }
+                self.increaseTime = -1
+                self.timerManager.start(completion: increaseTotalTime)
                 self.timerState = .resumed
             }
             .store(in: &cancellables)
     }
     
-    /// 타이머 재시작
-    func resumeTimer() {
-        let categoryId = selectedCategory?.id
-        timerUseCase.resumeTimer(resumeTime: Date(), categoryId: categoryId)
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    FMLogger.timer.debug("공부 재시작 API 요청 성공")
-                    return
-                case .failure(let error):
-                    // TODO: 타이머 일시정지 후 타이머 작동 이전 시간으로 롤백
-                    FMLogger.timer.error("\(error.localizedDescription)")
-                }
-            } receiveValue: { [weak self] _ in
-                guard let self = self else { return }
-                self.timerState = .resumed
-            }
-            .store(in: &cancellables)
-    }
-    
-    /// 타이머 일시정지
-    func suspendTimer() {
-        let learningTime = timerUseCase.suspendTimer(suspendTime: Date())
-        let studyEndLog = StudyEndLog(learningTime: learningTime, endDate: Date(), categoryId: selectedCategory?.id)
-        self.timerState = .suspended
+    func stopTimer() {
+        timerManager.cancel()
+        let studyEndLog = StudyEndLog(learningTime: increaseTime, endDate: Date(), categoryId: selectedCategory?.id)
         deviceSettingEnabledSubject.send(false)
         actions?.showTimerFinishViewController(studyEndLog)
+        timerState = .cancled
     }
     
-    /// 타이머 종료
-    func stopTimer() {
-        timerUseCase.stopTimer()
+    func increaseTotalTime() {
+        increaseTime += 1
+        
+        if increaseTime % 8 == 0 {
+            Task {
+                try await studingPingUseCase.studingPing()
+            }
+        }
+        
+        FMLogger.timer.debug("경과 시간 \(self.increaseTime)")
     }
 }
