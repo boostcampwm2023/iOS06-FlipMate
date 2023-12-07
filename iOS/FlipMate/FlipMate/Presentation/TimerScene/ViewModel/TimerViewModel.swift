@@ -69,7 +69,11 @@ final class TimerViewModel: TimerViewModelProtocol {
     private lazy var timerManager = TimerManager(timeInterval: .seconds(1), handler: increaseTotalTime)
     
     // MARK: - init
-    init(timerUseCase: TimerUseCase, userInfoUserCase: StudyLogUseCase, studingPingUseCase: StudingPingUseCase, actions: TimerViewModelActions? = nil, categoryManager: CategoryManageable) {
+    init(timerUseCase: TimerUseCase,
+         userInfoUserCase: StudyLogUseCase,
+         studingPingUseCase: StudingPingUseCase,
+         actions: TimerViewModelActions? = nil,
+         categoryManager: CategoryManageable) {
         self.timerUseCase = timerUseCase
         self.userInfoUserCase = userInfoUserCase
         self.studingPingUseCase = studingPingUseCase
