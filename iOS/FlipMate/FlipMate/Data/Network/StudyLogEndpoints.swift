@@ -14,4 +14,11 @@ struct StudyLogEndpoints {
             path: Paths.studylogs + "?date=\(Date().dateToString(format: .yyyyMMdd))",
             method: .get)
     }
+    
+    static func postStudyPing() -> EndPoint<StatusResponseDTO> {
+        return EndPoint(
+            baseURL: BaseURL.flipmateDomain,
+            path: Paths.ping,
+            method: .get)
+    }
 }
