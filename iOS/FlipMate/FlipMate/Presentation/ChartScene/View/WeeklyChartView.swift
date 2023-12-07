@@ -16,10 +16,10 @@ struct WeeklyChartView: View {
     }
     
     var body: some View {
-        VStack {
-            Text("주간 학습 추이").font(.title).padding(.trailing, 180).padding(.bottom, 30)
-            if #available(iOS 16.0, *) {
-                ScrollView(.vertical) {
+        ScrollView(.vertical) {
+            VStack {
+                Text("주간 학습 추이").font(.title).padding(.trailing, 180).padding(.bottom, 30)
+                if #available(iOS 16.0, *) {
                     Chart {
                         ForEach(viewModel.weeklyChartLog.dailyData, id: \.day) { data in
                             BarMark(x: .value("요일", data.day), y: .value("분", Float(data.studyTime) / 60))
@@ -36,14 +36,14 @@ struct WeeklyChartView: View {
                     .padding(.top, 10)
                     .padding(.bottom, 10)
                     .frame(height: 300 * (UIScreen.main.bounds.size.height / 844))
+                } else {
+                    Text("iOS 16.0 이상 버전부터 차트 기능 사용 가능")
                 }
-            } else {
-                Text("iOS 16.0 이상 버전부터 차트 기능 사용 가능")
             }
-        }
-        .onAppear {
-            Task {
-                try await viewModel.showWeeklyChart()
+            .onAppear {
+                Task {
+                    try await viewModel.showWeeklyChart()
+                }
             }
         }
     }

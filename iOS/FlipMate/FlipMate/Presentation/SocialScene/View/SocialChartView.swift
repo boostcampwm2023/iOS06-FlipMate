@@ -18,22 +18,20 @@ struct SocialChartView: View {
     }
     
     var body: some View {
-        ScrollView(.vertical) {
-            VStack {
-                if #available(iOS 16.0, *) {
-                    Chart(viewModel.userSeries) { series in
-                        ForEach(series.studyTime) { time in
-                            PointMark(x: .value("날짜", time.weekday, unit: .day), y: .value("학습 시간", Float(time.studyTime) / 60))
-                            LineMark(x: .value("날짜", time.weekday, unit: .day), y: .value("학습 시간", Float(time.studyTime) / 60))
-                        }
-                        .foregroundStyle(by: .value("사용자", series.user))
+        VStack {
+            if #available(iOS 16.0, *) {
+                Chart(viewModel.userSeries) { series in
+                    ForEach(series.studyTime) { time in
+                        PointMark(x: .value("날짜", time.weekday, unit: .day), y: .value("학습 시간", Float(time.studyTime) / 60))
+                        LineMark(x: .value("날짜", time.weekday, unit: .day), y: .value("학습 시간", Float(time.studyTime) / 60))
                     }
-                    .frame(height: 360)
-                    .chartYAxisLabel("분 (m)")
-                } else {
-                    Text("iOS 16.0 이상 버전부터 차트 기능 사용 가능")
+                    .foregroundStyle(by: .value("사용자", series.user))
                 }
-            }.padding()
-        }
+                .frame(height: 360)
+                .chartYAxisLabel("분 (m)")
+            } else {
+                Text("iOS 16.0 이상 버전부터 차트 기능 사용 가능")
+            }
+        }.padding()
     }
 }

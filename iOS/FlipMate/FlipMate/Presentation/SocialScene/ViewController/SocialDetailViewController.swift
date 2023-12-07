@@ -56,6 +56,22 @@ final class SocialDetailViewController: BaseViewController {
     }
 
     // MARK: - UI Components
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return scrollView
+    }()
+    
+    private lazy var contentView: UIView = {
+        let view = UIView()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         
@@ -229,9 +245,15 @@ final class SocialDetailViewController: BaseViewController {
         setChart()
         configureNavigationBar()
         
-        [profileImageView, nickNameLabel, unfollowButton, divider, studyLogStackView, studyTimeStackView].forEach {
+        [scrollView, profileImageView, nickNameLabel, unfollowButton, divider].forEach {
             view.addSubview($0)
         }
+        
+        [studyLogStackView, studyTimeStackView].forEach {
+            contentView.addSubview($0)
+        }
+        
+        scrollView.addSubview(contentView)
         
         NSLayoutConstraint.activate([
             profileImageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: LayoutConstant.profileImageTop),
@@ -260,22 +282,37 @@ final class SocialDetailViewController: BaseViewController {
         ])
         
         NSLayoutConstraint.activate([
-            studyLogStackView.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: LayoutConstant.studyLogTop),
-            studyLogStackView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, 
+            scrollView.topAnchor.constraint(equalTo: divider.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            studyLogStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstant.studyLogTop),
+            studyLogStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
                                                        constant: LayoutConstant.studyLogLeading),
             studyLogStackView.heightAnchor.constraint(equalToConstant: LayoutConstant.stduyLogHeight),
             
             studyTimeStackView.topAnchor.constraint(equalTo: studyLogStackView.topAnchor),
-            studyTimeStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, 
+            studyTimeStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
                                                          constant: LayoutConstant.studyTimeTrailing),
             studyTimeStackView.heightAnchor.constraint(equalTo: studyLogStackView.heightAnchor)
         ])
         
         NSLayoutConstraint.activate([
             chartView.topAnchor.constraint(equalTo: studyLogStackView.bottomAnchor, constant: LayoutConstant.chartTop),
-            chartView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: LayoutConstant.chartLeading),
-            chartView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: LayoutConstant.chartTrailing),
-            chartView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: LayoutConstant.chartBottom)
+            chartView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstant.chartLeading),
+            chartView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstant.chartTrailing),
+            chartView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: LayoutConstant.chartBottom)
         ])
     }
     
@@ -323,7 +360,7 @@ private extension SocialDetailViewController {
         addChild(hostingController)
         guard let newChartView = hostingController.view else { return }
         self.chartView = newChartView
-        self.view.addSubview(newChartView)
+        self.contentView.addSubview(newChartView)
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
         hostingController.didMove(toParent: self)
     }

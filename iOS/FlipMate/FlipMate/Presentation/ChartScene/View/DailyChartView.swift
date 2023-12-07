@@ -17,9 +17,9 @@ struct DailyChartView: View {
     }
     
     var body: some View {
-        VStack {
-            CustomCalenderView(selectedDate: $selectedDate, viewModel: viewModel)
-            ScrollView(.vertical) {
+        ScrollView(.vertical) {
+            VStack {
+                CustomCalenderView(selectedDate: $selectedDate, viewModel: viewModel)
                 if #available(iOS 17.0, *) {
                     Chart {
                         ForEach(viewModel.dailyChartLog.studyLog.category, id: \.subject) { category in
@@ -62,8 +62,8 @@ struct DailyChartView: View {
                 } else {
                     Text("iOS 16.0 이상 버전부터 차트 기능 사용 가능")
                 }
-            }
-        }.padding()
+            }.padding()
+        }
     }
     
     func getColorArray(categories: [Category]) -> [Color] {
