@@ -7,6 +7,7 @@
 
 import Foundation
 
+// swiftlint:disable force_unwrapping
 extension Data {
     static func makeMultiPartRequestBody(userName: String, jpegImageData: Data, boundary: String) -> Data {
         var body = Data()
@@ -27,3 +28,4 @@ extension Data {
         return body
     }
 }
+// swiftlint: enable force_unwrapping

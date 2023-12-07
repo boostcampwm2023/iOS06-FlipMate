@@ -174,19 +174,32 @@ final class ProfileSettingsViewController: BaseViewController {
     
     // MARK: - Viewmodel Binding
     override func bind() {
+        bindNickNameRelatedPublishers()
+        bindProfileImageRelatedPublishers()
+        
+        viewModel.isSignUpCompletedPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.doneButton.isEnabled = true
+                self?.navigationController?.popViewController(animated: true)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.errorPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] error in
+                FMLogger.general.error("SignUpViewModel에서 에러: \(error)")
+                self?.doneButton.isEnabled = false
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func bindNickNameRelatedPublishers() {
         viewModel.nicknamePublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] name in
                 guard let self = self else { return }
                 self.nickNameTextField.text = name
-            }
-            .store(in: &cancellables)
-        
-        viewModel.imageURLPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] imageURL in
-                guard let self = self else { return }
-                self.profileImageView.setImage(url: imageURL)
             }
             .store(in: &cancellables)
         
@@ -196,6 +209,16 @@ final class ProfileSettingsViewController: BaseViewController {
                 guard let self = self else { return }
                 FMLogger.general.log("닉네임 유효성 상태 : \(state.message)")
                 self.configureNickNameTextField(state)
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func bindProfileImageRelatedPublishers() {
+        viewModel.imageURLPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] imageURL in
+                guard let self = self else { return }
+                self.profileImageView.setImage(url: imageURL)
             }
             .store(in: &cancellables)
         
@@ -217,22 +240,6 @@ final class ProfileSettingsViewController: BaseViewController {
                 DispatchQueue.main.async {
                     self?.present(alert, animated: true)
                 }
-            }
-            .store(in: &cancellables)
-        
-        viewModel.isSignUpCompletedPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.doneButton.isEnabled = true
-                self?.navigationController?.popViewController(animated: true)
-            }
-            .store(in: &cancellables)
-        
-        viewModel.errorPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] error in
-                FMLogger.general.error("SignUpViewModel에서 에러: \(error)")
-                self?.doneButton.isEnabled = false
             }
             .store(in: &cancellables)
     }

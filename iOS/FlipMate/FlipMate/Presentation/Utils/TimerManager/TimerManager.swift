@@ -109,7 +109,10 @@ private extension TimerManager {
         let diffTime = nowTime - startTime
         // 0.0000 소수점 4번째 자리까지 0이면 수행.
         // TODO: - 너무 라이브하게 구현해서 수정 필요.
-        let fourNumber = String(format: "%.4f", diffTime).split(separator: ".").map { String($0) }.last!
+        guard let fourNumber = String(format: "%.4f", diffTime).split(separator: ".").map({ String($0) }).last else {
+            FMLogger.general.error("timer 형변환 실패")
+            return
+        }
         if fourNumber == "0000" {
             totalTime += 1
             FMLogger.device.debug("경과시간: \(diffTime)")

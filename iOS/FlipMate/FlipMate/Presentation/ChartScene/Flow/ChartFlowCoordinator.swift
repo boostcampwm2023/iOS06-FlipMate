@@ -29,4 +29,3 @@ final class ChartFlowCoordinator: Coordinator {
         navigationController.viewControllers = [chartViewController]
     }
 }
-

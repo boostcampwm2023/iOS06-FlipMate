@@ -11,10 +11,14 @@ final class KeychainManager {
     private static let serviceName = "FlipMate"
     
     static func saveAccessToken(token: String) throws {
+        guard let tokenData = token.data(using: .utf8) else {
+            throw KeychainError.noToken
+        }
+        
         let query: [String: AnyObject] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: serviceName as AnyObject,
-            kSecValueData as String: token.data(using: .utf8)! as AnyObject
+            kSecValueData as String: tokenData as AnyObject
         ]
         
         let status = SecItemAdd(query as CFDictionary, nil)

@@ -27,11 +27,17 @@ class MockURLSession: URLSessionable {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         
-        let httpResponse = HTTPURLResponse(
-            url: request.url!,
+        guard let url = request.url else {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+        }
+        
+        guard let httpResponse = HTTPURLResponse(
+            url: url,
             statusCode: status.statusCode,
             httpVersion: nil,
-            headerFields: nil)!
+            headerFields: nil) else {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+        }
         
         guard let data = response.data else { return Just((data: Data(), response: httpResponse))
                 .setFailureType(to: URLError.self)
@@ -48,11 +54,17 @@ class MockURLSession: URLSessionable {
             throw URLError(.badURL)
         }
         
-        let httpResponse = HTTPURLResponse(
-            url: request.url!,
+        guard let url = request.url else {
+            throw NetworkError.invalidURLComponents
+        }
+        
+        guard let httpResponse = HTTPURLResponse(
+            url: url,
             statusCode: status.statusCode,
             httpVersion: nil,
-            headerFields: nil)!
+            headerFields: nil) else {
+            throw NetworkError.invalidResponse
+        }
         
         guard let data = response.data else {
             return ((data: Data(), response: httpResponse))

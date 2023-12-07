@@ -34,6 +34,7 @@ let responseData = """
     }
 """
 
+// swiftlint:disable force_unwrapping
 let studyLogMockResponse = MockResponse(
     data: responseData.data(using: .utf8),
     urlResponse: HTTPURLResponse(
@@ -43,3 +44,4 @@ let studyLogMockResponse = MockResponse(
         headerFields: nil),
     error: nil
 )
+// swiftlint:enable force_unwrapping
