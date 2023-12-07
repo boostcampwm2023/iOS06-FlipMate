@@ -70,6 +70,19 @@ final class TimerFinishViewModel: TimerFinishViewModelProtocol {
     }
     
     func cancleButtonDidTapped() {
-        actions?.didCancleStudyEndLog()
+        timerFinishUseCase.finishTimer(endTime: studyEndLog.endDate, learningTime: 0, categoryId: studyEndLog.categoryId)
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    FMLogger.timer.debug("공부 종료 API 요청 성공")
+                case .failure(let error):
+                    FMLogger.timer.error("\(error.localizedDescription)")
+                }
+            } receiveValue: { [weak self] _ in
+                guard let self = self else { return }
+                self.actions?.didCancleStudyEndLog()
+            }
+            .store(in: &cancellables)
     }
 }
