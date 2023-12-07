@@ -90,6 +90,8 @@ struct CustomCalenderView: View {
                     }
                 }
             }
+            .padding(.leading, 15)
+            .padding(.trailing, 15)
         }
         // swiftlint:enable force_unwrapping
     }
