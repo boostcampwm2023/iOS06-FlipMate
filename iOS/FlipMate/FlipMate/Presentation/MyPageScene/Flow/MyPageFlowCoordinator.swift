@@ -51,10 +51,9 @@ final class MyPageFlowCoordinator: Coordinator {
         )
         let profileSettingsViewControlelr = dependencies.makeProfileSettingsViewController(actions: actions)
         myPageNavigationController.pushViewController(profileSettingsViewControlelr, animated: true)
-//        navigationController?.pushViewController(profileSettingsViewControlelr, animated: true)
     }
     
     private func didFinishSignUp() {
-        navigationController?.popViewController(animated: true)
+        myPageNavigationController.popViewController(animated: true)
     }
 }
