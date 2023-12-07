@@ -83,13 +83,7 @@ final class LoginViewModel: LoginViewModelProtocol {
                 // TODO: 추후 분기 처리 (회원가입 안했을 때 고려)
                 let accessToken = response.accessToken
 //                try KeychainManager.saveAccessToken(token: accessToken)
-                
-                if response.isMember {
-                    FMLogger.user.log("나는 이미 회원이야")
-                    try KeychainManager.saveAccessToken(token: accessToken)
-                } else {
-                    FMLogger.user.log("나는 아직 회원이 아니야")
-                }
+                try KeychainManager.saveAccessToken(token: accessToken)
                 
                 isMemberSubject.send(response.isMember)
 

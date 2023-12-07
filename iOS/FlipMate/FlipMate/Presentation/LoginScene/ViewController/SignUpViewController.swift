@@ -46,7 +46,7 @@ final class SignUpViewController: BaseViewController {
         textField.textAlignment = .center
         textField.font = FlipMateFont.mediumRegular.font
         textField.placeholder = Constant.nickNameTextFieldPlaceHolderText
-        textField.addTarget(self, action: #selector(nickNameTextFieldChanged(_:)), for: .editingChanged)
+        textField.delegate = self
         return textField
     }()
     
@@ -233,18 +233,21 @@ final class SignUpViewController: BaseViewController {
     }
 }
 
-// MARK: - Selector Methods
-private extension SignUpViewController {
-    @objc
-    func nickNameTextFieldChanged(_ sender: UITextField) {
-        signUpButton.isEnabled = false
-        guard let text = sender.text else {
-            FMLogger.user.log("닉네임 텍스트필드 내용 없음")
+// MARK: - UITextFieldDelegate
+extension SignUpViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let nickname = textField.text else { return }
+        guard nickname.count <= Constant.maxLength else {
+            textField.deleteBackward()
+            textField.resignFirstResponder()
             return
         }
-        viewModel.nickNameChanged(text)
+        viewModel.nickNameChanged(nickname)
     }
-    
+}
+
+// MARK: - Selector Methods
+private extension SignUpViewController {
     // 이미지 픽커 처리
     @objc
     func profileImageViewTapped() {
@@ -313,5 +316,6 @@ private extension SignUpViewController {
         static let profileImageName = "person.crop.circle.fill"
         static let cameraImageName = "camera.fill"
         static let nickNameTextFieldPlaceHolderText = "닉네임을 입력해 주세요"
+        static let maxLength = 10
     }
 }
