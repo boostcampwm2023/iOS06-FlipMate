@@ -8,15 +8,23 @@ export class RedisService {
     this.client = createClient();
     this.client.connect();
   }
-  async set(key: string, value: string) {
-    await this.client.set(key, value);
+  async hset(key: string, field: string, value: string) {
+    await this.client.hSet(key, field, value);
   }
 
-  get(key: string): Promise<string | null> {
-    return this.client.get(key);
+  hget(key: string, field: string): Promise<string | null> {
+    return this.client.hGet(key, field);
   }
 
-  async del(key: string): Promise<void> {
+  async hdel(key: string, field: string): Promise<void> {
+    await this.client.hDel(key, field);
+  }
+
+  async del(key: string) {
     await this.client.del(key);
+  }
+
+  getKeys() {
+    return this.client.keys('*');
   }
 }

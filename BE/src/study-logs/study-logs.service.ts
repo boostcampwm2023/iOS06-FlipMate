@@ -25,25 +25,35 @@ export class StudyLogsService {
     user_id: number,
   ): Promise<void> {
     const { created_at } = studyLogsData;
-    await this.redisService.set(`${user_id}`, `${created_at}`);
+    await this.redisService.hset(`${user_id}`, 'started_at', `${created_at}`);
+    await this.redisService.hset(`${user_id}`, 'received_at', `${Date.now()}`);
   }
 
   async createFinishLog(
     studyLogsData: StudyLogsCreateDto,
     user_id: number,
-  ): Promise<StudyLogsDto> {
-    const { category_id, ...data } = studyLogsData;
+  ): Promise<void> {
+    const { category_id } = studyLogsData;
     const user = { id: user_id } as UsersModel;
     const category = { id: category_id ?? null } as Categories;
 
-    const studyLog = this.studyLogsRepository.create({
-      ...data,
-      user_id: user,
-      category_id: category,
-    });
-    const savedStudyLog = await this.studyLogsRepository.save(studyLog);
+    const learningTimes = this.calculateLearningTimes(
+      studyLogsData.created_at,
+      studyLogsData.learning_time,
+    );
+
+    for (const { started_at, date, learning_time } of learningTimes) {
+      const studyLog = this.studyLogsRepository.create({
+        type: 'finish',
+        date,
+        learning_time,
+        created_at: started_at,
+        user_id: user,
+        category_id: category,
+      });
+      await this.studyLogsRepository.save(studyLog);
+    }
     await this.redisService.del(`${user_id}`);
-    return this.entityToDto(savedStudyLog);
   }
 
   async findAll(): Promise<StudyLogs[]> {
@@ -57,6 +67,38 @@ export class StudyLogsService {
       created_at.getTime() - learning_time * 1000 - standardMS;
     const started_at = new Date(millisecond);
     return started_at;
+  }
+
+  calculateLearningTimes(
+    created_at: string,
+    learning_time: number,
+  ): { started_at: string; date: string; learning_time: number }[] {
+    const finishedAt = moment(new Date(created_at));
+    const startedAt = finishedAt.clone().subtract(learning_time, 's');
+    if (startedAt.get('date') !== finishedAt.get('date')) {
+      return [
+        {
+          started_at: startedAt.toISOString(),
+          date: startedAt.format('YYYY-MM-DD'),
+          learning_time:
+            startedAt.clone().endOf('day').diff(startedAt, 's') + 1,
+        },
+        {
+          started_at: finishedAt.clone().startOf('day').toISOString(),
+          date: finishedAt.format('YYYY-MM-DD'),
+          learning_time: finishedAt
+            .clone()
+            .diff(finishedAt.clone().startOf('day'), 's'),
+        },
+      ];
+    }
+    return [
+      {
+        started_at: startedAt.toISOString(),
+        date: startedAt.format('YYYY-MM-DD'),
+        learning_time: learning_time,
+      },
+    ];
   }
 
   async calculateTotalTimes(
