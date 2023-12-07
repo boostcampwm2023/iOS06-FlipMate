@@ -12,8 +12,6 @@ import OSLog
 final class TimerManager {
     // MARK: - Properties
     private var state: TimerState = .suspended
-    private(set) var totalTime: Int = 0
-    private var startTime: TimeInterval = 0.0
     private var handler: (() -> Void)?
     private var timeInterval: DispatchTimeInterval
     
@@ -24,14 +22,6 @@ final class TimerManager {
                 label: "kr.codesquad.boostcamp8.FlipMate.backgroundTimer",
                 qos: .userInteractive))
         timer.schedule(deadline: .now(), repeating: timeInterval)
-        
-        guard let handler else {
-            timer.setEventHandler { [weak self] in
-                guard let self = self else { return }
-                self.increaseTotalTime()
-            }
-            return timer
-        }
         
         timer.setEventHandler { [weak self] in
             self?.handler?()
@@ -53,7 +43,6 @@ final class TimerManager {
     
     /// 타이머를 시작합니다.
     func start(startTime: Date = Date(), completion: (() -> Void)? = nil) {
-        self.startTime = startTime.timeIntervalSince1970
 
         guard let completion else {
             resume()
@@ -67,7 +56,6 @@ final class TimerManager {
     /// 타이머를 재개합니다.
     func resume(resumeTime: Date = Date()) {
         guard state == .suspended else { return }
-        self.startTime = resumeTime.timeIntervalSince1970
         state = .resumed
         timer.resume()
     }
@@ -75,7 +63,6 @@ final class TimerManager {
     /// 타이머를 일시정지합니다.
     func suspend() {
         guard state == .resumed else { return }
-        self.totalTime = 0
         state = .suspended
         timer.suspend()
     }
@@ -100,22 +87,6 @@ private extension TimerManager {
         timer.schedule(deadline: .now(), repeating: timeInterval)
         timer.setEventHandler { [weak self] in
             self?.handler?()
-        }
-    }
-    
-    func increaseTotalTime() {
-        
-        let nowTime = Date().timeIntervalSince1970
-        let diffTime = nowTime - startTime
-        // 0.0000 소수점 4번째 자리까지 0이면 수행.
-        // TODO: - 너무 라이브하게 구현해서 수정 필요.
-        guard let fourNumber = String(format: "%.4f", diffTime).split(separator: ".").map({ String($0) }).last else {
-            FMLogger.general.error("timer 형변환 실패")
-            return
-        }
-        if fourNumber == "0000" {
-            totalTime += 1
-            FMLogger.device.debug("경과시간: \(diffTime)")
         }
     }
 }
