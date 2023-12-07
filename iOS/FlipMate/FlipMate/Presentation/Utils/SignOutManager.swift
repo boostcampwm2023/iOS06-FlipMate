@@ -14,9 +14,6 @@ protocol SignOutManagerProtocol {
 }
 
 final class SignOutManager: SignOutManagerProtocol {
-    static let shared = SignOutManager()
-    private init() {}
-    
     private var signOutSubject = PassthroughSubject<Bool, Never>()
     
     var signOutPublisher: AnyPublisher<Bool, Never> {

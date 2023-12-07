@@ -10,6 +10,7 @@ import UIKit
 final class SocialDIContainer: SocialFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
+        let signOutManager: SignOutManagerProtocol
     }
     
     private let dependencies: Dependencies
@@ -53,6 +54,9 @@ final class SocialDIContainer: SocialFlowCoordinatorDependencies {
     }
     
     func makeMyPageDIContainer() -> MyPageDIContainer {
-        return MyPageDIContainer(dependencies: MyPageDIContainer.Dependencies(provider: dependencies.provider))
+        return MyPageDIContainer(
+            dependencies: MyPageDIContainer.Dependencies(
+                provider: dependencies.provider,
+                signOutManager: dependencies.signOutManager))
     }
 }

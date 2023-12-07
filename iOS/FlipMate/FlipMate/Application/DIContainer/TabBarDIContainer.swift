@@ -12,6 +12,7 @@ final class TabBarDIContainer: TabBarFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
         let categoryManager: CategoryManageable
+        let signOutManager: SignOutManagerProtocol
     }
     
     private let dependencies: Dependencies
@@ -35,7 +36,9 @@ final class TabBarDIContainer: TabBarFlowCoordinatorDependencies {
     
     func makeSocialDIContainer() -> SocialDIContainer {
         let dependencies = SocialDIContainer.Dependencies(
-            provider: dependencies.provider)
+            provider: dependencies.provider,
+            signOutManager: dependencies.signOutManager
+        )
         
         return SocialDIContainer(dependencies: dependencies)
     }

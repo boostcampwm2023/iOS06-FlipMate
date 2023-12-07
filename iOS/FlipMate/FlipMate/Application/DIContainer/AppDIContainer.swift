@@ -8,20 +8,25 @@
 import UIKit
 
 final class AppDIContainer {
-    lazy var signOutManager: SignOutManagerProtocol = SignOutManager.shared
+    lazy var signOutManager: SignOutManagerProtocol = SignOutManager()
     lazy var provider: Provider = Provider(urlSession: URLSession.shared, signOutManager: signOutManager)
     lazy var categoryManager: CategoryManageable = CategoryManager(categories: [])
     
     func makeTabBarDIContainer() -> TabBarDIContainer {
         let dependencies = TabBarDIContainer.Dependencies(
             provider: provider,
-            categoryManager: categoryManager)
+            categoryManager: categoryManager,
+            signOutManager: signOutManager
+        )
         
         return TabBarDIContainer(dependencies: dependencies)
     }
     
     func makeLoginDiContainer() -> LoginDIContainer {
-        let dependencies = LoginDIContainer.Dependencies(provider: provider, categoryManager: categoryManager)
+        let dependencies = LoginDIContainer.Dependencies(
+            provider: provider,
+            categoryManager: categoryManager,
+            signOutManager: signOutManager)
         
         return LoginDIContainer(dependencies: dependencies)
     }
