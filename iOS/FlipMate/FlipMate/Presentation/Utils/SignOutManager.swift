@@ -25,6 +25,8 @@ final class SignOutManager: SignOutManagerProtocol {
     
     func signOut() {
         try? KeychainManager.deleteAccessToken()
+        UserInfoStorage.nickname = ""
+        UserInfoStorage.profileImageURL = ""
         signOutSubject.send(true)
     }
 }
