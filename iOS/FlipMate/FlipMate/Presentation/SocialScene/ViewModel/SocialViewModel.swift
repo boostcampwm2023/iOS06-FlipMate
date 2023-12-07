@@ -160,6 +160,7 @@ private extension SocialViewModel {
     
     func getUserProfile() {
         UserInfoStorage.$nickname
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] nickName in
                 guard let self = self else { return }
                 self.nicknameSubject.send(nickName)
@@ -167,6 +168,7 @@ private extension SocialViewModel {
             .store(in: &cancellables)
         
         UserInfoStorage.$profileImageURL
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] profileImageURL in
                 guard let self = self else { return }
                 self.profileImageSubject.send(profileImageURL)
