@@ -10,11 +10,13 @@ import Combine
 
 protocol SignOutManagerProtocol {
     var signOutPublisher: AnyPublisher<Bool, Never> { get }
-    
     func signOut()
 }
 
 final class SignOutManager: SignOutManagerProtocol {
+    static let shared = SignOutManager()
+    private init() {}
+    
     private var signOutSubject = PassthroughSubject<Bool, Never>()
     
     var signOutPublisher: AnyPublisher<Bool, Never> {

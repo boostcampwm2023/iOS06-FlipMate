@@ -192,9 +192,9 @@
 		ED38421F2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38421E2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift */; };
 		ED3842212B0F1CF9001E2803 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842202B0F1CF9001E2803 /* User.swift */; };
 		ED3842232B0F1D70001E2803 /* GoogleAuthRepostiory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842222B0F1D70001E2803 /* GoogleAuthRepostiory.swift */; };
-		ED3842252B0F1DDA001E2803 /* DefaultGoogleAuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842242B0F1DDA001E2803 /* DefaultGoogleAuthUseCase.swift */; };
-		ED3842272B0F1E0C001E2803 /* GoogleAuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842262B0F1E0C001E2803 /* GoogleAuthUseCase.swift */; };
-		ED3842292B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842282B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift */; };
+		ED3842252B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842242B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift */; };
+		ED3842272B0F1E0C001E2803 /* AuthenticationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842262B0F1E0C001E2803 /* AuthenticationUseCase.swift */; };
+		ED3842292B0F3B19001E2803 /* DefaultAuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842282B0F3B19001E2803 /* DefaultAuthenticationRepository.swift */; };
 		ED38422C2B0F4531001E2803 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422B2B0F4531001E2803 /* LoginViewModel.swift */; };
 		ED38422F2B0F747B001E2803 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422E2B0F747B001E2803 /* KeyChainManager.swift */; };
 		ED3842312B0F94E6001E2803 /* DefaultCategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842302B0F94E6001E2803 /* DefaultCategoryRepository.swift */; };
@@ -417,9 +417,9 @@
 		ED38421E2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthResponseDTO.swift; sourceTree = "<group>"; };
 		ED3842202B0F1CF9001E2803 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ED3842222B0F1D70001E2803 /* GoogleAuthRepostiory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthRepostiory.swift; sourceTree = "<group>"; };
-		ED3842242B0F1DDA001E2803 /* DefaultGoogleAuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGoogleAuthUseCase.swift; sourceTree = "<group>"; };
-		ED3842262B0F1E0C001E2803 /* GoogleAuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthUseCase.swift; sourceTree = "<group>"; };
-		ED3842282B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGoogleAuthRepository.swift; sourceTree = "<group>"; };
+		ED3842242B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthenticationUseCase.swift; sourceTree = "<group>"; };
+		ED3842262B0F1E0C001E2803 /* AuthenticationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationUseCase.swift; sourceTree = "<group>"; };
+		ED3842282B0F3B19001E2803 /* DefaultAuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthenticationRepository.swift; sourceTree = "<group>"; };
 		ED38422B2B0F4531001E2803 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		ED38422E2B0F747B001E2803 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		ED3842302B0F94E6001E2803 /* DefaultCategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCategoryRepository.swift; sourceTree = "<group>"; };
@@ -1033,7 +1033,7 @@
 		600908FA2AFCDF0F0065DFFB /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				ED3842282B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift */,
+				ED3842282B0F3B19001E2803 /* DefaultAuthenticationRepository.swift */,
 				2C3430AC2B0DDF25008CBC85 /* DefaultTimerRepository.swift */,
 				2C2F217D2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift */,
 				ED3842302B0F94E6001E2803 /* DefaultCategoryRepository.swift */,
@@ -1173,7 +1173,7 @@
 				2C801D7D2B04B65400A7ABAE /* DefaultTimerUseCase.swift */,
 				60F67C692B0E1868002C8BF3 /* DefaultCategoryUseCase.swift */,
 				2C2F216D2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift */,
-				ED3842242B0F1DDA001E2803 /* DefaultGoogleAuthUseCase.swift */,
+				ED3842242B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift */,
 				601EB73E2B14F37300C5B216 /* DefaultProfileSettingsUseCase.swift */,
 				2C88DD102B14C50F000B4686 /* DefaultTimerFinishUseCase.swift */,
 				2C9F62102B17363400AE63F9 /* DefaultFriendUseCase.swift */,
@@ -1190,7 +1190,7 @@
 				2C801D7F2B04B68900A7ABAE /* TimerUseCase.swift */,
 				60F67C672B0E1785002C8BF3 /* CategoryUseCase.swift */,
 				2C2F21792B0F4CF900B45BA8 /* StudyLogUseCase.swift */,
-				ED3842262B0F1E0C001E2803 /* GoogleAuthUseCase.swift */,
+				ED3842262B0F1E0C001E2803 /* AuthenticationUseCase.swift */,
 				601EB73C2B14D67600C5B216 /* ProfileSettingsUseCase.swift */,
 				2C88DD122B14C51B000B4686 /* TimerFinishUseCase.swift */,
 				2C9F620E2B1735C700AE63F9 /* FriendUseCase.swift */,
@@ -1653,7 +1653,7 @@
 				2C4D55B02B0348FB006D7C26 /* TimerViewModel.swift in Sources */,
 				2CDCD0422B1873F60080DCDE /* SocialViewModel.swift in Sources */,
 				601EB7452B14F86100C5B216 /* SignUpEndpoints.swift in Sources */,
-				ED3842252B0F1DDA001E2803 /* DefaultGoogleAuthUseCase.swift in Sources */,
+				ED3842252B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift in Sources */,
 				601EB7412B14F39B00C5B216 /* ProfileSettingsRepository.swift in Sources */,
 				2C801D7E2B04B65400A7ABAE /* DefaultTimerUseCase.swift in Sources */,
 				2C88DCFB2B124451000B4686 /* LoginDIContainer.swift in Sources */,
@@ -1722,7 +1722,7 @@
 				2C9F62132B17366200AE63F9 /* FriendRepository.swift in Sources */,
 				6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */,
 				ED38422F2B0F747B001E2803 /* KeyChainManager.swift in Sources */,
-				ED3842292B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift in Sources */,
+				ED3842292B0F3B19001E2803 /* DefaultAuthenticationRepository.swift in Sources */,
 				600908BE2AFCD7DF0065DFFB /* AppDelegate.swift in Sources */,
 				2C9F62372B17517100AE63F9 /* MockFriendUseCase.swift in Sources */,
 				2CE84EFB2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift in Sources */,
@@ -1773,7 +1773,7 @@
 				2C1F2BBD2B20DA770026C30B /* ProfileHeaderItem.swift in Sources */,
 				2C88DD0F2B14C22C000B4686 /* TimerFinishViewModel.swift in Sources */,
 				2C4D55B32B035484006D7C26 /* DeviceOrientation.swift in Sources */,
-				ED3842272B0F1E0C001E2803 /* GoogleAuthUseCase.swift in Sources */,
+				ED3842272B0F1E0C001E2803 /* AuthenticationUseCase.swift in Sources */,
 				ED6865C42B1E4303001A2AAD /* DailyChartLogResponseDTO.swift in Sources */,
 				ED6865A22B162B8F001A2AAD /* SocialChartView.swift in Sources */,
 				2C88DCF22B124238000B4686 /* AppFlowCoordinator.swift in Sources */,
