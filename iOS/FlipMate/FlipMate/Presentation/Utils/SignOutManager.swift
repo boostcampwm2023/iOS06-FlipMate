@@ -24,6 +24,7 @@ final class SignOutManager: SignOutManagerProtocol {
         try? KeychainManager.deleteAccessToken()
         UserInfoStorage.nickname = ""
         UserInfoStorage.profileImageURL = ""
+        UserInfoStorage.totalTime = 0
         signOutSubject.send(true)
     }
 }
