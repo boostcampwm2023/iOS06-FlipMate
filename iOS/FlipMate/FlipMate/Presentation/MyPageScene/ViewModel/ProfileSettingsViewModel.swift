@@ -45,7 +45,7 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     private var errorSubject = PassthroughSubject<Error, Never>()
     private let actions: ProfileSettingsViewModelActions?
     
-    init(usecase: ProfileSettingsUseCase, actions: ProfileSettingsViewModelActions) {
+    init(usecase: ProfileSettingsUseCase, actions: ProfileSettingsViewModelActions?) {
         self.useCase = usecase
         self.actions = actions
     }

@@ -62,6 +62,10 @@ final class MyPageViewController: BaseViewController {
         fatalError("can't use this, no storyboard")
     }
     
+    deinit {
+        viewModel.viewEnded()
+    }
+    
     // MARK: - View LifeCycles
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -192,15 +196,7 @@ extension MyPageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 프로필 수정 탭
         if indexPath.section == 0, indexPath.row == 0 {
-            navigationController?.pushViewController(
-                ProfileSettingsViewController(
-                    viewModel: ProfileSettingsViewModel(
-                        usecase: DefaultProfileSettingsUseCase(
-                            repository: DefaultProfileSettingsRepository(
-                                provider: Provider(urlSession: URLSession.shared, signOutManager: SignOutManager())),
-                            validator: NickNameValidator()),
-                        actions: ProfileSettingsViewModelActions(didFinishSignUp: {}))),
-                animated: true)
+            viewModel.profileSettingsViewButtonTapped()
         }
         
         if indexPath.section == 1 {
@@ -228,8 +224,7 @@ extension MyPageViewController: UITableViewDelegate {
             
             // 로그아웃 탭
             if indexPath.row == 1 {
-                _ = try? KeychainManager.deleteAccessToken()
-                exit(0)
+                viewModel.signOutButtonTapped()
             }
         }
         

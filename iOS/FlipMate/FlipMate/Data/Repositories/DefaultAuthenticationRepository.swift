@@ -7,8 +7,8 @@
 
 import Foundation
 
-final class DefaultGoogleAuthRepository: GoogleAuthRepository {
-    func login(with accessToken: String) async throws -> User {
+final class DefaultAuthenticationRepository: AuthenticationRepository {
+    func googleLogin(with accessToken: String) async throws -> User {
         let requestDTO = GoogleAuthRequestDTO(accessToken: accessToken)
         let endpoint = GoogleAuthEndpoints.enterGoogleLogin(requestDTO)
         let responseDTO = try await provider.request(with: endpoint)

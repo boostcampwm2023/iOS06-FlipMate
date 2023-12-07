@@ -11,6 +11,7 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
         let categoryManager: CategoryManageable
+        let signOutManager: SignOutManagerProtocol
     }
     
     private let dependencies: Dependencies
@@ -22,9 +23,10 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
     func makeLoginViewController(actions: LoginViewModelActions) -> UIViewController {
         return LoginViewController(
             loginViewModel: LoginViewModel(
-                googleAuthUseCase: DefaultGoogleAuthUseCase(
-                    repository: DefaultGoogleAuthRepository(
-                        provider: dependencies.provider)),
+                googleAuthUseCase: DefaultAuthenticationUseCase(
+                    repository: DefaultAuthenticationRepository(
+                        provider: dependencies.provider),
+                    signoutManager: dependencies.signOutManager),
                 userInfoUseCase: DefaultUserInfoUseCase(
                     repository: DefaultUserInfoRepository(
                         provider: dependencies.provider)),
@@ -48,7 +50,8 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
     func makeTabBarDIContainer() -> TabBarDIContainer {
         let dependencies = TabBarDIContainer.Dependencies(
             provider: dependencies.provider,
-            categoryManager: dependencies.categoryManager)
+            categoryManager: dependencies.categoryManager,
+            signOutManager: dependencies.signOutManager)
         
         return TabBarDIContainer(dependencies: dependencies)
     }

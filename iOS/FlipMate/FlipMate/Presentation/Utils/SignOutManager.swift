@@ -10,7 +10,6 @@ import Combine
 
 protocol SignOutManagerProtocol {
     var signOutPublisher: AnyPublisher<Bool, Never> { get }
-    
     func signOut()
 }
 
@@ -23,6 +22,8 @@ final class SignOutManager: SignOutManagerProtocol {
     
     func signOut() {
         try? KeychainManager.deleteAccessToken()
+        UserInfoStorage.nickname = ""
+        UserInfoStorage.profileImageURL = ""
         signOutSubject.send(true)
     }
 }

@@ -5,12 +5,12 @@
 //  Created by 임현규 on 2023/11/30.
 //
 
-import Foundation
 import UIKit
 
 final class SocialDIContainer: SocialFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
+        let signOutManager: SignOutManagerProtocol
     }
     
     private let dependencies: Dependencies
@@ -53,7 +53,10 @@ final class SocialDIContainer: SocialFlowCoordinatorDependencies {
             )
     }
     
-    func makeMyPageViewController() -> UIViewController {
-        return MyPageViewController(viewModel: MyPageViewModel())
+    func makeMyPageDIContainer() -> MyPageDIContainer {
+        return MyPageDIContainer(
+            dependencies: MyPageDIContainer.Dependencies(
+                provider: dependencies.provider,
+                signOutManager: dependencies.signOutManager))
     }
 }
