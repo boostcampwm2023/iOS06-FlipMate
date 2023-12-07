@@ -24,4 +24,10 @@ final class DefaultStudyLogRepository: StudyLogRepository {
             }
             .eraseToAnyPublisher()
     }
+    
+    func studingPing() async throws {
+        let endpoint = StudyLogEndpoints.studingPing()
+        
+        _ = try await provider.request(with: endpoint)
+    }
 }

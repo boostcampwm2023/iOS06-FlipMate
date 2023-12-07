@@ -15,7 +15,7 @@ struct StudyLogEndpoints {
             method: .get)
     }
     
-    static func postStudyPing() -> EndPoint<StatusResponseDTO> {
+    static func studingPing() -> EndPoint<StatusResponseDTO> {
         return EndPoint(
             baseURL: BaseURL.flipmateDomain,
             path: Paths.ping,
