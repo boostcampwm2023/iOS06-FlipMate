@@ -7,6 +7,7 @@
 
 import Foundation
 
-protocol GoogleAuthUseCase {
+protocol AuthenticationUseCase {
     func googleLogin(accessToken: String) async throws -> User
+    func signOut()
 }
