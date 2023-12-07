@@ -53,11 +53,14 @@ struct DailyChartView: View {
                     Chart {
                         ForEach(viewModel.dailyChartLog.studyLog.category, id: \.subject) { category in
                             BarMark(x: .value("시간", Float(category.studyTime ?? 0) / 60), y: .value("카테고리", category.subject))
-                                .foregroundStyle(by: .value("", category.color))
+                                .foregroundStyle(by: .value("", category.subject))
                         }
                     }
                     .chartLegend(.hidden)
-                    .frame(height: 360 * (UIScreen.main.bounds.size.height / 844))
+                    .chartForegroundStyleScale(domain: viewModel.dailyChartLog.studyLog.category.compactMap({ category in
+                        category.subject
+                    }), range: getColorArray(categories: viewModel.dailyChartLog.studyLog.category))
+                    .frame(height: CGFloat(60 * viewModel.dailyChartLog.studyLog.category.count) * (UIScreen.main.bounds.size.height / 844))
                     .chartXAxisLabel("분 (m)")
                 } else {
                     Text("iOS 16.0 이상 버전부터 차트 기능 사용 가능")
