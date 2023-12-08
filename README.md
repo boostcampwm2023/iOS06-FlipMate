@@ -1,16 +1,18 @@
 # iOS06-FlipMate
 
-<div align="center" style="display:flex; justify-content:center; align-items:center;">
-    <img width="428" alt="image" src="https://github.com/boostcampwm2023/iOS06-FlipMate/assets/48830320/43709a3f-334c-4225-95f6-47cca7a6c7c1"/>     
-</div>
-<div align="center" style="text-align: center; padding:20px">
-    <br/>
-    <a href="https://yeim.notion.site/FlipMate-7d65cbbf9a694f8d83f83b85f0bac684?pvs=4">📖 팀 노션</a>
+<div align="center">
+    <a style="color: #111111" target="_blank" href="https://yeim.notion.site/FlipMate-7d65cbbf9a694f8d83f83b85f0bac684?pvs=4">📖 팀 노션</a>
     &nbsp;
-    <a href="https://yeim.notion.site/d8274f08a875465fa23af289d9675271?pvs=4">🤔 개발일지</a>
+    <a target="_blank" href="https://yeim.notion.site/d8274f08a875465fa23af289d9675271?pvs=4">🤔 개발일지</a>
     &nbsp;
-    <a href="https://yeim.notion.site/DevLog-1cfd2d38a59a4c0b9135542a83a77547?pvs=4">📚 학습공유</a>
+    <a target="_blank" href="https://yeim.notion.site/DevLog-1cfd2d38a59a4c0b9135542a83a77547?pvs=4">📚 학습공유</a>
+    <br/><br/>
 </div>
+
+<div align="center">
+     <img width="800" src="https://github.com/boostcampwm2023/iOS06-FlipMate/assets/56269396/01fec45d-5ac0-48d3-a05d-581f6a58a627" />
+</div>
+
 <br/>
 <div align="center" style="text-align:center;">
     FlipMate는 <strong>순수 학습 시간</strong>을 체크하고, 친구들과 <strong>공유</strong>할 수 있는 앱 입니다. <br/>
@@ -20,15 +22,18 @@
 
 
 ## 주요 기능
-
-<img width="1245" alt="스크린샷 2023-12-08 오전 10 24 36" src="https://github.com/boostcampwm2023/iOS06-FlipMate/assets/56269396/aadbed89-1ac1-4898-856f-d5a1d292b18a">
-
-</br>
-</br>
+<div align="center">
+    <img width="200" src="https://github.com/boostcampwm2023/iOS06-FlipMate/assets/56269396/4f72abb8-10e6-4bba-97bc-1a07116c3ea0" />
+    <img width="200" src="https://github.com/boostcampwm2023/iOS06-FlipMate/assets/56269396/cff8c64c-0931-42b9-a7a0-698e50266c7e" />
+    <img width="200" src="https://github.com/boostcampwm2023/iOS06-FlipMate/assets/56269396/c3c732b7-5be8-4932-9006-b17b84a25499" />
+    <br/><br/>
+</div>
 
 - 디바이스를 뒤집어 화면이 안 보이게 책상 위에 놓으면, 타이머가 작동하여 공부한 시간을 체크합니다.
 - 친구 추가 기능을 통해 친구들이 학습한 시간을 실시간으로 확인할 수 있습니다.
 - 저장된 기록을 바탕으로 공부 시간 관련 통계를 제공합니다.
+
+
 
 ## ⚙️ 인프라 구조
 <img width="765" alt="스크린샷 2023-12-08 오전 10 32 21" src="https://github.com/boostcampwm2023/iOS06-FlipMate/assets/56269396/b1a440c5-4b60-4d8a-ae9c-364781eaddeb" />
