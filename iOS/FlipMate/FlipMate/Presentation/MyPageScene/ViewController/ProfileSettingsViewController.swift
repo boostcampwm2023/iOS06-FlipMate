@@ -153,7 +153,9 @@ final class ProfileSettingsViewController: BaseViewController {
             nickNameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nickNameTextField.widthAnchor.constraint(equalToConstant: NicknameTextFieldConstant.width),
             
-            nickNameValidationStateLabel.topAnchor.constraint(equalTo: nickNameTextField.bottomAnchor, constant: NickNameValidationStateLabelConstant.bottom),
+            nickNameValidationStateLabel.topAnchor.constraint(
+                equalTo: nickNameTextField.bottomAnchor,
+                constant: NickNameValidationStateLabelConstant.bottom),
             nickNameValidationStateLabel.leadingAnchor.constraint(equalTo: nickNameTextField.leadingAnchor),
             nickNameValidationStateLabel.trailingAnchor.constraint(equalTo: nickNameTextField.trailingAnchor),
             
