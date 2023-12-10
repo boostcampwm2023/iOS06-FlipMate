@@ -32,7 +32,6 @@ typealias FriendAddViewModelProtocol = FriendAddViewModelInput & FriendAddViewMo
 
 final class FriendAddViewModel: FriendAddViewModelProtocol {
     // MARK: - Subject
-    private lazy var myNicknameSubject = CurrentValueSubject<String, Never>(UserInfoStorage.nickname)
     private var searchResultSubject = PassthroughSubject<FreindSeacrhItem, Never>()
     private var searchErrorSubject = PassthroughSubject<Void, Never>()
     private var nicknameCountSubject = PassthroughSubject<Int, Never>()
@@ -43,10 +42,14 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     private var friendNickname: String = ""
     private let friendUseCase: FriendUseCase
     private let actions: FriendAddViewModelActions?
+    private let userInfoManger: UserInfoManagerProtocol
     
-    init(friendUseCase: FriendUseCase, actions: FriendAddViewModelActions? = nil) {
+    init(friendUseCase: FriendUseCase, 
+         actions: FriendAddViewModelActions? = nil,
+         userInfoManager: UserInfoManagerProtocol) {
         self.friendUseCase = friendUseCase
         self.actions = actions
+        self.userInfoManger = userInfoManager
     }
     
     // MARK: - output
@@ -63,7 +66,7 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     }
     
     var myNicknamePublihser: AnyPublisher<String, Never> {
-        return myNicknameSubject.eraseToAnyPublisher()
+        return userInfoManger.nicknameChangePublisher
     }
     
     var followErrorPublisher: AnyPublisher<String, Never> {

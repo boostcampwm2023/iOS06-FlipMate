@@ -12,6 +12,7 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
         let provider: Providable
         let categoryManager: CategoryManageable
         let signOutManager: SignOutManagerProtocol
+        let userInfoManager: UserInfoManagerProtocol
     }
     
     private let dependencies: Dependencies
@@ -27,9 +28,6 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
                     repository: DefaultAuthenticationRepository(
                         provider: dependencies.provider),
                     signoutManager: dependencies.signOutManager),
-                userInfoUseCase: DefaultUserInfoUseCase(
-                    repository: DefaultUserInfoRepository(
-                        provider: dependencies.provider)),
                 actions: actions
             )
         )
@@ -51,7 +49,9 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
         let dependencies = TabBarDIContainer.Dependencies(
             provider: dependencies.provider,
             categoryManager: dependencies.categoryManager,
-            signOutManager: dependencies.signOutManager)
+            signOutManager: dependencies.signOutManager,
+            userInfoManager: dependencies.userInfoManager
+        )
         
         return TabBarDIContainer(dependencies: dependencies)
     }
