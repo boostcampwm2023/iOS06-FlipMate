@@ -130,7 +130,6 @@
 		2CDCD0672B18D0330080DCDE /* FriendUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0662B18D0330080DCDE /* FriendUser.swift */; };
 		2CDCD0692B18D0D10080DCDE /* FriendSearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0682B18D0D10080DCDE /* FriendSearchItem.swift */; };
 		2CDCD06C2B18E6960080DCDE /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD06B2B18E6960080DCDE /* UserDefault.swift */; };
-		2CDCD06E2B18EB4B0080DCDE /* UserInfoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD06D2B18EB4B0080DCDE /* UserInfoStorage.swift */; };
 		2CE84EEF2B0B742A00E2FB71 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */; };
 		2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */; };
 		2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF42B0B783800E2FB71 /* UICollectionViewCell++Extension.swift */; };
@@ -354,7 +353,6 @@
 		2CDCD0662B18D0330080DCDE /* FriendUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendUser.swift; sourceTree = "<group>"; };
 		2CDCD0682B18D0D10080DCDE /* FriendSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchItem.swift; sourceTree = "<group>"; };
 		2CDCD06B2B18E6960080DCDE /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
-		2CDCD06D2B18EB4B0080DCDE /* UserInfoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoStorage.swift; sourceTree = "<group>"; };
 		2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView++Extension.swift"; sourceTree = "<group>"; };
 		2CE84EF42B0B783800E2FB71 /* UICollectionViewCell++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell++Extension.swift"; sourceTree = "<group>"; };
@@ -529,7 +527,6 @@
 		2C3430952B0C7E44008CBC85 /* PersistenceService */ = {
 			isa = PBXGroup;
 			children = (
-				2CDCD06D2B18EB4B0080DCDE /* UserInfoStorage.swift */,
 			);
 			path = PersistenceService;
 			sourceTree = "<group>";
@@ -1769,7 +1766,6 @@
 				2C2F21702B0F429800B45BA8 /* StudyLogResponseDTO.swift in Sources */,
 				2C2F216E2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift in Sources */,
 				ED6865D82B1F32EF001A2AAD /* CustomCalenderView.swift in Sources */,
-				2CDCD06E2B18EB4B0080DCDE /* UserInfoStorage.swift in Sources */,
 				2CE84EF72B0B7F3C00E2FB71 /* CategorySettingSection.swift in Sources */,
 				2C88DD112B14C50F000B4686 /* DefaultTimerFinishUseCase.swift in Sources */,
 				2C3430AD2B0DDF25008CBC85 /* DefaultTimerRepository.swift in Sources */,
