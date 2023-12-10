@@ -22,7 +22,7 @@ final class NickNameValidator: NickNameValidatable {
             return NickNameValidationState.lengthViolation
         }
         
-        if nickName.isEmpty || nickName.count <= Constant.minLength {
+        if nickName.isEmpty || nickName.count < Constant.minLength {
             return NickNameValidationState.emptyViolation
         }
         
