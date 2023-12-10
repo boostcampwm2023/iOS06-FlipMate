@@ -11,18 +11,17 @@ import Combine
 
 final class SocialDetailViewController: BaseViewController {
     private enum ComponentConstant {
-        static let nicknameLabel = "닉네임"
-        static let dailyStudyLog = "오늘 학습 시간"
-        static let weeklyStudyLog = "주간 학습 시간"
-        static let primaryCategory = "최근 집중 분야"
-        static let primaryCategoryNil = "없음"
-        static let unfollow = "팔로우 취소"
+        static let dailyStudyLog = NSLocalizedString("dailyStudyLog", comment: "")
+        static let weeklyStudyLog = NSLocalizedString("weeklyStudyLog", comment: "")
+        static let primaryCategory = NSLocalizedString("primaryCategory", comment: "")
+        static let primaryCategoryNil = NSLocalizedString("primaryCategoryNil", comment: "")
+        static let unfollow = NSLocalizedString("unfollow", comment: "")
         static let borderWidth: CGFloat = 1
         static let cornerRadius: CGFloat = 8
         static let spacing1: CGFloat = 1
         static let spacing2: CGFloat = 12
-        static let cancelNavigationButton = "닫기"
-        static let navigationTitle = "친구 상세"
+        static let cancelNavigationButton = NSLocalizedString("cancel", comment: "")
+        static let navigationTitle = NSLocalizedString("SocialDetailTitle", comment: "")
     }
     
     private enum LayoutConstant {
@@ -36,7 +35,6 @@ final class SocialDetailViewController: BaseViewController {
         static let nicknameLabelHeight: CGFloat = 25
         
         static let unfollowButtonTrailing: CGFloat = -20
-        static let unfollowButtonWidth: CGFloat = 96
         static let unfollowButtonHeight: CGFloat = 34
         
         static let dividerTop: CGFloat = 16
@@ -248,7 +246,6 @@ final class SocialDetailViewController: BaseViewController {
             unfollowButton.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor),
             unfollowButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, 
                                                      constant: LayoutConstant.unfollowButtonTrailing),
-            unfollowButton.widthAnchor.constraint(equalToConstant: LayoutConstant.unfollowButtonWidth),
             unfollowButton.heightAnchor.constraint(equalToConstant: LayoutConstant.unfollowButtonHeight)
         ])
         

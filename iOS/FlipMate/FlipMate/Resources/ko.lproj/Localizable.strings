@@ -5,3 +5,81 @@
   Created by 임현규 on 2023/12/07.
   
 */
+
+// MARK: - Category Scene
+"setting" = "설정";
+"addCategory" = "카테고리 추가";
+"category" = "카테고리";
+"cancel" = "취소";
+"close" = "닫기";
+"done" = "완료";
+"delete" = "삭제";
+"deleteCategory" = "카테고리 삭제";
+"categoryName" = "카테고리 이름";
+"categoryColor" = "카테고리 색상";
+"modifyCategory" = "카테괼 수정";
+"deleteAlertMessage" = "해당 카테고리를 정말 삭제하시겠습니까?";
+"categoryNamePlaceHolder" = "카테고리 이름을 입력해주세요.";
+"social" = "소셜";
+
+// MARK: - MyPage Scene
+"myPage" = "마이페이지";
+"editProfile" = "프로필 수정";
+"contact" = "문의하기";
+"developer" = "개발자 정보";
+"version" = "버전 정보";
+"reset" = "데이터 초기화";
+"signout" = "로그아웃";
+"accountClosing" = "회원 탈퇴";
+"profileSetting" = "프로필 수정";
+"nicknamePlaceHolder" = "닉네임을 입력해주세요";
+"imageNotSafeTitle" = "이 이미지는 사용할 수 없습니다.";
+"imageNotSafeMessage" = "이미지 유해성이 확인되었습니다. 다른 이미지를 선택해 주세요.";
+"ok" = "확인";
+"available" = "사용 가능한 닉네임 입니다.";
+"lengthViolation" = "닉네임이 20자를 초과했습니다.";
+"emptyViolation" = "닉네임은 2자 이상 입력해야 합니다.";
+"duplicated" = "중복된 닉네임 입니다.";
+
+// MARK: - Friend Add Scene
+"addFriend" = "친구 추가";
+"friendNickname" = "친구 닉네임";
+"myNickname" = "내 닉네임";
+"noResult" = "검색 결과가 없습니다.";
+"follow" = "친구추가";
+
+// MARK: - TimerFinish Scene
+"yes" = "예";
+"no" = "아니요";
+"TimerFinishTitle" = "예";
+"learningTitle" = "공부한 시간을 저장하시겠습니까?";
+
+// MARK: - SocialDetail Scene
+"dailyStudyLog" = "오늘 학습 시간";
+"weeklyStudyLog" = "주간 학습 시간";
+"primaryCategory" = "최근 집중 분야";
+"primaryCategoryNil" = "없음";
+"unfollow" = "팔로우 취소";
+"SocialDetailTitle" = "친구 상제";
+"MessageOfiOS16" = "iOS 16.0 이상 버전부터 차트 기능 사용 가능";
+"date" = "날짜";
+"user" = "사용자";
+"studyTime" = "학습 시간";
+"min" = "분(m)";
+"me" = "나";
+"friend" = "친구";
+
+// MARK: - Chart Scene
+"daily" = "일간";
+"weekly" = "주간";
+"time" = "시간";
+"totalTime" = "총 학습 시간";
+"day" = "요일";
+"weeklyLearingChart" = "주간 학습 추이";
+
+// MARK: - Login Scene
+"logoSubTitle" = "우리들이 공부하는 시간";
+"skipLoginTitle" = "로그인하지 않고 이용하기";
+"googleLogin" = "구글 로그인";
+"appleLogin" = "애플 로그인";
+

@@ -9,7 +9,7 @@ import UIKit
 
 final class NoResultView: UIView, FreindAddResultViewProtocol {
     private enum Constant {
-        static let title = "검색 결과가 없습니다."
+        static let title = NSLocalizedString("noResult", comment: "")
         static let height: CGFloat = 100
     }
     

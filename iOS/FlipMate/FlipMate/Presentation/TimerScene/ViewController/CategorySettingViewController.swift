@@ -114,8 +114,8 @@ private extension CategorySettingViewController {
     }
     
     func showDeleteAlert(with category: Category) {
-        let alert = UIAlertController(title: "카테고리 삭제",
-                                      message: "\(category.subject)을(를) 정말 삭제하시겠습니까?",
+        let alert = UIAlertController(title: category.subject,
+                                      message: Constant.deleteAlertMessage,
                                       preferredStyle: .alert)
         
         let actions = createDeleteAlert(with: category)
@@ -202,30 +202,30 @@ private extension CategorySettingViewController {
 
 private extension CategorySettingViewController {
     func createActionSheet(with category: Category) -> [UIAlertAction] {
-        let modifyAction = UIAlertAction(title: "카테고리 수정", style: .default) { [weak self] _ in
+        let modifyAction = UIAlertAction(title: Constant.modifyCategory, style: .default) { [weak self] _ in
             guard let self = self else { return }
             self.viewModel.updateCategoryTapped(category: category)
         }
         
-        let deleteAction = UIAlertAction(title: "카테고리 삭제", style: .destructive) { [weak self] _ in
+        let deleteAction = UIAlertAction(title: Constant.deleteCategory, style: .destructive) { [weak self] _ in
             guard let self = self else { return }
             showDeleteAlert(with: category)
         }
         
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        let cancelAction = UIAlertAction(title: Constant.cancel, style: .cancel)
         
         return [modifyAction, deleteAction, cancelAction]
     }
     
     func createDeleteAlert(with category: Category) -> [UIAlertAction] {
-        let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { [weak self] _ in
+        let deleteAction = UIAlertAction(title: Constant.delete, style: .destructive) { [weak self] _ in
             guard let self = self else { return }
             Task {
                 try await self.viewModel.deleteCategory(of: category.id)
             }
         }
         
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        let cancelAction = UIAlertAction(title: Constant.cancel, style: .cancel)
         
         return [deleteAction, cancelAction]
     }
@@ -233,6 +233,11 @@ private extension CategorySettingViewController {
 
 private extension CategorySettingViewController {
     enum Constant {
-        static let title = "카테고리 관리"
+        static let title = NSLocalizedString("category", comment: "")
+        static let cancel = NSLocalizedString("cancel", comment: "")
+        static let delete = NSLocalizedString("delete", comment: "")
+        static let deleteCategory = NSLocalizedString("deleteCategory", comment: "")
+        static let modifyCategory = NSLocalizedString("modifyCategory", comment: "")
+        static let deleteAlertMessage = NSLocalizedString("deleteAlertMessage", comment: "")
     }
 }

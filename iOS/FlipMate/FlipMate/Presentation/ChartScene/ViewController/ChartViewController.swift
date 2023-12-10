@@ -9,9 +9,15 @@ import UIKit
 import SwiftUI
 
 final class ChartViewController: BaseViewController {
+    
+    private enum Constant {
+        static let daily = NSLocalizedString("daily", comment: "")
+        static let weekly = NSLocalizedString("weekly", comment: "")
+    }
+    
     private let segmentedControl: UISegmentedControl = {
-        let segmentedControl = ChartSegmentedControl(items: ["일간", "주간"])
-        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: FlipMateColor.gray2.color as Any, 
+        let segmentedControl = ChartSegmentedControl(items: [Constant.daily, Constant.weekly])
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: FlipMateColor.gray2.color as Any,
             .font: FlipMateFont.mediumRegular.font], for: .normal)
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.label, 
             .font: FlipMateFont.mediumBold.font], for: .selected)

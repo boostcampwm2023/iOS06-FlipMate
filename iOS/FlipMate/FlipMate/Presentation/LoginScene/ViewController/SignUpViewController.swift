@@ -310,8 +310,12 @@ extension SignUpViewController: PHPickerViewControllerDelegate {
 // MARK: - Constants
 private extension SignUpViewController {
     enum Constant {
-        static let profileImageName = "person.crop.circle.fill"
+        static let title = NSLocalizedString("profileSetting", comment: "")
+        static let done = NSLocalizedString("done", comment: "")
         static let cameraImageName = "camera.fill"
-        static let nickNameTextFieldPlaceHolderText = "닉네임을 입력해 주세요"
+        static let nickNameTextFieldPlaceHolderText = NSLocalizedString("nicknamePlaceHolder", comment: "")
+        static let imageNotSafeTitle = NSLocalizedString("imageNotSafeTitle", comment: "")
+        static let imageNotSafeMessage = NSLocalizedString("imageNotSafeMessage", comment: "")
+        static let okTitle = NSLocalizedString("ok", comment: "")
     }
 }

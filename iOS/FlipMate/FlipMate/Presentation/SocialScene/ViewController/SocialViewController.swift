@@ -262,7 +262,7 @@ extension SocialViewController: UICollectionViewDelegate {
 // MARK: - Constants
 private extension SocialViewController {
     enum Constant {
-        static let title = "소셜"
+        static let title = NSLocalizedString("social", comment: "")
     }
 
     private enum LayoutConstant {

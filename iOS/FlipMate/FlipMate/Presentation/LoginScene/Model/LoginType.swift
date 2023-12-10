@@ -4,6 +4,7 @@
 //
 //  Created by 임현규 on 2023/11/13.
 //
+import Foundation
 
 enum LoginType {
     case google
@@ -12,9 +13,9 @@ enum LoginType {
     var buttonTitle: String {
         switch self {
         case .google:
-            "구글 계정으로 로그인"
+            NSLocalizedString("googleLogin", comment: "")
         case .apple:
-            "애플 계정으로 로그인"
+            NSLocalizedString("appleLogin", comment: "")
         }
     }
     

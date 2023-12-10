@@ -17,12 +17,12 @@ struct WeeklyChartView: View {
     
     var body: some View {
         VStack {
-            Text("주간 학습 추이").font(.title).padding(.trailing, 180).padding(.bottom, 30)
+            Text(Constant.weeklyLearingChart).font(.title).padding(.trailing, 180).padding(.bottom, 30)
             if #available(iOS 16.0, *) {
                 ScrollView(.vertical) {
                     Chart {
                         ForEach(viewModel.weeklyChartLog.dailyData, id: \.day) { data in
-                            BarMark(x: .value("요일", data.day), y: .value("분", Float(data.studyTime) / 60))
+                            BarMark(x: .value(Constant.day, data.day), y: .value(Constant.min, Float(data.studyTime) / 60))
                                 .foregroundStyle(by: .value("", data.day))
                                 .annotation {
                                     Text("\(data.studyTime)")
@@ -38,7 +38,7 @@ struct WeeklyChartView: View {
                     .frame(height: 300 * (UIScreen.main.bounds.size.height / 844))
                 }
             } else {
-                Text("iOS 16.0 이상 버전부터 차트 기능 사용 가능")
+                Text(Constant.message)
             }
         }
         .onAppear {
@@ -49,6 +49,15 @@ struct WeeklyChartView: View {
     }
 }
 
+private extension WeeklyChartView {
+    enum Constant {
+        static let message = NSLocalizedString("MessageOfiOS16", comment: "")
+        static let day = NSLocalizedString("day", comment: "")
+        static let weeklyLearingChart = NSLocalizedString("weeklyLearingChart", comment: "")
+        static let min = NSLocalizedString("min", comment: "")
+    }
+}
+
 #Preview {
     WeeklyChartView(
         viewModel: ChartViewModel(
@@ -56,3 +65,4 @@ struct WeeklyChartView: View {
                 repository: DefaultChartRepository(
                     provider: Provider(urlSession: URLSession.shared)))))
 }
+

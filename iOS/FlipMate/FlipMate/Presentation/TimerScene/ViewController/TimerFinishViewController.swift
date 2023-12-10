@@ -10,11 +10,10 @@ import Combine
 
 final class TimerFinishViewController: BaseViewController {
     private enum Constant {
-        static let save = "예"
-        static let cancle = "아니요"
-        static let title = "타이머 종료"
-        static let learningTitle = "공부한 시간을 저장하시겠습니까?"
-        static let learningTime = "00:00:00"
+        static let save = NSLocalizedString("yes", comment: "")
+        static let cancle =  NSLocalizedString("no", comment: "")
+        static let title =  NSLocalizedString("TimerFinishTitle", comment: "")
+        static let learningTitle =  NSLocalizedString("learningTitle", comment: "")
     }
     
     // MARK: - Properties
@@ -82,7 +81,6 @@ final class TimerFinishViewController: BaseViewController {
     
     private let learningTimeContentLabel: UILabel = {
         let label = UILabel()
-        label.text = Constant.learningTime
         label.font = FlipMateFont.largeBold.font
         label.textColor = .label
         return label

@@ -9,8 +9,7 @@ import UIKit
 
 final class MyNickNameView: UIView, FreindAddResultViewProtocol {
     private enum Constant {
-        static let nameTitle = "내 닉네임"
-        static let nameContent = "사용자닉네임"
+        static let nameTitle = NSLocalizedString("myNickname", comment: "")
         static let height: CGFloat = 30
         static let leading: CGFloat = 10
         static let trailing: CGFloat = -10
@@ -28,7 +27,6 @@ final class MyNickNameView: UIView, FreindAddResultViewProtocol {
     private let nickNameContentLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
-        label.text = Constant.nameContent
         return label
     }()
     

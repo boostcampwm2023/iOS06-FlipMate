@@ -244,6 +244,6 @@ extension MyPageViewController: UITableViewDelegate {
 // MARK: - Constant
 private extension MyPageViewController {
     enum Constant {
-        static let title = "마이페이지"
+        static let title = NSLocalizedString("myPage", comment: "")
     }
 }

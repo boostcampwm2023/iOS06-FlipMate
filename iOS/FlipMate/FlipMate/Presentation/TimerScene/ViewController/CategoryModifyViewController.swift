@@ -14,18 +14,19 @@ enum CategoryPurpose {
     
     var title: String {
         switch self {
-        case .create: return "카테고리 추가"
-        case .update: return "카테고리 수정"
+        case .create: return NSLocalizedString("addCategory", comment: "")
+
+        case .update: return NSLocalizedString("modifyCategory", comment: "")
         }
     }
 }
 
 final class CategoryModifyViewController: BaseViewController {
     private enum Constant {
-        static let leftNavigationBarItemTitle = "닫기"
-        static let rightNavigationBarItemTitle = "완료"
-        static let sectionNames: [String] = ["카테고리 이름", "카테고리 색상"]
-        static let placeHolders: [String] = ["이름을 입력해주세요", "색상을 선택해주세요"]
+        static let leftNavigationBarItemTitle = NSLocalizedString("close", comment: "")
+        static let rightNavigationBarItemTitle = NSLocalizedString("done", comment: "")
+        static let sectionNames: [String] = [NSLocalizedString("categoryName", comment: ""), NSLocalizedString("categoryColor", comment: "")]
+        static let placeHolders: [String] = [NSLocalizedString("categoryNamePlaceHolder", comment: "")]
     }
     
     private var cancellables = Set<AnyCancellable>()

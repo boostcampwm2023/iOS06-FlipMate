@@ -52,6 +52,7 @@ final class ProfileSettingsViewController: BaseViewController {
         let label = UILabel()
         label.font = FlipMateFont.smallBold.font
         label.textColor = FlipMateColor.warningRed.color
+        label.numberOfLines = 0
         return label
     }()
     
@@ -78,12 +79,12 @@ final class ProfileSettingsViewController: BaseViewController {
                 leading: 32,
                 bottom: 16,
                 trailing: 32)
-            configuration.attributedTitle = AttributedString("완료", attributes: titleContainer)
+            configuration.attributedTitle = AttributedString(Constant.done, attributes: titleContainer)
             button.configuration = configuration
         } else {
             // iOS 14 지원
             button.contentEdgeInsets = UIEdgeInsets(top: 16, left: 32, bottom: 16, right: 32)
-            button.setTitle("완료", for: .normal)
+            button.setTitle(Constant.done, for: .normal)
             button.titleLabel?.font = FlipMateFont.mediumBold.font
             button.backgroundColor = FlipMateColor.darkBlue.color
         }
@@ -235,8 +236,8 @@ final class ProfileSettingsViewController: BaseViewController {
         
         viewModel.imageNotSafePublisher
             .sink { [weak self] in
-                let alert = UIAlertController(title: "이 이미지는 사용할 수 없습니다.", message: "이미지 유해성이 확인되었습니다. 다른 이미지를 선택해 주세요.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "확인", style: .default))
+                let alert = UIAlertController(title: Constant.imageNotSafeTitle, message: Constant.imageNotSafeMessage, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: Constant.okTitle, style: .default))
                 DispatchQueue.main.async {
                     self?.present(alert, animated: true)
                 }
@@ -347,8 +348,12 @@ extension ProfileSettingsViewController: PHPickerViewControllerDelegate {
 // MARK: - Constants
 private extension ProfileSettingsViewController {
     enum Constant {
-        static let title = "프로필 수정"
+        static let title = NSLocalizedString("profileSetting", comment: "")
+        static let done = NSLocalizedString("done", comment: "")
         static let cameraImageName = "camera.fill"
-        static let nickNameTextFieldPlaceHolderText = "닉네임을 입력해 주세요"
+        static let nickNameTextFieldPlaceHolderText = NSLocalizedString("nicknamePlaceHolder", comment: "")
+        static let imageNotSafeTitle = NSLocalizedString("imageNotSafeTitle", comment: "")
+        static let imageNotSafeMessage = NSLocalizedString("imageNotSafeMessage", comment: "")
+        static let okTitle = NSLocalizedString("ok", comment: "")
     }
 }

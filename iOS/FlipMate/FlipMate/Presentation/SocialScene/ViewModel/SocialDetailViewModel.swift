@@ -83,8 +83,8 @@ private extension SocialDetailViewModel {
         let myChartData = generateStudyTimeData(from: chartInfo.myData)
         let friendChartData = generateStudyTimeData(from: chartInfo.friendData)
         
-        let newSeries: [Series] = [Series(user: "나", studyTime: myChartData),
-                                   Series(user: "친구", studyTime: friendChartData)]
+        let newSeries: [Series] = [Series(user: NSLocalizedString("me", comment: ""), studyTime: myChartData),
+                                   Series(user: NSLocalizedString("friend", comment: ""), studyTime: friendChartData)]
         
         self.userSeries = newSeries
     }

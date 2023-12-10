@@ -23,10 +23,10 @@ typealias MyPageViewModelProtocol = MyPageViewModelInput & MyPageViewModelOutput
 
 final class MyPageViewModel: MyPageViewModelProtocol {
     private let myPageDataSource: [[String]] = [
-        ["프로필 수정"],
-        ["문의하기", "개발자 정보", "버전 정보"],
-        ["데이터 초기화", "로그아웃"],
-        ["계정 탈퇴"]
+        [Constant.editProfile],
+        [Constant.contact, Constant.developer, Constant.version],
+        [Constant.reset, Constant.signout],
+        [Constant.accountClosing]
     ]
     
     private lazy var tableViewDataSourceSubject = CurrentValueSubject<[[String]], Never>(myPageDataSource)
@@ -58,5 +58,17 @@ final class MyPageViewModel: MyPageViewModelProtocol {
     
     var errorPublisher: AnyPublisher<Error, Never> {
         return errorSubject.eraseToAnyPublisher()
+    }
+}
+
+private extension MyPageViewModel {
+    enum Constant {
+        static let editProfile = NSLocalizedString("editProfile", comment: "")
+        static let contact = NSLocalizedString("contact", comment: "")
+        static let version = NSLocalizedString("version", comment: "")
+        static let developer = NSLocalizedString("developer", comment: "")
+        static let reset = NSLocalizedString("reset", comment: "")
+        static let signout = NSLocalizedString("signout", comment: "")
+        static let accountClosing = NSLocalizedString("accountClosing", comment: "")
     }
 }
