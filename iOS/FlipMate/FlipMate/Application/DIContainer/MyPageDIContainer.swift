@@ -11,6 +11,7 @@ final class MyPageDIContainer: MyPageFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
         let signOutManager: SignOutManagerProtocol
+        let userInfoManager: UserInfoManagerProtocol
     }
     
     private let dependencies: Dependencies
@@ -32,13 +33,18 @@ final class MyPageDIContainer: MyPageFlowCoordinatorDependencies {
                     repository: DefaultAuthenticationRepository(
                         provider: dependencies.provider),
                     signoutManager: dependencies.signOutManager),
-                actions: actions))
+                actions: actions,
+                userInfoManager: dependencies.userInfoManager)
+        )
     }
     
     func makeProfileSettingsViewController(actions: ProfileSettingsViewModelActions) -> UIViewController {
         let repository = DefaultProfileSettingsRepository(provider: dependencies.provider)
         let useCase = DefaultProfileSettingsUseCase(repository: repository, validator: NickNameValidator())
-        let viewModel = ProfileSettingsViewModel(usecase: useCase, actions: actions)
+        let viewModel = ProfileSettingsViewModel(
+            usecase: useCase,
+            actions: actions, 
+            userInfoManager: dependencies.userInfoManager)
         return ProfileSettingsViewController(viewModel: viewModel)
     }
 }
