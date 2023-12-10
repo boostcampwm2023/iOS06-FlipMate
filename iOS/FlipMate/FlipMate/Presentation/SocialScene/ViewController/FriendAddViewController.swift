@@ -166,6 +166,14 @@ final class FriendAddViewController: BaseViewController {
                 self.viewModel.didFollowFriend()
             }
             .store(in: &cancellables)
+        
+        viewModel.followErrorPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] title in
+                guard let self = self else { return }
+                self.showToast(title: title)
+            }
+            .store(in: &cancellables)
     }
 }
 

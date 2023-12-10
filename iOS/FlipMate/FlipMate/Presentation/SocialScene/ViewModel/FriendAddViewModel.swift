@@ -25,6 +25,7 @@ protocol FriendAddViewModelOutput {
     var searchFreindPublisher: AnyPublisher<FreindSeacrhItem, Never> { get }
     var searchErrorPublisher: AnyPublisher<Void, Never> { get }
     var nicknameCountPublisher: AnyPublisher<Int, Never> { get }
+    var followErrorPublisher: AnyPublisher<String, Never> { get }
 }
 
 typealias FriendAddViewModelProtocol = FriendAddViewModelInput & FriendAddViewModelOutput
@@ -35,6 +36,7 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     private var searchResultSubject = PassthroughSubject<FreindSeacrhItem, Never>()
     private var searchErrorSubject = PassthroughSubject<Void, Never>()
     private var nicknameCountSubject = PassthroughSubject<Int, Never>()
+    private var followErrorSubject = PassthroughSubject<String, Never>()
     
     // MARK: - Properties
     private var cancellables = Set<AnyCancellable>()
@@ -63,17 +65,23 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     var myNicknamePublihser: AnyPublisher<String, Never> {
         return myNicknameSubject.eraseToAnyPublisher()
     }
+    
+    var followErrorPublisher: AnyPublisher<String, Never> {
+        return followErrorSubject.eraseToAnyPublisher()
+    }
 
     // MARK: - Input
     func didFollowFriend() {
         friendUseCase.follow(at: friendNickname)
             .receive(on: DispatchQueue.main)
-            .sink { completion in
+            .sink { [weak self] completion in
                 switch completion {
                 case .finished:
                     FMLogger.friend.debug("친구 요청 성공")
                 case .failure(let error):
+                    guard let self = self else { return }
                     FMLogger.friend.error("친구 요청 에러 발생 \(error)")
+                    self.followErrorSubject.send(error.localizedDescription)
                 }
             } receiveValue: { [weak self] _ in
                 guard let self = self else { return }
