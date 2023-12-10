@@ -37,6 +37,8 @@ final class FriendAddViewController: BaseViewController {
     
     private enum Constant {
         static let maxLength = 10
+        static let title = "친구추가"
+        static let cancle = "닫기"
     }
     
     // MARK: - Properties
@@ -67,7 +69,7 @@ final class FriendAddViewController: BaseViewController {
     
     private lazy var dismissButton: UIButton = {
         let button = UIButton()
-        button.setTitle("닫기", for: .normal)
+        button.setTitle(Constant.cancle, for: .normal)
         button.setTitleColor(.label, for: .normal)
         button.addTarget(self, action: #selector(dismissButtonDidTapped), for: .touchUpInside)
         return button
@@ -164,6 +166,14 @@ final class FriendAddViewController: BaseViewController {
                 self.viewModel.didFollowFriend()
             }
             .store(in: &cancellables)
+        
+        viewModel.followErrorPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] title in
+                guard let self = self else { return }
+                self.showToast(title: title)
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -183,7 +193,7 @@ private extension FriendAddViewController {
     }
     
     func configureNavigationBar() {
-        navigationItem.title = "친구추가"
+        navigationItem.title = Constant.title
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: dismissButton)
     }
 }

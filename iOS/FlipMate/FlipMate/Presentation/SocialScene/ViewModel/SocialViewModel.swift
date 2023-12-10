@@ -15,7 +15,6 @@ struct SocialViewModelActions {
 }
 
 protocol SocialViewModelInput {
-    func viewDidLoad()
     func viewWillAppear()
     func viewDidDisappear()
     func freindAddButtonDidTapped()
@@ -27,7 +26,7 @@ protocol SocialViewModelInput {
 protocol SocialViewModelOutput {
     var freindsPublisher: AnyPublisher<[Friend], Never> { get }
     var nicknamePublisher: AnyPublisher<String, Never> { get }
-    var profileImagePublisher: AnyPublisher<String, Never> { get }
+    var profileImagePublisher: AnyPublisher<String?, Never> { get }
     var totalTimePublisher: AnyPublisher<Int, Never> { get }
     var updateFriendStatus: AnyPublisher<[UpdateFriend], Never> { get }
     var stopFriendStatus: AnyPublisher<[StopFriend], Never> { get }
@@ -38,9 +37,6 @@ typealias SocialViewModelProtocol = SocialViewModelInput & SocialViewModelOutput
 final class SocialViewModel: SocialViewModelProtocol {
     // MARK: - Subject
     private var freindsSubject = PassthroughSubject<[Friend], Never>()
-    private var nicknameSubject = CurrentValueSubject<String, Never>(UserInfoStorage.nickname)
-    private var profileImageSubject = CurrentValueSubject<String, Never>(UserInfoStorage.profileImageURL)
-    private var totalTimeSubejct = CurrentValueSubject<Int, Never>(UserInfoStorage.totalTime)
     private var updateFriendSubject = PassthroughSubject<[UpdateFriend], Never>()
     private var stopFriendSubject = PassthroughSubject<[StopFriend], Never>()
     
@@ -49,14 +45,21 @@ final class SocialViewModel: SocialViewModelProtocol {
     private let actions: SocialViewModelActions?
     private let socialUseCase: SocialUseCase
     private var timerState: TimerState = .notStarted
+    
+    // MARK: - Managers
     private var friendStatusPollingManager: FriendStatusPollingManageable
     private lazy var timerManager: TimerManager = .init(timeInterval: .seconds(4), handler: fetchFriendStatus)
+    private let userInfoManager: UserInfoManagerProtocol
     
     // MARK: - init
-    init(actions: SocialViewModelActions? = nil, socialUseCase: SocialUseCase, friendStatusPollingManager: FriendStatusPollingManageable) {
+    init(actions: SocialViewModelActions? = nil, 
+         socialUseCase: SocialUseCase,
+         friendStatusPollingManager: FriendStatusPollingManageable,
+         userInfoManager: UserInfoManagerProtocol) {
         self.actions = actions
         self.socialUseCase = socialUseCase
         self.friendStatusPollingManager = friendStatusPollingManager
+        self.userInfoManager = userInfoManager
     }
     
     // MARK: - Output
@@ -65,15 +68,15 @@ final class SocialViewModel: SocialViewModelProtocol {
     }
     
     var nicknamePublisher: AnyPublisher<String, Never> {
-        return nicknameSubject.eraseToAnyPublisher()
+        return userInfoManager.nicknameChangePublisher
     }
     
-    var profileImagePublisher: AnyPublisher<String, Never> {
-        return profileImageSubject.eraseToAnyPublisher()
+    var profileImagePublisher: AnyPublisher<String?, Never> {
+        return userInfoManager.profileImageChangePublihser
     }
     
     var totalTimePublisher: AnyPublisher<Int, Never> {
-        return totalTimeSubejct.eraseToAnyPublisher()
+        return userInfoManager.totalTimeChangePublihser
     }
     
     var updateFriendStatus: AnyPublisher<[UpdateFriend], Never> {
@@ -91,10 +94,6 @@ final class SocialViewModel: SocialViewModelProtocol {
     
     func friendCellDidTapped(friend: Friend) {
         actions?.showSocialDetailViewController(friend)
-    }
-    
-    func viewDidLoad() {
-        getUserProfile()
     }
     
     func viewWillAppear() {
@@ -160,32 +159,6 @@ private extension SocialViewModel {
                 guard let self = self else { return }
                 self.friendStatusPollingManager.startPolling(friendsStatus: friendStatus)
                 self.friendStatusPollingManager.update(preFriendStatusArray: friendStatus)
-            }
-            .store(in: &cancellables)
-    }
-    
-    func getUserProfile() {
-        UserInfoStorage.$nickname
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] nickName in
-                guard let self = self else { return }
-                self.nicknameSubject.send(nickName)
-            }
-            .store(in: &cancellables)
-        
-        UserInfoStorage.$profileImageURL
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] profileImageURL in
-                guard let self = self else { return }
-                self.profileImageSubject.send(profileImageURL)
-            }
-            .store(in: &cancellables)
-        
-        UserInfoStorage.$totalTime
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] totalTime in
-                guard let self = self else { return }
-                self.totalTimeSubejct.send(totalTime)
             }
             .store(in: &cancellables)
     }

@@ -58,10 +58,8 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     func signUpButtonTapped(userName: String, profileImageData: Data) {
         Task {
             do {
-                let userInfo = try await useCase.setupProfileInfo(nickName: userName, profileImageData: profileImageData)
+                _ = try await useCase.setupProfileInfo(nickName: userName, profileImageData: profileImageData)
                 isSignUpCompletedSubject.send()
-                UserInfoStorage.nickname = userInfo.name
-                UserInfoStorage.profileImageURL = userInfo.profileImageURL ?? ""
                 DispatchQueue.main.async {
                     self.actions?.didFinishSignUp()
                 }
