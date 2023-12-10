@@ -28,7 +28,6 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
                     repository: DefaultAuthenticationRepository(
                         provider: dependencies.provider),
                     signoutManager: dependencies.signOutManager),
-                userInfoManager: dependencies.userInfoManager,
                 actions: actions
             )
         )
@@ -41,8 +40,7 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
                     repository: DefaultProfileSettingsRepository(
                         provider: dependencies.provider),
                     validator: NickNameValidator()),
-                actions: actions,
-                userInfoManager: dependencies.userInfoManager
+                actions: actions
             )
         )
     }

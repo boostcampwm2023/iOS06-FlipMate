@@ -45,13 +45,13 @@ typealias TimerViewModelProtocol = TimerViewModelInput & TimerViewModelOutput
 final class TimerViewModel: TimerViewModelProtocol {
     // MARK: UseCase
     private var timerUseCase: TimerUseCase
-    private var userInfoUserCase: StudyLogUseCase
+    private var studyLogUseCase: StudyLogUseCase
     private var studingPingUseCase: StudingPingUseCase
+    private var userInfoUseCase: UserInfoUseCase
     
     // MARK: Subject
     private var isDeviceFaceDownSubject = PassthroughSubject<Bool, Never>()
     private var isPresentingCategorySubject = PassthroughSubject<Void, Never>()
-    private var totalTimeSubject = PassthroughSubject<Int, Never>()
     private var categoryChangeSubject = PassthroughSubject<Category, Never>()
     private var categoriesSubject = PassthroughSubject<[Category], Never>()
     private var deviceSettingEnabledSubject = PassthroughSubject<Bool, Never>()
@@ -61,24 +61,30 @@ final class TimerViewModel: TimerViewModelProtocol {
     private var orientation: DeviceOrientation = .unknown
     private var timerState: TimerState = .notStarted
     private var cancellables = Set<AnyCancellable>()
-    private var totalTime: Int = 0 // 총 공부 시간
     private var increaseTime: Int = -1
     private var selectedCategory: Category?
     private let actions: TimerViewModelActions?
+    
+    // MARK: - Managers
     private let categoryManager: CategoryManageable
     private lazy var timerManager = TimerManager(timeInterval: .seconds(1), handler: increaseTotalTime)
+    private let userInfoManager: UserInfoManageable
     
     // MARK: - init
     init(timerUseCase: TimerUseCase,
-         userInfoUserCase: StudyLogUseCase,
+         studyLogUseCase: StudyLogUseCase,
          studingPingUseCase: StudingPingUseCase,
+         userInfoUseCase: UserInfoUseCase,
          actions: TimerViewModelActions? = nil,
-         categoryManager: CategoryManageable) {
+         categoryManager: CategoryManageable,
+         userInfoManager: UserInfoManageable) {
         self.timerUseCase = timerUseCase
-        self.userInfoUserCase = userInfoUserCase
+        self.studyLogUseCase = studyLogUseCase
         self.studingPingUseCase = studingPingUseCase
+        self.userInfoUseCase = userInfoUseCase
         self.actions = actions
         self.categoryManager = categoryManager
+        self.userInfoManager = userInfoManager
     }
     
     // MARK: Output
@@ -91,7 +97,7 @@ final class TimerViewModel: TimerViewModelProtocol {
     }
     
     var totalTimePublisher: AnyPublisher<Int, Never> {
-        return totalTimeSubject.eraseToAnyPublisher()
+        return userInfoManager.totalTimeChangePublihser
     }
     
     var categoryChangePublisher: AnyPublisher<Category, Never> {
@@ -122,23 +128,38 @@ final class TimerViewModel: TimerViewModelProtocol {
     }
     
     func viewDidLoad() {
-        UserInfoStorage.totalTime = 0
-        
-        userInfoUserCase.getUserInfo()
+        studyLogUseCase.getUserInfo()
             .receive(on: DispatchQueue.main)
             .sink { complection in
                 switch complection {
                 case .finished:
-                    FMLogger.timer.debug("유저 정보 요청 성공")
+                    FMLogger.timer.debug("유저 공부 정보 요청 성공")
                 case .failure(let error):
-                    FMLogger.timer.error("유저 정보 요청 실패 \(error.localizedDescription)")
+                    FMLogger.timer.error("유저 공부 정보 요청 실패 \(error.localizedDescription)")
+                }
+            } receiveValue: { [weak self] studyLog in
+                guard let self = self else { return }
+                self.userInfoManager.updateTotalTime(at: studyLog.totalTime)
+                self.categoryManager.replace(categories: studyLog.category)
+            }
+            .store(in: &cancellables)
+        
+        userInfoUseCase.getUserInfo()
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    FMLogger.user.debug("유저 정보 요청 성공")
+                case .failure(let error):
+                    FMLogger.user.error("유저 정보 요청 실패 \(error.localizedDescription)")
                 }
             } receiveValue: { [weak self] userInfo in
                 guard let self = self else { return }
-                self.totalTimeDidChange(time: userInfo.totalTime)
-                self.categoryManager.replace(categories: userInfo.category)
+                self.userInfoManager.updateNickname(at: userInfo.name)
+                self.userInfoManager.updateProfileImage(at: userInfo.profileImageURL)
             }
             .store(in: &cancellables)
+
     }
     
     func viewWillAppear() {
@@ -155,7 +176,7 @@ final class TimerViewModel: TimerViewModelProtocol {
     }
     
     func appendStudyEndLog(studyEndLog: StudyEndLog) {
-        totalTimeDidChange(time: studyEndLog.learningTime)
+        userInfoManager.updateTotalTime(at: studyEndLog.learningTime)
         guard let categoryId = studyEndLog.categoryId else { return }
         guard let targetCategory = categoryManager.findCategory(categoryId: categoryId) else { return }
         guard let studyTime = targetCategory.studyTime else { return }
@@ -184,11 +205,6 @@ private extension TimerViewModel {
             isDeviceFaceDownSubject.send(false)
             stopTimer()
         }
-    }
-    
-    func totalTimeDidChange(time: Int) {
-        UserInfoStorage.totalTime += time
-        totalTimeSubject.send(UserInfoStorage.totalTime)
     }
     
     func changeCategory(category: Category) {
