@@ -23,7 +23,6 @@ final class MyPageHeaderView: UIView {
     private lazy var userNicknameLabel: UILabel = {
         let label = UILabel()
         label.font = FlipMateFont.mediumRegular.font
-        label.text = UserInfoStorage.nickname
         label.textColor = .label
         return label
     }()
@@ -72,15 +71,12 @@ final class MyPageHeaderView: UIView {
         
     }
     
-    func configureProfileImage(_ url: String) {
-        DispatchQueue.main.async {
-            self.profileImageView.setImage(url: url)
-        }
+    func configureProfileImage(_ url: String?) {
+        self.profileImageView.setImage(url: url)
+        
     }
     
     func configureNickname(_ name: String) {
-        DispatchQueue.main.async {
-            self.userNicknameLabel.text = name
-        }
+        self.userNicknameLabel.text = name
     }
 }

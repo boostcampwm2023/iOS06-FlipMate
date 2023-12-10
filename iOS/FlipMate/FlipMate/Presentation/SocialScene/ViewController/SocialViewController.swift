@@ -134,9 +134,7 @@ final class SocialViewController: BaseViewController {
     
     override func bind() {
         bindFriendsRelatedPublisher()
-        
-        viewModel.viewDidLoad()
-        
+                
         viewModel.nicknamePublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] nickname in

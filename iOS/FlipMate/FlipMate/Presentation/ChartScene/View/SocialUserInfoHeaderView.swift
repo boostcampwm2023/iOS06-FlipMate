@@ -86,7 +86,7 @@ final class SocialUserInfoHeaderView: UICollectionReusableView {
         userNameLabel.text = nickname
     }
     
-    func update(profileImageURL: String) {
+    func update(profileImageURL: String?) {
         profileImageView.setImage(url: profileImageURL)
     }
     
