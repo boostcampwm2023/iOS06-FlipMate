@@ -30,6 +30,7 @@ protocol TimerViewModelInput {
     func categorySettingButtoneDidTapped()
     func categoryDidSelected(category: Category)
     func appendStudyEndLog(studyEndLog: StudyEndLog)
+    func categoryDidDeselected()
 }
 
 protocol TimerViewModelOutput {
@@ -152,6 +153,11 @@ final class TimerViewModel: TimerViewModelProtocol {
     func categoryDidSelected(category: Category) {
         FMLogger.timer.debug("\(category.subject)가 선택되었습니다.")
         selectedCategory = category
+    }
+    
+    func categoryDidDeselected() {
+        FMLogger.timer.debug("선택된 카테고리가 해제되었습니다.")
+        selectedCategory = nil
     }
     
     func appendStudyEndLog(studyEndLog: StudyEndLog) {
