@@ -286,6 +286,18 @@ extension TimerViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension TimerViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryListCollectionViewCell else { return true }
+        if cell.isSelected {
+            collectionView.deselectItem(at: indexPath, animated: true)
+            cell.updateShadow()
+            timerViewModel.categoryDidDeselected()
+            return false
+        } else {
+            return true
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryListCollectionViewCell else { return }
         guard let item = dataSource?.itemIdentifier(for: indexPath) else { return }
