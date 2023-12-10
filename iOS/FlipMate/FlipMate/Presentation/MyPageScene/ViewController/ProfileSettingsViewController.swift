@@ -16,7 +16,11 @@ final class ProfileSettingsViewController: BaseViewController {
         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage(resource: .defaultProfile)
         imageView.clipsToBounds = true
-        imageView.bounds = CGRect(x: 0, y: 0, width: 100, height: 100)
+        imageView.bounds = CGRect(
+            x: profileImageConstant.x,
+            y: profileImageConstant.y,
+            width: profileImageConstant.width,
+            height: profileImageConstant.heigth)
         imageView.layer.cornerRadius = imageView.bounds.height / 2
         let tapGestureRecognizer = UITapGestureRecognizer(
             target: self, action: #selector(profileImageViewTapped))
@@ -31,9 +35,17 @@ final class ProfileSettingsViewController: BaseViewController {
         imageView.tintColor = FlipMateColor.gray1.color
         imageView.backgroundColor = FlipMateColor.gray3.color
         imageView.contentMode = .center
-        imageView.layoutMargins = .init(top: 8, left: 16, bottom: 8, right: 16)
+        imageView.layoutMargins = .init(
+            top: cameraButtonConstant.topMargin,
+            left: cameraButtonConstant.leftMargin,
+            bottom: cameraButtonConstant.bottomMargin,
+            right: cameraButtonConstant.rightMargin)
         imageView.clipsToBounds = true
-        imageView.bounds = CGRect(x: 0, y: 0, width: 33, height: 33)
+        imageView.bounds = CGRect(
+            x: cameraButtonConstant.x,
+            y: cameraButtonConstant.y,
+            width: cameraButtonConstant.width,
+            height: cameraButtonConstant.height)
         imageView.layer.cornerRadius = imageView.bounds.height / 2
         return imageView
     }()
@@ -58,37 +70,26 @@ final class ProfileSettingsViewController: BaseViewController {
     private lazy var textFieldUnderline: UIView = {
         let underline = UIView()
         underline.frame = CGRect(
-            x: 0,
+            x: textFieldUnderlineConstant.x,
             y: Double(nickNameTextField.frame.height) + 2,
             width: Double(nickNameTextField.frame.width),
-            height: 1.5)
+            height: textFieldUnderlineConstant.height)
         underline.backgroundColor = FlipMateColor.gray1.color
         return underline
     }()
     
     private lazy var doneButton: UIButton = {
         let button = UIButton()
-        if #available(iOS 15.0, *) {
-            var configuration = UIButton.Configuration.filled()
-            var titleContainer = AttributeContainer()
-            titleContainer.font = FlipMateFont.mediumBold.font
-            configuration.baseBackgroundColor = FlipMateColor.darkBlue.color
-            configuration.contentInsets = NSDirectionalEdgeInsets(
-                top: 16,
-                leading: 32,
-                bottom: 16,
-                trailing: 32)
-            configuration.attributedTitle = AttributedString("완료", attributes: titleContainer)
-            button.configuration = configuration
-        } else {
-            // iOS 14 지원
-            button.contentEdgeInsets = UIEdgeInsets(top: 16, left: 32, bottom: 16, right: 32)
-            button.setTitle("완료", for: .normal)
-            button.titleLabel?.font = FlipMateFont.mediumBold.font
-            button.backgroundColor = FlipMateColor.darkBlue.color
-        }
+        button.contentEdgeInsets = UIEdgeInsets(
+            top: doneButtonConstant.topInset,
+            left: doneButtonConstant.leadingInset,
+            bottom: doneButtonConstant.bottomInset,
+            right: doneButtonConstant.trailingInset)
+        button.setTitle(doneButtonConstant.title, for: .normal)
+        button.titleLabel?.font = FlipMateFont.mediumBold.font
+        button.backgroundColor = FlipMateColor.darkBlue.color
         button.clipsToBounds = true
-        button.layer.cornerRadius = 15
+        button.layer.cornerRadius = doneButtonConstant.cornerRaidus
         button.isEnabled = false
         button.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
         return button
@@ -136,31 +137,31 @@ final class ProfileSettingsViewController: BaseViewController {
         }
         
         NSLayoutConstraint.activate([
-            profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 64),
+            profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: profileImageConstant.top),
             profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profileImageView.widthAnchor.constraint(equalToConstant: 100),
-            profileImageView.heightAnchor.constraint(equalToConstant: 100),
+            profileImageView.widthAnchor.constraint(equalToConstant: profileImageConstant.width),
+            profileImageView.heightAnchor.constraint(equalToConstant: profileImageConstant.heigth),
             
-            cameraButton.widthAnchor.constraint(equalToConstant: 33),
-            cameraButton.heightAnchor.constraint(equalToConstant: 33),
+            cameraButton.widthAnchor.constraint(equalToConstant: cameraButtonConstant.width),
+            cameraButton.heightAnchor.constraint(equalToConstant: cameraButtonConstant.height),
             cameraButton.trailingAnchor.constraint(equalTo: profileImageView.trailingAnchor),
             cameraButton.bottomAnchor.constraint(equalTo: profileImageView.bottomAnchor),
             
-            nickNameTextField.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 16),
+            nickNameTextField.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: nicknameTextFieldConstant.top),
             nickNameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            nickNameTextField.widthAnchor.constraint(equalToConstant: 220),
+            nickNameTextField.widthAnchor.constraint(equalToConstant: nicknameTextFieldConstant.width),
             
-            nickNameValidationStateLabel.topAnchor.constraint(equalTo: nickNameTextField.bottomAnchor, constant: 16),
+            nickNameValidationStateLabel.topAnchor.constraint(equalTo: nickNameTextField.bottomAnchor, constant: nickNameValidationStateLabelConstant.bottom),
             nickNameValidationStateLabel.leadingAnchor.constraint(equalTo: nickNameTextField.leadingAnchor),
             nickNameValidationStateLabel.trailingAnchor.constraint(equalTo: nickNameTextField.trailingAnchor),
             
             doneButton.bottomAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -64),
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: doneButtonConstant.top),
             doneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             doneButton.leadingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: doneButtonConstant.leading),
             doneButton.trailingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32)
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: doneButtonConstant.trailing)
         ])
     }
     
@@ -353,5 +354,52 @@ private extension ProfileSettingsViewController {
         static let cameraImageName = "camera.fill"
         static let nickNameTextFieldPlaceHolderText = "닉네임을 입력해 주세요"
         static let maxLength = 10
+    }
+    
+    enum profileImageConstant {
+        static let x: CGFloat = 0
+        static let y: CGFloat = 0
+        static let width: CGFloat = 100
+        static let heigth: CGFloat = 100
+        static let top: CGFloat = 64
+    }
+    
+    enum cameraButtonConstant {
+        static let topMargin: CGFloat = 8
+        static let leftMargin: CGFloat = 16
+        static let bottomMargin: CGFloat = 8
+        static let rightMargin: CGFloat = 16
+        
+        static let x: CGFloat = 0
+        static let y: CGFloat = 0
+        static let width: CGFloat = 33
+        static let height: CGFloat = 33
+    }
+    
+    enum nicknameTextFieldConstant {
+        static let top: CGFloat = 16
+        static let width: CGFloat = 220
+    }
+    
+    enum nickNameValidationStateLabelConstant {
+        static let bottom: CGFloat = 16
+    }
+    
+    enum textFieldUnderlineConstant {
+        static let x: CGFloat = 0
+        static let height: CGFloat = 1.5
+    }
+    
+    enum doneButtonConstant {
+        static let topInset: CGFloat = 16
+        static let leadingInset: CGFloat = 32
+        static let bottomInset: CGFloat = 16
+        static let trailingInset: CGFloat = 32
+        static let title = "완료"
+        static let cornerRaidus: CGFloat = 15
+        
+        static let top: CGFloat = -64
+        static let leading: CGFloat = 32
+        static let trailing: CGFloat = -32
     }
 }
