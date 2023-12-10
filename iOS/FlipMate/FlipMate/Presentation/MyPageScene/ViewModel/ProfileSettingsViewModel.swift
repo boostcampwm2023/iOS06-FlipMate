@@ -42,11 +42,11 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     private var isSignUpCompletedSubject = PassthroughSubject<Void, Never>()
     private var errorSubject = PassthroughSubject<Error, Never>()
     private let actions: ProfileSettingsViewModelActions?
-    private let userInfoManager: UserInfoManageable
+    private let userInfoManager: UserInfoManagerProtocol
     
     init(usecase: ProfileSettingsUseCase, 
          actions: ProfileSettingsViewModelActions?,
-         userInfoManager: UserInfoManageable) {
+         userInfoManager: UserInfoManagerProtocol) {
         self.useCase = usecase
         self.actions = actions
         self.userInfoManager = userInfoManager

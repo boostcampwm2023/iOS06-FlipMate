@@ -13,7 +13,7 @@ final class TabBarDIContainer: TabBarFlowCoordinatorDependencies {
         let provider: Providable
         let categoryManager: CategoryManageable
         let signOutManager: SignOutManagerProtocol
-        let userInfoManager: UserInfoManageable
+        let userInfoManager: UserInfoManagerProtocol
     }
     
     private let dependencies: Dependencies

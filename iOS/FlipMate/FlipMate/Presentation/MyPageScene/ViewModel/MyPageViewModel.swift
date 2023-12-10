@@ -45,11 +45,11 @@ final class MyPageViewModel: MyPageViewModelProtocol {
     private let useCase: AuthenticationUseCase
     private let actions: MyPageViewModelActions?
     
-    private let userInfoManager: UserInfoManageable
+    private let userInfoManager: UserInfoManagerProtocol
     
     init(authenticationUseCase: AuthenticationUseCase, 
          actions: MyPageViewModelActions? = nil,
-         userInfoManager: UserInfoManageable) {
+         userInfoManager: UserInfoManagerProtocol) {
         self.useCase = authenticationUseCase
         self.actions = actions
         self.userInfoManager = userInfoManager

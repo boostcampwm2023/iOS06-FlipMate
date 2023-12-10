@@ -11,7 +11,7 @@ final class AppDIContainer {
     lazy var signOutManager: SignOutManagerProtocol = SignOutManager(userInfoManager: userInfoManager)
     lazy var provider: Provider = Provider(urlSession: URLSession.shared, signOutManager: signOutManager)
     lazy var categoryManager: CategoryManageable = CategoryManager(categories: [])
-    lazy var userInfoManager: UserInfoManageable = UserInfoManager()
+    lazy var userInfoManager: UserInfoManagerProtocol = UserInfoManager()
     
     func makeTabBarDIContainer() -> TabBarDIContainer {
         let dependencies = TabBarDIContainer.Dependencies(

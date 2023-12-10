@@ -68,7 +68,7 @@ final class TimerViewModel: TimerViewModelProtocol {
     // MARK: - Managers
     private let categoryManager: CategoryManageable
     private lazy var timerManager = TimerManager(timeInterval: .seconds(1), handler: increaseTotalTime)
-    private let userInfoManager: UserInfoManageable
+    private let userInfoManager: UserInfoManagerProtocol
     
     // MARK: - init
     init(timerUseCase: TimerUseCase,
@@ -77,7 +77,7 @@ final class TimerViewModel: TimerViewModelProtocol {
          userInfoUseCase: UserInfoUseCase,
          actions: TimerViewModelActions? = nil,
          categoryManager: CategoryManageable,
-         userInfoManager: UserInfoManageable) {
+         userInfoManager: UserInfoManagerProtocol) {
         self.timerUseCase = timerUseCase
         self.studyLogUseCase = studyLogUseCase
         self.studingPingUseCase = studingPingUseCase

@@ -15,9 +15,9 @@ protocol SignOutManagerProtocol {
 
 final class SignOutManager: SignOutManagerProtocol {
     private var signOutSubject = PassthroughSubject<Bool, Never>()
-    private let userInfoManager: UserInfoManageable
+    private let userInfoManager: UserInfoManagerProtocol
     
-    init(userInfoManager: UserInfoManageable) {
+    init(userInfoManager: UserInfoManagerProtocol) {
         self.userInfoManager = userInfoManager
     }
     

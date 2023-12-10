@@ -11,7 +11,7 @@ final class SocialDIContainer: SocialFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
         let signOutManager: SignOutManagerProtocol
-        let userInfoManager: UserInfoManageable
+        let userInfoManager: UserInfoManagerProtocol
     }
     
     private let dependencies: Dependencies

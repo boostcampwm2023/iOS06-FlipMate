@@ -40,11 +40,11 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     private var friendNickname: String = ""
     private let friendUseCase: FriendUseCase
     private let actions: FriendAddViewModelActions?
-    private let userInfoManger: UserInfoManageable
+    private let userInfoManger: UserInfoManagerProtocol
     
     init(friendUseCase: FriendUseCase, 
          actions: FriendAddViewModelActions? = nil,
-         userInfoManager: UserInfoManageable) {
+         userInfoManager: UserInfoManagerProtocol) {
         self.friendUseCase = friendUseCase
         self.actions = actions
         self.userInfoManger = userInfoManager
