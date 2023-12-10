@@ -92,8 +92,9 @@ final class LoginViewController: BaseViewController {
           logoMainTitleLabel,
           logoSubTitleLabel,
           googleLoginButton,
-          appleLoginButton,
-          loginSkipButton ].forEach { view.addSubview($0) }
+          appleLoginButton].forEach { view.addSubview($0) }
+        
+        appleLoginButton.isHidden = true
         
         NSLayoutConstraint.activate([
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -114,10 +115,7 @@ final class LoginViewController: BaseViewController {
             appleLoginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
             appleLoginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             appleLoginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            appleLoginButton.heightAnchor.constraint(equalToConstant: 44),
-            
-            loginSkipButton.topAnchor.constraint(equalTo: appleLoginButton.bottomAnchor, constant: 20),
-            loginSkipButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            appleLoginButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
     
