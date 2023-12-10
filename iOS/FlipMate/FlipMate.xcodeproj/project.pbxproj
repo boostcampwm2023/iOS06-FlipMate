@@ -136,6 +136,7 @@
 		2CE84EF72B0B7F3C00E2FB71 /* CategorySettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF62B0B7F3C00E2FB71 /* CategorySettingSection.swift */; };
 		2CE84EF92B0B8A0B00E2FB71 /* CategorySettingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF82B0B8A0B00E2FB71 /* CategorySettingFooterView.swift */; };
 		2CE84EFB2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EFA2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift */; };
+		2CE91C752B25AE9700EACCD7 /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE91C742B25AE9700EACCD7 /* DoneButton.swift */; };
 		2CE91C702B25888C00EACCD7 /* UIViewController++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE91C6F2B25888C00EACCD7 /* UIViewController++Extension.swift */; };
 		2CE91C732B25971000EACCD7 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE91C722B25971000EACCD7 /* UserInfoManager.swift */; };
 		2DD8D73E476DE7C9EAF99CD3 /* Pods_FlipMate_FlipMateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4022DA62BEB41D4AE6C12507 /* Pods_FlipMate_FlipMateUITests.framework */; };
@@ -360,6 +361,7 @@
 		2CE84EF62B0B7F3C00E2FB71 /* CategorySettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingSection.swift; sourceTree = "<group>"; };
 		2CE84EF82B0B8A0B00E2FB71 /* CategorySettingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingFooterView.swift; sourceTree = "<group>"; };
 		2CE84EFA2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView++Extension.swift"; sourceTree = "<group>"; };
+		2CE91C742B25AE9700EACCD7 /* DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
 		2CE91C6F2B25888C00EACCD7 /* UIViewController++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController++Extension.swift"; sourceTree = "<group>"; };
 		2CE91C722B25971000EACCD7 /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
 		3CDE44797543C08CA812941B /* Pods-FlipMate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate.debug.xcconfig"; path = "Target Support Files/Pods-FlipMate/Pods-FlipMate.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1279,6 +1281,7 @@
 			children = (
 				60EB7F512B1EFEDA00F8C613 /* MyPageTableViewCell.swift */,
 				6020C7632B21C1D400F58AD0 /* MyPageHeaderView.swift */,
+				2CE91C742B25AE9700EACCD7 /* DoneButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1677,6 +1680,7 @@
 				2CE91C702B25888C00EACCD7 /* UIViewController++Extension.swift in Sources */,
 				2C43A0D82B037BBC0005596A /* FeedbackManager.swift in Sources */,
 				ED3595AB2B0C81B800558FAA /* Responsable.swift in Sources */,
+				2CE91C752B25AE9700EACCD7 /* DoneButton.swift in Sources */,
 				2C4D55B02B0348FB006D7C26 /* TimerViewModel.swift in Sources */,
 				2CDCD0422B1873F60080DCDE /* SocialViewModel.swift in Sources */,
 				601EB7452B14F86100C5B216 /* SignUpEndpoints.swift in Sources */,
