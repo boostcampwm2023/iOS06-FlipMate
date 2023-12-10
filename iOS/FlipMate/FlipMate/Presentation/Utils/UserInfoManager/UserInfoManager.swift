@@ -16,6 +16,8 @@ protocol UserInfoManageable {
     func updateNickname(at nickname: String)
     func updateProfileImage(at profileImageURL: String?)
     func updateTotalTime(at totalTime: Int)
+    
+    func initManager()
 }
 
 final class UserInfoManager: UserInfoManageable {
@@ -55,5 +57,11 @@ final class UserInfoManager: UserInfoManageable {
     func updateTotalTime(at totalTime: Int) {
         self.totalTime += totalTime
         totalTimeChangeSubject.send(self.totalTime)
+    }
+    
+    func initManager() {
+        totalTime = 0
+        profileImageURL = nil
+        nickname = ""
     }
 }
