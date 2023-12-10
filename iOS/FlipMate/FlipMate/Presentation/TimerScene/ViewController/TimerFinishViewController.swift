@@ -140,12 +140,12 @@ final class TimerFinishViewController: BaseViewController {
             learningTimeContentLabel.centerYAnchor.constraint(equalTo: finishView.centerYAnchor),
             
             saveButton.bottomAnchor.constraint(equalTo: finishView.bottomAnchor),
-            saveButton.leadingAnchor.constraint(equalTo: finishView.leadingAnchor),
+            saveButton.trailingAnchor.constraint(equalTo: finishView.trailingAnchor),
             saveButton.widthAnchor.constraint(equalTo: finishView.widthAnchor, multiplier: 0.5),
             saveButton.heightAnchor.constraint(equalTo: finishView.heightAnchor, multiplier: 0.2),
             
             cancleButton.bottomAnchor.constraint(equalTo: finishView.bottomAnchor),
-            cancleButton.trailingAnchor.constraint(equalTo: finishView.trailingAnchor),
+            cancleButton.leadingAnchor.constraint(equalTo: finishView.leadingAnchor),
             cancleButton.widthAnchor.constraint(equalTo: finishView.widthAnchor, multiplier: 0.5),
             cancleButton.heightAnchor.constraint(equalTo: finishView.heightAnchor, multiplier: 0.2)
         ])
