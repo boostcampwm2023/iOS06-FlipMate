@@ -48,18 +48,20 @@ final class SocialViewModel: SocialViewModelProtocol {
     
     // MARK: - Managers
     private var friendStatusPollingManager: FriendStatusPollingManageable
-    private lazy var timerManager: TimerManager = .init(timeInterval: .seconds(4), handler: fetchFriendStatus)
+    private let timerManager: TimerManagerProtocol
     private let userInfoManager: UserInfoManagerProtocol
     
     // MARK: - init
     init(actions: SocialViewModelActions? = nil, 
          socialUseCase: SocialUseCase,
          friendStatusPollingManager: FriendStatusPollingManageable,
-         userInfoManager: UserInfoManagerProtocol) {
+         userInfoManager: UserInfoManagerProtocol,
+         timerManager: TimerManagerProtocol) {
         self.actions = actions
         self.socialUseCase = socialUseCase
         self.friendStatusPollingManager = friendStatusPollingManager
         self.userInfoManager = userInfoManager
+        self.timerManager = timerManager
     }
     
     // MARK: - Output

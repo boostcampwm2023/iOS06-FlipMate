@@ -34,7 +34,8 @@ final class SocialDIContainer: SocialFlowCoordinatorDependencies {
                     repsoitory: DefaultSocialRepository(
                         provider: dependencies.provider)),
                 friendStatusPollingManager: FriendStatusPollingManager(),
-                userInfoManager: dependencies.userInfoManager
+                userInfoManager: dependencies.userInfoManager,
+                timerManager: TimerManager(timeInterval: .seconds(4))
             )
         )
     }

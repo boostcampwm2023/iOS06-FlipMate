@@ -8,8 +8,15 @@
 import Foundation
 import OSLog
 
+protocol TimerManagerProtocol {
+    func start(completion: (() -> Void)?)
+    func resume()
+    func suspend()
+    func cancel()
+}
+
 /// 타이머를 관리해주는 객체
-final class TimerManager {
+final class TimerManager: TimerManagerProtocol {
     // MARK: - Properties
     private var state: TimerState = .suspended
     private var handler: (() -> Void)?
@@ -29,7 +36,7 @@ final class TimerManager {
         return timer
     }()
     
-    init(timeInterval: DispatchTimeInterval = .microseconds(100), handler: (() -> Void)? = nil) {
+    init(timeInterval: DispatchTimeInterval = .seconds(1), handler: (() -> Void)? = nil) {
         self.handler = handler
         self.timeInterval = timeInterval
     }
@@ -42,7 +49,7 @@ final class TimerManager {
     }
     
     /// 타이머를 시작합니다.
-    func start(startTime: Date = Date(), completion: (() -> Void)? = nil) {
+    func start(completion: (() -> Void)? = nil) {
 
         guard let completion else {
             resume()
@@ -54,7 +61,7 @@ final class TimerManager {
     }
     
     /// 타이머를 재개합니다.
-    func resume(resumeTime: Date = Date()) {
+    func resume() {
         guard state == .suspended else { return }
         state = .resumed
         timer.resume()
