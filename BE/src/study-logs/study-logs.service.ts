@@ -73,7 +73,7 @@ export class StudyLogsService {
     created_at: string,
     learning_time: number,
   ): { started_at: string; date: string; learning_time: number }[] {
-    const offset = created_at.slice(-5);
+    const offset = created_at.split(/\d\d:\d\d:\d\d/)[1];
     const finishedAt = moment(created_at).utcOffset(offset);
     const startedAt = finishedAt.clone().subtract(learning_time, 's');
     if (startedAt.get('date') !== finishedAt.get('date')) {
