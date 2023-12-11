@@ -101,5 +101,6 @@ extension TabBarFlowCoordinator: UITabBarControllerDelegate {
         if let tabBarVC = tabBarController as? TabBarViewController {
             tabBarVC.timerButton.imageView?.tintColor = FlipMateColor.tabBarIconUnSelected.color
         }
+        FeedbackManager.shared.startTabBarItemTapFeedback()
     }
 }
