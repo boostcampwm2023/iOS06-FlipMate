@@ -21,6 +21,7 @@
 "deleteAlertMessage" = "Are you sure delete this category?";
 "categoryNamePlaceHolder" = "Please enter the category name";
 "social" = "social";
+"categoryAddMessage" = "You can add up to 10 categories.";
 
 // MARK: - MyPage Scene
 "myPage" = "MyPage";
@@ -35,7 +36,7 @@
 "nicknamePlaceHolder" = "Please enter your nickname";
 "imageNotSafeTitle" = "This image is not available.";
 "imageNotSafeMessage" = "This image has been confirmed to be harmful. Please select the different image.";
-"ok" = "yes";
+"ok" = "OK";
 "available" = "Available nickname.";
 "lengthViolation" = "Nickname exceeds 20 characters.";
 "emptyViolation" = "Nickname must contain at least 2 characters.";

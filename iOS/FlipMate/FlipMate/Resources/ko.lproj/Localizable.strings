@@ -21,6 +21,7 @@
 "deleteAlertMessage" = "해당 카테고리를 정말 삭제하시겠습니까?";
 "categoryNamePlaceHolder" = "카테고리 이름을 입력해주세요.";
 "social" = "소셜";
+"categoryAddMessage" = "카테고리는 10개까지 추가할 수 있습니다.";
 
 // MARK: - MyPage Scene
 "myPage" = "마이페이지";
