@@ -137,7 +137,7 @@ final class TimerViewController: BaseViewController {
         ])
         
         NSLayoutConstraint.activate([
-            instructionImage.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
+            instructionImage.topAnchor.constraint(equalTo: categorySettingButton.bottomAnchor, constant: 30),
             instructionImage.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
@@ -173,6 +173,11 @@ final class TimerViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] categories in
                 guard let self = self else { return }
+                if !categories.isEmpty {
+                    self.instructionImage.isHidden = true
+                } else {
+                    self.instructionImage.isHidden = false
+                }
                 guard var snapShot = self.dataSource?.snapshot() else { return }
                 let sections: [CategorySettingSection] = [.categorySection([])]
                 snapShot.deleteAllItems()
