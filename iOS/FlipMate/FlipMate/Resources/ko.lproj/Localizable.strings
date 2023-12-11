@@ -83,3 +83,5 @@
 "googleLogin" = "구글 로그인";
 "appleLogin" = "애플 로그인";
 
+// MARK: - Sign Up Scene
+"signUp" = "회원가입";

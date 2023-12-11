@@ -90,3 +90,5 @@
 "googleLogin" = "googleのアカウントで続ける";
 "appleLogin" = "Appleのアカウントで続ける";
 
+// MARK: - Sign Up Scene
+"signUp" = "会員登録";

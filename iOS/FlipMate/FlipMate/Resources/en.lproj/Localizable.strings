@@ -89,3 +89,5 @@
 "googleLogin" = "Sign in with Google";
 "appleLogin" = "Sign in with Apple";
 
+// MARK: - Sign Up Scene
+"signUp" = "Sign Up";
