@@ -134,9 +134,9 @@ extension MyPageViewController: UITableViewDataSource {
         case 0:
             return 1
         case 1:
-            return 3
-        case 2:
             return 2
+        case 2:
+            return 1
         case 3:
             return 1
         default:
@@ -180,30 +180,20 @@ extension MyPageViewController: UITableViewDelegate {
         }
         
         if indexPath.section == 1 {
-            // 문의하기 탭
+            // 개발자 정보 탭
             if indexPath.row == 0 {
             
             }
             
-            // 개발자 정보 탭
-            if indexPath.row == 1 {
-                
-            }
-            
             // 버전 정보 탭
-            if indexPath.row == 2 {
+            if indexPath.row == 1 {
                 
             }
         }
         
         if indexPath.section == 2 {
-            // 데이터 초기화 탭
-            if indexPath.row == 0 {
-                
-            }
-            
             // 로그아웃 탭
-            if indexPath.row == 1 {
+            if indexPath.row == 0 {
                 viewModel.signOutButtonTapped()
             }
         }
