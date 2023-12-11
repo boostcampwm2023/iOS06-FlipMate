@@ -12,7 +12,7 @@ final class MyPageViewController: BaseViewController {
     // MARK: - View Properties
     private lazy var dismissButton: UIButton = {
         let button = UIButton()
-        button.setTitle("닫기", for: .normal)
+        button.setTitle(Constant.close, for: .normal)
         button.setTitleColor(.label, for: .normal)
         button.addTarget(self, action: #selector(dismissButtonDidTapped), for: .touchUpInside)
         return button
@@ -220,5 +220,7 @@ extension MyPageViewController: UITableViewDelegate {
 private extension MyPageViewController {
     enum Constant {
         static let title = NSLocalizedString("myPage", comment: "")
+        static let close = NSLocalizedString("close", comment: "")
+        
     }
 }
