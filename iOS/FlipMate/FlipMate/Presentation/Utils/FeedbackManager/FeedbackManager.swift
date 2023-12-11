@@ -9,11 +9,12 @@ import Foundation
 import CoreHaptics
 
 final class FeedbackManager {
+    static let shared = FeedbackManager()
     private var engine: CHHapticEngine!
     private var supportsHaptics: Bool = false
     
     // MARK: - init
-    init() {
+    private init() {
         createEngine()
         checkHapticsCompatibility()
         configureResetHandler()
@@ -94,6 +95,10 @@ final class FeedbackManager {
     
     func startFaceupFeedback() {
         playHapticsFile(named: "FaceDown")
+    }
+    
+    func startTabBarItemTapFeedback() {
+        playHapticsFile(named: "Selection")
     }
     
     // TODO: 탭 이동 등 다른 부분에서도 햅틱 피드백 적용해보기
