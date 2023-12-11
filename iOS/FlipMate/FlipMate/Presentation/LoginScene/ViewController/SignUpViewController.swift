@@ -147,7 +147,9 @@ final class SignUpViewController: BaseViewController {
             nickNameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nickNameTextField.widthAnchor.constraint(equalToConstant: NicknameTextFieldConstant.width),
             
-            nickNameValidationStateLabel.topAnchor.constraint(equalTo: nickNameTextField.bottomAnchor, constant: NickNameValidationStateLabelConstant.bottom),
+            nickNameValidationStateLabel.topAnchor.constraint(
+                equalTo: nickNameTextField.bottomAnchor,
+                constant: NickNameValidationStateLabelConstant.bottom),
             nickNameValidationStateLabel.leadingAnchor.constraint(equalTo: nickNameTextField.leadingAnchor),
             nickNameValidationStateLabel.trailingAnchor.constraint(equalTo: nickNameTextField.trailingAnchor),
             
@@ -315,9 +317,13 @@ extension SignUpViewController: PHPickerViewControllerDelegate {
 // MARK: - Constants
 private extension SignUpViewController {
     enum Constant {
-        static let profileImageName = "person.crop.circle.fill"
+        static let title = NSLocalizedString("profileSetting", comment: "")
+        static let done = NSLocalizedString("done", comment: "")
         static let cameraImageName = "camera.fill"
-        static let nickNameTextFieldPlaceHolderText = "닉네임을 입력해 주세요"
+        static let nickNameTextFieldPlaceHolderText = NSLocalizedString("nicknamePlaceHolder", comment: "")
+        static let imageNotSafeTitle = NSLocalizedString("imageNotSafeTitle", comment: "")
+        static let imageNotSafeMessage = NSLocalizedString("imageNotSafeMessage", comment: "")
+        static let okTitle = NSLocalizedString("ok", comment: "")
         static let maxLength = 10
     }
     
@@ -360,7 +366,7 @@ private extension SignUpViewController {
         static let leadingInset: CGFloat = 32
         static let bottomInset: CGFloat = 16
         static let trailingInset: CGFloat = 32
-        static let title = "회원가입"
+        static let title = NSLocalizedString("signUp", comment: "")
         static let cornerRaidus: CGFloat = 15
         
         static let bottom: CGFloat = -32

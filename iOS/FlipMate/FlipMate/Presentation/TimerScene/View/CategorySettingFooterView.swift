@@ -11,7 +11,7 @@ import Combine
 final class CategorySettingFooterView: UICollectionReusableView {
     // MARK: - Constant
     private enum Constant {
-        static let addButtonTitle = "카테고리 추가 +"
+        static let addButtonTitle = NSLocalizedString("addCategory", comment: "")
         static let addButtonborderWidth: CGFloat = 1
         static let addButtoncornerRedius: CGFloat = 8
     }

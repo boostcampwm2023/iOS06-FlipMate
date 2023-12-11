@@ -114,13 +114,13 @@ enum NickNameValidationState {
     var message: String {
         switch self {
         case .valid:
-            return "사용 가능한 닉네임 입니다."
+            return NSLocalizedString("available", comment: "")
         case .lengthViolation:
-            return "닉네임이 20자를 초과했습니다."
+            return NSLocalizedString("lengthViolation", comment: "")
         case .emptyViolation:
-            return "닉네임은 2자 이상 입력해야 합니다."
+            return NSLocalizedString("emptyViolation", comment: "")
         case .duplicated:
-            return "중복된 닉네임 입니다."
+            return NSLocalizedString("duplicated", comment: "")
         }
     }
 }

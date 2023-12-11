@@ -22,16 +22,26 @@ struct SocialChartView: View {
             if #available(iOS 16.0, *) {
                 Chart(viewModel.userSeries) { series in
                     ForEach(series.studyTime) { time in
-                        PointMark(x: .value("날짜", time.weekday, unit: .day), y: .value("학습 시간", Float(time.studyTime) / 60))
-                        LineMark(x: .value("날짜", time.weekday, unit: .day), y: .value("학습 시간", Float(time.studyTime) / 60))
+                            PointMark(x: .value(Constant.date, time.weekday, unit: .day), y: .value(Constant.studyTime, Float(time.studyTime) / 60))
+                            LineMark(x: .value(Constant.date, time.weekday, unit: .day), y: .value(Constant.studyTime, Float(time.studyTime) / 60))
                     }
                     .foregroundStyle(by: .value("사용자", series.user))
                 }
                 .frame(height: 360)
                 .chartYAxisLabel("분 (m)")
             } else {
-                Text("iOS 16.0 이상 버전부터 차트 기능 사용 가능")
+                Text(Constant.message)
             }
         }.padding()
+    }
+}
+
+private extension SocialChartView {
+    enum Constant {
+        static let message = NSLocalizedString("MessageOfiOS16", comment: "")
+        static let date = NSLocalizedString("date", comment: "")
+        static let user = NSLocalizedString("user", comment: "")
+        static let studyTime = NSLocalizedString("studyTime", comment: "")
+        static let min = NSLocalizedString("min", comment: "")
     }
 }

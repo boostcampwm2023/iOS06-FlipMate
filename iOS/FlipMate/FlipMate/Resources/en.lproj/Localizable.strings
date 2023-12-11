@@ -1,0 +1,93 @@
+/* 
+  Localizable.strings
+  FlipMate
+
+  Created by 임현규 on 2023/12/07.
+  
+*/
+
+// MARK: - Category Scene
+"setting" = "Setting";
+"addCategory" = "Add Category";
+"category" = "Category";
+"cancel" = "cancel";
+"delete" = "delete";
+"close" = "close";
+"done" = "done";
+"deleteCategory" = "Delete Category";
+"modifyCategory" = "Modify Category";
+"categoryName" = "Category Name";
+"categoryColor" = "Category Color";
+"deleteAlertMessage" = "Are you sure delete this category?";
+"categoryNamePlaceHolder" = "Please enter the category name";
+"social" = "social";
+
+// MARK: - MyPage Scene
+"myPage" = "MyPage";
+"editProfile" = "Edit Profile";
+"contact" = "Contact";
+"developer" = "Developer Info";
+"version" = "Version Info";
+"reset" = "Reset Data";
+"signout" = "Log Out";
+"accountClosing" = "Account Withdrawal";
+"profileSetting" = "Profile Setting";
+"nicknamePlaceHolder" = "Please enter your nickname";
+"imageNotSafeTitle" = "This image is not available.";
+"imageNotSafeMessage" = "This image has been confirmed to be harmful. Please select the different image.";
+"ok" = "yes";
+"available" = "Available nickname.";
+"lengthViolation" = "Nickname exceeds 20 characters.";
+"emptyViolation" = "Nickname must contain at least 2 characters.";
+"duplicated" = "Nickname has been duplicated.";
+
+// MARK: - Friend Add Scene
+"addFriend" = "Add Friend";
+"myNickname" = "My Nickname";
+"friendNickname" = "Friend's Nickname";
+"noResult" = "No results were found for your search.";
+"follow" = "Follow";
+
+// MARK: - TimerFinish Scene
+"yes" = "Yes";
+"no" = "No";
+"TimerFinishTitle" = "Timer Finish";
+"learningTitle" = "Would you like to save the study time?";
+
+// MARK: - SocialDetail Scene
+"dailyStudyLog" = "Today Study Time";
+"weeklyStudyLog" = "Weekly Study Time";
+"primaryCategory" = "Recent Focus Category";
+"primaryCategoryNil" = "None";
+"unfollow" = "Unfollow";
+"SocialDetailTitle" = "Friend Status";
+
+// MARK: - SocialChartView
+"MessageOfiOS16" = "Available from iOS version 16.0 onwards";
+"date" = "Date";
+"user" = "User";
+"studyTime" = "Study Time";
+"min" = "min";
+"me" = "me";
+"friend" = "friend";
+
+// MARK: - ChartViewController
+"daily" = "Daily";
+"weekly" = "Weekly";
+
+// MARK: - DailyChartView
+"time" = "Time";
+"totalTime" = "Total Time";
+
+// MARK: - WeeklyChartView
+"day" = "day";
+"weeklyLearingChart" = "Weekly Study Chart";
+
+// MARK: - LoginViewController
+"logoSubTitle" = "Our Study Time";
+"skipLoginTitle" = "skip login";
+"googleLogin" = "Sign in with Google";
+"appleLogin" = "Sign in with Apple";
+
+// MARK: - Sign Up Scene
+"signUp" = "Sign Up";

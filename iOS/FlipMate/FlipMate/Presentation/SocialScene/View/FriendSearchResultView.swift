@@ -23,12 +23,11 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
     }
     
     private enum NickNameLabelConstant {
-        static let name = "임현규"
         static let top: CGFloat = 15
     }
     
     private enum FollowButtonConstant {
-        static let title = "친구추가"
+        static let title = NSLocalizedString("follow", comment: "")
         static let top: CGFloat = 15
         static let width: CGFloat = 90
         static let cornerRadius: CGFloat = 10
@@ -49,7 +48,6 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
     
     private lazy var nickNameLabel: UILabel = {
         let label = UILabel()
-        label.text = NickNameLabelConstant.name
         label.textColor = .label
         return label
     }()

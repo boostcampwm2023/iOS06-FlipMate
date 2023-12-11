@@ -64,6 +64,7 @@ final class ProfileSettingsViewController: BaseViewController {
         let label = UILabel()
         label.font = FlipMateFont.smallBold.font
         label.textColor = FlipMateColor.warningRed.color
+        label.numberOfLines = 0
         return label
     }()
     
@@ -239,8 +240,8 @@ final class ProfileSettingsViewController: BaseViewController {
         
         viewModel.imageNotSafePublisher
             .sink { [weak self] in
-                let alert = UIAlertController(title: "이 이미지는 사용할 수 없습니다.", message: "이미지 유해성이 확인되었습니다. 다른 이미지를 선택해 주세요.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "확인", style: .default))
+                let alert = UIAlertController(title: Constant.imageNotSafeTitle, message: Constant.imageNotSafeMessage, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: Constant.okTitle, style: .default))
                 DispatchQueue.main.async {
                     self?.present(alert, animated: true)
                 }
@@ -354,9 +355,12 @@ extension ProfileSettingsViewController: PHPickerViewControllerDelegate {
 // MARK: - Constants
 private extension ProfileSettingsViewController {
     enum Constant {
-        static let title = "프로필 수정"
+        static let title = NSLocalizedString("profileSetting", comment: "")
         static let cameraImageName = "camera.fill"
-        static let nickNameTextFieldPlaceHolderText = "닉네임을 입력해 주세요"
+        static let nickNameTextFieldPlaceHolderText = NSLocalizedString("nicknamePlaceHolder", comment: "")
+        static let imageNotSafeTitle = NSLocalizedString("imageNotSafeTitle", comment: "")
+        static let imageNotSafeMessage = NSLocalizedString("imageNotSafeMessage", comment: "")
+        static let okTitle = NSLocalizedString("ok", comment: "")
         static let maxLength = 10
     }
     
@@ -399,9 +403,8 @@ private extension ProfileSettingsViewController {
         static let leadingInset: CGFloat = 32
         static let bottomInset: CGFloat = 16
         static let trailingInset: CGFloat = 32
-        static let title = "완료"
+        static let title = NSLocalizedString("done", comment: "")
         static let cornerRaidus: CGFloat = 15
-        
         static let top: CGFloat = -64
         static let leading: CGFloat = 32
         static let trailing: CGFloat = -32

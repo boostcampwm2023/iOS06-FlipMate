@@ -321,6 +321,6 @@ private extension TimerViewController {
     enum Constant {
         static let startTime = "00:00:00"
         static let categoryManageButtonImageName = "gearshape"
-        static let categoryManageButtonTitle = "관리"
+        static let categoryManageButtonTitle = NSLocalizedString("setting", comment: "")
     }
 }

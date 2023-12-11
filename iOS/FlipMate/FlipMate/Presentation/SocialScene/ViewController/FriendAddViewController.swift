@@ -14,7 +14,7 @@ final class FriendAddViewController: BaseViewController {
         static let top: CGFloat = 20
         static let leading: CGFloat = 40
         static let height: CGFloat = 20
-        static let placeholder = "친구 닉네임"
+        static let placeholder = NSLocalizedString("friendNickname", comment: "")
     }
     
     private enum NameCountLabelConstant {
@@ -37,8 +37,7 @@ final class FriendAddViewController: BaseViewController {
     
     private enum Constant {
         static let maxLength = 10
-        static let title = "친구추가"
-        static let cancle = "닫기"
+        static let cancel = NSLocalizedString("cancel", comment: "")
     }
     
     // MARK: - Properties
@@ -69,7 +68,7 @@ final class FriendAddViewController: BaseViewController {
     
     private lazy var dismissButton: UIButton = {
         let button = UIButton()
-        button.setTitle(Constant.cancle, for: .normal)
+        button.setTitle(Constant.cancel, for: .normal)
         button.setTitleColor(.label, for: .normal)
         button.addTarget(self, action: #selector(dismissButtonDidTapped), for: .touchUpInside)
         return button
@@ -193,7 +192,7 @@ private extension FriendAddViewController {
     }
     
     func configureNavigationBar() {
-        navigationItem.title = Constant.title
+        navigationItem.title = NSLocalizedString("addFriend", comment: "")
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: dismissButton)
     }
 }

@@ -18,8 +18,8 @@ final class LoginViewController: BaseViewController {
     // MARK: - Constant
     private enum Constant {
         static let logoMainTitle = "FLIP MATE"
-        static let logoSubTitle = "우리들이 공부하는 시간"
-        static let skipLoginTitle = "로그인하지 않고 이용하기"
+        static let logoSubTitle = NSLocalizedString("logoSubTitle", comment: "")
+        static let skipLoginTitle = NSLocalizedString("skipLoginTitle", comment: "")
     }
     
     // MARK: - Init

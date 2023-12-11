@@ -1,0 +1,94 @@
+/* 
+  Localizable.strings
+  FlipMate
+
+  Created by 임현규 on 2023/12/07.
+  
+*/
+
+// MARK: - Category Scene
+"setting" = "設定";
+"addCategory" = "カテゴリを追加";
+"category" = "カテゴリ";
+"cancel" = "キャンセル";
+"close" = "閉じる";
+"delete" = "削除";
+"done" = "完了";
+"deleteCategory" = "カテゴリキャンセル";
+"categoryName" = "カテゴリー名";
+"categoryColor" = "カテゴリカラー";
+"modifyCategory" = "カテゴリ修正";
+"deleteAlertMessage" = "該当カテゴリを本当に削除しますか？";
+"categoryNamePlaceHolder" = "カテゴリ名を入力してください。";
+"social" = "ソーシャル";
+
+// MARK: - MyPage Scene
+"myPage" = "マイページ";
+"editProfile" = "プロフィールを編集";
+"contact" = "お問い合わせ";
+"developer" = "情報";
+"version" = "バージョン情報";
+"reset" = "データの初期化";
+"signout" = "ログアウト";
+"accountClosing" = "会員脱退";
+"profileSetting" = "プロファイル設定";
+"nicknamePlaceHolder" = "ニックネームを入力してください";
+"imageNotSafeTitle" = "この画像は使用できません。";
+"imageNotSafeMessage" = "画像の有害性が確認されました。別の画像を選択してください。";
+"ok" = "確認";
+"available" = "利用可能なニックネームです。";
+"lengthViolation" = "ニックネームが20文字を超えました。";
+"emptyViolation" = "ニックネームは2文字以上入力する必要があります。";
+"duplicated" = "重複したニックネームです。";
+
+// MARK: - Friend Add Scene
+
+"addFriend" = "友達を追加";
+"myNickname" = "私のニックネーム";
+"friendNickname" = "友達のニックネーム";
+"noResult" = "検索結果がありません。";
+"follow" = "フォロー";
+
+// MARK: - TimerFinish Scene
+"yes" = "はい";
+"no" = "いいえ";
+"TimerFinishTitle" = "タイマー終了";
+"learningTitle" = "勉強した時間を保存しますか？";
+
+// MARK: - SocialDetail Scene
+"dailyStudyLog" = "今日の学習時間";
+"weeklyStudyLog" = "週間学習時間";
+"primaryCategory" = "最近の重点分野";
+"primaryCategoryNil" = "なし";
+"unfollow" = "フォロー解除";
+"SocialDetailTitle" = "友達の状態";
+
+// MARK: - SocialChartView
+"MessageOfiOS16" = "iOS 16.0以降でチャート機能が利用可能";
+"date" = "日付";
+"user" = "ユーザー";
+"studyTime" = "学習時間";
+"min" = "分";
+"me" = "私";
+"friend" = "友達";
+
+// MARK: - ChartViewController
+"daily" = "毎日";
+"weekly" = "週間";
+
+// MARK: - DailyChartView
+"time" = "時間";
+"totalTime" = "総学習時間";
+
+// MARK: - WeeklyChartView
+"day" = "曜日";
+"weeklyLearingChart" = "週間学習の推移";
+
+// MARK: - LoginViewController
+"logoSubTitle" = "私たちが勉強する時間";
+"skipLoginTitle" = "ログインせずに利用する";
+"googleLogin" = "googleのアカウントで続ける";
+"appleLogin" = "Appleのアカウントで続ける";
+
+// MARK: - Sign Up Scene
+"signUp" = "会員登録";
