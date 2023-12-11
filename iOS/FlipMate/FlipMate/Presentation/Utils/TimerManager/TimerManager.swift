@@ -9,6 +9,8 @@ import Foundation
 import OSLog
 
 protocol TimerManagerProtocol {
+    var state: TimerState { get }
+    
     func start(completion: (() -> Void)?)
     func resume()
     func suspend()
@@ -18,9 +20,9 @@ protocol TimerManagerProtocol {
 /// 타이머를 관리해주는 객체
 final class TimerManager: TimerManagerProtocol {
     // MARK: - Properties
-    private var state: TimerState = .suspended
     private var handler: (() -> Void)?
     private var timeInterval: DispatchTimeInterval
+    var state: TimerState = .suspended
     
     private lazy var timer: DispatchSourceTimer = {
         let timer = DispatchSource.makeTimerSource(

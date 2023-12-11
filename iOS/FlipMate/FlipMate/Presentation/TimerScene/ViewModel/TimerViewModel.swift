@@ -60,7 +60,6 @@ final class TimerViewModel: TimerViewModelProtocol {
     // MARK: Properties
     private var proximity: Bool?
     private var orientation: DeviceOrientation = .unknown
-    private var timerState: TimerState = .notStarted
     private var cancellables = Set<AnyCancellable>()
     private var increaseTime: Int = -1
     private var selectedCategory: Category?
@@ -208,7 +207,7 @@ private extension TimerViewModel {
             isDeviceFaceDownSubject.send(true)
             startTimer()
         } else {
-            guard timerState == .resumed else { return }
+            guard timerManager.state == .resumed else { return }
             FMLogger.user.debug("디바이스가 face up 상태입니다.")
             isDeviceFaceDownSubject.send(false)
             stopTimer()
@@ -240,7 +239,6 @@ private extension TimerViewModel {
                 guard let self = self else { return }
                 self.increaseTime = -1
                 self.timerManager.start(completion: increaseTotalTime)
-                self.timerState = .resumed
             }
             .store(in: &cancellables)
     }
@@ -250,7 +248,6 @@ private extension TimerViewModel {
         let studyEndLog = StudyEndLog(learningTime: increaseTime, endDate: Date(), categoryId: selectedCategory?.id)
         deviceSettingEnabledSubject.send(false)
         actions?.showTimerFinishViewController(studyEndLog)
-        timerState = .cancled
     }
     
     func increaseTotalTime() {

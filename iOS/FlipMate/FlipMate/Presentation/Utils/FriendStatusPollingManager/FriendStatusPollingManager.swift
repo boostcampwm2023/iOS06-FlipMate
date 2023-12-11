@@ -25,7 +25,6 @@ protocol FriendStatusPollingManageable {
 final class FriendStatusPollingManager: FriendStatusPollingManageable {
     private var preFriendStatusArray: [FriendStatus] = []
     private var updateFriendArray: [UpdateFriend] = []
-    private var timerState: TimerState = .notStarted
     private let timerManager: TimerManagerProtocol
     
     private var updateLearningFriends = PassthroughSubject<[UpdateFriend], Never>()
@@ -157,13 +156,11 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
     
     private func startTimer() {
         if updateFriendArray.isEmpty { return }
-        if timerState == .resumed { return }
+        if timerManager.state == .resumed { return }
         timerManager.start(completion: increaseLearningTime)
-        timerState = .resumed
     }
     
     private func stopTimer() {
         timerManager.cancel()
-        timerState = .cancled
     }
 }

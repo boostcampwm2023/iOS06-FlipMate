@@ -44,7 +44,6 @@ final class SocialViewModel: SocialViewModelProtocol {
     private var cancellables = Set<AnyCancellable>()
     private let actions: SocialViewModelActions?
     private let socialUseCase: SocialUseCase
-    private var timerState: TimerState = .notStarted
     
     // MARK: - Managers
     private var friendStatusPollingManager: FriendStatusPollingManageable
