@@ -33,7 +33,7 @@ final class SocialDIContainer: SocialFlowCoordinatorDependencies {
                 socialUseCase: DefaultSocialUseCase(
                     repsoitory: DefaultSocialRepository(
                         provider: dependencies.provider)),
-                friendStatusPollingManager: FriendStatusPollingManager(),
+                friendStatusPollingManager: FriendStatusPollingManager(timerManager: TimerManager()),
                 userInfoManager: dependencies.userInfoManager,
                 timerManager: TimerManager(timeInterval: .seconds(4))
             )
