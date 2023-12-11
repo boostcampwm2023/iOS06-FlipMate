@@ -10,12 +10,16 @@ import Combine
 
 protocol SignOutManagerProtocol {
     var signOutPublisher: AnyPublisher<Bool, Never> { get }
-    
     func signOut()
 }
 
 final class SignOutManager: SignOutManagerProtocol {
     private var signOutSubject = PassthroughSubject<Bool, Never>()
+    private let userInfoManager: UserInfoManagerProtocol
+    
+    init(userInfoManager: UserInfoManagerProtocol) {
+        self.userInfoManager = userInfoManager
+    }
     
     var signOutPublisher: AnyPublisher<Bool, Never> {
         return signOutSubject.eraseToAnyPublisher()
@@ -23,6 +27,8 @@ final class SignOutManager: SignOutManagerProtocol {
     
     func signOut() {
         try? KeychainManager.deleteAccessToken()
+        // MAKR: - UserInfoManager 초기화
+        userInfoManager.initManager()
         signOutSubject.send(true)
     }
 }

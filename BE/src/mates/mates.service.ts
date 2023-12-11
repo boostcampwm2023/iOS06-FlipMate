@@ -68,7 +68,10 @@ export class MatesService {
     );
     return Promise.all(
       studyTimeByFollowing.map(async (record) => {
-        const started_at = await this.redisService.get(`${record.id}`);
+        const started_at = await this.redisService.hget(
+          `${record.id}`,
+          'started_at',
+        );
         return {
           ...record,
           image_url: getImageUrl(
@@ -89,7 +92,7 @@ export class MatesService {
     const userIds = result.map((following) => following.following_id.id);
     return Promise.all(
       userIds.map(async (id) => {
-        const started_at = await this.redisService.get(`${id}`);
+        const started_at = await this.redisService.hget(`${id}`, 'started_at');
         return { id, started_at };
       }),
     );

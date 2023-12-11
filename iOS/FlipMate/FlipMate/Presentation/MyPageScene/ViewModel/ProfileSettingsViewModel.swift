@@ -21,7 +21,7 @@ protocol ProfileSettingsViewModelInput {
 
 protocol ProfileSettingsViewModelOutput {
     var nicknamePublisher: AnyPublisher<String, Never> { get }
-    var imageURLPublisher: AnyPublisher<String, Never> { get }
+    var imageURLPublisher: AnyPublisher<String?, Never> { get }
     var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Never> { get }
     var isProfileImageChangedPublisher: AnyPublisher<Void, Never> { get }
     var imageNotSafePublisher: AnyPublisher<Void, Never> { get }
@@ -36,26 +36,24 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     private let useCase: ProfileSettingsUseCase
     
     // MARK: - Subjects
-    private var nameSubject = PassthroughSubject<String, Never>()
-    private var imageURLSubject = PassthroughSubject<String, Never>()
     private var isValidNickNameSubject = PassthroughSubject<NickNameValidationState, Never>()
     private var isProfileImageChangedSubject = PassthroughSubject<Void, Never>()
     private var imageNotSafeSubject = PassthroughSubject<Void, Never>()
     private var isSignUpCompletedSubject = PassthroughSubject<Void, Never>()
     private var errorSubject = PassthroughSubject<Error, Never>()
     private let actions: ProfileSettingsViewModelActions?
+    private let userInfoManager: UserInfoManagerProtocol
     
-    init(usecase: ProfileSettingsUseCase, actions: ProfileSettingsViewModelActions) {
+    init(usecase: ProfileSettingsUseCase, 
+         actions: ProfileSettingsViewModelActions?,
+         userInfoManager: UserInfoManagerProtocol) {
         self.useCase = usecase
         self.actions = actions
+        self.userInfoManager = userInfoManager
     }
     
     // MARK: - Input
     func viewReady() {
-        let nickname = UserInfoStorage.nickname
-        let imageURL = UserInfoStorage.profileImageURL
-        nameSubject.send(nickname)
-        imageURLSubject.send(imageURL)
     }
     
     func nickNameChanged(_ newNickName: String) {
@@ -78,8 +76,8 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
             do {
                 let userInfo = try await useCase.setupProfileInfo(nickName: userName, profileImageData: profileImageData)
                 isSignUpCompletedSubject.send()
-                UserInfoStorage.nickname = userInfo.name
-                UserInfoStorage.profileImageURL = userInfo.profileImageURL ?? ""
+                userInfoManager.updateNickname(at: userInfo.name)
+                userInfoManager.updateProfileImage(at: userInfo.profileImageURL)
                 DispatchQueue.main.async {
                     self.actions?.didFinishSignUp()
                 }
@@ -105,11 +103,11 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     
     // MARK: - Output
     var nicknamePublisher: AnyPublisher<String, Never> {
-        return nameSubject.eraseToAnyPublisher()
+        return userInfoManager.nicknameChangePublisher
     }
     
-    var imageURLPublisher: AnyPublisher<String, Never> {
-        return imageURLSubject.eraseToAnyPublisher()
+    var imageURLPublisher: AnyPublisher<String?, Never> {
+        return userInfoManager.profileImageChangePublihser
     }
     
     var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Never> {

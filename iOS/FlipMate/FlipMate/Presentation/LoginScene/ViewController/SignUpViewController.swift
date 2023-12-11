@@ -12,13 +12,16 @@ import PhotosUI
 final class SignUpViewController: BaseViewController {
     
     // MARK: - View Properties
-    /// 프로필 이미지 뷰
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage(resource: .defaultProfile)
         imageView.clipsToBounds = true
-        imageView.bounds = CGRect(x: 0, y: 0, width: 100, height: 100)
+        imageView.bounds = CGRect(
+            x: ProfileImageConstant.xPos,
+            y: ProfileImageConstant.yPos,
+            width: ProfileImageConstant.width,
+            height: ProfileImageConstant.heigth)
         imageView.layer.cornerRadius = imageView.bounds.height / 2
         let tapGestureRecognizer = UITapGestureRecognizer(
             target: self, action: #selector(profileImageViewTapped))
@@ -33,9 +36,17 @@ final class SignUpViewController: BaseViewController {
         imageView.tintColor = FlipMateColor.gray1.color
         imageView.backgroundColor = FlipMateColor.gray3.color
         imageView.contentMode = .center
-        imageView.layoutMargins = .init(top: 8, left: 16, bottom: 8, right: 16)
+        imageView.layoutMargins = .init(
+            top: CameraButtonConstant.topMargin,
+            left: CameraButtonConstant.leftMargin,
+            bottom: CameraButtonConstant.bottomMargin,
+            right: CameraButtonConstant.rightMargin)
         imageView.clipsToBounds = true
-        imageView.bounds = CGRect(x: 0, y: 0, width: 33, height: 33)
+        imageView.bounds = CGRect(
+            x: CameraButtonConstant.xPos,
+            y: CameraButtonConstant.yPos,
+            width: CameraButtonConstant.width,
+            height: CameraButtonConstant.height)
         imageView.layer.cornerRadius = imageView.bounds.height / 2
         return imageView
     }()
@@ -46,7 +57,7 @@ final class SignUpViewController: BaseViewController {
         textField.textAlignment = .center
         textField.font = FlipMateFont.mediumRegular.font
         textField.placeholder = Constant.nickNameTextFieldPlaceHolderText
-        textField.addTarget(self, action: #selector(nickNameTextFieldChanged(_:)), for: .editingChanged)
+        textField.delegate = self
         return textField
     }()
     
@@ -60,37 +71,28 @@ final class SignUpViewController: BaseViewController {
     private lazy var textFieldUnderline: UIView = {
         let underline = UIView()
         underline.frame = CGRect(
-            x: 0,
+            x: TextFieldUnderlineConstant.xPos,
             y: Double(nickNameTextField.frame.height) + 2,
             width: Double(nickNameTextField.frame.width),
-            height: 1.5)
+            height: TextFieldUnderlineConstant.height)
         underline.backgroundColor = FlipMateColor.gray1.color
         return underline
     }()
     
-    private lazy var signUpButton: UIButton = {
-        let button = UIButton()
-        if #available(iOS 15.0, *) {
-            var configuration = UIButton.Configuration.filled()
-            var titleContainer = AttributeContainer()
-            titleContainer.font = FlipMateFont.mediumBold.font
-            configuration.baseBackgroundColor = FlipMateColor.darkBlue.color
-            configuration.contentInsets = NSDirectionalEdgeInsets(
-                top: 16,
-                leading: 32,
-                bottom: 16,
-                trailing: 32)
-            configuration.attributedTitle = AttributedString("회원가입", attributes: titleContainer)
-            button.configuration = configuration
-        } else {
-            // iOS 14 지원
-            button.contentEdgeInsets = UIEdgeInsets(top: 16, left: 32, bottom: 16, right: 32)
-            button.setTitle("회원가입", for: .normal)
-            button.titleLabel?.font = FlipMateFont.mediumBold.font
-            button.backgroundColor = FlipMateColor.darkBlue.color
-        }
+    private lazy var doneButton: DoneButton = {
+        let button = DoneButton()
+        button.contentEdgeInsets = UIEdgeInsets(
+            top: DoneButtonConstant.topInset,
+            left: DoneButtonConstant.leadingInset,
+            bottom: DoneButtonConstant.bottomInset,
+            right: DoneButtonConstant.trailingInset)
+        button.setTitle(DoneButtonConstant.title, for: .normal)
+        button.titleLabel?.font = FlipMateFont.mediumBold.font
+        button.backgroundColor = FlipMateColor.darkBlue.color
+        button.setBackgroundColor(FlipMateColor.darkBlue.color, for: .normal)
+        button.setBackgroundColor(FlipMateColor.gray2.color, for: .disabled)
         button.clipsToBounds = true
-        button.layer.cornerRadius = 15
+        button.layer.cornerRadius = DoneButtonConstant.cornerRaidus
         button.isEnabled = false
         button.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
         return button
@@ -122,7 +124,7 @@ final class SignUpViewController: BaseViewController {
             cameraButton,
             nickNameTextField,
             nickNameValidationStateLabel,
-            signUpButton
+            doneButton
         ]
         
         subViews.forEach {
@@ -131,31 +133,31 @@ final class SignUpViewController: BaseViewController {
         }
         
         NSLayoutConstraint.activate([
-            profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 64),
+            profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: ProfileImageConstant.top),
             profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profileImageView.widthAnchor.constraint(equalToConstant: 100),
-            profileImageView.heightAnchor.constraint(equalToConstant: 100),
+            profileImageView.widthAnchor.constraint(equalToConstant: ProfileImageConstant.width),
+            profileImageView.heightAnchor.constraint(equalToConstant: ProfileImageConstant.heigth),
             
-            cameraButton.widthAnchor.constraint(equalToConstant: 33),
-            cameraButton.heightAnchor.constraint(equalToConstant: 33),
+            cameraButton.widthAnchor.constraint(equalToConstant: CameraButtonConstant.width),
+            cameraButton.heightAnchor.constraint(equalToConstant: CameraButtonConstant.height),
             cameraButton.trailingAnchor.constraint(equalTo: profileImageView.trailingAnchor),
             cameraButton.bottomAnchor.constraint(equalTo: profileImageView.bottomAnchor),
             
-            nickNameTextField.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 16),
+            nickNameTextField.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: NicknameTextFieldConstant.top),
             nickNameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            nickNameTextField.widthAnchor.constraint(equalToConstant: 220),
+            nickNameTextField.widthAnchor.constraint(equalToConstant: NicknameTextFieldConstant.width),
             
-            nickNameValidationStateLabel.topAnchor.constraint(equalTo: nickNameTextField.bottomAnchor, constant: 16),
+            nickNameValidationStateLabel.topAnchor.constraint(equalTo: nickNameTextField.bottomAnchor, constant: NickNameValidationStateLabelConstant.bottom),
             nickNameValidationStateLabel.leadingAnchor.constraint(equalTo: nickNameTextField.leadingAnchor),
             nickNameValidationStateLabel.trailingAnchor.constraint(equalTo: nickNameTextField.trailingAnchor),
             
-            signUpButton.bottomAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
-            signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            signUpButton.leadingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
-            signUpButton.trailingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32)
+            doneButton.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: DoneButtonConstant.bottom),
+            doneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            doneButton.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: DoneButtonConstant.leading),
+            doneButton.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: DoneButtonConstant.trailing)
         ])
         
         self.navigationController?.navigationBar.tintColor = .label
@@ -184,7 +186,7 @@ final class SignUpViewController: BaseViewController {
         viewModel.isSignUpCompletedPublisher
             .sink { [weak self] _ in
                 DispatchQueue.main.async {
-                    self?.signUpButton.isEnabled = true
+                    self?.doneButton.isEnabled = true
                 }
             }
             .store(in: &cancellables)
@@ -203,7 +205,7 @@ final class SignUpViewController: BaseViewController {
             .sink { [weak self] error in
                 FMLogger.general.error("SignUpViewModel에서 에러: \(error)")
                     DispatchQueue.main.async {
-                    self?.signUpButton.isEnabled = false
+                    self?.doneButton.isEnabled = false
                 }
             }
             .store(in: &cancellables)
@@ -215,36 +217,39 @@ final class SignUpViewController: BaseViewController {
             case .valid:
                 self.nickNameValidationStateLabel.text = state.message
                 self.nickNameValidationStateLabel.textColor = FlipMateColor.approveGreen.color
-                self.signUpButton.isEnabled = true
+                self.doneButton.isEnabled = true
             case .lengthViolation:
                 self.nickNameValidationStateLabel.text = state.message
                 self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                self.signUpButton.isEnabled = false
+                self.doneButton.isEnabled = false
             case .emptyViolation:
                 self.nickNameValidationStateLabel.text = state.message
                 self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                self.signUpButton.isEnabled = false
+                self.doneButton.isEnabled = false
             case .duplicated:
                 self.nickNameValidationStateLabel.text = state.message
                 self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                self.signUpButton.isEnabled = false
+                self.doneButton.isEnabled = false
             }
         }
     }
 }
 
-// MARK: - Selector Methods
-private extension SignUpViewController {
-    @objc
-    func nickNameTextFieldChanged(_ sender: UITextField) {
-        signUpButton.isEnabled = false
-        guard let text = sender.text else {
-            FMLogger.user.log("닉네임 텍스트필드 내용 없음")
+// MARK: - UITextFieldDelegate
+extension SignUpViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let nickname = textField.text else { return }
+        guard nickname.count <= Constant.maxLength else {
+            textField.deleteBackward()
+            textField.resignFirstResponder()
             return
         }
-        viewModel.nickNameChanged(text)
+        viewModel.nickNameChanged(nickname)
     }
-    
+}
+
+// MARK: - Selector Methods
+private extension SignUpViewController {
     // 이미지 픽커 처리
     @objc
     func profileImageViewTapped() {
@@ -259,7 +264,7 @@ private extension SignUpViewController {
     // 회원가입 처리
     @objc
     func signUpButtonTapped() {
-        signUpButton.isEnabled = false
+        doneButton.isEnabled = false
         let userName = nickNameTextField.text ?? ""
         guard let imageData = profileImageView.image?.jpegData(compressionQuality: 1) else {
             FMLogger.general.error("no profile image selected")
@@ -317,5 +322,53 @@ private extension SignUpViewController {
         static let imageNotSafeTitle = NSLocalizedString("imageNotSafeTitle", comment: "")
         static let imageNotSafeMessage = NSLocalizedString("imageNotSafeMessage", comment: "")
         static let okTitle = NSLocalizedString("ok", comment: "")
+        static let maxLength = 10
+    }
+    
+    enum ProfileImageConstant {
+        static let xPos: CGFloat = 0
+        static let yPos: CGFloat = 0
+        static let width: CGFloat = 100
+        static let heigth: CGFloat = 100
+        static let top: CGFloat = 64
+    }
+    
+    enum CameraButtonConstant {
+        static let topMargin: CGFloat = 8
+        static let leftMargin: CGFloat = 16
+        static let bottomMargin: CGFloat = 8
+        static let rightMargin: CGFloat = 16
+        
+        static let xPos: CGFloat = 0
+        static let yPos: CGFloat = 0
+        static let width: CGFloat = 33
+        static let height: CGFloat = 33
+    }
+    
+    enum NicknameTextFieldConstant {
+        static let top: CGFloat = 16
+        static let width: CGFloat = 220
+    }
+    
+    enum NickNameValidationStateLabelConstant {
+        static let bottom: CGFloat = 16
+    }
+    
+    enum TextFieldUnderlineConstant {
+        static let xPos: CGFloat = 0
+        static let height: CGFloat = 1.5
+    }
+    
+    enum DoneButtonConstant {
+        static let topInset: CGFloat = 16
+        static let leadingInset: CGFloat = 32
+        static let bottomInset: CGFloat = 16
+        static let trailingInset: CGFloat = 32
+        static let title = NSLocalizedString("signUp", comment: "")
+        static let cornerRaidus: CGFloat = 15
+        
+        static let bottom: CGFloat = -32
+        static let leading: CGFloat = 32
+        static let trailing: CGFloat = -32
     }
 }

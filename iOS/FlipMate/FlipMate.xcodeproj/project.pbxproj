@@ -117,6 +117,8 @@
 		2C9F62532B17700500AE63F9 /* BaseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A02B0DA4E6008CBC85 /* BaseComponents.swift */; };
 		2C9F62542B17701300AE63F9 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422E2B0F747B001E2803 /* KeyChainManager.swift */; };
 		2CD272ED2B21A619000CB9E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CD272EF2B21A619000CB9E5 /* Localizable.strings */; };
+		2CD272F32B21C748000CB9E5 /* StudingPingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD272F22B21C748000CB9E5 /* StudingPingUseCase.swift */; };
+		2CD272F52B21C789000CB9E5 /* DefaultStudingPingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD272F42B21C789000CB9E5 /* DefaultStudingPingUseCase.swift */; };
 		2CDCD03D2B1871E60080DCDE /* SocialDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD03C2B1871E60080DCDE /* SocialDIContainer.swift */; };
 		2CDCD0402B1872060080DCDE /* SocialFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD03F2B1872060080DCDE /* SocialFlowCoordinator.swift */; };
 		2CDCD0422B1873F60080DCDE /* SocialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0412B1873F60080DCDE /* SocialViewModel.swift */; };
@@ -129,13 +131,15 @@
 		2CDCD0672B18D0330080DCDE /* FriendUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0662B18D0330080DCDE /* FriendUser.swift */; };
 		2CDCD0692B18D0D10080DCDE /* FriendSearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0682B18D0D10080DCDE /* FriendSearchItem.swift */; };
 		2CDCD06C2B18E6960080DCDE /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD06B2B18E6960080DCDE /* UserDefault.swift */; };
-		2CDCD06E2B18EB4B0080DCDE /* UserInfoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD06D2B18EB4B0080DCDE /* UserInfoStorage.swift */; };
 		2CE84EEF2B0B742A00E2FB71 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */; };
 		2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */; };
 		2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF42B0B783800E2FB71 /* UICollectionViewCell++Extension.swift */; };
 		2CE84EF72B0B7F3C00E2FB71 /* CategorySettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF62B0B7F3C00E2FB71 /* CategorySettingSection.swift */; };
 		2CE84EF92B0B8A0B00E2FB71 /* CategorySettingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF82B0B8A0B00E2FB71 /* CategorySettingFooterView.swift */; };
 		2CE84EFB2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EFA2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift */; };
+		2CE91C752B25AE9700EACCD7 /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE91C742B25AE9700EACCD7 /* DoneButton.swift */; };
+		2CE91C702B25888C00EACCD7 /* UIViewController++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE91C6F2B25888C00EACCD7 /* UIViewController++Extension.swift */; };
+		2CE91C732B25971000EACCD7 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE91C722B25971000EACCD7 /* UserInfoManager.swift */; };
 		2DD8D73E476DE7C9EAF99CD3 /* Pods_FlipMate_FlipMateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4022DA62BEB41D4AE6C12507 /* Pods_FlipMate_FlipMateUITests.framework */; };
 		429B3DF652F07625CAB531EF /* Pods_FlipMateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B285F39D7D27E5C564F4D31 /* Pods_FlipMateTests.framework */; };
 		600195A02B0DFA3900F02BA4 /* StatusResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6001959F2B0DFA3900F02BA4 /* StatusResponseDTO.swift */; };
@@ -155,7 +159,10 @@
 		601EB7432B14F83400C5B216 /* DefaultProfileSettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601EB7422B14F83400C5B216 /* DefaultProfileSettingsRepository.swift */; };
 		601EB7452B14F86100C5B216 /* SignUpEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601EB7442B14F86100C5B216 /* SignUpEndpoints.swift */; };
 		601EB7472B14F97700C5B216 /* NickNameValidationResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601EB7462B14F97700C5B216 /* NickNameValidationResponseDTO.swift */; };
+		6020C7642B21C1D400F58AD0 /* MyPageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6020C7632B21C1D400F58AD0 /* MyPageHeaderView.swift */; };
 		60243EF02B05D24D0098A92F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 60243EEF2B05D24D0098A92F /* .swiftlint.yml */; };
+		60459D472B21A17C00A80AF7 /* MyPageFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60459D462B21A17C00A80AF7 /* MyPageFlowCoordinator.swift */; };
+		60459D492B21A28400A80AF7 /* MyPageDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60459D482B21A28400A80AF7 /* MyPageDIContainer.swift */; };
 		6057A58D2B0C7F0F00EE58E8 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58C2B0C7F0F00EE58E8 /* Requestable.swift */; };
 		6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58E2B0C801300EE58E8 /* NetworkError.swift */; };
 		605B95FA2B1B50BB00739FAB /* BaseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A02B0DA4E6008CBC85 /* BaseComponents.swift */; };
@@ -193,9 +200,9 @@
 		ED38421F2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38421E2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift */; };
 		ED3842212B0F1CF9001E2803 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842202B0F1CF9001E2803 /* User.swift */; };
 		ED3842232B0F1D70001E2803 /* GoogleAuthRepostiory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842222B0F1D70001E2803 /* GoogleAuthRepostiory.swift */; };
-		ED3842252B0F1DDA001E2803 /* DefaultGoogleAuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842242B0F1DDA001E2803 /* DefaultGoogleAuthUseCase.swift */; };
-		ED3842272B0F1E0C001E2803 /* GoogleAuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842262B0F1E0C001E2803 /* GoogleAuthUseCase.swift */; };
-		ED3842292B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842282B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift */; };
+		ED3842252B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842242B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift */; };
+		ED3842272B0F1E0C001E2803 /* AuthenticationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842262B0F1E0C001E2803 /* AuthenticationUseCase.swift */; };
+		ED3842292B0F3B19001E2803 /* DefaultAuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842282B0F3B19001E2803 /* DefaultAuthenticationRepository.swift */; };
 		ED38422C2B0F4531001E2803 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422B2B0F4531001E2803 /* LoginViewModel.swift */; };
 		ED38422F2B0F747B001E2803 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422E2B0F747B001E2803 /* KeyChainManager.swift */; };
 		ED3842312B0F94E6001E2803 /* DefaultCategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842302B0F94E6001E2803 /* DefaultCategoryRepository.swift */; };
@@ -338,6 +345,8 @@
 		2CD272EE2B21A619000CB9E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2CD272F02B21A622000CB9E5 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2CD272F12B21A62B000CB9E5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2CD272F22B21C748000CB9E5 /* StudingPingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudingPingUseCase.swift; sourceTree = "<group>"; };
+		2CD272F42B21C789000CB9E5 /* DefaultStudingPingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStudingPingUseCase.swift; sourceTree = "<group>"; };
 		2CDCD03C2B1871E60080DCDE /* SocialDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDIContainer.swift; sourceTree = "<group>"; };
 		2CDCD03F2B1872060080DCDE /* SocialFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFlowCoordinator.swift; sourceTree = "<group>"; };
 		2CDCD0412B1873F60080DCDE /* SocialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewModel.swift; sourceTree = "<group>"; };
@@ -350,13 +359,15 @@
 		2CDCD0662B18D0330080DCDE /* FriendUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendUser.swift; sourceTree = "<group>"; };
 		2CDCD0682B18D0D10080DCDE /* FriendSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchItem.swift; sourceTree = "<group>"; };
 		2CDCD06B2B18E6960080DCDE /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
-		2CDCD06D2B18EB4B0080DCDE /* UserInfoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoStorage.swift; sourceTree = "<group>"; };
 		2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView++Extension.swift"; sourceTree = "<group>"; };
 		2CE84EF42B0B783800E2FB71 /* UICollectionViewCell++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell++Extension.swift"; sourceTree = "<group>"; };
 		2CE84EF62B0B7F3C00E2FB71 /* CategorySettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingSection.swift; sourceTree = "<group>"; };
 		2CE84EF82B0B8A0B00E2FB71 /* CategorySettingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingFooterView.swift; sourceTree = "<group>"; };
 		2CE84EFA2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView++Extension.swift"; sourceTree = "<group>"; };
+		2CE91C742B25AE9700EACCD7 /* DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
+		2CE91C6F2B25888C00EACCD7 /* UIViewController++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController++Extension.swift"; sourceTree = "<group>"; };
+		2CE91C722B25971000EACCD7 /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
 		3CDE44797543C08CA812941B /* Pods-FlipMate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate.debug.xcconfig"; path = "Target Support Files/Pods-FlipMate/Pods-FlipMate.debug.xcconfig"; sourceTree = "<group>"; };
 		4022DA62BEB41D4AE6C12507 /* Pods_FlipMate_FlipMateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate_FlipMateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6001959F2B0DFA3900F02BA4 /* StatusResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusResponseDTO.swift; sourceTree = "<group>"; };
@@ -380,7 +391,10 @@
 		601EB7422B14F83400C5B216 /* DefaultProfileSettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileSettingsRepository.swift; sourceTree = "<group>"; };
 		601EB7442B14F86100C5B216 /* SignUpEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEndpoints.swift; sourceTree = "<group>"; };
 		601EB7462B14F97700C5B216 /* NickNameValidationResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameValidationResponseDTO.swift; sourceTree = "<group>"; };
+		6020C7632B21C1D400F58AD0 /* MyPageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageHeaderView.swift; sourceTree = "<group>"; };
 		60243EEF2B05D24D0098A92F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		60459D462B21A17C00A80AF7 /* MyPageFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFlowCoordinator.swift; sourceTree = "<group>"; };
+		60459D482B21A28400A80AF7 /* MyPageDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDIContainer.swift; sourceTree = "<group>"; };
 		6057A58C2B0C7F0F00EE58E8 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		6057A58E2B0C801300EE58E8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		606990562B18918B00E5730F /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
@@ -421,9 +435,9 @@
 		ED38421E2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthResponseDTO.swift; sourceTree = "<group>"; };
 		ED3842202B0F1CF9001E2803 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ED3842222B0F1D70001E2803 /* GoogleAuthRepostiory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthRepostiory.swift; sourceTree = "<group>"; };
-		ED3842242B0F1DDA001E2803 /* DefaultGoogleAuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGoogleAuthUseCase.swift; sourceTree = "<group>"; };
-		ED3842262B0F1E0C001E2803 /* GoogleAuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthUseCase.swift; sourceTree = "<group>"; };
-		ED3842282B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGoogleAuthRepository.swift; sourceTree = "<group>"; };
+		ED3842242B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthenticationUseCase.swift; sourceTree = "<group>"; };
+		ED3842262B0F1E0C001E2803 /* AuthenticationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationUseCase.swift; sourceTree = "<group>"; };
+		ED3842282B0F3B19001E2803 /* DefaultAuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthenticationRepository.swift; sourceTree = "<group>"; };
 		ED38422B2B0F4531001E2803 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		ED38422E2B0F747B001E2803 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		ED3842302B0F94E6001E2803 /* DefaultCategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCategoryRepository.swift; sourceTree = "<group>"; };
@@ -521,7 +535,6 @@
 		2C3430952B0C7E44008CBC85 /* PersistenceService */ = {
 			isa = PBXGroup;
 			children = (
-				2CDCD06D2B18EB4B0080DCDE /* UserInfoStorage.swift */,
 			);
 			path = PersistenceService;
 			sourceTree = "<group>";
@@ -838,6 +851,14 @@
 			path = UserDefault;
 			sourceTree = "<group>";
 		};
+		2CE91C712B25970700EACCD7 /* UserInfoManager */ = {
+			isa = PBXGroup;
+			children = (
+				2CE91C722B25971000EACCD7 /* UserInfoManager.swift */,
+			);
+			path = UserInfoManager;
+			sourceTree = "<group>";
+		};
 		48114A3517087E7FD0C9546F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1038,7 +1059,7 @@
 		600908FA2AFCDF0F0065DFFB /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				ED3842282B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift */,
+				ED3842282B0F3B19001E2803 /* DefaultAuthenticationRepository.swift */,
 				2C3430AC2B0DDF25008CBC85 /* DefaultTimerRepository.swift */,
 				2C2F217D2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift */,
 				ED3842302B0F94E6001E2803 /* DefaultCategoryRepository.swift */,
@@ -1086,6 +1107,7 @@
 		600908FE2AFCDF8D0065DFFB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				2CE91C712B25970700EACCD7 /* UserInfoManager */,
 				2C87C28F2B1F210F00A26313 /* ImageDownloader */,
 				2C87C28C2B1E315600A26313 /* SignOutManager */,
 				2C87C2752B1C788700A26313 /* FriendStatusPollingManager */,
@@ -1109,6 +1131,7 @@
 				2CE84EFA2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift */,
 				ED6865A32B1649ED001A2AAD /* String++Extension.swift */,
 				2C87C2922B1F344500A26313 /* UIImageView++Extension.swift */,
+				2CE91C6F2B25888C00EACCD7 /* UIViewController++Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1152,6 +1175,7 @@
 				2C88DD062B125781000B4686 /* TabBarDIContainer.swift */,
 				2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */,
 				2CDCD03C2B1871E60080DCDE /* SocialDIContainer.swift */,
+				60459D482B21A28400A80AF7 /* MyPageDIContainer.swift */,
 				ED6865CF2B1F1429001A2AAD /* ChartDIContainer.swift */,
 			);
 			path = DIContainer;
@@ -1178,13 +1202,14 @@
 				2C801D7D2B04B65400A7ABAE /* DefaultTimerUseCase.swift */,
 				60F67C692B0E1868002C8BF3 /* DefaultCategoryUseCase.swift */,
 				2C2F216D2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift */,
-				ED3842242B0F1DDA001E2803 /* DefaultGoogleAuthUseCase.swift */,
+				ED3842242B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift */,
 				601EB73E2B14F37300C5B216 /* DefaultProfileSettingsUseCase.swift */,
 				2C88DD102B14C50F000B4686 /* DefaultTimerFinishUseCase.swift */,
 				2C9F62102B17363400AE63F9 /* DefaultFriendUseCase.swift */,
 				2CDCD0452B1889040080DCDE /* DefaultSocialUseCase.swift */,
 				2C87C2842B1DF32A00A26313 /* DefaultUserInfoUseCase.swift */,
 				ED6865CD2B1E49A6001A2AAD /* DefaultChartUseCase.swift */,
+				2CD272F42B21C789000CB9E5 /* DefaultStudingPingUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1195,13 +1220,14 @@
 				2C801D7F2B04B68900A7ABAE /* TimerUseCase.swift */,
 				60F67C672B0E1785002C8BF3 /* CategoryUseCase.swift */,
 				2C2F21792B0F4CF900B45BA8 /* StudyLogUseCase.swift */,
-				ED3842262B0F1E0C001E2803 /* GoogleAuthUseCase.swift */,
+				ED3842262B0F1E0C001E2803 /* AuthenticationUseCase.swift */,
 				601EB73C2B14D67600C5B216 /* ProfileSettingsUseCase.swift */,
 				2C88DD122B14C51B000B4686 /* TimerFinishUseCase.swift */,
 				2C9F620E2B1735C700AE63F9 /* FriendUseCase.swift */,
 				2CDCD0432B1887200080DCDE /* SocialUseCase.swift */,
 				2C87C2822B1DF30E00A26313 /* UserInfoUseCase.swift */,
 				ED6865CB2B1E494D001A2AAD /* ChartUseCase.swift */,
+				2CD272F22B21C748000CB9E5 /* StudingPingUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1259,6 +1285,8 @@
 			isa = PBXGroup;
 			children = (
 				60EB7F512B1EFEDA00F8C613 /* MyPageTableViewCell.swift */,
+				6020C7632B21C1D400F58AD0 /* MyPageHeaderView.swift */,
+				2CE91C742B25AE9700EACCD7 /* DoneButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1284,6 +1312,7 @@
 		60EB7F572B1F167100F8C613 /* Flow */ = {
 			isa = PBXGroup;
 			children = (
+				60459D462B21A17C00A80AF7 /* MyPageFlowCoordinator.swift */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
@@ -1656,16 +1685,19 @@
 				2C9F62222B173AB500AE63F9 /* FriendFollowReqeustDTO.swift in Sources */,
 				60EB7F5B2B1F19D900F8C613 /* ProfileSettingsViewController.swift in Sources */,
 				ED38422C2B0F4531001E2803 /* LoginViewModel.swift in Sources */,
+				2CE91C702B25888C00EACCD7 /* UIViewController++Extension.swift in Sources */,
 				2C43A0D82B037BBC0005596A /* FeedbackManager.swift in Sources */,
 				ED3595AB2B0C81B800558FAA /* Responsable.swift in Sources */,
+				2CE91C752B25AE9700EACCD7 /* DoneButton.swift in Sources */,
 				2C4D55B02B0348FB006D7C26 /* TimerViewModel.swift in Sources */,
 				2CDCD0422B1873F60080DCDE /* SocialViewModel.swift in Sources */,
 				601EB7452B14F86100C5B216 /* SignUpEndpoints.swift in Sources */,
-				ED3842252B0F1DDA001E2803 /* DefaultGoogleAuthUseCase.swift in Sources */,
+				ED3842252B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift in Sources */,
 				601EB7412B14F39B00C5B216 /* ProfileSettingsRepository.swift in Sources */,
 				2C801D7E2B04B65400A7ABAE /* DefaultTimerUseCase.swift in Sources */,
 				2C88DCFB2B124451000B4686 /* LoginDIContainer.swift in Sources */,
 				2C88DD072B125781000B4686 /* TabBarDIContainer.swift in Sources */,
+				2CD272F52B21C789000CB9E5 /* DefaultStudingPingUseCase.swift in Sources */,
 				2C88DD092B1274FA000B4686 /* CategorySettingCoordinator.swift in Sources */,
 				2C4D55AB2B033029006D7C26 /* UIView++Extension.swift in Sources */,
 				2CDCD06C2B18E6960080DCDE /* UserDefault.swift in Sources */,
@@ -1701,6 +1733,7 @@
 				2C2F21782B0F4CCC00B45BA8 /* StudyLog.swift in Sources */,
 				ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */,
 				2C88DD132B14C51B000B4686 /* TimerFinishUseCase.swift in Sources */,
+				6020C7642B21C1D400F58AD0 /* MyPageHeaderView.swift in Sources */,
 				2C9F61FE2B15F48600AE63F9 /* FriendAddViewController.swift in Sources */,
 				2C88DCFE2B1244A6000B4686 /* LoginFlowCoordinator.swift in Sources */,
 				601773E42B021E6000D175D9 /* TimerViewController.swift in Sources */,
@@ -1708,6 +1741,7 @@
 				ED6865B82B1CE820001A2AAD /* FriendUnfollowRequestDTO.swift in Sources */,
 				2C88DCF92B1242DA000B4686 /* TimerFlowCoordinator.swift in Sources */,
 				60DFDDDE2B16384500FEF98A /* NickNameValidator.swift in Sources */,
+				60459D472B21A17C00A80AF7 /* MyPageFlowCoordinator.swift in Sources */,
 				600908C22AFCD7DF0065DFFB /* ViewController.swift in Sources */,
 				2C9F62032B16021E00AE63F9 /* FriendSearchResultView.swift in Sources */,
 				2C3430AB2B0DDB8D008CBC85 /* TimerEndpoints.swift in Sources */,
@@ -1730,7 +1764,7 @@
 				2C9F62132B17366200AE63F9 /* FriendRepository.swift in Sources */,
 				6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */,
 				ED38422F2B0F747B001E2803 /* KeyChainManager.swift in Sources */,
-				ED3842292B0F3B19001E2803 /* DefaultGoogleAuthRepository.swift in Sources */,
+				ED3842292B0F3B19001E2803 /* DefaultAuthenticationRepository.swift in Sources */,
 				600908BE2AFCD7DF0065DFFB /* AppDelegate.swift in Sources */,
 				2C9F62372B17517100AE63F9 /* MockFriendUseCase.swift in Sources */,
 				2CE84EFB2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift in Sources */,
@@ -1748,7 +1782,6 @@
 				2C2F21702B0F429800B45BA8 /* StudyLogResponseDTO.swift in Sources */,
 				2C2F216E2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift in Sources */,
 				ED6865D82B1F32EF001A2AAD /* CustomCalenderView.swift in Sources */,
-				2CDCD06E2B18EB4B0080DCDE /* UserInfoStorage.swift in Sources */,
 				2CE84EF72B0B7F3C00E2FB71 /* CategorySettingSection.swift in Sources */,
 				2C88DD112B14C50F000B4686 /* DefaultTimerFinishUseCase.swift in Sources */,
 				2C3430AD2B0DDF25008CBC85 /* DefaultTimerRepository.swift in Sources */,
@@ -1776,12 +1809,13 @@
 				ED6865CA2B1E454E001A2AAD /* DefaultChartRepository.swift in Sources */,
 				ED6865A42B1649ED001A2AAD /* String++Extension.swift in Sources */,
 				2C87C2772B1C789A00A26313 /* FriendStatusPollingManager.swift in Sources */,
+				60459D492B21A28400A80AF7 /* MyPageDIContainer.swift in Sources */,
 				2C87C2912B1F212200A26313 /* ImageDownLoader.swift in Sources */,
 				ED6865C62B1E438B001A2AAD /* ChartEndpoints.swift in Sources */,
 				2C1F2BBD2B20DA770026C30B /* ProfileHeaderItem.swift in Sources */,
 				2C88DD0F2B14C22C000B4686 /* TimerFinishViewModel.swift in Sources */,
 				2C4D55B32B035484006D7C26 /* DeviceOrientation.swift in Sources */,
-				ED3842272B0F1E0C001E2803 /* GoogleAuthUseCase.swift in Sources */,
+				ED3842272B0F1E0C001E2803 /* AuthenticationUseCase.swift in Sources */,
 				ED6865C42B1E4303001A2AAD /* DailyChartLogResponseDTO.swift in Sources */,
 				ED6865A22B162B8F001A2AAD /* SocialChartView.swift in Sources */,
 				2C88DCF22B124238000B4686 /* AppFlowCoordinator.swift in Sources */,
@@ -1804,6 +1838,7 @@
 				ED6865CC2B1E494D001A2AAD /* ChartUseCase.swift in Sources */,
 				2C2F217E2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift in Sources */,
 				2C5CDA4F2B025403007AFC57 /* SocialViewController.swift in Sources */,
+				2CE91C732B25971000EACCD7 /* UserInfoManager.swift in Sources */,
 				2C88DD052B1256D0000B4686 /* TabBarFlowCoordinator.swift in Sources */,
 				ED9B2A812B06048D008FE1C5 /* CategoryViewModel.swift in Sources */,
 				60DE49402B05E67200ACE6DD /* FlipMateConstant.swift in Sources */,
@@ -1815,6 +1850,7 @@
 				2C88DD0B2B1340E4000B4686 /* CategoryDIContainer.swift in Sources */,
 				2C87C27F2B1DF2A800A26313 /* UserInfoRepository.swift in Sources */,
 				2C9F62082B16398D00AE63F9 /* FreindAddResultViewProtocol.swift in Sources */,
+				2CD272F32B21C748000CB9E5 /* StudingPingUseCase.swift in Sources */,
 				ED3842312B0F94E6001E2803 /* DefaultCategoryRepository.swift in Sources */,
 				ED6865AD2B179600001A2AAD /* SocialDetailViewModel.swift in Sources */,
 				2CDCD04A2B18895E0080DCDE /* DefaultSocialRepository.swift in Sources */,

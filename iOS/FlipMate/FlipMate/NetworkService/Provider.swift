@@ -33,19 +33,14 @@ struct Provider: Providable {
                     }
                     
                     guard 200..<300 ~= response.statusCode else {
-                        do {
-                            if response.statusCode == 401 {
-                                FMLogger.general.error("토큰이 만료되어 로그인 화면으로 이동합니다.")
-                                signOutManager?.signOut()
-                            }
-                            
-                            let errorResult = try JSONDecoder().decode(StatusResponseWithErrorDTO.self, from: data)
-                            FMLogger.general.error("에러 코드 : \(errorResult.statusCode)\n내용 : \(errorResult.message)")
-                        } catch {
-                            let responseDescription = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
-                            FMLogger.general.error("에러 코드 : \(response.statusCode)\n내용 : \(responseDescription))")
+                        if response.statusCode == 401 {
+                            FMLogger.general.error("토큰이 만료되어 로그인 화면으로 이동합니다.")
+                            signOutManager?.signOut()
                         }
-                        throw NetworkError.statusCodeError
+                        
+                        let errorResult = try JSONDecoder().decode(StatusResponseWithErrorDTO.self, from: data)
+                        FMLogger.general.error("에러 코드 : \(errorResult.statusCode)\n내용 : \(errorResult.message)")
+                        throw NetworkError.statusCodeError(statusCode: response.statusCode, message: errorResult.message)
                     }
                     
                     guard !data.isEmpty else {
@@ -91,7 +86,9 @@ struct Provider: Providable {
                 throw error
             } catch {
                 FMLogger.general.error("에러 코드 : \(response.statusCode)\n내용 : \(HTTPURLResponse.localizedString(forStatusCode: response.statusCode))")
-                throw NetworkError.statusCodeError
+                throw NetworkError.statusCodeError(
+                    statusCode: response.statusCode,
+                    message: HTTPURLResponse.localizedString(forStatusCode: response.statusCode))
             }
         }
         

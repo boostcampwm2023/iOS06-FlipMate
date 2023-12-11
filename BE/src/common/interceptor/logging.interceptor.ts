@@ -16,11 +16,9 @@ export class LoggingInterceptor implements NestInterceptor {
     const request = ctx.getRequest();
     const response = ctx.getResponse();
     const { method, url, body } = request;
-
     this.logger.debug(
-      `[Request#${request.id.slice(0, 8)}] ${method} ${url} \n ${JSON.stringify(
-        body,
-      )}`,
+      `[📩 Req#${request.id.slice(0, 8)}] ${method} ${url} ${request.user
+        ?.nickname}#${request.user?.id}\n${JSON.stringify(body)}`,
     );
     return next.handle().pipe(
       tap((body) => {
@@ -28,9 +26,9 @@ export class LoggingInterceptor implements NestInterceptor {
           Date.now() - request.now
         }ms`;
         this.logger.debug(
-          `[Response#${request.id.slice(0, 8)}] ${
+          `[📤 Res#${request.id.slice(0, 8)}] ${
             response.statusCode
-          } ${requestToResponse} \n ${JSON.stringify(body)} \n`,
+          } ${requestToResponse} \n ${JSON.stringify(body)}`,
         );
       }),
     );

@@ -17,9 +17,9 @@ struct DailyChartView: View {
     }
     
     var body: some View {
-        VStack {
-            CustomCalenderView(selectedDate: $selectedDate, viewModel: viewModel)
-            ScrollView(.vertical) {
+        ScrollView(.vertical) {
+            VStack {
+                CustomCalenderView(selectedDate: $selectedDate, viewModel: viewModel)
                 if #available(iOS 17.0, *) {
                     Chart {
                         ForEach(viewModel.dailyChartLog.studyLog.category, id: \.subject) { category in
@@ -57,13 +57,16 @@ struct DailyChartView: View {
                         }
                     }
                     .chartLegend(.hidden)
-                    .frame(height: 360 * (UIScreen.main.bounds.size.height / 844))
+                      .chartForegroundStyleScale(domain: viewModel.dailyChartLog.studyLog.category.compactMap({ category in
+                        category.subject
+                    }), range: getColorArray(categories: viewModel.dailyChartLog.studyLog.category))
+                    .frame(height: CGFloat(60 * viewModel.dailyChartLog.studyLog.category.count) * (UIScreen.main.bounds.size.height / 844))
                     .chartXAxisLabel(Constant.min)
                 } else {
                     Text(Constant.message)
                 }
-            }
-        }.padding()
+            }.padding()
+        }
     }
     
     func getColorArray(categories: [Category]) -> [Color] {
