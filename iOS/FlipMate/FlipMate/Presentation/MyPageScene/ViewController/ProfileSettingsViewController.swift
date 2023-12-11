@@ -193,8 +193,13 @@ final class ProfileSettingsViewController: BaseViewController {
         viewModel.errorPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
-                FMLogger.general.error("SignUpViewModel에서 에러: \(error)")
                 self?.doneButton.isEnabled = false
+                let alert = UIAlertController(title: "오류 발생", message: "\(error.localizedDescription)", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .cancel))
+                DispatchQueue.main.async {
+                    self?.present(alert, animated: true)
+                }
+                FMLogger.general.error("SignUpViewModel에서 에러: \(error)")
             }
             .store(in: &cancellables)
     }
