@@ -30,10 +30,6 @@ final class TimerViewController: BaseViewController {
         fatalError("Don't use storyboard")
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     /// 오늘 학습한 총 시간 타이머
     private lazy var timerLabel: UILabel = {
         let label = UILabel()
@@ -89,11 +85,14 @@ final class TimerViewController: BaseViewController {
         timerViewModel.viewWillAppear()
     }
     
+    // swiftlint:disable notification_center_detachment
     override func viewDidDisappear(_ animated: Bool) {
         deviceMotionManager.stopDeviceMotion()
         timerViewModel.viewDidDisappear()
         UIDevice.current.isProximityMonitoringEnabled = false
+        NotificationCenter.default.removeObserver(self)
     }
+    // swiftlint:enable notification_center_detachment
     
     // MARK: - setup UI
     override func configureUI() {
@@ -138,7 +137,7 @@ final class TimerViewController: BaseViewController {
         ])
         
         NSLayoutConstraint.activate([
-            instructionImage.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
+            instructionImage.topAnchor.constraint(equalTo: categorySettingButton.bottomAnchor, constant: 30),
             instructionImage.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
@@ -174,6 +173,11 @@ final class TimerViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] categories in
                 guard let self = self else { return }
+                if !categories.isEmpty {
+                    self.instructionImage.isHidden = true
+                } else {
+                    self.instructionImage.isHidden = false
+                }
                 guard var snapShot = self.dataSource?.snapshot() else { return }
                 let sections: [CategorySettingSection] = [.categorySection([])]
                 snapShot.deleteAllItems()
@@ -287,6 +291,18 @@ extension TimerViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension TimerViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryListCollectionViewCell else { return true }
+        if cell.isSelected {
+            collectionView.deselectItem(at: indexPath, animated: true)
+            cell.updateShadow()
+            timerViewModel.categoryDidDeselected()
+            return false
+        } else {
+            return true
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryListCollectionViewCell else { return }
         guard let item = dataSource?.itemIdentifier(for: indexPath) else { return }

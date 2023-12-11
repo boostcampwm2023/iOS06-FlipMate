@@ -38,7 +38,6 @@ final class FriendAddViewController: BaseViewController {
     private enum Constant {
         static let maxLength = 10
         static let cancel = NSLocalizedString("cancel", comment: "")
-
     }
     
     // MARK: - Properties
@@ -164,6 +163,14 @@ final class FriendAddViewController: BaseViewController {
             .sink { [weak self] _ in
                 guard let self = self else { return }
                 self.viewModel.didFollowFriend()
+            }
+            .store(in: &cancellables)
+        
+        viewModel.followErrorPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] title in
+                guard let self = self else { return }
+                self.showToast(title: title)
             }
             .store(in: &cancellables)
     }

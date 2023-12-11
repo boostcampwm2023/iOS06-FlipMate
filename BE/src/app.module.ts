@@ -14,6 +14,7 @@ import { LoggingMiddleware } from './common/middleware/logging.middleware';
 import { typeormConfig } from './common/config/typeorm.config';
 import { staticConfig } from './common/config/static.config';
 import { AdminModule } from './admin/admin.module';
+import { HeartbeatModule } from './heartbeat/heartbeat.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { AdminModule } from './admin/admin.module';
     PassportModule,
     AuthModule,
     AdminModule,
+    HeartbeatModule,
   ],
   controllers: [AppController],
   providers: [AppService],

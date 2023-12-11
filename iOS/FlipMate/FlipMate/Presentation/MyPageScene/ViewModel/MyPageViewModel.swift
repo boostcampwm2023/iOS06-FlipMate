@@ -8,14 +8,22 @@
 import Foundation
 import Combine
 
+struct MyPageViewModelActions {
+    let showProfileSettingsView: () -> Void
+    let viewDidFinish: () -> Void
+}
+
 protocol MyPageViewModelInput {
     func viewReady()
+    func profileSettingsViewButtonTapped()
+    func dismissButtonDidTapped()
+    func signOutButtonTapped()
 }
 
 protocol MyPageViewModelOutput {
     var tableViewDataSourcePublisher: AnyPublisher<[[String]], Never> { get }
     var nicknamePublisher: AnyPublisher<String, Never> { get }
-    var imageURLPublisher: AnyPublisher<String, Never> { get }
+    var imageURLPublisher: AnyPublisher<String?, Never> { get }
     var errorPublisher: AnyPublisher<Error, Never> { get }
 }
 
@@ -29,18 +37,40 @@ final class MyPageViewModel: MyPageViewModelProtocol {
         [Constant.accountClosing]
     ]
     
+    // MARK: - Subjects
     private lazy var tableViewDataSourceSubject = CurrentValueSubject<[[String]], Never>(myPageDataSource)
-    private var nicknameSubject = PassthroughSubject<String, Never>()
-    private var imageURLSubject = PassthroughSubject<String, Never>()
     private var errorSubject = PassthroughSubject<Error, Never>()
+    
+    // MARK: - Properties
+    private let useCase: AuthenticationUseCase
+    private let actions: MyPageViewModelActions?
+    
+    private let userInfoManager: UserInfoManagerProtocol
+    
+    init(authenticationUseCase: AuthenticationUseCase, 
+         actions: MyPageViewModelActions? = nil,
+         userInfoManager: UserInfoManagerProtocol) {
+        self.useCase = authenticationUseCase
+        self.actions = actions
+        self.userInfoManager = userInfoManager
+    }
     
     // MARK: - Input
     func viewReady() {
         tableViewDataSourceSubject.send(myPageDataSource)
-        let nickname = UserInfoStorage.nickname
-        let imageURL = UserInfoStorage.profileImageURL
-        nicknameSubject.send(nickname)
-        imageURLSubject.send(imageURL)
+    }
+    
+    func profileSettingsViewButtonTapped() {
+        actions?.showProfileSettingsView()
+    }
+    
+    func signOutButtonTapped() {
+        useCase.signOut()
+        // TODO: 코디네이터가 담당해야 할 것 같다...? 뷰의 이동이기 때문,,
+    }
+    
+    func dismissButtonDidTapped() {
+        actions?.viewDidFinish()
     }
     
     // MARK: - Output
@@ -49,11 +79,11 @@ final class MyPageViewModel: MyPageViewModelProtocol {
     }
     
     var nicknamePublisher: AnyPublisher<String, Never> {
-        return nicknameSubject.eraseToAnyPublisher()
+        return userInfoManager.nicknameChangePublisher
     }
     
-    var imageURLPublisher: AnyPublisher<String, Never> {
-        return imageURLSubject.eraseToAnyPublisher()
+    var imageURLPublisher: AnyPublisher<String?, Never> {
+        return userInfoManager.profileImageChangePublihser
     }
     
     var errorPublisher: AnyPublisher<Error, Never> {

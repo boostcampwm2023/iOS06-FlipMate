@@ -5,14 +5,14 @@ export class StudyLogsCreateDto {
     example: '2023-11-23',
     description: '학습을 시작한 날짜',
   })
-  date: Date;
+  date: string;
 
   @ApiProperty({
     type: 'date',
     example: '2023-11-23 11:00:12',
     description: '학습을 시작/종료 시점의 시간',
   })
-  created_at: Date;
+  created_at: string;
 
   @ApiProperty({
     type: 'enum',

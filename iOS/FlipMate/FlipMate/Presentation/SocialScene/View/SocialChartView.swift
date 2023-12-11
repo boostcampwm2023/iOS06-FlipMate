@@ -18,23 +18,21 @@ struct SocialChartView: View {
     }
     
     var body: some View {
-        ScrollView(.vertical) {
-            VStack {
-                if #available(iOS 16.0, *) {
-                    Chart(viewModel.userSeries) { series in
-                        ForEach(series.studyTime) { time in
+        VStack {
+            if #available(iOS 16.0, *) {
+                Chart(viewModel.userSeries) { series in
+                    ForEach(series.studyTime) { time in
                             PointMark(x: .value(Constant.date, time.weekday, unit: .day), y: .value(Constant.studyTime, Float(time.studyTime) / 60))
                             LineMark(x: .value(Constant.date, time.weekday, unit: .day), y: .value(Constant.studyTime, Float(time.studyTime) / 60))
-                        }
-                        .foregroundStyle(by: .value(Constant.user, series.user))
                     }
-                    .frame(height: 360)
-                    .chartYAxisLabel(Constant.min)
-                } else {
-                    Text(Constant.message)
+                    .foregroundStyle(by: .value("사용자", series.user))
                 }
-            }.padding()
-        }
+                .frame(height: 360)
+                .chartYAxisLabel("분 (m)")
+            } else {
+                Text(Constant.message)
+            }
+        }.padding()
     }
 }
 

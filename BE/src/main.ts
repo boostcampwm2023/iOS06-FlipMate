@@ -10,6 +10,7 @@ import { LoggingInterceptor } from './common/interceptor/logging.interceptor';
 import { HttpExceptionFilter } from './common/exception-filter/http-exception-filter';
 import { swaggerConfig } from './common/config/swagger.config';
 import { ENV } from './common/const/env-keys.const';
+import { HeartbeatService } from './heartbeat/heartbeat.service';
 
 async function bootstrap() {
   const configService = new ConfigService();
@@ -34,6 +35,9 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalInterceptors(new LoggingInterceptor());
   app.useGlobalFilters(new HttpExceptionFilter());
+
+  const heartbeatService = app.get(HeartbeatService);
+  heartbeatService.startCheckingHeartbeats();
 
   await app.listen(configService.get<number>(ENV.PORT) || 3000);
 }
