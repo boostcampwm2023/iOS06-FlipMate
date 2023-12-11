@@ -27,7 +27,7 @@ struct DailyChartView: View {
                                 .foregroundStyle(by: .value(Constant.category, category.subject))
                                 .cornerRadius(10.0)
                                 .annotation(position: .overlay) {
-                                    if category.studyTime != 0 {
+                                    if getRatio(time: category.studyTime ?? 0, sum: viewModel.dailyChartLog.studyLog.totalTime) > 0.05 {
                                         Text("\(category.studyTime ?? 0)")
                                             .font(.headline)
                                     }
@@ -69,7 +69,7 @@ struct DailyChartView: View {
         }
     }
     
-    func getColorArray(categories: [Category]) -> [Color] {
+    private func getColorArray(categories: [Category]) -> [Color] {
         let colorArray: [Color] = categories.map { category in
             if let uiColor = UIColor(hexString: category.color) {
                 return Color(uiColor)
@@ -78,6 +78,10 @@ struct DailyChartView: View {
             }
         }
         return colorArray
+    }
+    
+    private func getRatio(time: Int, sum: Int) -> Float {
+        return Float(time) / Float(sum)
     }
 }
 
