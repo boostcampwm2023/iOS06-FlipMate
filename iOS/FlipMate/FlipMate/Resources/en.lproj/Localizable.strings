@@ -19,43 +19,43 @@
 "categoryName" = "Category Name";
 "categoryColor" = "Category Color";
 "deleteAlertMessage" = "Are you sure delete this category?";
-"categoryNamePlaceHolder" = "Please enter a category name";
+"categoryNamePlaceHolder" = "Please enter the category name";
 "social" = "social";
 
 // MARK: - MyPage Scene
 "myPage" = "MyPage";
 "editProfile" = "Edit Profile";
 "contact" = "Contact";
-"developer" = "Developer Information";
-"version" = "Version Infomation";
+"developer" = "Developer Info";
+"version" = "Version Info";
 "reset" = "Reset Data";
-"signout" = "Sign Out";
-"accountClosing" = "Account closing";
+"signout" = "Log Out";
+"accountClosing" = "Account Withdrawal";
 "profileSetting" = "Profile Setting";
 "nicknamePlaceHolder" = "Please enter your nickname";
 "imageNotSafeTitle" = "This image is not available.";
-"imageNotSafeMessage" = "The image has been confirmed to be harmful. Please select a different image.";
+"imageNotSafeMessage" = "This image has been confirmed to be harmful. Please select the different image.";
 "ok" = "yes";
 "available" = "Available nickname.";
 "lengthViolation" = "Nickname exceeds 20 characters.";
 "emptyViolation" = "Nickname must contain at least 2 characters.";
-"duplicated" = "This is a duplicate nickname.";
+"duplicated" = "Nickname has been duplicated.";
 
 // MARK: - Friend Add Scene
 "addFriend" = "Add Friend";
 "myNickname" = "My Nickname";
-"friendNickname" = "Friend Nickname";
+"friendNickname" = "Friend's Nickname";
 "noResult" = "No results were found for your search.";
-"follow" = "follow";
+"follow" = "Follow";
 
 // MARK: - TimerFinish Scene
-"yes" = "yes";
-"no" = "no";
+"yes" = "Yes";
+"no" = "No";
 "TimerFinishTitle" = "Timer Finish";
-"learningTitle" = "Would you like to save your study time?";
+"learningTitle" = "Would you like to save the study time?";
 
 // MARK: - SocialDetail Scene
-"dailyStudyLog" = "Today's Study Time";
+"dailyStudyLog" = "Today Study Time";
 "weeklyStudyLog" = "Weekly Study Time";
 "primaryCategory" = "Recent Focus Category";
 "primaryCategoryNil" = "None";
@@ -65,7 +65,7 @@
 // MARK: - SocialChartView
 "MessageOfiOS16" = "Available from iOS version 16.0 onwards";
 "date" = "Date";
-"user" = "user";
+"user" = "User";
 "studyTime" = "Study Time";
 "min" = "min";
 "me" = "me";
@@ -86,6 +86,6 @@
 // MARK: - LoginViewController
 "logoSubTitle" = "Our Study Time";
 "skipLoginTitle" = "skip login";
-"googleLogin" = "sign in with google";
-"appleLogin" = "sign in with apple";
+"googleLogin" = "Sign in with Google";
+"appleLogin" = "Sign in with Apple";
 
