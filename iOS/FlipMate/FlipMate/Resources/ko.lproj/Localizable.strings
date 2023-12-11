@@ -17,7 +17,7 @@
 "deleteCategory" = "카테고리 삭제";
 "categoryName" = "카테고리 이름";
 "categoryColor" = "카테고리 색상";
-"modifyCategory" = "카테괼 수정";
+"modifyCategory" = "카테고리 수정";
 "deleteAlertMessage" = "해당 카테고리를 정말 삭제하시겠습니까?";
 "categoryNamePlaceHolder" = "카테고리 이름을 입력해주세요.";
 "social" = "소셜";
