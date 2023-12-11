@@ -28,8 +28,8 @@ struct DailyChartView: View {
                                 .cornerRadius(10.0)
                                 .annotation(position: .overlay) {
                                     if getRatio(time: category.studyTime ?? 0, sum: viewModel.dailyChartLog.studyLog.totalTime) > 0.05 {
-                                        Text("\(category.studyTime ?? 0)")
-                                            .font(.headline)
+                                        DailyChartView.StrokeText(text: "\(category.studyTime ?? 0)", width: 0.3, color: .white)
+                                        .font(.headline)
                                     }
                                 }
                         }
@@ -92,5 +92,24 @@ private extension DailyChartView {
         static let totalTime = NSLocalizedString("totalTime", comment: "")
         static let category = NSLocalizedString("category", comment: "")
         static let min = NSLocalizedString("date", comment: "")
+    }
+    
+    struct StrokeText: View {
+        let text: String
+        let width: CGFloat
+        let color: Color
+        
+        var body: some View {
+            ZStack {
+                ZStack {
+                    Text(text).offset(x: width, y: width)
+                    Text(text).offset(x: -width, y: width)
+                    Text(text).offset(x: width, y: -width)
+                    Text(text).offset(x: -width, y: -width)
+                }
+                .foregroundColor(color)
+                Text(text)
+            }
+        }
     }
 }
