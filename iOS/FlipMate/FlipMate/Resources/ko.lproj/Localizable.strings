@@ -80,8 +80,8 @@
 // MARK: - Login Scene
 "logoSubTitle" = "우리들이 공부하는 시간";
 "skipLoginTitle" = "로그인하지 않고 이용하기";
-"googleLogin" = "구글 로그인";
-"appleLogin" = "애플 로그인";
+"googleLogin" = "구글 계정으로 로그인하기";
+"appleLogin" = "애플 계정으로 로그인하기";
 
 // MARK: - Sign Up Scene
 "signUp" = "회원가입";
