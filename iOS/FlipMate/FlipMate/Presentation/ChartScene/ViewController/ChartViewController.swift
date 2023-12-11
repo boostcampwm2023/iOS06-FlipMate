@@ -69,7 +69,7 @@ final class ChartViewController: BaseViewController {
             segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
             segmentedControl.heightAnchor.constraint(equalToConstant: 50),
-            segmentedControl.widthAnchor.constraint(equalToConstant: 140)
+            segmentedControl.widthAnchor.constraint(equalToConstant: 180)
         ])
         NSLayoutConstraint.activate([
             dailyChartView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 30),
