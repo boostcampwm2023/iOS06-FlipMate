@@ -65,4 +65,3 @@ private extension WeeklyChartView {
                 repository: DefaultChartRepository(
                     provider: Provider(urlSession: URLSession.shared)))))
 }
-

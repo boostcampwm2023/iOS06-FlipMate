@@ -26,8 +26,7 @@ final class DoneButton: UIButton {
                 if let color = defaultBackgroundColor {
                     self.backgroundColor = color
                 }
-            }
-            else {
+            } else {
                 if let color = disabledBackgroundColor {
                     self.backgroundColor = color
                 }
@@ -36,12 +35,11 @@ final class DoneButton: UIButton {
     }
     
     func setBackgroundColor(_ color: UIColor?, for state: ButtonState) {
-         switch state {
-         case .disabled:
-             disabledBackgroundColor = color
-         case .normal:
-             defaultBackgroundColor = color
-         }
-     }
+        switch state {
+        case .disabled:
+            disabledBackgroundColor = color
+        case .normal:
+            defaultBackgroundColor = color
+        }
+    }
 }
-
