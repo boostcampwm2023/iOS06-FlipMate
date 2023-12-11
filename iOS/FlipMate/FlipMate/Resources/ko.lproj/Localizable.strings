@@ -51,7 +51,7 @@
 // MARK: - TimerFinish Scene
 "yes" = "예";
 "no" = "아니요";
-"TimerFinishTitle" = "예";
+"TimerFinishTitle" = "타이머 종료";
 "learningTitle" = "공부한 시간을 저장하시겠습니까?";
 
 // MARK: - SocialDetail Scene
