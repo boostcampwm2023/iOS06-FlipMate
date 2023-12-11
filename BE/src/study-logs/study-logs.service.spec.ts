@@ -111,4 +111,86 @@ describe('StudyLogsService', () => {
       ).rejects.toThrow(BadRequestException);
     });
   });
+
+  describe('.calculateLearningTimes()', () => {
+    it('학습한 시간이 자정을 지나는 경우 날짜 별로 시간을 나눈다 (한국 시간)', () => {
+      const result = service.calculateLearningTimes(
+        '2023-11-12T01:00:00+09:00',
+        7200,
+      );
+      expect(result).toEqual([
+        {
+          started_at: '2023-11-11T14:00:00.000Z',
+          date: '2023-11-11',
+          learning_time: 3600,
+        },
+        {
+          started_at: '2023-11-11T15:00:00.000Z',
+          date: '2023-11-12',
+          learning_time: 3600,
+        },
+      ]);
+    });
+    it('학습한 시간이 자정을 지나는 경우 날짜 별로 시간을 나눈다 (미국 시간)', () => {
+      const result = service.calculateLearningTimes(
+        '2023-11-12T01:00:00-0500',
+        7200,
+      );
+      expect(result).toEqual([
+        {
+          started_at: '2023-11-12T04:00:00.000Z',
+          date: '2023-11-11',
+          learning_time: 3600,
+        },
+        {
+          started_at: '2023-11-12T05:00:00.000Z',
+          date: '2023-11-12',
+          learning_time: 3600,
+        },
+      ]);
+    });
+
+    it('학습한 시간이 자정을 지나지 않는 경우, 하루에 대한 학습 시간을 반환한다. (한국 시간)', () => {
+      const result = service.calculateLearningTimes(
+        '2023-11-12T02:00:00+09:00',
+        7200,
+      );
+      expect(result).toEqual([
+        {
+          started_at: '2023-11-11T15:00:00.000Z',
+          date: '2023-11-12',
+          learning_time: 7200,
+        },
+      ]);
+    });
+
+    it('학습한 시간이 자정을 지나지 않는 경우, 하루에 대한 학습 시간을 반환한다. (미국 시간)', () => {
+      const result = service.calculateLearningTimes(
+        '2023-11-12T02:00:00-0500',
+        7200,
+      );
+      expect(result).toEqual([
+        {
+          started_at: '2023-11-12T05:00:00.000Z',
+          date: '2023-11-12',
+          learning_time: 7200,
+        },
+      ]);
+    });
+  });
+
+  describe('calculatePercentage()', () => {
+    it('유저의 총 학습 시간 기준 전체 유저의 학습 시간에 대한 백분율을 반환한다.', async () => {
+      for (let i = 1; i <= 4; i++) {
+        jest.spyOn(repository, 'query').mockResolvedValueOnce([
+          { user_id: 1, total_time: 40000 },
+          { user_id: 2, total_time: 20000 },
+          { user_id: 3, total_time: 5000 },
+          { user_id: 4, total_time: 1000 },
+        ]);
+        jest.spyOn(usersRepository, 'count').mockResolvedValueOnce(4);
+        expect(await service.calculatePercentage(i, '', '')).toEqual(25 * i);
+      }
+    });
+  });
 });
