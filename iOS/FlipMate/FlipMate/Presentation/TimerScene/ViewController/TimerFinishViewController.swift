@@ -35,6 +35,7 @@ final class TimerFinishViewController: BaseViewController {
         let view = UIView()
         view.backgroundColor = .systemBackground
         view.layer.borderColor = FlipMateColor.gray2.color?.cgColor
+        view.layer.cornerRadius = 12.0
         view.layer.borderWidth = 1
         return view
     }()
@@ -47,6 +48,8 @@ final class TimerFinishViewController: BaseViewController {
         button.setTitleColor(.white, for: .normal)
         button.layer.borderColor = FlipMateColor.gray2.color?.cgColor
         button.layer.borderWidth = 1
+        button.layer.maskedCorners = [.layerMaxXMaxYCorner]
+        button.layer.cornerRadius = 12.0
         button.addTarget(self, action: #selector(saveButtonDidTapped), for: .touchUpInside)
         return button
     }()
@@ -59,6 +62,8 @@ final class TimerFinishViewController: BaseViewController {
         button.setTitleColor(.white, for: .normal)
         button.layer.borderColor = FlipMateColor.gray2.color?.cgColor
         button.layer.borderWidth = 1
+        button.layer.maskedCorners = [.layerMinXMaxYCorner]
+        button.layer.cornerRadius = 12.0
         button.addTarget(self, action: #selector(cancleButtonDidTapped), for: .touchUpInside)
 
         return button
@@ -75,7 +80,7 @@ final class TimerFinishViewController: BaseViewController {
     private let learningTimeTitleLabel: UILabel = {
         let label = UILabel()
         label.text = Constant.learningTitle
-        label.font = FlipMateFont.mediumBold.font
+        label.font = FlipMateFont.smallBold.font
         label.textColor = .label
         return label
     }()
@@ -134,18 +139,18 @@ final class TimerFinishViewController: BaseViewController {
             learningTimeTitleLabel.centerXAnchor.constraint(equalTo: finishView.centerXAnchor),
             learningTimeTitleLabel.bottomAnchor.constraint(
                 equalTo: learningTimeContentLabel.topAnchor,
-                constant: -5),
+                constant: -15),
             
             learningTimeContentLabel.centerXAnchor.constraint(equalTo: finishView.centerXAnchor),
             learningTimeContentLabel.centerYAnchor.constraint(equalTo: finishView.centerYAnchor),
             
             saveButton.bottomAnchor.constraint(equalTo: finishView.bottomAnchor),
-            saveButton.leadingAnchor.constraint(equalTo: finishView.leadingAnchor),
+            saveButton.trailingAnchor.constraint(equalTo: finishView.trailingAnchor),
             saveButton.widthAnchor.constraint(equalTo: finishView.widthAnchor, multiplier: 0.5),
             saveButton.heightAnchor.constraint(equalTo: finishView.heightAnchor, multiplier: 0.2),
             
             cancleButton.bottomAnchor.constraint(equalTo: finishView.bottomAnchor),
-            cancleButton.trailingAnchor.constraint(equalTo: finishView.trailingAnchor),
+            cancleButton.leadingAnchor.constraint(equalTo: finishView.leadingAnchor),
             cancleButton.widthAnchor.constraint(equalTo: finishView.widthAnchor, multiplier: 0.5),
             cancleButton.heightAnchor.constraint(equalTo: finishView.heightAnchor, multiplier: 0.2)
         ])
