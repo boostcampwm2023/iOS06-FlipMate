@@ -30,12 +30,14 @@
 "version" = "버전 정보";
 "reset" = "데이터 초기화";
 "signout" = "로그아웃";
+"signoutMessage" = "로그아웃 하시겠습니까?";
 "accountClosing" = "회원 탈퇴";
 "profileSetting" = "프로필 수정";
 "nicknamePlaceHolder" = "닉네임을 입력해주세요";
 "imageNotSafeTitle" = "이 이미지는 사용할 수 없습니다.";
 "imageNotSafeMessage" = "이미지 유해성이 확인되었습니다. 다른 이미지를 선택해 주세요.";
 "ok" = "확인";
+"cancel" = "취소";
 "available" = "사용 가능한 닉네임 입니다.";
 "lengthViolation" = "닉네임이 20자를 초과했습니다.";
 "emptyViolation" = "닉네임은 2자 이상 입력해야 합니다.";
