@@ -13,6 +13,8 @@ protocol UserInfoManagerProtocol {
     var profileImageChangePublihser: AnyPublisher<String?, Never> { get }
     var totalTimeChangePublihser: AnyPublisher<Int, Never> { get }
     
+    func sendCurrentNickname()
+    func sendCurrentProfileImageURL()
     func updateNickname(at nickname: String)
     func updateProfileImage(at profileImageURL: String?)
     func updateTotalTime(at totalTime: Int)
@@ -42,6 +44,14 @@ final class UserInfoManager: UserInfoManagerProtocol {
     
     var totalTimeChangePublihser: AnyPublisher<Int, Never> {
         return totalTimeChangeSubject.eraseToAnyPublisher()
+    }
+    
+    func sendCurrentNickname() {
+        nicknameChangeSubject.send(nickname)
+    }
+    
+    func sendCurrentProfileImageURL() {
+        profileImageChangeSubject.send(profileImageURL)
     }
     
     func updateNickname(at nickname: String) {
