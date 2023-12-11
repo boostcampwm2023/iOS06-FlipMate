@@ -310,7 +310,7 @@ private extension ProfileSettingsViewController {
     func signUpButtonTapped() {
         doneButton.isEnabled = false
         let userName = nickNameTextField.text ?? ""
-        guard let imageData = profileImageView.image?.jpegData(compressionQuality: 1) else {
+        guard let imageData = profileImageView.image?.jpegData(compressionQuality: 0.6) else {
             FMLogger.general.error("no profile image selected")
             return
         }
