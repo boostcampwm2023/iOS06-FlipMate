@@ -1,0 +1,25 @@
+{
+    "Version": 1.0,
+    "Metadata":
+    {
+        "Project" : "FlipMate",
+        "Created" : "11 Dec 2023",
+        "Description" : "무언가가 선택됨을 알리는 햅틱 진동"
+    },
+    "Pattern":
+    [
+        {
+            "Event":
+            {
+                "Time": 0.0,
+                "EventType": "HapticTransient",
+                "EventParameters":
+                [
+                    { "ParameterID": "HapticIntensity", "ParameterValue": 0.5 },
+                    { "ParameterID": "HapticSharpness", "ParameterValue": 0.5 }
+                ]
+            }
+        }
+    ]
+}
+

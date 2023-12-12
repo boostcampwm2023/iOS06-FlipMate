@@ -90,5 +90,6 @@ private extension TabBarViewController {
     @objc private func timerButtonAction(sender: UIButton) {
         selectedIndex = 1
         timerButton.imageView?.tintColor = FlipMateColor.tabBarIconSelected.color
+        FeedbackManager.shared.startTabBarItemTapFeedback()
     }
 }
