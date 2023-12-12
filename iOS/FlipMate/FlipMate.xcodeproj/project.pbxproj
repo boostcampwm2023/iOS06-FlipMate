@@ -737,6 +737,7 @@
 			children = (
 				2C9F62002B1601F200AE63F9 /* MyNickNameView.swift */,
 				ED6865A12B162B8F001A2AAD /* SocialChartView.swift */,
+				2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */,
 				2C9F62022B16021E00AE63F9 /* FriendSearchResultView.swift */,
 				2C9F62042B160B3900AE63F9 /* NoResultView.swift */,
 				60C2F2852B172D6900EBDD78 /* FriendsCollectionViewCell.swift */,
@@ -1367,7 +1368,6 @@
 				ED6865C02B1E3B48001A2AAD /* WeeklyChartView.swift */,
 				ED6865BE2B1E2FA6001A2AAD /* ChartSegmentedControl.swift */,
 				ED6865D72B1F32EF001A2AAD /* CustomCalenderView.swift */,
-				2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

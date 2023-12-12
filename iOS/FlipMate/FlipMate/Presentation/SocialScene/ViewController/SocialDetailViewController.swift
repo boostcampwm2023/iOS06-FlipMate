@@ -30,7 +30,7 @@ final class SocialDetailViewController: BaseViewController {
         static let profileImageHeight: CGFloat = 50
         static let profileImageWidth: CGFloat = 50
         
-        static let nicknameLabelLeading: CGFloat = 8
+        static let nicknameLabelLeading: CGFloat = 12
         static let nicknameLabelHeight: CGFloat = 25
         
         static let unfollowButtonTrailing: CGFloat = -20
@@ -92,7 +92,7 @@ final class SocialDetailViewController: BaseViewController {
     private lazy var nickNameLabel: UILabel = {
         let label = UILabel()
         
-        label.font = FlipMateFont.mediumBold.font
+        label.font = FlipMateFont.semiLargeBold.font
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         

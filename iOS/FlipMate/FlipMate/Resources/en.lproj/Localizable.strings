@@ -21,7 +21,7 @@
 "deleteAlertMessage" = "Are you sure delete this category?";
 "categoryNamePlaceHolder" = "Please enter the category name";
 "social" = "Social";
-"categoryAddMessage" = "You can add up to 10 categories.";
+"categoryAddMessage" = "You cannot add more than 10 categories";
 
 // MARK: - MyPage Scene
 "myPage" = "MyPage";
@@ -40,8 +40,8 @@
 "errorOccurred" = "An Error has Occurred!";
 "cancel" = "cancel";
 "ok" = "OK";
-"available" = "Available nickname.";
-"lengthViolation" = "Nickname exceeds 20 characters.";
+"available" = "You can use this nickname.";
+"lengthViolation" = "Nickname cannot exceed 10 characters.";
 "emptyViolation" = "Nickname must contain at least 2 characters.";
 "duplicated" = "Nickname has been duplicated.";
 
@@ -72,8 +72,8 @@
 "user" = "User";
 "studyTime" = "Study Time";
 "min" = "min";
-"me" = "me";
-"friend" = "friend";
+"me" = "Me";
+"friend" = "Friend";
 
 // MARK: - ChartViewController
 "daily" = "Daily";
