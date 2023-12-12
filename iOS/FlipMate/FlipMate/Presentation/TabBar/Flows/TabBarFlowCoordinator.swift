@@ -33,7 +33,7 @@ final class TabBarFlowCoordinator: NSObject, Coordinator {
         let tabBarController = dependencies.makeTabBarController()
         tabBarController.delegate = self
         tabBarController.setViewControllers(
-            [makeSocialViewController(), makeTimerViewContorller(), makeChartViewController()],
+            [setSocialViewController(), makeTimerViewContorller(), makeChartViewController()],
             animated: false
         )
         tabBarController.tabBar.tintColor = FlipMateColor.tabBarIconSelected.color
@@ -100,6 +100,15 @@ extension TabBarFlowCoordinator: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if let tabBarVC = tabBarController as? TabBarViewController {
             tabBarVC.timerButton.imageView?.tintColor = FlipMateColor.tabBarIconUnSelected.color
+        }
+        if let index = tabBarController.viewControllers?.firstIndex(of: viewController) {
+            if index == 0 && socialViewController == nil {
+                socialViewController = makeSocialViewController()
+                guard let socialViewController else { return }
+                tabBarController.viewControllers?[index] = socialViewController
+            } else {
+                return
+            }
         }
     }
 }

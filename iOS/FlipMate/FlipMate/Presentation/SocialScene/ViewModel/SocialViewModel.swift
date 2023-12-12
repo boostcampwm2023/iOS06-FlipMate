@@ -97,7 +97,6 @@ final class SocialViewModel: SocialViewModelProtocol {
     }
     
     func viewWillAppear() {
-        getUserInfo()
         getFriendState()
         FMLogger.friend.debug("친구 상태 폴링 시작")
         timerManager.start(completion: fetchFriendStatus)
@@ -119,10 +118,6 @@ final class SocialViewModel: SocialViewModelProtocol {
 }
 
 private extension SocialViewModel {
-    func getUserInfo() {
-        userInfoManager.sendCurrentNickname()
-        userInfoManager.sendCurrentProfileImageURL()
-    }
     
     func getFriendState() {
         socialUseCase.getMyFriend(date: Date())
