@@ -31,12 +31,14 @@
 "version" = "バージョン情報";
 "reset" = "データの初期化";
 "signout" = "ログアウト";
+"signoutMessage" = "ログアウトしますか？";
 "accountClosing" = "会員脱退";
 "profileSetting" = "プロファイル設定";
 "nicknamePlaceHolder" = "ニックネームを入力してください";
 "imageNotSafeTitle" = "この画像は使用できません。";
 "imageNotSafeMessage" = "画像の有害性が確認されました。別の画像を選択してください。";
 "ok" = "確認";
+"cancel" = "キャンセル";
 "available" = "利用可能なニックネームです。";
 "lengthViolation" = "ニックネームが20文字を超えました。";
 "emptyViolation" = "ニックネームは2文字以上入力する必要があります。";

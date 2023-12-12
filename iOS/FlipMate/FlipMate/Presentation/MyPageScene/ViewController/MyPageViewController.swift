@@ -194,7 +194,14 @@ extension MyPageViewController: UITableViewDelegate {
         if indexPath.section == 2 {
             // 로그아웃 탭
             if indexPath.row == 0 {
-                viewModel.signOutButtonTapped()
+                let alert = UIAlertController(title: Constant.signoutMessage, message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: Constant.cancel, style: .cancel))
+                alert.addAction(UIAlertAction(title: Constant.signout, style: .destructive, handler: { [weak self] _ in
+                    self?.viewModel.signOutButtonTapped()
+                }))
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true)
+                }
             }
         }
         
@@ -210,7 +217,9 @@ extension MyPageViewController: UITableViewDelegate {
 private extension MyPageViewController {
     enum Constant {
         static let title = NSLocalizedString("myPage", comment: "")
+        static let signout = NSLocalizedString("signout", comment: "")
+        static let cancel = NSLocalizedString("cancel", comment: "")
+        static let signoutMessage = NSLocalizedString("signoutMessage", comment: "")
         static let close = NSLocalizedString("close", comment: "")
-        
     }
 }

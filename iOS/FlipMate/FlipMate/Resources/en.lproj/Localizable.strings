@@ -20,7 +20,7 @@
 "categoryColor" = "Category Color";
 "deleteAlertMessage" = "Are you sure delete this category?";
 "categoryNamePlaceHolder" = "Please enter the category name";
-"social" = "social";
+"social" = "Social";
 "categoryAddMessage" = "You can add up to 10 categories.";
 
 // MARK: - MyPage Scene
@@ -31,11 +31,13 @@
 "version" = "Version Info";
 "reset" = "Reset Data";
 "signout" = "Log Out";
+"signoutMessage" = "Do you want to log out?";
 "accountClosing" = "Account Withdrawal";
 "profileSetting" = "Profile Setting";
 "nicknamePlaceHolder" = "Please enter your nickname";
 "imageNotSafeTitle" = "This image is not available.";
 "imageNotSafeMessage" = "This image has been confirmed to be harmful. Please select the different image.";
+"cancel" = "cancel";
 "ok" = "OK";
 "available" = "Available nickname.";
 "lengthViolation" = "Nickname exceeds 20 characters.";
