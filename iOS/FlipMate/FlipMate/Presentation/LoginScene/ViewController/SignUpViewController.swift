@@ -194,12 +194,9 @@ final class SignUpViewController: BaseViewController {
             .store(in: &cancellables)
         
         viewModel.imageNotSafePublisher
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                let alert = UIAlertController(title: "이 이미지는 사용할 수 없습니다.", message: "이미지 유해성이 확인되었습니다. 다른 이미지를 선택해 주세요.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "확인", style: .default))
-                DispatchQueue.main.async {
-                    self?.present(alert, animated: true)
-                }
+                self?.showErrorAlert(title: Constant.imageNotSafeTitle, message: Constant.imageNotSafeMessage)
             }
             .store(in: &cancellables)
         
@@ -207,9 +204,7 @@ final class SignUpViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
                 self?.doneButton.isEnabled = false
-                let alert = UIAlertController(title: "오류 발생", message: "\(error.localizedDescription)", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "확인", style: .cancel))
-                self?.present(alert, animated: true)
+                self?.showErrorAlert(title: Constant.errorOccurred, message: "\(error)")
                 FMLogger.general.error("SignUpViewModel에서 에러: \(error)")
             }
             .store(in: &cancellables)
@@ -236,6 +231,12 @@ final class SignUpViewController: BaseViewController {
                 self.doneButton.isEnabled = false
             }
         }
+    }
+    
+    private func showErrorAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Constant.okTitle, style: .default))
+        present(alert, animated: true)
     }
 }
 
@@ -338,6 +339,7 @@ private extension SignUpViewController {
         static let imageNotSafeTitle = NSLocalizedString("imageNotSafeTitle", comment: "")
         static let imageNotSafeMessage = NSLocalizedString("imageNotSafeMessage", comment: "")
         static let okTitle = NSLocalizedString("ok", comment: "")
+        static let errorOccurred = NSLocalizedString("errorOccurred", comment: "")
         static let maxLength = 10
     }
     

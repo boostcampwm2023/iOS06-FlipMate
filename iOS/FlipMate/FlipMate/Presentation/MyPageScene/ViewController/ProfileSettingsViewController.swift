@@ -194,9 +194,7 @@ final class ProfileSettingsViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
                 self?.doneButton.isEnabled = false
-                let alert = UIAlertController(title: "오류 발생", message: "\(error.localizedDescription)", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "확인", style: .cancel))
-                self?.present(alert, animated: true)
+                self?.showErrorAlert(title: Constant.errorOccurred, message: "\(error.localizedDescription)")
                 FMLogger.general.error("SignUpViewModel에서 에러: \(error)")
             }
             .store(in: &cancellables)
@@ -243,9 +241,7 @@ final class ProfileSettingsViewController: BaseViewController {
         viewModel.imageNotSafePublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                let alert = UIAlertController(title: Constant.imageNotSafeTitle, message: Constant.imageNotSafeMessage, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: Constant.okTitle, style: .default))
-                self?.present(alert, animated: true)
+                self?.showErrorAlert(title: Constant.imageNotSafeTitle, message: Constant.imageNotSafeMessage)
             }
             .store(in: &cancellables)
     }
@@ -272,6 +268,12 @@ final class ProfileSettingsViewController: BaseViewController {
                 self.doneButton.isEnabled = false
             }
         }
+    }
+    
+    private func showErrorAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Constant.okTitle, style: .default))
+        present(alert, animated: true)
     }
 }
 
@@ -306,7 +308,7 @@ private extension ProfileSettingsViewController {
     func signUpButtonTapped() {
         doneButton.isEnabled = false
         let userName = nickNameTextField.text ?? ""
-        guard let imageData = profileImageView.image?.jpegData(compressionQuality: 0.6) else {
+        guard let imageData = profileImageView.image?.jpegData(compressionQuality: 1) else {
             FMLogger.general.error("no profile image selected")
             return
         }
@@ -374,6 +376,7 @@ private extension ProfileSettingsViewController {
         static let imageNotSafeTitle = NSLocalizedString("imageNotSafeTitle", comment: "")
         static let imageNotSafeMessage = NSLocalizedString("imageNotSafeMessage", comment: "")
         static let okTitle = NSLocalizedString("ok", comment: "")
+        static let errorOccurred = NSLocalizedString("errorOccurred", comment: "")
         static let maxLength = 10
     }
     
