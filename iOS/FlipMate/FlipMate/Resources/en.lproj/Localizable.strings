@@ -36,6 +36,7 @@
 "imageNotSafeTitle" = "This image is not available.";
 "imageNotSafeMessage" = "This image has been confirmed to be harmful. Please select the different image.";
 "ok" = "yes";
+"errorOccurred" = "An Error has Occurred!";
 "available" = "Available nickname.";
 "lengthViolation" = "Nickname exceeds 20 characters.";
 "emptyViolation" = "Nickname must contain at least 2 characters.";
