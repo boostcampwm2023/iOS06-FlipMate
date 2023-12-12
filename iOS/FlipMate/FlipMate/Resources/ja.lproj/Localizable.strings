@@ -79,6 +79,7 @@
 // MARK: - DailyChartView
 "time" = "時間";
 "totalTime" = "総学習時間";
+"etc" = "その他";
 
 // MARK: - WeeklyChartView
 "day" = "曜日";

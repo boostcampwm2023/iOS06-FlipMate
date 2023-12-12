@@ -76,6 +76,7 @@
 "totalTime" = "총 학습 시간";
 "day" = "요일";
 "weeklyLearingChart" = "주간 학습 추이";
+"etc" = "기타";
 
 // MARK: - Login Scene
 "logoSubTitle" = "우리들이 공부하는 시간";
