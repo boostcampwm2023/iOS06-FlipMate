@@ -74,7 +74,7 @@ final class SignUpViewModel: SignUpViewModelProtocol {
                     case 40001:
                         imageNotSafeSubject.send()
                     default:
-                        break
+                        errorSubject.send(errorBody)
                     }
                 }
             } catch let error {

@@ -37,6 +37,7 @@
 "nicknamePlaceHolder" = "Please enter your nickname";
 "imageNotSafeTitle" = "This image is not available.";
 "imageNotSafeMessage" = "This image has been confirmed to be harmful. Please select the different image.";
+"errorOccurred" = "An Error has Occurred!";
 "cancel" = "cancel";
 "ok" = "OK";
 "available" = "Available nickname.";
