@@ -45,7 +45,8 @@ final class TimerSceneDIContainer: TimerFlowCoordinatorDependencies {
             userInfoUseCase: makeUserInfoUseCase(),
             actions: actions,
             categoryManager: dependencies.categoryManager,
-            userInfoManager: dependencies.userInfoManager
+            userInfoManager: dependencies.userInfoManager,
+            timerManager: TimerManager()
         )
     }
     

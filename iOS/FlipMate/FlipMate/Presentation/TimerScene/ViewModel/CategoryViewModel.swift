@@ -24,6 +24,7 @@ protocol CategoryViewModelInput {
 protocol CategoryViewModelOutput {
     var categoriesPublisher: AnyPublisher<[Category], Never> { get }
     var selectedCategoryPublisher: AnyPublisher<Category, Never> { get }
+    var categoryPullPublisher: AnyPublisher<Void, Never> { get }
 }
 
 typealias CategoryViewModelProtocol = CategoryViewModelInput & CategoryViewModelOutput
@@ -32,6 +33,7 @@ final class CategoryViewModel: CategoryViewModelProtocol {
     // MARK: properties
     private var categoriesSubject = CurrentValueSubject<[Category], Never>([])
     private var selectedCategorySubject = PassthroughSubject<Category, Never>()
+    private var categoryPullSubject = PassthroughSubject<Void, Never>()
     
     private var categoryMananger: CategoryManageable
     private let useCase: CategoryUseCase
@@ -53,9 +55,18 @@ final class CategoryViewModel: CategoryViewModelProtocol {
         return selectedCategorySubject.eraseToAnyPublisher()
     }
     
+    var categoryPullPublisher: AnyPublisher<Void, Never> {
+        return categoryPullSubject.eraseToAnyPublisher()
+    }
+    
     // MARK: Input
     func createCategoryTapped() {
-        actions?.showModifyCategory(.create, nil)
+        
+        if categoryMananger.numberOfCategory() == 10 {
+            categoryPullSubject.send()
+        } else {
+            actions?.showModifyCategory(.create, nil)
+        }
     }
     
     func updateCategoryTapped(category: Category) {
