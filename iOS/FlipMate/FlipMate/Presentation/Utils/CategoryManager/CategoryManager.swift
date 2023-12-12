@@ -52,4 +52,8 @@ final class CategoryManager: CategoryManageable {
         guard let targetIndex = categories.firstIndex(of: targetCategory) else { return nil }
         return categories[targetIndex]
     }
+    
+    func numberOfCategory() -> Int {
+        return categories.count
+    }
 }

@@ -26,11 +26,10 @@ final class CategorySettingFooterView: UICollectionReusableView {
         button.layer.borderWidth = Constant.addButtonborderWidth
         button.layer.cornerRadius = Constant.addButtoncornerRedius
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
         return button
     }()
     
-    private lazy var tapGestureRecognizer = UITapGestureRecognizer(target: self, 
-                                                                   action: #selector(footerViewSelected))
     private var subject = PassthroughSubject<Void, Never>()
     var cancellable: AnyCancellable?
     
@@ -38,7 +37,6 @@ final class CategorySettingFooterView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
-        configureGestureRecognizers()
     }
     
     required init?(coder: NSCoder) {
@@ -65,19 +63,14 @@ private extension CategorySettingFooterView {
             addButton.topAnchor.constraint(equalTo: topAnchor),
             addButton.leadingAnchor.constraint(equalTo: leadingAnchor),
             addButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-            addButton.bottomAnchor.constraint(equalTo: bottomAnchor)
+            addButton.heightAnchor.constraint(equalToConstant: 58)
         ])
     }
 }
 
 private extension CategorySettingFooterView {
-    func configureGestureRecognizers() {
-        tapGestureRecognizer.cancelsTouchesInView = false
-        self.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
     @objc
-    func footerViewSelected() {
+    func addButtonTapped() {
         subject.send()
     }
 }
