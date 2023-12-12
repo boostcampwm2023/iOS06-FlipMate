@@ -251,23 +251,29 @@ final class ProfileSettingsViewController: BaseViewController {
         DispatchQueue.main.async {
             switch state {
             case .valid:
-                self.nickNameValidationStateLabel.text = state.message
-                self.nickNameValidationStateLabel.textColor = FlipMateColor.approveGreen.color
-                self.doneButton.isEnabled = true
+                self.approveNickName()
             case .lengthViolation:
-                self.nickNameValidationStateLabel.text = state.message
-                self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                self.doneButton.isEnabled = false
+                self.invalidNickName(state)
             case .emptyViolation:
-                self.nickNameValidationStateLabel.text = state.message
-                self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                self.doneButton.isEnabled = false
+                self.invalidNickName(state)
             case .duplicated:
-                self.nickNameValidationStateLabel.text = state.message
-                self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                self.doneButton.isEnabled = false
+                self.invalidNickName(state)
+            case .emojiContained:
+                self.invalidNickName(state)
             }
         }
+    }
+    
+    private func approveNickName() {
+        self.nickNameValidationStateLabel.text = NickNameValidationState.valid.message
+        self.nickNameValidationStateLabel.textColor = FlipMateColor.approveGreen.color
+        self.doneButton.isEnabled = true
+    }
+    
+    private func invalidNickName(_ state: NickNameValidationState) {
+        self.nickNameValidationStateLabel.text = state.message
+        self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
+        self.doneButton.isEnabled = false
     }
     
     private func showErrorAlert(title: String, message: String) {
@@ -354,7 +360,7 @@ extension ProfileSettingsViewController: PHPickerViewControllerDelegate {
             }
         }
     }
-                
+    
     private func removedOrientationImage(_ image: UIImage) -> UIImage {
         guard image.imageOrientation != .up else { return image }
         
