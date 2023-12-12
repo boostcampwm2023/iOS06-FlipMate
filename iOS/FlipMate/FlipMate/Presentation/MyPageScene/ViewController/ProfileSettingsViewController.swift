@@ -350,10 +350,22 @@ extension ProfileSettingsViewController: PHPickerViewControllerDelegate {
                     FMLogger.general.error("ERROR: 이미지 저장 실패")
                     return
                 }
-                self.profileImageView.image = image
+                let normalizedImage = self.removedOrientationImage(image)
+                self.profileImageView.image = normalizedImage
                 self.viewModel.profileImageChanged()
             }
         }
+    }
+                
+    func removedOrientationImage(_ image: UIImage) -> UIImage {
+        guard image.imageOrientation != .up else { return image }
+        
+        UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
+        image.draw(in: CGRect(origin: .zero, size: image.size))
+        let normalizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return normalizedImage ?? image
     }
 }
 
