@@ -25,10 +25,10 @@ struct SocialChartView: View {
                             PointMark(x: .value(Constant.date, time.weekday, unit: .day), y: .value(Constant.studyTime, Float(time.studyTime) / 60))
                             LineMark(x: .value(Constant.date, time.weekday, unit: .day), y: .value(Constant.studyTime, Float(time.studyTime) / 60))
                     }
-                    .foregroundStyle(by: .value("사용자", series.user))
+                    .foregroundStyle(by: .value(Constant.user, series.user))
                 }
                 .frame(height: 360)
-                .chartYAxisLabel("분 (m)")
+                .chartYAxisLabel(Constant.min)
             } else {
                 Text(Constant.message)
             }

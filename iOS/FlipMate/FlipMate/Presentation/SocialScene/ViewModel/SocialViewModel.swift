@@ -44,22 +44,23 @@ final class SocialViewModel: SocialViewModelProtocol {
     private var cancellables = Set<AnyCancellable>()
     private let actions: SocialViewModelActions?
     private let socialUseCase: SocialUseCase
-    private var timerState: TimerState = .notStarted
     
     // MARK: - Managers
     private var friendStatusPollingManager: FriendStatusPollingManageable
-    private lazy var timerManager: TimerManager = .init(timeInterval: .seconds(4), handler: fetchFriendStatus)
+    private let timerManager: TimerManagerProtocol
     private let userInfoManager: UserInfoManagerProtocol
     
     // MARK: - init
     init(actions: SocialViewModelActions? = nil, 
          socialUseCase: SocialUseCase,
          friendStatusPollingManager: FriendStatusPollingManageable,
-         userInfoManager: UserInfoManagerProtocol) {
+         userInfoManager: UserInfoManagerProtocol,
+         timerManager: TimerManagerProtocol) {
         self.actions = actions
         self.socialUseCase = socialUseCase
         self.friendStatusPollingManager = friendStatusPollingManager
         self.userInfoManager = userInfoManager
+        self.timerManager = timerManager
     }
     
     // MARK: - Output
@@ -97,7 +98,6 @@ final class SocialViewModel: SocialViewModelProtocol {
     }
     
     func viewWillAppear() {
-        getUserInfo()
         getFriendState()
         FMLogger.friend.debug("친구 상태 폴링 시작")
         timerManager.start(completion: fetchFriendStatus)
@@ -119,11 +119,6 @@ final class SocialViewModel: SocialViewModelProtocol {
 }
 
 private extension SocialViewModel {
-    func getUserInfo() {
-        userInfoManager.sendCurrentNickname()
-        userInfoManager.sendCurrentProfileImageURL()
-    }
-    
     func getFriendState() {
         socialUseCase.getMyFriend(date: Date())
             .receive(on: DispatchQueue.main)

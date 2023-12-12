@@ -86,7 +86,14 @@ final class CategorySettingViewController: BaseViewController {
                 showActionSheet(with: category)
             }
             .store(in: &cancellables)
-            
+        
+        viewModel.categoryPullPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                self.showAlert()
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -229,6 +236,15 @@ private extension CategorySettingViewController {
         
         return [deleteAction, cancelAction]
     }
+    
+    func showAlert() {
+        let alertController = UIAlertController(
+            title: Constant.addCategory,
+            message: Constant.categoryAddMessage, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: Constant.okTitle, style: .default)
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
+    }
 }
 
 private extension CategorySettingViewController {
@@ -239,5 +255,8 @@ private extension CategorySettingViewController {
         static let deleteCategory = NSLocalizedString("deleteCategory", comment: "")
         static let modifyCategory = NSLocalizedString("modifyCategory", comment: "")
         static let deleteAlertMessage = NSLocalizedString("deleteAlertMessage", comment: "")
+        static let okTitle = NSLocalizedString("ok", comment: "")
+        static let addCategory = NSLocalizedString("addCategory", comment: "")
+        static let categoryAddMessage = NSLocalizedString("categoryAddMessage", comment: "")
     }
 }

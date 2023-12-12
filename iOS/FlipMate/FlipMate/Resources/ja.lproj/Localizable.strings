@@ -21,6 +21,7 @@
 "deleteAlertMessage" = "該当カテゴリを本当に削除しますか？";
 "categoryNamePlaceHolder" = "カテゴリ名を入力してください。";
 "social" = "ソーシャル";
+"categoryAddMessage" = "カテゴリは10個まで追加できます。";
 
 // MARK: - MyPage Scene
 "myPage" = "マイページ";
