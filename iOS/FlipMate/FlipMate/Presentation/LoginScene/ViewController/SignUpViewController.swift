@@ -204,11 +204,13 @@ final class SignUpViewController: BaseViewController {
             .store(in: &cancellables)
         
         viewModel.errorPublisher
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
+                self?.doneButton.isEnabled = false
+                let alert = UIAlertController(title: "오류 발생", message: "\(error.localizedDescription)", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .cancel))
+                self?.present(alert, animated: true)
                 FMLogger.general.error("SignUpViewModel에서 에러: \(error)")
-                    DispatchQueue.main.async {
-                    self?.doneButton.isEnabled = false
-                }
             }
             .store(in: &cancellables)
     }
@@ -268,7 +270,7 @@ private extension SignUpViewController {
     func signUpButtonTapped() {
         doneButton.isEnabled = false
         let userName = nickNameTextField.text ?? ""
-        guard let imageData = profileImageView.image?.jpegData(compressionQuality: 1) else {
+        guard let imageData = profileImageView.image?.jpegData(compressionQuality: 0.6) else {
             FMLogger.general.error("no profile image selected")
             return
         }
@@ -308,9 +310,21 @@ extension SignUpViewController: PHPickerViewControllerDelegate {
                     FMLogger.general.error("ERROR: 이미지 저장 실패")
                     return
                 }
-                self.profileImageView.image = image
+                let normalizedImage = self.removedOrientationImage(image)
+                self.profileImageView.image = normalizedImage
             }
         }
+    }
+    
+    private func removedOrientationImage(_ image: UIImage) -> UIImage {
+        guard image.imageOrientation != .up else { return image }
+        
+        UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
+        image.draw(in: CGRect(origin: .zero, size: image.size))
+        let normalizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return normalizedImage ?? image
     }
 }
 

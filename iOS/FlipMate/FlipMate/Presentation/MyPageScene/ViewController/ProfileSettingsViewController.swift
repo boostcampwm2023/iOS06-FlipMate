@@ -196,9 +196,7 @@ final class ProfileSettingsViewController: BaseViewController {
                 self?.doneButton.isEnabled = false
                 let alert = UIAlertController(title: "오류 발생", message: "\(error.localizedDescription)", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "확인", style: .cancel))
-                DispatchQueue.main.async {
-                    self?.present(alert, animated: true)
-                }
+                self?.present(alert, animated: true)
                 FMLogger.general.error("SignUpViewModel에서 에러: \(error)")
             }
             .store(in: &cancellables)
@@ -233,7 +231,6 @@ final class ProfileSettingsViewController: BaseViewController {
             .store(in: &cancellables)
         
         viewModel.isProfileImageChangedPublisher
-            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 if self?.currentNicknameState == nil || self?.currentNicknameState == .valid {
                     DispatchQueue.main.async {
@@ -244,12 +241,11 @@ final class ProfileSettingsViewController: BaseViewController {
             .store(in: &cancellables)
         
         viewModel.imageNotSafePublisher
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 let alert = UIAlertController(title: Constant.imageNotSafeTitle, message: Constant.imageNotSafeMessage, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: Constant.okTitle, style: .default))
-                DispatchQueue.main.async {
-                    self?.present(alert, animated: true)
-                }
+                self?.present(alert, animated: true)
             }
             .store(in: &cancellables)
     }
@@ -357,7 +353,7 @@ extension ProfileSettingsViewController: PHPickerViewControllerDelegate {
         }
     }
                 
-    func removedOrientationImage(_ image: UIImage) -> UIImage {
+    private func removedOrientationImage(_ image: UIImage) -> UIImage {
         guard image.imageOrientation != .up else { return image }
         
         UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
