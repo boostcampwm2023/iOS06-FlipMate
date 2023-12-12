@@ -11,6 +11,7 @@ import Charts
 struct DailyChartView: View {
     @ObservedObject var viewModel: ChartViewModel
     @State private var selectedDate = Date()
+    @Environment(\.colorScheme) var colorScheme
     
     init(viewModel: ChartViewModel) {
         self.viewModel = viewModel
@@ -28,7 +29,8 @@ struct DailyChartView: View {
                                 .cornerRadius(10.0)
                                 .annotation(position: .overlay) {
                                     if getRatio(time: category.studyTime ?? 0, sum: viewModel.dailyChartLog.studyLog.totalTime) > 0.05 {
-                                        DailyChartView.StrokeText(text: "\(category.studyTime ?? 0)", width: 0.3, color: .white)
+                                        DailyChartView.StrokeText(text: "\(category.studyTime ?? 0)",
+                                                                  width: 0.3, color: colorScheme == .dark ? .black : .white)
                                         .font(.headline)
                                     }
                                 }
