@@ -119,6 +119,7 @@ final class SocialViewModel: SocialViewModelProtocol {
 }
 
 private extension SocialViewModel {
+    
     func getFriendState() {
         socialUseCase.getMyFriend(date: Date())
             .receive(on: DispatchQueue.main)
