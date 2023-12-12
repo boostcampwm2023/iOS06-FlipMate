@@ -11,6 +11,7 @@ import Charts
 struct DailyChartView: View {
     @ObservedObject var viewModel: ChartViewModel
     @State private var selectedDate = Date()
+    @Environment(\.colorScheme) var colorScheme
     
     init(viewModel: ChartViewModel) {
         self.viewModel = viewModel
@@ -27,9 +28,10 @@ struct DailyChartView: View {
                                 .foregroundStyle(by: .value(Constant.category, category.subject))
                                 .cornerRadius(10.0)
                                 .annotation(position: .overlay) {
-                                    if category.studyTime != 0 {
-                                        Text("\(category.studyTime ?? 0)")
-                                            .font(.headline)
+                                    if getRatio(time: category.studyTime ?? 0, sum: viewModel.dailyChartLog.studyLog.totalTime) > 0.05 {
+                                        DailyChartView.StrokeText(text: "\(category.studyTime ?? 0)",
+                                                                  width: 0.3, color: colorScheme == .dark ? .black : .white)
+                                        .font(.headline)
                                     }
                                 }
                         }
@@ -69,7 +71,7 @@ struct DailyChartView: View {
         }
     }
     
-    func getColorArray(categories: [Category]) -> [Color] {
+    private func getColorArray(categories: [Category]) -> [Color] {
         let colorArray: [Color] = categories.map { category in
             if let uiColor = UIColor(hexString: category.color) {
                 return Color(uiColor)
@@ -78,6 +80,10 @@ struct DailyChartView: View {
             }
         }
         return colorArray
+    }
+    
+    private func getRatio(time: Int, sum: Int) -> Float {
+        return Float(time) / Float(sum)
     }
 }
 
@@ -88,5 +94,24 @@ private extension DailyChartView {
         static let totalTime = NSLocalizedString("totalTime", comment: "")
         static let category = NSLocalizedString("category", comment: "")
         static let min = NSLocalizedString("date", comment: "")
+    }
+    
+    struct StrokeText: View {
+        let text: String
+        let width: CGFloat
+        let color: Color
+        
+        var body: some View {
+            ZStack {
+                ZStack {
+                    Text(text).offset(x: width, y: width)
+                    Text(text).offset(x: -width, y: width)
+                    Text(text).offset(x: width, y: -width)
+                    Text(text).offset(x: -width, y: -width)
+                }
+                .foregroundColor(color)
+                Text(text)
+            }
+        }
     }
 }

@@ -81,6 +81,7 @@
 // MARK: - DailyChartView
 "time" = "Time";
 "totalTime" = "Total Time";
+"etc" = "etc";
 
 // MARK: - WeeklyChartView
 "day" = "day";
