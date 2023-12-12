@@ -58,9 +58,13 @@ private extension TabBarViewController {
     }
     
     func configureTabBar() {
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        tabBarAppearance.backgroundColor = FlipMateColor.tabBarColor.color
         tabBar.layer.borderWidth = Constant.borderWidth
         tabBar.layer.borderColor = FlipMateColor.tabBarLayerColor.color?.cgColor
-        tabBar.layer.backgroundColor = FlipMateColor.tabBarColor.color?.cgColor
+        tabBar.backgroundColor = FlipMateColor.tabBarColor.color
+        tabBar.standardAppearance = tabBarAppearance
         view.addSubview(timerButton)
     }
 
