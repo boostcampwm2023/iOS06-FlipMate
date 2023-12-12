@@ -25,8 +25,7 @@ protocol FriendStatusPollingManageable {
 final class FriendStatusPollingManager: FriendStatusPollingManageable {
     private var preFriendStatusArray: [FriendStatus] = []
     private var updateFriendArray: [UpdateFriend] = []
-    private var timerState: TimerState = .notStarted
-    private lazy var timerManager = TimerManager(timeInterval: .seconds(1), handler: increaseLearningTime)
+    private let timerManager: TimerManagerProtocol
     
     private var updateLearningFriends = PassthroughSubject<[UpdateFriend], Never>()
     private var updateStopFriends = PassthroughSubject<[StopFriend], Never>()
@@ -37,6 +36,10 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
     
     var updateStopFriendsPublisher: AnyPublisher<[StopFriend], Never> {
         return updateStopFriends.eraseToAnyPublisher()
+    }
+    
+    init(timerManager: TimerManagerProtocol) {
+        self.timerManager = timerManager
     }
     
     func update(preFriendStatusArray: [FriendStatus]) {
@@ -153,13 +156,11 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
     
     private func startTimer() {
         if updateFriendArray.isEmpty { return }
-        if timerState == .resumed { return }
+        if timerManager.state == .resumed { return }
         timerManager.start(completion: increaseLearningTime)
-        timerState = .resumed
     }
     
     private func stopTimer() {
         timerManager.cancel()
-        timerState = .cancled
     }
 }

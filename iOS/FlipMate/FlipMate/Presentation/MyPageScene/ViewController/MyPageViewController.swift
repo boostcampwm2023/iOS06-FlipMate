@@ -12,7 +12,7 @@ final class MyPageViewController: BaseViewController {
     // MARK: - View Properties
     private lazy var dismissButton: UIButton = {
         let button = UIButton()
-        button.setTitle("닫기", for: .normal)
+        button.setTitle(Constant.close, for: .normal)
         button.setTitleColor(.label, for: .normal)
         button.addTarget(self, action: #selector(dismissButtonDidTapped), for: .touchUpInside)
         return button
@@ -134,9 +134,9 @@ extension MyPageViewController: UITableViewDataSource {
         case 0:
             return 1
         case 1:
-            return 3
-        case 2:
             return 2
+        case 2:
+            return 1
         case 3:
             return 1
         default:
@@ -180,30 +180,20 @@ extension MyPageViewController: UITableViewDelegate {
         }
         
         if indexPath.section == 1 {
-            // 문의하기 탭
+            // 개발자 정보 탭
             if indexPath.row == 0 {
             
             }
             
-            // 개발자 정보 탭
-            if indexPath.row == 1 {
-                
-            }
-            
             // 버전 정보 탭
-            if indexPath.row == 2 {
+            if indexPath.row == 1 {
                 
             }
         }
         
         if indexPath.section == 2 {
-            // 데이터 초기화 탭
-            if indexPath.row == 0 {
-                
-            }
-            
             // 로그아웃 탭
-            if indexPath.row == 1 {
+            if indexPath.row == 0 {
                 let alert = UIAlertController(title: Constant.signoutMessage, message: "", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: Constant.cancel, style: .cancel))
                 alert.addAction(UIAlertAction(title: Constant.signout, style: .destructive, handler: { [weak self] _ in
@@ -230,5 +220,6 @@ private extension MyPageViewController {
         static let signout = NSLocalizedString("signout", comment: "")
         static let cancel = NSLocalizedString("cancel", comment: "")
         static let signoutMessage = NSLocalizedString("signoutMessage", comment: "")
+        static let close = NSLocalizedString("close", comment: "")
     }
 }

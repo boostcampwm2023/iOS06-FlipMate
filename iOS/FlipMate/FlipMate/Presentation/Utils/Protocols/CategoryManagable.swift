@@ -15,4 +15,5 @@ protocol CategoryManageable {
     func removeCategory(categoryId: Int)
     func append(category: Category)
     func findCategory(categoryId: Int) -> Category?
+    func numberOfCategory() -> Int
 }
