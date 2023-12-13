@@ -141,6 +141,37 @@ export class MatesService {
     return this.entityToDto(result);
   }
 
+  async findMate(user: UsersModel, following_nickname: string) {
+    let statusCode = 20000;
+    const following = await this.userRepository.findOne({
+      where: { nickname: following_nickname },
+    });
+
+    if (user.id === following?.id) {
+      statusCode = 20001; //자신을 친구 추가 할 수 없습니다.
+    }
+
+    if (!user || !following) {
+      throw new NotFoundException('해당 유저는 존재하지 않습니다.');
+    }
+
+    const isExist = await this.matesRepository.findOne({
+      where: { follower_id: user, following_id: following },
+    });
+
+    if (isExist) {
+      statusCode = 20002; //이미 친구 관계입니다.
+    }
+
+    return {
+      statusCode,
+      image_url: getImageUrl(
+        this.configService.get(ENV.CDN_ENDPOINT),
+        following.image_url,
+      ),
+    };
+  }
+
   async deleteMate(user: UsersModel, following_id: number): Promise<void> {
     const following = await this.userRepository.findOne({
       where: { id: following_id },
