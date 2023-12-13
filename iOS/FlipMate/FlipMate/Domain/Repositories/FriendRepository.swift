@@ -11,6 +11,6 @@ import Combine
 protocol FriendRepository {
     func follow(at nickname: String) -> AnyPublisher<String, NetworkError>
     func unfollow(at id: Int) -> AnyPublisher<String, NetworkError>
-    func search(at nickname: String) -> AnyPublisher<String?, NetworkError>
+    func search(at nickname: String) -> AnyPublisher<FriendSearchResult, NetworkError>
     func loadChart(at id: Int) -> AnyPublisher<SocialChart, NetworkError>
 }

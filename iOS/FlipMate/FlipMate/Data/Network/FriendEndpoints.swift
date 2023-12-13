@@ -27,7 +27,7 @@ struct FriendEndpoints {
     static func searchFriend(at nickname: String) -> EndPoint<UserProfileResposeDTO> {
         return EndPoint(
             baseURL: BaseURL.flipmateDomain,
-            path: Paths.user + "/profile?nickname=\(nickname)",
+            path: Paths.friend + "/search?nickname=\(nickname)",
             method: .get)
     }
     
