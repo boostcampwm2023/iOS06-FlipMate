@@ -29,7 +29,7 @@ protocol TimerViewModelInput {
     func deviceProximityDidChange(_ sender: Bool)
     func categorySettingButtoneDidTapped()
     func categoryDidSelected(category: Category)
-    func appendStudyEndLog(studyEndLog: StudyEndLog)
+    func saveStudyLog()
     func categoryDidDeselected()
 }
 
@@ -130,38 +130,8 @@ final class TimerViewModel: TimerViewModelProtocol {
     }
     
     func viewDidLoad() {
-        studyLogUseCase.getUserInfo()
-            .receive(on: DispatchQueue.main)
-            .sink { complection in
-                switch complection {
-                case .finished:
-                    FMLogger.timer.debug("유저 공부 정보 요청 성공")
-                case .failure(let error):
-                    FMLogger.timer.error("유저 공부 정보 요청 실패 \(error.localizedDescription)")
-                }
-            } receiveValue: { [weak self] studyLog in
-                guard let self = self else { return }
-                self.userInfoManager.updateTotalTime(at: studyLog.totalTime)
-                self.categoryManager.replace(categories: studyLog.category)
-            }
-            .store(in: &cancellables)
-        
-        userInfoUseCase.getUserInfo()
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    FMLogger.user.debug("유저 정보 요청 성공")
-                case .failure(let error):
-                    FMLogger.user.error("유저 정보 요청 실패 \(error.localizedDescription)")
-                }
-            } receiveValue: { [weak self] userInfo in
-                guard let self = self else { return }
-                self.userInfoManager.updateNickname(at: userInfo.name)
-                self.userInfoManager.updateProfileImage(at: userInfo.profileImageURL)
-            }
-            .store(in: &cancellables)
-
+        updateStudyLog()
+        updateUserInfo()
     }
     
     func viewWillAppear() {
@@ -182,18 +152,8 @@ final class TimerViewModel: TimerViewModelProtocol {
         selectedCategory = nil
     }
     
-    func appendStudyEndLog(studyEndLog: StudyEndLog) {
-        userInfoManager.updateTotalTime(at: studyEndLog.learningTime)
-        guard let categoryId = studyEndLog.categoryId else { return }
-        guard let targetCategory = categoryManager.findCategory(categoryId: categoryId) else { return }
-        guard let studyTime = targetCategory.studyTime else { return }
-        let newCategory = Category(
-            id: targetCategory.id,
-            color: targetCategory.color,
-            subject: targetCategory.subject,
-            studyTime: studyTime + studyEndLog.learningTime)
-        selectedCategory = nil
-        categoryManager.change(category: newCategory)
+    func saveStudyLog() {
+        updateStudyLog()
     }
 }
 
@@ -216,6 +176,42 @@ private extension TimerViewModel {
     
     func changeCategory(category: Category) {
         categoryManager.change(category: category)
+    }
+    
+    func updateStudyLog() {
+        studyLogUseCase.getUserInfo()
+            .receive(on: DispatchQueue.main)
+            .sink { complection in
+                switch complection {
+                case .finished:
+                    FMLogger.timer.debug("유저 공부 정보 요청 성공")
+                case .failure(let error):
+                    FMLogger.timer.error("유저 공부 정보 요청 실패 \(error.localizedDescription)")
+                }
+            } receiveValue: { [weak self] studyLog in
+                guard let self = self else { return }
+                self.userInfoManager.updateTotalTime(at: studyLog.totalTime)
+                self.categoryManager.replace(categories: studyLog.category)
+            }
+            .store(in: &cancellables)
+    }
+    
+    func updateUserInfo() {
+        userInfoUseCase.getUserInfo()
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    FMLogger.user.debug("유저 정보 요청 성공")
+                case .failure(let error):
+                    FMLogger.user.error("유저 정보 요청 실패 \(error.localizedDescription)")
+                }
+            } receiveValue: { [weak self] userInfo in
+                guard let self = self else { return }
+                self.userInfoManager.updateNickname(at: userInfo.name)
+                self.userInfoManager.updateProfileImage(at: userInfo.profileImageURL)
+            }
+            .store(in: &cancellables)
     }
 }
 

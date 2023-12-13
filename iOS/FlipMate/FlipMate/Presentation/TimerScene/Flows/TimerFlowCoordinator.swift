@@ -52,9 +52,9 @@ final class TimerFlowCoordinator: Coordinator {
         navigationController?.present(timerFinishViewController, animated: true)
     }
     
-    private func didSaveStudyEndLog(studyEndLog: StudyEndLog) {
+    private func didSaveStudyEndLog() {
         navigationController?.dismiss(animated: true)
-        timerViewController?.appendStudyEndLog(studyEndLog: studyEndLog)
+        timerViewController?.saveStudyLog()
     }
     
     private func didCancleStudyEndLog() {

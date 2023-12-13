@@ -65,7 +65,7 @@ final class UserInfoManager: UserInfoManagerProtocol {
     }
     
     func updateTotalTime(at totalTime: Int) {
-        self.totalTime += totalTime
+        self.totalTime = totalTime
         totalTimeChangeSubject.send(self.totalTime)
     }
     

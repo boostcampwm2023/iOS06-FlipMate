@@ -196,8 +196,8 @@ final class TimerViewController: BaseViewController {
             .store(in: &cancellables)
     }
     
-    func appendStudyEndLog(studyEndLog: StudyEndLog) {
-        timerViewModel.appendStudyEndLog(studyEndLog: studyEndLog)
+    func saveStudyLog() {
+        timerViewModel.saveStudyLog()
     }
 }
 
