@@ -22,6 +22,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   ): Promise<any> {
     const user = {
       email: email.emails[0].value,
+      auth_type: 'google',
     };
     done(null, user);
   }

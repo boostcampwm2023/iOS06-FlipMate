@@ -53,10 +53,17 @@ export class MatesService {
     };
   }
 
-  async getMates(user_id: number, date: string): Promise<object[]> {
-    const offset = date.split(/\d\d:\d\d:\d\d/)[1];
+  async getMates(
+    user_id: number,
+    datetime: string,
+    timezone: string,
+  ): Promise<object[]> {
+    if (!user_id || !datetime || !timezone) {
+      throw new BadRequestException('인자의 형식이 잘못되었습니다.');
+    }
+    const offset = timezone[0] === ' ' ? `+${timezone.trim()}` : timezone;
 
-    const nowUserTime = moment(date)
+    const nowUserTime = moment(`${datetime}${timezone}`)
       .utcOffset(offset)
       .format('YYYY-MM-DD HH:mm:ss');
 
