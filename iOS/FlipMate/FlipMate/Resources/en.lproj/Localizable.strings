@@ -73,7 +73,7 @@
 
 // MARK: - ChartViewController
 "daily" = "Daily";
-"weekly" = "Weekly";
+"weekly" = "Week";
 
 // MARK: - DailyChartView
 "time" = "Time";
