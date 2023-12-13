@@ -77,11 +77,12 @@ final class TimerViewController: BaseViewController {
         super.viewDidLoad()
         setDataSource()
         setSnapshot()
+        configureTimeZoneNotification()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         UIDevice.current.isProximityMonitoringEnabled = true
-        configureNotification()
+        configureProximityNotification()
         timerViewModel.viewWillAppear()
     }
     
@@ -90,7 +91,7 @@ final class TimerViewController: BaseViewController {
         deviceMotionManager.stopDeviceMotion()
         timerViewModel.viewDidDisappear()
         UIDevice.current.isProximityMonitoringEnabled = false
-        NotificationCenter.default.removeObserver(self)
+        removeProximityNotification()
     }
     // swiftlint:enable notification_center_detachment
     
@@ -222,7 +223,7 @@ private extension TimerViewController {
 
 // MARK: Detecting FaceDown Method
 private extension TimerViewController {
-    func configureNotification() {
+    func configureProximityNotification() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(proximityDidChange(_:)),
@@ -230,9 +231,27 @@ private extension TimerViewController {
             object: nil)
     }
     
+    func removeProximityNotification() {
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIDevice.proximityStateDidChangeNotification,
+            object: nil)
+    }
+    
     func handleOrientationChange(_ orientation: UIDeviceOrientation) {
         guard let deviceOrientation = DeviceOrientation(rawValue: orientation.rawValue) else { return }
         timerViewModel.deviceOrientationDidChange(deviceOrientation)
+    }
+}
+
+// MARK: - TimeZone Notification
+private extension TimerViewController {
+    func configureTimeZoneNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didChangeTimeZone),
+            name: NSNotification.Name.NSSystemTimeZoneDidChange,
+            object: nil)
     }
 }
 
@@ -246,6 +265,11 @@ private extension TimerViewController {
     
     @objc func categorySettingButtonDidTapped() {
         timerViewModel.categorySettingButtoneDidTapped()
+    }
+    
+    @objc func didChangeTimeZone() {
+        // MARK: - 타임존 대응
+        FMLogger.device.log("타임존이 바꼈습니다. TimerViewController")
     }
 }
 

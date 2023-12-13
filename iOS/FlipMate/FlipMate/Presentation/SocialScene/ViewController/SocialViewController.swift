@@ -60,6 +60,7 @@ final class SocialViewController: BaseViewController {
         super.viewDidLoad()
         configureDiffableDataSource()
         configureNavigationBarItems()
+        configureTimeZoneNotification()
         setSnapshot()
     }
 
@@ -241,22 +242,35 @@ private extension SocialViewController {
     }
 }
 
+// MARK: - TimeZone Notification
+private extension SocialViewController {
+    func configureTimeZoneNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didChangeTimeZone),
+            name: NSNotification.Name.NSSystemTimeZoneDidChange,
+            object: nil)
+    }
+}
+
 // MARK: - Selector methods
 private extension SocialViewController {
-    @objc
-    func myPageButtonTapped() {
+    @objc func myPageButtonTapped() {
         viewModel.myPageButtonTapped()
     }
     
-    @objc
-    func addFriendButtonTapped() {
+    @objc func addFriendButtonTapped() {
         viewModel.freindAddButtonDidTapped()
     }
     
-    @objc
-    func refreshFreindsStatus() {
+    @objc func refreshFreindsStatus() {
         viewModel.didRefresh()
         friendsCollectionView.refreshControl?.endRefreshing()
+    }
+    
+    @objc func didChangeTimeZone() {
+        // MARK: - 타임존 대응
+        FMLogger.device.log("타임존이 바꼈습니다. SocialViewController")
     }
 }
 
