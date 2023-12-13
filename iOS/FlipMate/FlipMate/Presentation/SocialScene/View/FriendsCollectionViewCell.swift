@@ -18,7 +18,7 @@ final class FriendsCollectionViewCell: UICollectionViewCell {
         imageView.bounds = CGRect(x: 0, y: 0, width: 90, height: 90)
         imageView.layer.cornerRadius = imageView.bounds.height / 2
         imageView.isUserInteractionEnabled = true
-        imageView.layer.borderWidth = 1
+        imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.red.cgColor
         return imageView
     }()

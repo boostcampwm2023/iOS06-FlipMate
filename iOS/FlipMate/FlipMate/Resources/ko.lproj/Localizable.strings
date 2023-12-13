@@ -41,7 +41,7 @@
 "errorOccurred" = "오류 발생!";
 "cancel" = "취소";
 "available" = "사용 가능한 닉네임 입니다.";
-"lengthViolation" = "닉네임이 20자를 초과했습니다.";
+"lengthViolation" = "닉네임이 10자를 초과했습니다.";
 "emptyViolation" = "닉네임은 2자 이상 입력해야 합니다.";
 "duplicated" = "중복된 닉네임 입니다.";
 
@@ -64,7 +64,7 @@
 "primaryCategory" = "최근 집중 분야";
 "primaryCategoryNil" = "없음";
 "unfollow" = "팔로우 취소";
-"SocialDetailTitle" = "친구 상제";
+"SocialDetailTitle" = "친구 상세";
 "MessageOfiOS16" = "iOS 16.0 이상 버전부터 차트 기능 사용 가능";
 "date" = "날짜";
 "user" = "사용자";

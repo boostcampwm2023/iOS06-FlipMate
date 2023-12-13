@@ -41,7 +41,7 @@
 "errorOccurred" = "エラー発生";
 "cancel" = "キャンセル";
 "available" = "利用可能なニックネームです。";
-"lengthViolation" = "ニックネームが20文字を超えました。";
+"lengthViolation" = "ニックネームが10文字を超えました。";
 "emptyViolation" = "ニックネームは2文字以上入力する必要があります。";
 "duplicated" = "重複したニックネームです。";
 
