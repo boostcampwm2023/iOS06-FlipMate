@@ -31,19 +31,33 @@ export class MatesService {
   async getMateAndMyStats(
     user_id: number,
     following_id: number,
-    date: string,
+    datetime: string,
+    timezone: string,
   ): Promise<object> {
-    const start_date = moment(date).subtract(6, 'days').format('YYYY-MM-DD');
+    const my_date = moment(`${datetime}${timezone}`);
+    const start_date = my_date.clone().subtract(6, 'days').format('YYYY-MM-DD');
     const my_daily_data = await this.studyLogsService.calculateTotalTimes(
       user_id,
       start_date,
-      date,
+      my_date.format('YYYY-MM-DD'),
     );
+    const following = await this.userRepository.findOne({
+      where: { id: following_id },
+    });
+    if (!following) {
+      throw new NotFoundException('해당 유저는 존재하지 않습니다.');
+    }
+    const following_date = moment(my_date).utcOffset(following.timezone);
+    const following_start_date = following_date
+      .clone()
+      .subtract(6, 'days')
+      .format('YYYY-MM-DD');
+
     const following_daily_data =
       await this.studyLogsService.calculateTotalTimes(
         following_id,
-        start_date,
-        date,
+        following_start_date,
+        following_date.format('YYYY-MM-DD'),
       );
     // 랭킹1위 카테고리 조회 로직 - ToDo
     return {
