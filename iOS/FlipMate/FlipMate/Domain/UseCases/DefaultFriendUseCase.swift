@@ -23,7 +23,7 @@ final class DefaultFriendUseCase: FriendUseCase {
         return repository.unfollow(at: id)
     }
     
-    func search(at nickname: String) -> AnyPublisher<String?, NetworkError> {
+    func search(at nickname: String) -> AnyPublisher<FriendSearchResult, NetworkError> {
         return repository.search(at: nickname)
     }
     
