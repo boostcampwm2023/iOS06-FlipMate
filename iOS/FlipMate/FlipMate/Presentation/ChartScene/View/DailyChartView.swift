@@ -11,6 +11,8 @@ import Charts
 struct DailyChartView: View {
     @ObservedObject var viewModel: ChartViewModel
     @State private var selectedDate = Date()
+    @State private var selectedCount: Int?
+    @State private var selectedSector: String?
     @Environment(\.colorScheme) var colorScheme
     
     init(viewModel: ChartViewModel) {
@@ -34,6 +36,7 @@ struct DailyChartView: View {
                                         .font(.headline)
                                     }
                                 }
+                                .opacity(selectedSector == nil ? 1.0 : (selectedSector == category.subject ? 1.0 : 0.3))
                         }
                     }
                     .chartForegroundStyleScale(domain: viewModel.dailyChartLog.studyLog.category.compactMap({ category in
@@ -46,6 +49,14 @@ struct DailyChartView: View {
                                 .foregroundStyle(.secondary)
                             Text("\(viewModel.dailyChartLog.studyLog.totalTime.secondsToStringTime())").font(.system(size: 36))}
                         .padding(.bottom, 20)
+                    }
+                    .chartAngleSelection(value: $selectedCount)
+                    .onChange(of: selectedCount) { _, newValue in
+                        if let newValue {
+                            selectedSector = findSelectorSector(value: newValue)
+                        } else {
+                            selectedSector = nil
+                        }
                     }
                 } else if #available(iOS 16.0, *) {
                     Text(Constant.totalTime).font(.callout)
@@ -84,6 +95,17 @@ struct DailyChartView: View {
     
     private func getRatio(time: Int, sum: Int) -> Float {
         return Float(time) / Float(sum)
+    }
+    
+    private func findSelectorSector(value: Int) -> String? {
+        var accumulatedCount = 0
+        
+        let category = viewModel.dailyChartLog.studyLog.category.first { category in
+            accumulatedCount += category.studyTime ?? 0
+            return value <= accumulatedCount
+        }
+        
+        return category?.subject
     }
 }
 
