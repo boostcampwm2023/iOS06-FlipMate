@@ -21,7 +21,7 @@ export class AdminController {
   async createMockUsers(@Body('emails') emails: Array<{ email: string }>) {
     const createdUsers = [];
     for (const { email } of emails) {
-      const { access_token } = await this.authService.loginWithGoogle({
+      const { access_token } = await this.authService.loginWithOAuth({
         email,
         auth_type: 'google',
       });

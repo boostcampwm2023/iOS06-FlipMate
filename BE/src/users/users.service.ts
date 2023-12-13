@@ -25,6 +25,7 @@ export class UsersService {
         nickname: user.nickname,
         email: user.email,
         image_url: null,
+        auth_type: user.auth_type,
       });
       return await this.usersRepository.save(userObject);
     } catch (error) {
