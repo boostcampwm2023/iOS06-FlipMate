@@ -105,11 +105,12 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
                     FMLogger.friend.error("친구 검색 에러 발생 \(error.localizedDescription)")
                     self.searchErrorSubject.send()
                 }
-            } receiveValue: { [weak self] profileimageURL in
+            } receiveValue: { [weak self] friendSearchResult in
                 guard let self = self else { return }
                 self.searchResultSubject.send(FreindSeacrhItem(
                     nickname: friendNickname,
-                    iamgeURL: profileimageURL)
+                    iamgeURL: friendSearchResult.imageURL,
+                    status: friendSearchResult.status)
                 )
             }
             .store(in: &cancellables)

@@ -62,6 +62,14 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
         return button
     }()
     
+    private lazy var infomationLabel: UILabel = {
+        let label = UILabel()
+        label.font = FlipMateFont.smallRegular.font
+        label.textColor = .label
+        return label
+    }()
+    
+    
     // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -79,6 +87,17 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
     func updateUI(friendSearchItem: FreindSeacrhItem) {
         nickNameLabel.text = friendSearchItem.nickname
         profileImageView.setImage(url: friendSearchItem.iamgeURL)
+        
+        switch friendSearchItem.status {
+        case .alreayFriend:
+            infomationLabel.text = "이미 친구입니다."
+            setfollowButtonHidden(isHidden: true)
+        case .myself:
+            infomationLabel.text = "자기 자신은 친구 추가할 수 없습니다."
+            setfollowButtonHidden(isHidden: true)
+        default:
+            setfollowButtonHidden(isHidden: false)
+        }
     }
     
     func tapPublisher() -> AnyPublisher<Void, Never> {
@@ -93,7 +112,7 @@ private extension FriendSearchResultView {
         backgroundColor = FlipMateColor.gray3.color
         layer.cornerRadius = Constant.cornerRadius
 
-        [profileImageView, nickNameLabel, followButton].forEach {
+        [profileImageView, nickNameLabel, followButton, infomationLabel].forEach {
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -109,8 +128,16 @@ private extension FriendSearchResultView {
             
             followButton.topAnchor.constraint(equalTo: nickNameLabel.bottomAnchor, constant: FollowButtonConstant.top),
             followButton.widthAnchor.constraint(equalToConstant: FollowButtonConstant.width),
-            followButton.centerXAnchor.constraint(equalTo: centerXAnchor)
+            followButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            infomationLabel.topAnchor.constraint(equalTo: nickNameLabel.bottomAnchor, constant: FollowButtonConstant.top),
+            infomationLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
+    }
+    
+    func setfollowButtonHidden(isHidden: Bool) {
+        followButton.isHidden = isHidden
+        infomationLabel.isHidden = !isHidden
     }
 }
 
