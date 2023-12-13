@@ -46,10 +46,17 @@ export class MatesService {
         date,
       );
     // 랭킹1위 카테고리 조회 로직 - ToDo
+    const following_primary_category =
+      await this.studyLogsService.getPrimaryCategory(
+        following_id,
+        start_date,
+        date,
+      );
+
     return {
       my_daily_data,
       following_daily_data,
-      following_primary_category: null,
+      following_primary_category,
     };
   }
 
