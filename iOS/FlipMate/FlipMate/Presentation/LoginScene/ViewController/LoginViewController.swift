@@ -71,7 +71,7 @@ final class LoginViewController: BaseViewController {
     private var appleLoginButton: ASAuthorizationAppleIDButton = {
         let button = ASAuthorizationAppleIDButton(
             authorizationButtonType: .default,
-            authorizationButtonStyle: .black)
+            authorizationButtonStyle: .whiteOutline)
         button.cornerRadius = 11
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setShadow()
