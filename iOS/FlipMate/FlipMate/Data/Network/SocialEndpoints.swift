@@ -12,7 +12,7 @@ struct SocialEndpoints {
     static func getMyFreinds(date: Date) -> EndPoint<[FriendsResponseDTO]> {
         return EndPoint(
             baseURL: BaseURL.flipmateDomain,
-            path: Paths.friend + "?date=\(date.dateToString(format: .yyyyMMdd))",
+            path: Paths.friend + "?datetime=\(date.dateToString(format: .yyyyMMddTHHmmSS))&timezone=\(date.dateToString(format: .ZZZZZ))",
             method: .get)
         
     }
@@ -20,7 +20,7 @@ struct SocialEndpoints {
     static func fetchMyFriend(date: Date) -> EndPoint<[FriendsResponseDTO]> {
         return EndPoint(
             baseURL: BaseURL.flipmateDomain,
-            path: Paths.friend + "?date=\(date.dateToString(format: .yyyyMMdd))",
+            path: Paths.friend + "?datetime=\(date.dateToString(format: .yyyyMMddTHHmmSS))&timezone=\(date.dateToString(format: .ZZZZZ))",
             method: .get)
     }
 }

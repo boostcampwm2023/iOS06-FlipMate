@@ -28,7 +28,7 @@ extension DefaultTimerRepository: TimerRepsoitory {
     -> AnyPublisher<Void, NetworkError> {
         let requestDTO = TimerStartRequestDTO(
             date: startTime.dateToString(format: .yyyyMMdd),
-            createdAt: startTime.dateToString(format: .yyyyMMddhhmmss),
+            createdAt: startTime.dateToString(format: .yyyyMMddhhmmssZZZZZ),
             type: StudyType.start.rawValue,
             learningTime: 0,
             categoryID: categoryId)
@@ -48,7 +48,7 @@ extension DefaultTimerRepository: TimerRepsoitory {
     -> AnyPublisher<Void, NetworkError> {
         let requestDTO = TimerFinishRequestDTO(
             date: endTime.dateToString(format: .yyyyMMdd),
-            createdAt: endTime.dateToString(format: .yyyyMMddhhmmss),
+            createdAt: endTime.dateToString(format: .yyyyMMddhhmmssZZZZZ),
             type: StudyType.finish.rawValue,
             learningTime: learningTime,
             categoryID: categoryId)
