@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TimeZoneDelegate: NSObject {
+    func didChangeTimeZone()
+}
+
 final class TabBarViewController: UITabBarController {
     
     // MARK: - Constant
@@ -14,7 +18,13 @@ final class TabBarViewController: UITabBarController {
         static let timerImageName = "timer"
         static let borderWidth: CGFloat = 1.0
         static let timerImageSize: CGFloat = 40
+        static let timeZone = NSLocalizedString("timeZone", comment: "")
+        static let timeZoneMessage = NSLocalizedString("timeZoneMessage", comment: "")
+        static let yes = NSLocalizedString("yes", comment: "")
     }
+    
+    // MARK: - Properties
+    weak var timeZoneDelegate: TimeZoneDelegate?
     
     // MARK: - UI Components
     lazy var timerButton: UIButton = {
@@ -106,15 +116,19 @@ private extension TabBarViewController {
     
     @objc func didChangeTimeZone() {
         // MARK: - 타임존 대응
-        FMLogger.device.log("타임존이 바뀌었습니다.")
+        FMLogger.device.log("타임존이 바뀌었습니다")
         showAlert()
     }
     
     func showAlert() {
         let alertController = UIAlertController(
-            title: "타임존 설정",
-            message: "현재 타임존이 바뀌었기 때문에 화면을 새로고침합니다.", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "확인", style: .default)
+            title: Constant.timeZone,
+            message: Constant.timeZoneMessage, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: Constant.yes, style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            self.timeZoneDelegate?.didChangeTimeZone()
+        }
+        
         alertController.addAction(okAction)
         present(alertController, animated: true)
     }

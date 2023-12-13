@@ -22,7 +22,7 @@ final class TabBarDIContainer: TabBarFlowCoordinatorDependencies {
         self.dependencies = dependencies
     }
     
-    func makeTabBarController() -> UITabBarController {
+    func makeTabBarController() -> TabBarViewController {
         return TabBarViewController()
     }
     
