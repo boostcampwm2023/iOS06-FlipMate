@@ -53,18 +53,27 @@ export class MatesService {
     };
   }
 
-  async getMates(user_id: number, date: string): Promise<object[]> {
+  async getMates(
+    user_id: number,
+    date: string,
+    now = new Date(),
+  ): Promise<object[]> {
+    const userTimezone = await this.userRepository.findOne({
+      where: { id: user_id },
+    });
+    const nowUserTime = moment(now).utcOffset(userTimezone.timezone).format();
+
     const studyTimeByFollowing = await this.userRepository.query(
       `
         SELECT u.id, u.nickname, u.image_url, COALESCE(SUM(s.learning_time), 0) AS total_time
         FROM users_model u
         LEFT JOIN mates m ON m.following_id = u.id
-        LEFT JOIN study_logs s ON s.user_id = u.id AND s.date = ?
+        LEFT JOIN study_logs s ON s.user_id = u.id AND s.date = DATE(CONVERT_TZ(?, ?, u.timezone))
         WHERE m.follower_id = ? 
         GROUP BY u.id
         ORDER BY total_time DESC
       `,
-      [date, user_id],
+      [nowUserTime, userTimezone.timezone, user_id],
     );
     return Promise.all(
       studyTimeByFollowing.map(async (record) => {

@@ -78,6 +78,15 @@ export class UsersService {
     }
   }
 
+  async updateTimezone(user_id: number, timezone: string): Promise<UsersModel> {
+    const selectedUser = await this.usersRepository.findOne({
+      where: { id: user_id },
+    });
+    selectedUser.timezone = timezone;
+    const updatedUser = await this.usersRepository.save(selectedUser);
+    return updatedUser;
+  }
+
   async isUniqueNickname(nickname: string): Promise<object> {
     const isDuplicated = await this.usersRepository.exist({
       where: { nickname },

@@ -124,4 +124,25 @@ export class AuthController {
       ),
     };
   }
+
+  @Patch('timezone')
+  @UseGuards(AccessTokenGuard)
+  @ApiOperation({ summary: '유저 타임존 설정 (완)' })
+  @ApiResponse({ status: 200, description: '타임존 설정 성공' })
+  @ApiResponse({ status: 400, description: '잘못된 요청' })
+  @ApiResponse({ status: 401, description: '인증 실패' })
+  @ApiBearerAuth()
+  async patchTimezone(
+    @User('id') user_id: number,
+    @Body('timezone') timezone: string,
+  ): Promise<any> {
+    const updatedUser = await this.usersService.updateTimezone(
+      user_id,
+      timezone,
+    );
+    return {
+      statusCode: 200,
+      message: '타임존 설정 성공',
+    };
+  }
 }

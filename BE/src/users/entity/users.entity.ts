@@ -54,6 +54,13 @@ export class UsersModel {
   })
   auth_type: AuthTypeEnum;
 
+  @Column({
+    type: 'char',
+    default: '+09:00',
+    length: 6,
+  })
+  timezone: string;
+
   @OneToMany(() => StudyLogs, (studyLog) => studyLog.user_id)
   study_logs: StudyLogs[];
 
