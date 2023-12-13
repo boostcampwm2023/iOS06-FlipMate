@@ -115,6 +115,9 @@ export class AuthService {
       });
       return decoded['email'];
     } catch (error) {
+      if (error.message === 'invalid signature') {
+        throw new UnauthorizedException('토큰 검증 실패');
+      }
       throw error;
     }
   }
