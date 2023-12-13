@@ -55,15 +55,15 @@ export class MatesService {
 
   async getMates(
     user_id: number,
-    date: string,
+    datetime: string,
     timezone: string,
   ): Promise<object[]> {
-    if (!user_id || !date || !timezone) {
+    if (!user_id || !datetime || !timezone) {
       throw new BadRequestException('인자의 형식이 잘못되었습니다.');
     }
     const offset = timezone[0] === ' ' ? `+${timezone.trim()}` : timezone;
 
-    const nowUserTime = moment(date)
+    const nowUserTime = moment(`${datetime}${timezone}`)
       .utcOffset(offset)
       .format('YYYY-MM-DD HH:mm:ss');
 

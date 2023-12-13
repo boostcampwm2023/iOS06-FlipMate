@@ -34,7 +34,7 @@ export class MatesController {
     description: 'OK',
   })
   @ApiQuery({
-    name: 'date',
+    name: 'datetime',
     example: '2023-11-22',
     description: '날짜',
   })
@@ -46,10 +46,10 @@ export class MatesController {
   @ApiOperation({ summary: '모든 친구들 조회하기 (완)' })
   getMates(
     @User('id') user_id: number,
-    @Query('date') date: string,
+    @Query('datetime') datetime: string,
     @Query('timezone') timezone: string,
   ): Promise<object> {
-    return this.matesService.getMates(user_id, date, timezone);
+    return this.matesService.getMates(user_id, datetime, timezone);
   }
 
   @Get('/status')
