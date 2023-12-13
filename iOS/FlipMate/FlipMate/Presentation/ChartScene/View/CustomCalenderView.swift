@@ -10,7 +10,6 @@ import SwiftUI
 struct CustomCalenderView: View {
     @Binding var selectedDate: Date
     @ObservedObject var viewModel: ChartViewModel
-    @State private var todayIndex: Int?
     @Environment(\.colorScheme) var colorScheme
     private let calendar = Calendar.current
     
@@ -65,41 +64,34 @@ struct CustomCalenderView: View {
         // swiftlint:disable force_unwrapping
         let today = calendar.date(from: Calendar.current.dateComponents([.year, .month], from: selectedDate))!
         
-        ScrollViewReader { scrollView in
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 10) {
-                    let components = (0..<calendar.range(of: .day, in: .month, for: today)!.count)
-                        .map {
-                            calendar.date(byAdding: .day, value: $0, to: today)!
-                        }
-                    
-                    ForEach(components.indices, id: \.self) { index in
-                        VStack {
-                            Text(day(from: components[index]))
-                                .font(.caption)
-                                .id(index)
-                            Text("\(calendar.component(.day, from: components[index]))")
-                        }
-                        .frame(width: 30, height: 30)
-                        .padding(5)
-                        .background(calendar.isDate(selectedDate, equalTo: components[index], toGranularity: .day) ?
-                                    (colorScheme == .dark ? .white : .darkBlue) : Color.clear)
-                        .cornerRadius(16)
-                        .foregroundColor(calendar.isDate(selectedDate, equalTo: components[index], toGranularity: .day) ? 
-                                         (colorScheme == .dark ? .black : .white) :
-                                            (colorScheme == .dark ? .white : .black))
-                        .onTapGesture {
-                            selectedDate = components[index]
-                            
-                        }
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 10) {
+                let components = (0..<calendar.range(of: .day, in: .month, for: today)!.count)
+                    .map {
+                        calendar.date(byAdding: .day, value: $0, to: today)!
+                    }
+                
+                ForEach(components, id: \.self) { date in
+                    VStack {
+                        Text(day(from: date))
+                            .font(.caption)
+                        Text("\(calendar.component(.day, from: date))")
+                    }
+                    .frame(width: 30, height: 30)
+                    .padding(5)
+                    .background(calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) ? 
+                                (colorScheme == .dark ? .white : .darkBlue) : Color.clear)
+                    .cornerRadius(16)
+                    .foregroundColor(calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) ? (colorScheme == .dark ? .black : .white) : 
+                                        (colorScheme == .dark ? .white : .black))
+                    .onTapGesture {
+                        selectedDate = date
+                        
                     }
                 }
             }
             .padding(.leading, 15)
             .padding(.trailing, 15)
-            .onAppear {
-                scrollView.scrollTo((calendar.dateComponents([.day], from: Date()).day ?? 1) - 1)
-            }
         }
         // swiftlint:enable force_unwrapping
     }
