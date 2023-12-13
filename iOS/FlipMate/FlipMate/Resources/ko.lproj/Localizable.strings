@@ -52,6 +52,7 @@
 "myNickname" = "내 닉네임";
 "noResult" = "검색 결과가 없습니다.";
 "follow" = "친구추가";
+"tryAagin" = "다시 시도해주세요.";
 
 // MARK: - TimerFinish Scene
 "yes" = "예";

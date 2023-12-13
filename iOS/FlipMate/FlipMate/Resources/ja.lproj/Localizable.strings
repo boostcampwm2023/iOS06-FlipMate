@@ -53,6 +53,7 @@
 "friendNickname" = "友達のニックネーム";
 "noResult" = "検索結果がありません。";
 "follow" = "フォロー";
+"tryAagin" = "もう一度お試しください";
 
 // MARK: - TimerFinish Scene
 "yes" = "はい";

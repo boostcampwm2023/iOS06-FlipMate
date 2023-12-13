@@ -52,6 +52,7 @@
 "friendNickname" = "Friend's Nickname";
 "noResult" = "No results were found for your search.";
 "follow" = "Follow";
+"tryAagin" = "Please try again";
 
 // MARK: - TimerFinish Scene
 "yes" = "Yes";
