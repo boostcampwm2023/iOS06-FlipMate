@@ -32,8 +32,8 @@ typealias MyPageViewModelProtocol = MyPageViewModelInput & MyPageViewModelOutput
 final class MyPageViewModel: MyPageViewModelProtocol {
     private let myPageDataSource: [[String]] = [
         [Constant.editProfile],
-        [Constant.contact, Constant.developer, Constant.version],
-        [Constant.reset, Constant.signout],
+        [Constant.developer, Constant.version],
+        [Constant.signout],
         [Constant.accountClosing]
     ]
     
@@ -94,10 +94,8 @@ final class MyPageViewModel: MyPageViewModelProtocol {
 private extension MyPageViewModel {
     enum Constant {
         static let editProfile = NSLocalizedString("editProfile", comment: "")
-        static let contact = NSLocalizedString("contact", comment: "")
         static let version = NSLocalizedString("version", comment: "")
         static let developer = NSLocalizedString("developer", comment: "")
-        static let reset = NSLocalizedString("reset", comment: "")
         static let signout = NSLocalizedString("signout", comment: "")
         static let accountClosing = NSLocalizedString("accountClosing", comment: "")
     }

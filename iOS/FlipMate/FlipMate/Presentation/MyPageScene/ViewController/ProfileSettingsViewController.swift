@@ -193,8 +193,9 @@ final class ProfileSettingsViewController: BaseViewController {
         viewModel.errorPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
-                FMLogger.general.error("SignUpViewModel에서 에러: \(error)")
                 self?.doneButton.isEnabled = false
+                self?.showErrorAlert(title: Constant.errorOccurred, message: "\(error.localizedDescription)")
+                FMLogger.general.error("SignUpViewModel에서 에러: \(error)")
             }
             .store(in: &cancellables)
     }
@@ -228,7 +229,6 @@ final class ProfileSettingsViewController: BaseViewController {
             .store(in: &cancellables)
         
         viewModel.isProfileImageChangedPublisher
-            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 if self?.currentNicknameState == nil || self?.currentNicknameState == .valid {
                     DispatchQueue.main.async {
@@ -239,12 +239,9 @@ final class ProfileSettingsViewController: BaseViewController {
             .store(in: &cancellables)
         
         viewModel.imageNotSafePublisher
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                let alert = UIAlertController(title: Constant.imageNotSafeTitle, message: Constant.imageNotSafeMessage, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: Constant.okTitle, style: .default))
-                DispatchQueue.main.async {
-                    self?.present(alert, animated: true)
-                }
+                self?.showErrorAlert(title: Constant.imageNotSafeTitle, message: Constant.imageNotSafeMessage)
             }
             .store(in: &cancellables)
     }
@@ -254,23 +251,35 @@ final class ProfileSettingsViewController: BaseViewController {
         DispatchQueue.main.async {
             switch state {
             case .valid:
-                self.nickNameValidationStateLabel.text = state.message
-                self.nickNameValidationStateLabel.textColor = FlipMateColor.approveGreen.color
-                self.doneButton.isEnabled = true
+                self.approveNickName()
             case .lengthViolation:
-                self.nickNameValidationStateLabel.text = state.message
-                self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                self.doneButton.isEnabled = false
+                self.invalidNickName(state)
             case .emptyViolation:
-                self.nickNameValidationStateLabel.text = state.message
-                self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                self.doneButton.isEnabled = false
+                self.invalidNickName(state)
             case .duplicated:
-                self.nickNameValidationStateLabel.text = state.message
-                self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
-                self.doneButton.isEnabled = false
+                self.invalidNickName(state)
+            case .emojiContained:
+                self.invalidNickName(state)
             }
         }
+    }
+    
+    private func approveNickName() {
+        self.nickNameValidationStateLabel.text = NickNameValidationState.valid.message
+        self.nickNameValidationStateLabel.textColor = FlipMateColor.approveGreen.color
+        self.doneButton.isEnabled = true
+    }
+    
+    private func invalidNickName(_ state: NickNameValidationState) {
+        self.nickNameValidationStateLabel.text = state.message
+        self.nickNameValidationStateLabel.textColor = FlipMateColor.warningRed.color
+        self.doneButton.isEnabled = false
+    }
+    
+    private func showErrorAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Constant.okTitle, style: .default))
+        present(alert, animated: true)
     }
 }
 
@@ -305,7 +314,7 @@ private extension ProfileSettingsViewController {
     func signUpButtonTapped() {
         doneButton.isEnabled = false
         let userName = nickNameTextField.text ?? ""
-        guard let imageData = profileImageView.image?.jpegData(compressionQuality: 1) else {
+        guard let imageData = profileImageView.image?.jpegData(compressionQuality: 0.6) else {
             FMLogger.general.error("no profile image selected")
             return
         }
@@ -345,10 +354,22 @@ extension ProfileSettingsViewController: PHPickerViewControllerDelegate {
                     FMLogger.general.error("ERROR: 이미지 저장 실패")
                     return
                 }
-                self.profileImageView.image = image
+                let normalizedImage = self.removedOrientationImage(image)
+                self.profileImageView.image = normalizedImage
                 self.viewModel.profileImageChanged()
             }
         }
+    }
+    
+    private func removedOrientationImage(_ image: UIImage) -> UIImage {
+        guard image.imageOrientation != .up else { return image }
+        
+        UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
+        image.draw(in: CGRect(origin: .zero, size: image.size))
+        let normalizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return normalizedImage ?? image
     }
 }
 
@@ -361,6 +382,7 @@ private extension ProfileSettingsViewController {
         static let imageNotSafeTitle = NSLocalizedString("imageNotSafeTitle", comment: "")
         static let imageNotSafeMessage = NSLocalizedString("imageNotSafeMessage", comment: "")
         static let okTitle = NSLocalizedString("ok", comment: "")
+        static let errorOccurred = NSLocalizedString("errorOccurred", comment: "")
         static let maxLength = 10
     }
     

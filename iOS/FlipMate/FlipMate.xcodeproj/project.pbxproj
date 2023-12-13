@@ -164,6 +164,7 @@
 		6057A58D2B0C7F0F00EE58E8 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58C2B0C7F0F00EE58E8 /* Requestable.swift */; };
 		6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58E2B0C801300EE58E8 /* NetworkError.swift */; };
 		605B95FA2B1B50BB00739FAB /* BaseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A02B0DA4E6008CBC85 /* BaseComponents.swift */; };
+		6067DD832B2737F9004625AF /* Selection.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 6067DD822B2737F9004625AF /* Selection.ahap */; };
 		606990572B18918B00E5730F /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606990562B18918B00E5730F /* MyPageViewController.swift */; };
 		6086464E2B0DDA1300B0C1BC /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086464D2B0DDA1300B0C1BC /* CategoryRepository.swift */; };
 		608646552B0DDC3900B0C1BC /* CategoryRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646542B0DDC3900B0C1BC /* CategoryRequestDTO.swift */; };
@@ -395,6 +396,7 @@
 		60459D482B21A28400A80AF7 /* MyPageDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDIContainer.swift; sourceTree = "<group>"; };
 		6057A58C2B0C7F0F00EE58E8 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		6057A58E2B0C801300EE58E8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		6067DD822B2737F9004625AF /* Selection.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = Selection.ahap; sourceTree = "<group>"; };
 		606990562B18918B00E5730F /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		6086464D2B0DDA1300B0C1BC /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
 		608646542B0DDC3900B0C1BC /* CategoryRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRequestDTO.swift; sourceTree = "<group>"; };
@@ -735,6 +737,7 @@
 			children = (
 				2C9F62002B1601F200AE63F9 /* MyNickNameView.swift */,
 				ED6865A12B162B8F001A2AAD /* SocialChartView.swift */,
+				2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */,
 				2C9F62022B16021E00AE63F9 /* FriendSearchResultView.swift */,
 				2C9F62042B160B3900AE63F9 /* NoResultView.swift */,
 				60C2F2852B172D6900EBDD78 /* FriendsCollectionViewCell.swift */,
@@ -896,7 +899,6 @@
 		600908BC2AFCD7DF0065DFFB /* FlipMate */ = {
 			isa = PBXGroup;
 			children = (
-				6096F91D2B04F3CA00D0B972 /* FaceDown.ahap */,
 				600908ED2AFCDB6E0065DFFB /* Application */,
 				600908EF2AFCDBC90065DFFB /* Presentation */,
 				600908F72AFCDE540065DFFB /* Domain */,
@@ -905,6 +907,8 @@
 				2C3430952B0C7E44008CBC85 /* PersistenceService */,
 				600909012AFCDFD10065DFFB /* Common */,
 				600908EE2AFCDBAB0065DFFB /* Resources */,
+				6067DD822B2737F9004625AF /* Selection.ahap */,
+				6096F91D2B04F3CA00D0B972 /* FaceDown.ahap */,
 			);
 			path = FlipMate;
 			sourceTree = "<group>";
@@ -1364,7 +1368,6 @@
 				ED6865C02B1E3B48001A2AAD /* WeeklyChartView.swift */,
 				ED6865BE2B1E2FA6001A2AAD /* ChartSegmentedControl.swift */,
 				ED6865D72B1F32EF001A2AAD /* CustomCalenderView.swift */,
-				2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1526,6 +1529,7 @@
 			files = (
 				2CD272ED2B21A619000CB9E5 /* Localizable.strings in Resources */,
 				60243EF02B05D24D0098A92F /* .swiftlint.yml in Resources */,
+				6067DD832B2737F9004625AF /* Selection.ahap in Resources */,
 				6096F91E2B04F3CA00D0B972 /* FaceDown.ahap in Resources */,
 				600908CA2AFCD7E00065DFFB /* LaunchScreen.storyboard in Resources */,
 				600908C72AFCD7E00065DFFB /* Assets.xcassets in Resources */,

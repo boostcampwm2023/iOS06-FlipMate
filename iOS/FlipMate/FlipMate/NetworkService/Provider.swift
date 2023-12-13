@@ -40,7 +40,7 @@ struct Provider: Providable {
                         
                         let errorResult = try JSONDecoder().decode(StatusResponseWithErrorDTO.self, from: data)
                         FMLogger.general.error("에러 코드 : \(errorResult.statusCode)\n내용 : \(errorResult.message)")
-                        throw NetworkError.statusCodeError(statusCode: response.statusCode, message: errorResult.message)
+                        throw APIError.errorResponse(errorResult)
                     }
                     
                     guard !data.isEmpty else {
@@ -102,6 +102,13 @@ struct Provider: Providable {
     }
 }
 
-enum APIError: Error {
+enum APIError: LocalizedError {
     case errorResponse(StatusResponseWithErrorDTO)
+    
+    var errorDescription: String? {
+        switch self {
+        case .errorResponse(let response):
+            return response.message
+        }
+    }
 }

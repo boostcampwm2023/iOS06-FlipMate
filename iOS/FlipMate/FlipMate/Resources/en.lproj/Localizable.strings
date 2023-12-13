@@ -20,7 +20,8 @@
 "categoryColor" = "Category Color";
 "deleteAlertMessage" = "Are you sure delete this category?";
 "categoryNamePlaceHolder" = "Please enter the category name";
-"social" = "social";
+"social" = "Social";
+"categoryAddMessage" = "You cannot add more than 10 categories";
 
 // MARK: - MyPage Scene
 "myPage" = "MyPage";
@@ -30,16 +31,20 @@
 "version" = "Version Info";
 "reset" = "Reset Data";
 "signout" = "Log Out";
+"signoutMessage" = "Do you want to log out?";
 "accountClosing" = "Account Withdrawal";
 "profileSetting" = "Profile Setting";
 "nicknamePlaceHolder" = "Please enter your nickname";
 "imageNotSafeTitle" = "This image is not available.";
 "imageNotSafeMessage" = "This image has been confirmed to be harmful. Please select the different image.";
-"ok" = "yes";
-"available" = "Available nickname.";
-"lengthViolation" = "Nickname exceeds 20 characters.";
+"errorOccurred" = "An Error has Occurred!";
+"cancel" = "cancel";
+"ok" = "OK";
+"available" = "You can use this nickname.";
+"lengthViolation" = "Nickname cannot exceed 10 characters.";
 "emptyViolation" = "Nickname must contain at least 2 characters.";
 "duplicated" = "Nickname has been duplicated.";
+"emojiContained" = "Nickname cannot contain emojis.";
 
 // MARK: - Friend Add Scene
 "addFriend" = "Add Friend";
@@ -68,8 +73,8 @@
 "user" = "User";
 "studyTime" = "Study Time";
 "min" = "min";
-"me" = "me";
-"friend" = "friend";
+"me" = "Me";
+"friend" = "Friend";
 
 // MARK: - ChartViewController
 "daily" = "Daily";

@@ -34,16 +34,22 @@ export class MatesController {
     description: 'OK',
   })
   @ApiQuery({
-    name: 'date',
-    example: '2023-11-22',
+    name: 'datetime',
+    example: '2023-11-22T14:00:00',
     description: '날짜',
+  })
+  @ApiQuery({
+    name: 'timezone',
+    example: '+09:00',
+    description: '타임존',
   })
   @ApiOperation({ summary: '모든 친구들 조회하기 (완)' })
   getMates(
     @User('id') user_id: number,
-    @Query('date') date: string,
+    @Query('datetime') datetime: string,
+    @Query('timezone') timezone: string,
   ): Promise<object> {
-    return this.matesService.getMates(user_id, date);
+    return this.matesService.getMates(user_id, datetime, timezone);
   }
 
   @Get('/status')
@@ -95,6 +101,31 @@ export class MatesController {
   ): Promise<ResponseDto> {
     await this.matesService.addMate(user, following_nickname);
     return { statusCode: 201, message: '친구가 성공적으로 구독되었습니다.' };
+  }
+
+  @Get('search')
+  @UseGuards(AccessTokenGuard)
+  @ApiBearerAuth()
+  @ApiCreatedResponse({
+    description: '닉네임을 검색',
+  })
+  @ApiBody({
+    schema: {
+      properties: {
+        following_nickname: {
+          type: 'string',
+          description: '검색할 닉네임',
+          example: '어린콩',
+        },
+      },
+    },
+  })
+  @ApiOperation({ summary: '친구 검색하기 (완)' })
+  async findMate(
+    @User() user: UsersModel,
+    @Query('nickname') nickname: string,
+  ): Promise<object> {
+    return this.matesService.findMate(user, nickname);
   }
 
   @Delete('')

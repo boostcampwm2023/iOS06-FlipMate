@@ -36,6 +36,7 @@ final class TabBarFlowCoordinator: NSObject, Coordinator {
             [setSocialViewController(), makeTimerViewContorller(), makeChartViewController()],
             animated: false
         )
+        tabBarController.tabBar.tintColor = FlipMateColor.tabBarIconSelected.color
         navigationController?.isNavigationBarHidden = true
         navigationController?.viewControllers = [tabBarController]
         tabBarController.selectedIndex = 1
@@ -74,6 +75,7 @@ final class TabBarFlowCoordinator: NSObject, Coordinator {
             systemName: Constant.socialSelectedImageName)
         return navigationViewController
     }
+    
     private func makeChartViewController() -> UINavigationController {
         let navigationViewController = UINavigationController()
         navigationViewController.tabBarItem.image = UIImage(
@@ -96,6 +98,11 @@ final class TabBarFlowCoordinator: NSObject, Coordinator {
 
 extension TabBarFlowCoordinator: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if let tabBarVC = tabBarController as? TabBarViewController {
+            tabBarVC.timerButton.imageView?.tintColor = FlipMateColor.tabBarIconUnSelected.color
+        }
+        FeedbackManager.shared.startTabBarItemTapFeedback()
+        
         if let index = tabBarController.viewControllers?.firstIndex(of: viewController) {
             if index == 0 && socialViewController == nil {
                 socialViewController = makeSocialViewController()

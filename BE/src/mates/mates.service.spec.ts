@@ -149,4 +149,36 @@ describe('MatesService', () => {
       following_primary_category: null,
     });
   });
+
+  describe('.findMate()', () => {
+    it('유효한 데이터가 주어지면 20000코드를 준다.', async () => {
+      const result = await service.findMate(user, '어린콩3');
+      expect(result).toStrictEqual({
+        statusCode: 20000,
+        image_url: null,
+      });
+    });
+
+    it('자신을 검색하면 20001코드를 준다.', async () => {
+      const result = await service.findMate(user, '어린콩');
+      expect(result).toStrictEqual({
+        statusCode: 20001,
+        image_url: null,
+      });
+    });
+
+    it('이미 친구 관계인 유저를 검색하면 20002코드를 준다.', async () => {
+      const result = await service.findMate(user, '어린콩2');
+      expect(result).toStrictEqual({
+        statusCode: 20002,
+        image_url: null,
+      });
+    });
+
+    it('존재하지 않는 유저를 검색하면 에러를 던진다.', async () => {
+      expect(service.findMate(user, '어린콩4')).rejects.toThrow(
+        NotFoundException,
+      );
+    });
+  });
 });

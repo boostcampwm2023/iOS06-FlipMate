@@ -25,6 +25,7 @@ export class UsersService {
         nickname: user.nickname,
         email: user.email,
         image_url: null,
+        auth_type: user.auth_type,
       });
       return await this.usersRepository.save(userObject);
     } catch (error) {
@@ -78,6 +79,15 @@ export class UsersService {
     }
   }
 
+  async updateTimezone(user_id: number, timezone: string): Promise<UsersModel> {
+    const selectedUser = await this.usersRepository.findOne({
+      where: { id: user_id },
+    });
+    selectedUser.timezone = timezone;
+    const updatedUser = await this.usersRepository.save(selectedUser);
+    return updatedUser;
+  }
+
   async isUniqueNickname(nickname: string): Promise<object> {
     const isDuplicated = await this.usersRepository.exist({
       where: { nickname },
@@ -88,9 +98,13 @@ export class UsersService {
     };
   }
 
-  async findUserByEmail(email: string): Promise<UsersModel> {
+  async findUserByEmailAndAuthType(
+    email: string,
+    auth_type: string,
+  ): Promise<UsersModel> {
+    const authEnumStr = auth_type.toUpperCase();
     const selectedUser = await this.usersRepository.findOne({
-      where: { email },
+      where: { email, auth_type: auth_type[authEnumStr] },
     });
 
     return selectedUser;

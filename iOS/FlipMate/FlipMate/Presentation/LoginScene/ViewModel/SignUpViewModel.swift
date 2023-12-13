@@ -74,7 +74,7 @@ final class SignUpViewModel: SignUpViewModelProtocol {
                     case 40001:
                         imageNotSafeSubject.send()
                     default:
-                        break
+                        errorSubject.send(errorBody)
                     }
                 }
             } catch let error {
@@ -102,25 +102,5 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     var errorPublisher: AnyPublisher<Error, Never> {
         return errorSubject
             .eraseToAnyPublisher()
-    }
-}
-
-enum NickNameValidationState {
-    case valid
-    case lengthViolation
-    case emptyViolation
-    case duplicated
-    
-    var message: String {
-        switch self {
-        case .valid:
-            return NSLocalizedString("available", comment: "")
-        case .lengthViolation:
-            return NSLocalizedString("lengthViolation", comment: "")
-        case .emptyViolation:
-            return NSLocalizedString("emptyViolation", comment: "")
-        case .duplicated:
-            return NSLocalizedString("duplicated", comment: "")
-        }
     }
 }

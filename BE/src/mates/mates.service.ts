@@ -46,25 +46,45 @@ export class MatesService {
         date,
       );
     // 랭킹1위 카테고리 조회 로직 - ToDo
+    const following_primary_category =
+      await this.studyLogsService.getPrimaryCategory(
+        following_id,
+        start_date,
+        date,
+      );
+
     return {
       my_daily_data,
       following_daily_data,
-      following_primary_category: null,
+      following_primary_category,
     };
   }
 
-  async getMates(user_id: number, date: string): Promise<object[]> {
+  async getMates(
+    user_id: number,
+    datetime: string,
+    timezone: string,
+  ): Promise<object[]> {
+    if (!user_id || !datetime || !timezone) {
+      throw new BadRequestException('인자의 형식이 잘못되었습니다.');
+    }
+    const offset = timezone[0] === ' ' ? `+${timezone.trim()}` : timezone;
+
+    const nowUserTime = moment(`${datetime}${offset}`)
+      .utcOffset(offset)
+      .format('YYYY-MM-DD HH:mm:ss');
+
     const studyTimeByFollowing = await this.userRepository.query(
       `
         SELECT u.id, u.nickname, u.image_url, COALESCE(SUM(s.learning_time), 0) AS total_time
         FROM users_model u
         LEFT JOIN mates m ON m.following_id = u.id
-        LEFT JOIN study_logs s ON s.user_id = u.id AND s.date = ?
+        LEFT JOIN study_logs s ON s.user_id = u.id AND s.date = DATE(CONVERT_TZ(?, ?, u.timezone))
         WHERE m.follower_id = ? 
         GROUP BY u.id
         ORDER BY total_time DESC
       `,
-      [date, user_id],
+      [nowUserTime, offset, user_id],
     );
     return Promise.all(
       studyTimeByFollowing.map(async (record) => {
@@ -139,6 +159,37 @@ export class MatesService {
 
     const result = await this.matesRepository.save(mate);
     return this.entityToDto(result);
+  }
+
+  async findMate(user: UsersModel, following_nickname: string) {
+    let statusCode = 20000;
+    const following = await this.userRepository.findOne({
+      where: { nickname: following_nickname },
+    });
+
+    if (user.id === following?.id) {
+      statusCode = 20001; //자신을 친구 추가 할 수 없습니다.
+    }
+
+    if (!user || !following) {
+      throw new NotFoundException('해당 유저는 존재하지 않습니다.');
+    }
+
+    const isExist = await this.matesRepository.findOne({
+      where: { follower_id: user, following_id: following },
+    });
+
+    if (isExist) {
+      statusCode = 20002; //이미 친구 관계입니다.
+    }
+
+    return {
+      statusCode,
+      image_url: getImageUrl(
+        this.configService.get(ENV.CDN_ENDPOINT),
+        following.image_url,
+      ),
+    };
   }
 
   async deleteMate(user: UsersModel, following_id: number): Promise<void> {

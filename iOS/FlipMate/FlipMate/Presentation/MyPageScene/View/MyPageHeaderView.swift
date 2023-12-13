@@ -22,7 +22,7 @@ final class MyPageHeaderView: UIView {
     
     private lazy var userNicknameLabel: UILabel = {
         let label = UILabel()
-        label.font = FlipMateFont.mediumRegular.font
+        label.font = FlipMateFont.mediumBold.font
         label.textColor = .label
         return label
     }()

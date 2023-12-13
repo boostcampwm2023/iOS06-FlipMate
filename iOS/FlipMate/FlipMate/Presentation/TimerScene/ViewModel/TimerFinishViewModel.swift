@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 struct TimerFinishViewModelActions {
-    let didSaveStudyEndLog: (StudyEndLog) -> Void
+    let didSaveStudyEndLog: () -> Void
     let didCancleStudyEndLog: () -> Void
 }
 
@@ -53,7 +53,10 @@ final class TimerFinishViewModel: TimerFinishViewModelProtocol {
     
     // MARK: - input
     func saveButtonDidTapped() {
-        timerFinishUseCase.finishTimer(endTime: studyEndLog.endDate, learningTime: studyEndLog.learningTime, categoryId: studyEndLog.categoryId)
+        timerFinishUseCase.finishTimer(
+            endTime: studyEndLog.endDate,
+            learningTime: studyEndLog.learningTime,
+            categoryId: studyEndLog.categoryId)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -64,13 +67,16 @@ final class TimerFinishViewModel: TimerFinishViewModelProtocol {
                 }
             } receiveValue: { [weak self] _ in
                 guard let self = self else { return }
-                self.actions?.didSaveStudyEndLog(studyEndLog)
+                self.actions?.didSaveStudyEndLog()
             }
             .store(in: &cancellables)
     }
     
     func cancleButtonDidTapped() {
-        timerFinishUseCase.finishTimer(endTime: studyEndLog.endDate, learningTime: 0, categoryId: studyEndLog.categoryId)
+        timerFinishUseCase.finishTimer(
+            endTime: studyEndLog.endDate,
+            learningTime: 0,
+            categoryId: studyEndLog.categoryId)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {

@@ -29,7 +29,7 @@ protocol TimerViewModelInput {
     func deviceProximityDidChange(_ sender: Bool)
     func categorySettingButtoneDidTapped()
     func categoryDidSelected(category: Category)
-    func appendStudyEndLog(studyEndLog: StudyEndLog)
+    func saveStudyLog()
     func categoryDidDeselected()
 }
 
@@ -60,7 +60,6 @@ final class TimerViewModel: TimerViewModelProtocol {
     // MARK: Properties
     private var proximity: Bool?
     private var orientation: DeviceOrientation = .unknown
-    private var timerState: TimerState = .notStarted
     private var cancellables = Set<AnyCancellable>()
     private var increaseTime: Int = -1
     private var selectedCategory: Category?
@@ -68,7 +67,7 @@ final class TimerViewModel: TimerViewModelProtocol {
     
     // MARK: - Managers
     private let categoryManager: CategoryManageable
-    private lazy var timerManager = TimerManager(timeInterval: .seconds(1), handler: increaseTotalTime)
+    private let timerManager: TimerManagerProtocol
     private let userInfoManager: UserInfoManagerProtocol
     
     // MARK: - init
@@ -78,7 +77,8 @@ final class TimerViewModel: TimerViewModelProtocol {
          userInfoUseCase: UserInfoUseCase,
          actions: TimerViewModelActions? = nil,
          categoryManager: CategoryManageable,
-         userInfoManager: UserInfoManagerProtocol) {
+         userInfoManager: UserInfoManagerProtocol,
+         timerManager: TimerManagerProtocol) {
         self.timerUseCase = timerUseCase
         self.studyLogUseCase = studyLogUseCase
         self.studingPingUseCase = studingPingUseCase
@@ -86,6 +86,7 @@ final class TimerViewModel: TimerViewModelProtocol {
         self.actions = actions
         self.categoryManager = categoryManager
         self.userInfoManager = userInfoManager
+        self.timerManager = timerManager
     }
     
     // MARK: Output
@@ -129,38 +130,8 @@ final class TimerViewModel: TimerViewModelProtocol {
     }
     
     func viewDidLoad() {
-        studyLogUseCase.getUserInfo()
-            .receive(on: DispatchQueue.main)
-            .sink { complection in
-                switch complection {
-                case .finished:
-                    FMLogger.timer.debug("유저 공부 정보 요청 성공")
-                case .failure(let error):
-                    FMLogger.timer.error("유저 공부 정보 요청 실패 \(error.localizedDescription)")
-                }
-            } receiveValue: { [weak self] studyLog in
-                guard let self = self else { return }
-                self.userInfoManager.updateTotalTime(at: studyLog.totalTime)
-                self.categoryManager.replace(categories: studyLog.category)
-            }
-            .store(in: &cancellables)
-        
-        userInfoUseCase.getUserInfo()
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    FMLogger.user.debug("유저 정보 요청 성공")
-                case .failure(let error):
-                    FMLogger.user.error("유저 정보 요청 실패 \(error.localizedDescription)")
-                }
-            } receiveValue: { [weak self] userInfo in
-                guard let self = self else { return }
-                self.userInfoManager.updateNickname(at: userInfo.name)
-                self.userInfoManager.updateProfileImage(at: userInfo.profileImageURL)
-            }
-            .store(in: &cancellables)
-
+        updateStudyLog()
+        updateUserInfo()
     }
     
     func viewWillAppear() {
@@ -181,18 +152,8 @@ final class TimerViewModel: TimerViewModelProtocol {
         selectedCategory = nil
     }
     
-    func appendStudyEndLog(studyEndLog: StudyEndLog) {
-        userInfoManager.updateTotalTime(at: studyEndLog.learningTime)
-        guard let categoryId = studyEndLog.categoryId else { return }
-        guard let targetCategory = categoryManager.findCategory(categoryId: categoryId) else { return }
-        guard let studyTime = targetCategory.studyTime else { return }
-        let newCategory = Category(
-            id: targetCategory.id,
-            color: targetCategory.color,
-            subject: targetCategory.subject,
-            studyTime: studyTime + studyEndLog.learningTime)
-        selectedCategory = nil
-        categoryManager.change(category: newCategory)
+    func saveStudyLog() {
+        updateStudyLog()
     }
 }
 
@@ -206,7 +167,7 @@ private extension TimerViewModel {
             isDeviceFaceDownSubject.send(true)
             startTimer()
         } else {
-            guard timerState == .resumed else { return }
+            guard timerManager.state == .resumed else { return }
             FMLogger.user.debug("디바이스가 face up 상태입니다.")
             isDeviceFaceDownSubject.send(false)
             stopTimer()
@@ -215,6 +176,42 @@ private extension TimerViewModel {
     
     func changeCategory(category: Category) {
         categoryManager.change(category: category)
+    }
+    
+    func updateStudyLog() {
+        studyLogUseCase.getUserInfo()
+            .receive(on: DispatchQueue.main)
+            .sink { complection in
+                switch complection {
+                case .finished:
+                    FMLogger.timer.debug("유저 공부 정보 요청 성공")
+                case .failure(let error):
+                    FMLogger.timer.error("유저 공부 정보 요청 실패 \(error.localizedDescription)")
+                }
+            } receiveValue: { [weak self] studyLog in
+                guard let self = self else { return }
+                self.userInfoManager.updateTotalTime(at: studyLog.totalTime)
+                self.categoryManager.replace(categories: studyLog.category)
+            }
+            .store(in: &cancellables)
+    }
+    
+    func updateUserInfo() {
+        userInfoUseCase.getUserInfo()
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    FMLogger.user.debug("유저 정보 요청 성공")
+                case .failure(let error):
+                    FMLogger.user.error("유저 정보 요청 실패 \(error.localizedDescription)")
+                }
+            } receiveValue: { [weak self] userInfo in
+                guard let self = self else { return }
+                self.userInfoManager.updateNickname(at: userInfo.name)
+                self.userInfoManager.updateProfileImage(at: userInfo.profileImageURL)
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -238,7 +235,6 @@ private extension TimerViewModel {
                 guard let self = self else { return }
                 self.increaseTime = -1
                 self.timerManager.start(completion: increaseTotalTime)
-                self.timerState = .resumed
             }
             .store(in: &cancellables)
     }
@@ -248,7 +244,6 @@ private extension TimerViewModel {
         let studyEndLog = StudyEndLog(learningTime: increaseTime, endDate: Date(), categoryId: selectedCategory?.id)
         deviceSettingEnabledSubject.send(false)
         actions?.showTimerFinishViewController(studyEndLog)
-        timerState = .cancled
     }
     
     func increaseTotalTime() {

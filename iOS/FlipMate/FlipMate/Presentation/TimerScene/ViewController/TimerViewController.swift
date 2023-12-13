@@ -16,7 +16,7 @@ final class TimerViewController: BaseViewController {
     // MARK: - Properties
     private var timerViewModel: TimerViewModelProtocol
     private let deviceMotionManager = DeviceMotionManager.shared
-    private let feedbackManager = FeedbackManager()
+    private let feedbackManager = FeedbackManager.shared
     private var cancellables = Set<AnyCancellable>()
     private var dataSource: CateogoryDataSource?
     
@@ -196,8 +196,8 @@ final class TimerViewController: BaseViewController {
             .store(in: &cancellables)
     }
     
-    func appendStudyEndLog(studyEndLog: StudyEndLog) {
-        timerViewModel.appendStudyEndLog(studyEndLog: studyEndLog)
+    func saveStudyLog() {
+        timerViewModel.saveStudyLog()
     }
 }
 

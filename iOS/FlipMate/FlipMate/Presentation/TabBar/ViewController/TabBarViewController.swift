@@ -8,7 +8,7 @@
 import UIKit
 
 final class TabBarViewController: UITabBarController {
-
+    
     private enum Constant {
         static let timerImageName = "timer"
         static let borderWidth: CGFloat = 1.0
@@ -20,13 +20,18 @@ final class TabBarViewController: UITabBarController {
         button.layer.borderWidth = Constant.borderWidth
         button.backgroundColor = FlipMateColor.tabBarColor.color
         button.layer.borderColor = FlipMateColor.gray2.color?.cgColor
-        button.tintColor = FlipMateColor.gray2.color
         button.addTarget(self, action: #selector(timerButtonAction(sender:)), for: .touchUpInside)
         button.setShadow()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: Constant.timerImageName,
-                                withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: Constant.timerImageSize))),
-                                     for: .normal)
+        button.adjustsImageWhenHighlighted = false
+        button.setImage(
+            UIImage(
+                systemName: Constant.timerImageName,
+                withConfiguration: UIImage.SymbolConfiguration(
+                    font: .systemFont(
+                        ofSize: Constant.timerImageSize)))?.withRenderingMode(.alwaysTemplate),
+            for: .normal)
+        button.imageView?.tintColor = FlipMateColor.tabBarIconSelected.color
         return button
     }()
     
@@ -34,7 +39,7 @@ final class TabBarViewController: UITabBarController {
         super.viewDidLoad()
         configureTabBar()
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupFrame()
@@ -58,12 +63,16 @@ private extension TabBarViewController {
     }
     
     func configureTabBar() {
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        tabBarAppearance.backgroundColor = FlipMateColor.tabBarColor.color
         tabBar.layer.borderWidth = Constant.borderWidth
         tabBar.layer.borderColor = FlipMateColor.tabBarLayerColor.color?.cgColor
-        tabBar.layer.backgroundColor = FlipMateColor.tabBarColor.color?.cgColor
+        tabBar.backgroundColor = FlipMateColor.tabBarColor.color
+        tabBar.standardAppearance = tabBarAppearance
         view.addSubview(timerButton)
     }
-
+    
     func setUpTimerButton() {
         let tabBarHeight = tabBar.frame.size.height
         timerButton.layer.cornerRadius = tabBarHeight / 2
@@ -80,5 +89,7 @@ private extension TabBarViewController {
 private extension TabBarViewController {
     @objc private func timerButtonAction(sender: UIButton) {
         selectedIndex = 1
+        timerButton.imageView?.tintColor = FlipMateColor.tabBarIconSelected.color
+        FeedbackManager.shared.startTabBarItemTapFeedback()
     }
 }

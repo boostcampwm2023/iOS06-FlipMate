@@ -29,9 +29,7 @@ export class UsersModel {
     example: 'google_email@email.com',
     description: 'OAuth로 로그인 한 구글 계정 아이디',
   })
-  @Column({
-    unique: true,
-  })
+  @Column()
   @IsString()
   @IsEmail()
   email: string;
@@ -53,6 +51,13 @@ export class UsersModel {
     default: AuthTypeEnum.GOOGLE,
   })
   auth_type: AuthTypeEnum;
+
+  @Column({
+    type: 'char',
+    default: '+09:00',
+    length: 6,
+  })
+  timezone: string;
 
   @OneToMany(() => StudyLogs, (studyLog) => studyLog.user_id)
   study_logs: StudyLogs[];

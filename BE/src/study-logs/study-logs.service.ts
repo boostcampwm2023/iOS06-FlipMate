@@ -73,7 +73,8 @@ export class StudyLogsService {
     created_at: string,
     learning_time: number,
   ): { started_at: string; date: string; learning_time: number }[] {
-    const finishedAt = moment(new Date(created_at));
+    const offset = created_at.split(/\d\d:\d\d:\d\d/)[1];
+    const finishedAt = moment(created_at).utcOffset(offset);
     const startedAt = finishedAt.clone().subtract(learning_time, 's');
     if (startedAt.get('date') !== finishedAt.get('date')) {
       return [
@@ -131,6 +132,24 @@ export class StudyLogsService {
     return result;
   }
 
+  async getPrimaryCategory(
+    user_id: number,
+    start_date: string,
+    end_date: string,
+  ): Promise<object> {
+    const primary_category = await this.studyLogsRepository.query(
+      `SELECT c.id, c.name, c.color_code, SUM(study_logs.learning_time) as total_time
+       FROM study_logs
+       LEFT JOIN categories c ON study_logs.category_id = c.id
+       WHERE study_logs.user_id = ?
+       AND study_logs.date BETWEEN ? AND ?
+       GROUP BY c.id
+       ORDER BY total_time DESC
+       LIMIT 1`,
+      [user_id, start_date, end_date],
+    );
+    return primary_category[0].name ?? null;
+  }
   async groupByCategory(user_id: number, date: string): Promise<object> {
     const studyLogsByCategory = await this.studyLogsRepository.query(
       `SELECT
