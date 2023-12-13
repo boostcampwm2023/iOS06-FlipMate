@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 import GoogleSignIn
+import AuthenticationServices
 
 final class LoginViewController: BaseViewController {
     
@@ -67,10 +68,13 @@ final class LoginViewController: BaseViewController {
         return button
     }()
 
-    private var appleLoginButton: UIButton = {
-        let button = UIButton()
-        button.setLoginButton(type: .apple)
+    private var appleLoginButton: ASAuthorizationAppleIDButton = {
+        let button = ASAuthorizationAppleIDButton(
+            authorizationButtonType: .default,
+            authorizationButtonStyle: .black)
+        button.cornerRadius = 11
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.setShadow()
         return button
     }()
     
@@ -93,8 +97,6 @@ final class LoginViewController: BaseViewController {
           logoSubTitleLabel,
           googleLoginButton,
           appleLoginButton].forEach { view.addSubview($0) }
-        
-        appleLoginButton.isHidden = true
         
         NSLayoutConstraint.activate([
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
