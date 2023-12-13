@@ -13,6 +13,7 @@ export const typeormConfig = (config: ConfigService): TypeOrmModuleOptions => ({
   username: config.get<string>(ENV.DATABASE_USERNAME),
   password: config.get<string>(ENV.DATABASE_PASSWORD),
   database: config.get<string>(ENV.DATABASE_NAME),
+  charset: 'utf8mb4_unicode_ci',
   entities: [StudyLogs, Categories, UsersModel, Mates],
   timezone: 'Z',
   synchronize: true,

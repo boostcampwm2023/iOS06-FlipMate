@@ -29,9 +29,7 @@ export class UsersModel {
     example: 'google_email@email.com',
     description: 'OAuth로 로그인 한 구글 계정 아이디',
   })
-  @Column({
-    unique: true,
-  })
+  @Column()
   @IsString()
   @IsEmail()
   email: string;

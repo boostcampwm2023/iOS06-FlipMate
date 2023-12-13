@@ -26,7 +26,10 @@ class BearerTokenGuard implements CanActivate {
 
     const result = this.authService.verifyToken(token);
 
-    const user = await this.usersService.findUserByEmail(result.email);
+    const user = await this.usersService.findUserByEmailAndAuthType(
+      result.email,
+      result.auth_type,
+    );
 
     if (!user) {
       throw new UnauthorizedException('해당 유저는 회원이 아닙니다.');

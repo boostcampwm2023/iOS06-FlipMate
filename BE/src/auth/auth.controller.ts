@@ -30,6 +30,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ConfigService } from '@nestjs/config';
 import { ENV } from 'src/common/const/env-keys.const';
 import { getImageUrl } from 'src/common/utils/utils';
+import { identity } from 'rxjs';
 
 @ApiTags('로그인 페이지')
 @Controller('auth')
@@ -45,7 +46,7 @@ export class AuthController {
   @ApiExcludeEndpoint()
   googleAuth(@Req() req) {
     const user = req.user;
-    return this.authService.loginWithGoogle(user);
+    return this.authService.loginWithOAuth(user);
   }
 
   @Post('google/app')
@@ -54,7 +55,16 @@ export class AuthController {
   @ApiResponse({ status: 401, description: '인증 실패' })
   async googleAppAuth(@Body('access_token') accessToken: string) {
     const email = await this.authService.getUserInfo(accessToken);
-    return this.authService.loginWithGoogle({ email, auth_type: 'google' });
+    return this.authService.loginWithOAuth({ email, auth_type: 'google' });
+  }
+
+  @Post('apple/app')
+  @ApiOperation({ summary: 'Apple 아이폰용 로그인 (완)' })
+  @ApiResponse({ status: 201, description: '인증 성공' })
+  @ApiResponse({ status: 401, description: '인증 실패' })
+  async appleAppAuth(@Body('identity_token') identity_token: string) {
+    const email = await this.authService.getAppleUserInfo(identity_token);
+    return this.authService.loginWithOAuth({ email, auth_type: 'apple' });
   }
 
   @Get('logout')
