@@ -41,13 +41,16 @@ export class AuthService {
       email: user.email,
       nickname: user.nickname,
       type: 'access',
-      auth_type: 'google',
+      auth_type: user.auth_type,
     };
     return this.jwtService.sign(payload);
   }
 
   public async loginWithOAuth(user) {
-    const prevUser = await this.usersService.findUserByEmail(user.email);
+    const prevUser = await this.usersService.findUserByEmailAndAuthType(
+      user.email,
+      user.auth_type,
+    );
     if (!prevUser) {
       const id = user.email.split('@')[0];
       const userEntity = {

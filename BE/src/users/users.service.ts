@@ -89,9 +89,13 @@ export class UsersService {
     };
   }
 
-  async findUserByEmail(email: string): Promise<UsersModel> {
+  async findUserByEmailAndAuthType(
+    email: string,
+    auth_type: string,
+  ): Promise<UsersModel> {
+    const authEnumStr = auth_type.toUpperCase();
     const selectedUser = await this.usersRepository.findOne({
-      where: { email },
+      where: { email, auth_type: auth_type[authEnumStr] },
     });
 
     return selectedUser;

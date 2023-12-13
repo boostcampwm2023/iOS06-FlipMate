@@ -31,7 +31,10 @@ export class AdminController {
 
     for (let idx = 0; idx < createdUsers.length; idx++) {
       const email = createdUsers[idx].email;
-      const me = await this.usersService.findUserByEmail(email);
+      const me = await this.usersService.findUserByEmailAndAuthType(
+        email,
+        'google',
+      );
       for (let i = 1; i <= MATES_MAXIMUM; i++) {
         const friendIdx = (idx + i) % createdUsers.length;
         const friendNickname = createdUsers[friendIdx].nickname;
