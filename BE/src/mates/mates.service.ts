@@ -63,7 +63,7 @@ export class MatesService {
     }
     const offset = timezone[0] === ' ' ? `+${timezone.trim()}` : timezone;
 
-    const nowUserTime = moment(`${datetime}${timezone}`)
+    const nowUserTime = moment(`${datetime}${offset}`)
       .utcOffset(offset)
       .format('YYYY-MM-DD HH:mm:ss');
 
