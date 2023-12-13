@@ -33,15 +33,21 @@ export class MatesController {
   @ApiCreatedResponse({
     description: 'OK',
   })
-  @ApiQuery({
-    name: 'date',
-    example: '2023-11-22',
-    description: '날짜',
+  @ApiBody({
+    schema: {
+      properties: {
+        date: {
+          type: 'datetime',
+          example: '2023-11-22T14:00:00+09:00',
+          description: '날짜',
+        },
+      },
+    },
   })
   @ApiOperation({ summary: '모든 친구들 조회하기 (완)' })
   getMates(
     @User('id') user_id: number,
-    @Query('date') date: string,
+    @Body('date') date: string,
   ): Promise<object> {
     return this.matesService.getMates(user_id, date);
   }
