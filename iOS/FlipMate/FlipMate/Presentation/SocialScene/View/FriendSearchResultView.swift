@@ -13,6 +13,8 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
     private enum Constant {
         static let height: CGFloat = 250
         static let cornerRadius: CGFloat = 5
+        static let alreadyFriend = NSLocalizedString("alreadyFriend", comment: "")
+        static let myself = NSLocalizedString("myself", comment: "")
     }
     
     private enum ProfileImageConstant {
@@ -90,10 +92,10 @@ final class FriendSearchResultView: UIView, FreindAddResultViewProtocol {
         
         switch friendSearchItem.status {
         case .alreayFriend:
-            infomationLabel.text = "이미 친구입니다."
+            infomationLabel.text = Constant.alreadyFriend
             setfollowButtonHidden(isHidden: true)
         case .myself:
-            infomationLabel.text = "자기 자신은 친구 추가할 수 없습니다."
+            infomationLabel.text = Constant.myself
             setfollowButtonHidden(isHidden: true)
         default:
             setfollowButtonHidden(isHidden: false)
