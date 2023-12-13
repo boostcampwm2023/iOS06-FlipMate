@@ -35,7 +35,7 @@ export class MatesController {
   })
   @ApiQuery({
     name: 'datetime',
-    example: '2023-11-22',
+    example: '2023-11-22T14:00:00',
     description: '날짜',
   })
   @ApiQuery({
