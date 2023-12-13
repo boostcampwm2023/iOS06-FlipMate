@@ -44,6 +44,7 @@
 "lengthViolation" = "Nickname cannot exceed 10 characters.";
 "emptyViolation" = "Nickname must contain at least 2 characters.";
 "duplicated" = "Nickname has been duplicated.";
+"emojiContained" = "Nickname cannot contain emojis.";
 
 // MARK: - Friend Add Scene
 "addFriend" = "Add Friend";

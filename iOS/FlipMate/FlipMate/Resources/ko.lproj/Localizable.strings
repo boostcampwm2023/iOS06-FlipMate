@@ -44,6 +44,7 @@
 "lengthViolation" = "닉네임이 10자를 초과했습니다.";
 "emptyViolation" = "닉네임은 2자 이상 입력해야 합니다.";
 "duplicated" = "중복된 닉네임 입니다.";
+"emojiContained" = "이모티콘을 포함할 수 없습니다.";
 
 // MARK: - Friend Add Scene
 "addFriend" = "친구 추가";

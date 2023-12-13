@@ -44,6 +44,7 @@
 "lengthViolation" = "ニックネームが10文字を超えました。";
 "emptyViolation" = "ニックネームは2文字以上入力する必要があります。";
 "duplicated" = "重複したニックネームです。";
+"emojiContained" = "ニックネームに絵文字を含めることはできません";
 
 // MARK: - Friend Add Scene
 
