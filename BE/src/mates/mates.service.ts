@@ -61,8 +61,10 @@ export class MatesService {
     const userTimezone = await this.userRepository.findOne({
       where: { id: user_id },
     });
-    const nowUserTime = moment(now).utcOffset(userTimezone.timezone).format();
-
+    const nowUserTime = moment(now)
+      .utcOffset(userTimezone.timezone)
+      .format('YYYY-MM-DD HH:mm:ss');
+    console.log(nowUserTime);
     const studyTimeByFollowing = await this.userRepository.query(
       `
         SELECT u.id, u.nickname, u.image_url, COALESCE(SUM(s.learning_time), 0) AS total_time
