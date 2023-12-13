@@ -63,18 +63,30 @@ export class MatesController {
   @Get('/:following_id/stats')
   @UseGuards(AccessTokenGuard)
   @ApiQuery({
-    name: 'date',
-    example: '2023-11-22',
+    name: 'datetime',
+    example: '2023-11-22T14:00:00',
     description: '날짜',
+  })
+  @ApiQuery({
+    name: 'timezone',
+    example: '+09:00',
+    description: '타임존',
   })
   @ApiBearerAuth()
   @ApiOperation({ summary: '특정 친구의 통계 조회하기' })
   getMateStats(
     @User('id') user_id: number,
     @Param('following_id') following_id: number,
-    @Query('date') date: string,
+    @Query('datetime') datetime: string,
+    @Query('timezone') timezone: string,
   ): Promise<object> {
-    return this.matesService.getMateAndMyStats(user_id, following_id, date);
+    timezone = timezone[0] === '-' ? timezone : `+${timezone.trim()}`;
+    return this.matesService.getMateAndMyStats(
+      user_id,
+      following_id,
+      datetime,
+      timezone,
+    );
   }
 
   @Post()
