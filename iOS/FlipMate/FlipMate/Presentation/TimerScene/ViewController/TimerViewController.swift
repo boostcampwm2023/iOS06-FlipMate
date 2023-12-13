@@ -77,7 +77,6 @@ final class TimerViewController: BaseViewController {
         super.viewDidLoad()
         setDataSource()
         setSnapshot()
-        configureTimeZoneNotification()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -244,17 +243,6 @@ private extension TimerViewController {
     }
 }
 
-// MARK: - TimeZone Notification
-private extension TimerViewController {
-    func configureTimeZoneNotification() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(didChangeTimeZone),
-            name: NSNotification.Name.NSSystemTimeZoneDidChange,
-            object: nil)
-    }
-}
-
 // MARK: objc function
 private extension TimerViewController {
     @objc func proximityDidChange(_ notification: Notification) {
@@ -265,11 +253,6 @@ private extension TimerViewController {
     
     @objc func categorySettingButtonDidTapped() {
         timerViewModel.categorySettingButtoneDidTapped()
-    }
-    
-    @objc func didChangeTimeZone() {
-        // MARK: - 타임존 대응
-        FMLogger.device.log("타임존이 바꼈습니다. TimerViewController")
     }
 }
 
