@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GoogleAuthResponseDTO: Decodable {
+struct AuthResponseDTO: Decodable {
     let isMember: Bool
     let accessToken: String
     

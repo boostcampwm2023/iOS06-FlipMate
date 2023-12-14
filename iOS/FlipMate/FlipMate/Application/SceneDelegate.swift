@@ -7,6 +7,7 @@
 
 import UIKit
 import GoogleSignIn
+import AuthenticationServices
 import Combine
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -45,6 +46,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         guard let url = URLContexts.first?.url else { return }
         _ = GIDSignIn.sharedInstance.handle(url)
+    }
+    
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        guard let userID = try? KeychainManager.getAppleUserID() else {
+            FMLogger.general.error("키체인으로부터 애플 유저 아이디 가져오기 실패")
+            return
+        }
+        
+        appleIDProvider.getCredentialState(forUserID: userID) { credentialState, error in
+            if error != nil {
+                FMLogger.general.error("애플 credential 가져오는 중 오류 - \(error)")
+                return
+            }
+            switch credentialState {
+            case .authorized:
+                FMLogger.appLifeCycle.log("sceneDidBecomeActive - 애플 로그인 인증 성공")
+            case .revoked:
+                FMLogger.appLifeCycle.log("sceneDidBecomeActive - 애플 로그인 인증 만료")
+                self.appDIContainer.signOutManager.signOut()
+            case .notFound:
+                FMLogger.appLifeCycle.log("sceneDidBecomeActive - 애플 Credential을 찾을 수 없음")
+            default:
+                break
+            }
+        }
     }
 }
 

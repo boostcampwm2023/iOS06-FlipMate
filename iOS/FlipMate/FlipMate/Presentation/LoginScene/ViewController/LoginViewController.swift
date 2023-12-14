@@ -8,19 +8,13 @@
 import UIKit
 import Combine
 import GoogleSignIn
+import AuthenticationServices
 
 final class LoginViewController: BaseViewController {
     
     // MARK: - Properties
     private let loginViewModel: LoginViewModelProtocol
     private var cancellables: Set<AnyCancellable> = []
-    
-    // MARK: - Constant
-    private enum Constant {
-        static let logoMainTitle = "FLIP MATE"
-        static let logoSubTitle = NSLocalizedString("logoSubTitle", comment: "")
-        static let skipLoginTitle = NSLocalizedString("skipLoginTitle", comment: "")
-    }
     
     // MARK: - Init
     init(loginViewModel: LoginViewModelProtocol) {
@@ -61,16 +55,27 @@ final class LoginViewController: BaseViewController {
     
     private lazy var googleLoginButton: UIButton = {
         let button = UIButton()
-        button.setLoginButton(type: .google)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(Constant.googleLoginTitle, for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        button.titleLabel?.font = FlipMateFont.smallRegular.font
+        button.backgroundColor = .systemBackground
+        button.layer.cornerRadius = 11
+        button.layer.borderWidth = 1.0
+        button.layer.borderColor = FlipMateColor.gray2.color?.cgColor
+        button.setShadow()
         button.addTarget(self, action: #selector(handleGoogleLoginButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-
-    private var appleLoginButton: UIButton = {
-        let button = UIButton()
-        button.setLoginButton(type: .apple)
+    
+    private lazy var appleLoginButton: ASAuthorizationAppleIDButton = {
+        let button = ASAuthorizationAppleIDButton(
+            authorizationButtonType: .default,
+            authorizationButtonStyle: .whiteOutline)
+        button.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
+        button.cornerRadius = 11
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.setShadow()
         return button
     }()
     
@@ -93,8 +98,6 @@ final class LoginViewController: BaseViewController {
           logoSubTitleLabel,
           googleLoginButton,
           appleLoginButton].forEach { view.addSubview($0) }
-        
-        appleLoginButton.isHidden = true
         
         NSLayoutConstraint.activate([
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -124,6 +127,7 @@ final class LoginViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isMember in
                 guard let self = self else { return }
+                self.enableButtons()
                 if let isMember = isMember {
                     if isMember {
                         FMLogger.device.log("타이머 창으로 이동합니다")
@@ -135,6 +139,40 @@ final class LoginViewController: BaseViewController {
                 }
             }
             .store(in: &cancellables)
+        
+        loginViewModel.errorPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] error in
+                let alert = UIAlertController(title: Constant.errorOccurred, message: "\(error.localizedDescription)", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: Constant.errorOkTitle, style: .default))
+                self?.present(alert, animated: true)
+                self?.enableButtons()
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func disableButtons() {
+        DispatchQueue.main.async {
+            self.googleLoginButton.isEnabled = false
+            self.appleLoginButton.isEnabled = false
+        }
+    }
+    
+    private func enableButtons() {
+        DispatchQueue.main.async {
+            self.googleLoginButton.isEnabled = true
+            self.appleLoginButton.isEnabled = true
+        }
+    }
+}
+
+extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        guard let window = self.view.window else {
+            FMLogger.general.error("window is nil!!")
+            return UIWindow()
+        }
+        return window
     }
 }
 
@@ -145,11 +183,12 @@ private extension LoginViewController {
     }
     
     @objc func handleGoogleLoginButton() {
+        disableButtons()
         GIDSignIn.sharedInstance.signIn(withPresenting: self) { [weak self] signInResult, error in
             guard let self = self else { return }
             if let result = signInResult {
                 let accessToken = result.user.accessToken.tokenString
-                self.loginViewModel.requestLogin(accessToken: accessToken)
+                self.loginViewModel.requestGoogleLogin(accessToken: accessToken)
             } else if let error = error {
                 FMLogger.device.error("\(error.localizedDescription)")
             } else {
@@ -159,16 +198,57 @@ private extension LoginViewController {
     }
 }
 
-// MARK: - UIButton extension
-fileprivate extension UIButton {
-    func setLoginButton(type: LoginType) {
-        self.setTitle(type.buttonTitle, for: .normal)
-        self.backgroundColor = .systemBackground
-        self.titleLabel?.font = FlipMateFont.smallRegular.font
-        self.setTitleColor(.label, for: .normal)
-        self.layer.cornerRadius = 11
-        self.layer.borderWidth = 1.0
-        self.layer.borderColor = FlipMateColor.gray2.color?.cgColor
-        self.setShadow()
+extension LoginViewController: ASAuthorizationControllerDelegate {
+    @objc
+    func handleAuthorizationAppleIDButtonPress() {
+        self.disableButtons()
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            let userID = appleIDCredential.user
+            guard let token = appleIDCredential.identityToken, let decodedAccessToken = String(data: token, encoding: .utf8) else {
+                FMLogger.general.error("토큰 비어있음!")
+                return
+            }
+            loginViewModel.requestAppleLogin(accessToken: decodedAccessToken, userID: userID)
+        default:
+            break
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // 단순 취소는 오류 띄우지 않음
+        if let error = error as? ASAuthorizationError {
+            if error.errorCode == 1001 {
+                enableButtons()
+                return
+            }
+        }
+        let alert = UIAlertController(title: Constant.errorOccurred, message: "\(error.localizedDescription)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Constant.errorOkTitle, style: .default))
+        self.present(alert, animated: true)
+        FMLogger.general.error("애플 로그인 중 에러 발생 : \(error)")
+        enableButtons()
+    }
+}
+
+private extension LoginViewController {
+    enum Constant {
+        static let logoMainTitle = "FLIP MATE"
+        static let logoSubTitle = NSLocalizedString("logoSubTitle", comment: "")
+        static let skipLoginTitle = NSLocalizedString("skipLoginTitle", comment: "")
+        static let errorOccurred = NSLocalizedString("errorOccurred", comment: "")
+        static let errorOkTitle = NSLocalizedString("ok", comment: "")
+        static let googleLoginTitle = NSLocalizedString("googleLogin", comment: "")
     }
 }

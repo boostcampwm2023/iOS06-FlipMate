@@ -9,4 +9,5 @@ import Foundation
 
 protocol AuthenticationRepository {
     func googleLogin(with accessToken: String) async throws -> User
+    func appleLogin(with accessToken: String) async throws -> User
 }

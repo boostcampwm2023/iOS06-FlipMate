@@ -15,6 +15,7 @@ enum BaseURL {
 enum Paths {
     static let categories = "/categories"
     static let googleApp = "/auth/google/app"
+    static let appleApp = "/auth/apple/app"
     static let studylogs = "/study-logs"
     static let auth = "/auth"
     static let authInfo = "/auth/info"

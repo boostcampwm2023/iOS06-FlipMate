@@ -166,6 +166,7 @@
 		60243EF02B05D24D0098A92F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 60243EEF2B05D24D0098A92F /* .swiftlint.yml */; };
 		60459D472B21A17C00A80AF7 /* MyPageFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60459D462B21A17C00A80AF7 /* MyPageFlowCoordinator.swift */; };
 		60459D492B21A28400A80AF7 /* MyPageDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60459D482B21A28400A80AF7 /* MyPageDIContainer.swift */; };
+		604A6FFD2B2AC5F100B0B42E /* AppleAuthRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604A6FFC2B2AC5F100B0B42E /* AppleAuthRequestDTO.swift */; };
 		6057A58D2B0C7F0F00EE58E8 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58C2B0C7F0F00EE58E8 /* Requestable.swift */; };
 		6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58E2B0C801300EE58E8 /* NetworkError.swift */; };
 		605B95FA2B1B50BB00739FAB /* BaseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A02B0DA4E6008CBC85 /* BaseComponents.swift */; };
@@ -200,10 +201,10 @@
 		ED3595BD2B0DB29F00558FAA /* CategoryModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595BC2B0DB29F00558FAA /* CategoryModifyViewController.swift */; };
 		ED3595C12B0DC2F100558FAA /* CategoryColorSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */; };
 		ED38421B2B0F1B7E001E2803 /* GoogleAuthRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38421A2B0F1B7E001E2803 /* GoogleAuthRequestDTO.swift */; };
-		ED38421D2B0F1BE9001E2803 /* GoogleAuthEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38421C2B0F1BE9001E2803 /* GoogleAuthEndpoints.swift */; };
-		ED38421F2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38421E2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift */; };
+		ED38421D2B0F1BE9001E2803 /* AuthenticationEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38421C2B0F1BE9001E2803 /* AuthenticationEndpoints.swift */; };
+		ED38421F2B0F1C7A001E2803 /* AuthResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38421E2B0F1C7A001E2803 /* AuthResponseDTO.swift */; };
 		ED3842212B0F1CF9001E2803 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842202B0F1CF9001E2803 /* User.swift */; };
-		ED3842232B0F1D70001E2803 /* GoogleAuthRepostiory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842222B0F1D70001E2803 /* GoogleAuthRepostiory.swift */; };
+		ED3842232B0F1D70001E2803 /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842222B0F1D70001E2803 /* AuthenticationRepository.swift */; };
 		ED3842252B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842242B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift */; };
 		ED3842272B0F1E0C001E2803 /* AuthenticationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842262B0F1E0C001E2803 /* AuthenticationUseCase.swift */; };
 		ED3842292B0F3B19001E2803 /* DefaultAuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842282B0F3B19001E2803 /* DefaultAuthenticationRepository.swift */; };
@@ -404,8 +405,10 @@
 		60243EEF2B05D24D0098A92F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		60459D462B21A17C00A80AF7 /* MyPageFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFlowCoordinator.swift; sourceTree = "<group>"; };
 		60459D482B21A28400A80AF7 /* MyPageDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDIContainer.swift; sourceTree = "<group>"; };
+		604A6FFC2B2AC5F100B0B42E /* AppleAuthRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthRequestDTO.swift; sourceTree = "<group>"; };
 		6057A58C2B0C7F0F00EE58E8 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		6057A58E2B0C801300EE58E8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		605F88492B297DA5008975DC /* FlipMate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FlipMate.entitlements; sourceTree = "<group>"; };
 		6067DD822B2737F9004625AF /* Selection.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = Selection.ahap; sourceTree = "<group>"; };
 		606990562B18918B00E5730F /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		6086464D2B0DDA1300B0C1BC /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
@@ -441,10 +444,10 @@
 		ED3595BC2B0DB29F00558FAA /* CategoryModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModifyViewController.swift; sourceTree = "<group>"; };
 		ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColorSelectView.swift; sourceTree = "<group>"; };
 		ED38421A2B0F1B7E001E2803 /* GoogleAuthRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthRequestDTO.swift; sourceTree = "<group>"; };
-		ED38421C2B0F1BE9001E2803 /* GoogleAuthEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthEndpoints.swift; sourceTree = "<group>"; };
-		ED38421E2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthResponseDTO.swift; sourceTree = "<group>"; };
+		ED38421C2B0F1BE9001E2803 /* AuthenticationEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationEndpoints.swift; sourceTree = "<group>"; };
+		ED38421E2B0F1C7A001E2803 /* AuthResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponseDTO.swift; sourceTree = "<group>"; };
 		ED3842202B0F1CF9001E2803 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		ED3842222B0F1D70001E2803 /* GoogleAuthRepostiory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthRepostiory.swift; sourceTree = "<group>"; };
+		ED3842222B0F1D70001E2803 /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
 		ED3842242B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthenticationUseCase.swift; sourceTree = "<group>"; };
 		ED3842262B0F1E0C001E2803 /* AuthenticationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationUseCase.swift; sourceTree = "<group>"; };
 		ED3842282B0F3B19001E2803 /* DefaultAuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthenticationRepository.swift; sourceTree = "<group>"; };
@@ -909,6 +912,7 @@
 		600908BC2AFCD7DF0065DFFB /* FlipMate */ = {
 			isa = PBXGroup;
 			children = (
+				605F88492B297DA5008975DC /* FlipMate.entitlements */,
 				600908ED2AFCDB6E0065DFFB /* Application */,
 				600908EF2AFCDBC90065DFFB /* Presentation */,
 				600908F72AFCDE540065DFFB /* Domain */,
@@ -1090,7 +1094,7 @@
 				600908FD2AFCDF3A0065DFFB /* DataMapping */,
 				2C3430A02B0DA4E6008CBC85 /* BaseComponents.swift */,
 				608646582B0DE61200B0C1BC /* CategoryEndpoints.swift */,
-				ED38421C2B0F1BE9001E2803 /* GoogleAuthEndpoints.swift */,
+				ED38421C2B0F1BE9001E2803 /* AuthenticationEndpoints.swift */,
 				601EB7442B14F86100C5B216 /* SignUpEndpoints.swift */,
 				2C3430AA2B0DDB8D008CBC85 /* TimerEndpoints.swift */,
 				2C2F21752B0F440D00B45BA8 /* StudyLogEndpoints.swift */,
@@ -1254,7 +1258,7 @@
 				2C3430A62B0DD0F6008CBC85 /* TimerRepsoitory.swift */,
 				6086464D2B0DDA1300B0C1BC /* CategoryRepository.swift */,
 				2C2F217B2B0F4D4000B45BA8 /* StudyLogRepository.swift */,
-				ED3842222B0F1D70001E2803 /* GoogleAuthRepostiory.swift */,
+				ED3842222B0F1D70001E2803 /* AuthenticationRepository.swift */,
 				601EB7402B14F39B00C5B216 /* ProfileSettingsRepository.swift */,
 				2C9F62122B17366200AE63F9 /* FriendRepository.swift */,
 				2CDCD0472B18893A0080DCDE /* SocialRepository.swift */,
@@ -1350,7 +1354,8 @@
 			isa = PBXGroup;
 			children = (
 				ED38421A2B0F1B7E001E2803 /* GoogleAuthRequestDTO.swift */,
-				ED38421E2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift */,
+				604A6FFC2B2AC5F100B0B42E /* AppleAuthRequestDTO.swift */,
+				ED38421E2B0F1C7A001E2803 /* AuthResponseDTO.swift */,
 				601EB7462B14F97700C5B216 /* NickNameValidationResponseDTO.swift */,
 				60DFDDDA2B14FE0100FEF98A /* SignUpResponseDTO.swift */,
 				2C87C27A2B1DF11000A26313 /* UserInfoResponseDTO.swift */,
@@ -1734,7 +1739,7 @@
 				601EB73D2B14D67600C5B216 /* ProfileSettingsUseCase.swift in Sources */,
 				608646572B0DE31800B0C1BC /* CategoryResponseDTO.swift in Sources */,
 				2C87C2952B1F345800A26313 /* ImageFetcher.swift in Sources */,
-				ED38421F2B0F1C7A001E2803 /* GoogleAuthResponseDTO.swift in Sources */,
+				ED38421F2B0F1C7A001E2803 /* AuthResponseDTO.swift in Sources */,
 				ED6865BF2B1E2FA6001A2AAD /* ChartSegmentedControl.swift in Sources */,
 				ED3595B22B0C83D700558FAA /* TimerStartResponseDTO.swift in Sources */,
 				2C5CDA582B025426007AFC57 /* FlipMateFont.swift in Sources */,
@@ -1791,7 +1796,7 @@
 				ED3595A92B0C7F3500558FAA /* HTTPMethod.swift in Sources */,
 				2C87C27D2B1DF1C300A26313 /* DefaultUserInfoRepository.swift in Sources */,
 				2C9F62052B160B3900AE63F9 /* NoResultView.swift in Sources */,
-				ED38421D2B0F1BE9001E2803 /* GoogleAuthEndpoints.swift in Sources */,
+				ED38421D2B0F1BE9001E2803 /* AuthenticationEndpoints.swift in Sources */,
 				2C5CDA562B025426007AFC57 /* BaseViewController.swift in Sources */,
 				2C9F61FB2B15C96100AE63F9 /* CategoryModifyViewModel.swift in Sources */,
 				ED82F0072B126C95005BB32D /* UITextField++Extension.swift in Sources */,
@@ -1814,6 +1819,7 @@
 				2C87C27B2B1DF11000A26313 /* UserInfoResponseDTO.swift in Sources */,
 				2C34309B2B0C8674008CBC85 /* URLSessionable.swift in Sources */,
 				ED6865C82B1E44B1001A2AAD /* ChartRepository.swift in Sources */,
+				604A6FFD2B2AC5F100B0B42E /* AppleAuthRequestDTO.swift in Sources */,
 				2CE84EF92B0B8A0B00E2FB71 /* CategorySettingFooterView.swift in Sources */,
 				601EB7472B14F97700C5B216 /* NickNameValidationResponseDTO.swift in Sources */,
 				2C3430972B0C7ED8008CBC85 /* EndPoint.swift in Sources */,
@@ -1862,7 +1868,7 @@
 				2C88DD052B1256D0000B4686 /* TabBarFlowCoordinator.swift in Sources */,
 				ED9B2A812B06048D008FE1C5 /* CategoryViewModel.swift in Sources */,
 				60DE49402B05E67200ACE6DD /* FlipMateConstant.swift in Sources */,
-				ED3842232B0F1D70001E2803 /* GoogleAuthRepostiory.swift in Sources */,
+				ED3842232B0F1D70001E2803 /* AuthenticationRepository.swift in Sources */,
 				601EB7432B14F83400C5B216 /* DefaultProfileSettingsRepository.swift in Sources */,
 				2C801D832B04C64F00A7ABAE /* TimerManager.swift in Sources */,
 				60C2F2862B172D6900EBDD78 /* FriendsCollectionViewCell.swift in Sources */,
@@ -2096,6 +2102,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FlipMate/FlipMate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
@@ -2131,6 +2138,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FlipMate/FlipMate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
