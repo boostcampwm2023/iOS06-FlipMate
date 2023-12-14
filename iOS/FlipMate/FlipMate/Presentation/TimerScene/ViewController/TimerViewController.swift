@@ -68,7 +68,7 @@ final class TimerViewController: BaseViewController {
     
     private lazy var instructionImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(resource: .instruction)
+        image.image = UIImage(named: Constant.instructionImageName)
         return image
     }()
     
@@ -329,5 +329,6 @@ private extension TimerViewController {
         static let startTime = "00:00:00"
         static let categoryManageButtonImageName = "gearshape"
         static let categoryManageButtonTitle = NSLocalizedString("setting", comment: "")
+        static let instructionImageName = NSLocalizedString("instruction", comment: "")
     }
 }

@@ -105,3 +105,6 @@
 // MARK: - TimeZone
 "timeZone" = "タイムゾーン";
 "timeZoneMessage" = "タイムゾーンが変更されたため、画面をリフレッシュしています。";
+
+// MARK: - Image Asset
+"instruction" = "instruction_JP";
