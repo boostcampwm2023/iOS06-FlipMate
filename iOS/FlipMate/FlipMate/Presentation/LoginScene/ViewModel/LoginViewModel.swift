@@ -18,11 +18,13 @@ protocol LoginViewModelInput {
     func skippedLogin()
     func didFinishLoginAndIsMember()
     func didFinishLoginAndIsNotMember()
-    func requestLogin(accessToken: String)
+    func requestGoogleLogin(accessToken: String)
+    func requestAppleLogin(accessToken: String)
 }
 
 protocol LoginViewModelOutput { 
     var isMemberPublisher: AnyPublisher<Bool?, Never> { get }
+    var errorPublisher: AnyPublisher<Error, Never> { get }
 }
 
 typealias LoginViewModelProtocol = LoginViewModelInput & LoginViewModelOutput
@@ -35,10 +37,7 @@ final class LoginViewModel: LoginViewModelProtocol {
     private let actions: LoginViewModelActions?
     
     private let isMemberSubject = CurrentValueSubject<Bool?, Never>(nil)
-    
-    var isMemberPublisher: AnyPublisher<Bool?, Never> {
-        return isMemberSubject.eraseToAnyPublisher()
-    }
+    private let errorSubject = PassthroughSubject<Error, Never>()
     
     init(googleAuthUseCase: AuthenticationUseCase, actions: LoginViewModelActions? = nil) {
         self.googleAuthUseCase = googleAuthUseCase
@@ -58,21 +57,42 @@ final class LoginViewModel: LoginViewModelProtocol {
         actions?.showSignUpViewController()
     }
 
-    func requestLogin(accessToken: String) {
+    func requestGoogleLogin(accessToken: String) {
         Task {
             do {
                 let response = try await self.googleAuthUseCase.googleLogin(accessToken: accessToken)
 
-                // TODO: 추후 분기 처리 (회원가입 안했을 때 고려)
                 let accessToken = response.accessToken
-
                 try KeychainManager.saveAccessToken(token: accessToken)
-                
                 isMemberSubject.send(response.isMember)
-
             } catch let error {
+                errorSubject.send(error)
                 FMLogger.general.error("로그인 중 에러 발생 : \(error)")
             }
         }
+    }
+    
+    func requestAppleLogin(accessToken: String) {
+        Task {
+            do {
+                let response = try await self.googleAuthUseCase.appleLogin(accessToken: accessToken)
+                
+                let accessToken = response.accessToken
+                try KeychainManager.saveAccessToken(token: accessToken)
+                isMemberSubject.send(response.isMember)
+            } catch let error {
+                errorSubject.send(error)
+                FMLogger.general.error("로그인 중 에러 발생 : \(error)")
+            }
+        }
+    }
+    
+    // MARK: - Output
+    var isMemberPublisher: AnyPublisher<Bool?, Never> {
+        return isMemberSubject.eraseToAnyPublisher()
+    }
+    
+    var errorPublisher: AnyPublisher<Error, Never> {
+        return errorSubject.eraseToAnyPublisher()
     }
 }
