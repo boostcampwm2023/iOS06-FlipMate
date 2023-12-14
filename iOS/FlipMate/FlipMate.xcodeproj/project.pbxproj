@@ -10,6 +10,7 @@
 		0A814BC3CFA46D0501C8B894 /* Pods_FlipMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288FECD685A9C6B6E481147C /* Pods_FlipMate.framework */; };
 		2C1F2BBB2B20D8D60026C30B /* SocialUserInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */; };
 		2C1F2BBD2B20DA770026C30B /* ProfileHeaderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1F2BBC2B20DA770026C30B /* ProfileHeaderItem.swift */; };
+		2C2C7CB92B29CEC300C733D5 /* FriendSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CB82B29CEC300C733D5 /* FriendSearchResult.swift */; };
 		2C2C7CBB2B29DFA600C733D5 /* TimeZoneUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CBA2B29DFA600C733D5 /* TimeZoneUseCase.swift */; };
 		2C2C7CBD2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CBC2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift */; };
 		2C2C7CBF2B29E0BF00C733D5 /* UserInfoEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CBE2B29E0BF00C733D5 /* UserInfoEndpoints.swift */; };
@@ -262,6 +263,7 @@
 		2B285F39D7D27E5C564F4D31 /* Pods_FlipMateTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMateTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialUserInfoHeaderView.swift; sourceTree = "<group>"; };
 		2C1F2BBC2B20DA770026C30B /* ProfileHeaderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderItem.swift; sourceTree = "<group>"; };
+		2C2C7CB82B29CEC300C733D5 /* FriendSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchResult.swift; sourceTree = "<group>"; };
 		2C2C7CBA2B29DFA600C733D5 /* TimeZoneUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneUseCase.swift; sourceTree = "<group>"; };
 		2C2C7CBC2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimeZoneUseCase.swift; sourceTree = "<group>"; };
 		2C2C7CBE2B29E0BF00C733D5 /* UserInfoEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoEndpoints.swift; sourceTree = "<group>"; };
@@ -1202,6 +1204,7 @@
 				2C5E34BD2B1B51CB00FD481B /* FriendStatus.swift */,
 				ED6865B92B1CEA0F001A2AAD /* SocialChart.swift */,
 				2C87C2802B1DF2C000A26313 /* UserInfo.swift */,
+				2C2C7CB82B29CEC300C733D5 /* FriendSearchResult.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1848,6 +1851,7 @@
 				ED6865A72B17932F001A2AAD /* SocialDetailRequestDTO.swift in Sources */,
 				2C3430B12B0DE3D0008CBC85 /* Date++Extension.swift in Sources */,
 				ED6865D02B1F1429001A2AAD /* ChartDIContainer.swift in Sources */,
+				2C2C7CB92B29CEC300C733D5 /* FriendSearchResult.swift in Sources */,
 				60EB7F522B1EFEDA00F8C613 /* MyPageTableViewCell.swift in Sources */,
 				2C9F62152B1736BE00AE63F9 /* DefaultFriendRepository.swift in Sources */,
 				2CDCD0672B18D0330080DCDE /* FriendUser.swift in Sources */,

@@ -52,6 +52,9 @@
 "friendNickname" = "Friend's Nickname";
 "noResult" = "No results were found for your search.";
 "follow" = "Follow";
+"tryAagin" = "Please try again";
+"alreadyFriend" = "This user is already friend.";
+"myself" = "You cannot add yourself";
 
 // MARK: - TimerFinish Scene
 "yes" = "Yes";

@@ -25,7 +25,7 @@ protocol FriendAddViewModelOutput {
     var searchFreindPublisher: AnyPublisher<FreindSeacrhItem, Never> { get }
     var searchErrorPublisher: AnyPublisher<Void, Never> { get }
     var nicknameCountPublisher: AnyPublisher<Int, Never> { get }
-    var followErrorPublisher: AnyPublisher<String, Never> { get }
+    var followErrorPublisher: AnyPublisher<Void, Never> { get }
 }
 
 typealias FriendAddViewModelProtocol = FriendAddViewModelInput & FriendAddViewModelOutput
@@ -35,7 +35,7 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     private var searchResultSubject = PassthroughSubject<FreindSeacrhItem, Never>()
     private var searchErrorSubject = PassthroughSubject<Void, Never>()
     private var nicknameCountSubject = PassthroughSubject<Int, Never>()
-    private var followErrorSubject = PassthroughSubject<String, Never>()
+    private var followErrorSubject = PassthroughSubject<Void, Never>()
     
     // MARK: - Properties
     private var cancellables = Set<AnyCancellable>()
@@ -69,7 +69,7 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
         return userInfoManger.nicknameChangePublisher
     }
     
-    var followErrorPublisher: AnyPublisher<String, Never> {
+    var followErrorPublisher: AnyPublisher<Void, Never> {
         return followErrorSubject.eraseToAnyPublisher()
     }
 
@@ -84,7 +84,7 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
                 case .failure(let error):
                     guard let self = self else { return }
                     FMLogger.friend.error("친구 요청 에러 발생 \(error)")
-                    self.followErrorSubject.send(error.localizedDescription)
+                    self.followErrorSubject.send()
                 }
             } receiveValue: { [weak self] _ in
                 guard let self = self else { return }
@@ -105,11 +105,12 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
                     FMLogger.friend.error("친구 검색 에러 발생 \(error.localizedDescription)")
                     self.searchErrorSubject.send()
                 }
-            } receiveValue: { [weak self] profileimageURL in
+            } receiveValue: { [weak self] friendSearchResult in
                 guard let self = self else { return }
                 self.searchResultSubject.send(FreindSeacrhItem(
                     nickname: friendNickname,
-                    iamgeURL: profileimageURL)
+                    iamgeURL: friendSearchResult.imageURL,
+                    status: friendSearchResult.status)
                 )
             }
             .store(in: &cancellables)

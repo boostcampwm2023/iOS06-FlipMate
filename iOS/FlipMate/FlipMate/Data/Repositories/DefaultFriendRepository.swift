@@ -8,6 +8,13 @@
 import Foundation
 import Combine
 
+enum FriendSearchStatus: Int {
+    case alreayFriend = 20002
+    case myself = 20001
+    case notFriend = 20000
+    case unknown = 0
+}
+
 final class DefaultFriendRepository: FriendRepository {
     
     private let provider: Providable
@@ -36,11 +43,13 @@ final class DefaultFriendRepository: FriendRepository {
             .eraseToAnyPublisher()
     }
     
-    func search(at nickname: String) -> AnyPublisher<String?, NetworkError> {
+    func search(at nickname: String) -> AnyPublisher<FriendSearchResult, NetworkError> {
         let endPoint = FriendEndpoints.searchFriend(at: nickname)
         return provider.request(with: endPoint)
-            .map { response -> String? in
-                return response.profileImageURL
+            .map { response -> FriendSearchResult in
+                return FriendSearchResult(
+                    status: FriendSearchStatus(rawValue: response.statusCode) ?? .unknown,
+                    imageURL: response.profileImageURL)
             }
             .eraseToAnyPublisher()
     }

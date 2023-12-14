@@ -10,4 +10,5 @@ import Foundation
 struct FreindSeacrhItem {
     let nickname: String
     let iamgeURL: String?
+    let status: FriendSearchStatus
 }

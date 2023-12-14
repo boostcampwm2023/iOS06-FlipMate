@@ -38,6 +38,7 @@ final class FriendAddViewController: BaseViewController {
     private enum Constant {
         static let maxLength = 10
         static let cancel = NSLocalizedString("cancel", comment: "")
+        static let errorMessage = NSLocalizedString("tryAgain", comment: "")
     }
     
     // MARK: - Properties
@@ -168,9 +169,9 @@ final class FriendAddViewController: BaseViewController {
         
         viewModel.followErrorPublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] title in
+            .sink { [weak self] _ in
                 guard let self = self else { return }
-                self.showToast(title: title)
+                self.showToast(title: Constant.errorMessage)
             }
             .store(in: &cancellables)
     }

@@ -53,6 +53,9 @@
 "friendNickname" = "友達のニックネーム";
 "noResult" = "検索結果がありません。";
 "follow" = "フォロー";
+"tryAagin" = "もう一度お試しください";
+"alreadyFriend" = "このユーザーはすでに友達です。";
+"myself" = "自分自身は友達として追加できません。";
 
 // MARK: - TimerFinish Scene
 "yes" = "はい";
