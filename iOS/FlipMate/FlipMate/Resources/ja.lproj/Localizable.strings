@@ -98,3 +98,7 @@
 
 // MARK: - Sign Up Scene
 "signUp" = "会員登録";
+
+// MARK: - TimeZone
+"timeZone" = "タイムゾーン";
+"timeZoneMessage" = "タイムゾーンが変更されたため、画面をリフレッシュしています。";

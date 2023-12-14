@@ -10,4 +10,5 @@ import Combine
 
 protocol UserInfoRepository {
     func getUserInfo() -> AnyPublisher<UserInfo, NetworkError>
+    func patchTimeZone(date: Date) async throws
 }

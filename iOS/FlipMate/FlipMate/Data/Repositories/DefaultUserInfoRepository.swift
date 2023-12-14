@@ -16,7 +16,7 @@ final class DefaultUserInfoRepository: UserInfoRepository {
     }
     
     func getUserInfo() -> AnyPublisher<UserInfo, NetworkError> {
-        let endpoint = SignUpEndpoints.userInfo()
+        let endpoint = UserInfoEndpoints.userInfo()
         return provider.request(with: endpoint)
             .map { response -> UserInfo in
                 return UserInfo(
@@ -25,5 +25,11 @@ final class DefaultUserInfoRepository: UserInfoRepository {
                     email: response.email)
             }
             .eraseToAnyPublisher()
+    }
+    
+    func patchTimeZone(date: Date) async throws {
+        let reqeust = TimeZoneRequestDTO(timezone: date.dateToString(format: .ZZZZZ))
+        let endpoint = UserInfoEndpoints.patchTimeZone(with: reqeust)
+        _ = try await provider.request(with: endpoint)
     }
 }

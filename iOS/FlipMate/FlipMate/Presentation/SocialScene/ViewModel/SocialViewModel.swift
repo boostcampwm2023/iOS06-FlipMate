@@ -114,7 +114,7 @@ final class SocialViewModel: SocialViewModelProtocol {
     }
     
     func didRefresh() {
-        fetchFriendStatus()
+        getFriendState()
     }
 }
 
