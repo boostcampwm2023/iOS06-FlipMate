@@ -11,6 +11,10 @@
 		2C1F2BBB2B20D8D60026C30B /* SocialUserInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */; };
 		2C1F2BBD2B20DA770026C30B /* ProfileHeaderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1F2BBC2B20DA770026C30B /* ProfileHeaderItem.swift */; };
 		2C2C7CB92B29CEC300C733D5 /* FriendSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CB82B29CEC300C733D5 /* FriendSearchResult.swift */; };
+		2C2C7CBB2B29DFA600C733D5 /* TimeZoneUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CBA2B29DFA600C733D5 /* TimeZoneUseCase.swift */; };
+		2C2C7CBD2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CBC2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift */; };
+		2C2C7CBF2B29E0BF00C733D5 /* UserInfoEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CBE2B29E0BF00C733D5 /* UserInfoEndpoints.swift */; };
+		2C2C7CC12B29E18F00C733D5 /* TimeZoneRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CC02B29E18F00C733D5 /* TimeZoneRequestDTO.swift */; };
 		2C2F216E2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F216D2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift */; };
 		2C2F21702B0F429800B45BA8 /* StudyLogResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F216F2B0F429800B45BA8 /* StudyLogResponseDTO.swift */; };
 		2C2F21762B0F440D00B45BA8 /* StudyLogEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F21752B0F440D00B45BA8 /* StudyLogEndpoints.swift */; };
@@ -260,6 +264,10 @@
 		2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialUserInfoHeaderView.swift; sourceTree = "<group>"; };
 		2C1F2BBC2B20DA770026C30B /* ProfileHeaderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderItem.swift; sourceTree = "<group>"; };
 		2C2C7CB82B29CEC300C733D5 /* FriendSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchResult.swift; sourceTree = "<group>"; };
+		2C2C7CBA2B29DFA600C733D5 /* TimeZoneUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneUseCase.swift; sourceTree = "<group>"; };
+		2C2C7CBC2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimeZoneUseCase.swift; sourceTree = "<group>"; };
+		2C2C7CBE2B29E0BF00C733D5 /* UserInfoEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoEndpoints.swift; sourceTree = "<group>"; };
+		2C2C7CC02B29E18F00C733D5 /* TimeZoneRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneRequestDTO.swift; sourceTree = "<group>"; };
 		2C2F216D2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStudyLogUseCase.swift; sourceTree = "<group>"; };
 		2C2F216F2B0F429800B45BA8 /* StudyLogResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogResponseDTO.swift; sourceTree = "<group>"; };
 		2C2F21752B0F440D00B45BA8 /* StudyLogEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogEndpoints.swift; sourceTree = "<group>"; };
@@ -1090,6 +1098,7 @@
 				2C9F62252B1742D200AE63F9 /* FriendEndpoints.swift */,
 				2CDCD04B2B18899A0080DCDE /* SocialEndpoints.swift */,
 				ED6865C52B1E438B001A2AAD /* ChartEndpoints.swift */,
+				2C2C7CBE2B29E0BF00C733D5 /* UserInfoEndpoints.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1215,6 +1224,7 @@
 				2C87C2842B1DF32A00A26313 /* DefaultUserInfoUseCase.swift */,
 				ED6865CD2B1E49A6001A2AAD /* DefaultChartUseCase.swift */,
 				2CD272F42B21C789000CB9E5 /* DefaultStudingPingUseCase.swift */,
+				2C2C7CBC2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1233,6 +1243,7 @@
 				2C87C2822B1DF30E00A26313 /* UserInfoUseCase.swift */,
 				ED6865CB2B1E494D001A2AAD /* ChartUseCase.swift */,
 				2CD272F22B21C748000CB9E5 /* StudingPingUseCase.swift */,
+				2C2C7CBA2B29DFA600C733D5 /* TimeZoneUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1330,6 +1341,7 @@
 				ED3595B62B0C887C00558FAA /* TimerFinishRequestDTO.swift */,
 				ED3595B82B0C88A300558FAA /* TimerFinishResponseDTO.swift */,
 				2C2F216F2B0F429800B45BA8 /* StudyLogResponseDTO.swift */,
+				2C2C7CC02B29E18F00C733D5 /* TimeZoneRequestDTO.swift */,
 			);
 			path = TimerScene;
 			sourceTree = "<group>";
@@ -1687,6 +1699,7 @@
 				2C3430A32B0DA5A5008CBC85 /* HTTPHeader.swift in Sources */,
 				ED6865BA2B1CEA0F001A2AAD /* SocialChart.swift in Sources */,
 				EDC851D22B04EE83009031EA /* CategoryListCollectionViewCell.swift in Sources */,
+				2C2C7CBD2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift in Sources */,
 				2C9F62222B173AB500AE63F9 /* FriendFollowReqeustDTO.swift in Sources */,
 				60EB7F5B2B1F19D900F8C613 /* ProfileSettingsViewController.swift in Sources */,
 				ED38422C2B0F4531001E2803 /* LoginViewModel.swift in Sources */,
@@ -1698,6 +1711,7 @@
 				2CDCD0422B1873F60080DCDE /* SocialViewModel.swift in Sources */,
 				601EB7452B14F86100C5B216 /* SignUpEndpoints.swift in Sources */,
 				ED3842252B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift in Sources */,
+				2C2C7CBF2B29E0BF00C733D5 /* UserInfoEndpoints.swift in Sources */,
 				601EB7412B14F39B00C5B216 /* ProfileSettingsRepository.swift in Sources */,
 				2C801D7E2B04B65400A7ABAE /* DefaultTimerUseCase.swift in Sources */,
 				2C88DCFB2B124451000B4686 /* LoginDIContainer.swift in Sources */,
@@ -1784,10 +1798,12 @@
 				2C3430992B0C8427008CBC85 /* Provider.swift in Sources */,
 				2C2F21702B0F429800B45BA8 /* StudyLogResponseDTO.swift in Sources */,
 				2C2F216E2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift in Sources */,
+				2C2C7CBB2B29DFA600C733D5 /* TimeZoneUseCase.swift in Sources */,
 				ED6865D82B1F32EF001A2AAD /* CustomCalenderView.swift in Sources */,
 				2CE84EF72B0B7F3C00E2FB71 /* CategorySettingSection.swift in Sources */,
 				2C88DD112B14C50F000B4686 /* DefaultTimerFinishUseCase.swift in Sources */,
 				2C3430AD2B0DDF25008CBC85 /* DefaultTimerRepository.swift in Sources */,
+				2C2C7CC12B29E18F00C733D5 /* TimeZoneRequestDTO.swift in Sources */,
 				2C9F61F92B14F33600AE63F9 /* CategoryManagable.swift in Sources */,
 				2C6717F82B0535A8004D118D /* Int++Extension.swift in Sources */,
 				ED3595B92B0C88A300558FAA /* TimerFinishResponseDTO.swift in Sources */,

@@ -31,11 +31,5 @@ struct SignUpEndpoints {
             data: body,
             headers: [HTTPHeader(value: contentType, field: "Content-Type")])
     }
-    
-    static func userInfo() -> EndPoint<UserInfoResponseDTO> {
-        return EndPoint(
-            baseURL: BaseURL.flipmateDomain,
-            path: Paths.authInfo,
-            method: .get)
-    }
+
 }

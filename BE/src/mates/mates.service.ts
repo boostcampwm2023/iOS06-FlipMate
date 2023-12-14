@@ -46,17 +46,31 @@ export class MatesService {
         date,
       );
     // 랭킹1위 카테고리 조회 로직 - ToDo
+    const following_primary_category =
+      await this.studyLogsService.getPrimaryCategory(
+        following_id,
+        start_date,
+        date,
+      );
+
     return {
       my_daily_data,
       following_daily_data,
-      following_primary_category: null,
+      following_primary_category,
     };
   }
 
-  async getMates(user_id: number, date: string): Promise<object[]> {
-    const offset = date.split(/\d\d:\d\d:\d\d/)[1];
+  async getMates(
+    user_id: number,
+    datetime: string,
+    timezone: string,
+  ): Promise<object[]> {
+    if (!user_id || !datetime || !timezone) {
+      throw new BadRequestException('인자의 형식이 잘못되었습니다.');
+    }
+    const offset = timezone[0] === ' ' ? `+${timezone.trim()}` : timezone;
 
-    const nowUserTime = moment(date)
+    const nowUserTime = moment(`${datetime}${offset}`)
       .utcOffset(offset)
       .format('YYYY-MM-DD HH:mm:ss');
 

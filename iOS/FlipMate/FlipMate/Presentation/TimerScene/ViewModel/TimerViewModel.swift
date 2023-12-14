@@ -49,6 +49,7 @@ final class TimerViewModel: TimerViewModelProtocol {
     private var studyLogUseCase: StudyLogUseCase
     private var studingPingUseCase: StudingPingUseCase
     private var userInfoUseCase: UserInfoUseCase
+    private var timeZoneUseCase: TimeZoneUseCase
     
     // MARK: Subject
     private var isDeviceFaceDownSubject = PassthroughSubject<Bool, Never>()
@@ -75,6 +76,7 @@ final class TimerViewModel: TimerViewModelProtocol {
          studyLogUseCase: StudyLogUseCase,
          studingPingUseCase: StudingPingUseCase,
          userInfoUseCase: UserInfoUseCase,
+         timeZoneUseCase: TimeZoneUseCase,
          actions: TimerViewModelActions? = nil,
          categoryManager: CategoryManageable,
          userInfoManager: UserInfoManagerProtocol,
@@ -83,6 +85,7 @@ final class TimerViewModel: TimerViewModelProtocol {
         self.studyLogUseCase = studyLogUseCase
         self.studingPingUseCase = studingPingUseCase
         self.userInfoUseCase = userInfoUseCase
+        self.timeZoneUseCase = timeZoneUseCase
         self.actions = actions
         self.categoryManager = categoryManager
         self.userInfoManager = userInfoManager
@@ -132,6 +135,7 @@ final class TimerViewModel: TimerViewModelProtocol {
     func viewDidLoad() {
         updateStudyLog()
         updateUserInfo()
+        patchTimeZone()
     }
     
     func viewWillAppear() {
@@ -212,6 +216,12 @@ private extension TimerViewModel {
                 self.userInfoManager.updateProfileImage(at: userInfo.profileImageURL)
             }
             .store(in: &cancellables)
+    }
+    
+    func patchTimeZone() {
+        Task {
+            try await timeZoneUseCase.patchTimeZone(date: Date())
+        }
     }
 }
 

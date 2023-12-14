@@ -10,7 +10,9 @@ import Foundation
 extension Date {
     enum FMDateFormmat: String {
         case yyyyMMdd = "yyyy-MM-dd"
-        case yyyyMMddhhmmss = "yyyy-MM-dd HH:mm:ssZZZZZ"
+        case yyyyMMddTHHmmSS = "yyyy-MM-dd'T'HH:mm:ss"
+        case yyyyMMddhhmmssZZZZZ = "yyyy-MM-dd HH:mm:ssZZZZZ"
+        case ZZZZZ = "ZZZZZ"
     }
     
     /// 파라미터로 전달받은 format의 타입으로 Date을 문자열로 변환하여 리턴합니다.

@@ -100,3 +100,8 @@
 
 // MARK: - Sign Up Scene
 "signUp" = "Sign Up";
+
+// MARK: - TimeZone
+"timeZone" = "TimeZone";
+"timeZoneMessage" = "Refresh the screen because the time zone has changed.";
+

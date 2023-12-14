@@ -8,7 +8,7 @@
 import UIKit
 
 protocol TabBarFlowCoordinatorDependencies {
-    func makeTabBarController() -> UITabBarController
+    func makeTabBarController() -> TabBarViewController
     func makeTimerViewController() -> UIViewController
     func makeTimerDIContainer() -> TimerSceneDIContainer
     func makeSocialDIContainer() -> SocialDIContainer
@@ -32,6 +32,7 @@ final class TabBarFlowCoordinator: NSObject, Coordinator {
     func start() {
         let tabBarController = dependencies.makeTabBarController()
         tabBarController.delegate = self
+        tabBarController.timeZoneDelegate = self
         tabBarController.setViewControllers(
             [setSocialViewController(), makeTimerViewContorller(), makeChartViewController()],
             animated: false
@@ -112,5 +113,13 @@ extension TabBarFlowCoordinator: UITabBarControllerDelegate {
                 return
             }
         }
+    }
+}
+
+extension TabBarFlowCoordinator: TimeZoneDelegate {
+    func didChangeTimeZone() {
+        socialViewController = nil
+        childCoordinators = []
+        start()
     }
 }

@@ -7,14 +7,26 @@
 
 import UIKit
 
+protocol TimeZoneDelegate: NSObject {
+    func didChangeTimeZone()
+}
+
 final class TabBarViewController: UITabBarController {
     
+    // MARK: - Constant
     private enum Constant {
         static let timerImageName = "timer"
         static let borderWidth: CGFloat = 1.0
         static let timerImageSize: CGFloat = 40
+        static let timeZone = NSLocalizedString("timeZone", comment: "")
+        static let timeZoneMessage = NSLocalizedString("timeZoneMessage", comment: "")
+        static let yes = NSLocalizedString("yes", comment: "")
     }
     
+    // MARK: - Properties
+    weak var timeZoneDelegate: TimeZoneDelegate?
+    
+    // MARK: - UI Components
     lazy var timerButton: UIButton = {
         let button = UIButton()
         button.layer.borderWidth = Constant.borderWidth
@@ -38,6 +50,7 @@ final class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTabBar()
+        configureTimeZoneNotification()
     }
     
     override func viewDidLayoutSubviews() {
@@ -83,6 +96,14 @@ private extension TabBarViewController {
             timerButton.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -tabBarHeight * 1.5)
         ])
     }
+    
+    func configureTimeZoneNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didChangeTimeZone),
+            name: NSNotification.Name.NSSystemTimeZoneDidChange,
+            object: nil)
+    }
 }
 
 // MARK: - objc function
@@ -91,5 +112,24 @@ private extension TabBarViewController {
         selectedIndex = 1
         timerButton.imageView?.tintColor = FlipMateColor.tabBarIconSelected.color
         FeedbackManager.shared.startTabBarItemTapFeedback()
+    }
+    
+    @objc func didChangeTimeZone() {
+        // MARK: - 타임존 대응
+        FMLogger.device.log("타임존이 바뀌었습니다")
+        showAlert()
+    }
+    
+    func showAlert() {
+        let alertController = UIAlertController(
+            title: Constant.timeZone,
+            message: Constant.timeZoneMessage, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: Constant.yes, style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            self.timeZoneDelegate?.didChangeTimeZone()
+        }
+        
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
     }
 }

@@ -243,18 +243,15 @@ private extension SocialViewController {
 
 // MARK: - Selector methods
 private extension SocialViewController {
-    @objc
-    func myPageButtonTapped() {
+    @objc func myPageButtonTapped() {
         viewModel.myPageButtonTapped()
     }
     
-    @objc
-    func addFriendButtonTapped() {
+    @objc func addFriendButtonTapped() {
         viewModel.freindAddButtonDidTapped()
     }
     
-    @objc
-    func refreshFreindsStatus() {
+    @objc func refreshFreindsStatus() {
         viewModel.didRefresh()
         friendsCollectionView.refreshControl?.endRefreshing()
     }

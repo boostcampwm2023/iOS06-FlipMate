@@ -81,7 +81,7 @@ final class TimerViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         UIDevice.current.isProximityMonitoringEnabled = true
-        configureNotification()
+        configureProximityNotification()
         timerViewModel.viewWillAppear()
     }
     
@@ -90,7 +90,7 @@ final class TimerViewController: BaseViewController {
         deviceMotionManager.stopDeviceMotion()
         timerViewModel.viewDidDisappear()
         UIDevice.current.isProximityMonitoringEnabled = false
-        NotificationCenter.default.removeObserver(self)
+        removeProximityNotification()
     }
     // swiftlint:enable notification_center_detachment
     
@@ -222,10 +222,17 @@ private extension TimerViewController {
 
 // MARK: Detecting FaceDown Method
 private extension TimerViewController {
-    func configureNotification() {
+    func configureProximityNotification() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(proximityDidChange(_:)),
+            name: UIDevice.proximityStateDidChangeNotification,
+            object: nil)
+    }
+    
+    func removeProximityNotification() {
+        NotificationCenter.default.removeObserver(
+            self,
             name: UIDevice.proximityStateDidChangeNotification,
             object: nil)
     }
