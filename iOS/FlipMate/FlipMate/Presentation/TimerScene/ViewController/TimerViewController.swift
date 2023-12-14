@@ -20,6 +20,32 @@ final class TimerViewController: BaseViewController {
     private var cancellables = Set<AnyCancellable>()
     private var dataSource: CateogoryDataSource?
     
+    // MARK: - View Properties
+    private lazy var categoryListCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(CategoryListCollectionViewCell.self)
+        collectionView.register(TimerHeaderView.self, kind: .header)
+        collectionView.delegate = self
+        collectionView.refreshControl = refreshControl
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
+    }()
+    
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshStudyLog), for: .valueChanged)
+        return refreshControl
+    }()
+    
+    private lazy var instructionImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: Constant.instructionImageName)
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.isHidden = true
+        return image
+    }()
+    
     // MARK: - init
     init(timerViewModel: TimerViewModelProtocol) {
         self.timerViewModel = timerViewModel
@@ -29,48 +55,6 @@ final class TimerViewController: BaseViewController {
     required init?(coder: NSCoder) {
         fatalError("Don't use storyboard")
     }
-    
-    /// 오늘 학습한 총 시간 타이머
-    private lazy var timerLabel: UILabel = {
-        let label = UILabel()
-        label.text = Constant.startTime
-        label.font = FlipMateFont.extraLargeBold.font
-        label.textColor = .label
-        return label
-    }()
-    
-    private lazy var divider: UIView = {
-        let divider = UIView()
-        divider.backgroundColor = .gray
-        return divider
-    }()
-    
-    private lazy var categoryListCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(CategoryListCollectionViewCell.self)
-        collectionView.delegate = self
-        return collectionView
-    }()
-    
-    private lazy var categorySettingButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(systemName: Constant.categoryManageButtonImageName), for: .normal)
-        button.setTitle(Constant.categoryManageButtonTitle, for: .normal)
-        button.setTitleColor(FlipMateColor.gray1.color, for: .normal)
-        button.tintColor = FlipMateColor.gray1.color
-        button.layer.borderWidth = 1.0
-        button.layer.borderColor = FlipMateColor.gray1.color?.cgColor
-        button.layer.cornerRadius = 8.0
-        button.addTarget(self, action: #selector(categorySettingButtonDidTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    private lazy var instructionImage: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: Constant.instructionImageName)
-        return image
-    }()
     
     // MARK: - View LifeCycles
     override func viewDidLoad() {
@@ -85,60 +69,28 @@ final class TimerViewController: BaseViewController {
         timerViewModel.viewWillAppear()
     }
     
-    // swiftlint:disable notification_center_detachment
     override func viewDidDisappear(_ animated: Bool) {
         deviceMotionManager.stopDeviceMotion()
         timerViewModel.viewDidDisappear()
         UIDevice.current.isProximityMonitoringEnabled = false
         removeProximityNotification()
     }
-    // swiftlint:enable notification_center_detachment
     
     // MARK: - setup UI
     override func configureUI() {
-        let subViews = [timerLabel,
-                        divider,
-                        categoryListCollectionView,
-                        categorySettingButton,
-                        instructionImage
-        ]
-        
-        subViews.forEach {
-            view.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
+        view.addSubview(categoryListCollectionView)
+        categoryListCollectionView.addSubview(instructionImage)
         
         NSLayoutConstraint.activate([
-            timerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            divider.topAnchor.constraint(equalTo: timerLabel.bottomAnchor, constant: 30),
-            divider.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            divider.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            divider.heightAnchor.constraint(equalToConstant: 1)
-        ])
-        
-        NSLayoutConstraint.activate([
-            categoryListCollectionView.topAnchor.constraint(equalTo: categorySettingButton.bottomAnchor, constant: 10),
+            categoryListCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             categoryListCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             categoryListCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            categoryListCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            categoryListCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            categorySettingButton.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 10),
-            categorySettingButton.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
-            categorySettingButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            categorySettingButton.widthAnchor.constraint(equalToConstant: 90),
-            categorySettingButton.heightAnchor.constraint(equalToConstant: 32)
-            
-        ])
-        
-        NSLayoutConstraint.activate([
-            instructionImage.topAnchor.constraint(equalTo: categorySettingButton.bottomAnchor, constant: 30),
-            instructionImage.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            instructionImage.centerXAnchor.constraint(equalTo: categoryListCollectionView.centerXAnchor),
+            instructionImage.centerYAnchor.constraint(equalTo: categoryListCollectionView.centerYAnchor)
         ])
     }
     
@@ -157,7 +109,8 @@ final class TimerViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] totalTime in
                 guard let self = self else { return }
-                self.timerLabel.text = totalTime.secondsToStringTime()
+                let header = findHeader()
+                header?.updateTotalTime(time: totalTime)
             }
             .store(in: &cancellables)
         
@@ -184,20 +137,29 @@ final class TimerViewController: BaseViewController {
                 snapShot.appendSections(sections)
                 snapShot.appendItems(categories.map { CategorySettingItem.categoryCell($0) })
                 self.dataSource?.apply(snapShot)
+                self.setInstructionImage()
             }
             .store(in: &cancellables)
         
         timerViewModel.deviceSettingEnabledPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isEnabled in
-                print("넘어옵니다.", isEnabled)
-                self?.setDeviceSetting(isEnabled: isEnabled)
+                guard let self = self else { return }
+                self.setDeviceSetting(isEnabled: isEnabled)
             }
             .store(in: &cancellables)
     }
     
     func saveStudyLog() {
-        timerViewModel.saveStudyLog()
+        timerViewModel.refreshStudyLog()
+    }
+    
+    @objc func refreshStudyLog() {
+        timerViewModel.refreshStudyLog()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) { [weak self] in
+            self?.categoryListCollectionView.refreshControl?.endRefreshing()
+        }
     }
 }
 
@@ -216,6 +178,24 @@ private extension TimerViewController {
             deviceMotionManager.startDeviceMotion()
         } else {
             deviceMotionManager.stopDeviceMotion()
+        }
+    }
+    
+    func findHeader() -> TimerHeaderView? {
+        guard let header = categoryListCollectionView.visibleSupplementaryViews(
+            ofKind: UICollectionView.elementKindSectionHeader).first
+                as? TimerHeaderView else { return nil }
+        return header
+    }
+    
+    func setInstructionImage() {
+        let snapshot = dataSource?.snapshot()
+        let numberOfItems = snapshot?.numberOfItems
+        
+        if numberOfItems == .zero {
+            instructionImage.isHidden = false
+        } else {
+            instructionImage.isHidden = true
         }
     }
 }
@@ -269,6 +249,18 @@ private extension TimerViewController {
                 return cell
             }
         })
+        
+        dataSource?
+            .supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+                let header: TimerHeaderView = collectionView
+                    .dequeueReusableView(for: indexPath, kind: kind)
+                header.cancellable = header.categoryTapPublisher()
+                    .receive(on: DispatchQueue.main)
+                    .sink { [weak self] _ in
+                        self?.timerViewModel.categorySettingButtoneDidTapped()
+                    }
+                return header
+            }
     }
     
     func setSnapshot() {
@@ -286,14 +278,36 @@ extension TimerViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.size.width - 20, height: 58)
+        return CGSize(
+            width: view.frame.size.width - CollectionViewConstant.cellSpacing,
+            height: CollectionViewConstant.cellHeight)
     }
     
     /// 위아래 간격
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return CollectionViewConstant.sectionSpacing
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(
+            top: CollectionViewConstant.sectionTopInset,
+            left: CollectionViewConstant.sectionLeftInset,
+            bottom: CollectionViewConstant.sectionBottomInset,
+            right: CollectionViewConstant.sectionRightInset)
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        referenceSizeForHeaderInSection section: Int) -> CGSize {
+            return CGSize(
+                width: CollectionViewConstant.sectionWidth,
+                height: CollectionViewConstant.sectionHeight)
     }
 }
 
@@ -326,9 +340,19 @@ extension TimerViewController: UICollectionViewDelegate {
 // MARK: - Constants
 private extension TimerViewController {
     enum Constant {
-        static let startTime = "00:00:00"
-        static let categoryManageButtonImageName = "gearshape"
-        static let categoryManageButtonTitle = NSLocalizedString("setting", comment: "")
         static let instructionImageName = NSLocalizedString("instruction", comment: "")
+    }
+    
+    enum CollectionViewConstant {
+        static let cellHeight: CGFloat = 58
+        static let cellSpacing: CGFloat = 20
+        
+        static let sectionSpacing: CGFloat = 10
+        static let sectionTopInset: CGFloat = 0
+        static let sectionLeftInset: CGFloat = 0
+        static let sectionBottomInset: CGFloat = 60
+        static let sectionRightInset: CGFloat = 0
+        static let sectionWidth: CGFloat = 200
+        static let sectionHeight: CGFloat = 150
     }
 }

@@ -16,7 +16,7 @@ final class TimerHeaderView: UICollectionReusableView {
         static let categoryManageButtonTitle = NSLocalizedString("setting", comment: "")
     }
     
-    private enum categoryButtonConstant {
+    private enum CategoryButtonConstant {
         static let borderWidth: CGFloat = 1
         static let cornerRadius: CGFloat = 8
         static let bottom: CGFloat = 10
@@ -25,7 +25,7 @@ final class TimerHeaderView: UICollectionReusableView {
         static let height: CGFloat = 32
     }
     
-    private enum dividerConstant {
+    private enum DividerConstant {
         static let bottom: CGFloat = 30
         static let height: CGFloat = 1
     }
@@ -55,9 +55,9 @@ final class TimerHeaderView: UICollectionReusableView {
         button.setTitle(Constant.categoryManageButtonTitle, for: .normal)
         button.setTitleColor(FlipMateColor.gray1.color, for: .normal)
         button.tintColor = FlipMateColor.gray1.color
-        button.layer.borderWidth = categoryButtonConstant.borderWidth
+        button.layer.borderWidth = CategoryButtonConstant.borderWidth
         button.layer.borderColor = FlipMateColor.gray1.color?.cgColor
-        button.layer.cornerRadius = categoryButtonConstant.cornerRadius
+        button.layer.cornerRadius = CategoryButtonConstant.cornerRadius
         button.addTarget(self, action: #selector(categorySettingButtonDidTapped), for: .touchUpInside)
         return button
     }()
@@ -100,16 +100,16 @@ private extension TimerHeaderView {
             timerLabel.topAnchor.constraint(equalTo: topAnchor),
             timerLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            divider.topAnchor.constraint(equalTo: timerLabel.bottomAnchor, constant: dividerConstant.bottom),
+            divider.topAnchor.constraint(equalTo: timerLabel.bottomAnchor, constant: DividerConstant.bottom),
             divider.leadingAnchor.constraint(equalTo: leadingAnchor),
             divider.trailingAnchor.constraint(equalTo: trailingAnchor),
-            divider.heightAnchor.constraint(equalToConstant: dividerConstant.height),
+            divider.heightAnchor.constraint(equalToConstant: DividerConstant.height),
             
-            categorySettingButton.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: categoryButtonConstant.bottom),
+            categorySettingButton.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: CategoryButtonConstant.bottom),
             categorySettingButton.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor),
-            categorySettingButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: categoryButtonConstant.trailing),
-            categorySettingButton.widthAnchor.constraint(equalToConstant: categoryButtonConstant.width),
-            categorySettingButton.heightAnchor.constraint(equalToConstant: categoryButtonConstant.height)
+            categorySettingButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: CategoryButtonConstant.trailing),
+            categorySettingButton.widthAnchor.constraint(equalToConstant: CategoryButtonConstant.width),
+            categorySettingButton.heightAnchor.constraint(equalToConstant: CategoryButtonConstant.height)
         ])
     }
 }
