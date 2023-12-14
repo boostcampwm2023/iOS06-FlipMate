@@ -199,13 +199,12 @@ private extension CategoryModifyViewController {
         viewModel.modifyCloseButtonTapped()
     }
     
-    // swiftlint:disable cyclomatic_complexity
     @objc func doneButtonTapped(_ sender: UIBarButtonItem) {
         guard let categoryTitle = categoryTitleTextField.text else {
             FMLogger.general.error("빈 제목, 추가할 수 없음")
             return
         }
-         
+        
         if categoryTitle.isEmpty || categoryTitle.count > 10 {
             showAlert(message: Constant.categoryNameCountError)
             return
@@ -213,43 +212,18 @@ private extension CategoryModifyViewController {
         
         let colorCode = categoryColorSelectView.colorValue()
         let name = categoryTitle
-
-        if purpose == .create {
-            Task {
-                do {
-                    try await viewModel.createCategory(name: name,
-                                                       colorCode: colorCode)
-                } catch let error as APIError {
-                    FMLogger.general.error("카테고리 추가 중 에러 \(error)")
-                    switch error {
-                    case .errorResponse(let response):
-                        switch response.statusCode {
-                        case 400: showAlert(message: Constant.categoryNameIsDuplicated)
-                        default: showAlert(message: Constant.unknownError)
-                        }
-                    }
-                }
-            }
-        } else {
-            Task {
-                do {
-                    try await viewModel.updateCategory(newName: name,
-                                                       newColorCode: colorCode)
-                } catch let error as APIError {
-                    FMLogger.general.error("카테고리 변경 중 에러 \(error)")
-                    switch error {
-                    case .errorResponse(let response):
-                        switch response.statusCode {
-                        case 400: showAlert(message: Constant.categoryNameIsDuplicated)
-                        default: showAlert(message: Constant.unknownError)
-                        }
-                    }
+        
+        Task {
+            do {
+                try await viewModel.performCategoryModification(purpose: purpose, name: name, colorCode: colorCode)
+            } catch let categoryError as CategoryModificationError {
+                switch categoryError {
+                case .duplicatedName: showAlert(message: Constant.categoryNameIsDuplicated)
+                case .unknownError: showAlert(message: Constant.unknownError)
                 }
             }
         }
-        viewModel.modifyDoneButtonTapped()
     }
-    // swiftlint:enable cyclomatic_complexity
 }
 
 // MARK: - Alert Function
