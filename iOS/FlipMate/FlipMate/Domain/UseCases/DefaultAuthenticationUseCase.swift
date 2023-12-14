@@ -20,6 +20,10 @@ final class DefaultAuthenticationUseCase: AuthenticationUseCase {
         return try await repository.googleLogin(with: accessToken)
     }
     
+    func appleLogin(accessToken: String) async throws -> User {
+        return try await repository.appleLogin(with: accessToken)
+    }
+    
     func signOut() {
         signoutManager.signOut()
     }

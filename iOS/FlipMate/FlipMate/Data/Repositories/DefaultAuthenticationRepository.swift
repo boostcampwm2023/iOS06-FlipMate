@@ -8,17 +8,25 @@
 import Foundation
 
 final class DefaultAuthenticationRepository: AuthenticationRepository {
+    private let provider: Providable
+    
+    init(provider: Providable) {
+        self.provider = provider
+    }
+    
     func googleLogin(with accessToken: String) async throws -> User {
         let requestDTO = GoogleAuthRequestDTO(accessToken: accessToken)
-        let endpoint = GoogleAuthEndpoints.enterGoogleLogin(requestDTO)
+        let endpoint = AuthenticationEndpoints.enterGoogleLogin(requestDTO)
         let responseDTO = try await provider.request(with: endpoint)
         
         return User(isMember: responseDTO.isMember, accessToken: responseDTO.accessToken)
     }
     
-    private let provider: Providable
-    
-    init(provider: Providable) {
-        self.provider = provider
+    func appleLogin(with identityToken: String) async throws -> User {
+        let requestDTO = AppleAuthRequestDTO(identityToken: identityToken)
+        let endpoint = AuthenticationEndpoints.enterAppleLogin(requestDTO)
+        let responseDTO = try await provider.request(with: endpoint)
+        
+        return User(isMember: responseDTO.isMember, accessToken: responseDTO.accessToken)
     }
 }
