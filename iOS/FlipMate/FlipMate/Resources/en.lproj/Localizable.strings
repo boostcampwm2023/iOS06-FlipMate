@@ -32,7 +32,8 @@
 "reset" = "Reset Data";
 "signout" = "Log Out";
 "signoutMessage" = "Do you want to log out?";
-"accountClosing" = "Account Withdrawal";
+"accountWithrawal" = "Account Withdrawal";
+"accountWithrawalMessage" = "When you withdraw from membership, all personal information will be permanently deleted, and recovery will be impossible. Are you sure you want to proceed with the withdrawal?";
 "profileSetting" = "Profile Setting";
 "nicknamePlaceHolder" = "Please enter your nickname";
 "imageNotSafeTitle" = "This image is not available.";
@@ -46,12 +47,13 @@
 "duplicated" = "Nickname has been duplicated.";
 "emojiContained" = "Nickname cannot contain emojis.";
 
+
 // MARK: - Friend Add Scene
 "addFriend" = "Add Friend";
 "myNickname" = "My Nickname";
 "friendNickname" = "Friend's Nickname";
 "noResult" = "No results were found for your search.";
-"follow" = "Follow";
+"follow" = " Follow ";
 "tryAagin" = "Please try again";
 "alreadyFriend" = "This user is already friend.";
 "myself" = "You cannot add yourself";
