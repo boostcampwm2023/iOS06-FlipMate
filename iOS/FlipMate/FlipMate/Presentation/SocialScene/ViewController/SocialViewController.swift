@@ -253,7 +253,10 @@ private extension SocialViewController {
     
     @objc func refreshFreindsStatus() {
         viewModel.didRefresh()
-        friendsCollectionView.refreshControl?.endRefreshing()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) { [weak self] in
+            self?.friendsCollectionView.refreshControl?.endRefreshing()
+        }
     }
 }
 
