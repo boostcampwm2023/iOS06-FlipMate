@@ -32,8 +32,8 @@
 "reset" = "データの初期化";
 "signout" = "ログアウト";
 "signoutMessage" = "ログアウトしますか？";
-"accountWithrawal" = "会員脱退";
-"accountWithrawalMessage" = "会員脱退時にすべての個人情報が削除され、復旧はできません。本当に脱退しますか？";
+"withdrawal" = "会員脱退";
+"withdrawalMessage" = "会員脱退時にすべての個人情報が削除され、復旧はできません。本当に脱退しますか？";
 "profileSetting" = "プロファイル設定";
 "nicknamePlaceHolder" = "ニックネームを入力してください";
 "imageNotSafeTitle" = "この画像は使用できません。";
