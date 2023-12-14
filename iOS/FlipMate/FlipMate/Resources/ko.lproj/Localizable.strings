@@ -36,8 +36,8 @@
 "reset" = "데이터 초기화";
 "signout" = "로그아웃";
 "signoutMessage" = "로그아웃 하시겠습니까?";
-"accountWithrawal" = "회원 탈퇴";
-"accountWithrawalMessage" = "회원 탈퇴 시 모든 개인 정보가 삭제되며, 복구가 불가능합니다. 정말로 탈퇴하시겠습니까?";
+"withdrawal" = "회원 탈퇴";
+"withdrawalMessage" = "회원 탈퇴 시 모든 개인 정보가 삭제되며, 복구가 불가능합니다. 정말로 탈퇴하시겠습니까?";
 "profileSetting" = "프로필 수정";
 "nicknamePlaceHolder" = "닉네임을 입력해주세요";
 "imageNotSafeTitle" = "이 이미지는 사용할 수 없습니다.";

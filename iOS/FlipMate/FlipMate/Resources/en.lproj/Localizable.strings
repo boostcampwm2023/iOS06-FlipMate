@@ -36,8 +36,8 @@
 "reset" = "Reset Data";
 "signout" = "Log Out";
 "signoutMessage" = "Do you want to log out?";
-"accountWithrawal" = "Account Withdrawal";
-"accountWithrawalMessage" = "When you withdraw from membership, all personal information will be permanently deleted, and recovery will be impossible. Are you sure you want to proceed with the withdrawal?";
+"withdrawal" = "Account Withdrawal";
+"withdrawalMessage" = "When you withdraw from membership, all personal information will be permanently deleted, and recovery will be impossible. Are you sure you want to proceed with the withdrawal?";
 "profileSetting" = "Profile Setting";
 "nicknamePlaceHolder" = "Please enter your nickname";
 "imageNotSafeTitle" = "This image is not available.";
