@@ -11,6 +11,7 @@ import {
   UploadedFile,
   BadRequestException,
   Patch,
+  Delete,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
@@ -30,7 +31,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ConfigService } from '@nestjs/config';
 import { ENV } from 'src/common/const/env-keys.const';
 import { getImageUrl } from 'src/common/utils/utils';
-import { identity } from 'rxjs';
+import { ResponseDto } from 'src/common/response.dto';
 
 @ApiTags('로그인 페이지')
 @Controller('auth')
@@ -145,14 +146,21 @@ export class AuthController {
   async patchTimezone(
     @User('id') user_id: number,
     @Body('timezone') timezone: string,
-  ): Promise<any> {
-    const updatedUser = await this.usersService.updateTimezone(
-      user_id,
-      timezone,
-    );
-    return {
-      statusCode: 200,
-      message: '타임존 설정 성공',
-    };
+  ): Promise<ResponseDto> {
+    await this.usersService.updateTimezone(user_id, timezone);
+    return new ResponseDto(200, '타임존 설정 성공');
+  }
+
+  @Delete()
+  @UseGuards(AccessTokenGuard)
+  @ApiOperation({ summary: '유저 회원 탈퇴 (완)' })
+  @ApiResponse({
+    type: ResponseDto,
+    description: '카테고리 삭제 성공',
+  })
+  @ApiBearerAuth()
+  async deleteUser(@User('id') user_id: number): Promise<ResponseDto> {
+    await this.usersService.remove(user_id);
+    return new ResponseDto(200, '성공적으로 삭제되었습니다.');
   }
 }

@@ -175,4 +175,11 @@ export class UsersService {
   async s3Upload(file: Express.Multer.File): Promise<string> {
     return this.s3Service.uploadFile(file);
   }
+
+  remove(user_id: number) {
+    if (!user_id) {
+      throw new BadRequestException('인자의 형식이 잘못되었습니다.');
+    }
+    return this.usersRepository.delete(user_id);
+  }
 }
