@@ -148,7 +148,9 @@ export class StudyLogsService {
        LIMIT 1`,
       [user_id, start_date, end_date],
     );
-    return primary_category[0].name ?? null;
+    return primary_category[0]?.name === null
+      ? '기타'
+      : primary_category[0]?.name ?? null;
   }
   async groupByCategory(user_id: number, date: string): Promise<object> {
     const studyLogsByCategory = await this.studyLogsRepository.query(
