@@ -9,18 +9,32 @@ import UIKit
 import Combine
 
 final class TimerHeaderView: UICollectionReusableView {
+    // MARK: - Constants
     private enum Constant {
         static let startTime = "00:00:00"
         static let categoryManageButtonImageName = "gearshape"
         static let categoryManageButtonTitle = NSLocalizedString("setting", comment: "")
-        static let instructionImageName = NSLocalizedString("instruction", comment: "")
-        static let bottomInset: CGFloat = 50
     }
     
+    private enum categoryButtonConstant {
+        static let borderWidth: CGFloat = 1
+        static let cornerRadius: CGFloat = 8
+        static let bottom: CGFloat = 10
+        static let trailing: CGFloat = -16
+        static let width: CGFloat = 90
+        static let height: CGFloat = 32
+    }
+    
+    private enum dividerConstant {
+        static let bottom: CGFloat = 30
+        static let height: CGFloat = 1
+    }
+    
+    // MARK: - Properties
     private var categorySettingSubejct = PassthroughSubject<Void, Never>()
     var cancellable: AnyCancellable?
 
-    /// 오늘 학습한 총 시간 타이머
+    // MARK: - UI Components
     private lazy var timerLabel: UILabel = {
         let label = UILabel()
         label.text = Constant.startTime
@@ -41,18 +55,20 @@ final class TimerHeaderView: UICollectionReusableView {
         button.setTitle(Constant.categoryManageButtonTitle, for: .normal)
         button.setTitleColor(FlipMateColor.gray1.color, for: .normal)
         button.tintColor = FlipMateColor.gray1.color
-        button.layer.borderWidth = 1.0
+        button.layer.borderWidth = categoryButtonConstant.borderWidth
         button.layer.borderColor = FlipMateColor.gray1.color?.cgColor
-        button.layer.cornerRadius = 8.0
+        button.layer.cornerRadius = categoryButtonConstant.cornerRadius
         button.addTarget(self, action: #selector(categorySettingButtonDidTapped), for: .touchUpInside)
         return button
     }()
     
+    // MARK: - Life cycle
     override func prepareForReuse() {
         super.prepareForReuse()
         cancellable?.cancel()
     }
     
+    // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
@@ -62,12 +78,9 @@ final class TimerHeaderView: UICollectionReusableView {
         fatalError("Don't use storyboard")
     }
     
+    // MARK: - Methods
     func categoryTapPublisher() -> AnyPublisher<Void, Never> {
         return categorySettingSubejct.eraseToAnyPublisher()
-    }
-    
-    @objc func categorySettingButtonDidTapped() {
-        categorySettingSubejct.send()
     }
     
     func updateTotalTime(time: Int) {
@@ -75,6 +88,7 @@ final class TimerHeaderView: UICollectionReusableView {
     }
 }
 
+// MARK: - UI Setting
 private extension TimerHeaderView {
     func configureUI() {
         [ timerLabel, divider, categorySettingButton ].forEach {
@@ -86,16 +100,23 @@ private extension TimerHeaderView {
             timerLabel.topAnchor.constraint(equalTo: topAnchor),
             timerLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            divider.topAnchor.constraint(equalTo: timerLabel.bottomAnchor, constant: 30),
+            divider.topAnchor.constraint(equalTo: timerLabel.bottomAnchor, constant: dividerConstant.bottom),
             divider.leadingAnchor.constraint(equalTo: leadingAnchor),
             divider.trailingAnchor.constraint(equalTo: trailingAnchor),
-            divider.heightAnchor.constraint(equalToConstant: 1),
+            divider.heightAnchor.constraint(equalToConstant: dividerConstant.height),
             
-            categorySettingButton.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 10),
+            categorySettingButton.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: categoryButtonConstant.bottom),
             categorySettingButton.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor),
-            categorySettingButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            categorySettingButton.widthAnchor.constraint(equalToConstant: 90),
-            categorySettingButton.heightAnchor.constraint(equalToConstant: 32)
+            categorySettingButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: categoryButtonConstant.trailing),
+            categorySettingButton.widthAnchor.constraint(equalToConstant: categoryButtonConstant.width),
+            categorySettingButton.heightAnchor.constraint(equalToConstant: categoryButtonConstant.height)
         ])
+    }
+}
+
+// MARK: - objc func
+private extension TimerHeaderView {
+    @objc func categorySettingButtonDidTapped() {
+        categorySettingSubejct.send()
     }
 }
