@@ -33,13 +33,18 @@ export class CategoriesService {
       throw new NotFoundException('해당 id의 유저가 존재하지 않습니다.');
     }
 
-    const categoryCount = await this.categoriesRepository.count({
+    const categories = await this.categoriesRepository.find({
       where: { user_id: { id: user.id } },
     });
+    const categoryCount = categories.length;
     if (categoryCount >= CATEGORIES_MAXIMUM) {
       throw new BadRequestException(
         `카테고리는 최대 ${CATEGORIES_MAXIMUM}개까지 생성할 수 있습니다.`,
       );
+    }
+    const categoryNames = categories.map((category) => category.name);
+    if (categoryNames.includes(categoriesData.name)) {
+      throw new BadRequestException('이미 존재하는 카테고리입니다.');
     }
 
     const category = this.categoriesRepository.create({
