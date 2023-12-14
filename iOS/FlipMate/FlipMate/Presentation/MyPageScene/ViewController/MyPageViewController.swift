@@ -209,7 +209,7 @@ extension MyPageViewController: UITableViewDelegate {
             let alert = UIAlertController(title: Constant.accountWithrawal, message: Constant.accountWithrawalMessage, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: Constant.cancel, style: .cancel))
             alert.addAction(UIAlertAction(title: Constant.accountWithrawal, style: .destructive, handler: { [weak self] _ in
-                
+                self?.viewModel.withdrawButtonTapped()
             }))
             
             DispatchQueue.main.async {

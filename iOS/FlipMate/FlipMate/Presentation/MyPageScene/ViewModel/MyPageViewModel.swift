@@ -18,6 +18,7 @@ protocol MyPageViewModelInput {
     func profileSettingsViewButtonTapped()
     func dismissButtonDidTapped()
     func signOutButtonTapped()
+    func withdrawButtonTapped()
 }
 
 protocol MyPageViewModelOutput {
@@ -65,6 +66,11 @@ final class MyPageViewModel: MyPageViewModelProtocol {
     }
     
     func signOutButtonTapped() {
+        useCase.signOut()
+    }
+    
+    func withdrawButtonTapped() {
+        useCase.withdraw()
         signOutUseCsae.signOut()
         // TODO: 코디네이터가 담당해야 할 것 같다...? 뷰의 이동이기 때문,,
     }
