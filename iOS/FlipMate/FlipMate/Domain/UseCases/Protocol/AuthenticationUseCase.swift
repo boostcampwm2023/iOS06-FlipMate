@@ -11,4 +11,5 @@ protocol AuthenticationUseCase {
     func googleLogin(accessToken: String) async throws -> User
     func appleLogin(accessToken: String) async throws -> User
     func signOut()
+    func withdraw()
 }
