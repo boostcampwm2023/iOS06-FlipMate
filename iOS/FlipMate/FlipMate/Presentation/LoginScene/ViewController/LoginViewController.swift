@@ -215,12 +215,12 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            let userID = appleIDCredential.user
             guard let token = appleIDCredential.identityToken, let decodedAccessToken = String(data: token, encoding: .utf8) else {
                 FMLogger.general.error("토큰 비어있음!")
                 return
             }
-            print(decodedAccessToken)
-            loginViewModel.requestAppleLogin(accessToken: decodedAccessToken)
+            loginViewModel.requestAppleLogin(accessToken: decodedAccessToken, userID: userID)
         default:
             break
         }

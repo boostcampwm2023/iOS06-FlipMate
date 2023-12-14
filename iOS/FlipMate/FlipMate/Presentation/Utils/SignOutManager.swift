@@ -27,6 +27,7 @@ final class SignOutManager: SignOutManagerProtocol {
     
     func signOut() {
         try? KeychainManager.deleteAccessToken()
+        try? KeychainManager.deleteAppleUserID()
         // MAKR: - UserInfoManager 초기화
         userInfoManager.initManager()
         signOutSubject.send(true)
