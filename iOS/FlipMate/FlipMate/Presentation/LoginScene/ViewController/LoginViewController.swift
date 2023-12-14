@@ -227,6 +227,13 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // 단순 취소는 오류 띄우지 않음
+        if let error = error as? ASAuthorizationError {
+            if error.errorCode == 1001 {
+                enableButtons()
+                return
+            }
+        }
         let alert = UIAlertController(title: Constant.errorOccurred, message: "\(error.localizedDescription)", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: Constant.errorOkTitle, style: .default))
         self.present(alert, animated: true)
