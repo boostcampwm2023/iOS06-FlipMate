@@ -34,7 +34,7 @@ final class MyPageViewModel: MyPageViewModelProtocol {
         [Constant.editProfile],
         [Constant.developer, Constant.version],
         [Constant.signout],
-        [Constant.accountClosing]
+        [Constant.accountWithrawal]
     ]
     
     // MARK: - Subjects
@@ -97,6 +97,6 @@ private extension MyPageViewModel {
         static let version = NSLocalizedString("version", comment: "")
         static let developer = NSLocalizedString("developer", comment: "")
         static let signout = NSLocalizedString("signout", comment: "")
-        static let accountClosing = NSLocalizedString("accountClosing", comment: "")
+        static let accountWithrawal = NSLocalizedString("accountWithrawal", comment: "")
     }
 }

@@ -36,7 +36,8 @@
 "reset" = "데이터 초기화";
 "signout" = "로그아웃";
 "signoutMessage" = "로그아웃 하시겠습니까?";
-"accountClosing" = "회원 탈퇴";
+"accountWithrawal" = "회원 탈퇴";
+"accountWithrawalMessage" = "회원 탈퇴 시 모든 개인 정보가 삭제되며, 복구가 불가능합니다. 정말로 탈퇴하시겠습니까?";
 "profileSetting" = "프로필 수정";
 "nicknamePlaceHolder" = "닉네임을 입력해주세요";
 "imageNotSafeTitle" = "이 이미지는 사용할 수 없습니다.";
@@ -55,7 +56,7 @@
 "friendNickname" = "친구 닉네임";
 "myNickname" = "내 닉네임";
 "noResult" = "검색 결과가 없습니다.";
-"follow" = "친구추가";
+"follow" = " 친구추가 ";
 "tryAagin" = "다시 시도해주세요.";
 "alreadyFriend" = "이미 친구인 사용자입니다.";
 "myself" = "자기 자신은 친구 추가를 할 수 없습니다.";

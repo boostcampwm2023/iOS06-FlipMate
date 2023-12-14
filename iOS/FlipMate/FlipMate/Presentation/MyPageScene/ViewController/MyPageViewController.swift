@@ -206,7 +206,15 @@ extension MyPageViewController: UITableViewDelegate {
         }
         
         if indexPath.section == 3, indexPath.row == 0 {
-            // 계정 탈퇴 탭
+            let alert = UIAlertController(title: Constant.accountWithrawal, message: Constant.accountWithrawalMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: Constant.cancel, style: .cancel))
+            alert.addAction(UIAlertAction(title: Constant.accountWithrawal, style: .destructive, handler: { [weak self] _ in
+                
+            }))
+            
+            DispatchQueue.main.async {
+                self.present(alert, animated: true)
+            }
         }
         
         myPageTableView.deselectRow(at: indexPath, animated: true)
@@ -221,5 +229,7 @@ private extension MyPageViewController {
         static let cancel = NSLocalizedString("cancel", comment: "")
         static let signoutMessage = NSLocalizedString("signoutMessage", comment: "")
         static let close = NSLocalizedString("close", comment: "")
+        static let accountWithrawal = NSLocalizedString("accountWithrawal", comment: "")
+        static let accountWithrawalMessage = NSLocalizedString("accountWithrawalMessage", comment: "")
     }
 }
