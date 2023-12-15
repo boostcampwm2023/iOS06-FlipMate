@@ -1,12 +1,13 @@
 ## 서비스 소개
 
+
 <div align="center">
-    <a style="color: #111111" target="_blank" href="https://yeim.notion.site/FlipMate-7d65cbbf9a694f8d83f83b85f0bac684?pvs=4">📖 팀 노션</a>
-    &nbsp;
-    <a target="_blank" href="https://yeim.notion.site/d8274f08a875465fa23af289d9675271?pvs=4">🤔 개발일지</a>
-    &nbsp;
-    <a target="_blank" href="https://yeim.notion.site/DevLog-1cfd2d38a59a4c0b9135542a83a77547?pvs=4">📚 학습공유</a>
-    <br/><br/>
+<a style="color: #111111" target="_blank" href="https://yeim.notion.site/FlipMate-7d65cbbf9a694f8d83f83b85f0bac684?pvs=4">📖 팀 노션</a>
+&nbsp;
+<a target="_blank" href="https://yeim.notion.site/d8274f08a875465fa23af289d9675271?pvs=4">🤔 개발일지</a>
+&nbsp;
+<a target="_blank" href="https://yeim.notion.site/DevLog-1cfd2d38a59a4c0b9135542a83a77547?pvs=4">📚 학습공유</a>
+<br/><br/>
 </div>
 
 <div align="center">
@@ -18,8 +19,6 @@
     FlipMate는 <strong>순수 학습 시간</strong>을 체크하고, 친구들과 <strong>공유</strong>할 수 있는 앱 입니다. <br/>
 기존의 학습용 타이머보다 엄격하고 독특하게 학습시간을 측정할 수 있어요!    
 </div>
-
-
 
 ## 💗 주요 기능
 <div align="center">
@@ -45,6 +44,11 @@
     <img width="600" src="https://github.com/boostcampwm2023/iOS06-FlipMate/assets/56269396/bd52e270-de3a-4c49-a806-317d8a110d2b" />
 </div>
 
+<h3 align="center">다국어 지원</h3>
+<div align="center">
+     <img width="1200" src="https://github.com/boostcampwm2023/iOS06-FlipMate/assets/56269396/2d4aff7e-f736-4d59-b3b8-420e721f9d31" />
+</div>
+
 ## 📝 FlipMate 개발 일지
 
 ### 공통
@@ -59,6 +63,7 @@
 - [ncloud에서 VPC 구성하기](https://yeim.notion.site/ncloud-VPC-c55a9dcc39024ae6a0717d2d225b0412?pvs=4)
 
 ### iOS
+- [사용자의 TimeZone 대응하기](https://yeim.notion.site/TimeZone-7dbacef5214e4ee28b057c0f49f53aaa?pvs=4)
 - [CoreMotion으로 Device FaceDown 감지하기](https://yeim.notion.site/CoreMotion-cb91b16de7e74c86bd7369eb549b8c8c?pvs=4)
 - [Core Haptics로 커스텀 햅틱 피드백 만들기](https://yeim.notion.site/Core-Haptics-6f66eba841f84644bc010083bf1b700f?pvs=4)
 - [의존성 주입에 관한 고찰](https://yeim.notion.site/09ed955f90fc43b7953327a1de37ffe4?pvs=4)
@@ -67,18 +72,31 @@
 - [Face Down 상태에서 화면 밝기 조정](https://yeim.notion.site/FaceDown-591d9e2dd93744078bc6616cf282cbb3?pvs=4)
 - [화면 방향 잠금이 켜져있을 때 UIDeviceOrientation 안되는 문제](https://yeim.notion.site/c6a2cd1d4d9d42b38083643541f7f314?pvs=4)
 
-## ⚙️ 인프라 구조
+## ⚙️ BE
+### 인프라 구조
 
 <div align="center">
     <img width="740" alt="스크린샷 2023-12-14 오후 1 42 09" src="https://github.com/boostcampwm2023/iOS06-FlipMate/assets/56269396/d1c77b53-497b-49cb-aeed-85f200df5636">
 </div>
 
-## 🛠️ 기술 스택
-
+### 기술 스택
 <div align="center">
     <img width="740" alt="스크린샷 2023-12-14 오후 1 44 31" src="https://github.com/boostcampwm2023/iOS06-FlipMate/assets/56269396/0e899fe2-95df-4520-985f-f17c61179fd8">
 </div>
 
+## 🛠️ iOS
+### 기술 스택
+<div align="center">
+<img width="740" alt="스크린샷 2023-12-15 오후 4 47 05" src="https://github.com/boostcampwm2023/iOS06-FlipMate/assets/56269396/6d70868f-dbd6-4d47-8843-59871a916d15">
+</div>
+
+### 아키텍처
+
+- MVVM-C, Clean Architecture
+- DI Container, Coordinator Pattern
+<img width="1170" alt="image" src="https://github.com/boostcampwm2023/iOS06-FlipMate/assets/48830320/127f9da2-05e6-4b84-9ca3-ab628f7b0994">
+
+</br>
 
 ## 👨‍👨‍👦‍👦 Member
 
