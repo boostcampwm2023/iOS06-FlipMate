@@ -18,6 +18,7 @@ protocol MyPageViewModelInput {
     func profileSettingsViewButtonTapped()
     func dismissButtonDidTapped()
     func signOutButtonTapped()
+    func withdrawButtonTapped()
 }
 
 protocol MyPageViewModelOutput {
@@ -34,7 +35,7 @@ final class MyPageViewModel: MyPageViewModelProtocol {
         [Constant.editProfile],
         [Constant.developer, Constant.version],
         [Constant.signout],
-        [Constant.accountClosing]
+        [Constant.withdrawal]
     ]
     
     // MARK: - Subjects
@@ -66,7 +67,10 @@ final class MyPageViewModel: MyPageViewModelProtocol {
     
     func signOutButtonTapped() {
         useCase.signOut()
-        // TODO: 코디네이터가 담당해야 할 것 같다...? 뷰의 이동이기 때문,,
+    }
+    
+    func withdrawButtonTapped() {
+        useCase.withdraw()
     }
     
     func dismissButtonDidTapped() {
@@ -97,6 +101,6 @@ private extension MyPageViewModel {
         static let version = NSLocalizedString("version", comment: "")
         static let developer = NSLocalizedString("developer", comment: "")
         static let signout = NSLocalizedString("signout", comment: "")
-        static let accountClosing = NSLocalizedString("accountClosing", comment: "")
+        static let withdrawal = NSLocalizedString("withdrawal", comment: "")
     }
 }

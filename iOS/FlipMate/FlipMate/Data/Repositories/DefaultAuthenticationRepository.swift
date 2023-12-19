@@ -29,4 +29,9 @@ final class DefaultAuthenticationRepository: AuthenticationRepository {
         
         return User(isMember: responseDTO.isMember, accessToken: responseDTO.accessToken)
     }
+    
+    func withdraw() async throws {
+        let endpoint = AuthenticationEndpoints.withdraw()
+        _ = try await provider.request(with: endpoint)
+    }
 }

@@ -27,4 +27,11 @@ final class DefaultAuthenticationUseCase: AuthenticationUseCase {
     func signOut() {
         signoutManager.signOut()
     }
+    
+    func withdraw() {
+        Task {
+            try await repository.withdraw()
+            signoutManager.signOut()
+        }
+    }
 }

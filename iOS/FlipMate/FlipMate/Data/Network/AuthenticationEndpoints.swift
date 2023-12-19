@@ -19,4 +19,11 @@ struct AuthenticationEndpoints {
         let data = try? encoder.encode(dto)
         return EndPoint(baseURL: BaseURL.flipmateDomain, path: Paths.appleApp, method: .post, data: data)
     }
+    
+    static func withdraw() -> EndPoint<StatusResponseDTO> {
+        return EndPoint(
+            baseURL: BaseURL.flipmateDomain,
+            path: Paths.auth,
+            method: .delete)
+    }
 }
