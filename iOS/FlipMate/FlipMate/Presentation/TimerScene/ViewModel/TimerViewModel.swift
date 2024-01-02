@@ -29,8 +29,8 @@ protocol TimerViewModelInput {
     func deviceProximityDidChange(_ sender: Bool)
     func categorySettingButtoneDidTapped()
     func categoryDidSelected(category: Category)
-    func saveStudyLog()
     func categoryDidDeselected()
+    func refreshStudyLog()
 }
 
 protocol TimerViewModelOutput {
@@ -156,7 +156,7 @@ final class TimerViewModel: TimerViewModelProtocol {
         selectedCategory = nil
     }
     
-    func saveStudyLog() {
+    func refreshStudyLog() {
         updateStudyLog()
     }
 }

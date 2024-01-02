@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Group 256.png",
+      "filename" : "Instruction_JP_Light.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,12 +12,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Group 257@1x.png",
+      "filename" : "Instruction_JP_Dark.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Group 256@2x.png",
+      "filename" : "Instruction_JP_Light 1.svg",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -28,12 +28,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Group 257@2x.png",
+      "filename" : "Instruction_JP_Dark 1.svg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Group 256@3x.png",
+      "filename" : "Instruction_JP_Light 2.svg",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -44,7 +44,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Group 257@3x.png",
+      "filename" : "Instruction_JP_Dark 2.svg",
       "idiom" : "universal",
       "scale" : "3x"
     }

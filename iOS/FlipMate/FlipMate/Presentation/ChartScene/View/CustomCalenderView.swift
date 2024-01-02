@@ -13,16 +13,18 @@ struct CustomCalenderView: View {
     @State private var todayIndex: Int?
     @Environment(\.colorScheme) var colorScheme
     private let calendar = Calendar.current
-    
+
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
-            monthView
-            ZStack {
-                dayView
-                blurView
+            if #available(iOS 15.0, *) {
+                monthView
+                ZStack {
+                    dayView
+                    blurView
+                }
+                .frame(height: 30)
+                .padding(.horizontal, 25)
             }
-            .frame(height: 30)
-            .padding(.horizontal, 25)
         }
         .onAppear {
             Task {
@@ -37,13 +39,15 @@ struct CustomCalenderView: View {
         }
     }
     
+    @available(iOS 15.0, *)
     private var monthView: some View {
         HStack(spacing: 20) {
             Button(action: {
                 changeMonth(-1)
             }, label: {
-                Image(systemName: "arrowtriangle.backward")
+                Image(systemName: "chevron.left")
                     .padding()
+                    .foregroundColor(colorScheme == .dark ? .white : .black)
                 }
             )
             
@@ -53,8 +57,9 @@ struct CustomCalenderView: View {
             Button(action: {
                 changeMonth(1)
             }, label: {
-                Image(systemName: "arrowtriangle.forward")
+                Image(systemName: "chevron.right")
                     .padding()
+                    .foregroundColor(colorScheme == .dark ? .white : .black)
                 }
             )
         }

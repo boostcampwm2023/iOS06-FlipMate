@@ -56,12 +56,12 @@ final class LoginViewController: BaseViewController {
     private lazy var googleLoginButton: UIButton = {
         let button = UIButton()
         button.setTitle(Constant.googleLoginTitle, for: .normal)
-        button.setTitleColor(.label, for: .normal)
-        button.titleLabel?.font = FlipMateFont.smallRegular.font
-        button.backgroundColor = .systemBackground
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = FlipMateFont.smallBold.font
+        button.backgroundColor = .white
         button.layer.cornerRadius = 11
         button.layer.borderWidth = 1.0
-        button.layer.borderColor = FlipMateColor.gray2.color?.cgColor
+        button.layer.borderColor = UIColor.black.cgColor
         button.setShadow()
         button.addTarget(self, action: #selector(handleGoogleLoginButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
