@@ -13,7 +13,7 @@ import { getImageUrl } from 'src/common/utils/utils';
 import { ConfigService } from '@nestjs/config';
 import { ENV } from 'src/common/const/env-keys.const';
 import { StudyLogsService } from 'src/study-logs/study-logs.service';
-import moment, { now } from 'moment';
+import moment from 'moment';
 import { MATES_MAXIMUM } from 'src/common/const/service-var.const';
 
 @Injectable()
