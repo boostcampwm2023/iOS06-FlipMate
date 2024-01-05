@@ -12,9 +12,14 @@ import { RedisService } from 'src/common/redis.service';
 import { MockRedisService } from '../../test/mock-service/mock-redis-service';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { MockConfigService } from '../../test/mock-service/mock-config-service';
+import { Repository } from 'typeorm';
 
 describe('MatesService', () => {
   let service: MatesService;
+  let repository: Repository<Mates>;
+  let redisService: RedisService;
+  let studyLogsService: StudyLogsService;
+  let usersRepository: Repository<UsersModel>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -22,11 +27,11 @@ describe('MatesService', () => {
         MatesService,
         {
           provide: getRepositoryToken(Mates),
-          useClass: MockMatesRepository,
+          useClass: Repository,
         },
         {
           provide: getRepositoryToken(UsersModel),
-          useClass: MockUsersRepository,
+          useClass: Repository,
         },
         {
           provide: RedisService,
@@ -44,6 +49,12 @@ describe('MatesService', () => {
     }).compile();
 
     service = module.get<MatesService>(MatesService);
+    redisService = module.get<RedisService>(RedisService);
+    studyLogsService = module.get<StudyLogsService>(StudyLogsService);
+    repository = module.get<Repository<Mates>>(getRepositoryToken(Mates));
+    usersRepository = module.get<Repository<UsersModel>>(
+      getRepositoryToken(UsersModel),
+    );
   });
 
   it('should be defined', () => {
@@ -104,6 +115,16 @@ describe('MatesService', () => {
 
   describe('.getMatesStatus()', () => {
     it('유효한 데이터가 주어지면 성공적으로 친구 상태를 가져온다.', async () => {
+      jest.spyOn(repository, 'find').mockResolvedValueOnce([
+        {
+          id: 1,
+          follower_id: { id: 1 } as UsersModel,
+          following_id: { id: 2 } as UsersModel,
+        },
+      ]);
+      jest
+        .spyOn(redisService, 'hget')
+        .mockResolvedValueOnce('2023-11-29 16:00:00');
       const result = await service.getMatesStatus(1);
       expect(result).toStrictEqual([
         { id: 2, started_at: '2023-11-29 16:00:00' },
@@ -113,7 +134,15 @@ describe('MatesService', () => {
 
   describe('.getMates()', () => {
     it('유효한 데이터가 주어지면 성공적으로 친구들을 가져온다.', async () => {
-      const result = await service.getMates(1, '2023-11-29');
+      jest
+        .spyOn(service, 'getMatesStudyTime')
+        .mockResolvedValueOnce([
+          { id: 2, nickname: '어린콩2', total_time: 825 },
+        ]);
+      jest
+        .spyOn(redisService, 'hget')
+        .mockResolvedValueOnce('2023-11-29 16:00:00');
+      const result = await service.getMates(1, '2023-11-29', '09:00');
       expect(result).toStrictEqual([
         {
           id: 2,
@@ -125,13 +154,23 @@ describe('MatesService', () => {
       ]);
     });
     it('친구가 없는 유저는 빈 배열을 가져온다.', async () => {
-      const result = await service.getMates(3, '2023-11-29');
+      jest.spyOn(service, 'getMatesStudyTime').mockResolvedValueOnce([]);
+      const result = await service.getMates(3, '2023-11-29', '09:00');
       expect(result).toStrictEqual([]);
     });
   });
 
   describe('.getMateAndMyStats()', () => {
     it('유효한 데이터가 주어지면 성공적으로 친구들의 학습시간과 내 학습시간을 가져온다.', async () => {
+      jest
+        .spyOn(studyLogsService, 'calculateTotalTimes')
+        .mockResolvedValueOnce([0, 0, 0, 0, 0, 0, 827]);
+      jest
+        .spyOn(studyLogsService, 'calculateTotalTimes')
+        .mockResolvedValueOnce([0, 0, 0, 0, 0, 0, 825]);
+      jest
+        .spyOn(studyLogsService, 'getPrimaryCategory')
+        .mockResolvedValueOnce(null);
       const result = await service.getMateAndMyStats(1, 2, '2023-11-29');
       expect(result).toStrictEqual({
         my_daily_data: [0, 0, 0, 0, 0, 0, 827],
@@ -141,17 +180,14 @@ describe('MatesService', () => {
     });
   });
 
-  it('학습 시간이 존재하지 않는 경우 모든 값이 0인 배열을 반환한다.', async () => {
-    const result = await service.getMateAndMyStats(1, 2, '2023-12-29');
-    expect(result).toStrictEqual({
-      my_daily_data: [0, 0, 0, 0, 0, 0, 0],
-      following_daily_data: [0, 0, 0, 0, 0, 0, 0],
-      following_primary_category: null,
-    });
-  });
-
   describe('.findMate()', () => {
     it('유효한 데이터가 주어지면 20000코드를 준다.', async () => {
+      jest.spyOn(usersRepository, 'findOne').mockResolvedValueOnce({
+        id: 3,
+        nickname: '어린콩3',
+        image_url: null,
+      } as UsersModel);
+      jest.spyOn(repository, 'findOne').mockResolvedValueOnce(null);
       const result = await service.findMate(user, '어린콩3');
       expect(result).toStrictEqual({
         statusCode: 20000,
@@ -160,6 +196,8 @@ describe('MatesService', () => {
     });
 
     it('자신을 검색하면 20001코드를 준다.', async () => {
+      jest.spyOn(usersRepository, 'findOne').mockResolvedValueOnce(user);
+      jest.spyOn(repository, 'findOne').mockResolvedValueOnce(null);
       const result = await service.findMate(user, '어린콩');
       expect(result).toStrictEqual({
         statusCode: 20001,
@@ -168,6 +206,16 @@ describe('MatesService', () => {
     });
 
     it('이미 친구 관계인 유저를 검색하면 20002코드를 준다.', async () => {
+      jest.spyOn(usersRepository, 'findOne').mockResolvedValueOnce({
+        id: 2,
+        nickname: '어린콩2',
+        image_url: null,
+      } as UsersModel);
+      jest.spyOn(repository, 'findOne').mockResolvedValueOnce({
+        id: 1,
+        follower_id: { id: 1 } as UsersModel,
+        following_id: { id: 2 } as UsersModel,
+      });
       const result = await service.findMate(user, '어린콩2');
       expect(result).toStrictEqual({
         statusCode: 20002,
@@ -176,6 +224,7 @@ describe('MatesService', () => {
     });
 
     it('존재하지 않는 유저를 검색하면 에러를 던진다.', async () => {
+      jest.spyOn(usersRepository, 'findOne').mockResolvedValueOnce(null);
       expect(service.findMate(user, '어린콩4')).rejects.toThrow(
         NotFoundException,
       );

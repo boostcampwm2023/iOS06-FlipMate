@@ -13,7 +13,7 @@ import { getImageUrl } from 'src/common/utils/utils';
 import { ConfigService } from '@nestjs/config';
 import { ENV } from 'src/common/const/env-keys.const';
 import { StudyLogsService } from 'src/study-logs/study-logs.service';
-import moment from 'moment';
+import moment, { now } from 'moment';
 import { MATES_MAXIMUM } from 'src/common/const/service-var.const';
 
 @Injectable()
@@ -74,17 +74,10 @@ export class MatesService {
       .utcOffset(offset)
       .format('YYYY-MM-DD HH:mm:ss');
 
-    const studyTimeByFollowing = await this.userRepository.query(
-      `
-        SELECT u.id, u.nickname, u.image_url, COALESCE(SUM(s.learning_time), 0) AS total_time
-        FROM users_model u
-        LEFT JOIN mates m ON m.following_id = u.id
-        LEFT JOIN study_logs s ON s.user_id = u.id AND s.date = DATE(CONVERT_TZ(?, ?, u.timezone))
-        WHERE m.follower_id = ? 
-        GROUP BY u.id
-        ORDER BY total_time DESC
-      `,
-      [nowUserTime, offset, user_id],
+    const studyTimeByFollowing = await this.getMatesStudyTime(
+      nowUserTime,
+      offset,
+      user_id,
     );
     return Promise.all(
       studyTimeByFollowing.map(async (record) => {
@@ -103,6 +96,23 @@ export class MatesService {
         };
       }),
     );
+  }
+
+  async getMatesStudyTime(followerDate, followerTimezone, followerId) {
+    const result = await this.userRepository.query(
+      `
+        SELECT u.id, u.nickname, u.image_url, COALESCE(SUM(s.learning_time), 0) AS total_time
+        FROM users_model u
+        LEFT JOIN mates m ON m.following_id = u.id
+        LEFT JOIN study_logs s ON s.user_id = u.id AND s.date = DATE(CONVERT_TZ(?, ?, u.timezone))
+        WHERE m.follower_id = ? 
+        GROUP BY u.id
+        ORDER BY total_time DESC
+      `,
+      [followerDate, followerTimezone, followerId],
+    );
+
+    return result;
   }
 
   async getMatesStatus(user_id: number): Promise<object[]> {
