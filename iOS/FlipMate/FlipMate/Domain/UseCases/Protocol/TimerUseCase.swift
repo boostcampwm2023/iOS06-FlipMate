@@ -8,8 +8,10 @@
 import Foundation
 import Combine
 
-/// 타이머 Usecase을 추상화한 프로토콜
-protocol TimerUseCase {
-    /// 타이머 작동
+protocol StartTimerUseCase {
     func startTimer(startTime: Date, categoryId: Int?) -> AnyPublisher<Void, NetworkError>
+}
+
+protocol FinishTimerUseCase {
+    func finishTimer(endTime: Date, learningTime: Int, categoryId: Int?) -> AnyPublisher<Void, NetworkError>
 }

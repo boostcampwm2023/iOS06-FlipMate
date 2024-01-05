@@ -7,7 +7,10 @@
 
 import Foundation
 
-protocol ChartUseCase {
+protocol FetchDailyChartUseCase {
     func fetchDailyChartLog(at date: Date) async throws -> CategoryChartLog
+}
+
+protocol FetchWeeklyChartUseCase {
     func fetchWeeklyChartLog() async throws -> WeeklyChartLog
 }

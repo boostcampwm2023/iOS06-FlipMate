@@ -7,7 +7,10 @@
 
 import Foundation
 
-protocol ProfileSettingsUseCase {
+protocol ValidateNicknameUseCase {
     func isNickNameValid(_ nickName: String) async throws -> NickNameValidationState
+}
+
+protocol SetupProfileInfoUseCase {
     func setupProfileInfo(nickName: String, profileImageData: Data) async throws -> UserInfo
 }
