@@ -10,7 +10,7 @@ import Foundation
 final class DefaultValidateNicknameUseCase: ValidateNicknameUseCase {
     private let validator: NickNameValidatable
     
-    init(repository: ProfileSettingsRepository, validator: NickNameValidatable) {
+    init(validator: NickNameValidatable) {
         self.validator = validator
     }
     
@@ -23,7 +23,7 @@ final class DefaultValidateNicknameUseCase: ValidateNicknameUseCase {
 final class DefaultSetupProfileInfoUseCase: SetupProfileInfoUseCase {
     private let repository: ProfileSettingsRepository
     
-    init(repository: ProfileSettingsRepository, validator: NickNameValidatable) {
+    init(repository: ProfileSettingsRepository) {
         self.repository = repository
     }
 
