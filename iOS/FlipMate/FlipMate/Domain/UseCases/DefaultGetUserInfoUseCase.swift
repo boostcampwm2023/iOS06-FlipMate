@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class DefaultUserInfoUseCase: UserInfoUseCase {
+final class DefaultGetUserInfoUseCase: GetUserInfoUseCase {
     private let repository: UserInfoRepository
     
     init(repository: UserInfoRepository) {

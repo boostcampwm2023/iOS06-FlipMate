@@ -7,13 +7,10 @@
 
 import Foundation
 
-final class DefaultProfileSettingsUseCase: ProfileSettingsUseCase {
-    
-    private let repository: ProfileSettingsRepository
+final class DefaultValidateNicknameUseCase: ValidateNicknameUseCase {
     private let validator: NickNameValidatable
     
     init(repository: ProfileSettingsRepository, validator: NickNameValidatable) {
-        self.repository = repository
         self.validator = validator
     }
     
@@ -21,7 +18,15 @@ final class DefaultProfileSettingsUseCase: ProfileSettingsUseCase {
         let validationState = validator.checkNickNameValidationState(nickName)
         return validationState
     }
+}
+
+final class DefaultSetupProfileInfoUseCase: SetupProfileInfoUseCase {
+    private let repository: ProfileSettingsRepository
     
+    init(repository: ProfileSettingsRepository, validator: NickNameValidatable) {
+        self.repository = repository
+    }
+
     func setupProfileInfo(nickName: String, profileImageData: Data) async throws -> UserInfo {
         return try await repository.setupNewProfileInfo(nickName: nickName, profileImageData: profileImageData)
     }

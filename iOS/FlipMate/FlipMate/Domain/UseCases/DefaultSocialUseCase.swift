@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class DefaultSocialUseCase: SocialUseCase {
+final class DefaultGetFriendsUseCase: GetFriendsUseCase {
     private let repsoitory: SocialRepository
     
     init(repsoitory: SocialRepository) {
@@ -17,6 +17,14 @@ final class DefaultSocialUseCase: SocialUseCase {
     
     func getMyFriend(date: Date) -> AnyPublisher<[Friend], NetworkError> {
         return repsoitory.getMyFriend(date: date)
+    }
+}
+
+final class DefaultFetchFriendsUseCase: FetchFriendsUseCase {
+    private let repsoitory: SocialRepository
+    
+    init(repsoitory: SocialRepository) {
+        self.repsoitory = repsoitory
     }
     
     func fetchMyFriend(date: Date) -> AnyPublisher<[FriendStatus], NetworkError> {

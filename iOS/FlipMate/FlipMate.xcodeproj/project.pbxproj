@@ -12,14 +12,14 @@
 		2C1F2BBD2B20DA770026C30B /* ProfileHeaderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1F2BBC2B20DA770026C30B /* ProfileHeaderItem.swift */; };
 		2C2C7CB92B29CEC300C733D5 /* FriendSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CB82B29CEC300C733D5 /* FriendSearchResult.swift */; };
 		2C2C7CBB2B29DFA600C733D5 /* TimeZoneUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CBA2B29DFA600C733D5 /* TimeZoneUseCase.swift */; };
-		2C2C7CBD2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CBC2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift */; };
+		2C2C7CBD2B29DFD900C733D5 /* DefaultPatchTimeZoneUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CBC2B29DFD900C733D5 /* DefaultPatchTimeZoneUseCase.swift */; };
 		2C2C7CBF2B29E0BF00C733D5 /* UserInfoEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CBE2B29E0BF00C733D5 /* UserInfoEndpoints.swift */; };
 		2C2C7CC12B29E18F00C733D5 /* TimeZoneRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CC02B29E18F00C733D5 /* TimeZoneRequestDTO.swift */; };
-		2C2F216E2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F216D2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift */; };
+		2C2F216E2B0F40A100B45BA8 /* DefaultGetStudyLogUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F216D2B0F40A100B45BA8 /* DefaultGetStudyLogUseCase.swift */; };
 		2C2F21702B0F429800B45BA8 /* StudyLogResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F216F2B0F429800B45BA8 /* StudyLogResponseDTO.swift */; };
 		2C2F21762B0F440D00B45BA8 /* StudyLogEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F21752B0F440D00B45BA8 /* StudyLogEndpoints.swift */; };
 		2C2F21782B0F4CCC00B45BA8 /* StudyLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F21772B0F4CCC00B45BA8 /* StudyLog.swift */; };
-		2C2F217A2B0F4CF900B45BA8 /* StudyLogUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F21792B0F4CF900B45BA8 /* StudyLogUseCase.swift */; };
+		2C2F217A2B0F4CF900B45BA8 /* GetUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F21792B0F4CF900B45BA8 /* GetUserInfoUseCase.swift */; };
 		2C2F217C2B0F4D4000B45BA8 /* StudyLogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F217B2B0F4D4000B45BA8 /* StudyLogRepository.swift */; };
 		2C2F217E2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F217D2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift */; };
 		2C2F21802B0F4DA600B45BA8 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F217F2B0F4DA600B45BA8 /* MockURLSession.swift */; };
@@ -56,7 +56,7 @@
 		2C87C27F2B1DF2A800A26313 /* UserInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C27E2B1DF2A800A26313 /* UserInfoRepository.swift */; };
 		2C87C2812B1DF2C000A26313 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2802B1DF2C000A26313 /* UserInfo.swift */; };
 		2C87C2832B1DF30E00A26313 /* UserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2822B1DF30E00A26313 /* UserInfoUseCase.swift */; };
-		2C87C2852B1DF32A00A26313 /* DefaultUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2842B1DF32A00A26313 /* DefaultUserInfoUseCase.swift */; };
+		2C87C2852B1DF32A00A26313 /* DefaultGetUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2842B1DF32A00A26313 /* DefaultGetUserInfoUseCase.swift */; };
 		2C87C28E2B1E316800A26313 /* SignOutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C28D2B1E316800A26313 /* SignOutManager.swift */; };
 		2C87C2912B1F212200A26313 /* ImageDownLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2902B1F212200A26313 /* ImageDownLoader.swift */; };
 		2C87C2932B1F344500A26313 /* UIImageView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2922B1F344500A26313 /* UIImageView++Extension.swift */; };
@@ -74,8 +74,6 @@
 		2C88DD0B2B1340E4000B4686 /* CategoryDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */; };
 		2C88DD0D2B148E9B000B4686 /* TimerFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD0C2B148E9B000B4686 /* TimerFinishViewController.swift */; };
 		2C88DD0F2B14C22C000B4686 /* TimerFinishViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD0E2B14C22C000B4686 /* TimerFinishViewModel.swift */; };
-		2C88DD112B14C50F000B4686 /* DefaultTimerFinishUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD102B14C50F000B4686 /* DefaultTimerFinishUseCase.swift */; };
-		2C88DD132B14C51B000B4686 /* TimerFinishUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD122B14C51B000B4686 /* TimerFinishUseCase.swift */; };
 		2C9F61F72B14EFA200AE63F9 /* CategoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61F62B14EFA200AE63F9 /* CategoryManager.swift */; };
 		2C9F61F92B14F33600AE63F9 /* CategoryManagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61F82B14F33600AE63F9 /* CategoryManagable.swift */; };
 		2C9F61FB2B15C96100AE63F9 /* CategoryModifyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61FA2B15C96100AE63F9 /* CategoryModifyViewModel.swift */; };
@@ -266,14 +264,14 @@
 		2C1F2BBC2B20DA770026C30B /* ProfileHeaderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderItem.swift; sourceTree = "<group>"; };
 		2C2C7CB82B29CEC300C733D5 /* FriendSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchResult.swift; sourceTree = "<group>"; };
 		2C2C7CBA2B29DFA600C733D5 /* TimeZoneUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneUseCase.swift; sourceTree = "<group>"; };
-		2C2C7CBC2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimeZoneUseCase.swift; sourceTree = "<group>"; };
+		2C2C7CBC2B29DFD900C733D5 /* DefaultPatchTimeZoneUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPatchTimeZoneUseCase.swift; sourceTree = "<group>"; };
 		2C2C7CBE2B29E0BF00C733D5 /* UserInfoEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoEndpoints.swift; sourceTree = "<group>"; };
 		2C2C7CC02B29E18F00C733D5 /* TimeZoneRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneRequestDTO.swift; sourceTree = "<group>"; };
-		2C2F216D2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStudyLogUseCase.swift; sourceTree = "<group>"; };
+		2C2F216D2B0F40A100B45BA8 /* DefaultGetStudyLogUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGetStudyLogUseCase.swift; sourceTree = "<group>"; };
 		2C2F216F2B0F429800B45BA8 /* StudyLogResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogResponseDTO.swift; sourceTree = "<group>"; };
 		2C2F21752B0F440D00B45BA8 /* StudyLogEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogEndpoints.swift; sourceTree = "<group>"; };
 		2C2F21772B0F4CCC00B45BA8 /* StudyLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLog.swift; sourceTree = "<group>"; };
-		2C2F21792B0F4CF900B45BA8 /* StudyLogUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogUseCase.swift; sourceTree = "<group>"; };
+		2C2F21792B0F4CF900B45BA8 /* GetUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserInfoUseCase.swift; sourceTree = "<group>"; };
 		2C2F217B2B0F4D4000B45BA8 /* StudyLogRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogRepository.swift; sourceTree = "<group>"; };
 		2C2F217D2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStudyLogRepository.swift; sourceTree = "<group>"; };
 		2C2F217F2B0F4DA600B45BA8 /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
@@ -311,7 +309,7 @@
 		2C87C27E2B1DF2A800A26313 /* UserInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRepository.swift; sourceTree = "<group>"; };
 		2C87C2802B1DF2C000A26313 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		2C87C2822B1DF30E00A26313 /* UserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoUseCase.swift; sourceTree = "<group>"; };
-		2C87C2842B1DF32A00A26313 /* DefaultUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserInfoUseCase.swift; sourceTree = "<group>"; };
+		2C87C2842B1DF32A00A26313 /* DefaultGetUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGetUserInfoUseCase.swift; sourceTree = "<group>"; };
 		2C87C28D2B1E316800A26313 /* SignOutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignOutManager.swift; path = FlipMate/Presentation/Utils/SignOutManager.swift; sourceTree = SOURCE_ROOT; };
 		2C87C2902B1F212200A26313 /* ImageDownLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownLoader.swift; sourceTree = "<group>"; };
 		2C87C2922B1F344500A26313 /* UIImageView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView++Extension.swift"; sourceTree = "<group>"; };
@@ -329,8 +327,6 @@
 		2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDIContainer.swift; sourceTree = "<group>"; };
 		2C88DD0C2B148E9B000B4686 /* TimerFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishViewController.swift; sourceTree = "<group>"; };
 		2C88DD0E2B14C22C000B4686 /* TimerFinishViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishViewModel.swift; sourceTree = "<group>"; };
-		2C88DD102B14C50F000B4686 /* DefaultTimerFinishUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimerFinishUseCase.swift; sourceTree = "<group>"; };
-		2C88DD122B14C51B000B4686 /* TimerFinishUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishUseCase.swift; sourceTree = "<group>"; };
 		2C9F61F62B14EFA200AE63F9 /* CategoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManager.swift; sourceTree = "<group>"; };
 		2C9F61F82B14F33600AE63F9 /* CategoryManagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagable.swift; sourceTree = "<group>"; };
 		2C9F61FA2B15C96100AE63F9 /* CategoryModifyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModifyViewModel.swift; sourceTree = "<group>"; };
@@ -1219,16 +1215,15 @@
 				600909072AFCE0DC0065DFFB /* Protocol */,
 				2C801D7D2B04B65400A7ABAE /* DefaultTimerUseCase.swift */,
 				60F67C692B0E1868002C8BF3 /* DefaultCategoryUseCase.swift */,
-				2C2F216D2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift */,
+				2C2F216D2B0F40A100B45BA8 /* DefaultGetStudyLogUseCase.swift */,
 				ED3842242B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift */,
 				601EB73E2B14F37300C5B216 /* DefaultProfileSettingsUseCase.swift */,
-				2C88DD102B14C50F000B4686 /* DefaultTimerFinishUseCase.swift */,
 				2C9F62102B17363400AE63F9 /* DefaultFriendUseCase.swift */,
 				2CDCD0452B1889040080DCDE /* DefaultSocialUseCase.swift */,
-				2C87C2842B1DF32A00A26313 /* DefaultUserInfoUseCase.swift */,
+				2C87C2842B1DF32A00A26313 /* DefaultGetUserInfoUseCase.swift */,
 				ED6865CD2B1E49A6001A2AAD /* DefaultChartUseCase.swift */,
 				2CD272F42B21C789000CB9E5 /* DefaultStudingPingUseCase.swift */,
-				2C2C7CBC2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift */,
+				2C2C7CBC2B29DFD900C733D5 /* DefaultPatchTimeZoneUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1238,10 +1233,9 @@
 			children = (
 				2C801D7F2B04B68900A7ABAE /* TimerUseCase.swift */,
 				60F67C672B0E1785002C8BF3 /* CategoryUseCase.swift */,
-				2C2F21792B0F4CF900B45BA8 /* StudyLogUseCase.swift */,
+				2C2F21792B0F4CF900B45BA8 /* GetUserInfoUseCase.swift */,
 				ED3842262B0F1E0C001E2803 /* AuthenticationUseCase.swift */,
 				601EB73C2B14D67600C5B216 /* ProfileSettingsUseCase.swift */,
-				2C88DD122B14C51B000B4686 /* TimerFinishUseCase.swift */,
 				2C9F620E2B1735C700AE63F9 /* FriendUseCase.swift */,
 				2CDCD0432B1887200080DCDE /* SocialUseCase.swift */,
 				2C87C2822B1DF30E00A26313 /* UserInfoUseCase.swift */,
@@ -1704,7 +1698,7 @@
 				2C3430A32B0DA5A5008CBC85 /* HTTPHeader.swift in Sources */,
 				ED6865BA2B1CEA0F001A2AAD /* SocialChart.swift in Sources */,
 				EDC851D22B04EE83009031EA /* CategoryListCollectionViewCell.swift in Sources */,
-				2C2C7CBD2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift in Sources */,
+				2C2C7CBD2B29DFD900C733D5 /* DefaultPatchTimeZoneUseCase.swift in Sources */,
 				2C9F62222B173AB500AE63F9 /* FriendFollowReqeustDTO.swift in Sources */,
 				60EB7F5B2B1F19D900F8C613 /* ProfileSettingsViewController.swift in Sources */,
 				ED38422C2B0F4531001E2803 /* LoginViewModel.swift in Sources */,
@@ -1755,7 +1749,6 @@
 				2C9F620B2B171C8300AE63F9 /* FriendAddViewModel.swift in Sources */,
 				2C2F21782B0F4CCC00B45BA8 /* StudyLog.swift in Sources */,
 				ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */,
-				2C88DD132B14C51B000B4686 /* TimerFinishUseCase.swift in Sources */,
 				6020C7642B21C1D400F58AD0 /* MyPageHeaderView.swift in Sources */,
 				2C9F61FE2B15F48600AE63F9 /* FriendAddViewController.swift in Sources */,
 				2C88DCFE2B1244A6000B4686 /* LoginFlowCoordinator.swift in Sources */,
@@ -1782,7 +1775,7 @@
 				ED6865C12B1E3B48001A2AAD /* WeeklyChartView.swift in Sources */,
 				6057A58D2B0C7F0F00EE58E8 /* Requestable.swift in Sources */,
 				601EB73F2B14F37300C5B216 /* DefaultProfileSettingsUseCase.swift in Sources */,
-				2C87C2852B1DF32A00A26313 /* DefaultUserInfoUseCase.swift in Sources */,
+				2C87C2852B1DF32A00A26313 /* DefaultGetUserInfoUseCase.swift in Sources */,
 				2C3430A72B0DD0F6008CBC85 /* TimerRepsoitory.swift in Sources */,
 				2C9F62132B17366200AE63F9 /* FriendRepository.swift in Sources */,
 				6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */,
@@ -1791,7 +1784,7 @@
 				600908BE2AFCD7DF0065DFFB /* AppDelegate.swift in Sources */,
 				2CE84EFB2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift in Sources */,
 				ED3595B72B0C887C00558FAA /* TimerFinishRequestDTO.swift in Sources */,
-				2C2F217A2B0F4CF900B45BA8 /* StudyLogUseCase.swift in Sources */,
+				2C2F217A2B0F4CF900B45BA8 /* GetUserInfoUseCase.swift in Sources */,
 				ED6865D62B1F14CF001A2AAD /* ChartViewModel.swift in Sources */,
 				ED3595A92B0C7F3500558FAA /* HTTPMethod.swift in Sources */,
 				2C87C27D2B1DF1C300A26313 /* DefaultUserInfoRepository.swift in Sources */,
@@ -1802,11 +1795,10 @@
 				ED82F0072B126C95005BB32D /* UITextField++Extension.swift in Sources */,
 				2C3430992B0C8427008CBC85 /* Provider.swift in Sources */,
 				2C2F21702B0F429800B45BA8 /* StudyLogResponseDTO.swift in Sources */,
-				2C2F216E2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift in Sources */,
+				2C2F216E2B0F40A100B45BA8 /* DefaultGetStudyLogUseCase.swift in Sources */,
 				2C2C7CBB2B29DFA600C733D5 /* TimeZoneUseCase.swift in Sources */,
 				ED6865D82B1F32EF001A2AAD /* CustomCalenderView.swift in Sources */,
 				2CE84EF72B0B7F3C00E2FB71 /* CategorySettingSection.swift in Sources */,
-				2C88DD112B14C50F000B4686 /* DefaultTimerFinishUseCase.swift in Sources */,
 				2C3430AD2B0DDF25008CBC85 /* DefaultTimerRepository.swift in Sources */,
 				2C2C7CC12B29E18F00C733D5 /* TimeZoneRequestDTO.swift in Sources */,
 				2C9F61F92B14F33600AE63F9 /* CategoryManagable.swift in Sources */,

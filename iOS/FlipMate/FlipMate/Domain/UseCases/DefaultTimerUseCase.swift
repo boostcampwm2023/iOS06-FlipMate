@@ -8,15 +8,29 @@
 import Foundation
 import Combine
 
-/// 타이머 작동 비즈니스 로직을 가지고 있는 Usecase
-class DefaultTimerUseCase: TimerUseCase {
+final class DefaultStartTimerUseCase: StartTimerUseCase {
     private let timerRepository: TimerRepsoitory
-    
+
     init(timerRepository: TimerRepsoitory) {
         self.timerRepository = timerRepository
     }
     
     func startTimer(startTime: Date, categoryId: Int?) -> AnyPublisher<Void, NetworkError> {
         return timerRepository.startTimer(startTime: startTime, categoryId: categoryId)
+    }
+}
+
+final class DefaultFinishTimerUseCase: FinishTimerUseCase {
+    private let timerRepository: TimerRepsoitory
+    
+    init(timerRepository: TimerRepsoitory) {
+        self.timerRepository = timerRepository
+    }
+    
+    func finishTimer(endTime: Date, learningTime: Int, categoryId: Int?) -> AnyPublisher<Void, NetworkError> {
+        return timerRepository.finishTimer(
+            endTime: endTime,
+            learningTime: learningTime,
+            categoryId: categoryId)
     }
 }

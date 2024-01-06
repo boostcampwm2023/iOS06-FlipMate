@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DefaultChartUseCase: ChartUseCase {
+final class DefaultFetchDailyChartUseCase: FetchDailyChartUseCase {
     private let repository: ChartRepository
     
     init(repository: ChartRepository) {
@@ -24,9 +24,17 @@ final class DefaultChartUseCase: ChartUseCase {
         etcTime = chartLog.studyLog.totalTime - etcTime
         
         let etcCategory = Category(id: 0, color: "888888FF", subject: NSLocalizedString("etc", comment: ""), studyTime: etcTime)
-            chartLog.studyLog.category.append(etcCategory)
+        chartLog.studyLog.category.append(etcCategory)
         
         return chartLog
+    }
+}
+
+final class DefaultFetchWeeklyChartUseCase: FetchWeeklyChartUseCase {
+    private let repository: ChartRepository
+    
+    init(repository: ChartRepository) {
+        self.repository = repository
     }
     
     func fetchWeeklyChartLog() async throws -> WeeklyChartLog {

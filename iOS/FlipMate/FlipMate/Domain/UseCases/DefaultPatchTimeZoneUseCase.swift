@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DefaultTimeZoneUseCase: TimeZoneUseCase {
+final class DefaultPatchTimeZoneUseCase: PatchTimeZoneUseCase {
     private let repository: UserInfoRepository
     
     init(repository: UserInfoRepository) {
