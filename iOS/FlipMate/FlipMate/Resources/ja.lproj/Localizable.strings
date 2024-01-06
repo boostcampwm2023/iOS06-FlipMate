@@ -22,6 +22,10 @@
 "categoryNamePlaceHolder" = "カテゴリ名を入力してください。";
 "social" = "ソーシャル";
 "categoryAddMessage" = "カテゴリは10個まで追加できます。";
+"categoryErrorTitle" = "カテゴリ追加・変更エラー";
+"categoryNameCountError" = "カテゴリ名の長さは 1 ～ 10 文字にする必要があります。";
+"categoryNameIsDuplicated" = "カテゴリ名は重複できません。";
+"unknownError" = "不明なエラーが発生しました。";
 
 // MARK: - MyPage Scene
 "myPage" = "マイページ";

@@ -22,6 +22,10 @@
 "categoryNamePlaceHolder" = "Please enter the category name";
 "social" = "Social";
 "categoryAddMessage" = "You cannot add more than 10 categories";
+"categoryErrorTitle" = "Category Add / Modify Error";
+"categoryNameCountError" = "Category names must be 1 to 10 characters long.";
+"categoryNameIsDuplicated" = "Category names cannot be duplicated.";
+"unknownError" = "Unknown Error occurred.";
 
 // MARK: - MyPage Scene
 "myPage" = "MyPage";

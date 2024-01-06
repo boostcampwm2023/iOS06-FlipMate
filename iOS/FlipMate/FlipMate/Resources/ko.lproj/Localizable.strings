@@ -22,6 +22,10 @@
 "categoryNamePlaceHolder" = "카테고리 이름을 입력해주세요.";
 "social" = "소셜";
 "categoryAddMessage" = "카테고리는 10개까지 추가할 수 있습니다.";
+"categoryErrorTitle" = "카테고리 추가 / 변경 실패";
+"categoryNameCountError" = "카테고리 이름은 1~10자여야 합니다.";
+"categoryNameIsDuplicated" = "카테고리 이름은 중복될 수 없습니다.";
+"unknownError" = "알 수 없는 오류가 발생했습니다.";
 
 // MARK: - MyPage Scene
 "myPage" = "마이페이지";

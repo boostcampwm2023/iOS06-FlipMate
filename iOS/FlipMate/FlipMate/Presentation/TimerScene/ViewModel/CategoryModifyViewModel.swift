@@ -17,6 +17,7 @@ protocol CategoryModifyViewModelInput {
     func updateCategory(newName: String, newColorCode: String?) async throws
     func modifyCloseButtonTapped()
     func modifyDoneButtonTapped()
+    func performCategoryModification(purpose: CategoryPurpose, name: String, colorCode: String?) async throws
 }
 
 protocol CategoryModifyViewModelOutput {
@@ -26,10 +27,10 @@ protocol CategoryModifyViewModelOutput {
 typealias CategoryModifyViewModelProtocol = CategoryModifyViewModelInput & CategoryModifyViewModelOutput
 
 final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
-
+    
     // MARK: - Subject
     private lazy var selectedCategorySubject = CurrentValueSubject<Category?, Never>(selectedCategory)
-
+    
     // MARK: - Properites
     private var categoryMananger: CategoryManageable
     private let useCase: CategoryUseCase
@@ -76,4 +77,30 @@ final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
     func modifyCloseButtonTapped() {
         actions?.didFinishCategoryModify()
     }
+    
+    func performCategoryModification(purpose: CategoryPurpose, name: String, colorCode: String?) async throws {
+        do {
+            switch purpose {
+            case .create:
+                try await createCategory(name: name, colorCode: colorCode)
+            case .update:
+                try await updateCategory(newName: name, newColorCode: colorCode)
+            }
+            modifyDoneButtonTapped()
+        } catch let error as APIError {
+            FMLogger.general.error("카테고리 에러 \(error)")
+            switch error {
+            case .errorResponse(let response):
+                switch response.statusCode {
+                case 400: throw CategoryModificationError.duplicatedName
+                default: throw CategoryModificationError.unknownError
+                }
+            }
+        }
+    }
+}
+
+enum CategoryModificationError: Error {
+    case duplicatedName
+    case unknownError
 }
