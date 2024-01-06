@@ -60,8 +60,13 @@ private extension WeeklyChartView {
 
 #Preview {
     WeeklyChartView(
-        viewModel: ChartViewModel(
-            chartUseCase: DefaultChartUseCase(
-                repository: DefaultChartRepository(
-                    provider: Provider(urlSession: URLSession.shared)))))
+        viewModel:
+            ChartViewModel(
+                fetchDailyChartUseCase: DefaultFetchDailyChartUseCase(
+                    repository: DefaultChartRepository(
+                        provider: Provider(urlSession: URLSession.shared))),
+                fetchWeeklyChartUseCase: DefaultFetchWeeklyChartUseCase(
+                    repository: DefaultChartRepository(
+                        provider: Provider(urlSession: URLSession.shared))),
+                actions: ChartViewModelActions()))
 }

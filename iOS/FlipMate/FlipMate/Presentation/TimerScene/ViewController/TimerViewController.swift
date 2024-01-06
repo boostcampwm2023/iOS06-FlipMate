@@ -85,14 +85,12 @@ final class TimerViewController: BaseViewController {
         timerViewModel.viewWillAppear()
     }
     
-    // swiftlint:disable notification_center_detachment
     override func viewDidDisappear(_ animated: Bool) {
         deviceMotionManager.stopDeviceMotion()
         timerViewModel.viewDidDisappear()
         UIDevice.current.isProximityMonitoringEnabled = false
         removeProximityNotification()
     }
-    // swiftlint:enable notification_center_detachment
     
     // MARK: - setup UI
     override func configureUI() {
