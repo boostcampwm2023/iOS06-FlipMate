@@ -8,6 +8,6 @@
 import Foundation
 import Combine
 
-protocol UserInfoUseCase {
+protocol GetUserInfoUseCase {
     func getUserInfo() -> AnyPublisher<UserInfo, NetworkError>
 }

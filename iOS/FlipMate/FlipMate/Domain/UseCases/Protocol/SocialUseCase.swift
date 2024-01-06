@@ -8,7 +8,10 @@
 import Foundation
 import Combine
 
-protocol SocialUseCase {
+protocol GetFriendsUseCase {
     func getMyFriend(date: Date) -> AnyPublisher<[Friend], NetworkError>
+}
+
+protocol FetchFriendsUseCase {
     func fetchMyFriend(date: Date) -> AnyPublisher<[FriendStatus], NetworkError>
 }

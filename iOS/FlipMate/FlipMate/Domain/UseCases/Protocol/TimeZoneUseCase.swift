@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol TimeZoneUseCase {
+protocol PatchTimeZoneUseCase {
     func patchTimeZone(date: Date) async throws
 }
