@@ -22,26 +22,33 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
     }
     
     func makeLoginViewController(actions: LoginViewModelActions) -> UIViewController {
+        let repository = DefaultAuthenticationRepository(provider: dependencies.provider)
+        let signOutManager = dependencies.signOutManager
         return LoginViewController(
             loginViewModel: LoginViewModel(
-                googleAuthUseCase: DefaultAuthenticationUseCase(
-                    repository: DefaultAuthenticationRepository(
-                        provider: dependencies.provider),
-                    signoutManager: dependencies.signOutManager),
-                actions: actions
+                googleLoginUseCase: DefaultGoogleLoginUseCase(
+                    repository: repository,
+                    signoutManager: signOutManager),
+                appleLoginUseCase: DefaultAppleLoginUseCase(
+                    repository: repository,
+                    signoutManager: signOutManager),
+                signoutUseCase: DefaultSignOutUseCase(
+                    repository: repository,
+                    signoutManager: signOutManager),
+                actions: actions)
             )
-        )
     }
     
     func makeSignUpViewController(actions: SignUpViewModelActions) -> UIViewController {
+        let repository = DefaultProfileSettingsRepository(provider: dependencies.provider)
+        let validator = NickNameValidator()
         return SignUpViewController(
             viewModel: SignUpViewModel(
-                usecase: DefaultProfileSettingsUseCase(
-                    repository: DefaultProfileSettingsRepository(
-                        provider: dependencies.provider),
-                    validator: NickNameValidator()),
-                actions: actions
-            )
+                validateNickNameUseCase: DefaultValidateNicknameUseCase(
+                    validator: validator),
+                setupProfileUseCase: DefaultSetupProfileInfoUseCase(
+                    repository: repository),
+                actions: actions)
         )
     }
     
