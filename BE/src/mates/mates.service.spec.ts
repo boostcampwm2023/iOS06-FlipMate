@@ -2,9 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { MatesService } from './mates.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Mates } from './mates.entity';
-import { MockMatesRepository } from '../../test/mock-repo/mock-mates-repo';
 import { UsersModel } from 'src/users/entity/users.entity';
-import { MockUsersRepository } from '../../test/mock-repo/mock-user-repo';
 import { StudyLogsService } from 'src/study-logs/study-logs.service';
 import { MockStudyLogsService } from '../../test/mock-service/mock-study-logs-service';
 import { ConfigService } from '@nestjs/config';
@@ -69,6 +67,23 @@ describe('MatesService', () => {
   } as UsersModel;
   describe('.addMate()', () => {
     it('유효한 데이터가 주어지면 성공적으로 친구 추가를 해야한다.', async () => {
+      jest.spyOn(usersRepository, 'findOne').mockResolvedValueOnce({
+        id: 3,
+        nickname: '어린콩3',
+        image_url: null,
+      } as UsersModel);
+      jest.spyOn(repository, 'count').mockResolvedValueOnce(1);
+      jest.spyOn(repository, 'findOne').mockResolvedValueOnce(null);
+      jest.spyOn(repository, 'create').mockResolvedValueOnce({
+        id: 2,
+        follower_id: { id: 1 },
+        following_id: { id: 3 },
+      } as never);
+      jest.spyOn(repository, 'save').mockResolvedValueOnce({
+        id: 2,
+        follower_id: { id: 1 } as UsersModel,
+        following_id: { id: 3 } as UsersModel,
+      });
       const result = await service.addMate(user, '어린콩3');
       expect(result).toStrictEqual({
         id: 2,
@@ -77,21 +92,48 @@ describe('MatesService', () => {
       });
     });
 
-    it.todo('친구는 최대 10명까지 추가할 수 있다.');
+    it('친구는 최대 10명까지 추가할 수 있다.', async () => {
+      jest.spyOn(usersRepository, 'findOne').mockResolvedValueOnce({
+        id: 3,
+        nickname: '어린콩3',
+        image_url: null,
+      } as UsersModel);
+      jest.spyOn(repository, 'count').mockResolvedValueOnce(10);
+      expect(service.addMate(user, '어린콩3')).rejects.toThrow(
+        BadRequestException,
+      );
+    });
 
     it('자신을 친구 추가 할 수 없다.', async () => {
+      jest.spyOn(usersRepository, 'findOne').mockResolvedValueOnce({
+        id: 1,
+        nickname: '어린콩',
+        image_url: null,
+      } as UsersModel);
       expect(service.addMate(user, '어린콩')).rejects.toThrow(
         BadRequestException,
       );
     });
 
     it('존재하지 않는 유저를 친구 추가 할 수 없다.', async () => {
+      jest.spyOn(usersRepository, 'findOne').mockResolvedValueOnce(null);
       expect(service.addMate(user, '어린콩4')).rejects.toThrow(
         NotFoundException,
       );
     });
 
     it('이미 친구 관계인 유저에게 친구 신청을 할 수 없다.', async () => {
+      jest.spyOn(usersRepository, 'findOne').mockResolvedValueOnce({
+        id: 3,
+        nickname: '어린콩3',
+        image_url: null,
+      } as UsersModel);
+      jest.spyOn(repository, 'count').mockResolvedValueOnce(1);
+      jest.spyOn(repository, 'findOne').mockResolvedValueOnce({
+        id: 1,
+        follower_id: { id: 1 } as UsersModel,
+        following_id: { id: 3 } as UsersModel,
+      });
       expect(service.addMate(user, '어린콩2')).rejects.toThrow(
         BadRequestException,
       );
@@ -100,15 +142,29 @@ describe('MatesService', () => {
 
   describe('.deleteMate()', () => {
     it('유효한 데이터가 주어지면 성공적으로 친구 삭제를 해야한다.', async () => {
+      const data = {
+        id: 1,
+        follower_id: { id: 1 } as UsersModel,
+        following_id: { id: 2 } as UsersModel,
+      };
+      jest
+        .spyOn(usersRepository, 'findOne')
+        .mockResolvedValueOnce({ id: 2 } as UsersModel);
+      jest.spyOn(repository, 'delete').mockResolvedValueOnce(data as never);
       const result = await service.deleteMate(user, 2);
       expect(result).toStrictEqual(undefined);
     });
 
     it('존재하지 않는 유저를 친구 삭제 할 수 없다.', () => {
+      jest.spyOn(usersRepository, 'findOne').mockResolvedValueOnce(null);
       expect(service.deleteMate(user, 100)).rejects.toThrow(NotFoundException);
     });
 
     it('친구 관계가 아닌 유저를 친구 삭제 할 수 없다.', () => {
+      jest
+        .spyOn(usersRepository, 'findOne')
+        .mockResolvedValueOnce({ id: 2 } as UsersModel);
+      jest.spyOn(repository, 'delete').mockResolvedValueOnce(null);
       expect(service.deleteMate(user, 3)).rejects.toThrow(NotFoundException);
     });
   });
