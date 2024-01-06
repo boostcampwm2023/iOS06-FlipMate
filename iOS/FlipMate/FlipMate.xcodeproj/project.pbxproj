@@ -10,6 +10,7 @@
 		0A814BC3CFA46D0501C8B894 /* Pods_FlipMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288FECD685A9C6B6E481147C /* Pods_FlipMate.framework */; };
 		2C1F2BBB2B20D8D60026C30B /* SocialUserInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */; };
 		2C1F2BBD2B20DA770026C30B /* ProfileHeaderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1F2BBC2B20DA770026C30B /* ProfileHeaderItem.swift */; };
+		2C277ABB2B497FB500567CAC /* DonutChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C277ABA2B497FB500567CAC /* DonutChartView.swift */; };
 		2C2C7CB92B29CEC300C733D5 /* FriendSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CB82B29CEC300C733D5 /* FriendSearchResult.swift */; };
 		2C2C7CBB2B29DFA600C733D5 /* TimeZoneUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CBA2B29DFA600C733D5 /* TimeZoneUseCase.swift */; };
 		2C2C7CBD2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CBC2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift */; };
@@ -264,6 +265,7 @@
 		2B285F39D7D27E5C564F4D31 /* Pods_FlipMateTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMateTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialUserInfoHeaderView.swift; sourceTree = "<group>"; };
 		2C1F2BBC2B20DA770026C30B /* ProfileHeaderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderItem.swift; sourceTree = "<group>"; };
+		2C277ABA2B497FB500567CAC /* DonutChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutChartView.swift; sourceTree = "<group>"; };
 		2C2C7CB82B29CEC300C733D5 /* FriendSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchResult.swift; sourceTree = "<group>"; };
 		2C2C7CBA2B29DFA600C733D5 /* TimeZoneUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneUseCase.swift; sourceTree = "<group>"; };
 		2C2C7CBC2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimeZoneUseCase.swift; sourceTree = "<group>"; };
@@ -1388,6 +1390,7 @@
 				ED6865C02B1E3B48001A2AAD /* WeeklyChartView.swift */,
 				ED6865BE2B1E2FA6001A2AAD /* ChartSegmentedControl.swift */,
 				ED6865D72B1F32EF001A2AAD /* CustomCalenderView.swift */,
+				2C277ABA2B497FB500567CAC /* DonutChartView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1853,6 +1856,7 @@
 				2C5CDA572B025426007AFC57 /* FlipMateColor.swift in Sources */,
 				2C2F217C2B0F4D4000B45BA8 /* StudyLogRepository.swift in Sources */,
 				ED68659D2B15E928001A2AAD /* SocialDetailViewController.swift in Sources */,
+				2C277ABB2B497FB500567CAC /* DonutChartView.swift in Sources */,
 				600908C02AFCD7DF0065DFFB /* SceneDelegate.swift in Sources */,
 				ED6865A72B17932F001A2AAD /* SocialDetailRequestDTO.swift in Sources */,
 				2C3430B12B0DE3D0008CBC85 /* Date++Extension.swift in Sources */,
