@@ -1,14 +1,14 @@
 export class MockRedisService {
-  private redis: Map<string, string> = new Map();
-  constructor() {
-    this.redis.set('2', '2023-11-29 16:00:00');
-  }
-  set(key: string, value: string) {
-    this.redis.set(key, value);
+  private redis: Map<string, object> = new Map();
+  constructor() {}
+  hset(key: string, field: string, value: string) {
+    const data = {};
+    data[field] = value;
+    this.redis.set(key, data);
   }
 
-  get(key: string): Promise<string | null> {
-    return Promise.resolve(this.redis.get(key));
+  hget(key: string, field: string): Promise<string | null> {
+    return Promise.resolve(this.redis.get(key)[field]);
   }
 
   async del(key: string): Promise<void> {
