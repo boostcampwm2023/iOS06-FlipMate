@@ -6,64 +6,66 @@
 //
 
 import UIKit
-import SwiftUI
+import Combine
 
 final class ChartViewController: BaseViewController {
-    
+    // MARK: - Constant
     private enum Constant {
         static let daily = NSLocalizedString("daily", comment: "")
         static let weekly = NSLocalizedString("weekly", comment: "")
     }
     
-    private let segmentedControl: UISegmentedControl = {
+    // MARK: - Properties
+    private let viewModel: ChartViewModelProtocol
+    private var cancellables = Set<AnyCancellable>()
+    
+    // MARK: - UI Components
+    private lazy var segmentedControl: UISegmentedControl = {
         let segmentedControl = ChartSegmentedControl(items: [Constant.daily, Constant.weekly])
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: FlipMateColor.gray2.color as Any,
             .font: FlipMateFont.mediumRegular.font], for: .normal)
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.label, 
             .font: FlipMateFont.mediumBold.font], for: .selected)
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        
+        segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
+        segmentedControl.selectedSegmentIndex = 0
         return segmentedControl
     }()
     
-    private var dailyChartView: UIView = {
-        let view = UIView()
-        
-        return view
-    }()
+    private var donutChartView = DonutChartView()
     
     private var weeklyChartView: UIView = {
         let view = UIView()
-        
         return view
     }()
     
     var shouldHideDailyChartView: Bool? {
         didSet {
             guard let shouldHideDailyChartView = self.shouldHideDailyChartView else { return }
-            dailyChartView.isHidden = shouldHideDailyChartView
-            weeklyChartView.isHidden = !dailyChartView.isHidden
+            donutChartView.isHidden = shouldHideDailyChartView
+            weeklyChartView.isHidden = !donutChartView.isHidden
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setSegmentControll()
-        
+    // MARK: - init
+    init(viewModel: ChartViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("Don't use StoryBoard")
+    }
+    
+    // MARK: - Life Cycle
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     override func configureUI() {
-        super.configureUI()
-        setDailyChart()
-        setWeeklyChart()
-        
-        self.view.addSubview(self.segmentedControl)
-        self.view.addSubview(self.dailyChartView)
-        self.view.addSubview(self.weeklyChartView)
+        [ segmentedControl, donutChartView ] .forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
         NSLayoutConstraint.activate([
             segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -71,59 +73,25 @@ final class ChartViewController: BaseViewController {
             segmentedControl.heightAnchor.constraint(equalToConstant: 50),
             segmentedControl.widthAnchor.constraint(equalToConstant: 180)
         ])
+        
         NSLayoutConstraint.activate([
-            dailyChartView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 30),
-            dailyChartView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
-            dailyChartView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -5),
-            dailyChartView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
-        ])
-        NSLayoutConstraint.activate([
-            weeklyChartView.topAnchor.constraint(equalTo: dailyChartView.topAnchor),
-            weeklyChartView.leadingAnchor.constraint(equalTo: dailyChartView.leadingAnchor),
-            weeklyChartView.trailingAnchor.constraint(equalTo: dailyChartView.trailingAnchor),
-            weeklyChartView.bottomAnchor.constraint(equalTo: dailyChartView.bottomAnchor)
+            donutChartView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 30),
+            donutChartView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
+            donutChartView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -5),
+            donutChartView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
         ])
     }
-}
-
-private extension ChartViewController {
-    func setSegmentControll() {
-        segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
-        segmentedControl.selectedSegmentIndex = 0
-        self.didChangeValue(segment: self.segmentedControl)
-    }
     
-    func setDailyChart() {
-        let dailyChartView = DailyChartView(
-            viewModel: ChartViewModel(
-                chartUseCase: DefaultChartUseCase(
-                    repository: DefaultChartRepository(
-                        provider: Provider(
-                            urlSession: URLSession.shared))),
-                actions: nil))
-        let hostingController = UIHostingController(rootView: dailyChartView)
-        addChild(hostingController)
-        guard let newChartView = hostingController.view else { return }
-        self.dailyChartView = newChartView
-        self.view.addSubview(newChartView)
-        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
-        hostingController.didMove(toParent: self)
-    }
-    
-    func setWeeklyChart() {
-        let weeklyChartView = WeeklyChartView(
-            viewModel: ChartViewModel(
-                chartUseCase: DefaultChartUseCase(
-                    repository: DefaultChartRepository(
-                        provider: Provider(urlSession: URLSession.shared))),
-                actions: nil))
-        let hostingController = UIHostingController(rootView: weeklyChartView)
-        addChild(hostingController)
-        guard let newChartView = hostingController.view else { return }
-        self.weeklyChartView = newChartView
-        self.view.addSubview(newChartView)
-        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
-        hostingController.didMove(toParent: self)
+    override func bind() {
+        viewModel.viewDidLoad()
+        
+        viewModel.dailyChartPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] studyLog in
+                guard let self = self else { return }
+                donutChartView.fetchStudyLog(studyLog)
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -131,9 +99,4 @@ private extension ChartViewController {
     @objc func didChangeValue(segment: UISegmentedControl) {
         shouldHideDailyChartView = segment.selectedSegmentIndex != 0
     }
-}
-
-@available(iOS 17.0, *)
-#Preview {
-    ChartViewController()
 }

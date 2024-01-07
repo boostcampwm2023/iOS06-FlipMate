@@ -19,6 +19,7 @@ final class DonutChartView: UIView {
     // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -31,8 +32,20 @@ final class DonutChartView: UIView {
         drawDonutChartLayer()
         drawMiddleCircle()
     }
+    
+    func fetchStudyLog(_ studyLog: StudyLog) {
+        self.studyLog = studyLog
+    }
 }
 
+// MARK: - Configure UI
+private extension DonutChartView {
+    func configureUI() {
+        backgroundColor = .systemBackground
+    }
+}
+
+// MARK: - Chart Layer funcs
 private extension DonutChartView {
     func drawDonutChartLayer() {
         guard let studyLog else { return }
@@ -40,9 +53,11 @@ private extension DonutChartView {
         let categories = studyLog.category, totalTime = CGFloat(studyLog.totalTime)
         var startAngle: CGFloat = 0.0, endAngle: CGFloat = 0.0, middleAngle: CGFloat = 0.0
         
-        categories.forEach { category in
-            let studyTime = CGFloat(category.studyTime ?? 0)
-            let percentage = (studyTime / totalTime)
+        // MARK: - if TotalTime == 0 -> 차트 X
+        
+        for category in categories {
+            guard let studyTime = category.studyTime, studyTime != 0 else { return }
+            let percentage = (CGFloat(studyTime) / totalTime)
             startAngle = endAngle
             endAngle = startAngle + CGFloat(percentage)
             middleAngle = startAngle + ((endAngle - startAngle) / 2)
