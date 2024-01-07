@@ -30,6 +30,7 @@ final class DonutChartView: UIView {
     // MARK: - Life Cycle
     override func draw(_ rect: CGRect) {
         drawDonutChartLayer()
+        drawMiddleCircle()
     }
 }
 
@@ -60,11 +61,27 @@ private extension DonutChartView {
             path.stroke()
         }
     }
+    
+    func drawMiddleCircle() {
+        let center = CGPoint(x: bounds.midX, y: bounds.midY)
+        let middleCircle = UIBezierPath(
+            arcCenter: center,
+            radius: Constant.middleCircleRadius,
+            startAngle: Constant.middleCircleStartAngle,
+            endAngle: Constant.middleCircleEndAngle,
+            clockwise: true)
+        UIColor.systemBackground.set()
+        middleCircle.fill()
+    }
 }
 
 private extension DonutChartView {
     enum Constant {
         static let lineWidth: CGFloat = 3
         static let radiusSpacing: CGFloat = 30
+        
+        static let middleCircleRadius: CGFloat = 100
+        static let middleCircleStartAngle: CGFloat = 0
+        static let middleCircleEndAngle: CGFloat = 360 * CGFloat.pi / 180
     }
 }
