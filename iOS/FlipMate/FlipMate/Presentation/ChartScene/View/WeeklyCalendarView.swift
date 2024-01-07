@@ -11,12 +11,21 @@ final class WeeklyCalendarView: UIView {
     typealias CalendarDataSource = UICollectionViewDiffableDataSource<WeeklySection, WeeklySectionItem>
     typealias Snapshot = NSDiffableDataSourceSnapshot<WeeklySection, WeeklySectionItem>
     
+    // MARK: - Properties
+    private enum ScrollState {
+        case left
+        case none
+        case right
+    }
+    
     private var dataSource: CalendarDataSource?
+    private var scrollState: ScrollState = .none
+    private var currentWeekDate = Date()
+    private var calendar = Calendar.current
     
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.font = FlipMateFont.semiLargeBold.font
-        label.text = "2024년 1월"
         return label
     }()
     
@@ -28,9 +37,13 @@ final class WeeklyCalendarView: UIView {
     }()
     
     private lazy var weekCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(WeekCollectionViewCell.self)
+        collectionView.isPagingEnabled = true
+        collectionView.delegate = self
         return collectionView
     }()
     
@@ -40,6 +53,11 @@ final class WeeklyCalendarView: UIView {
         configureWeekStackView()
         setDataSource()
         setSnapshot()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.weekCollectionView.scrollToItem(at: IndexPath(row: Constant.currentWeekSundayIndex, section: 0), at: .centeredHorizontally, animated: false)
     }
     
     required init?(coder: NSCoder) {
@@ -64,9 +82,81 @@ private extension WeeklyCalendarView {
     func setSnapshot() {
         var snapshot = Snapshot()
         let sections: [WeeklySection] = [.section([])]
+        let currentWeekDate = Date()
+        let lastWeekDate = addDays(date: currentWeekDate, days: Constant.lastWeekValue)
+        let nextWeekDate = addDays(date: currentWeekDate, days: Constant.nextWeekValue)
         snapshot.appendSections(sections)
-        snapshot.appendItems([.dateCell(1), .dateCell(2), .dateCell(3), .dateCell(4), .dateCell(5), .dateCell(6), .dateCell(7), .dateCell(8), .dateCell(9), .dateCell(10), .dateCell(11), .dateCell(12), .dateCell(13), .dateCell(14)])
+        snapshot.appendItems(weekendItem(lastWeekDate))
+        snapshot.appendItems(weekendItem(currentWeekDate))
+        snapshot.appendItems(weekendItem(nextWeekDate))
+        dateLabel.text = monthTitle(from: currentWeekDate)
         dataSource?.apply(snapshot)
+    }
+}
+
+private extension WeeklyCalendarView {
+    func weekendItem(_ date: Date) -> [WeeklySectionItem] {
+        var weekendDate = [Int]()
+        var current = findSunday(date: date)
+        let nextSunday = addDays(date: current, days: Constant.nextWeekValue)
+        
+        while current < nextSunday {
+            guard let date = Int(current.dateToString(format: .day)) else { continue }
+            weekendDate.append(date)
+            current = addDays(date: current, days: 1)
+        }
+        
+        return weekendDate.map { WeeklySectionItem.dateCell($0) }
+    }
+    
+    func findSunday(date: Date) -> Date {
+        var current = date
+        let oneWeekAgo = addDays(date: current, days: Constant.lastWeekValue)
+        
+        while current > oneWeekAgo {
+            let currentWeekDay = calendar.dateComponents([.weekday], from: current).weekday
+            if currentWeekDay == 1 {
+                return current
+            }
+            current = addDays(date: current, days: -1)
+        }
+        return current
+    }
+    
+    func addDays(date: Date, days: Int) -> Date {
+        return calendar.date(byAdding: .day, value: days, to: date) ?? Date()
+    }
+}
+
+private extension WeeklyCalendarView {
+    func leftScroll() {
+        var snapshot = Snapshot()
+        let sections: [WeeklySection] = [.section([])]
+        let followingWeekDate = currentWeekDate
+        currentWeekDate = addDays(date: followingWeekDate, days: Constant.lastWeekValue)
+        let previousWeekDate = addDays(date: currentWeekDate, days: Constant.lastWeekValue)
+        snapshot.appendSections(sections)
+        snapshot.appendItems(weekendItem(previousWeekDate))
+        snapshot.appendItems(weekendItem(currentWeekDate))
+        snapshot.appendItems(weekendItem(followingWeekDate))
+        dateLabel.text = monthTitle(from: currentWeekDate)
+        dataSource?.apply(snapshot, animatingDifferences: false)
+        weekCollectionView.scrollToItem(at: IndexPath(row: Constant.currentWeekSundayIndex, section: 0), at: .centeredHorizontally, animated: false)
+    }
+    
+    func rightScroll() {
+        var snapshot = Snapshot()
+        let sections: [WeeklySection] = [.section([])]
+        let previousWeekDate = currentWeekDate
+        currentWeekDate = addDays(date: previousWeekDate, days: Constant.nextWeekValue)
+        let followingWeekDate = addDays(date: currentWeekDate, days: Constant.nextWeekValue)
+        snapshot.appendSections(sections)
+        snapshot.appendItems(weekendItem(previousWeekDate))
+        snapshot.appendItems(weekendItem(currentWeekDate))
+        snapshot.appendItems(weekendItem(followingWeekDate))
+        dateLabel.text = monthTitle(from: currentWeekDate)
+        dataSource?.apply(snapshot, animatingDifferences: false)
+        weekCollectionView.scrollToItem(at: IndexPath(row: Constant.currentWeekSundayIndex, section: 0), at: .centeredHorizontally, animated: false)
     }
 }
 
@@ -78,14 +168,14 @@ private extension WeeklyCalendarView {
         }
         
         NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            dateLabel.topAnchor.constraint(equalTo: topAnchor, constant: Constant.top),
+            dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constant.leading),
             
-            weekStackView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 20),
-            weekStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            weekStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            weekStackView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: Constant.top),
+            weekStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constant.leading),
+            weekStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constant.trailing),
             
-            weekCollectionView.topAnchor.constraint(equalTo: weekStackView.bottomAnchor, constant: 20),
+            weekCollectionView.topAnchor.constraint(equalTo: weekStackView.bottomAnchor, constant: Constant.top),
             weekCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             weekCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             weekCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
@@ -93,6 +183,7 @@ private extension WeeklyCalendarView {
     }
     
     func configureWeekStackView() {
+        // TODO: - 다국어 지원
         let week = ["일", "월", "화", "수", "목", "금", "토"]
         week.forEach {
             let label = UILabel()
@@ -105,19 +196,68 @@ private extension WeeklyCalendarView {
 }
 
 private extension WeeklyCalendarView {
-    func makeLayoutSection(sectionType: WeeklySection) -> NSCollectionLayoutSection {
-        let item = NSCollectionLayoutItem(layoutSize: sectionType.itemSize)
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: sectionType.groupSize, subitems: [item])
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPaging
-        
-        return section
+    func monthTitle(from date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.setLocalizedDateFormatFromTemplate("yyyy MMM")
+        return dateFormatter.string(from: date)
+    }
+}
+
+extension WeeklyCalendarView: UICollectionViewDelegate, UIScrollViewDelegate {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        switch targetContentOffset.pointee.x {
+        case 0:
+            scrollState = .left
+        case frame.width:
+            scrollState = .none
+        case frame.width * CGFloat(2):
+            scrollState = .right
+        default:
+            return
+        }
     }
     
-    func setCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-        return UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
-            guard let sectionType = self?.dataSource?.snapshot().sectionIdentifiers[sectionIndex] else { return nil }
-            return self?.makeLayoutSection(sectionType: sectionType)
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        switch scrollState {
+        case .left:
+            leftScroll()
+        case .none:
+            return
+        case .right:
+            rightScroll()
         }
+    }
+}
+
+extension WeeklyCalendarView: UICollectionViewDelegateFlowLayout {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath) -> CGSize {
+            return CGSize(width: frame.width / Constant.weeklyCount, height: Constant.cellHeight)
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+            return Constant.cellSpacing
+    }
+}
+
+private extension WeeklyCalendarView {
+    enum Constant {
+        static let currentWeekSundayIndex = 7
+        static let lastWeekValue = -7
+        static let nextWeekValue = 7
+        
+        static let top: CGFloat = 20
+        static let bottom: CGFloat = 20
+        static let leading: CGFloat = 20
+        static let trailing: CGFloat = -20
+        
+        static let weeklyCount: CGFloat = 7
+        static let cellHeight: CGFloat = 30
+        static let cellSpacing: CGFloat = 0
     }
 }
