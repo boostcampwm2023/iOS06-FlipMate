@@ -1,8 +1,8 @@
 //
-//  DefaultChartUseCase.swift
+//  DefaultFetchDailyChartUseCase.swift
 //  FlipMate
 //
-//  Created by 신민규 on 12/5/23.
+//  Created by 권승용 on 1/7/24.
 //
 
 import Foundation
@@ -27,17 +27,5 @@ final class DefaultFetchDailyChartUseCase: FetchDailyChartUseCase {
         chartLog.studyLog.category.append(etcCategory)
         
         return chartLog
-    }
-}
-
-final class DefaultFetchWeeklyChartUseCase: FetchWeeklyChartUseCase {
-    private let repository: ChartRepository
-    
-    init(repository: ChartRepository) {
-        self.repository = repository
-    }
-    
-    func fetchWeeklyChartLog() async throws -> WeeklyChartLog {
-        return try await repository.fetchWeeklyLog()
     }
 }
