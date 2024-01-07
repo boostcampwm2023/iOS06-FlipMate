@@ -31,12 +31,9 @@ final class ChartViewController: BaseViewController {
         return segmentedControl
     }()
     
+    private var weeklyCalendarView = WeeklyCalendarView()
     private var donutChartView = DonutChartView()
-    
-    private var weeklyChartView: UIView = {
-        let view = UIView()
-        return view
-    }()
+    private var weeklyChartView = UIView()
     
     var shouldHideDailyChartView: Bool? {
         didSet {
@@ -62,7 +59,7 @@ final class ChartViewController: BaseViewController {
     }
     
     override func configureUI() {
-        [ segmentedControl, donutChartView ] .forEach {
+        [ segmentedControl, weeklyCalendarView, donutChartView ] .forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -71,11 +68,14 @@ final class ChartViewController: BaseViewController {
             segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
             segmentedControl.heightAnchor.constraint(equalToConstant: 50),
-            segmentedControl.widthAnchor.constraint(equalToConstant: 180)
-        ])
-        
-        NSLayoutConstraint.activate([
-            donutChartView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 30),
+            segmentedControl.widthAnchor.constraint(equalToConstant: 180),
+            
+            weeklyCalendarView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor),
+            weeklyCalendarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            weeklyCalendarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            weeklyCalendarView.heightAnchor.constraint(equalToConstant: 150),
+            
+            donutChartView.topAnchor.constraint(equalTo: weeklyCalendarView.bottomAnchor, constant: 30),
             donutChartView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             donutChartView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -5),
             donutChartView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
