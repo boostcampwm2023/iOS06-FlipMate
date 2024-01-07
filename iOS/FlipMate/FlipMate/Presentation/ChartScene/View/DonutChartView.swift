@@ -47,8 +47,8 @@ private extension DonutChartView {
             endAngle = startAngle + CGFloat(percentage)
             middleAngle = startAngle + ((endAngle - startAngle) / 2)
             
-            let xPos: CGFloat = cos((middleAngle * 2 * CGFloat.pi)) * Constant.hypotenuse
-            let yPos: CGFloat = sin((middleAngle * 2 * CGFloat.pi)) * Constant.hypotenuse
+            let xPos: CGFloat = cos((middleAngle.toRadian())) * Constant.hypotenuse
+            let yPos: CGFloat = sin((middleAngle.toRadian())) * Constant.hypotenuse
             let textLayer = CATextLayer()
             textLayer.frame = CGRect(x: center.x + xPos, y: center.y + yPos, width: 0, height: 0).insetBy(dx: -60, dy: -7.5)
             textLayer.foregroundColor = UIColor.white.cgColor
@@ -63,8 +63,8 @@ private extension DonutChartView {
             path.move(to: center)
             path.addArc(withCenter: center,
                         radius: bounds.width / 2 - Constant.radiusSpacing,
-                        startAngle: startAngle * 2 * CGFloat.pi,
-                        endAngle: endAngle * 2 * CGFloat.pi,
+                        startAngle: startAngle.toRadian(),
+                        endAngle: endAngle.toRadian(),
                         clockwise: true)
             UIColor(hexString: category.color)?.set()
             path.fill()
