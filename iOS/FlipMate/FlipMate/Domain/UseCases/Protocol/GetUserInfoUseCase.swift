@@ -1,13 +1,13 @@
 //
-//  StudyLogUseCase.swift
+//  UserInfoUseCase.swift
 //  FlipMate
 //
-//  Created by 임현규 on 2023/11/23.
+//  Created by 임현규 on 2023/12/04.
 //
 
 import Foundation
 import Combine
 
-protocol GetStudyLogUseCase {
-    func getStudyLog() -> AnyPublisher<StudyLog, NetworkError>
+protocol GetUserInfoUseCase {
+    func getUserInfo() -> AnyPublisher<UserInfo, NetworkError>
 }

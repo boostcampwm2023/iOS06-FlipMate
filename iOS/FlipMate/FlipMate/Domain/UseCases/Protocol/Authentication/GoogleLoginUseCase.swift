@@ -10,11 +10,3 @@ import Foundation
 protocol GoogleLoginUseCase {
     func googleLogin(accessToken: String) async throws -> User
 }
-
-protocol AppleLoginUseCase {
-    func appleLogin(accessToken: String) async throws -> User
-}
-
-protocol SignOutUseCase {
-    func signOut()
-}

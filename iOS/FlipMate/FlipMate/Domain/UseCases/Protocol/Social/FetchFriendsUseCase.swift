@@ -1,16 +1,12 @@
 //
-//  SocialUseCase.swift
+//  FetchFriendsUseCase.swift
 //  FlipMate
 //
-//  Created by 임현규 on 2023/11/30.
+//  Created by 권승용 on 1/7/24.
 //
 
 import Foundation
 import Combine
-
-protocol GetFriendsUseCase {
-    func getMyFriend(date: Date) -> AnyPublisher<[Friend], NetworkError>
-}
 
 protocol FetchFriendsUseCase {
     func fetchMyFriend(date: Date) -> AnyPublisher<[FriendStatus], NetworkError>

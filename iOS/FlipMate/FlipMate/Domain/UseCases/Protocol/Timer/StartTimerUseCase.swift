@@ -11,7 +11,3 @@ import Combine
 protocol StartTimerUseCase {
     func startTimer(startTime: Date, categoryId: Int?) -> AnyPublisher<Void, NetworkError>
 }
-
-protocol FinishTimerUseCase {
-    func finishTimer(endTime: Date, learningTime: Int, categoryId: Int?) -> AnyPublisher<Void, NetworkError>
-}
