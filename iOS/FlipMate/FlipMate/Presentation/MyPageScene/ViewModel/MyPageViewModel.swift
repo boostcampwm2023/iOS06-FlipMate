@@ -42,15 +42,15 @@ final class MyPageViewModel: MyPageViewModelProtocol {
     private var errorSubject = PassthroughSubject<Error, Never>()
     
     // MARK: - Properties
-    private let useCase: AuthenticationUseCase
+    private let signOutUseCsae: SignOutUseCase
     private let actions: MyPageViewModelActions?
     
     private let userInfoManager: UserInfoManagerProtocol
     
-    init(authenticationUseCase: AuthenticationUseCase, 
+    init(signOutUseCase: SignOutUseCase,
          actions: MyPageViewModelActions? = nil,
          userInfoManager: UserInfoManagerProtocol) {
-        self.useCase = authenticationUseCase
+        self.signOutUseCsae = signOutUseCase
         self.actions = actions
         self.userInfoManager = userInfoManager
     }
@@ -65,7 +65,7 @@ final class MyPageViewModel: MyPageViewModelProtocol {
     }
     
     func signOutButtonTapped() {
-        useCase.signOut()
+        signOutUseCsae.signOut()
         // TODO: 코디네이터가 담당해야 할 것 같다...? 뷰의 이동이기 때문,,
     }
     

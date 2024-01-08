@@ -32,17 +32,20 @@ final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
 
     // MARK: - Properites
     private var categoryMananger: CategoryManageable
-    private let useCase: CategoryUseCase
+    private let createCategoryUseCase: CreateCategoryUseCase
+    private let updateCategoryUseCase: UpdateCategoryUseCsae
     private let actions: CategoryModifyViewModelActions?
     private let selectedCategory: Category?
     
     // MARK: - init
     
-    init(useCase: CategoryUseCase,
+    init(createCategoryUseCase: CreateCategoryUseCase,
+         updateCategoryUseCase: UpdateCategoryUseCsae,
          categoryManager: CategoryManageable,
          actions: CategoryModifyViewModelActions? = nil,
          selectedCategory: Category? = nil) {
-        self.useCase = useCase
+        self.createCategoryUseCase = createCategoryUseCase
+        self.updateCategoryUseCase = updateCategoryUseCase
         self.categoryMananger = categoryManager
         self.actions = actions
         self.selectedCategory = selectedCategory
@@ -56,7 +59,7 @@ final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
     // MARK: - Input
     func createCategory(name: String, colorCode: String?) async throws {
         let colorCode = colorCode ?? "000000FF"
-        let newCategoryID = try await useCase.createCategory(name: name, colorCode: colorCode)
+        let newCategoryID = try await createCategoryUseCase.createCategory(name: name, colorCode: colorCode)
         let newCategory = Category(id: newCategoryID, color: colorCode, subject: name, studyTime: 0)
         categoryMananger.append(category: newCategory)
     }
@@ -64,7 +67,7 @@ final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
     func updateCategory(newName: String, newColorCode: String?) async throws {
         guard let selectedCategory = selectedCategory else { return FMLogger.general.error("선택된 카테고리 없음")}
         let colorCode = newColorCode ?? "000000FF", studyTime = selectedCategory.studyTime ?? 0
-        try await useCase.updateCategory(of: selectedCategory.id, newName: newName, newColorCode: colorCode)
+        try await updateCategoryUseCase.updateCategory(of: selectedCategory.id, newName: newName, newColorCode: colorCode)
         let updateCategory = Category(id: selectedCategory.id, color: colorCode, subject: newName, studyTime: studyTime)
         categoryMananger.change(category: updateCategory)
     }

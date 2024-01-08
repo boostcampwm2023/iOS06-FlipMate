@@ -28,7 +28,8 @@ typealias SignUpViewModelProtocol = SignUpViewModelInput & SignUpViewModelOutput
 
 final class SignUpViewModel: SignUpViewModelProtocol {
     // MARK: - Use Case
-    private let useCase: ProfileSettingsUseCase
+    private let validateNickNameUseCase: ValidateNicknameUseCase
+    private let setupProfileUseCase: SetupProfileInfoUseCase
     
     // MARK: - Subjects
     private var isValidNickNameSubject = PassthroughSubject<NickNameValidationState, Never>()
@@ -38,8 +39,11 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     private var errorSubject = PassthroughSubject<Error, Never>()
     private let actions: SignUpViewModelActions?
     
-    init(usecase: ProfileSettingsUseCase, actions: SignUpViewModelActions) {
-        self.useCase = usecase
+    init(validateNickNameUseCase: ValidateNicknameUseCase,
+         setupProfileUseCase: SetupProfileInfoUseCase,
+         actions: SignUpViewModelActions) {
+        self.validateNickNameUseCase = validateNickNameUseCase
+        self.setupProfileUseCase = setupProfileUseCase
         self.actions = actions
     }
     
@@ -47,7 +51,7 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     func nickNameChanged(_ newNickName: String) {
         Task {
             do {
-                let nickNameValidationStatus = try await useCase.isNickNameValid(newNickName)
+                let nickNameValidationStatus = try await validateNickNameUseCase.isNickNameValid(newNickName)
                 isValidNickNameSubject.send(nickNameValidationStatus)
             } catch let error {
                 errorSubject.send(error)
@@ -58,7 +62,7 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     func signUpButtonTapped(userName: String, profileImageData: Data) {
         Task {
             do {
-                _ = try await useCase.setupProfileInfo(nickName: userName, profileImageData: profileImageData)
+                _ = try await setupProfileUseCase.setupProfileInfo(nickName: userName, profileImageData: profileImageData)
                 isSignUpCompletedSubject.send()
                 DispatchQueue.main.async {
                     self.actions?.didFinishSignUp()

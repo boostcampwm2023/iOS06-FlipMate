@@ -1,6 +1,7 @@
 disabled_rules:
   - trailing_whitespace
   - todo
+  - class_delegate_protocol
 opt_in_rules:
   - empty_count
   - force_unwrapping

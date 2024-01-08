@@ -33,42 +33,45 @@ final class TimerSceneDIContainer: TimerFlowCoordinatorDependencies {
     func makeTimerFinishViewModel(studyEndLog: StudyEndLog, actions: TimerFinishViewModelActions) -> TimerFinishViewModel {
         return TimerFinishViewModel(
             studyEndLog: studyEndLog,
-            timerFinishUseCase: DefaultTimerFinishUseCase(timerRepository: makeTimerRepository()),
+            finishTimerUseCase: makeFinishTimerUseCase(),
             actions: actions)
     }
     
     func makeTimerViewModel(actions: TimerViewModelActions) -> TimerViewModelProtocol {
         return TimerViewModel(
-            timerUseCase: makeTimerUseCase(),
-            studyLogUseCase: makeStudyLogUseCase(),
+            startTimerUseCase: makeStartTimerUseCase(),
+            getStudyLogUseCase: makeGetStudyLogUseCase(),
+            getUserInfoUseCase: makeGetUserInfoUseCase(),
             studingPingUseCase: makeStudingPingUseCase(),
-            userInfoUseCase: makeUserInfoUseCase(),
-            timeZoneUseCase: makeTimeZoneUseCase(),
+            patchTimeZoneUseCase: makePatchTimeZoneUseCase(),
             actions: actions,
             categoryManager: dependencies.categoryManager,
             userInfoManager: dependencies.userInfoManager,
-            timerManager: TimerManager()
-        )
+            timerManager: TimerManager())
     }
     
-    func makeTimerUseCase() -> TimerUseCase {
-        return DefaultTimerUseCase(timerRepository: makeTimerRepository())
+    func makeStartTimerUseCase() -> StartTimerUseCase {
+        return DefaultStartTimerUseCase(timerRepository: makeTimerRepository())
     }
     
-    func makeStudyLogUseCase() -> StudyLogUseCase {
-        return DefaultStudyLogUseCase(userInfoRepository: makeStudyLogRespository())
+    func makeFinishTimerUseCase() -> FinishTimerUseCase {
+        return DefaultFinishTimerUseCase(timerRepository: makeTimerRepository())
     }
     
-    func makeUserInfoUseCase() -> UserInfoUseCase {
-        return DefaultUserInfoUseCase(repository: makeUserInfoRepository())
+    func makeGetStudyLogUseCase() -> GetStudyLogUseCase {
+        return DefaultGetStudyLogUseCase(studyLogRepository: makeStudyLogRespository())
+    }
+    
+    func makeGetUserInfoUseCase() -> GetUserInfoUseCase {
+        return DefaultGetUserInfoUseCase(repository: makeUserInfoRepository())
     }
     
     func makeStudingPingUseCase() -> StudingPingUseCase {
         return DefaultStudingPingUseCase(repository: makeStudyLogRespository())
     }
     
-    func makeTimeZoneUseCase() -> TimeZoneUseCase {
-        return DefaultTimeZoneUseCase(repository: makeUserInfoRepository())
+    func makePatchTimeZoneUseCase() -> PatchTimeZoneUseCase {
+        return DefaultPatchTimeZoneUseCase(repository: makeUserInfoRepository())
     }
     
     func makeTimerRepository() -> TimerRepsoitory {
