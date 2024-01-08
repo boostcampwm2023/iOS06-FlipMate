@@ -36,12 +36,12 @@ final class CategoryViewModel: CategoryViewModelProtocol {
     private var categoryPullSubject = PassthroughSubject<Void, Never>()
     
     private var categoryMananger: CategoryManageable
-    private let useCase: CategoryUseCase
+    private let deleteCategoryUseCase: DeleteCategoryUseCase
     private let actions: CategoryViewModelActions?
     private var selectedCategory: Category?
     
-    init(useCase: CategoryUseCase, categoryManager: CategoryManageable, actions: CategoryViewModelActions? = nil) {
-        self.useCase = useCase
+    init(deleteCategoryUseCase: DeleteCategoryUseCase, categoryManager: CategoryManageable, actions: CategoryViewModelActions? = nil) {
+        self.deleteCategoryUseCase = deleteCategoryUseCase
         self.categoryMananger = categoryManager
         self.actions = actions
     }
@@ -84,7 +84,7 @@ final class CategoryViewModel: CategoryViewModelProtocol {
     }
 
     func deleteCategory(of id: Int) async throws {
-        try await useCase.deleteCategory(of: id)
+        try await deleteCategoryUseCase.deleteCategory(of: id)
         categoryMananger.removeCategory(categoryId: id)
     }
 }

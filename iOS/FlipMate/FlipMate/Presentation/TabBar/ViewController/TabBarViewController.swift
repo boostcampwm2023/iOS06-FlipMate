@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol TimeZoneDelegate: NSObject {
+protocol TimeZoneDelegate: AnyObject {
     func didChangeTimeZone()
 }
 

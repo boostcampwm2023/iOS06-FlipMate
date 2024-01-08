@@ -33,16 +33,16 @@ struct StudyEndLog {
 final class TimerFinishViewModel: TimerFinishViewModelProtocol {
     
     private let studyEndLog: StudyEndLog
-    private let timerFinishUseCase: TimerFinishUseCase
+    private let finishTimerUseCase: FinishTimerUseCase
     private let actions: TimerFinishViewModelActions?
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Subject
     private lazy var learningTimeSubject = CurrentValueSubject<Int, Never>(studyEndLog.learningTime)
     
-    init(studyEndLog: StudyEndLog, timerFinishUseCase: TimerFinishUseCase, actions: TimerFinishViewModelActions? = nil) {
+    init(studyEndLog: StudyEndLog, finishTimerUseCase: FinishTimerUseCase, actions: TimerFinishViewModelActions? = nil) {
         self.studyEndLog = studyEndLog
-        self.timerFinishUseCase = timerFinishUseCase
+        self.finishTimerUseCase = finishTimerUseCase
         self.actions = actions
     }
     
@@ -53,7 +53,7 @@ final class TimerFinishViewModel: TimerFinishViewModelProtocol {
     
     // MARK: - input
     func saveButtonDidTapped() {
-        timerFinishUseCase.finishTimer(
+        finishTimerUseCase.finishTimer(
             endTime: studyEndLog.endDate,
             learningTime: studyEndLog.learningTime,
             categoryId: studyEndLog.categoryId)
@@ -73,7 +73,7 @@ final class TimerFinishViewModel: TimerFinishViewModelProtocol {
     }
     
     func cancleButtonDidTapped() {
-        timerFinishUseCase.finishTimer(
+        finishTimerUseCase.finishTimer(
             endTime: studyEndLog.endDate,
             learningTime: 0,
             categoryId: studyEndLog.categoryId)

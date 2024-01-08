@@ -17,11 +17,15 @@ final class ChartViewModel: ObservableObject {
     @Published var weeklyChartLog: WeeklyChartLog = .init(totalTime: 0, dailyData: [], percentage: 0)
     
     private var cancellables = Set<AnyCancellable>()
-    private let chartUseCase: ChartUseCase
+    private let fetchDailyChartUseCase: FetchDailyChartUseCase
+    private let fetchWeeklyChartUseCase: FetchWeeklyChartUseCase
     private let actions: ChartViewModelActions?
     
-    init(chartUseCase: ChartUseCase, actions: ChartViewModelActions? = nil) {
-        self.chartUseCase = chartUseCase
+    init(fetchDailyChartUseCase: FetchDailyChartUseCase,
+         fetchWeeklyChartUseCase: FetchWeeklyChartUseCase,
+         actions: ChartViewModelActions? = nil) {
+        self.fetchDailyChartUseCase = fetchDailyChartUseCase
+        self.fetchWeeklyChartUseCase = fetchWeeklyChartUseCase
         self.actions = actions
     }
     
@@ -41,14 +45,14 @@ final class ChartViewModel: ObservableObject {
 
 private extension ChartViewModel {
     func fetchDailyData(date: Date) async throws {
-        let newDailyChartLog = try await chartUseCase.fetchDailyChartLog(at: date)
+        let newDailyChartLog = try await fetchDailyChartUseCase.fetchDailyChartLog(at: date)
         DispatchQueue.main.async {
             self.dailyChartLog = newDailyChartLog
         }
     }
     
     func fetchWeeklyData() async throws {
-        let newWeeklyChartLog = try await chartUseCase.fetchWeeklyChartLog()
+        let newWeeklyChartLog = try await fetchWeeklyChartUseCase.fetchWeeklyChartLog()
         DispatchQueue.main.async {
             self.weeklyChartLog = newWeeklyChartLog
         }
