@@ -33,7 +33,8 @@ typealias ProfileSettingsViewModelProtocol = ProfileSettingsViewModelInput & Pro
 
 final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     // MARK: - Use Case
-    private let useCase: ProfileSettingsUseCase
+    private let validateNicknameUseCase: ValidateNicknameUseCase
+    private let setupProfileInfoUseCase: SetupProfileInfoUseCase
     
     // MARK: - Subjects
     private var isValidNickNameSubject = PassthroughSubject<NickNameValidationState, Never>()
@@ -44,10 +45,12 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     private let actions: ProfileSettingsViewModelActions?
     private let userInfoManager: UserInfoManagerProtocol
     
-    init(usecase: ProfileSettingsUseCase, 
+    init(validateNicknameUseCase: ValidateNicknameUseCase,
+         setupProfileInfoUseCase: SetupProfileInfoUseCase,
          actions: ProfileSettingsViewModelActions?,
          userInfoManager: UserInfoManagerProtocol) {
-        self.useCase = usecase
+        self.validateNicknameUseCase = validateNicknameUseCase
+        self.setupProfileInfoUseCase = setupProfileInfoUseCase
         self.actions = actions
         self.userInfoManager = userInfoManager
     }
@@ -59,7 +62,7 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     func nickNameChanged(_ newNickName: String) {
         Task {
             do {
-                let nickNameValidationStatus = try await useCase.isNickNameValid(newNickName)
+                let nickNameValidationStatus = try await validateNicknameUseCase.isNickNameValid(newNickName)
                 isValidNickNameSubject.send(nickNameValidationStatus)
             } catch let error {
                 errorSubject.send(error)
@@ -74,7 +77,7 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     func signUpButtonTapped(userName: String, profileImageData: Data) {
         Task {
             do {
-                let userInfo = try await useCase.setupProfileInfo(nickName: userName, profileImageData: profileImageData)
+                let userInfo = try await setupProfileInfoUseCase.setupProfileInfo(nickName: userName, profileImageData: profileImageData)
                 isSignUpCompletedSubject.send()
                 userInfoManager.updateNickname(at: userInfo.name)
                 userInfoManager.updateProfileImage(at: userInfo.profileImageURL)

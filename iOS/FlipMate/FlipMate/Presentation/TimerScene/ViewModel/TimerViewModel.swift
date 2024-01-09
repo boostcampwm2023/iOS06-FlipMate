@@ -45,11 +45,11 @@ typealias TimerViewModelProtocol = TimerViewModelInput & TimerViewModelOutput
 
 final class TimerViewModel: TimerViewModelProtocol {
     // MARK: UseCase
-    private var timerUseCase: TimerUseCase
-    private var studyLogUseCase: StudyLogUseCase
-    private var studingPingUseCase: StudingPingUseCase
-    private var userInfoUseCase: UserInfoUseCase
-    private var timeZoneUseCase: TimeZoneUseCase
+    private let startTimerUseCase: StartTimerUseCase
+    private let getStudyLogUseCase: GetStudyLogUseCase
+    private let getUserInfoUseCase: GetUserInfoUseCase
+    private let studingPingUseCase: StudingPingUseCase
+    private let patchTimeZoneUseCase: PatchTimeZoneUseCase
     
     // MARK: Subject
     private var isDeviceFaceDownSubject = PassthroughSubject<Bool, Never>()
@@ -72,20 +72,20 @@ final class TimerViewModel: TimerViewModelProtocol {
     private let userInfoManager: UserInfoManagerProtocol
     
     // MARK: - init
-    init(timerUseCase: TimerUseCase,
-         studyLogUseCase: StudyLogUseCase,
+    init(startTimerUseCase: StartTimerUseCase,
+         getStudyLogUseCase: GetStudyLogUseCase,
+         getUserInfoUseCase: GetUserInfoUseCase,
          studingPingUseCase: StudingPingUseCase,
-         userInfoUseCase: UserInfoUseCase,
-         timeZoneUseCase: TimeZoneUseCase,
+         patchTimeZoneUseCase: PatchTimeZoneUseCase,
          actions: TimerViewModelActions? = nil,
          categoryManager: CategoryManageable,
          userInfoManager: UserInfoManagerProtocol,
          timerManager: TimerManagerProtocol) {
-        self.timerUseCase = timerUseCase
-        self.studyLogUseCase = studyLogUseCase
+        self.startTimerUseCase = startTimerUseCase
+        self.getStudyLogUseCase = getStudyLogUseCase
+        self.getUserInfoUseCase = getUserInfoUseCase
         self.studingPingUseCase = studingPingUseCase
-        self.userInfoUseCase = userInfoUseCase
-        self.timeZoneUseCase = timeZoneUseCase
+        self.patchTimeZoneUseCase = patchTimeZoneUseCase
         self.actions = actions
         self.categoryManager = categoryManager
         self.userInfoManager = userInfoManager
@@ -183,7 +183,7 @@ private extension TimerViewModel {
     }
     
     func updateStudyLog() {
-        studyLogUseCase.getUserInfo()
+        getStudyLogUseCase.getStudyLog()
             .receive(on: DispatchQueue.main)
             .sink { complection in
                 switch complection {
@@ -201,7 +201,7 @@ private extension TimerViewModel {
     }
     
     func updateUserInfo() {
-        userInfoUseCase.getUserInfo()
+        getUserInfoUseCase.getUserInfo()
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -220,7 +220,7 @@ private extension TimerViewModel {
     
     func patchTimeZone() {
         Task {
-            try await timeZoneUseCase.patchTimeZone(date: Date())
+            try await patchTimeZoneUseCase.patchTimeZone(date: Date())
         }
     }
 }
@@ -230,7 +230,7 @@ private extension TimerViewModel {
     /// 타이머 시작
     func startTimer() {
         let categoryId = selectedCategory?.id
-        timerUseCase.startTimer(startTime: Date(), categoryId: categoryId)
+        startTimerUseCase.startTimer(startTime: Date(), categoryId: categoryId)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {

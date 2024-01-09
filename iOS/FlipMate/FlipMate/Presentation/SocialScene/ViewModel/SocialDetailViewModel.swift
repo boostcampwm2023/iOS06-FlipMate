@@ -19,7 +19,8 @@ final class SocialDetailViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     private let friend: Friend
-    private let friendUseCase: FriendUseCase
+    private let loadChartUseCase: LoadChartUseCase
+    private let unfollowUseCase: UnfollowFriendUseCase
     private let actions: SocialDetailViewModelActions?
     
     // MARK: - Subject
@@ -30,14 +31,18 @@ final class SocialDetailViewModel: ObservableObject {
         return friendSubject.eraseToAnyPublisher()
     }
     
-    init(friend: Friend, friendUseCase: FriendUseCase, actions: SocialDetailViewModelActions? = nil) {
+    init(friend: Friend,
+         loadChartUseCase: LoadChartUseCase,
+         unfollowUseCase: UnfollowFriendUseCase,
+         actions: SocialDetailViewModelActions? = nil) {
         self.friend = friend
-        self.friendUseCase = friendUseCase
+        self.loadChartUseCase = loadChartUseCase
+        self.unfollowUseCase = unfollowUseCase
         self.actions = actions
     }
     
     func viewDidLoad() {
-        friendUseCase.loadChart(at: friend.id)
+        loadChartUseCase.loadChart(at: friend.id)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -55,7 +60,7 @@ final class SocialDetailViewModel: ObservableObject {
     }
     
     func didUnfollowFriend() {
-        friendUseCase.unfollow(at: friend.id)
+        unfollowUseCase.unfollow(at: friend.id)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {

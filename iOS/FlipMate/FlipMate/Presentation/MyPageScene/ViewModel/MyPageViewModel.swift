@@ -18,6 +18,7 @@ protocol MyPageViewModelInput {
     func profileSettingsViewButtonTapped()
     func dismissButtonDidTapped()
     func signOutButtonTapped()
+    func withdrawButtonTapped()
 }
 
 protocol MyPageViewModelOutput {
@@ -34,7 +35,7 @@ final class MyPageViewModel: MyPageViewModelProtocol {
         [Constant.editProfile],
         [Constant.developer, Constant.version],
         [Constant.signout],
-        [Constant.accountClosing]
+        [Constant.withdrawal]
     ]
     
     // MARK: - Subjects
@@ -42,15 +43,18 @@ final class MyPageViewModel: MyPageViewModelProtocol {
     private var errorSubject = PassthroughSubject<Error, Never>()
     
     // MARK: - Properties
-    private let useCase: AuthenticationUseCase
+    private let signOutUseCsae: SignOutUseCase
+    private let withdrawUseCase: WithdrawUseCase
     private let actions: MyPageViewModelActions?
     
     private let userInfoManager: UserInfoManagerProtocol
     
-    init(authenticationUseCase: AuthenticationUseCase, 
+    init(signOutUseCase: SignOutUseCase,
+         withdrawUseCase: WithdrawUseCase,
          actions: MyPageViewModelActions? = nil,
          userInfoManager: UserInfoManagerProtocol) {
-        self.useCase = authenticationUseCase
+        self.signOutUseCsae = signOutUseCase
+        self.withdrawUseCase = withdrawUseCase
         self.actions = actions
         self.userInfoManager = userInfoManager
     }
@@ -65,8 +69,13 @@ final class MyPageViewModel: MyPageViewModelProtocol {
     }
     
     func signOutButtonTapped() {
-        useCase.signOut()
-        // TODO: 코디네이터가 담당해야 할 것 같다...? 뷰의 이동이기 때문,,
+        signOutUseCsae.signOut()
+    }
+    
+    func withdrawButtonTapped() {
+        Task {
+            try await withdrawUseCase.withdraw()
+        }
     }
     
     func dismissButtonDidTapped() {
@@ -97,6 +106,6 @@ private extension MyPageViewModel {
         static let version = NSLocalizedString("version", comment: "")
         static let developer = NSLocalizedString("developer", comment: "")
         static let signout = NSLocalizedString("signout", comment: "")
-        static let accountClosing = NSLocalizedString("accountClosing", comment: "")
+        static let withdrawal = NSLocalizedString("withdrawal", comment: "")
     }
 }

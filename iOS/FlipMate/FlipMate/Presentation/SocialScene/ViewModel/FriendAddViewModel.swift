@@ -40,14 +40,17 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     // MARK: - Properties
     private var cancellables = Set<AnyCancellable>()
     private var friendNickname: String = ""
-    private let friendUseCase: FriendUseCase
+    private let followUseCase: FollowFriendUseCase
+    private let searchUseCase: SearchFriendUseCase
     private let actions: FriendAddViewModelActions?
     private let userInfoManger: UserInfoManagerProtocol
     
-    init(friendUseCase: FriendUseCase, 
+    init(followUseCase: FollowFriendUseCase,
+         searchUseCase: SearchFriendUseCase,
          actions: FriendAddViewModelActions? = nil,
          userInfoManager: UserInfoManagerProtocol) {
-        self.friendUseCase = friendUseCase
+        self.followUseCase = followUseCase
+        self.searchUseCase = searchUseCase
         self.actions = actions
         self.userInfoManger = userInfoManager
     }
@@ -75,7 +78,7 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
 
     // MARK: - Input
     func didFollowFriend() {
-        friendUseCase.follow(at: friendNickname)
+        followUseCase.follow(at: friendNickname)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 switch completion {
@@ -94,7 +97,7 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     }
     
     func didSearchFriend() {
-        friendUseCase.search(at: friendNickname)
+        searchUseCase.search(at: friendNickname)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 guard let self = self else { return }

@@ -20,25 +20,22 @@ final class CategoryDIContainer: CategoryFlowCoordinatorDependencies {
     }
     
     func makeCategoryViewModel(actions: CategoryViewModelActions? = nil) -> CategoryViewModelProtocol {
+        let repository = DefaultCategoryRepository(provider: dependencies.provider)
         return CategoryViewModel(
-            useCase: DefaultCategoryUseCase(
-                repository: DefaultCategoryRepository(
-                    provider: dependencies.provider)),
+            deleteCategoryUseCase: DefaultDeleteCategoryUseCase(repository: repository),
             categoryManager: dependencies.categoryManager,
-            actions: actions
-        )
+            actions: actions)
     }
     
     func makeCategoryModifyViewModel(actions: CategoryModifyViewModelActions? = nil,
                                      selectedCategory: Category? = nil) -> CategoryModifyViewModelProtocol {
+        let repository = DefaultCategoryRepository(provider: dependencies.provider)
         return CategoryModifyViewModel(
-            useCase: DefaultCategoryUseCase(
-                repository: DefaultCategoryRepository(
-                    provider: dependencies.provider)),
+            createCategoryUseCase: DefaultCreateCategoryUseCase(repository: repository),
+            updateCategoryUseCase: DefaultUpdateCategoryUseCase(repository: repository),
             categoryManager: dependencies.categoryManager,
             actions: actions,
-            selectedCategory: selectedCategory
-        )
+            selectedCategory: selectedCategory)
     }
     
     func makeCategorySettingViewController(actions: CategoryViewModelActions) -> UIViewController {

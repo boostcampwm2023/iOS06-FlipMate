@@ -22,6 +22,10 @@
 "categoryNamePlaceHolder" = "カテゴリ名を入力してください。";
 "social" = "ソーシャル";
 "categoryAddMessage" = "カテゴリは10個まで追加できます。";
+"categoryErrorTitle" = "カテゴリ追加・変更エラー";
+"categoryNameCountError" = "カテゴリ名の長さは 1 ～ 10 文字にする必要があります。";
+"categoryNameIsDuplicated" = "カテゴリ名は重複できません。";
+"unknownError" = "不明なエラーが発生しました。";
 
 // MARK: - MyPage Scene
 "myPage" = "マイページ";
@@ -32,7 +36,8 @@
 "reset" = "データの初期化";
 "signout" = "ログアウト";
 "signoutMessage" = "ログアウトしますか？";
-"accountClosing" = "会員脱退";
+"withdrawal" = "会員脱退";
+"withdrawalMessage" = "会員脱退時にすべての個人情報が削除され、復旧はできません。本当に脱退しますか？";
 "profileSetting" = "プロファイル設定";
 "nicknamePlaceHolder" = "ニックネームを入力してください";
 "imageNotSafeTitle" = "この画像は使用できません。";
@@ -52,7 +57,7 @@
 "myNickname" = "私のニックネーム";
 "friendNickname" = "友達のニックネーム";
 "noResult" = "検索結果がありません。";
-"follow" = "フォロー";
+"follow" = " フォロー ";
 "tryAagin" = "もう一度お試しください";
 "alreadyFriend" = "このユーザーはすでに友達です。";
 "myself" = "自分自身は友達として追加できません。";

@@ -43,7 +43,8 @@ final class SocialViewModel: SocialViewModelProtocol {
     // MARK: - Properties
     private var cancellables = Set<AnyCancellable>()
     private let actions: SocialViewModelActions?
-    private let socialUseCase: SocialUseCase
+    private let getFriendsUseCase: GetFriendsUseCase
+    private let fetchFriendsUseCase: FetchFriendsUseCase
     
     // MARK: - Managers
     private var friendStatusPollingManager: FriendStatusPollingManageable
@@ -52,12 +53,14 @@ final class SocialViewModel: SocialViewModelProtocol {
     
     // MARK: - init
     init(actions: SocialViewModelActions? = nil, 
-         socialUseCase: SocialUseCase,
+         getFriendsUseCase: GetFriendsUseCase,
+         fetchFriendsUseCase: FetchFriendsUseCase,
          friendStatusPollingManager: FriendStatusPollingManageable,
          userInfoManager: UserInfoManagerProtocol,
          timerManager: TimerManagerProtocol) {
         self.actions = actions
-        self.socialUseCase = socialUseCase
+        self.getFriendsUseCase = getFriendsUseCase
+        self.fetchFriendsUseCase = fetchFriendsUseCase
         self.friendStatusPollingManager = friendStatusPollingManager
         self.userInfoManager = userInfoManager
         self.timerManager = timerManager
@@ -120,7 +123,7 @@ final class SocialViewModel: SocialViewModelProtocol {
 
 private extension SocialViewModel {
     func getFriendState() {
-        socialUseCase.getMyFriend(date: Date())
+        getFriendsUseCase.getMyFriend(date: Date())
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -147,7 +150,7 @@ private extension SocialViewModel {
     }
     
     func fetchFriendStatus() {
-        socialUseCase.fetchMyFriend(date: Date())
+        fetchFriendsUseCase.fetchMyFriend(date: Date())
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {

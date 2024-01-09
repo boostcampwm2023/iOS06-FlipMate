@@ -10,16 +10,18 @@
 		0A814BC3CFA46D0501C8B894 /* Pods_FlipMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288FECD685A9C6B6E481147C /* Pods_FlipMate.framework */; };
 		2C1F2BBB2B20D8D60026C30B /* SocialUserInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */; };
 		2C1F2BBD2B20DA770026C30B /* ProfileHeaderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1F2BBC2B20DA770026C30B /* ProfileHeaderItem.swift */; };
+		2C277AC62B4D266B00567CAC /* WithdrawUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C277AC52B4D266B00567CAC /* WithdrawUseCase.swift */; };
+		2C277AC82B4D26AD00567CAC /* DefaultWithdrawUesCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C277AC72B4D26AD00567CAC /* DefaultWithdrawUesCase.swift */; };
 		2C2C7CB92B29CEC300C733D5 /* FriendSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CB82B29CEC300C733D5 /* FriendSearchResult.swift */; };
-		2C2C7CBB2B29DFA600C733D5 /* TimeZoneUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CBA2B29DFA600C733D5 /* TimeZoneUseCase.swift */; };
-		2C2C7CBD2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CBC2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift */; };
+		2C2C7CBB2B29DFA600C733D5 /* PatchTimeZoneUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CBA2B29DFA600C733D5 /* PatchTimeZoneUseCase.swift */; };
+		2C2C7CBD2B29DFD900C733D5 /* DefaultPatchTimeZoneUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CBC2B29DFD900C733D5 /* DefaultPatchTimeZoneUseCase.swift */; };
 		2C2C7CBF2B29E0BF00C733D5 /* UserInfoEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CBE2B29E0BF00C733D5 /* UserInfoEndpoints.swift */; };
 		2C2C7CC12B29E18F00C733D5 /* TimeZoneRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CC02B29E18F00C733D5 /* TimeZoneRequestDTO.swift */; };
-		2C2F216E2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F216D2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift */; };
+		2C2F216E2B0F40A100B45BA8 /* DefaultGetStudyLogUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F216D2B0F40A100B45BA8 /* DefaultGetStudyLogUseCase.swift */; };
 		2C2F21702B0F429800B45BA8 /* StudyLogResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F216F2B0F429800B45BA8 /* StudyLogResponseDTO.swift */; };
 		2C2F21762B0F440D00B45BA8 /* StudyLogEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F21752B0F440D00B45BA8 /* StudyLogEndpoints.swift */; };
 		2C2F21782B0F4CCC00B45BA8 /* StudyLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F21772B0F4CCC00B45BA8 /* StudyLog.swift */; };
-		2C2F217A2B0F4CF900B45BA8 /* StudyLogUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F21792B0F4CF900B45BA8 /* StudyLogUseCase.swift */; };
+		2C2F217A2B0F4CF900B45BA8 /* GetStudyLogUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F21792B0F4CF900B45BA8 /* GetStudyLogUseCase.swift */; };
 		2C2F217C2B0F4D4000B45BA8 /* StudyLogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F217B2B0F4D4000B45BA8 /* StudyLogRepository.swift */; };
 		2C2F217E2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F217D2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift */; };
 		2C2F21802B0F4DA600B45BA8 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F217F2B0F4DA600B45BA8 /* MockURLSession.swift */; };
@@ -47,8 +49,8 @@
 		2C5E34BE2B1B51CB00FD481B /* FriendStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E34BD2B1B51CB00FD481B /* FriendStatus.swift */; };
 		2C6717F82B0535A8004D118D /* Int++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6717F72B0535A8004D118D /* Int++Extension.swift */; };
 		2C7CBD592B2B3AAD0024A9AA /* TimerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7CBD582B2B3AAD0024A9AA /* TimerHeaderView.swift */; };
-		2C801D7E2B04B65400A7ABAE /* DefaultTimerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C801D7D2B04B65400A7ABAE /* DefaultTimerUseCase.swift */; };
-		2C801D802B04B68900A7ABAE /* TimerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C801D7F2B04B68900A7ABAE /* TimerUseCase.swift */; };
+		2C801D7E2B04B65400A7ABAE /* DefaultStartTimerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C801D7D2B04B65400A7ABAE /* DefaultStartTimerUseCase.swift */; };
+		2C801D802B04B68900A7ABAE /* StartTimerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C801D7F2B04B68900A7ABAE /* StartTimerUseCase.swift */; };
 		2C801D832B04C64F00A7ABAE /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C801D822B04C64F00A7ABAE /* TimerManager.swift */; };
 		2C87C2772B1C789A00A26313 /* FriendStatusPollingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2762B1C789A00A26313 /* FriendStatusPollingManager.swift */; };
 		2C87C2792B1C794000A26313 /* UpdateFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2782B1C794000A26313 /* UpdateFriend.swift */; };
@@ -56,8 +58,8 @@
 		2C87C27D2B1DF1C300A26313 /* DefaultUserInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C27C2B1DF1C300A26313 /* DefaultUserInfoRepository.swift */; };
 		2C87C27F2B1DF2A800A26313 /* UserInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C27E2B1DF2A800A26313 /* UserInfoRepository.swift */; };
 		2C87C2812B1DF2C000A26313 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2802B1DF2C000A26313 /* UserInfo.swift */; };
-		2C87C2832B1DF30E00A26313 /* UserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2822B1DF30E00A26313 /* UserInfoUseCase.swift */; };
-		2C87C2852B1DF32A00A26313 /* DefaultUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2842B1DF32A00A26313 /* DefaultUserInfoUseCase.swift */; };
+		2C87C2832B1DF30E00A26313 /* GetUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2822B1DF30E00A26313 /* GetUserInfoUseCase.swift */; };
+		2C87C2852B1DF32A00A26313 /* DefaultGetUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2842B1DF32A00A26313 /* DefaultGetUserInfoUseCase.swift */; };
 		2C87C28E2B1E316800A26313 /* SignOutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C28D2B1E316800A26313 /* SignOutManager.swift */; };
 		2C87C2912B1F212200A26313 /* ImageDownLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2902B1F212200A26313 /* ImageDownLoader.swift */; };
 		2C87C2932B1F344500A26313 /* UIImageView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2922B1F344500A26313 /* UIImageView++Extension.swift */; };
@@ -75,8 +77,6 @@
 		2C88DD0B2B1340E4000B4686 /* CategoryDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */; };
 		2C88DD0D2B148E9B000B4686 /* TimerFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD0C2B148E9B000B4686 /* TimerFinishViewController.swift */; };
 		2C88DD0F2B14C22C000B4686 /* TimerFinishViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD0E2B14C22C000B4686 /* TimerFinishViewModel.swift */; };
-		2C88DD112B14C50F000B4686 /* DefaultTimerFinishUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD102B14C50F000B4686 /* DefaultTimerFinishUseCase.swift */; };
-		2C88DD132B14C51B000B4686 /* TimerFinishUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD122B14C51B000B4686 /* TimerFinishUseCase.swift */; };
 		2C9F61F72B14EFA200AE63F9 /* CategoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61F62B14EFA200AE63F9 /* CategoryManager.swift */; };
 		2C9F61F92B14F33600AE63F9 /* CategoryManagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61F82B14F33600AE63F9 /* CategoryManagable.swift */; };
 		2C9F61FB2B15C96100AE63F9 /* CategoryModifyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61FA2B15C96100AE63F9 /* CategoryModifyViewModel.swift */; };
@@ -87,8 +87,6 @@
 		2C9F62082B16398D00AE63F9 /* FreindAddResultViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62072B16398D00AE63F9 /* FreindAddResultViewProtocol.swift */; };
 		2C9F620B2B171C8300AE63F9 /* FriendAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F620A2B171C8300AE63F9 /* FriendAddViewModel.swift */; };
 		2C9F620D2B17241200AE63F9 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F620C2B17241200AE63F9 /* Friend.swift */; };
-		2C9F620F2B1735C700AE63F9 /* FriendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F620E2B1735C700AE63F9 /* FriendUseCase.swift */; };
-		2C9F62112B17363400AE63F9 /* DefaultFriendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62102B17363400AE63F9 /* DefaultFriendUseCase.swift */; };
 		2C9F62132B17366200AE63F9 /* FriendRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62122B17366200AE63F9 /* FriendRepository.swift */; };
 		2C9F62152B1736BE00AE63F9 /* DefaultFriendRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62142B1736BE00AE63F9 /* DefaultFriendRepository.swift */; };
 		2C9F62222B173AB500AE63F9 /* FriendFollowReqeustDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62212B173AB500AE63F9 /* FriendFollowReqeustDTO.swift */; };
@@ -96,7 +94,6 @@
 		2C9F62262B1742D200AE63F9 /* FriendEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62252B1742D200AE63F9 /* FriendEndpoints.swift */; };
 		2C9F62302B17508500AE63F9 /* FriendAddViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F622E2B17505B00AE63F9 /* FriendAddViewModelTests.swift */; };
 		2C9F62312B1750A300AE63F9 /* FriendAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F620A2B171C8300AE63F9 /* FriendAddViewModel.swift */; };
-		2C9F62342B17514D00AE63F9 /* FriendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F620E2B1735C700AE63F9 /* FriendUseCase.swift */; };
 		2C9F62352B17515800AE63F9 /* FriendRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62122B17366200AE63F9 /* FriendRepository.swift */; };
 		2C9F62382B17517B00AE63F9 /* MockFriendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62362B17517100AE63F9 /* MockFriendUseCase.swift */; };
 		2C9F62392B1756BC00AE63F9 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057A58E2B0C801300EE58E8 /* NetworkError.swift */; };
@@ -106,7 +103,6 @@
 		2C9F623E2B1756EB00AE63F9 /* FlipMateLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE493C2B05DEA400ACE6DD /* FlipMateLogger.swift */; };
 		2C9F623F2B1756FE00AE63F9 /* FlipMateConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE493F2B05E67200ACE6DD /* FlipMateConstant.swift */; };
 		2C9F62422B176A0400AE63F9 /* FriendUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62402B1769FD00AE63F9 /* FriendUseCaseTests.swift */; };
-		2C9F62432B176A9000AE63F9 /* DefaultFriendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62102B17363400AE63F9 /* DefaultFriendUseCase.swift */; };
 		2C9F62442B176AA500AE63F9 /* DefaultFriendRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62142B1736BE00AE63F9 /* DefaultFriendRepository.swift */; };
 		2C9F62482B176AEE00AE63F9 /* MockFriendRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62462B176AEC00AE63F9 /* MockFriendRepository.swift */; };
 		2C9F62492B176F6300AE63F9 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430982B0C8427008CBC85 /* Provider.swift */; };
@@ -126,8 +122,7 @@
 		2CDCD03D2B1871E60080DCDE /* SocialDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD03C2B1871E60080DCDE /* SocialDIContainer.swift */; };
 		2CDCD0402B1872060080DCDE /* SocialFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD03F2B1872060080DCDE /* SocialFlowCoordinator.swift */; };
 		2CDCD0422B1873F60080DCDE /* SocialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0412B1873F60080DCDE /* SocialViewModel.swift */; };
-		2CDCD0442B1887200080DCDE /* SocialUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0432B1887200080DCDE /* SocialUseCase.swift */; };
-		2CDCD0462B1889040080DCDE /* DefaultSocialUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0452B1889040080DCDE /* DefaultSocialUseCase.swift */; };
+		2CDCD0442B1887200080DCDE /* GetFriendsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0432B1887200080DCDE /* GetFriendsUseCase.swift */; };
 		2CDCD0482B18893A0080DCDE /* SocialRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0472B18893A0080DCDE /* SocialRepository.swift */; };
 		2CDCD04A2B18895E0080DCDE /* DefaultSocialRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD0492B18895E0080DCDE /* DefaultSocialRepository.swift */; };
 		2CDCD04C2B18899A0080DCDE /* SocialEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD04B2B18899A0080DCDE /* SocialEndpoints.swift */; };
@@ -157,8 +152,8 @@
 		600908E12AFCD7E00065DFFB /* FlipMateUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908E02AFCD7E00065DFFB /* FlipMateUITestsLaunchTests.swift */; };
 		601773E42B021E6000D175D9 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601773E32B021E6000D175D9 /* TimerViewController.swift */; };
 		601EB73B2B148F9A00C5B216 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601EB73A2B148F9A00C5B216 /* SignUpViewModel.swift */; };
-		601EB73D2B14D67600C5B216 /* ProfileSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601EB73C2B14D67600C5B216 /* ProfileSettingsUseCase.swift */; };
-		601EB73F2B14F37300C5B216 /* DefaultProfileSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601EB73E2B14F37300C5B216 /* DefaultProfileSettingsUseCase.swift */; };
+		601EB73D2B14D67600C5B216 /* SetupProfileInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601EB73C2B14D67600C5B216 /* SetupProfileInfoUseCase.swift */; };
+		601EB73F2B14F37300C5B216 /* DefaultValidateNicknameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601EB73E2B14F37300C5B216 /* DefaultValidateNicknameUseCase.swift */; };
 		601EB7412B14F39B00C5B216 /* ProfileSettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601EB7402B14F39B00C5B216 /* ProfileSettingsRepository.swift */; };
 		601EB7432B14F83400C5B216 /* DefaultProfileSettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601EB7422B14F83400C5B216 /* DefaultProfileSettingsRepository.swift */; };
 		601EB7452B14F86100C5B216 /* SignUpEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601EB7442B14F86100C5B216 /* SignUpEndpoints.swift */; };
@@ -177,6 +172,36 @@
 		608646552B0DDC3900B0C1BC /* CategoryRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646542B0DDC3900B0C1BC /* CategoryRequestDTO.swift */; };
 		608646572B0DE31800B0C1BC /* CategoryResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646562B0DE31800B0C1BC /* CategoryResponseDTO.swift */; };
 		608646592B0DE61200B0C1BC /* CategoryEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608646582B0DE61200B0C1BC /* CategoryEndpoints.swift */; };
+		6087AEA72B4A6A2300B29637 /* FinishTimerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEA62B4A6A2300B29637 /* FinishTimerUseCase.swift */; };
+		6087AEAB2B4A6A8500B29637 /* ReadCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEAA2B4A6A8500B29637 /* ReadCategoryUseCase.swift */; };
+		6087AEAD2B4A6A9300B29637 /* UpdateCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEAC2B4A6A9300B29637 /* UpdateCategoryUseCase.swift */; };
+		6087AEAF2B4A6A9E00B29637 /* DeleteCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEAE2B4A6A9E00B29637 /* DeleteCategoryUseCase.swift */; };
+		6087AEB22B4A6B2E00B29637 /* AppleLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEB12B4A6B2E00B29637 /* AppleLoginUseCase.swift */; };
+		6087AEB42B4A6B3900B29637 /* SignOutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEB32B4A6B3900B29637 /* SignOutUseCase.swift */; };
+		6087AEB62B4A6BD900B29637 /* ValidateNicknameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEB52B4A6BD900B29637 /* ValidateNicknameUseCase.swift */; };
+		6087AEBB2B4A6C6600B29637 /* FollowFriendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEBA2B4A6C6600B29637 /* FollowFriendUseCase.swift */; };
+		6087AEBD2B4A6C7400B29637 /* UnfollowFriendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEBC2B4A6C7400B29637 /* UnfollowFriendUseCase.swift */; };
+		6087AEC12B4A6C9C00B29637 /* SearchFriendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEC02B4A6C9C00B29637 /* SearchFriendUseCase.swift */; };
+		6087AEC32B4A6CA600B29637 /* LoadChartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEC22B4A6CA600B29637 /* LoadChartUseCase.swift */; };
+		6087AEC52B4A6D3800B29637 /* FetchFriendsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEC42B4A6D3800B29637 /* FetchFriendsUseCase.swift */; };
+		6087AEC72B4A6D6700B29637 /* FetchWeeklyChartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEC62B4A6D6700B29637 /* FetchWeeklyChartUseCase.swift */; };
+		6087AECA2B4A6E7700B29637 /* DefaultFinishTimerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEC92B4A6E7700B29637 /* DefaultFinishTimerUseCase.swift */; };
+		6087AED12B4A6EF700B29637 /* DefaultCreateCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AED02B4A6EF700B29637 /* DefaultCreateCategoryUseCase.swift */; };
+		6087AED32B4A6F1200B29637 /* DefaultReadCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AED22B4A6F1200B29637 /* DefaultReadCategoryUseCase.swift */; };
+		6087AED52B4A6F1F00B29637 /* DefaultUpdateCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AED42B4A6F1F00B29637 /* DefaultUpdateCategoryUseCase.swift */; };
+		6087AED72B4A6F2B00B29637 /* DefaultDeleteCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AED62B4A6F2B00B29637 /* DefaultDeleteCategoryUseCase.swift */; };
+		6087AED92B4A705000B29637 /* DefaultGoogleLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AED82B4A705000B29637 /* DefaultGoogleLoginUseCase.swift */; };
+		6087AEDB2B4A706000B29637 /* DefaultAppleLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEDA2B4A706000B29637 /* DefaultAppleLoginUseCase.swift */; };
+		6087AEDD2B4A706C00B29637 /* DefaultSignOutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEDC2B4A706C00B29637 /* DefaultSignOutUseCase.swift */; };
+		6087AEDF2B4A70D000B29637 /* DefaultFollowFriendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEDE2B4A70D000B29637 /* DefaultFollowFriendUseCase.swift */; };
+		6087AEE12B4A70DE00B29637 /* DefaultUnfollowFriendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEE02B4A70DE00B29637 /* DefaultUnfollowFriendUseCase.swift */; };
+		6087AEE32B4A70EC00B29637 /* DefaultSearchFriendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEE22B4A70EC00B29637 /* DefaultSearchFriendUseCase.swift */; };
+		6087AEE52B4A710B00B29637 /* DefaultSetupProfileInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEE42B4A710B00B29637 /* DefaultSetupProfileInfoUseCase.swift */; };
+		6087AEE72B4A711D00B29637 /* DefaultGetFriendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEE62B4A711D00B29637 /* DefaultGetFriendUseCase.swift */; };
+		6087AEE92B4A712800B29637 /* DefaultFetchFriendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEE82B4A712800B29637 /* DefaultFetchFriendUseCase.swift */; };
+		6087AEEB2B4A713900B29637 /* DefaultFetchDailyChartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEEA2B4A713900B29637 /* DefaultFetchDailyChartUseCase.swift */; };
+		6087AEED2B4A714900B29637 /* DefaultFetchWeeklyChartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEEC2B4A714900B29637 /* DefaultFetchWeeklyChartUseCase.swift */; };
+		6087AEEF2B4A715600B29637 /* DefaultLoadChartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087AEEE2B4A715600B29637 /* DefaultLoadChartUseCase.swift */; };
 		6096F91E2B04F3CA00D0B972 /* FaceDown.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 6096F91D2B04F3CA00D0B972 /* FaceDown.ahap */; };
 		60A0B8E12B181C4900510299 /* Data++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A0B8E02B181C4900510299 /* Data++Extension.swift */; };
 		60C2F2862B172D6900EBDD78 /* FriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2F2852B172D6900EBDD78 /* FriendsCollectionViewCell.swift */; };
@@ -189,8 +214,7 @@
 		60EB7F562B1F053800F8C613 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EB7F552B1F053800F8C613 /* MyPageViewModel.swift */; };
 		60EB7F5B2B1F19D900F8C613 /* ProfileSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EB7F5A2B1F19D900F8C613 /* ProfileSettingsViewController.swift */; };
 		60EB7F5D2B1F4F9E00F8C613 /* ProfileSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EB7F5C2B1F4F9E00F8C613 /* ProfileSettingsViewModel.swift */; };
-		60F67C682B0E1785002C8BF3 /* CategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F67C672B0E1785002C8BF3 /* CategoryUseCase.swift */; };
-		60F67C6A2B0E1868002C8BF3 /* DefaultCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F67C692B0E1868002C8BF3 /* DefaultCategoryUseCase.swift */; };
+		60F67C682B0E1785002C8BF3 /* CreateCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F67C672B0E1785002C8BF3 /* CreateCategoryUseCase.swift */; };
 		60F6FD732B0B5E130057CE0B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F6FD722B0B5E130057CE0B /* SignUpViewController.swift */; };
 		ED1B3F292B1F8AA300FB9DBC /* WeeklyChartLogResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B3F282B1F8AA300FB9DBC /* WeeklyChartLogResponseDTO.swift */; };
 		ED3595A92B0C7F3500558FAA /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595A82B0C7F3500558FAA /* HTTPMethod.swift */; };
@@ -206,8 +230,7 @@
 		ED38421F2B0F1C7A001E2803 /* AuthResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38421E2B0F1C7A001E2803 /* AuthResponseDTO.swift */; };
 		ED3842212B0F1CF9001E2803 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842202B0F1CF9001E2803 /* User.swift */; };
 		ED3842232B0F1D70001E2803 /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842222B0F1D70001E2803 /* AuthenticationRepository.swift */; };
-		ED3842252B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842242B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift */; };
-		ED3842272B0F1E0C001E2803 /* AuthenticationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842262B0F1E0C001E2803 /* AuthenticationUseCase.swift */; };
+		ED3842272B0F1E0C001E2803 /* GoogleLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842262B0F1E0C001E2803 /* GoogleLoginUseCase.swift */; };
 		ED3842292B0F3B19001E2803 /* DefaultAuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842282B0F3B19001E2803 /* DefaultAuthenticationRepository.swift */; };
 		ED38422C2B0F4531001E2803 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422B2B0F4531001E2803 /* LoginViewModel.swift */; };
 		ED38422F2B0F747B001E2803 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422E2B0F747B001E2803 /* KeyChainManager.swift */; };
@@ -227,8 +250,7 @@
 		ED6865C62B1E438B001A2AAD /* ChartEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865C52B1E438B001A2AAD /* ChartEndpoints.swift */; };
 		ED6865C82B1E44B1001A2AAD /* ChartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865C72B1E44B1001A2AAD /* ChartRepository.swift */; };
 		ED6865CA2B1E454E001A2AAD /* DefaultChartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865C92B1E454E001A2AAD /* DefaultChartRepository.swift */; };
-		ED6865CC2B1E494D001A2AAD /* ChartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865CB2B1E494D001A2AAD /* ChartUseCase.swift */; };
-		ED6865CE2B1E49A6001A2AAD /* DefaultChartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865CD2B1E49A6001A2AAD /* DefaultChartUseCase.swift */; };
+		ED6865CC2B1E494D001A2AAD /* FetchDailyChartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865CB2B1E494D001A2AAD /* FetchDailyChartUseCase.swift */; };
 		ED6865D02B1F1429001A2AAD /* ChartDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865CF2B1F1429001A2AAD /* ChartDIContainer.swift */; };
 		ED6865D32B1F1464001A2AAD /* ChartFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865D22B1F1464001A2AAD /* ChartFlowCoordinator.swift */; };
 		ED6865D62B1F14CF001A2AAD /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865D52B1F14CF001A2AAD /* ChartViewModel.swift */; };
@@ -265,16 +287,18 @@
 		2B285F39D7D27E5C564F4D31 /* Pods_FlipMateTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMateTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialUserInfoHeaderView.swift; sourceTree = "<group>"; };
 		2C1F2BBC2B20DA770026C30B /* ProfileHeaderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderItem.swift; sourceTree = "<group>"; };
+		2C277AC52B4D266B00567CAC /* WithdrawUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawUseCase.swift; sourceTree = "<group>"; };
+		2C277AC72B4D26AD00567CAC /* DefaultWithdrawUesCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWithdrawUesCase.swift; sourceTree = "<group>"; };
 		2C2C7CB82B29CEC300C733D5 /* FriendSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchResult.swift; sourceTree = "<group>"; };
-		2C2C7CBA2B29DFA600C733D5 /* TimeZoneUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneUseCase.swift; sourceTree = "<group>"; };
-		2C2C7CBC2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimeZoneUseCase.swift; sourceTree = "<group>"; };
+		2C2C7CBA2B29DFA600C733D5 /* PatchTimeZoneUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchTimeZoneUseCase.swift; sourceTree = "<group>"; };
+		2C2C7CBC2B29DFD900C733D5 /* DefaultPatchTimeZoneUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPatchTimeZoneUseCase.swift; sourceTree = "<group>"; };
 		2C2C7CBE2B29E0BF00C733D5 /* UserInfoEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoEndpoints.swift; sourceTree = "<group>"; };
 		2C2C7CC02B29E18F00C733D5 /* TimeZoneRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneRequestDTO.swift; sourceTree = "<group>"; };
-		2C2F216D2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStudyLogUseCase.swift; sourceTree = "<group>"; };
+		2C2F216D2B0F40A100B45BA8 /* DefaultGetStudyLogUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGetStudyLogUseCase.swift; sourceTree = "<group>"; };
 		2C2F216F2B0F429800B45BA8 /* StudyLogResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogResponseDTO.swift; sourceTree = "<group>"; };
 		2C2F21752B0F440D00B45BA8 /* StudyLogEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogEndpoints.swift; sourceTree = "<group>"; };
 		2C2F21772B0F4CCC00B45BA8 /* StudyLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLog.swift; sourceTree = "<group>"; };
-		2C2F21792B0F4CF900B45BA8 /* StudyLogUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogUseCase.swift; sourceTree = "<group>"; };
+		2C2F21792B0F4CF900B45BA8 /* GetStudyLogUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStudyLogUseCase.swift; sourceTree = "<group>"; };
 		2C2F217B2B0F4D4000B45BA8 /* StudyLogRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyLogRepository.swift; sourceTree = "<group>"; };
 		2C2F217D2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStudyLogRepository.swift; sourceTree = "<group>"; };
 		2C2F217F2B0F4DA600B45BA8 /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
@@ -303,8 +327,8 @@
 		2C5E34BD2B1B51CB00FD481B /* FriendStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendStatus.swift; sourceTree = "<group>"; };
 		2C6717F72B0535A8004D118D /* Int++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int++Extension.swift"; sourceTree = "<group>"; };
 		2C7CBD582B2B3AAD0024A9AA /* TimerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHeaderView.swift; sourceTree = "<group>"; };
-		2C801D7D2B04B65400A7ABAE /* DefaultTimerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimerUseCase.swift; sourceTree = "<group>"; };
-		2C801D7F2B04B68900A7ABAE /* TimerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerUseCase.swift; sourceTree = "<group>"; };
+		2C801D7D2B04B65400A7ABAE /* DefaultStartTimerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStartTimerUseCase.swift; sourceTree = "<group>"; };
+		2C801D7F2B04B68900A7ABAE /* StartTimerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimerUseCase.swift; sourceTree = "<group>"; };
 		2C801D822B04C64F00A7ABAE /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		2C87C2762B1C789A00A26313 /* FriendStatusPollingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendStatusPollingManager.swift; sourceTree = "<group>"; };
 		2C87C2782B1C794000A26313 /* UpdateFriend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFriend.swift; sourceTree = "<group>"; };
@@ -312,8 +336,8 @@
 		2C87C27C2B1DF1C300A26313 /* DefaultUserInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserInfoRepository.swift; sourceTree = "<group>"; };
 		2C87C27E2B1DF2A800A26313 /* UserInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRepository.swift; sourceTree = "<group>"; };
 		2C87C2802B1DF2C000A26313 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
-		2C87C2822B1DF30E00A26313 /* UserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoUseCase.swift; sourceTree = "<group>"; };
-		2C87C2842B1DF32A00A26313 /* DefaultUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserInfoUseCase.swift; sourceTree = "<group>"; };
+		2C87C2822B1DF30E00A26313 /* GetUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserInfoUseCase.swift; sourceTree = "<group>"; };
+		2C87C2842B1DF32A00A26313 /* DefaultGetUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGetUserInfoUseCase.swift; sourceTree = "<group>"; };
 		2C87C28D2B1E316800A26313 /* SignOutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignOutManager.swift; path = FlipMate/Presentation/Utils/SignOutManager.swift; sourceTree = SOURCE_ROOT; };
 		2C87C2902B1F212200A26313 /* ImageDownLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownLoader.swift; sourceTree = "<group>"; };
 		2C87C2922B1F344500A26313 /* UIImageView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView++Extension.swift"; sourceTree = "<group>"; };
@@ -331,8 +355,6 @@
 		2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDIContainer.swift; sourceTree = "<group>"; };
 		2C88DD0C2B148E9B000B4686 /* TimerFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishViewController.swift; sourceTree = "<group>"; };
 		2C88DD0E2B14C22C000B4686 /* TimerFinishViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishViewModel.swift; sourceTree = "<group>"; };
-		2C88DD102B14C50F000B4686 /* DefaultTimerFinishUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimerFinishUseCase.swift; sourceTree = "<group>"; };
-		2C88DD122B14C51B000B4686 /* TimerFinishUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishUseCase.swift; sourceTree = "<group>"; };
 		2C9F61F62B14EFA200AE63F9 /* CategoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManager.swift; sourceTree = "<group>"; };
 		2C9F61F82B14F33600AE63F9 /* CategoryManagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagable.swift; sourceTree = "<group>"; };
 		2C9F61FA2B15C96100AE63F9 /* CategoryModifyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModifyViewModel.swift; sourceTree = "<group>"; };
@@ -343,8 +365,6 @@
 		2C9F62072B16398D00AE63F9 /* FreindAddResultViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreindAddResultViewProtocol.swift; sourceTree = "<group>"; };
 		2C9F620A2B171C8300AE63F9 /* FriendAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddViewModel.swift; sourceTree = "<group>"; };
 		2C9F620C2B17241200AE63F9 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
-		2C9F620E2B1735C700AE63F9 /* FriendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendUseCase.swift; sourceTree = "<group>"; };
-		2C9F62102B17363400AE63F9 /* DefaultFriendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFriendUseCase.swift; sourceTree = "<group>"; };
 		2C9F62122B17366200AE63F9 /* FriendRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRepository.swift; sourceTree = "<group>"; };
 		2C9F62142B1736BE00AE63F9 /* DefaultFriendRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFriendRepository.swift; sourceTree = "<group>"; };
 		2C9F62212B173AB500AE63F9 /* FriendFollowReqeustDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendFollowReqeustDTO.swift; sourceTree = "<group>"; };
@@ -362,8 +382,7 @@
 		2CDCD03C2B1871E60080DCDE /* SocialDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDIContainer.swift; sourceTree = "<group>"; };
 		2CDCD03F2B1872060080DCDE /* SocialFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFlowCoordinator.swift; sourceTree = "<group>"; };
 		2CDCD0412B1873F60080DCDE /* SocialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewModel.swift; sourceTree = "<group>"; };
-		2CDCD0432B1887200080DCDE /* SocialUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialUseCase.swift; sourceTree = "<group>"; };
-		2CDCD0452B1889040080DCDE /* DefaultSocialUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSocialUseCase.swift; sourceTree = "<group>"; };
+		2CDCD0432B1887200080DCDE /* GetFriendsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFriendsUseCase.swift; sourceTree = "<group>"; };
 		2CDCD0472B18893A0080DCDE /* SocialRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialRepository.swift; sourceTree = "<group>"; };
 		2CDCD0492B18895E0080DCDE /* DefaultSocialRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSocialRepository.swift; sourceTree = "<group>"; };
 		2CDCD04B2B18899A0080DCDE /* SocialEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialEndpoints.swift; sourceTree = "<group>"; };
@@ -397,8 +416,8 @@
 		600908E02AFCD7E00065DFFB /* FlipMateUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipMateUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		601773E32B021E6000D175D9 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		601EB73A2B148F9A00C5B216 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
-		601EB73C2B14D67600C5B216 /* ProfileSettingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsUseCase.swift; sourceTree = "<group>"; };
-		601EB73E2B14F37300C5B216 /* DefaultProfileSettingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileSettingsUseCase.swift; sourceTree = "<group>"; };
+		601EB73C2B14D67600C5B216 /* SetupProfileInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupProfileInfoUseCase.swift; sourceTree = "<group>"; };
+		601EB73E2B14F37300C5B216 /* DefaultValidateNicknameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultValidateNicknameUseCase.swift; sourceTree = "<group>"; };
 		601EB7402B14F39B00C5B216 /* ProfileSettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsRepository.swift; sourceTree = "<group>"; };
 		601EB7422B14F83400C5B216 /* DefaultProfileSettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileSettingsRepository.swift; sourceTree = "<group>"; };
 		601EB7442B14F86100C5B216 /* SignUpEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEndpoints.swift; sourceTree = "<group>"; };
@@ -417,6 +436,36 @@
 		608646542B0DDC3900B0C1BC /* CategoryRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRequestDTO.swift; sourceTree = "<group>"; };
 		608646562B0DE31800B0C1BC /* CategoryResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryResponseDTO.swift; sourceTree = "<group>"; };
 		608646582B0DE61200B0C1BC /* CategoryEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEndpoints.swift; sourceTree = "<group>"; };
+		6087AEA62B4A6A2300B29637 /* FinishTimerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishTimerUseCase.swift; sourceTree = "<group>"; };
+		6087AEAA2B4A6A8500B29637 /* ReadCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadCategoryUseCase.swift; sourceTree = "<group>"; };
+		6087AEAC2B4A6A9300B29637 /* UpdateCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCategoryUseCase.swift; sourceTree = "<group>"; };
+		6087AEAE2B4A6A9E00B29637 /* DeleteCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCategoryUseCase.swift; sourceTree = "<group>"; };
+		6087AEB12B4A6B2E00B29637 /* AppleLoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginUseCase.swift; sourceTree = "<group>"; };
+		6087AEB32B4A6B3900B29637 /* SignOutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutUseCase.swift; sourceTree = "<group>"; };
+		6087AEB52B4A6BD900B29637 /* ValidateNicknameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateNicknameUseCase.swift; sourceTree = "<group>"; };
+		6087AEBA2B4A6C6600B29637 /* FollowFriendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowFriendUseCase.swift; sourceTree = "<group>"; };
+		6087AEBC2B4A6C7400B29637 /* UnfollowFriendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfollowFriendUseCase.swift; sourceTree = "<group>"; };
+		6087AEC02B4A6C9C00B29637 /* SearchFriendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriendUseCase.swift; sourceTree = "<group>"; };
+		6087AEC22B4A6CA600B29637 /* LoadChartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadChartUseCase.swift; sourceTree = "<group>"; };
+		6087AEC42B4A6D3800B29637 /* FetchFriendsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchFriendsUseCase.swift; sourceTree = "<group>"; };
+		6087AEC62B4A6D6700B29637 /* FetchWeeklyChartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchWeeklyChartUseCase.swift; sourceTree = "<group>"; };
+		6087AEC92B4A6E7700B29637 /* DefaultFinishTimerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFinishTimerUseCase.swift; sourceTree = "<group>"; };
+		6087AED02B4A6EF700B29637 /* DefaultCreateCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCreateCategoryUseCase.swift; sourceTree = "<group>"; };
+		6087AED22B4A6F1200B29637 /* DefaultReadCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultReadCategoryUseCase.swift; sourceTree = "<group>"; };
+		6087AED42B4A6F1F00B29637 /* DefaultUpdateCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUpdateCategoryUseCase.swift; sourceTree = "<group>"; };
+		6087AED62B4A6F2B00B29637 /* DefaultDeleteCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDeleteCategoryUseCase.swift; sourceTree = "<group>"; };
+		6087AED82B4A705000B29637 /* DefaultGoogleLoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGoogleLoginUseCase.swift; sourceTree = "<group>"; };
+		6087AEDA2B4A706000B29637 /* DefaultAppleLoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAppleLoginUseCase.swift; sourceTree = "<group>"; };
+		6087AEDC2B4A706C00B29637 /* DefaultSignOutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSignOutUseCase.swift; sourceTree = "<group>"; };
+		6087AEDE2B4A70D000B29637 /* DefaultFollowFriendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFollowFriendUseCase.swift; sourceTree = "<group>"; };
+		6087AEE02B4A70DE00B29637 /* DefaultUnfollowFriendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUnfollowFriendUseCase.swift; sourceTree = "<group>"; };
+		6087AEE22B4A70EC00B29637 /* DefaultSearchFriendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSearchFriendUseCase.swift; sourceTree = "<group>"; };
+		6087AEE42B4A710B00B29637 /* DefaultSetupProfileInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSetupProfileInfoUseCase.swift; sourceTree = "<group>"; };
+		6087AEE62B4A711D00B29637 /* DefaultGetFriendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGetFriendUseCase.swift; sourceTree = "<group>"; };
+		6087AEE82B4A712800B29637 /* DefaultFetchFriendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFetchFriendUseCase.swift; sourceTree = "<group>"; };
+		6087AEEA2B4A713900B29637 /* DefaultFetchDailyChartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFetchDailyChartUseCase.swift; sourceTree = "<group>"; };
+		6087AEEC2B4A714900B29637 /* DefaultFetchWeeklyChartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFetchWeeklyChartUseCase.swift; sourceTree = "<group>"; };
+		6087AEEE2B4A715600B29637 /* DefaultLoadChartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLoadChartUseCase.swift; sourceTree = "<group>"; };
 		6096F91D2B04F3CA00D0B972 /* FaceDown.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = FaceDown.ahap; sourceTree = "<group>"; };
 		60A0B8E02B181C4900510299 /* Data++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data++Extension.swift"; sourceTree = "<group>"; };
 		60C2F2852B172D6900EBDD78 /* FriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -429,8 +478,7 @@
 		60EB7F552B1F053800F8C613 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		60EB7F5A2B1F19D900F8C613 /* ProfileSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewController.swift; sourceTree = "<group>"; };
 		60EB7F5C2B1F4F9E00F8C613 /* ProfileSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewModel.swift; sourceTree = "<group>"; };
-		60F67C672B0E1785002C8BF3 /* CategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryUseCase.swift; sourceTree = "<group>"; };
-		60F67C692B0E1868002C8BF3 /* DefaultCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCategoryUseCase.swift; sourceTree = "<group>"; };
+		60F67C672B0E1785002C8BF3 /* CreateCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryUseCase.swift; sourceTree = "<group>"; };
 		60F6FD722B0B5E130057CE0B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		65D7B3C8248401D64CA3EF90 /* Pods-FlipMateTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMateTests.release.xcconfig"; path = "Target Support Files/Pods-FlipMateTests/Pods-FlipMateTests.release.xcconfig"; sourceTree = "<group>"; };
 		8ED331B3B7BDE8C6BB68666F /* Pods-FlipMate-FlipMateUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate-FlipMateUITests.debug.xcconfig"; path = "Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -450,8 +498,7 @@
 		ED38421E2B0F1C7A001E2803 /* AuthResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponseDTO.swift; sourceTree = "<group>"; };
 		ED3842202B0F1CF9001E2803 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ED3842222B0F1D70001E2803 /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
-		ED3842242B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthenticationUseCase.swift; sourceTree = "<group>"; };
-		ED3842262B0F1E0C001E2803 /* AuthenticationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationUseCase.swift; sourceTree = "<group>"; };
+		ED3842262B0F1E0C001E2803 /* GoogleLoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginUseCase.swift; sourceTree = "<group>"; };
 		ED3842282B0F3B19001E2803 /* DefaultAuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthenticationRepository.swift; sourceTree = "<group>"; };
 		ED38422B2B0F4531001E2803 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		ED38422E2B0F747B001E2803 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
@@ -471,8 +518,7 @@
 		ED6865C52B1E438B001A2AAD /* ChartEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartEndpoints.swift; sourceTree = "<group>"; };
 		ED6865C72B1E44B1001A2AAD /* ChartRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartRepository.swift; sourceTree = "<group>"; };
 		ED6865C92B1E454E001A2AAD /* DefaultChartRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChartRepository.swift; sourceTree = "<group>"; };
-		ED6865CB2B1E494D001A2AAD /* ChartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartUseCase.swift; sourceTree = "<group>"; };
-		ED6865CD2B1E49A6001A2AAD /* DefaultChartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChartUseCase.swift; sourceTree = "<group>"; };
+		ED6865CB2B1E494D001A2AAD /* FetchDailyChartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDailyChartUseCase.swift; sourceTree = "<group>"; };
 		ED6865CF2B1F1429001A2AAD /* ChartDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDIContainer.swift; sourceTree = "<group>"; };
 		ED6865D22B1F1464001A2AAD /* ChartFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFlowCoordinator.swift; sourceTree = "<group>"; };
 		ED6865D52B1F14CF001A2AAD /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
@@ -1219,18 +1265,17 @@
 			isa = PBXGroup;
 			children = (
 				600909072AFCE0DC0065DFFB /* Protocol */,
-				2C801D7D2B04B65400A7ABAE /* DefaultTimerUseCase.swift */,
-				60F67C692B0E1868002C8BF3 /* DefaultCategoryUseCase.swift */,
-				2C2F216D2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift */,
-				ED3842242B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift */,
-				601EB73E2B14F37300C5B216 /* DefaultProfileSettingsUseCase.swift */,
-				2C88DD102B14C50F000B4686 /* DefaultTimerFinishUseCase.swift */,
-				2C9F62102B17363400AE63F9 /* DefaultFriendUseCase.swift */,
-				2CDCD0452B1889040080DCDE /* DefaultSocialUseCase.swift */,
-				2C87C2842B1DF32A00A26313 /* DefaultUserInfoUseCase.swift */,
-				ED6865CD2B1E49A6001A2AAD /* DefaultChartUseCase.swift */,
+				6087AEC82B4A6E5B00B29637 /* Timer */,
+				6087AECB2B4A6EA800B29637 /* Category */,
+				6087AECC2B4A6EB300B29637 /* Authentication */,
+				6087AECD2B4A6EBD00B29637 /* Friend */,
+				6087AECE2B4A6EC400B29637 /* Social */,
+				6087AECF2B4A6ECC00B29637 /* Chart */,
+				2C2F216D2B0F40A100B45BA8 /* DefaultGetStudyLogUseCase.swift */,
+				2C87C2842B1DF32A00A26313 /* DefaultGetUserInfoUseCase.swift */,
+				601EB73E2B14F37300C5B216 /* DefaultValidateNicknameUseCase.swift */,
 				2CD272F42B21C789000CB9E5 /* DefaultStudingPingUseCase.swift */,
-				2C2C7CBC2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift */,
+				2C2C7CBC2B29DFD900C733D5 /* DefaultPatchTimeZoneUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1238,18 +1283,17 @@
 		600909072AFCE0DC0065DFFB /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				2C801D7F2B04B68900A7ABAE /* TimerUseCase.swift */,
-				60F67C672B0E1785002C8BF3 /* CategoryUseCase.swift */,
-				2C2F21792B0F4CF900B45BA8 /* StudyLogUseCase.swift */,
-				ED3842262B0F1E0C001E2803 /* AuthenticationUseCase.swift */,
-				601EB73C2B14D67600C5B216 /* ProfileSettingsUseCase.swift */,
-				2C88DD122B14C51B000B4686 /* TimerFinishUseCase.swift */,
-				2C9F620E2B1735C700AE63F9 /* FriendUseCase.swift */,
-				2CDCD0432B1887200080DCDE /* SocialUseCase.swift */,
-				2C87C2822B1DF30E00A26313 /* UserInfoUseCase.swift */,
-				ED6865CB2B1E494D001A2AAD /* ChartUseCase.swift */,
+				6087AEA82B4A6A5600B29637 /* Timer */,
+				6087AEA92B4A6A6800B29637 /* Category */,
+				6087AEB02B4A6B1000B29637 /* Authentication */,
+				6087AEB72B4A6C2200B29637 /* Friend */,
+				6087AEB92B4A6C3900B29637 /* Social */,
+				6087AEB82B4A6C2F00B29637 /* Chart */,
+				2C2F21792B0F4CF900B45BA8 /* GetStudyLogUseCase.swift */,
+				2C87C2822B1DF30E00A26313 /* GetUserInfoUseCase.swift */,
+				6087AEB52B4A6BD900B29637 /* ValidateNicknameUseCase.swift */,
 				2CD272F22B21C748000CB9E5 /* StudingPingUseCase.swift */,
-				2C2C7CBA2B29DFA600C733D5 /* TimeZoneUseCase.swift */,
+				2C2C7CBA2B29DFA600C733D5 /* PatchTimeZoneUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1277,6 +1321,128 @@
 				608646562B0DE31800B0C1BC /* CategoryResponseDTO.swift */,
 			);
 			path = Category;
+			sourceTree = "<group>";
+		};
+		6087AEA82B4A6A5600B29637 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				2C801D7F2B04B68900A7ABAE /* StartTimerUseCase.swift */,
+				6087AEA62B4A6A2300B29637 /* FinishTimerUseCase.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		6087AEA92B4A6A6800B29637 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				60F67C672B0E1785002C8BF3 /* CreateCategoryUseCase.swift */,
+				6087AEAA2B4A6A8500B29637 /* ReadCategoryUseCase.swift */,
+				6087AEAC2B4A6A9300B29637 /* UpdateCategoryUseCase.swift */,
+				6087AEAE2B4A6A9E00B29637 /* DeleteCategoryUseCase.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		6087AEB02B4A6B1000B29637 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				ED3842262B0F1E0C001E2803 /* GoogleLoginUseCase.swift */,
+				6087AEB12B4A6B2E00B29637 /* AppleLoginUseCase.swift */,
+				6087AEB32B4A6B3900B29637 /* SignOutUseCase.swift */,
+				2C277AC52B4D266B00567CAC /* WithdrawUseCase.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		6087AEB72B4A6C2200B29637 /* Friend */ = {
+			isa = PBXGroup;
+			children = (
+				6087AEBA2B4A6C6600B29637 /* FollowFriendUseCase.swift */,
+				6087AEBC2B4A6C7400B29637 /* UnfollowFriendUseCase.swift */,
+				6087AEC02B4A6C9C00B29637 /* SearchFriendUseCase.swift */,
+			);
+			path = Friend;
+			sourceTree = "<group>";
+		};
+		6087AEB82B4A6C2F00B29637 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				ED6865CB2B1E494D001A2AAD /* FetchDailyChartUseCase.swift */,
+				6087AEC62B4A6D6700B29637 /* FetchWeeklyChartUseCase.swift */,
+				6087AEC22B4A6CA600B29637 /* LoadChartUseCase.swift */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
+		6087AEB92B4A6C3900B29637 /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				601EB73C2B14D67600C5B216 /* SetupProfileInfoUseCase.swift */,
+				2CDCD0432B1887200080DCDE /* GetFriendsUseCase.swift */,
+				6087AEC42B4A6D3800B29637 /* FetchFriendsUseCase.swift */,
+			);
+			path = Social;
+			sourceTree = "<group>";
+		};
+		6087AEC82B4A6E5B00B29637 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				2C801D7D2B04B65400A7ABAE /* DefaultStartTimerUseCase.swift */,
+				6087AEC92B4A6E7700B29637 /* DefaultFinishTimerUseCase.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		6087AECB2B4A6EA800B29637 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				6087AED02B4A6EF700B29637 /* DefaultCreateCategoryUseCase.swift */,
+				6087AED22B4A6F1200B29637 /* DefaultReadCategoryUseCase.swift */,
+				6087AED42B4A6F1F00B29637 /* DefaultUpdateCategoryUseCase.swift */,
+				6087AED62B4A6F2B00B29637 /* DefaultDeleteCategoryUseCase.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		6087AECC2B4A6EB300B29637 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				6087AED82B4A705000B29637 /* DefaultGoogleLoginUseCase.swift */,
+				6087AEDA2B4A706000B29637 /* DefaultAppleLoginUseCase.swift */,
+				6087AEDC2B4A706C00B29637 /* DefaultSignOutUseCase.swift */,
+				2C277AC72B4D26AD00567CAC /* DefaultWithdrawUesCase.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		6087AECD2B4A6EBD00B29637 /* Friend */ = {
+			isa = PBXGroup;
+			children = (
+				6087AEDE2B4A70D000B29637 /* DefaultFollowFriendUseCase.swift */,
+				6087AEE02B4A70DE00B29637 /* DefaultUnfollowFriendUseCase.swift */,
+				6087AEE22B4A70EC00B29637 /* DefaultSearchFriendUseCase.swift */,
+			);
+			path = Friend;
+			sourceTree = "<group>";
+		};
+		6087AECE2B4A6EC400B29637 /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				6087AEE42B4A710B00B29637 /* DefaultSetupProfileInfoUseCase.swift */,
+				6087AEE62B4A711D00B29637 /* DefaultGetFriendUseCase.swift */,
+				6087AEE82B4A712800B29637 /* DefaultFetchFriendUseCase.swift */,
+			);
+			path = Social;
+			sourceTree = "<group>";
+		};
+		6087AECF2B4A6ECC00B29637 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				6087AEEA2B4A713900B29637 /* DefaultFetchDailyChartUseCase.swift */,
+				6087AEEC2B4A714900B29637 /* DefaultFetchWeeklyChartUseCase.swift */,
+				6087AEEE2B4A715600B29637 /* DefaultLoadChartUseCase.swift */,
+			);
+			path = Chart;
 			sourceTree = "<group>";
 		};
 		60DE493B2B05DE6700ACE6DD /* Logger */ = {
@@ -1701,64 +1867,76 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6087AEBB2B4A6C6600B29637 /* FollowFriendUseCase.swift in Sources */,
 				60EB7F562B1F053800F8C613 /* MyPageViewModel.swift in Sources */,
 				605B95FA2B1B50BB00739FAB /* BaseComponents.swift in Sources */,
-				2C87C2832B1DF30E00A26313 /* UserInfoUseCase.swift in Sources */,
+				2C87C2832B1DF30E00A26313 /* GetUserInfoUseCase.swift in Sources */,
 				2C3430A32B0DA5A5008CBC85 /* HTTPHeader.swift in Sources */,
 				ED6865BA2B1CEA0F001A2AAD /* SocialChart.swift in Sources */,
 				EDC851D22B04EE83009031EA /* CategoryListCollectionViewCell.swift in Sources */,
-				2C2C7CBD2B29DFD900C733D5 /* DefaultTimeZoneUseCase.swift in Sources */,
+				2C2C7CBD2B29DFD900C733D5 /* DefaultPatchTimeZoneUseCase.swift in Sources */,
 				2C9F62222B173AB500AE63F9 /* FriendFollowReqeustDTO.swift in Sources */,
 				60EB7F5B2B1F19D900F8C613 /* ProfileSettingsViewController.swift in Sources */,
+				6087AED72B4A6F2B00B29637 /* DefaultDeleteCategoryUseCase.swift in Sources */,
 				ED38422C2B0F4531001E2803 /* LoginViewModel.swift in Sources */,
 				2CE91C702B25888C00EACCD7 /* UIViewController++Extension.swift in Sources */,
+				6087AED52B4A6F1F00B29637 /* DefaultUpdateCategoryUseCase.swift in Sources */,
 				2C43A0D82B037BBC0005596A /* FeedbackManager.swift in Sources */,
+				6087AEB22B4A6B2E00B29637 /* AppleLoginUseCase.swift in Sources */,
 				ED3595AB2B0C81B800558FAA /* Responsable.swift in Sources */,
 				2CE91C752B25AE9700EACCD7 /* DoneButton.swift in Sources */,
 				2C4D55B02B0348FB006D7C26 /* TimerViewModel.swift in Sources */,
+				6087AEAD2B4A6A9300B29637 /* UpdateCategoryUseCase.swift in Sources */,
 				2CDCD0422B1873F60080DCDE /* SocialViewModel.swift in Sources */,
+				6087AEC52B4A6D3800B29637 /* FetchFriendsUseCase.swift in Sources */,
 				601EB7452B14F86100C5B216 /* SignUpEndpoints.swift in Sources */,
-				ED3842252B0F1DDA001E2803 /* DefaultAuthenticationUseCase.swift in Sources */,
+				6087AEDB2B4A706000B29637 /* DefaultAppleLoginUseCase.swift in Sources */,
+				6087AEBD2B4A6C7400B29637 /* UnfollowFriendUseCase.swift in Sources */,
 				2C2C7CBF2B29E0BF00C733D5 /* UserInfoEndpoints.swift in Sources */,
 				601EB7412B14F39B00C5B216 /* ProfileSettingsRepository.swift in Sources */,
-				2C801D7E2B04B65400A7ABAE /* DefaultTimerUseCase.swift in Sources */,
+				2C801D7E2B04B65400A7ABAE /* DefaultStartTimerUseCase.swift in Sources */,
 				2C88DCFB2B124451000B4686 /* LoginDIContainer.swift in Sources */,
 				2C88DD072B125781000B4686 /* TabBarDIContainer.swift in Sources */,
 				2CD272F52B21C789000CB9E5 /* DefaultStudingPingUseCase.swift in Sources */,
 				2C88DD092B1274FA000B4686 /* CategorySettingCoordinator.swift in Sources */,
+				6087AEA72B4A6A2300B29637 /* FinishTimerUseCase.swift in Sources */,
 				2C4D55AB2B033029006D7C26 /* UIView++Extension.swift in Sources */,
 				2CDCD06C2B18E6960080DCDE /* UserDefault.swift in Sources */,
-				60F67C6A2B0E1868002C8BF3 /* DefaultCategoryUseCase.swift in Sources */,
 				2C5CDA4B2B0252C1007AFC57 /* LoginType.swift in Sources */,
 				600195A02B0DFA3900F02BA4 /* StatusResponseDTO.swift in Sources */,
+				6087AECA2B4A6E7700B29637 /* DefaultFinishTimerUseCase.swift in Sources */,
 				2C9F620D2B17241200AE63F9 /* Friend.swift in Sources */,
 				60F6FD732B0B5E130057CE0B /* SignUpViewController.swift in Sources */,
 				2CDCD0402B1872060080DCDE /* SocialFlowCoordinator.swift in Sources */,
 				2CE84EEF2B0B742A00E2FB71 /* CategorySettingViewController.swift in Sources */,
 				60A0B8E12B181C4900510299 /* Data++Extension.swift in Sources */,
 				ED3595B02B0C82C800558FAA /* TimerStartRequestDTO.swift in Sources */,
+				6087AEC72B4A6D6700B29637 /* FetchWeeklyChartUseCase.swift in Sources */,
 				2C5CDA482B0252B2007AFC57 /* LoginViewController.swift in Sources */,
 				2CDCD0482B18893A0080DCDE /* SocialRepository.swift in Sources */,
-				601EB73D2B14D67600C5B216 /* ProfileSettingsUseCase.swift in Sources */,
+				601EB73D2B14D67600C5B216 /* SetupProfileInfoUseCase.swift in Sources */,
+				6087AEED2B4A714900B29637 /* DefaultFetchWeeklyChartUseCase.swift in Sources */,
 				608646572B0DE31800B0C1BC /* CategoryResponseDTO.swift in Sources */,
+				6087AEB42B4A6B3900B29637 /* SignOutUseCase.swift in Sources */,
 				2C87C2952B1F345800A26313 /* ImageFetcher.swift in Sources */,
 				ED38421F2B0F1C7A001E2803 /* AuthResponseDTO.swift in Sources */,
+				6087AEE32B4A70EC00B29637 /* DefaultSearchFriendUseCase.swift in Sources */,
 				ED6865BF2B1E2FA6001A2AAD /* ChartSegmentedControl.swift in Sources */,
 				ED3595B22B0C83D700558FAA /* TimerStartResponseDTO.swift in Sources */,
 				2C5CDA582B025426007AFC57 /* FlipMateFont.swift in Sources */,
 				2CDCD04C2B18899A0080DCDE /* SocialEndpoints.swift in Sources */,
+				2C277AC62B4D266B00567CAC /* WithdrawUseCase.swift in Sources */,
 				60DE493D2B05DEA400ACE6DD /* FlipMateLogger.swift in Sources */,
 				2C9F61F72B14EFA200AE63F9 /* CategoryManager.swift in Sources */,
 				2C88DCF62B124292000B4686 /* TimerSceneDIContainer.swift in Sources */,
 				2C2F21802B0F4DA600B45BA8 /* MockURLSession.swift in Sources */,
-				2C9F620F2B1735C700AE63F9 /* FriendUseCase.swift in Sources */,
 				2CDCD0692B18D0D10080DCDE /* FriendSearchItem.swift in Sources */,
-				2C801D802B04B68900A7ABAE /* TimerUseCase.swift in Sources */,
+				2C801D802B04B68900A7ABAE /* StartTimerUseCase.swift in Sources */,
 				6086464E2B0DDA1300B0C1BC /* CategoryRepository.swift in Sources */,
 				2C9F620B2B171C8300AE63F9 /* FriendAddViewModel.swift in Sources */,
 				2C2F21782B0F4CCC00B45BA8 /* StudyLog.swift in Sources */,
+				6087AEE72B4A711D00B29637 /* DefaultGetFriendUseCase.swift in Sources */,
 				ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */,
-				2C88DD132B14C51B000B4686 /* TimerFinishUseCase.swift in Sources */,
 				6020C7642B21C1D400F58AD0 /* MyPageHeaderView.swift in Sources */,
 				2C9F61FE2B15F48600AE63F9 /* FriendAddViewController.swift in Sources */,
 				2C88DCFE2B1244A6000B4686 /* LoginFlowCoordinator.swift in Sources */,
@@ -1772,29 +1950,31 @@
 				2C9F62032B16021E00AE63F9 /* FriendSearchResultView.swift in Sources */,
 				2C3430AB2B0DDB8D008CBC85 /* TimerEndpoints.swift in Sources */,
 				ED3842212B0F1CF9001E2803 /* User.swift in Sources */,
-				2CDCD0462B1889040080DCDE /* DefaultSocialUseCase.swift in Sources */,
 				2C5E34BC2B1B430D00FD481B /* FreindStatusResponseDTO.swift in Sources */,
 				2C88DD0D2B148E9B000B4686 /* TimerFinishViewController.swift in Sources */,
+				2C277AC82B4D26AD00567CAC /* DefaultWithdrawUesCase.swift in Sources */,
 				2C2F21832B0F53B500B45BA8 /* StduyLogMock.swift in Sources */,
-				2CDCD0442B1887200080DCDE /* SocialUseCase.swift in Sources */,
-				60F67C682B0E1785002C8BF3 /* CategoryUseCase.swift in Sources */,
+				2CDCD0442B1887200080DCDE /* GetFriendsUseCase.swift in Sources */,
+				60F67C682B0E1785002C8BF3 /* CreateCategoryUseCase.swift in Sources */,
 				2C88DCF42B124272000B4686 /* AppDIContainer.swift in Sources */,
 				2C5CDA5B2B025440007AFC57 /* ChartViewController.swift in Sources */,
 				2C87C28E2B1E316800A26313 /* SignOutManager.swift in Sources */,
 				2C9F62012B1601F200AE63F9 /* MyNickNameView.swift in Sources */,
 				ED6865C12B1E3B48001A2AAD /* WeeklyChartView.swift in Sources */,
 				6057A58D2B0C7F0F00EE58E8 /* Requestable.swift in Sources */,
-				601EB73F2B14F37300C5B216 /* DefaultProfileSettingsUseCase.swift in Sources */,
-				2C87C2852B1DF32A00A26313 /* DefaultUserInfoUseCase.swift in Sources */,
+				601EB73F2B14F37300C5B216 /* DefaultValidateNicknameUseCase.swift in Sources */,
+				2C87C2852B1DF32A00A26313 /* DefaultGetUserInfoUseCase.swift in Sources */,
 				2C3430A72B0DD0F6008CBC85 /* TimerRepsoitory.swift in Sources */,
 				2C9F62132B17366200AE63F9 /* FriendRepository.swift in Sources */,
 				6057A58F2B0C801300EE58E8 /* NetworkError.swift in Sources */,
 				ED38422F2B0F747B001E2803 /* KeyChainManager.swift in Sources */,
 				ED3842292B0F3B19001E2803 /* DefaultAuthenticationRepository.swift in Sources */,
 				600908BE2AFCD7DF0065DFFB /* AppDelegate.swift in Sources */,
+				6087AEAB2B4A6A8500B29637 /* ReadCategoryUseCase.swift in Sources */,
 				2CE84EFB2B0B92BA00E2FB71 /* UICollectionReusableView++Extension.swift in Sources */,
 				ED3595B72B0C887C00558FAA /* TimerFinishRequestDTO.swift in Sources */,
-				2C2F217A2B0F4CF900B45BA8 /* StudyLogUseCase.swift in Sources */,
+				2C2F217A2B0F4CF900B45BA8 /* GetStudyLogUseCase.swift in Sources */,
+				6087AEAF2B4A6A9E00B29637 /* DeleteCategoryUseCase.swift in Sources */,
 				ED6865D62B1F14CF001A2AAD /* ChartViewModel.swift in Sources */,
 				ED3595A92B0C7F3500558FAA /* HTTPMethod.swift in Sources */,
 				2C87C27D2B1DF1C300A26313 /* DefaultUserInfoRepository.swift in Sources */,
@@ -1805,17 +1985,24 @@
 				ED82F0072B126C95005BB32D /* UITextField++Extension.swift in Sources */,
 				2C3430992B0C8427008CBC85 /* Provider.swift in Sources */,
 				2C2F21702B0F429800B45BA8 /* StudyLogResponseDTO.swift in Sources */,
-				2C2F216E2B0F40A100B45BA8 /* DefaultStudyLogUseCase.swift in Sources */,
-				2C2C7CBB2B29DFA600C733D5 /* TimeZoneUseCase.swift in Sources */,
+				6087AED12B4A6EF700B29637 /* DefaultCreateCategoryUseCase.swift in Sources */,
+				6087AED92B4A705000B29637 /* DefaultGoogleLoginUseCase.swift in Sources */,
+				6087AEE52B4A710B00B29637 /* DefaultSetupProfileInfoUseCase.swift in Sources */,
+				6087AED32B4A6F1200B29637 /* DefaultReadCategoryUseCase.swift in Sources */,
+				6087AEE12B4A70DE00B29637 /* DefaultUnfollowFriendUseCase.swift in Sources */,
+				2C2F216E2B0F40A100B45BA8 /* DefaultGetStudyLogUseCase.swift in Sources */,
+				2C2C7CBB2B29DFA600C733D5 /* PatchTimeZoneUseCase.swift in Sources */,
 				ED6865D82B1F32EF001A2AAD /* CustomCalenderView.swift in Sources */,
 				2CE84EF72B0B7F3C00E2FB71 /* CategorySettingSection.swift in Sources */,
-				2C88DD112B14C50F000B4686 /* DefaultTimerFinishUseCase.swift in Sources */,
+				6087AEC12B4A6C9C00B29637 /* SearchFriendUseCase.swift in Sources */,
 				2C3430AD2B0DDF25008CBC85 /* DefaultTimerRepository.swift in Sources */,
 				2C2C7CC12B29E18F00C733D5 /* TimeZoneRequestDTO.swift in Sources */,
 				2C9F61F92B14F33600AE63F9 /* CategoryManagable.swift in Sources */,
+				6087AEEB2B4A713900B29637 /* DefaultFetchDailyChartUseCase.swift in Sources */,
 				2C6717F82B0535A8004D118D /* Int++Extension.swift in Sources */,
 				ED3595B92B0C88A300558FAA /* TimerFinishResponseDTO.swift in Sources */,
 				608646552B0DDC3900B0C1BC /* CategoryRequestDTO.swift in Sources */,
+				6087AEC32B4A6CA600B29637 /* LoadChartUseCase.swift in Sources */,
 				606990572B18918B00E5730F /* MyPageViewController.swift in Sources */,
 				ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */,
 				ED3595BD2B0DB29F00558FAA /* CategoryModifyViewController.swift in Sources */,
@@ -1831,6 +2018,7 @@
 				60DFDDD92B14FD7800FEF98A /* StatusResponseWithErrorDTO.swift in Sources */,
 				2C2F21762B0F440D00B45BA8 /* StudyLogEndpoints.swift in Sources */,
 				ED6865BD2B1DEE3D001A2AAD /* DailyChartView.swift in Sources */,
+				6087AEDD2B4A706C00B29637 /* DefaultSignOutUseCase.swift in Sources */,
 				2C87C2932B1F344500A26313 /* UIImageView++Extension.swift in Sources */,
 				601EB73B2B148F9A00C5B216 /* SignUpViewModel.swift in Sources */,
 				2C5E34BE2B1B51CB00FD481B /* FriendStatus.swift in Sources */,
@@ -1843,13 +2031,14 @@
 				ED6865C62B1E438B001A2AAD /* ChartEndpoints.swift in Sources */,
 				2C1F2BBD2B20DA770026C30B /* ProfileHeaderItem.swift in Sources */,
 				2C88DD0F2B14C22C000B4686 /* TimerFinishViewModel.swift in Sources */,
+				6087AEB62B4A6BD900B29637 /* ValidateNicknameUseCase.swift in Sources */,
 				2C4D55B32B035484006D7C26 /* DeviceOrientation.swift in Sources */,
-				ED3842272B0F1E0C001E2803 /* AuthenticationUseCase.swift in Sources */,
+				6087AEE92B4A712800B29637 /* DefaultFetchFriendUseCase.swift in Sources */,
+				ED3842272B0F1E0C001E2803 /* GoogleLoginUseCase.swift in Sources */,
 				ED6865C42B1E4303001A2AAD /* DailyChartLogResponseDTO.swift in Sources */,
 				ED6865A22B162B8F001A2AAD /* SocialChartView.swift in Sources */,
 				2C88DCF22B124238000B4686 /* AppFlowCoordinator.swift in Sources */,
 				2C1F2BBB2B20D8D60026C30B /* SocialUserInfoHeaderView.swift in Sources */,
-				2C9F62112B17363400AE63F9 /* DefaultFriendUseCase.swift in Sources */,
 				2CDCD0642B18CEDF0080DCDE /* FriendsResponseDTO.swift in Sources */,
 				ED1B3F292B1F8AA300FB9DBC /* WeeklyChartLogResponseDTO.swift in Sources */,
 				EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */,
@@ -1860,12 +2049,13 @@
 				600908C02AFCD7DF0065DFFB /* SceneDelegate.swift in Sources */,
 				ED6865A72B17932F001A2AAD /* SocialDetailRequestDTO.swift in Sources */,
 				2C3430B12B0DE3D0008CBC85 /* Date++Extension.swift in Sources */,
+				6087AEDF2B4A70D000B29637 /* DefaultFollowFriendUseCase.swift in Sources */,
 				ED6865D02B1F1429001A2AAD /* ChartDIContainer.swift in Sources */,
 				2C2C7CB92B29CEC300C733D5 /* FriendSearchResult.swift in Sources */,
 				60EB7F522B1EFEDA00F8C613 /* MyPageTableViewCell.swift in Sources */,
 				2C9F62152B1736BE00AE63F9 /* DefaultFriendRepository.swift in Sources */,
 				2CDCD0672B18D0330080DCDE /* FriendUser.swift in Sources */,
-				ED6865CC2B1E494D001A2AAD /* ChartUseCase.swift in Sources */,
+				ED6865CC2B1E494D001A2AAD /* FetchDailyChartUseCase.swift in Sources */,
 				2C2F217E2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift in Sources */,
 				2C5CDA4F2B025403007AFC57 /* SocialViewController.swift in Sources */,
 				2CE91C732B25971000EACCD7 /* UserInfoManager.swift in Sources */,
@@ -1878,6 +2068,7 @@
 				60C2F2862B172D6900EBDD78 /* FriendsCollectionViewCell.swift in Sources */,
 				2CE84EF52B0B783800E2FB71 /* UICollectionViewCell++Extension.swift in Sources */,
 				2C88DD0B2B1340E4000B4686 /* CategoryDIContainer.swift in Sources */,
+				6087AEEF2B4A715600B29637 /* DefaultLoadChartUseCase.swift in Sources */,
 				2C87C27F2B1DF2A800A26313 /* UserInfoRepository.swift in Sources */,
 				2C9F62082B16398D00AE63F9 /* FreindAddResultViewProtocol.swift in Sources */,
 				2CD272F32B21C748000CB9E5 /* StudingPingUseCase.swift in Sources */,
@@ -1892,7 +2083,6 @@
 				2C87C2972B1F346700A26313 /* ImageDownLoaderError.swift in Sources */,
 				EDC851D92B05C37C009031EA /* DeviceMotionManager.swift in Sources */,
 				2C9F62262B1742D200AE63F9 /* FriendEndpoints.swift in Sources */,
-				ED6865CE2B1E49A6001A2AAD /* DefaultChartUseCase.swift in Sources */,
 				2CDCD03D2B1871E60080DCDE /* SocialDIContainer.swift in Sources */,
 				ED6865D32B1F1464001A2AAD /* ChartFlowCoordinator.swift in Sources */,
 				2C87C2792B1C794000A26313 /* UpdateFriend.swift in Sources */,
@@ -1921,7 +2111,6 @@
 				2C9F623B2B1756D500AE63F9 /* StatusResponseDTO.swift in Sources */,
 				2C9F623E2B1756EB00AE63F9 /* FlipMateLogger.swift in Sources */,
 				2C9F62302B17508500AE63F9 /* FriendAddViewModelTests.swift in Sources */,
-				2C9F62432B176A9000AE63F9 /* DefaultFriendUseCase.swift in Sources */,
 				2C9F624F2B176FF200AE63F9 /* Requestable.swift in Sources */,
 				2C9F623D2B1756E400AE63F9 /* Friend.swift in Sources */,
 				2C9F62532B17700500AE63F9 /* BaseComponents.swift in Sources */,
@@ -1929,7 +2118,6 @@
 				2C9F62352B17515800AE63F9 /* FriendRepository.swift in Sources */,
 				2C9F624A2B176FD900AE63F9 /* URLSessionable.swift in Sources */,
 				2C9F624C2B176FE800AE63F9 /* FriendFollowReqeustDTO.swift in Sources */,
-				2C9F62342B17514D00AE63F9 /* FriendUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

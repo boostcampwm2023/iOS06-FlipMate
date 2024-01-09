@@ -32,15 +32,22 @@ typealias LoginViewModelProtocol = LoginViewModelInput & LoginViewModelOutput
 final class LoginViewModel: LoginViewModelProtocol {
 
     // MARK: properties
-    private let googleAuthUseCase: AuthenticationUseCase
+    private let googleLoginUseCase: GoogleLoginUseCase
+    private let appleLoginUseCase: AppleLoginUseCase
+    private let signoutUseCase: SignOutUseCase
     private var cancellables: Set<AnyCancellable> = []
     private let actions: LoginViewModelActions?
     
     private let isMemberSubject = CurrentValueSubject<Bool?, Never>(nil)
     private let errorSubject = PassthroughSubject<Error, Never>()
     
-    init(googleAuthUseCase: AuthenticationUseCase, actions: LoginViewModelActions? = nil) {
-        self.googleAuthUseCase = googleAuthUseCase
+    init(googleLoginUseCase: GoogleLoginUseCase,
+         appleLoginUseCase: AppleLoginUseCase,
+         signoutUseCase: SignOutUseCase,
+         actions: LoginViewModelActions? = nil) {
+        self.googleLoginUseCase = googleLoginUseCase
+        self.appleLoginUseCase = appleLoginUseCase
+        self.signoutUseCase = signoutUseCase
         self.actions = actions
     }
     
@@ -60,7 +67,7 @@ final class LoginViewModel: LoginViewModelProtocol {
     func requestGoogleLogin(accessToken: String) {
         Task {
             do {
-                let response = try await self.googleAuthUseCase.googleLogin(accessToken: accessToken)
+                let response = try await self.googleLoginUseCase.googleLogin(accessToken: accessToken)
 
                 let accessToken = response.accessToken
                 try KeychainManager.saveAccessToken(token: accessToken)
@@ -75,7 +82,7 @@ final class LoginViewModel: LoginViewModelProtocol {
     func requestAppleLogin(accessToken: String, userID: String) {
         Task {
             do {
-                let response = try await self.googleAuthUseCase.appleLogin(accessToken: accessToken)
+                let response = try await self.appleLoginUseCase.appleLogin(accessToken: accessToken)
                 
                 let accessToken = response.accessToken
                 try KeychainManager.saveAccessToken(token: accessToken)

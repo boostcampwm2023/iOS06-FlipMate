@@ -49,6 +49,8 @@ final class CategoryFlowCoordinator: Coordinator {
     }
     
     func didFinishCategoryModify() {
-        navigationController?.popViewController(animated: true)
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }

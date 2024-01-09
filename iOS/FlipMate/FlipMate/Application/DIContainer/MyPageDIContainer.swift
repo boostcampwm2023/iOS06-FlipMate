@@ -28,23 +28,30 @@ final class MyPageDIContainer: MyPageFlowCoordinatorDependencies {
     
     func makeMyPageViewController(actions: MyPageViewModelActions) -> UIViewController {
         return MyPageViewController(
-            viewModel: MyPageViewModel(
-                authenticationUseCase: DefaultAuthenticationUseCase(
-                    repository: DefaultAuthenticationRepository(
-                        provider: dependencies.provider),
-                    signoutManager: dependencies.signOutManager),
-                actions: actions,
-                userInfoManager: dependencies.userInfoManager)
+            viewModel: makeMyPageViewModel(actions: actions)
         )
     }
     
-    func makeProfileSettingsViewController(actions: ProfileSettingsViewModelActions) -> UIViewController {
-        let repository = DefaultProfileSettingsRepository(provider: dependencies.provider)
-        let useCase = DefaultProfileSettingsUseCase(repository: repository, validator: NickNameValidator())
-        let viewModel = ProfileSettingsViewModel(
-            usecase: useCase,
-            actions: actions, 
+    private func makeMyPageViewModel(actions: MyPageViewModelActions) -> MyPageViewModel {
+        let repository = DefaultAuthenticationRepository(provider: dependencies.provider)
+        return MyPageViewModel(
+            signOutUseCase: DefaultSignOutUseCase(repository: repository,
+                                                  signoutManager: dependencies.signOutManager),
+            withdrawUseCase: DefaultWithdrawUesCase(repository: repository,
+                                                    signOutManager: dependencies.signOutManager),
+            actions: actions,
             userInfoManager: dependencies.userInfoManager)
-        return ProfileSettingsViewController(viewModel: viewModel)
+    }
+    
+    func makeProfileSettingsViewController(actions: ProfileSettingsViewModelActions) -> UIViewController {
+        return ProfileSettingsViewController(viewModel: makeProfileSettingsViewModel(actions: actions))
+    }
+    
+    private func makeProfileSettingsViewModel(actions: ProfileSettingsViewModelActions) -> ProfileSettingsViewModel {
+        return ProfileSettingsViewModel(
+            validateNicknameUseCase: DefaultValidateNicknameUseCase(validator: NickNameValidator()),
+            setupProfileInfoUseCase: DefaultSetupProfileInfoUseCase(repository: DefaultProfileSettingsRepository(provider: dependencies.provider)),
+            actions: actions,
+            userInfoManager: dependencies.userInfoManager)
     }
 }
