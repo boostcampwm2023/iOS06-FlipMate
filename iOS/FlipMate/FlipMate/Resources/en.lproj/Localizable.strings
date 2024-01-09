@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   FlipMate
 
@@ -111,3 +111,5 @@
 "timeZone" = "TimeZone";
 "timeZoneMessage" = "Refresh the screen because the time zone has changed.";
 
+// MARK: - Image Asset
+"instruction" = "instruction_EN";
