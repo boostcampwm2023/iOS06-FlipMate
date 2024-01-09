@@ -1378,6 +1378,7 @@
 				ED3842262B0F1E0C001E2803 /* GoogleLoginUseCase.swift */,
 				6087AEB12B4A6B2E00B29637 /* AppleLoginUseCase.swift */,
 				6087AEB32B4A6B3900B29637 /* SignOutUseCase.swift */,
+				2C277AC52B4D266B00567CAC /* WithdrawUseCase.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -1438,6 +1439,7 @@
 				6087AED82B4A705000B29637 /* DefaultGoogleLoginUseCase.swift */,
 				6087AEDA2B4A706000B29637 /* DefaultAppleLoginUseCase.swift */,
 				6087AEDC2B4A706C00B29637 /* DefaultSignOutUseCase.swift */,
+				2C277AC72B4D26AD00567CAC /* DefaultWithdrawUesCase.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -1983,6 +1985,7 @@
 				ED3842212B0F1CF9001E2803 /* User.swift in Sources */,
 				2C5E34BC2B1B430D00FD481B /* FreindStatusResponseDTO.swift in Sources */,
 				2C88DD0D2B148E9B000B4686 /* TimerFinishViewController.swift in Sources */,
+				2C277AC82B4D26AD00567CAC /* DefaultWithdrawUesCase.swift in Sources */,
 				2C2F21832B0F53B500B45BA8 /* StduyLogMock.swift in Sources */,
 				2CDCD0442B1887200080DCDE /* GetFriendsUseCase.swift in Sources */,
 				60F67C682B0E1785002C8BF3 /* CreateCategoryUseCase.swift in Sources */,

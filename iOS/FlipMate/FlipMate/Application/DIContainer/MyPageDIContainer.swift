@@ -33,10 +33,12 @@ final class MyPageDIContainer: MyPageFlowCoordinatorDependencies {
     }
     
     private func makeMyPageViewModel(actions: MyPageViewModelActions) -> MyPageViewModel {
+        let repository = DefaultAuthenticationRepository(provider: dependencies.provider)
         return MyPageViewModel(
-            signOutUseCase: DefaultSignOutUseCase(
-                repository: DefaultAuthenticationRepository(provider: dependencies.provider),
-                signoutManager: dependencies.signOutManager),
+            signOutUseCase: DefaultSignOutUseCase(repository: repository,
+                                                  signoutManager: dependencies.signOutManager),
+            withdrawUseCase: DefaultWithdrawUesCase(repository: repository,
+                                                    signOutManager: dependencies.signOutManager),
             actions: actions,
             userInfoManager: dependencies.userInfoManager)
     }
