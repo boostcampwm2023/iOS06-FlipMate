@@ -15,7 +15,6 @@ enum CategoryPurpose {
     var title: String {
         switch self {
         case .create: return NSLocalizedString("addCategory", comment: "")
-
         case .update: return NSLocalizedString("modifyCategory", comment: "")
         }
     }
@@ -27,6 +26,11 @@ final class CategoryModifyViewController: BaseViewController {
         static let rightNavigationBarItemTitle = NSLocalizedString("done", comment: "")
         static let sectionNames: [String] = [NSLocalizedString("categoryName", comment: ""), NSLocalizedString("categoryColor", comment: "")]
         static let placeHolders: [String] = [NSLocalizedString("categoryNamePlaceHolder", comment: "")]
+        static let categoryErrorTitle = NSLocalizedString("categoryErrorTitle", comment: "")
+        static let yes = NSLocalizedString("yes", comment: "")
+        static let categoryNameCountError = NSLocalizedString("categoryNameCountError", comment: "")
+        static let categoryNameIsDuplicated = NSLocalizedString("categoryNameIsDuplicated", comment: "")
+        static let unknownError = NSLocalizedString("unknownError", comment: "")
     }
     
     private var cancellables = Set<AnyCancellable>()
@@ -200,29 +204,35 @@ private extension CategoryModifyViewController {
             FMLogger.general.error("빈 제목, 추가할 수 없음")
             return
         }
-         
+        
+        if categoryTitle.isEmpty || categoryTitle.count > 10 {
+            showAlert(message: Constant.categoryNameCountError)
+            return
+        }
+        
         let colorCode = categoryColorSelectView.colorValue()
         let name = categoryTitle
-
-        if purpose == .create {
-            Task {
-                do {
-                    try await viewModel.createCategory(name: name,
-                                                       colorCode: colorCode)
-                } catch let error {
-                    FMLogger.general.error("카테고리 추가 중 에러 \(error)")
-                }
-            }
-        } else {
-            Task {
-                do {
-                    try await viewModel.updateCategory(newName: name,
-                                                       newColorCode: colorCode)
-                } catch let error {
-                    FMLogger.general.error("카테고리 추가 중 에러 \(error)")
+        
+        Task {
+            do {
+                try await viewModel.performCategoryModification(purpose: purpose, name: name, colorCode: colorCode)
+            } catch let categoryError as CategoryModificationError {
+                switch categoryError {
+                case .duplicatedName: showAlert(message: Constant.categoryNameIsDuplicated)
+                case .unknownError: showAlert(message: Constant.unknownError)
                 }
             }
         }
-        viewModel.modifyDoneButtonTapped()
+    }
+}
+
+// MARK: - Alert Function
+private extension CategoryModifyViewController {
+    func showAlert(message: String) {
+        let alertController = UIAlertController(title: Constant.categoryErrorTitle, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: Constant.yes, style: .default)
+        
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
     }
 }
