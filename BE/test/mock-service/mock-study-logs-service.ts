@@ -22,4 +22,6 @@ export class MockStudyLogsService {
       }, result);
     return daily_sums;
   }
+
+  getPrimaryCategory(id, start_date, end_date) {}
 }

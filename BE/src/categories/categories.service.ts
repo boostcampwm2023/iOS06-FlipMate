@@ -115,7 +115,7 @@ export class CategoriesService {
       );
     }
 
-    const result = await this.categoriesRepository.delete(id);
+    await this.categoriesRepository.delete(id);
   }
 
   entityToDto(category: Categories): CategoryDto {
