@@ -53,7 +53,7 @@ final class TimerFinishViewController: BaseViewController {
         return button
     }()
     
-    private lazy var cancleButton: UIButton = {
+    private lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle(Constant.cancle, for: .normal)
         button.backgroundColor = FlipMateColor.darkBlue.color
@@ -102,6 +102,10 @@ final class TimerFinishViewController: BaseViewController {
     }
     
     // MARK: - Life Cycle
+    override func viewDidAppear(_ animated: Bool) {
+        makeButtonsEnabled()
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         deviceMotionManager.startDeviceMotion()
     }
@@ -114,7 +118,7 @@ final class TimerFinishViewController: BaseViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        [saveButton, cancleButton, titleLabel, learningTimeTitleLabel, learningTimeContentLabel].forEach {
+        [saveButton, cancelButton, titleLabel, learningTimeTitleLabel, learningTimeContentLabel].forEach {
             finishView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -147,10 +151,10 @@ final class TimerFinishViewController: BaseViewController {
             saveButton.widthAnchor.constraint(equalTo: finishView.widthAnchor, multiplier: 0.5),
             saveButton.heightAnchor.constraint(equalTo: finishView.heightAnchor, multiplier: 0.2),
             
-            cancleButton.bottomAnchor.constraint(equalTo: finishView.bottomAnchor),
-            cancleButton.leadingAnchor.constraint(equalTo: finishView.leadingAnchor),
-            cancleButton.widthAnchor.constraint(equalTo: finishView.widthAnchor, multiplier: 0.5),
-            cancleButton.heightAnchor.constraint(equalTo: finishView.heightAnchor, multiplier: 0.2)
+            cancelButton.bottomAnchor.constraint(equalTo: finishView.bottomAnchor),
+            cancelButton.leadingAnchor.constraint(equalTo: finishView.leadingAnchor),
+            cancelButton.widthAnchor.constraint(equalTo: finishView.widthAnchor, multiplier: 0.5),
+            cancelButton.heightAnchor.constraint(equalTo: finishView.heightAnchor, multiplier: 0.2)
         ])
     }
     
@@ -168,15 +172,27 @@ final class TimerFinishViewController: BaseViewController {
 private extension TimerFinishViewController {
     @objc func saveButtonDidTapped() {
         viewModel.saveButtonDidTapped()
+        makeButtonsDisabled()
     }
     
     @objc func cancleButtonDidTapped() {
         viewModel.cancleButtonDidTapped()
+        makeButtonsDisabled()
     }
 }
 
 private extension TimerFinishViewController {
     func updateLearningTime(time: Int) {
         learningTimeContentLabel.text = time.secondsToStringTime()
+    }
+    
+    func makeButtonsDisabled() {
+        cancelButton.isEnabled = false
+        saveButton.isEnabled = false
+    }
+    
+    func makeButtonsEnabled() {
+        cancelButton.isEnabled = true
+        saveButton.isEnabled = true
     }
 }
