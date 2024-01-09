@@ -44,14 +44,17 @@ final class MyPageViewModel: MyPageViewModelProtocol {
     
     // MARK: - Properties
     private let signOutUseCsae: SignOutUseCase
+    private let withdrawUseCase: WithdrawUseCase
     private let actions: MyPageViewModelActions?
     
     private let userInfoManager: UserInfoManagerProtocol
     
     init(signOutUseCase: SignOutUseCase,
+         withdrawUseCase: WithdrawUseCase,
          actions: MyPageViewModelActions? = nil,
          userInfoManager: UserInfoManagerProtocol) {
         self.signOutUseCsae = signOutUseCase
+        self.withdrawUseCase = withdrawUseCase
         self.actions = actions
         self.userInfoManager = userInfoManager
     }
@@ -66,11 +69,13 @@ final class MyPageViewModel: MyPageViewModelProtocol {
     }
     
     func signOutButtonTapped() {
-        useCase.signOut()
+        signOutUseCsae.signOut()
     }
     
     func withdrawButtonTapped() {
-        useCase.withdraw()
+        Task {
+            try await withdrawUseCase.withdraw()
+        }
     }
     
     func dismissButtonDidTapped() {
