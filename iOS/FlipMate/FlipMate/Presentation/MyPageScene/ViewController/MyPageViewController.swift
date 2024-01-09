@@ -151,7 +151,8 @@ extension MyPageViewController: UITableViewDataSource {
         }
         
         if indexPath.section == 1 && indexPath.row == 1 {
-            cell.configureCell(title: myPageDataSource[indexPath.section][indexPath.row], detail: Constant.version)
+            guard let dictionary = Bundle.main.infoDictionary, let version = dictionary["CFBundleShortVersionString"] as? String else { return cell }
+            cell.configureCell(title: myPageDataSource[indexPath.section][indexPath.row], detail: "v\(version)")
         } else {
             cell.configureCell(title: myPageDataSource[indexPath.section][indexPath.row], detail: nil)
         }
@@ -240,7 +241,5 @@ private extension MyPageViewController {
         static let close = NSLocalizedString("close", comment: "")
         static let withdrawal = NSLocalizedString("withdrawal", comment: "")
         static let withdrawalMessage = NSLocalizedString("withdrawalMessage", comment: "")
-        
-        static let version = "beta 0.1.7"
     }
 }
