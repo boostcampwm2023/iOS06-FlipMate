@@ -10,12 +10,14 @@ import Combine
 
 struct MyPageViewModelActions {
     let showProfileSettingsView: () -> Void
+    let showPrivacyPolicyView: () -> Void
     let viewDidFinish: () -> Void
 }
 
 protocol MyPageViewModelInput {
     func viewReady()
     func profileSettingsViewButtonTapped()
+    func privacyPolicyViewButtonTapped()
     func dismissButtonDidTapped()
     func signOutButtonTapped()
     func withdrawButtonTapped()
@@ -33,7 +35,7 @@ typealias MyPageViewModelProtocol = MyPageViewModelInput & MyPageViewModelOutput
 final class MyPageViewModel: MyPageViewModelProtocol {
     private let myPageDataSource: [[String]] = [
         [Constant.editProfile],
-        [Constant.developer, Constant.version],
+        [Constant.developer, Constant.version, Constant.privacyPolicy],
         [Constant.signout],
         [Constant.withdrawal]
     ]
@@ -66,6 +68,10 @@ final class MyPageViewModel: MyPageViewModelProtocol {
     
     func profileSettingsViewButtonTapped() {
         actions?.showProfileSettingsView()
+    }
+    
+    func privacyPolicyViewButtonTapped() {
+        actions?.showPrivacyPolicyView()
     }
     
     func signOutButtonTapped() {
@@ -105,6 +111,7 @@ private extension MyPageViewModel {
         static let editProfile = NSLocalizedString("editProfile", comment: "")
         static let version = NSLocalizedString("version", comment: "")
         static let developer = NSLocalizedString("developer", comment: "")
+        static let privacyPolicy = NSLocalizedString("privacyPolicy", comment: "")
         static let signout = NSLocalizedString("signout", comment: "")
         static let withdrawal = NSLocalizedString("withdrawal", comment: "")
     }
