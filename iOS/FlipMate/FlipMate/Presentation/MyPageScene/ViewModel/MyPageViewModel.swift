@@ -10,6 +10,7 @@ import Combine
 
 struct MyPageViewModelActions {
     let showProfileSettingsView: () -> Void
+    let showPrivacyPolicyView: () -> Void
     let viewDidFinish: () -> Void
 }
 

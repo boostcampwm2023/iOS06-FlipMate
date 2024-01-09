@@ -11,6 +11,7 @@ protocol MyPageFlowCoordinatorDependencies {
     func makeMyPageFlowCoordinator(navigationController: UINavigationController?) -> MyPageFlowCoordinator
     func makeMyPageViewController(actions: MyPageViewModelActions) -> UIViewController
     func makeProfileSettingsViewController(actions: ProfileSettingsViewModelActions) -> UIViewController
+    func makePrivacyPolicyViewController() -> UIViewController
 }
 
 final class MyPageFlowCoordinator: Coordinator {
@@ -27,7 +28,7 @@ final class MyPageFlowCoordinator: Coordinator {
     
     func start() {
         let actions = MyPageViewModelActions(
-            showProfileSettingsView: showProfileSettingsView,
+            showProfileSettingsView: showProfileSettingsView, showPrivacyPolicyView: showPrivacyPolicyView,
             viewDidFinish: dismissView
             )
         let myPageViewControlelr = dependencies.makeMyPageViewController(actions: actions)
@@ -51,6 +52,11 @@ final class MyPageFlowCoordinator: Coordinator {
         )
         let profileSettingsViewControlelr = dependencies.makeProfileSettingsViewController(actions: actions)
         myPageNavigationController.pushViewController(profileSettingsViewControlelr, animated: true)
+    }
+    
+    private func showPrivacyPolicyView() {
+        let privacyPolicyViewController = dependencies.makePrivacyPolicyViewController()
+        myPageNavigationController.present(privacyPolicyViewController, animated: true)
     }
     
     private func didFinishSignUp() {

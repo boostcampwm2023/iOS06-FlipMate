@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import SafariServices
 
 final class MyPageViewController: BaseViewController {
     // MARK: - View Properties
@@ -187,12 +188,11 @@ extension MyPageViewController: UITableViewDelegate {
         if indexPath.section == 1 {
             // 개발자 정보 탭
             if indexPath.row == 0 {
-            
-            }
-            
-            // 버전 정보 탭
-            if indexPath.row == 1 {
-                
+                let infoUrl = NSURL(string: "https://yeim.notion.site/729517f5f8754f53b555a6b457746d9e?pvs=4")
+                // swiftlint:disable force_unwrapping
+                let infoSafariView = SFSafariViewController(url: infoUrl! as URL)
+                self.present(infoSafariView, animated: true, completion: nil)
+                // swiftlint:enable force_unwrapping
             }
         }
         

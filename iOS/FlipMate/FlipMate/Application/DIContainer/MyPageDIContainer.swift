@@ -47,6 +47,10 @@ final class MyPageDIContainer: MyPageFlowCoordinatorDependencies {
         return ProfileSettingsViewController(viewModel: makeProfileSettingsViewModel(actions: actions))
     }
     
+    func makePrivacyPolicyViewController() -> UIViewController {
+        return PrivacyPolicyViewController()
+    }
+    
     private func makeProfileSettingsViewModel(actions: ProfileSettingsViewModelActions) -> ProfileSettingsViewModel {
         return ProfileSettingsViewModel(
             validateNicknameUseCase: DefaultValidateNicknameUseCase(validator: NickNameValidator()),
