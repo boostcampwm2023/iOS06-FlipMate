@@ -104,3 +104,6 @@
 // MARK: - TimeZone
 "timeZone" = "시간대";
 "timeZoneMessage" = "시간대가 변경되어 화면을 새로고침합니다.";
+
+// MARK: - Image Asset
+"instruction" = "instruction_KR";
