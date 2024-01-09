@@ -135,7 +135,7 @@ extension MyPageViewController: UITableViewDataSource {
         case 0:
             return 1
         case 1:
-            return 2
+            return 3
         case 2:
             return 1
         case 3:
@@ -193,6 +193,10 @@ extension MyPageViewController: UITableViewDelegate {
                 let infoSafariView = SFSafariViewController(url: infoUrl! as URL)
                 self.present(infoSafariView, animated: true, completion: nil)
                 // swiftlint:enable force_unwrapping
+            }
+            
+            if indexPath.row == 2 {
+                viewModel.privacyPolicyViewButtonTapped()
             }
         }
         

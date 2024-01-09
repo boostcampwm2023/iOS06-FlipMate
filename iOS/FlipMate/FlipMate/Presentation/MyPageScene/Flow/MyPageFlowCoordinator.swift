@@ -56,7 +56,7 @@ final class MyPageFlowCoordinator: Coordinator {
     
     private func showPrivacyPolicyView() {
         let privacyPolicyViewController = dependencies.makePrivacyPolicyViewController()
-        myPageNavigationController.present(privacyPolicyViewController, animated: true)
+        myPageNavigationController.pushViewController(privacyPolicyViewController, animated: true)
     }
     
     private func didFinishSignUp() {
