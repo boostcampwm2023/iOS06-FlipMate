@@ -8,11 +8,14 @@ import { MockUsersRepository } from '../../test/mock-repo/mock-user-repo';
 import { UsersModel } from './entity/users.entity';
 import path from 'path';
 import { BadRequestException } from '@nestjs/common';
+import { AuthTypeEnum } from './const/auth-type.const';
+import { Repository } from 'typeorm';
 
 class MockS3Service {}
 
 describe('UsersService', () => {
   let service: UsersService;
+  let repository: Repository<UsersModel>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -28,6 +31,9 @@ describe('UsersService', () => {
     }).compile();
 
     service = module.get<UsersService>(UsersService);
+    repository = module.get<Repository<UsersModel>>(
+      getRepositoryToken(UsersModel),
+    );
   });
 
   it('should be defined', () => {
@@ -39,11 +45,13 @@ describe('UsersService', () => {
       const user = {
         nickname: 'test',
         email: 'test@test.com',
+        auth_type: AuthTypeEnum.GOOGLE,
       } as UsersModel;
       const result = await service.createUser(user);
       expect(result).toStrictEqual({
         id: 4,
         nickname: user.nickname,
+        auth_type: AuthTypeEnum.GOOGLE,
         email: user.email,
         image_url: null,
       });

@@ -116,7 +116,20 @@ export class StudyLogsService {
       throw new BadRequestException('startDate는 endDate보다 작아야 합니다.');
     }
     const result = Array.from({ length: diffDays }, () => 0);
-    const daily_sums = await this.studyLogsRepository.query(
+    const daily_sums = await this.getDailySum(user_id, start_date, end_date);
+
+    daily_sums.forEach(({ date, daily_sum }) => {
+      result[moment(date).diff(startMoment, 'days')] = +daily_sum;
+    });
+    return result;
+  }
+
+  async getDailySum(
+    user_id,
+    start_date,
+    end_date,
+  ): Promise<{ date: string; daily_sum: string | number }[]> {
+    return this.studyLogsRepository.query(
       `SELECT DATE(study_logs.date) as date, SUM(study_logs.learning_time) as daily_sum
        FROM study_logs
        WHERE study_logs.user_id = ?
@@ -125,11 +138,6 @@ export class StudyLogsService {
        ORDER BY DATE(study_logs.date) ASC`,
       [user_id, start_date, end_date],
     );
-
-    daily_sums.forEach(({ date, daily_sum }) => {
-      result[moment(date).diff(startMoment, 'days')] = +daily_sum;
-    });
-    return result;
   }
 
   async getPrimaryCategory(
@@ -152,23 +160,11 @@ export class StudyLogsService {
       ? '기타'
       : primary_category[0]?.name ?? null;
   }
+
   async groupByCategory(user_id: number, date: string): Promise<object> {
-    const studyLogsByCategory = await this.studyLogsRepository.query(
-      `SELECT
-        c.id,
-        c.name,
-        c.color_code,
-        c.user_id,
-        COALESCE(SUM(s.learning_time), 0) AS today_time
-      FROM categories c
-      LEFT JOIN study_logs s
-        ON c.id = s.category_id
-        AND s.date = ?
-      WHERE c.user_id = ?
-      GROUP BY
-        c.id, c.name, c.color_code;
-      `,
-      [date, user_id],
+    const studyLogsByCategory = await this.getTodayTotalTimeByCategory(
+      user_id,
+      date,
     );
 
     const categories = studyLogsByCategory.map((studyLog) => ({
@@ -186,6 +182,31 @@ export class StudyLogsService {
     return result;
   }
 
+  async getTodayTotalTimeByCategory(
+    user_id: number,
+    date: string,
+  ): Promise<
+    { id: string; name: string; color_code: string; today_time: string }[]
+  > {
+    return this.studyLogsRepository.query(
+      `SELECT
+        c.id,
+        c.name,
+        c.color_code,
+        c.user_id,
+        COALESCE(SUM(s.learning_time), 0) AS today_time
+      FROM categories c
+      LEFT JOIN study_logs s
+        ON c.id = s.category_id
+        AND s.date = ?
+      WHERE c.user_id = ?
+      GROUP BY
+        c.id, c.name, c.color_code;
+      `,
+      [date, user_id],
+    );
+  }
+
   async deleteRowsByUserId(id: number): Promise<void> {
     this.studyLogsRepository.delete({ user_id: { id: id } });
   }
@@ -195,7 +216,20 @@ export class StudyLogsService {
     startDate: string,
     endDate: string,
   ): Promise<number> {
-    const result = await this.studyLogsRepository.query(
+    const result = await this.getTotalTimeByDateRange(startDate, endDate);
+    const rank = result.findIndex((user) => user.user_id === userId) + 1;
+    if (!rank) {
+      return 100;
+    }
+    const userCount = await this.usersRepository.count();
+    return (rank / userCount) * 100;
+  }
+
+  async getTotalTimeByDateRange(
+    startDate: string,
+    endDate: string,
+  ): Promise<{ user_id: number }[]> {
+    return this.studyLogsRepository.query(
       `
       SELECT user_id, SUM(learning_time) AS total_time
       FROM study_logs
@@ -205,12 +239,6 @@ export class StudyLogsService {
     `,
       [startDate, endDate],
     );
-    const rank = result.findIndex((user) => user.user_id === userId) + 1;
-    if (!rank) {
-      return 100;
-    }
-    const userCount = await this.usersRepository.count();
-    return (rank / userCount) * 100;
   }
 
   entityToDto(studyLog: StudyLogs): StudyLogsDto {

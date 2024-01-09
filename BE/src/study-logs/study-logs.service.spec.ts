@@ -193,4 +193,52 @@ describe('StudyLogsService', () => {
       }
     });
   });
+
+  describe('getPrimaryCategory()', () => {
+    it('유저가 해당 기간 동안 학습한 카테고리 중 가장 많이 학습한 카테고리를 반환한다.', async () => {
+      jest
+        .spyOn(repository, 'query')
+        .mockResolvedValueOnce([{ id: 1, name: '1', total_time: 40000 }]);
+      expect(await service.getPrimaryCategory(1, '', '')).toEqual('1');
+    });
+
+    it('유저가 해당 기간 동안 학습한 카테고리가 없을 경우 기타를 반환한다.', async () => {
+      jest
+        .spyOn(repository, 'query')
+        .mockResolvedValueOnce([{ id: 1, name: null, total_time: 100 }]);
+      expect(await service.getPrimaryCategory(1, '', '')).toEqual('기타');
+    });
+
+    it('유저가 해당 기간 동안 학습 기록이 없는 경우 null을 반환한다.', async () => {
+      jest.spyOn(repository, 'query').mockResolvedValueOnce([]);
+      expect(await service.getPrimaryCategory(1, '', '')).toEqual(null);
+    });
+  });
+
+  describe('groupByCategory()', () => {
+    it('유저의 해당 날짜 학습 기록을 카테고리로 묶어서 반환한다.', async () => {
+      const result = [
+        {
+          id: 1,
+          name: '카테고리1',
+          color_code: '#000000',
+          today_time: 3600,
+        },
+        {
+          id: 2,
+          name: '카테고리2',
+          color_code: '#000000',
+          today_time: 7200,
+        },
+      ];
+      jest.spyOn(repository, 'query').mockResolvedValueOnce(result);
+      jest
+        .spyOn(repository, 'query')
+        .mockResolvedValueOnce([{ date: '2023-01-01', daily_sum: 11800 }]);
+      expect(await service.groupByCategory(1, '2023-01-01')).toEqual({
+        total_time: 11800,
+        categories: result,
+      });
+    });
+  });
 });
