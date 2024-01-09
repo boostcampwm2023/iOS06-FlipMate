@@ -10,6 +10,8 @@
 		0A814BC3CFA46D0501C8B894 /* Pods_FlipMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288FECD685A9C6B6E481147C /* Pods_FlipMate.framework */; };
 		2C1F2BBB2B20D8D60026C30B /* SocialUserInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */; };
 		2C1F2BBD2B20DA770026C30B /* ProfileHeaderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1F2BBC2B20DA770026C30B /* ProfileHeaderItem.swift */; };
+		2C277AC62B4D266B00567CAC /* WithdrawUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C277AC52B4D266B00567CAC /* WithdrawUseCase.swift */; };
+		2C277AC82B4D26AD00567CAC /* DefaultWithdrawUesCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C277AC72B4D26AD00567CAC /* DefaultWithdrawUesCase.swift */; };
 		2C2C7CB92B29CEC300C733D5 /* FriendSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CB82B29CEC300C733D5 /* FriendSearchResult.swift */; };
 		2C2C7CBB2B29DFA600C733D5 /* PatchTimeZoneUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CBA2B29DFA600C733D5 /* PatchTimeZoneUseCase.swift */; };
 		2C2C7CBD2B29DFD900C733D5 /* DefaultPatchTimeZoneUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C7CBC2B29DFD900C733D5 /* DefaultPatchTimeZoneUseCase.swift */; };
@@ -284,6 +286,8 @@
 		2B285F39D7D27E5C564F4D31 /* Pods_FlipMateTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMateTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialUserInfoHeaderView.swift; sourceTree = "<group>"; };
 		2C1F2BBC2B20DA770026C30B /* ProfileHeaderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderItem.swift; sourceTree = "<group>"; };
+		2C277AC52B4D266B00567CAC /* WithdrawUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawUseCase.swift; sourceTree = "<group>"; };
+		2C277AC72B4D26AD00567CAC /* DefaultWithdrawUesCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWithdrawUesCase.swift; sourceTree = "<group>"; };
 		2C2C7CB82B29CEC300C733D5 /* FriendSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchResult.swift; sourceTree = "<group>"; };
 		2C2C7CBA2B29DFA600C733D5 /* PatchTimeZoneUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchTimeZoneUseCase.swift; sourceTree = "<group>"; };
 		2C2C7CBC2B29DFD900C733D5 /* DefaultPatchTimeZoneUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPatchTimeZoneUseCase.swift; sourceTree = "<group>"; };
@@ -1343,6 +1347,7 @@
 				ED3842262B0F1E0C001E2803 /* GoogleLoginUseCase.swift */,
 				6087AEB12B4A6B2E00B29637 /* AppleLoginUseCase.swift */,
 				6087AEB32B4A6B3900B29637 /* SignOutUseCase.swift */,
+				2C277AC52B4D266B00567CAC /* WithdrawUseCase.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -1403,6 +1408,7 @@
 				6087AED82B4A705000B29637 /* DefaultGoogleLoginUseCase.swift */,
 				6087AEDA2B4A706000B29637 /* DefaultAppleLoginUseCase.swift */,
 				6087AEDC2B4A706C00B29637 /* DefaultSignOutUseCase.swift */,
+				2C277AC72B4D26AD00567CAC /* DefaultWithdrawUesCase.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -1916,6 +1922,7 @@
 				ED3595B22B0C83D700558FAA /* TimerStartResponseDTO.swift in Sources */,
 				2C5CDA582B025426007AFC57 /* FlipMateFont.swift in Sources */,
 				2CDCD04C2B18899A0080DCDE /* SocialEndpoints.swift in Sources */,
+				2C277AC62B4D266B00567CAC /* WithdrawUseCase.swift in Sources */,
 				60DE493D2B05DEA400ACE6DD /* FlipMateLogger.swift in Sources */,
 				2C9F61F72B14EFA200AE63F9 /* CategoryManager.swift in Sources */,
 				2C88DCF62B124292000B4686 /* TimerSceneDIContainer.swift in Sources */,
@@ -1942,6 +1949,7 @@
 				ED3842212B0F1CF9001E2803 /* User.swift in Sources */,
 				2C5E34BC2B1B430D00FD481B /* FreindStatusResponseDTO.swift in Sources */,
 				2C88DD0D2B148E9B000B4686 /* TimerFinishViewController.swift in Sources */,
+				2C277AC82B4D26AD00567CAC /* DefaultWithdrawUesCase.swift in Sources */,
 				2C2F21832B0F53B500B45BA8 /* StduyLogMock.swift in Sources */,
 				2CDCD0442B1887200080DCDE /* GetFriendsUseCase.swift in Sources */,
 				60F67C682B0E1785002C8BF3 /* CreateCategoryUseCase.swift in Sources */,
