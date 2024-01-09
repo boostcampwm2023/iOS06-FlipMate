@@ -148,7 +148,12 @@ extension MyPageViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MyPageTableViewCell.identifier, for: indexPath) as? MyPageTableViewCell else {
             return MyPageTableViewCell()
         }
-        cell.configureCell(title: myPageDataSource[indexPath.section][indexPath.row])
+        
+        if indexPath.section == 1 && indexPath.row == 1 {
+            cell.configureCell(title: myPageDataSource[indexPath.section][indexPath.row], detail: Constant.version)
+        } else {
+            cell.configureCell(title: myPageDataSource[indexPath.section][indexPath.row], detail: nil)
+        }
         return cell
     }
     
@@ -231,5 +236,7 @@ private extension MyPageViewController {
         static let close = NSLocalizedString("close", comment: "")
         static let withdrawal = NSLocalizedString("withdrawal", comment: "")
         static let withdrawalMessage = NSLocalizedString("withdrawalMessage", comment: "")
+        
+        static let version = "beta 0.1.7"
     }
 }
