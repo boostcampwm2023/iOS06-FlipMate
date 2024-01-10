@@ -69,7 +69,6 @@ export class MatesService {
       throw new BadRequestException('인자의 형식이 잘못되었습니다.');
     }
     const offset = timezone[0] === ' ' ? `+${timezone.trim()}` : timezone;
-    console.log(offset, datetime);
     const nowUserTime = moment(`${datetime}${offset}`)
       .utcOffset(offset)
       .format('YYYY-MM-DD HH:mm:ss');
@@ -98,8 +97,12 @@ export class MatesService {
     );
   }
 
-  async getMatesStudyTime(followerDate, followerTimezone, followerId) {
-    const result = await this.userRepository.query(
+  private getMatesStudyTime(
+    followerDate: string,
+    followerTimezone: string,
+    followerId: number,
+  ) {
+    return this.userRepository.query(
       `
         SELECT u.id, u.nickname, u.image_url, COALESCE(SUM(s.learning_time), 0) AS total_time
         FROM users_model u
@@ -111,8 +114,6 @@ export class MatesService {
       `,
       [followerDate, followerTimezone, followerId],
     );
-
-    return result;
   }
 
   async getMatesStatus(user_id: number): Promise<object[]> {
