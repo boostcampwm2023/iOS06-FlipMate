@@ -34,7 +34,6 @@ final class LoginViewModel: LoginViewModelProtocol {
     // MARK: properties
     private let googleLoginUseCase: GoogleLoginUseCase
     private let appleLoginUseCase: AppleLoginUseCase
-    private let signoutUseCase: SignOutUseCase
     private var cancellables: Set<AnyCancellable> = []
     private let actions: LoginViewModelActions?
     
@@ -43,11 +42,9 @@ final class LoginViewModel: LoginViewModelProtocol {
     
     init(googleLoginUseCase: GoogleLoginUseCase,
          appleLoginUseCase: AppleLoginUseCase,
-         signoutUseCase: SignOutUseCase,
          actions: LoginViewModelActions? = nil) {
         self.googleLoginUseCase = googleLoginUseCase
         self.appleLoginUseCase = appleLoginUseCase
-        self.signoutUseCase = signoutUseCase
         self.actions = actions
     }
     
@@ -68,7 +65,6 @@ final class LoginViewModel: LoginViewModelProtocol {
         Task {
             do {
                 let response = try await self.googleLoginUseCase.googleLogin(accessToken: accessToken)
-
                 let accessToken = response.accessToken
                 try KeychainManager.saveAccessToken(token: accessToken)
                 isMemberSubject.send(response.isMember)
@@ -83,7 +79,6 @@ final class LoginViewModel: LoginViewModelProtocol {
         Task {
             do {
                 let response = try await self.appleLoginUseCase.appleLogin(accessToken: accessToken)
-                
                 let accessToken = response.accessToken
                 try KeychainManager.saveAccessToken(token: accessToken)
                 try KeychainManager.saveAppleUserID(id: userID)

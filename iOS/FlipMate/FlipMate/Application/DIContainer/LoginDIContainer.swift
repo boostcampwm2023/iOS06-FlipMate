@@ -32,9 +32,6 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
                 appleLoginUseCase: DefaultAppleLoginUseCase(
                     repository: repository,
                     signoutManager: signOutManager),
-                signoutUseCase: DefaultSignOutUseCase(
-                    repository: repository,
-                    signoutManager: signOutManager),
                 actions: actions)
             )
     }
