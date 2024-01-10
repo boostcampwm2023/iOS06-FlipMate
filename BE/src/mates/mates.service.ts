@@ -69,7 +69,7 @@ export class MatesService {
       throw new BadRequestException('인자의 형식이 잘못되었습니다.');
     }
     const offset = timezone[0] === ' ' ? `+${timezone.trim()}` : timezone;
-
+    console.log(offset, datetime);
     const nowUserTime = moment(`${datetime}${offset}`)
       .utcOffset(offset)
       .format('YYYY-MM-DD HH:mm:ss');
