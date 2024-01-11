@@ -78,11 +78,13 @@ describe('MatesService', () => {
         id: 2,
         follower_id: { id: 1 },
         following_id: { id: 3 },
+        fixation: false,
       } as never);
       jest.spyOn(repository, 'save').mockResolvedValueOnce({
         id: 2,
         follower_id: { id: 1 } as UsersModel,
         following_id: { id: 3 } as UsersModel,
+        is_fixed: false,
       });
       const result = await service.addMate(user, '어린콩3');
       expect(result).toStrictEqual({
@@ -133,6 +135,7 @@ describe('MatesService', () => {
         id: 1,
         follower_id: { id: 1 } as UsersModel,
         following_id: { id: 3 } as UsersModel,
+        is_fixed: false,
       });
       expect(service.addMate(user, '어린콩2')).rejects.toThrow(
         BadRequestException,
@@ -176,6 +179,7 @@ describe('MatesService', () => {
           id: 1,
           follower_id: { id: 1 } as UsersModel,
           following_id: { id: 2 } as UsersModel,
+          is_fixed: false,
         },
       ]);
       jest
@@ -198,7 +202,7 @@ describe('MatesService', () => {
       jest
         .spyOn(redisService, 'hget')
         .mockResolvedValueOnce('2023-11-29 16:00:00');
-      const result = await service.getMates(1, '2023-11-29', '09:00');
+      const result = await service.getMates(1, '2023-11-29 00:00:00', ' 09:00');
       expect(result).toStrictEqual([
         {
           id: 2,
@@ -211,7 +215,7 @@ describe('MatesService', () => {
     });
     it('친구가 없는 유저는 빈 배열을 가져온다.', async () => {
       jest.spyOn(service, 'getMatesStudyTime').mockResolvedValueOnce([]);
-      const result = await service.getMates(3, '2023-11-29', '09:00');
+      const result = await service.getMates(3, '2023-11-29 00:00:00', '09:00');
       expect(result).toStrictEqual([]);
     });
   });
@@ -271,6 +275,7 @@ describe('MatesService', () => {
         id: 1,
         follower_id: { id: 1 } as UsersModel,
         following_id: { id: 2 } as UsersModel,
+        is_fixed: false,
       });
       const result = await service.findMate(user, '어린콩2');
       expect(result).toStrictEqual({
