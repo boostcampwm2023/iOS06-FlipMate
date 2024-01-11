@@ -106,8 +106,8 @@ export class MatesService {
         LEFT JOIN mates m ON m.following_id = u.id
         LEFT JOIN study_logs s ON s.user_id = u.id AND s.date = DATE(CONVERT_TZ(?, ?, u.timezone))
         WHERE m.follower_id = ? 
-        GROUP BY u.id
-        ORDER BY total_time DESC
+        GROUP BY u.id, m.fixation
+        ORDER BY m.fixation DESC, total_time DESC
       `,
       [followerDate, followerTimezone, followerId],
     );
@@ -215,6 +215,24 @@ export class MatesService {
       follower_id: user,
       following_id: following,
     });
+
+    if (!result) {
+      throw new NotFoundException('해당 친구 관계는 존재하지 않습니다.');
+    }
+  }
+
+  async fixationMate(
+    id,
+    following_id: number,
+    is_fixed: boolean,
+  ): Promise<void> {
+    const result = await this.matesRepository.update(
+      {
+        follower_id: { id: id },
+        following_id: { id: following_id },
+      },
+      { is_fixed: is_fixed },
+    );
 
     if (!result) {
       throw new NotFoundException('해당 친구 관계는 존재하지 않습니다.');

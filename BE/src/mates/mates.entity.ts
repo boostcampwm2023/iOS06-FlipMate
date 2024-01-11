@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+  Column,
+} from 'typeorm';
 import { UsersModel } from 'src/users/entity/users.entity';
 
 @Entity()
@@ -19,4 +25,7 @@ export class Mates {
   })
   @JoinColumn({ name: 'following_id' })
   following_id: UsersModel;
+
+  @Column({ type: 'boolean', default: false })
+  is_fixed: boolean;
 }
