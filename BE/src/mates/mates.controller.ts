@@ -160,6 +160,17 @@ export class MatesController {
   @UseGuards(AccessTokenGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: '친구 목록에서 고정/고정 해제' })
+  @ApiBody({
+    schema: {
+      properties: {
+        fixation: {
+          type: 'boolean',
+          description: '고정/고정 해제 여부',
+          example: 'true',
+        },
+      },
+    },
+  })
   async fixationMate(
     @Body('id') id: number,
     @Body('fixation') fixation: boolean,
