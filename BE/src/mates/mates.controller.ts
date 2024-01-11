@@ -179,9 +179,9 @@ export class MatesController {
   async fixationMate(
     @User('id') id: number,
     @Body('following_id') following_id: number,
-    @Body('fixation') fixation: boolean,
+    @Body('is_fixed') is_fixed: boolean,
   ): Promise<StatusMessageDto> {
-    await this.matesService.fixationMate(id, following_id, fixation);
+    await this.matesService.fixationMate(id, following_id, is_fixed);
 
     return {
       statusCode: 200,
