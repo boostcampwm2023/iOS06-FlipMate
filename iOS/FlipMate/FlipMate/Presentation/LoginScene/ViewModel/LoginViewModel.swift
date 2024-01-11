@@ -23,7 +23,7 @@ protocol LoginViewModelInput {
 }
 
 protocol LoginViewModelOutput { 
-    var isMemberPublisher: AnyPublisher<Bool?, Never> { get }
+    var isMemberPublisher: AnyPublisher<Bool, Never> { get }
     var errorPublisher: AnyPublisher<Error, Never> { get }
 }
 
@@ -37,7 +37,7 @@ final class LoginViewModel: LoginViewModelProtocol {
     private var cancellables: Set<AnyCancellable> = []
     private let actions: LoginViewModelActions?
     
-    private let isMemberSubject = CurrentValueSubject<Bool?, Never>(nil)
+    private let isMemberSubject = PassthroughSubject<Bool, Never>()
     private let errorSubject = PassthroughSubject<Error, Never>()
     
     init(googleLoginUseCase: GoogleLoginUseCase,
@@ -91,7 +91,7 @@ final class LoginViewModel: LoginViewModelProtocol {
     }
     
     // MARK: - Output
-    var isMemberPublisher: AnyPublisher<Bool?, Never> {
+    var isMemberPublisher: AnyPublisher<Bool, Never> {
         return isMemberSubject.eraseToAnyPublisher()
     }
     
