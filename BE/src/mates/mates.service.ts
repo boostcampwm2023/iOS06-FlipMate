@@ -106,8 +106,8 @@ export class MatesService {
         LEFT JOIN mates m ON m.following_id = u.id
         LEFT JOIN study_logs s ON s.user_id = u.id AND s.date = DATE(CONVERT_TZ(?, ?, u.timezone))
         WHERE m.follower_id = ? 
-        GROUP BY u.id
-        ORDER BY total_time DESC
+        GROUP BY u.id, m.fixation
+        ORDER BY m.fixation DESC, total_time DESC
       `,
       [followerDate, followerTimezone, followerId],
     );
