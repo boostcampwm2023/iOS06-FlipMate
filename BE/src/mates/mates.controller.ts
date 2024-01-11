@@ -52,6 +52,22 @@ export class MatesController {
     return this.matesService.getMates(user_id, datetime, timezone);
   }
 
+  @Get('/followers')
+  @UseGuards(AccessTokenGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: '나를 팔로우 하는 사람들 조회하기' })
+  getFollowers(@User('id') user_id: number): Promise<object> {
+    return this.matesService.getFollowersInfo(user_id);
+  }
+
+  @Get('/followings')
+  @UseGuards(AccessTokenGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: '내가 팔로우 하는 사람들 조회하기' })
+  getFollowings(@User('id') user_id: number): Promise<object> {
+    return this.matesService.getFollowingsInfo(user_id);
+  }
+
   @Get('/status')
   @UseGuards(AccessTokenGuard)
   @ApiBearerAuth()

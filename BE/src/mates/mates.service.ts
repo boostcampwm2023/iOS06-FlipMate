@@ -60,6 +60,28 @@ export class MatesService {
     };
   }
 
+  getFollowersInfo(user_id: number) {
+    return this.matesRepository.query(
+      `SELECT u.id, u.nickname, u.image_url 
+       FROM mates 
+       INNER JOIN users_model as u ON u.id = mates.follower_id 
+       WHERE mates.following_id = ?
+       ORDER BY u.nickname`,
+      [user_id],
+    );
+  }
+
+  getFollowingsInfo(user_id: number) {
+    return this.matesRepository.query(
+      `SELECT u.id, u.nickname, u.image_url 
+       FROM mates 
+       INNER JOIN users_model as u ON u.id = mates.following_id 
+       WHERE mates.follower_id = ?
+       ORDER BY u.nickname`,
+      [user_id],
+    );
+  }
+
   async getMates(
     user_id: number,
     datetime: string,
