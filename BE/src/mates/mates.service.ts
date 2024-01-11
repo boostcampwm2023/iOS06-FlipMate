@@ -221,6 +221,17 @@ export class MatesService {
     }
   }
 
+  async fixationMate(id: number, fixataion: boolean): Promise<void> {
+    const result = await this.matesRepository.update(
+      { id: id },
+      { fixataion: fixataion },
+    );
+
+    if (!result) {
+      throw new NotFoundException('해당 친구 관계는 존재하지 않습니다.');
+    }
+  }
+
   entityToDto(mate: Mates): MatesDto {
     const { id, follower_id, following_id } = mate;
     const mateDto = {
