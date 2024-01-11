@@ -163,6 +163,11 @@ export class MatesController {
   @ApiBody({
     schema: {
       properties: {
+        following_id: {
+          type: 'number',
+          description: '친구의 id',
+          example: '1',
+        },
         fixation: {
           type: 'boolean',
           description: '고정/고정 해제 여부',
@@ -172,10 +177,11 @@ export class MatesController {
     },
   })
   async fixationMate(
-    @Body('id') id: number,
+    @User('id') id: number,
+    @Body('following_id') following_id: number,
     @Body('fixation') fixation: boolean,
   ): Promise<StatusMessageDto> {
-    await this.matesService.fixationMate(id, fixation);
+    await this.matesService.fixationMate(id, following_id, fixation);
 
     return {
       statusCode: 200,
