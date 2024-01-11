@@ -27,5 +27,5 @@ export class Mates {
   following_id: UsersModel;
 
   @Column({ type: 'boolean', default: false })
-  fixataion: boolean;
+  fixation: boolean;
 }

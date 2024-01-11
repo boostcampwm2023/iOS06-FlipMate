@@ -224,7 +224,7 @@ export class MatesService {
   async fixationMate(id: number, fixataion: boolean): Promise<void> {
     const result = await this.matesRepository.update(
       { id: id },
-      { fixataion: fixataion },
+      { fixation: fixataion },
     );
 
     if (!result) {
