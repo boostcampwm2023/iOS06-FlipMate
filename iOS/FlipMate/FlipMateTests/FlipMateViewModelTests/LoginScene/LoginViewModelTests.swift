@@ -43,9 +43,9 @@ final class LoginViewModelTests: XCTestCase {
     private var sut: LoginViewModelProtocol!
  
     override func setUpWithError() throws {
-        let googleLoginUseCase = GoogleLoginUseCaseStub()
-        let appleLoginUseCase = AppleLoginUseCaseStub()
-        sut = LoginViewModel(googleLoginUseCase: googleLoginUseCase, appleLoginUseCase: appleLoginUseCase)
+        sut = LoginViewModel(
+            googleLoginUseCase: GoogleLoginUseCaseStub(),
+            appleLoginUseCase: AppleLoginUseCaseStub())
     }
     
     override func tearDownWithError() throws {
@@ -59,7 +59,6 @@ final class LoginViewModelTests: XCTestCase {
         let cancellable = sut.isMemberPublisher
             .sink { isMember in
                 received = isMember
-                XCTAssertEqual(received, true)
                 expectation.fulfill()
             }
         
@@ -67,6 +66,8 @@ final class LoginViewModelTests: XCTestCase {
         sut.requestGoogleLogin(accessToken: TestToken.success)
         wait(for: [expectation], timeout: 10)
         
+        // assert
+        XCTAssertEqual(received, true)
         cancellable.cancel()
     }
     
