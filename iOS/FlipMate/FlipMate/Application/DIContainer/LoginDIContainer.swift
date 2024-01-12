@@ -24,7 +24,6 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
     
     func makeLoginViewController(actions: LoginViewModelActions) -> UIViewController {
         let repository = DefaultAuthenticationRepository(provider: dependencies.provider)
-        let signOutManager = dependencies.signOutManager
         return LoginViewController(
             loginViewModel: LoginViewModel(
                 googleLoginUseCase: DefaultGoogleLoginUseCase(
