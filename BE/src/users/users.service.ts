@@ -19,6 +19,19 @@ export class UsersService {
     private config: ConfigService,
   ) {}
 
+  async getFollowsCount(user_id: number) {
+    const [followsCount] = await this.usersRepository.query(
+      `SELECT 
+        (SELECT COUNT(*) FROM mates WHERE following_id = ?) AS follower_count,
+        (SELECT COUNT(*) FROM mates WHERE follower_id = ?) AS following_count`,
+      [user_id, user_id],
+    );
+    return {
+      follower_count: +followsCount.follower_count,
+      following_count: +followsCount.following_count,
+    };
+  }
+
   async createUser(user: UsersModel): Promise<UsersModel> {
     try {
       const userObject = this.usersRepository.create({

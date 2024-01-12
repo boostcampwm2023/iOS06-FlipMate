@@ -126,7 +126,10 @@ export class AuthController {
   @ApiBearerAuth()
   async getUser(@User('id') user_id: number): Promise<any> {
     const user = await this.usersService.findUserById(user_id);
+    const followsCount = await this.usersService.getFollowsCount(user_id);
     return {
+      follower_count: followsCount.follower_count,
+      following_count: followsCount.following_count,
       nickname: user.nickname,
       email: user.email,
       image_url: getImageUrl(
