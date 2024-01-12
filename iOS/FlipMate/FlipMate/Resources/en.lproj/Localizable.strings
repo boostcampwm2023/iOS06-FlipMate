@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   FlipMate
 
@@ -33,6 +33,7 @@
 "contact" = "Contact";
 "developer" = "Developer Info";
 "version" = "Version Info";
+"privacyPolicy" = "Privacy Policy";
 "reset" = "Reset Data";
 "signout" = "Log Out";
 "signoutMessage" = "Do you want to log out?";
@@ -50,7 +51,54 @@
 "emptyViolation" = "Nickname must contain at least 2 characters.";
 "duplicated" = "Nickname has been duplicated.";
 "emojiContained" = "Nickname cannot contain emojis.";
+"privacyPolicyLabel" = "
+'Flipmate' adheres to the Personal Information Protection Act to protect the privacy and rights of users, and we have established the following privacy policy:
 
+In the event of any amendments to our privacy policy, we will provide notice through the announcement section of the app.
+
+1. Purpose of Processing Personal Information:
+We do not store or use personal information separately.
+
+2. Status of Personal Information Files:
+We do not use or store separate personal information files.
+We do not use cookies.
+Users with concerns regarding this should directly contact the respective service (application).
+
+3. Processing and Retention Period of Personal Information:
+We do not directly store or retain personal information.
+We do not have any content or retention period for processing user's personal information.
+
+4. Matters Regarding the Provision of Personal Information to Third Parties:
+We do not provide personal information to third parties.
+
+5. Outsourcing of Personal Information Processing:
+We do not outsource the processing of personal information.
+
+6. Rights, Obligations, and Methods of Exercising Rights of Data Subjects:
+Users can exercise their rights as data subjects.
+
+1) Request for access to personal information
+2) Request for correction in case of errors
+3) Request for deletion
+4) Request for suspension of processing
+We do not store personal information.
+
+7. Destruction of Personal Information:
+Our application operates independently without using a separate server.
+Also, as we do not store personal information, there is no personal information to be destroyed.
+However, users can delete all data by uninstalling the application if they wish.
+
+8. Guidance on the Use of Third-Party Modules:
+We are not currently using third-party service modules.
+If we use them in the future, we plan to update the app's privacy policy.
+
+9. Personal Information Protection Manager:
+If you have any questions or concerns about this privacy policy, or if you have questions about the personal information processing procedure, please contact us at:
+
+- Email: evolroop@gmail.com
+
+
+";
 
 // MARK: - Friend Add Scene
 "addFriend" = "Add Friend";
@@ -111,3 +159,5 @@
 "timeZone" = "TimeZone";
 "timeZoneMessage" = "Refresh the screen because the time zone has changed.";
 
+// MARK: - Image Asset
+"instruction" = "instruction_EN";

@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import SafariServices
 
 final class MyPageViewController: BaseViewController {
     // MARK: - View Properties
@@ -134,7 +135,7 @@ extension MyPageViewController: UITableViewDataSource {
         case 0:
             return 1
         case 1:
-            return 2
+            return 3
         case 2:
             return 1
         case 3:
@@ -148,7 +149,13 @@ extension MyPageViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MyPageTableViewCell.identifier, for: indexPath) as? MyPageTableViewCell else {
             return MyPageTableViewCell()
         }
-        cell.configureCell(title: myPageDataSource[indexPath.section][indexPath.row])
+        
+        if indexPath.section == 1 && indexPath.row == 1 {
+            guard let dictionary = Bundle.main.infoDictionary, let version = dictionary["CFBundleShortVersionString"] as? String else { return cell }
+            cell.configureCell(title: myPageDataSource[indexPath.section][indexPath.row], detail: "v\(version)")
+        } else {
+            cell.configureCell(title: myPageDataSource[indexPath.section][indexPath.row], detail: nil)
+        }
         return cell
     }
     
@@ -182,12 +189,15 @@ extension MyPageViewController: UITableViewDelegate {
         if indexPath.section == 1 {
             // 개발자 정보 탭
             if indexPath.row == 0 {
-            
+                let infoUrl = NSURL(string: "https://yeim.notion.site/729517f5f8754f53b555a6b457746d9e?pvs=4")
+                // swiftlint:disable force_unwrapping
+                let infoSafariView = SFSafariViewController(url: infoUrl! as URL)
+                self.present(infoSafariView, animated: true, completion: nil)
+                // swiftlint:enable force_unwrapping
             }
             
-            // 버전 정보 탭
-            if indexPath.row == 1 {
-                
+            if indexPath.row == 2 {
+                viewModel.privacyPolicyViewButtonTapped()
             }
         }
         

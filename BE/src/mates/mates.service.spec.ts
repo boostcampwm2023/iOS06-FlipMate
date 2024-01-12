@@ -78,11 +78,13 @@ describe('MatesService', () => {
         id: 2,
         follower_id: { id: 1 },
         following_id: { id: 3 },
+        fixation: false,
       } as never);
       jest.spyOn(repository, 'save').mockResolvedValueOnce({
         id: 2,
         follower_id: { id: 1 } as UsersModel,
         following_id: { id: 3 } as UsersModel,
+        is_fixed: false,
       });
       const result = await service.addMate(user, '어린콩3');
       expect(result).toStrictEqual({
@@ -133,6 +135,7 @@ describe('MatesService', () => {
         id: 1,
         follower_id: { id: 1 } as UsersModel,
         following_id: { id: 3 } as UsersModel,
+        is_fixed: false,
       });
       expect(service.addMate(user, '어린콩2')).rejects.toThrow(
         BadRequestException,
@@ -176,6 +179,7 @@ describe('MatesService', () => {
           id: 1,
           follower_id: { id: 1 } as UsersModel,
           following_id: { id: 2 } as UsersModel,
+          is_fixed: false,
         },
       ]);
       jest
@@ -271,6 +275,7 @@ describe('MatesService', () => {
         id: 1,
         follower_id: { id: 1 } as UsersModel,
         following_id: { id: 2 } as UsersModel,
+        is_fixed: false,
       });
       const result = await service.findMate(user, '어린콩2');
       expect(result).toStrictEqual({

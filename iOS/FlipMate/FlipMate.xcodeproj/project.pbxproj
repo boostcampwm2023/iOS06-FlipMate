@@ -48,6 +48,7 @@
 		2C5E34BC2B1B430D00FD481B /* FreindStatusResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E34BB2B1B430D00FD481B /* FreindStatusResponseDTO.swift */; };
 		2C5E34BE2B1B51CB00FD481B /* FriendStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E34BD2B1B51CB00FD481B /* FriendStatus.swift */; };
 		2C6717F82B0535A8004D118D /* Int++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6717F72B0535A8004D118D /* Int++Extension.swift */; };
+		2C7CBD592B2B3AAD0024A9AA /* TimerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7CBD582B2B3AAD0024A9AA /* TimerHeaderView.swift */; };
 		2C801D7E2B04B65400A7ABAE /* DefaultStartTimerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C801D7D2B04B65400A7ABAE /* DefaultStartTimerUseCase.swift */; };
 		2C801D802B04B68900A7ABAE /* StartTimerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C801D7F2B04B68900A7ABAE /* StartTimerUseCase.swift */; };
 		2C801D832B04C64F00A7ABAE /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C801D822B04C64F00A7ABAE /* TimerManager.swift */; };
@@ -261,6 +262,7 @@
 		EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851C62B021492009031EA /* TabBarViewController.swift */; };
 		EDC851D22B04EE83009031EA /* CategoryListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851D12B04EE83009031EA /* CategoryListCollectionViewCell.swift */; };
 		EDC851D92B05C37C009031EA /* DeviceMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851D82B05C37C009031EA /* DeviceMotionManager.swift */; };
+		EDDAD39C2B4D2E43003A9D18 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDAD39B2B4D2E43003A9D18 /* PrivacyPolicyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -325,6 +327,7 @@
 		2C5E34BB2B1B430D00FD481B /* FreindStatusResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreindStatusResponseDTO.swift; sourceTree = "<group>"; };
 		2C5E34BD2B1B51CB00FD481B /* FriendStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendStatus.swift; sourceTree = "<group>"; };
 		2C6717F72B0535A8004D118D /* Int++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int++Extension.swift"; sourceTree = "<group>"; };
+		2C7CBD582B2B3AAD0024A9AA /* TimerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHeaderView.swift; sourceTree = "<group>"; };
 		2C801D7D2B04B65400A7ABAE /* DefaultStartTimerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStartTimerUseCase.swift; sourceTree = "<group>"; };
 		2C801D7F2B04B68900A7ABAE /* StartTimerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimerUseCase.swift; sourceTree = "<group>"; };
 		2C801D822B04C64F00A7ABAE /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
@@ -528,6 +531,7 @@
 		EDC851C62B021492009031EA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		EDC851D12B04EE83009031EA /* CategoryListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCollectionViewCell.swift; sourceTree = "<group>"; };
 		EDC851D82B05C37C009031EA /* DeviceMotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceMotionManager.swift; path = FlipMate/Presentation/Utils/MotionManager/DeviceMotionManager.swift; sourceTree = SOURCE_ROOT; };
+		EDDAD39B2B4D2E43003A9D18 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1482,6 +1486,7 @@
 			children = (
 				606990562B18918B00E5730F /* MyPageViewController.swift */,
 				60EB7F5A2B1F19D900F8C613 /* ProfileSettingsViewController.swift */,
+				EDDAD39B2B4D2E43003A9D18 /* PrivacyPolicyViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1589,6 +1594,7 @@
 				EDC851D12B04EE83009031EA /* CategoryListCollectionViewCell.swift */,
 				2CE84EF82B0B8A0B00E2FB71 /* CategorySettingFooterView.swift */,
 				ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */,
+				2C7CBD582B2B3AAD0024A9AA /* TimerHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1874,6 +1880,7 @@
 				2C2C7CBD2B29DFD900C733D5 /* DefaultPatchTimeZoneUseCase.swift in Sources */,
 				2C9F62222B173AB500AE63F9 /* FriendFollowReqeustDTO.swift in Sources */,
 				60EB7F5B2B1F19D900F8C613 /* ProfileSettingsViewController.swift in Sources */,
+				EDDAD39C2B4D2E43003A9D18 /* PrivacyPolicyViewController.swift in Sources */,
 				6087AED72B4A6F2B00B29637 /* DefaultDeleteCategoryUseCase.swift in Sources */,
 				ED38422C2B0F4531001E2803 /* LoginViewModel.swift in Sources */,
 				2CE91C702B25888C00EACCD7 /* UIViewController++Extension.swift in Sources */,
@@ -2005,6 +2012,7 @@
 				ED3595BD2B0DB29F00558FAA /* CategoryModifyViewController.swift in Sources */,
 				2C87C27B2B1DF11000A26313 /* UserInfoResponseDTO.swift in Sources */,
 				2C34309B2B0C8674008CBC85 /* URLSessionable.swift in Sources */,
+				2C7CBD592B2B3AAD0024A9AA /* TimerHeaderView.swift in Sources */,
 				ED6865C82B1E44B1001A2AAD /* ChartRepository.swift in Sources */,
 				604A6FFD2B2AC5F100B0B42E /* AppleAuthRequestDTO.swift in Sources */,
 				2CE84EF92B0B8A0B00E2FB71 /* CategorySettingFooterView.swift in Sources */,

@@ -7,6 +7,7 @@ import {
   Body,
   UseGuards,
   Query,
+  Patch,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -168,6 +169,39 @@ export class MatesController {
     return {
       statusCode: 200,
       message: '성공적으로 삭제되었습니다.',
+    };
+  }
+
+  @Patch('fixation')
+  @UseGuards(AccessTokenGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: '친구 목록에서 고정/고정 해제' })
+  @ApiBody({
+    schema: {
+      properties: {
+        following_id: {
+          type: 'number',
+          description: '친구의 id',
+          example: '1',
+        },
+        fixation: {
+          type: 'boolean',
+          description: '고정/고정 해제 여부',
+          example: 'true',
+        },
+      },
+    },
+  })
+  async fixationMate(
+    @User('id') id: number,
+    @Body('following_id') following_id: number,
+    @Body('is_fixed') is_fixed: boolean,
+  ): Promise<StatusMessageDto> {
+    await this.matesService.fixationMate(id, following_id, is_fixed);
+
+    return {
+      statusCode: 200,
+      message: '수정 완료',
     };
   }
 }
