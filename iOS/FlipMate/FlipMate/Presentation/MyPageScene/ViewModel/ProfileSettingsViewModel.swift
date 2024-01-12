@@ -60,14 +60,8 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     }
     
     func nickNameChanged(_ newNickName: String) {
-        Task {
-            do {
-                let nickNameValidationStatus = try await validateNicknameUseCase.isNickNameValid(newNickName)
-                isValidNickNameSubject.send(nickNameValidationStatus)
-            } catch let error {
-                errorSubject.send(error)
-            }
-        }
+        let nickNameValidationStatus = validateNicknameUseCase.isNickNameValid(newNickName)
+        isValidNickNameSubject.send(nickNameValidationStatus)
     }
     
     func profileImageChanged() {

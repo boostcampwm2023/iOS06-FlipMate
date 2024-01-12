@@ -49,14 +49,8 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     
     // MARK: - Input
     func nickNameChanged(_ newNickName: String) {
-        Task {
-            do {
-                let nickNameValidationStatus = try await validateNickNameUseCase.isNickNameValid(newNickName)
-                isValidNickNameSubject.send(nickNameValidationStatus)
-            } catch let error {
-                errorSubject.send(error)
-            }
-        }
+        let nickNameValidationStatus = validateNickNameUseCase.isNickNameValid(newNickName)
+        isValidNickNameSubject.send(nickNameValidationStatus)
     }
     
     func signUpButtonTapped(userName: String, profileImageData: Data) {

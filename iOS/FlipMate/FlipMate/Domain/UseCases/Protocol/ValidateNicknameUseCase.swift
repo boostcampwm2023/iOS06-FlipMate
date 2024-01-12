@@ -8,5 +8,5 @@
 import Foundation
 
 protocol ValidateNicknameUseCase {
-    func isNickNameValid(_ nickName: String) async throws -> NickNameValidationState
+    func isNickNameValid(_ nickName: String) -> NickNameValidationState
 }

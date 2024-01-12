@@ -14,7 +14,7 @@ final class DefaultValidateNicknameUseCase: ValidateNicknameUseCase {
         self.validator = validator
     }
     
-    func isNickNameValid(_ nickName: String) async throws -> NickNameValidationState {
+    func isNickNameValid(_ nickName: String) -> NickNameValidationState {
         let validationState = validator.checkNickNameValidationState(nickName)
         return validationState
     }
