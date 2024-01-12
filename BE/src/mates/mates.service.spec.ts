@@ -195,14 +195,14 @@ describe('MatesService', () => {
   describe('.getMates()', () => {
     it('유효한 데이터가 주어지면 성공적으로 친구들을 가져온다.', async () => {
       jest
-        .spyOn(service, 'getMatesStudyTime')
+        .spyOn(usersRepository, 'query')
         .mockResolvedValueOnce([
           { id: 2, nickname: '어린콩2', total_time: 825 },
         ]);
       jest
         .spyOn(redisService, 'hget')
         .mockResolvedValueOnce('2023-11-29 16:00:00');
-      const result = await service.getMates(1, '2023-11-29 00:00:00', ' 09:00');
+      const result = await service.getMates(1, '2023-11-29T16:00:00', '+09:00');
       expect(result).toStrictEqual([
         {
           id: 2,
@@ -214,8 +214,8 @@ describe('MatesService', () => {
       ]);
     });
     it('친구가 없는 유저는 빈 배열을 가져온다.', async () => {
-      jest.spyOn(service, 'getMatesStudyTime').mockResolvedValueOnce([]);
-      const result = await service.getMates(3, '2023-11-29 00:00:00', '09:00');
+      jest.spyOn(usersRepository, 'query').mockResolvedValueOnce([]);
+      const result = await service.getMates(3, '2023-11-29T16:00:00', '+09:00');
       expect(result).toStrictEqual([]);
     });
   });

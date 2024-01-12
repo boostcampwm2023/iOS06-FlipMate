@@ -60,6 +60,28 @@ export class MatesService {
     };
   }
 
+  getFollowersInfo(user_id: number) {
+    return this.matesRepository.query(
+      `SELECT u.id, u.nickname, u.image_url 
+       FROM mates 
+       INNER JOIN users_model as u ON u.id = mates.follower_id 
+       WHERE mates.following_id = ?
+       ORDER BY u.nickname`,
+      [user_id],
+    );
+  }
+
+  getFollowingsInfo(user_id: number) {
+    return this.matesRepository.query(
+      `SELECT u.id, u.nickname, u.image_url 
+       FROM mates 
+       INNER JOIN users_model as u ON u.id = mates.following_id 
+       WHERE mates.follower_id = ?
+       ORDER BY u.nickname`,
+      [user_id],
+    );
+  }
+
   async getMates(
     user_id: number,
     datetime: string,
@@ -69,7 +91,6 @@ export class MatesService {
       throw new BadRequestException('인자의 형식이 잘못되었습니다.');
     }
     const offset = timezone[0] === ' ' ? `+${timezone.trim()}` : timezone;
-
     const nowUserTime = moment(`${datetime}${offset}`)
       .utcOffset(offset)
       .format('YYYY-MM-DD HH:mm:ss');
@@ -98,8 +119,12 @@ export class MatesService {
     );
   }
 
-  async getMatesStudyTime(followerDate, followerTimezone, followerId) {
-    const result = await this.userRepository.query(
+  private getMatesStudyTime(
+    followerDate: string,
+    followerTimezone: string,
+    followerId: number,
+  ) {
+    return this.userRepository.query(
       `
         SELECT u.id, u.nickname, u.image_url, COALESCE(SUM(s.learning_time), 0) AS total_time
         FROM users_model u
@@ -111,8 +136,6 @@ export class MatesService {
       `,
       [followerDate, followerTimezone, followerId],
     );
-
-    return result;
   }
 
   async getMatesStatus(user_id: number): Promise<object[]> {
