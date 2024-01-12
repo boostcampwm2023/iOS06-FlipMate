@@ -9,12 +9,17 @@ import Foundation
 
 final class DefaultGoogleLoginUseCase: GoogleLoginUseCase {
     private let repository: AuthenticationRepository
+    private let keychainManager: KeychainManagerProtocol
     
-    public init(repository: AuthenticationRepository, signoutManager: SignOutManagerProtocol) {
+    public init(repository: AuthenticationRepository, keychainManager: KeychainManagerProtocol) {
         self.repository = repository
+        self.keychainManager = keychainManager
     }
     
     func googleLogin(accessToken: String) async throws -> User {
-        return try await repository.googleLogin(with: accessToken)
+        let response = try await repository.googleLogin(with: accessToken)
+        let userAccessToken = response.accessToken
+        try keychainManager.saveAccessToken(token: userAccessToken)
+        return response
     }
 }

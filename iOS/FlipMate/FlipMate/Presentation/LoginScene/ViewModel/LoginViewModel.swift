@@ -65,8 +65,6 @@ final class LoginViewModel: LoginViewModelProtocol {
         Task {
             do {
                 let response = try await self.googleLoginUseCase.googleLogin(accessToken: accessToken)
-                let accessToken = response.accessToken
-                try KeychainManager.saveAccessToken(token: accessToken)
                 isMemberSubject.send(response.isMember)
             } catch let error {
                 errorSubject.send(error)
@@ -78,10 +76,7 @@ final class LoginViewModel: LoginViewModelProtocol {
     func requestAppleLogin(accessToken: String, userID: String) {
         Task {
             do {
-                let response = try await self.appleLoginUseCase.appleLogin(accessToken: accessToken)
-                let accessToken = response.accessToken
-                try KeychainManager.saveAccessToken(token: accessToken)
-                try KeychainManager.saveAppleUserID(id: userID)
+                let response = try await self.appleLoginUseCase.appleLogin(accessToken: accessToken, userID: userID)
                 isMemberSubject.send(response.isMember)
             } catch let error {
                 errorSubject.send(error)

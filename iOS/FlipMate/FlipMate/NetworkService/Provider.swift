@@ -16,16 +16,22 @@ protocol Providable {
 struct Provider: Providable {
     private let jsonDecoder = JSONDecoder()
     private var urlSession: URLSessionable
-    private let signOutManager: SignOutManagerProtocol?
+    private let signOutManager: SignOutManagerProtocol
+    private let keychainManager: KeychainManagerProtocol
     
-    init(urlSession: URLSessionable, signOutManager: SignOutManagerProtocol? = nil) {
+    init(urlSession: URLSessionable,
+         signOutManager: SignOutManagerProtocol,
+         keychainManager: KeychainManagerProtocol) {
         self.urlSession = urlSession
         self.signOutManager = signOutManager
+        self.keychainManager = keychainManager
     }
     
     func request<E: RequestResponseable>(with endpoint: E) -> AnyPublisher<E.Response, NetworkError> {
         do {
-            let urlReqeust = try endpoint.makeURLRequest()
+            let token = try? keychainManager.getAccessToken()
+            let urlReqeust = try endpoint.makeURLRequest(with: token)
+            
             return urlSession.response(for: urlReqeust)
                 .tryMap { data, response in
                     guard let response = response as? HTTPURLResponse else {
@@ -35,7 +41,7 @@ struct Provider: Providable {
                     guard 200..<300 ~= response.statusCode else {
                         if response.statusCode == 401 {
                             FMLogger.general.error("토큰이 만료되어 로그인 화면으로 이동합니다.")
-                            signOutManager?.signOut()
+                            signOutManager.signOut()
                         }
                         
                         let errorResult = try JSONDecoder().decode(StatusResponseWithErrorDTO.self, from: data)
@@ -66,8 +72,10 @@ struct Provider: Providable {
     }
     
     func request<E: RequestResponseable>(with endpoint: E) async throws -> E.Response where E: Requestable, E: Responsable {
-        let urlRequest = try endpoint.makeURLRequest()
+        let token = try? keychainManager.getAccessToken()
+        let urlRequest = try endpoint.makeURLRequest(with: token)
         let (data, response) = try await urlSession.response(for: urlRequest)
+        
         guard let response = response as? HTTPURLResponse else {
             throw NetworkError.invalidResponse
         }
@@ -76,7 +84,7 @@ struct Provider: Providable {
             do {
                 if response.statusCode == 401 {
                     FMLogger.general.error("토큰이 만료되어 로그인 화면으로 이동합니다.")
-                    signOutManager?.signOut()
+                    signOutManager.signOut()
                 }
                 
                 let errorResult = try JSONDecoder().decode(StatusResponseWithErrorDTO.self, from: data)

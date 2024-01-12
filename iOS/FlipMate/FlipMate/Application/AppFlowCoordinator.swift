@@ -34,7 +34,7 @@ final class AppFlowCoordinator: Coordinator {
     func start() {
         var isLoggedIn: Bool
         
-        if (try? KeychainManager.getAccessToken()) != nil {
+        if (try? appDIContainer.keychainManager.getAccessToken()) != nil {
             isLoggedIn = true
         } else {
             isLoggedIn = false

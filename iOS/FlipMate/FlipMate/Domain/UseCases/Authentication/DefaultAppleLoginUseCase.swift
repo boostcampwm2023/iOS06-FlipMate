@@ -9,12 +9,18 @@ import Foundation
 
 final class DefaultAppleLoginUseCase: AppleLoginUseCase {
     private let repository: AuthenticationRepository
+    private let keychainManager: KeychainManagerProtocol
     
-    public init(repository: AuthenticationRepository, signoutManager: SignOutManagerProtocol) {
+    public init(repository: AuthenticationRepository, keychainManager: KeychainManagerProtocol) {
         self.repository = repository
+        self.keychainManager = keychainManager
     }
     
-    func appleLogin(accessToken: String) async throws -> User {
-        return try await repository.appleLogin(with: accessToken)
+    func appleLogin(accessToken: String, userID: String) async throws -> User {
+        let response = try await repository.appleLogin(with: accessToken)
+        let userAccessToken = response.accessToken
+        try keychainManager.saveAccessToken(token: userAccessToken)
+        try keychainManager.saveAppleUserID(id: userID)
+        return response
     }
 }

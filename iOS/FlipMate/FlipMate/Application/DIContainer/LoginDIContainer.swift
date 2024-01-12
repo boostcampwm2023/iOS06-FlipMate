@@ -13,6 +13,7 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
         let categoryManager: CategoryManageable
         let signOutManager: SignOutManagerProtocol
         let userInfoManager: UserInfoManagerProtocol
+        let keychainManager: KeychainManagerProtocol
     }
     
     private let dependencies: Dependencies
@@ -28,10 +29,10 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
             loginViewModel: LoginViewModel(
                 googleLoginUseCase: DefaultGoogleLoginUseCase(
                     repository: repository,
-                    signoutManager: signOutManager),
+                    keychainManager: dependencies.keychainManager),
                 appleLoginUseCase: DefaultAppleLoginUseCase(
                     repository: repository,
-                    signoutManager: signOutManager),
+                    keychainManager: dependencies.keychainManager),
                 actions: actions)
             )
     }

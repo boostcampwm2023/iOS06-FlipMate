@@ -16,9 +16,11 @@ protocol SignOutManagerProtocol {
 final class SignOutManager: SignOutManagerProtocol {
     private var signOutSubject = PassthroughSubject<Bool, Never>()
     private let userInfoManager: UserInfoManagerProtocol
+    private let keychainManager: KeychainManagerProtocol
     
-    init(userInfoManager: UserInfoManagerProtocol) {
+    init(userInfoManager: UserInfoManagerProtocol, keychainManager: KeychainManagerProtocol) {
         self.userInfoManager = userInfoManager
+        self.keychainManager = keychainManager
     }
     
     var signOutPublisher: AnyPublisher<Bool, Never> {
@@ -26,8 +28,8 @@ final class SignOutManager: SignOutManagerProtocol {
     }
     
     func signOut() {
-        try? KeychainManager.deleteAccessToken()
-        try? KeychainManager.deleteAppleUserID()
+        try? keychainManager.deleteAccessToken()
+        try? keychainManager.deleteAppleUserID()
         // MAKR: - UserInfoManager 초기화
         userInfoManager.initManager()
         signOutSubject.send(true)

@@ -14,6 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let appDIContainer = AppDIContainer()
     var appFlowCoordinator: AppFlowCoordinator?
     var cancellables = Set<AnyCancellable>()
+    let keychainManager = KeychainManager()
     
     var window: UIWindow?
     
@@ -50,7 +51,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func sceneDidBecomeActive(_ scene: UIScene) {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
-        guard let userID = try? KeychainManager.getAppleUserID() else {
+        guard let userID = try? keychainManager.getAppleUserID() else {
             FMLogger.general.error("키체인으로부터 애플 유저 아이디 가져오기 실패")
             return
         }
