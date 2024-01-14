@@ -32,8 +32,8 @@ final class WeekCollectionViewCell: UICollectionViewCell {
         backgroundColor = nil
     }
     
-    func updateDate(_ date: Date) {
-        dateLabel.text = "\(date.dateToString(format: .day))"
+    func updateDate(_ date: String) {
+        dateLabel.text = date.toDate(.yyyyMMdd)?.dateToString(format: .day)
     }
     
     func updateBackgroundColor() {

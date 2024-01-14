@@ -59,8 +59,7 @@ final class WeeklyCalendarView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        // TODO: 현재 날짜로 선택되도록 구현.
-        self.weekCollectionView.scrollToItem(at: IndexPath(row: Constant.currentWeekSundayIndex, section: 0), at: .centeredHorizontally, animated: false)
+        selectItem(at: Date())
     }
     
     required init?(coder: NSCoder) {
@@ -77,6 +76,7 @@ private extension WeeklyCalendarView {
                 case .dateCell(let date):
                     let cell: WeekCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
                     cell.updateDate(date)
+                    cell.updateBackgroundColor()
                     return cell
                 }
             })
@@ -95,6 +95,18 @@ private extension WeeklyCalendarView {
         dateLabel.text = monthTitle(from: currentWeekDate)
         dataSource?.apply(snapshot)
     }
+    
+    func findItemIndex(at date: String) -> Int? {
+        guard let snapshot = dataSource?.snapshot(),
+              let targetItem = snapshot.itemIdentifiers.filter { $0.date == date }.first else { return nil }
+        return snapshot.indexOfItem(targetItem)
+    }
+    
+    func selectItem(at date: Date) {
+        guard let targetIndex = findItemIndex(at: date.dateToString(format: .yyyyMMdd)) else { return }
+        let indexPath = IndexPath(row: targetIndex, section: 0)
+        weekCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredHorizontally)
+    }
 }
 
 private extension WeeklyCalendarView {
@@ -108,7 +120,7 @@ private extension WeeklyCalendarView {
             current = addDays(date: current, days: 1)
         }
         
-        return weekendDate.map { WeeklySectionItem.dateCell($0) }
+        return weekendDate.map { WeeklySectionItem.dateCell($0.dateToString(format: .yyyyMMdd)) }
     }
     
     func findSunday(date: Date) -> Date {
@@ -209,8 +221,9 @@ extension WeeklyCalendarView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? WeekCollectionViewCell else { return }
         guard let item = dataSource?.itemIdentifier(for: indexPath) else { return }
+        guard let selectedDate = item.date.toDate(.yyyyMMdd) else { return }
         cell.updateBackgroundColor()
-        viewModel.dateDidSelected(date: item.date)
+        viewModel.dateDidSelected(date: selectedDate)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
