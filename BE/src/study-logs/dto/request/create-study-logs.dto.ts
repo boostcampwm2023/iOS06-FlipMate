@@ -9,7 +9,7 @@ export class StudyLogsCreateDto {
 
   @ApiProperty({
     type: 'date',
-    example: '2023-11-23 11:00:12',
+    example: '2023-11-23 11:00:12+09:00',
     description: '학습을 시작/종료 시점의 시간',
   })
   created_at: string;
