@@ -27,6 +27,12 @@ export class StudyLogsService {
     const { created_at } = studyLogsData;
     await this.redisService.hset(`${user_id}`, 'started_at', `${created_at}`);
     await this.redisService.hset(`${user_id}`, 'received_at', `${Date.now()}`);
+    await this.redisService.hset(
+      `${user_id}`,
+      'category_id',
+      `${studyLogsData.category_id ?? null}`,
+    );
+    await this.usersRepository.update({ id: user_id }, { is_studying: true });
   }
 
   async createFinishLog(
@@ -54,6 +60,7 @@ export class StudyLogsService {
       await this.studyLogsRepository.save(studyLog);
     }
     await this.redisService.del(`${user_id}`);
+    await this.usersRepository.update({ id: user_id }, { is_studying: false });
   }
 
   async findAll(): Promise<StudyLogs[]> {

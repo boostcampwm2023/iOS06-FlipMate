@@ -59,6 +59,12 @@ export class UsersModel {
   })
   timezone: string;
 
+  @Column({
+    type: 'boolean',
+    default: false,
+  })
+  is_studying: boolean;
+
   @OneToMany(() => StudyLogs, (studyLog) => studyLog.user_id)
   study_logs: StudyLogs[];
 
