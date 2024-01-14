@@ -84,7 +84,6 @@ export class HeartbeatService {
         category_id: { id: +category_id || null } as Categories,
         is_finished: false,
       });
-      console.log(studyLog);
       await this.studyLogsRepository.save(studyLog);
     }
   }
