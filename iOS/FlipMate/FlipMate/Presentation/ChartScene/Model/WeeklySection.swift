@@ -12,5 +12,12 @@ enum WeeklySection: Hashable {
 }
 
 enum WeeklySectionItem: Hashable {
-    case dateCell(Int)
+    case dateCell(Date)
+    
+    var date: Date {
+        switch self {
+        case .dateCell(let date):
+            return date
+        }
+    }
 }

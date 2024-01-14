@@ -26,8 +26,18 @@ final class WeekCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateDate(_ date: Int) {
-        dateLabel.text = "\(date)"
+    // MARK: - life Cycle
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        backgroundColor = nil
+    }
+    
+    func updateDate(_ date: Date) {
+        dateLabel.text = "\(date.dateToString(format: .day))"
+    }
+    
+    func updateBackgroundColor() {
+        backgroundColor = isSelected ? FlipMateColor.gray3.color : .systemBackground
     }
 }
 

@@ -10,6 +10,7 @@ import Combine
 
 protocol ChartViewModelInput {
     func viewDidLoad()
+    func dateDidSelected(date: Date)
 }
 
 protocol ChartViewModelOutput {
@@ -19,6 +20,9 @@ protocol ChartViewModelOutput {
 typealias ChartViewModelProtocol = ChartViewModelInput & ChartViewModelOutput
 
 final class ChartViewModel: ChartViewModelProtocol {
+    
+    // MARK: - Properties
+    private var selectedDate = Date()
     
     // MARK: - UseCase
     private let chartUseCase: ChartUseCase
@@ -35,10 +39,18 @@ final class ChartViewModel: ChartViewModelProtocol {
         self.chartUseCase = chartUseCase
     }
     
+    // MARK: - input
     func viewDidLoad() {
-        fetchDailyChartLog(at: Date())
+        fetchDailyChartLog(at: selectedDate)
     }
+    
+    func dateDidSelected(date: Date) {
+        selectedDate = date
+        fetchDailyChartLog(at: selectedDate)
+    }
+}
 
+private extension ChartViewModel {
     func fetchDailyChartLog(at date: Date) {
         Task {
             let log = try await chartUseCase.fetchDailyChartLog(at: date)

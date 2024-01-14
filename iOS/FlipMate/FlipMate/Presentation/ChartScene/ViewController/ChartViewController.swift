@@ -31,7 +31,7 @@ final class ChartViewController: BaseViewController {
         return segmentedControl
     }()
     
-    private var weeklyCalendarView = WeeklyCalendarView()
+    private var weeklyCalendarView: WeeklyCalendarView
     private var donutChartView = DonutChartView()
     private var weeklyChartView = UIView()
     
@@ -46,6 +46,7 @@ final class ChartViewController: BaseViewController {
     // MARK: - init
     init(viewModel: ChartViewModelProtocol) {
         self.viewModel = viewModel
+        self.weeklyCalendarView = WeeklyCalendarView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
     

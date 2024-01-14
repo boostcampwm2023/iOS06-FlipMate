@@ -22,6 +22,7 @@ final class WeeklyCalendarView: UIView {
     private var scrollState: ScrollState = .none
     private var currentWeekDate = Date()
     private var calendar = Calendar.current
+    private var viewModel: ChartViewModelProtocol
     
     private let dateLabel: UILabel = {
         let label = UILabel()
@@ -47,8 +48,9 @@ final class WeeklyCalendarView: UIView {
         return collectionView
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(viewModel: ChartViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(frame: .zero)
         configureUI()
         configureWeekStackView()
         setDataSource()
@@ -57,6 +59,7 @@ final class WeeklyCalendarView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        // TODO: 현재 날짜로 선택되도록 구현.
         self.weekCollectionView.scrollToItem(at: IndexPath(row: Constant.currentWeekSundayIndex, section: 0), at: .centeredHorizontally, animated: false)
     }
     
@@ -96,13 +99,12 @@ private extension WeeklyCalendarView {
 
 private extension WeeklyCalendarView {
     func weekendItem(_ date: Date) -> [WeeklySectionItem] {
-        var weekendDate = [Int]()
+        var weekendDate = [Date]()
         var current = findSunday(date: date)
         let nextSunday = addDays(date: current, days: Constant.nextWeekValue)
         
         while current < nextSunday {
-            guard let date = Int(current.dateToString(format: .day)) else { continue }
-            weekendDate.append(date)
+            weekendDate.append(current)
             current = addDays(date: current, days: 1)
         }
         
@@ -203,7 +205,22 @@ private extension WeeklyCalendarView {
     }
 }
 
-extension WeeklyCalendarView: UICollectionViewDelegate, UIScrollViewDelegate {
+extension WeeklyCalendarView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? WeekCollectionViewCell else { return }
+        guard let item = dataSource?.itemIdentifier(for: indexPath) else { return }
+        cell.updateBackgroundColor()
+        viewModel.dateDidSelected(date: item.date)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? WeekCollectionViewCell else { return }
+        cell.updateBackgroundColor()
+        // TODO: - DonutChartView 초기화.
+    }
+}
+
+extension WeeklyCalendarView: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         switch targetContentOffset.pointee.x {
         case 0:
