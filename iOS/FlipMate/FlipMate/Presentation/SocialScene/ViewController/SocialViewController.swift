@@ -28,7 +28,7 @@ final class SocialViewController: BaseViewController {
         layout.minimumInteritemSpacing = LayoutConstant.itemSpacing
         layout.itemSize = CGSize(
             width: UIScreen.main.bounds.width / LayoutConstant.itemCountForLine - LayoutConstant.itemSpacing * 2,
-            height: LayoutConstant.iemHeight)
+            height: LayoutConstant.itemHeight)
         layout.headerReferenceSize = CGSize(width: LayoutConstant.sectionWidth, height: LayoutConstant.sectionHeight)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(FriendsCollectionViewCell.self)
@@ -165,11 +165,12 @@ final class SocialViewController: BaseViewController {
     func bindFriendsRelatedPublisher() {
         viewModel.freindsPublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] friends in
+            .sink { [weak self] followings in
                 guard let self = self else { return }
+                guard let header = findHeader() else { return }
                 var snapshot = Snapshot()
                 snapshot.appendSections([.main])
-                snapshot.appendItems(friends.map { Friend(
+                snapshot.appendItems(followings.map { Friend(
                     id: $0.id,
                     nickName: $0.nickName,
                     profileImageURL: $0.profileImageURL,
@@ -177,6 +178,7 @@ final class SocialViewController: BaseViewController {
                     startedTime: $0.startedTime,
                     isStuding: $0.isStuding)}
                 )
+                header.update(following: followings.count)
                 self.diffableDataSource.apply(snapshot, animatingDifferences: true)
             }
             .store(in: &cancellables)
@@ -283,11 +285,11 @@ private extension SocialViewController {
         
         static var lineSpacing: CGFloat = 16
         static var itemSpacing: CGFloat = 16
-        static var iemHeight: CGFloat = 179
+        static var itemHeight: CGFloat = 179
         static var itemCountForLine = 3.0
         
         static var sectionWidth: CGFloat = 50
-        static var sectionHeight: CGFloat = 200
+        static var sectionHeight: CGFloat = 110
     }
     
     private enum ProfileImageViewConstant {
@@ -304,10 +306,5 @@ private extension SocialViewController {
     private enum LearningTimeLabelConstant {
         static var bottom: CGFloat = 8
         static var title = "00:00:00"
-    }
-    
-    private enum DividerConstant {
-        static var bottom: CGFloat = 24
-        static var height: CGFloat = 1
     }
 }
