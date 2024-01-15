@@ -11,9 +11,9 @@ final class SocialUserInfoHeaderView: UICollectionReusableView {
       
     // MARK: - Constant
     private enum Constant {
-        static let defaultNickName = "닉네임"
-        static let following = "팔로잉"
-        static let follower = "팔로워"
+        static let defaultNickName = NSLocalizedString("nickname", comment: "")
+        static let following = NSLocalizedString("followingNumber", comment: "")
+        static let follower = NSLocalizedString("followerNumber", comment: "")
         static let defaultTime = "00:00:00"
         static let defaultNumber = "0"
     }
@@ -22,13 +22,13 @@ final class SocialUserInfoHeaderView: UICollectionReusableView {
         static var width: CGFloat = 60
         static var height: CGFloat = 60
         static var top: CGFloat = 32
-        static var leading: CGFloat = 10
+        static var leading: CGFloat = 20
         static var spacing: CGFloat = 5
     }
     
     private enum UserNameLabelConstant {
         static var bottom: CGFloat = 8
-        static var title = "닉네임"
+        static var title = Constant.defaultNickName
     }
     
     private enum LearningTimeLabelConstant {
