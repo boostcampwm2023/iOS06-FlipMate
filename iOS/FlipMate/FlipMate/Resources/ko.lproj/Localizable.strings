@@ -130,6 +130,9 @@
 "min" = "분(m)";
 "me" = "나";
 "friend" = "친구";
+"nickname" = "닉네임";
+"followingNumber" = "팔로잉";
+"followerNumber" = "팔로워";
 
 // MARK: - Chart Scene
 "daily" = "일간";

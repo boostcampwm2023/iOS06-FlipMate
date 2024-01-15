@@ -133,6 +133,9 @@
 "min" = "分";
 "me" = "私";
 "friend" = "友達";
+"nickname" = "ニックネーム";
+"followingNumber" = "フォロー";
+"followerNumber" = "フォロワー";
 
 // MARK: - ChartViewController
 "daily" = "毎日";

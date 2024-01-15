@@ -132,6 +132,9 @@ If you have any questions or concerns about this privacy policy, or if you have 
 "min" = "min";
 "me" = "Me";
 "friend" = "Friend";
+"nickname" = "Nickname";
+"followingNumber" = "Following";
+"followerNumber" = "Follower";
 
 // MARK: - ChartViewController
 "daily" = "Daily";
