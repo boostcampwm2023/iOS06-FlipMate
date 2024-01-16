@@ -45,4 +45,26 @@ final class DefaultSocialRepository: SocialRepository {
             }
             .eraseToAnyPublisher()
     }
+    
+    func fetchMyFollowings() -> AnyPublisher<[Follower], NetworkError> {
+        let endpoint = SocialEndpoints.fetchFollowings()
+        return provider.request(with: endpoint)
+            .map { response -> [Follower] in
+                return response.map {
+                    Follower(id: $0.id, nickName: $0.nickname, profileImageURL: $0.imageUrl, isFollowing: nil)
+                }
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchMyFollowers() -> AnyPublisher<[Follower], NetworkError> {
+        let endpoint = SocialEndpoints.fetchFollowers()
+        return provider.request(with: endpoint)
+            .map { response -> [Follower] in
+                return response.map {
+                    Follower(id: $0.id, nickName: $0.nickname, profileImageURL: $0.imageUrl, isFollowing: $0.isFollowed)
+                }
+            }
+            .eraseToAnyPublisher()
+    }
 }

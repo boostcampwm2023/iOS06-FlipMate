@@ -11,4 +11,6 @@ import Combine
 protocol SocialRepository {
     func getMyFriend(date: Date) -> AnyPublisher<[Friend], NetworkError>
     func fetchMyFriend(date: Date) -> AnyPublisher<[FriendStatus], NetworkError>
+    func fetchMyFollowings() -> AnyPublisher<[Follower], NetworkError>
+    func fetchMyFollowers() -> AnyPublisher<[Follower], NetworkError>
 }

@@ -23,4 +23,12 @@ struct SocialEndpoints {
             path: Paths.friend + "?datetime=\(date.dateToString(format: .yyyyMMddTHHmmSS))&timezone=\(date.dateToString(format: .ZZZZZ))",
             method: .get)
     }
+    
+    static func fetchFollowings() -> EndPoint<[FollowingFriendResponseDTO]> {
+        return EndPoint(baseURL: BaseURL.flipmateDomain, path: Paths.friend + "/followings", method: .get)
+    }
+    
+    static func fetchFollowers() -> EndPoint<[FollowerFriendResponseDTO]> {
+        return EndPoint(baseURL: BaseURL.flipmateDomain, path: Paths.friend + "/followers", method: .get)
+    }
 }
