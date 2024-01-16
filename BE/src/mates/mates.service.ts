@@ -247,14 +247,14 @@ export class MatesService {
   async fixationMate(
     id: number,
     following_id: number,
-    is_blocked: boolean,
+    is_fixed: boolean,
   ): Promise<void> {
     const result = await this.matesRepository.update(
       {
         follower_id: { id: id },
         following_id: { id: following_id },
       },
-      { is_blocked: is_blocked },
+      { is_fixed: is_fixed },
     );
 
     if (!result) {
@@ -264,15 +264,15 @@ export class MatesService {
 
   async blockMate(
     id: number,
-    following_id: number,
-    is_fixed: boolean,
+    follower_id: number,
+    is_blocked: boolean,
   ): Promise<void> {
     const result = await this.matesRepository.update(
       {
-        follower_id: { id: following_id },
+        follower_id: { id: follower_id },
         following_id: { id: id },
       },
-      { is_fixed: is_fixed },
+      { is_blocked: is_blocked },
     );
 
     if (!result) {

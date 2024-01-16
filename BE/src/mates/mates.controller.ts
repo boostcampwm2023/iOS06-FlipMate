@@ -214,7 +214,7 @@ export class MatesController {
   @ApiBody({
     schema: {
       properties: {
-        following_id: {
+        follower_id: {
           type: 'number',
           description: '친구의 id',
           example: '1',
@@ -229,10 +229,10 @@ export class MatesController {
   })
   async blockMate(
     @User('id') id: number,
-    @Body('following_id') following_id: number,
+    @Body('follower_id') follower_id: number,
     @Body('is_blocked') is_blocked: boolean,
   ): Promise<StatusMessageDto> {
-    await this.matesService.blockMate(id, following_id, is_blocked);
+    await this.matesService.blockMate(id, follower_id, is_blocked);
 
     return {
       statusCode: 200,
