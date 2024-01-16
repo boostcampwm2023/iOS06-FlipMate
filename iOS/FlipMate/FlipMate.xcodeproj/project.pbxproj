@@ -259,6 +259,8 @@
 		ED82F00B2B128C4D005BB32D /* UIColor++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */; };
 		ED9B2A7F2B06033F008FE1C5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A7E2B06033F008FE1C5 /* Category.swift */; };
 		ED9B2A812B06048D008FE1C5 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */; };
+		EDA60F682B4FD32400F0104D /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA60F672B4FD32400F0104D /* FollowersViewController.swift */; };
+		EDB02C0D2B56711E003F515F /* FollowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB02C0C2B56711E003F515F /* FollowTableViewCell.swift */; };
 		EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851C62B021492009031EA /* TabBarViewController.swift */; };
 		EDC851D22B04EE83009031EA /* CategoryListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851D12B04EE83009031EA /* CategoryListCollectionViewCell.swift */; };
 		EDC851D92B05C37C009031EA /* DeviceMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851D82B05C37C009031EA /* DeviceMotionManager.swift */; };
@@ -528,6 +530,8 @@
 		ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor++Extension.swift"; sourceTree = "<group>"; };
 		ED9B2A7E2B06033F008FE1C5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
+		EDA60F672B4FD32400F0104D /* FollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
+		EDB02C0C2B56711E003F515F /* FollowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowTableViewCell.swift; sourceTree = "<group>"; };
 		EDC851C62B021492009031EA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		EDC851D12B04EE83009031EA /* CategoryListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCollectionViewCell.swift; sourceTree = "<group>"; };
 		EDC851D82B05C37C009031EA /* DeviceMotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceMotionManager.swift; path = FlipMate/Presentation/Utils/MotionManager/DeviceMotionManager.swift; sourceTree = SOURCE_ROOT; };
@@ -675,6 +679,7 @@
 				2C5CDA4E2B025403007AFC57 /* SocialViewController.swift */,
 				ED68659C2B15E928001A2AAD /* SocialDetailViewController.swift */,
 				2C9F61FD2B15F48600AE63F9 /* FriendAddViewController.swift */,
+				EDA60F672B4FD32400F0104D /* FollowersViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -804,6 +809,7 @@
 				2C9F62022B16021E00AE63F9 /* FriendSearchResultView.swift */,
 				2C9F62042B160B3900AE63F9 /* NoResultView.swift */,
 				60C2F2852B172D6900EBDD78 /* FriendsCollectionViewCell.swift */,
+				EDB02C0C2B56711E003F515F /* FollowTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1892,6 +1898,7 @@
 				2C4D55B02B0348FB006D7C26 /* TimerViewModel.swift in Sources */,
 				6087AEAD2B4A6A9300B29637 /* UpdateCategoryUseCase.swift in Sources */,
 				2CDCD0422B1873F60080DCDE /* SocialViewModel.swift in Sources */,
+				EDB02C0D2B56711E003F515F /* FollowTableViewCell.swift in Sources */,
 				6087AEC52B4A6D3800B29637 /* FetchFriendsUseCase.swift in Sources */,
 				601EB7452B14F86100C5B216 /* SignUpEndpoints.swift in Sources */,
 				6087AEDB2B4A706000B29637 /* DefaultAppleLoginUseCase.swift in Sources */,
@@ -1997,6 +2004,7 @@
 				2C2F216E2B0F40A100B45BA8 /* DefaultGetStudyLogUseCase.swift in Sources */,
 				2C2C7CBB2B29DFA600C733D5 /* PatchTimeZoneUseCase.swift in Sources */,
 				ED6865D82B1F32EF001A2AAD /* CustomCalenderView.swift in Sources */,
+				EDA60F682B4FD32400F0104D /* FollowersViewController.swift in Sources */,
 				2CE84EF72B0B7F3C00E2FB71 /* CategorySettingSection.swift in Sources */,
 				6087AEC12B4A6C9C00B29637 /* SearchFriendUseCase.swift in Sources */,
 				2C3430AD2B0DDF25008CBC85 /* DefaultTimerRepository.swift in Sources */,
