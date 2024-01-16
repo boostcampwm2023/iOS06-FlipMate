@@ -184,7 +184,7 @@ export class MatesController {
           description: '친구의 id',
           example: '1',
         },
-        fixation: {
+        is_fixed: {
           type: 'boolean',
           description: '고정/고정 해제 여부',
           example: 'true',
@@ -203,5 +203,48 @@ export class MatesController {
       statusCode: 200,
       message: '수정 완료',
     };
+  }
+
+  @Patch('blocking')
+  @UseGuards(AccessTokenGuard)
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary: '팔로워 목록에서 차단/차단 해제(나를 팔로우하고 있는 사람만 가능)',
+  })
+  @ApiBody({
+    schema: {
+      properties: {
+        follower_id: {
+          type: 'number',
+          description: '친구의 id',
+          example: '1',
+        },
+        is_blocked: {
+          type: 'boolean',
+          description: '차단/차단 해제 여부',
+          example: 'true',
+        },
+      },
+    },
+  })
+  async blockMate(
+    @User('id') id: number,
+    @Body('follower_id') follower_id: number,
+    @Body('is_blocked') is_blocked: boolean,
+  ): Promise<StatusMessageDto> {
+    await this.matesService.blockMate(id, follower_id, is_blocked);
+
+    return {
+      statusCode: 200,
+      message: '수정 완료',
+    };
+  }
+
+  @Get('/blockings')
+  @UseGuards(AccessTokenGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: '내가 차단한 사람들 조회하기' })
+  getBlockedMate(@User('id') user_id: number): Promise<object> {
+    return this.matesService.getBlockedFollowersInfo(user_id);
   }
 }

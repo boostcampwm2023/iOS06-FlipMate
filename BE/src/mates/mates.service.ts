@@ -65,7 +65,18 @@ export class MatesService {
       `SELECT u.id, u.nickname, u.image_url 
        FROM mates 
        INNER JOIN users_model as u ON u.id = mates.follower_id 
-       WHERE mates.following_id = ?
+       WHERE mates.following_id = ? AND mates.is_blocked = false
+       ORDER BY u.nickname`,
+      [user_id],
+    );
+  }
+
+  getBlockedFollowersInfo(user_id: number) {
+    return this.matesRepository.query(
+      `SELECT u.id, u.nickname, u.image_url 
+       FROM mates 
+       INNER JOIN users_model as u ON u.id = mates.follower_id 
+       WHERE mates.following_id = ? AND mates.is_blocked = true
        ORDER BY u.nickname`,
       [user_id],
     );
@@ -245,7 +256,7 @@ export class MatesService {
   }
 
   async fixationMate(
-    id,
+    id: number,
     following_id: number,
     is_fixed: boolean,
   ): Promise<void> {
@@ -255,6 +266,24 @@ export class MatesService {
         following_id: { id: following_id },
       },
       { is_fixed: is_fixed },
+    );
+
+    if (!result) {
+      throw new NotFoundException('해당 친구 관계는 존재하지 않습니다.');
+    }
+  }
+
+  async blockMate(
+    id: number,
+    follower_id: number,
+    is_blocked: boolean,
+  ): Promise<void> {
+    const result = await this.matesRepository.update(
+      {
+        follower_id: { id: follower_id },
+        following_id: { id: id },
+      },
+      { is_blocked: is_blocked },
     );
 
     if (!result) {

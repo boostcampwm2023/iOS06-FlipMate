@@ -22,7 +22,7 @@ export class UsersService {
   async getFollowsCount(user_id: number) {
     const [followsCount] = await this.usersRepository.query(
       `SELECT 
-        (SELECT COUNT(*) FROM mates WHERE following_id = ?) AS follower_count,
+        (SELECT COUNT(*) FROM mates WHERE following_id = ? AND is_blocked = false) AS follower_count,
         (SELECT COUNT(*) FROM mates WHERE follower_id = ?) AS following_count`,
       [user_id, user_id],
     );
