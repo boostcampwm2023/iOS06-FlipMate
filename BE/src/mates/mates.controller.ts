@@ -184,7 +184,7 @@ export class MatesController {
           description: '친구의 id',
           example: '1',
         },
-        fixation: {
+        is_fixed: {
           type: 'boolean',
           description: '고정/고정 해제 여부',
           example: 'true',
@@ -219,7 +219,7 @@ export class MatesController {
           description: '친구의 id',
           example: '1',
         },
-        fixation: {
+        is_blocked: {
           type: 'boolean',
           description: '차단/차단 해제 여부',
           example: 'true',
