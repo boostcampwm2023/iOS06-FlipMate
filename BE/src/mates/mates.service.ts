@@ -245,14 +245,32 @@ export class MatesService {
   }
 
   async fixationMate(
-    id,
+    id: number,
     following_id: number,
-    is_fixed: boolean,
+    is_blocked: boolean,
   ): Promise<void> {
     const result = await this.matesRepository.update(
       {
         follower_id: { id: id },
         following_id: { id: following_id },
+      },
+      { is_blocked: is_blocked },
+    );
+
+    if (!result) {
+      throw new NotFoundException('해당 친구 관계는 존재하지 않습니다.');
+    }
+  }
+
+  async blockMate(
+    id: number,
+    following_id: number,
+    is_fixed: boolean,
+  ): Promise<void> {
+    const result = await this.matesRepository.update(
+      {
+        follower_id: { id: following_id },
+        following_id: { id: id },
       },
       { is_fixed: is_fixed },
     );

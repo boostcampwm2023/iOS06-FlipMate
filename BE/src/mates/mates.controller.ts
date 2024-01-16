@@ -204,4 +204,39 @@ export class MatesController {
       message: '수정 완료',
     };
   }
+
+  @Patch('blocking')
+  @UseGuards(AccessTokenGuard)
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary: '친구 목록에서 차단/차단 해제(나를 팔로우하고 있는 사람만 가능)',
+  })
+  @ApiBody({
+    schema: {
+      properties: {
+        following_id: {
+          type: 'number',
+          description: '친구의 id',
+          example: '1',
+        },
+        fixation: {
+          type: 'boolean',
+          description: '차단/차단 해제 여부',
+          example: 'true',
+        },
+      },
+    },
+  })
+  async blockMate(
+    @User('id') id: number,
+    @Body('following_id') following_id: number,
+    @Body('is_blocked') is_blocked: boolean,
+  ): Promise<StatusMessageDto> {
+    await this.matesService.blockMate(id, following_id, is_blocked);
+
+    return {
+      statusCode: 200,
+      message: '수정 완료',
+    };
+  }
 }

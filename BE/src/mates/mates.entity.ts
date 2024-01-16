@@ -28,4 +28,7 @@ export class Mates {
 
   @Column({ type: 'boolean', default: false })
   is_fixed: boolean;
+
+  @Column({ type: 'boolean', default: false })
+  is_blocked: boolean;
 }
