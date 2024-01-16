@@ -71,6 +71,17 @@ export class MatesService {
     );
   }
 
+  getBlockedFollowersInfo(user_id: number) {
+    return this.matesRepository.query(
+      `SELECT u.id, u.nickname, u.image_url 
+       FROM mates 
+       INNER JOIN users_model as u ON u.id = mates.follower_id 
+       WHERE mates.following_id = ? AND mates.is_blocked = true
+       ORDER BY u.nickname`,
+      [user_id],
+    );
+  }
+
   getFollowingsInfo(user_id: number) {
     return this.matesRepository.query(
       `SELECT u.id, u.nickname, u.image_url 

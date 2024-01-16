@@ -209,7 +209,7 @@ export class MatesController {
   @UseGuards(AccessTokenGuard)
   @ApiBearerAuth()
   @ApiOperation({
-    summary: '친구 목록에서 차단/차단 해제(나를 팔로우하고 있는 사람만 가능)',
+    summary: '팔로워 목록에서 차단/차단 해제(나를 팔로우하고 있는 사람만 가능)',
   })
   @ApiBody({
     schema: {
@@ -238,5 +238,13 @@ export class MatesController {
       statusCode: 200,
       message: '수정 완료',
     };
+  }
+
+  @Get('/blockings')
+  @UseGuards(AccessTokenGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: '내가 차단한 사람들 조회하기' })
+  getBlockedMate(@User('id') user_id: number): Promise<object> {
+    return this.matesService.getBlockedFollowersInfo(user_id);
   }
 }
