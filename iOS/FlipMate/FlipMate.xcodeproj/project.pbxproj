@@ -810,13 +810,6 @@
 			path = SocialScene;
 			sourceTree = "<group>";
 		};
-		2C9F62272B174FC200AE63F9 /* FlipMateUseCaseTests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = FlipMateUseCaseTests;
-			sourceTree = "<group>";
-		};
 		2C9F62282B174FDB00AE63F9 /* FlipMateViewModelTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -932,7 +925,6 @@
 			isa = PBXGroup;
 			children = (
 				2C9F62282B174FDB00AE63F9 /* FlipMateViewModelTests */,
-				2C9F62272B174FC200AE63F9 /* FlipMateUseCaseTests */,
 			);
 			path = FlipMateTests;
 			sourceTree = "<group>";
@@ -2265,14 +2257,14 @@
 				CODE_SIGN_ENTITLEMENTS = FlipMate/FlipMate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				DEVELOPMENT_TEAM = MV89SHQKF4;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FlipMate/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = FlipMate;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2281,7 +2273,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.codesquad.boostcamp8.FlipMate;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.wbygg.FlipMate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -2302,14 +2294,14 @@
 				CODE_SIGN_ENTITLEMENTS = FlipMate/FlipMate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				DEVELOPMENT_TEAM = MV89SHQKF4;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FlipMate/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = FlipMate;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2318,7 +2310,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.codesquad.boostcamp8.FlipMate;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.wbygg.FlipMate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
