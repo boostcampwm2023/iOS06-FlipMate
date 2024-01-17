@@ -137,8 +137,9 @@ final class FriendAddViewController: BaseViewController {
         
         viewModel.searchErrorPublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
+            .sink { [weak self] error in
                 guard let self = self else { return }
+                FMLogger.general.error("에러 발생 : \(error)")
                 self.updateResultView(noResultView)
             }
             .store(in: &cancellables)
