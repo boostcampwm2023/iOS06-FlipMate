@@ -43,12 +43,12 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     private let followUseCase: FollowFriendUseCase
     private let searchUseCase: SearchFriendUseCase
     private let actions: FriendAddViewModelActions?
-    private let userInfoManger: UserInfoManagerProtocol
+    private let userInfoManger: UserInfoManagable
     
     init(followUseCase: FollowFriendUseCase,
          searchUseCase: SearchFriendUseCase,
          actions: FriendAddViewModelActions? = nil,
-         userInfoManager: UserInfoManagerProtocol) {
+         userInfoManager: UserInfoManagable) {
         self.followUseCase = followUseCase
         self.searchUseCase = searchUseCase
         self.actions = actions

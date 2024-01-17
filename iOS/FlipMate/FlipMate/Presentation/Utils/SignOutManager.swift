@@ -15,10 +15,10 @@ protocol SignOutManagerProtocol {
 
 final class SignOutManager: SignOutManagerProtocol {
     private var signOutSubject = PassthroughSubject<Bool, Never>()
-    private let userInfoManager: UserInfoManagerProtocol
+    private let userInfoManager: UserInfoManagable
     private let keychainManager: KeychainManagerProtocol
     
-    init(userInfoManager: UserInfoManagerProtocol, keychainManager: KeychainManagerProtocol) {
+    init(userInfoManager: UserInfoManagable, keychainManager: KeychainManagerProtocol) {
         self.userInfoManager = userInfoManager
         self.keychainManager = keychainManager
     }

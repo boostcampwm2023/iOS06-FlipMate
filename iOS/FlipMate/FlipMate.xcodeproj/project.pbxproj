@@ -15,11 +15,18 @@
 		600908CA2AFCD7E00065DFFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 600908C82AFCD7E00065DFFB /* LaunchScreen.storyboard */; };
 		600908DF2AFCD7E00065DFFB /* FlipMateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908DE2AFCD7E00065DFFB /* FlipMateUITests.swift */; };
 		600908E12AFCD7E00065DFFB /* FlipMateUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908E02AFCD7E00065DFFB /* FlipMateUITestsLaunchTests.swift */; };
+		600D81362B51344500670882 /* TimerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE4D2B4B82B1006B1CF9 /* TimerViewModelTests.swift */; };
+		600D81372B5148B900670882 /* CategoryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE4F2B4B82C1006B1CF9 /* CategoryViewModelTests.swift */; };
+		600D81382B5148B900670882 /* CategoryModifyViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE532B4B82E4006B1CF9 /* CategoryModifyViewModelTests.swift */; };
+		600D81392B5148B900670882 /* TimerFinishViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE512B4B82CC006B1CF9 /* TimerFinishViewModelTests.swift */; };
+		600D813C2B5148CC00670882 /* FriendAddViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F622E2B17505B00AE63F9 /* FriendAddViewModelTests.swift */; };
 		60243EF02B05D24D0098A92F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 60243EEF2B05D24D0098A92F /* .swiftlint.yml */; };
 		602C9D472B4E9A310021F2DE /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE492B4B826F006B1CF9 /* LoginViewModelTests.swift */; };
 		602C9D482B4F95D30021F2DE /* SignUpViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE4B2B4B829B006B1CF9 /* SignUpViewModelTests.swift */; };
 		6067DD832B2737F9004625AF /* Selection.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 6067DD822B2737F9004625AF /* Selection.ahap */; };
 		6096F91E2B04F3CA00D0B972 /* FaceDown.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 6096F91D2B04F3CA00D0B972 /* FaceDown.ahap */; };
+		60C7918A2B5810FA0019E81F /* DummyUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C791892B5810FA0019E81F /* DummyUseCases.swift */; };
+		60C7918D2B5819F10019E81F /* DummyManagers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C7918C2B5819F10019E81F /* DummyManagers.swift */; };
 		60FAB97A2B4E9807004572BF /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */; };
 		60FAB97B2B4E9807004572BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908BD2AFCD7DF0065DFFB /* AppDelegate.swift */; };
 		60FAB97C2B4E9807004572BF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908BF2AFCD7DF0065DFFB /* SceneDelegate.swift */; };
@@ -439,6 +446,8 @@
 		6096F91D2B04F3CA00D0B972 /* FaceDown.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = FaceDown.ahap; sourceTree = "<group>"; };
 		60A0B8E02B181C4900510299 /* Data++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data++Extension.swift"; sourceTree = "<group>"; };
 		60C2F2852B172D6900EBDD78 /* FriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewCell.swift; sourceTree = "<group>"; };
+		60C791892B5810FA0019E81F /* DummyUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyUseCases.swift; sourceTree = "<group>"; };
+		60C7918C2B5819F10019E81F /* DummyManagers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyManagers.swift; sourceTree = "<group>"; };
 		60DE493C2B05DEA400ACE6DD /* FlipMateLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipMateLogger.swift; sourceTree = "<group>"; };
 		60DE493F2B05E67200ACE6DD /* FlipMateConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipMateConstant.swift; sourceTree = "<group>"; };
 		60DFDDD82B14FD7800FEF98A /* StatusResponseWithErrorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusResponseWithErrorDTO.swift; sourceTree = "<group>"; };
@@ -456,11 +465,6 @@
 		60FBEE4F2B4B82C1006B1CF9 /* CategoryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModelTests.swift; sourceTree = "<group>"; };
 		60FBEE512B4B82CC006B1CF9 /* TimerFinishViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishViewModelTests.swift; sourceTree = "<group>"; };
 		60FBEE532B4B82E4006B1CF9 /* CategoryModifyViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModifyViewModelTests.swift; sourceTree = "<group>"; };
-		60FBEE552B4B82FB006B1CF9 /* ChartViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModelTests.swift; sourceTree = "<group>"; };
-		60FBEE5A2B4BCCF6006B1CF9 /* SocialViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewModelTests.swift; sourceTree = "<group>"; };
-		60FBEE5C2B4BCD01006B1CF9 /* SocialDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDetailViewModelTests.swift; sourceTree = "<group>"; };
-		60FBEE5E2B4BCD0C006B1CF9 /* MyPageViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModelTests.swift; sourceTree = "<group>"; };
-		60FBEE602B4BCD17006B1CF9 /* ProfileSettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewModelTests.swift; sourceTree = "<group>"; };
 		65D7B3C8248401D64CA3EF90 /* Pods-FlipMateTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMateTests.release.xcconfig"; path = "Target Support Files/Pods-FlipMateTests/Pods-FlipMateTests.release.xcconfig"; sourceTree = "<group>"; };
 		8ED331B3B7BDE8C6BB68666F /* Pods-FlipMate-FlipMateUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate-FlipMateUITests.debug.xcconfig"; path = "Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D2F176F76D65D7B591BA21B0 /* Pods-FlipMate-FlipMateUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate-FlipMateUITests.release.xcconfig"; path = "Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -822,6 +826,8 @@
 		2C9F62282B174FDB00AE63F9 /* FlipMateViewModelTests */ = {
 			isa = PBXGroup;
 			children = (
+				60C7918B2B5819E70019E81F /* DummyManagers */,
+				60C791882B5810EB0019E81F /* DummyUseCases */,
 				60FBEE462B4B81EF006B1CF9 /* LoginScene */,
 				60FBEE472B4B81F9006B1CF9 /* TimerScene */,
 				60FBEE482B4B821E006B1CF9 /* ChartScene */,
@@ -834,8 +840,6 @@
 		2C9F62322B17512E00AE63F9 /* SocialScene */ = {
 			isa = PBXGroup;
 			children = (
-				60FBEE5A2B4BCCF6006B1CF9 /* SocialViewModelTests.swift */,
-				60FBEE5C2B4BCD01006B1CF9 /* SocialDetailViewModelTests.swift */,
 				2C9F622E2B17505B00AE63F9 /* FriendAddViewModelTests.swift */,
 			);
 			path = SocialScene;
@@ -1396,6 +1400,22 @@
 			path = Chart;
 			sourceTree = "<group>";
 		};
+		60C791882B5810EB0019E81F /* DummyUseCases */ = {
+			isa = PBXGroup;
+			children = (
+				60C791892B5810FA0019E81F /* DummyUseCases.swift */,
+			);
+			path = DummyUseCases;
+			sourceTree = "<group>";
+		};
+		60C7918B2B5819E70019E81F /* DummyManagers */ = {
+			isa = PBXGroup;
+			children = (
+				60C7918C2B5819F10019E81F /* DummyManagers.swift */,
+			);
+			path = DummyManagers;
+			sourceTree = "<group>";
+		};
 		60DE493B2B05DE6700ACE6DD /* Logger */ = {
 			isa = PBXGroup;
 			children = (
@@ -1460,7 +1480,6 @@
 		60FBEE462B4B81EF006B1CF9 /* LoginScene */ = {
 			isa = PBXGroup;
 			children = (
-				60FBEF242B4BD184006B1CF9 /* Mock */,
 				60FBEE492B4B826F006B1CF9 /* LoginViewModelTests.swift */,
 				60FBEE4B2B4B829B006B1CF9 /* SignUpViewModelTests.swift */,
 			);
@@ -1481,7 +1500,6 @@
 		60FBEE482B4B821E006B1CF9 /* ChartScene */ = {
 			isa = PBXGroup;
 			children = (
-				60FBEE552B4B82FB006B1CF9 /* ChartViewModelTests.swift */,
 			);
 			path = ChartScene;
 			sourceTree = "<group>";
@@ -1489,17 +1507,8 @@
 		60FBEE572B4BCC8C006B1CF9 /* MyPageScene */ = {
 			isa = PBXGroup;
 			children = (
-				60FBEE5E2B4BCD0C006B1CF9 /* MyPageViewModelTests.swift */,
-				60FBEE602B4BCD17006B1CF9 /* ProfileSettingsViewModelTests.swift */,
 			);
 			path = MyPageScene;
-			sourceTree = "<group>";
-		};
-		60FBEF242B4BD184006B1CF9 /* Mock */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Mock;
 			sourceTree = "<group>";
 		};
 		ED3595AE2B0C82A200558FAA /* TimerScene */ = {
@@ -2089,8 +2098,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				600D813C2B5148CC00670882 /* FriendAddViewModelTests.swift in Sources */,
+				600D81372B5148B900670882 /* CategoryViewModelTests.swift in Sources */,
+				60C7918A2B5810FA0019E81F /* DummyUseCases.swift in Sources */,
 				602C9D482B4F95D30021F2DE /* SignUpViewModelTests.swift in Sources */,
+				600D81382B5148B900670882 /* CategoryModifyViewModelTests.swift in Sources */,
+				600D81392B5148B900670882 /* TimerFinishViewModelTests.swift in Sources */,
+				600D81362B51344500670882 /* TimerViewModelTests.swift in Sources */,
 				602C9D472B4E9A310021F2DE /* LoginViewModelTests.swift in Sources */,
+				60C7918D2B5819F10019E81F /* DummyManagers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

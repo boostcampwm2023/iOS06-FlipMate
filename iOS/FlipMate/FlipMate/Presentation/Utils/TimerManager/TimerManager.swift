@@ -8,7 +8,7 @@
 import Foundation
 import OSLog
 
-protocol TimerManagerProtocol {
+protocol TimerManagable {
     var state: TimerState { get }
     
     func start(completion: (() -> Void)?)
@@ -18,7 +18,7 @@ protocol TimerManagerProtocol {
 }
 
 /// 타이머를 관리해주는 객체
-final class TimerManager: TimerManagerProtocol {
+final class TimerManager: TimerManagable {
     // MARK: - Properties
     private var handler: (() -> Void)?
     private var timeInterval: DispatchTimeInterval

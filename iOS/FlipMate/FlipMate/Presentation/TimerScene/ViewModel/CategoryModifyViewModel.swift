@@ -32,7 +32,7 @@ final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
     private lazy var selectedCategorySubject = CurrentValueSubject<Category?, Never>(selectedCategory)
     
     // MARK: - Properites
-    private var categoryMananger: CategoryManageable
+    private var categoryMananger: CategoryManagable
     private let createCategoryUseCase: CreateCategoryUseCase
     private let updateCategoryUseCase: UpdateCategoryUseCsae
     private let actions: CategoryModifyViewModelActions?
@@ -42,7 +42,7 @@ final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
     
     init(createCategoryUseCase: CreateCategoryUseCase,
          updateCategoryUseCase: UpdateCategoryUseCsae,
-         categoryManager: CategoryManageable,
+         categoryManager: CategoryManagable,
          actions: CategoryModifyViewModelActions? = nil,
          selectedCategory: Category? = nil) {
         self.createCategoryUseCase = createCategoryUseCase

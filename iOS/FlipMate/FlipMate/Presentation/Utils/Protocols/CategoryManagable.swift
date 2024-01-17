@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-protocol CategoryManageable {
+protocol CategoryManagable {
     var categoryDidChangePublisher: AnyPublisher<[Category], Never> { get }
     func replace(categories: [Category])
     func change(category: Category)

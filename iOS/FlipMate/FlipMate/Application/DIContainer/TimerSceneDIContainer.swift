@@ -10,8 +10,8 @@ import UIKit
 final class TimerSceneDIContainer: TimerFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
-        let categoryManager: CategoryManageable
-        let userInfoManager: UserInfoManagerProtocol
+        let categoryManager: CategoryManagable
+        let userInfoManager: UserInfoManagable
     }
     
     private let dependencies: Dependencies
