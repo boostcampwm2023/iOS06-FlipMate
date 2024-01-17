@@ -9,6 +9,15 @@
     }
   ],
   "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:FlipMate.xcodeproj",
+          "identifier" : "600908B92AFCD7DF0065DFFB",
+          "name" : "FlipMate"
+        }
+      ]
+    },
     "targetForVariableExpansion" : {
       "containerPath" : "container:FlipMate.xcodeproj",
       "identifier" : "600908B92AFCD7DF0065DFFB",
