@@ -41,7 +41,7 @@ final class EndPoint<R: Decodable>: RequestResponseable {
         return urlRequest
     }
     
-    func makeURL() throws -> URL {
+    private func makeURL() throws -> URL {
         let fullPath = "\(baseURL)\(path)"
         guard let components = URLComponents(string: fullPath) else { throw NetworkError.invalidURLComponents }
         

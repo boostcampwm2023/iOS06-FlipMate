@@ -14,5 +14,4 @@ protocol Requestable {
     var data: Data? { get }
     var headers: [HTTPHeader]? { get }
     func makeURLRequest(with token: String?) throws -> URLRequest
-    func makeURL() throws -> URL
 }
