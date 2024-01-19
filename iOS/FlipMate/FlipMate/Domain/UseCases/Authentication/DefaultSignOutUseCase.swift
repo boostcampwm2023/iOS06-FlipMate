@@ -8,9 +8,9 @@
 import Foundation
 
 final class DefaultSignOutUseCase: SignOutUseCase {
-    private let signoutManager: SignOutManagerProtocol
+    private let signoutManager: SignOutManagable
     
-    public init(signoutManager: SignOutManagerProtocol) {
+    public init(signoutManager: SignOutManagable) {
         self.signoutManager = signoutManager
     }
     

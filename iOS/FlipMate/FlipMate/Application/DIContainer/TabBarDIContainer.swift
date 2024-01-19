@@ -12,7 +12,7 @@ final class TabBarDIContainer: TabBarFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
         let categoryManager: CategoryManagable
-        let signOutManager: SignOutManagerProtocol
+        let signOutManager: SignOutManagable
         let userInfoManager: UserInfoManagable
     }
     

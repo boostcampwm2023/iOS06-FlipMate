@@ -11,9 +11,9 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
         let categoryManager: CategoryManagable
-        let signOutManager: SignOutManagerProtocol
+        let signOutManager: SignOutManagable
         let userInfoManager: UserInfoManagable
-        let keychainManager: KeychainManagerProtocol
+        let keychainManager: KeychainManagable
     }
     
     private let dependencies: Dependencies

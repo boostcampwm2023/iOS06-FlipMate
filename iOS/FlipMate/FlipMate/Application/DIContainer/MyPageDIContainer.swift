@@ -10,7 +10,7 @@ import UIKit
 final class MyPageDIContainer: MyPageFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
-        let signOutManager: SignOutManagerProtocol
+        let signOutManager: SignOutManagable
         let userInfoManager: UserInfoManagable
     }
     

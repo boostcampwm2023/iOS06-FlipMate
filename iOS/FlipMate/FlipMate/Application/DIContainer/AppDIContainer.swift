@@ -8,8 +8,8 @@
 import UIKit
 
 final class AppDIContainer {
-    lazy var keychainManager: KeychainManagerProtocol = KeychainManager()
-    lazy var signOutManager: SignOutManagerProtocol = SignOutManager(userInfoManager: userInfoManager, keychainManager: keychainManager)
+    lazy var keychainManager: KeychainManagable = KeychainManager()
+    lazy var signOutManager: SignOutManagable = SignOutManager(userInfoManager: userInfoManager, keychainManager: keychainManager)
     lazy var provider: Provider = Provider(urlSession: URLSession.shared, signOutManager: signOutManager, keychainManager: keychainManager)
     lazy var categoryManager: CategoryManagable = CategoryManager(categories: [])
     lazy var userInfoManager: UserInfoManagable = UserInfoManager()

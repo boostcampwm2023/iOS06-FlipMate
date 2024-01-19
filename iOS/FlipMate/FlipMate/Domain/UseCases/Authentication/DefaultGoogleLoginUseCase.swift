@@ -9,9 +9,9 @@ import Foundation
 
 final class DefaultGoogleLoginUseCase: GoogleLoginUseCase {
     private let repository: AuthenticationRepository
-    private let keychainManager: KeychainManagerProtocol
+    private let keychainManager: KeychainManagable
     
-    public init(repository: AuthenticationRepository, keychainManager: KeychainManagerProtocol) {
+    public init(repository: AuthenticationRepository, keychainManager: KeychainManagable) {
         self.repository = repository
         self.keychainManager = keychainManager
     }
