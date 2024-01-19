@@ -10,10 +10,10 @@ import UIKit
 final class LoginDIContainer: LoginFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
-        let categoryManager: CategoryManagable
-        let signOutManager: SignOutManagable
-        let userInfoManager: UserInfoManagable
-        let keychainManager: KeychainManagable
+        let categoryManager: CategoryManageable
+        let signOutManager: SignOutManageable
+        let userInfoManager: UserInfoManageable
+        let keychainManager: KeychainManageable
     }
     
     private let dependencies: Dependencies

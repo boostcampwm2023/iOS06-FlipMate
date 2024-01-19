@@ -1,6 +1,6 @@
 import Foundation
 
-protocol KeychainManagable {
+protocol KeychainManageable {
     func saveAccessToken(token: String) throws
     func getAccessToken() throws -> String
     func deleteAccessToken() throws
@@ -15,7 +15,7 @@ enum KeychainError: Error {
     case unknown(OSStatus)
 }
 
-final class KeychainManager: KeychainManagable {
+final class KeychainManager: KeychainManageable {
     enum ServiceName {
         static let flipMate = "FlipMate"
         static let appleLogin = "AppleLogin"

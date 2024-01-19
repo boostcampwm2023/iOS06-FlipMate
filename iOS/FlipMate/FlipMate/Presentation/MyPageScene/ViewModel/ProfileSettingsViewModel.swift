@@ -43,12 +43,12 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     private var isSignUpCompletedSubject = PassthroughSubject<Void, Never>()
     private var errorSubject = PassthroughSubject<Error, Never>()
     private let actions: ProfileSettingsViewModelActions?
-    private let userInfoManager: UserInfoManagable
+    private let userInfoManager: UserInfoManageable
     
     init(validateNicknameUseCase: ValidateNicknameUseCase,
          setupProfileInfoUseCase: SetupProfileInfoUseCase,
          actions: ProfileSettingsViewModelActions?,
-         userInfoManager: UserInfoManagable) {
+         userInfoManager: UserInfoManageable) {
         self.validateNicknameUseCase = validateNicknameUseCase
         self.setupProfileInfoUseCase = setupProfileInfoUseCase
         self.actions = actions

@@ -16,12 +16,12 @@ protocol Providable {
 struct Provider: Providable {
     private let jsonDecoder = JSONDecoder()
     private var urlSession: URLSessionable
-    private let signOutManager: SignOutManagable
-    private let keychainManager: KeychainManagable
+    private let signOutManager: SignOutManageable
+    private let keychainManager: KeychainManageable
     
     init(urlSession: URLSessionable,
-         signOutManager: SignOutManagable,
-         keychainManager: KeychainManagable) {
+         signOutManager: SignOutManageable,
+         keychainManager: KeychainManageable) {
         self.urlSession = urlSession
         self.signOutManager = signOutManager
         self.keychainManager = keychainManager

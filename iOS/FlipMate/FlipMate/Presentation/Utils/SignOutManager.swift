@@ -8,17 +8,17 @@
 import Foundation
 import Combine
 
-protocol SignOutManagable {
+protocol SignOutManageable {
     var signOutPublisher: AnyPublisher<Bool, Never> { get }
     func signOut()
 }
 
-final class SignOutManager: SignOutManagable {
+final class SignOutManager: SignOutManageable {
     private var signOutSubject = PassthroughSubject<Bool, Never>()
-    private let userInfoManager: UserInfoManagable
-    private let keychainManager: KeychainManagable
+    private let userInfoManager: UserInfoManageable
+    private let keychainManager: KeychainManageable
     
-    init(userInfoManager: UserInfoManagable, keychainManager: KeychainManagable) {
+    init(userInfoManager: UserInfoManageable, keychainManager: KeychainManageable) {
         self.userInfoManager = userInfoManager
         self.keychainManager = keychainManager
     }

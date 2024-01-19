@@ -9,7 +9,7 @@ import Foundation
 import Combine
 @testable import FlipMate
 
-final class DummyCategoryManager: CategoryManagable {
+final class DummyCategoryManager: CategoryManageable {
     var categoryDidChangePublisher: AnyPublisher<[FlipMate.Category], Never>
     
     init(categoryDidChangePublisher: AnyPublisher<[FlipMate.Category], Never>) {
@@ -46,7 +46,7 @@ final class DummyCategoryManager: CategoryManagable {
     }
 }
 
-final class DummyUserInfoManager: UserInfoManagable {
+final class DummyUserInfoManager: UserInfoManageable {
     var nicknameChangePublisher: AnyPublisher<String, Never>
     
     var profileImageChangePublihser: AnyPublisher<String?, Never>
@@ -95,7 +95,7 @@ final class DummyUserInfoManager: UserInfoManagable {
     }
 }
 
-final class DummyTimerManager: TimerManagable {
+final class DummyTimerManager: TimerManageable {
     var state: FlipMate.TimerState
     
     init(state: FlipMate.TimerState) {

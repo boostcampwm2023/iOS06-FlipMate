@@ -10,7 +10,7 @@ import UIKit
 final class CategoryDIContainer: CategoryFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
-        let categoryManager: CategoryManagable
+        let categoryManager: CategoryManageable
     }
     
     private let dependencies: Dependencies

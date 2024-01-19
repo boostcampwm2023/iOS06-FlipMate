@@ -9,9 +9,9 @@ import Foundation
 
 final class DefaultAppleLoginUseCase: AppleLoginUseCase {
     private let repository: AuthenticationRepository
-    private let keychainManager: KeychainManagable
+    private let keychainManager: KeychainManageable
     
-    public init(repository: AuthenticationRepository, keychainManager: KeychainManagable) {
+    public init(repository: AuthenticationRepository, keychainManager: KeychainManageable) {
         self.repository = repository
         self.keychainManager = keychainManager
     }

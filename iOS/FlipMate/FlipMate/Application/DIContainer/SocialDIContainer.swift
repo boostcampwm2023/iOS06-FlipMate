@@ -10,8 +10,8 @@ import UIKit
 final class SocialDIContainer: SocialFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
-        let signOutManager: SignOutManagable
-        let userInfoManager: UserInfoManagable
+        let signOutManager: SignOutManageable
+        let userInfoManager: UserInfoManageable
     }
     
     private let dependencies: Dependencies

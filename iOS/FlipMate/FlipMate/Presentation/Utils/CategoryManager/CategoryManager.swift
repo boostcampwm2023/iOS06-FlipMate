@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class CategoryManager: CategoryManagable {
+final class CategoryManager: CategoryManageable {
     // MARK: - Properties
     private lazy var categoryDidChangeSubject = CurrentValueSubject<[Category], Never>(categories)
     private var categories: [Category] = []

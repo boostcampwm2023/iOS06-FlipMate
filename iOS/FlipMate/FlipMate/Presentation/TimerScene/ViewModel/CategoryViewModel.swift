@@ -35,12 +35,12 @@ final class CategoryViewModel: CategoryViewModelProtocol {
     private var selectedCategorySubject = PassthroughSubject<Category, Never>()
     private var categoryPullSubject = PassthroughSubject<Void, Never>()
     
-    private var categoryMananger: CategoryManagable
+    private var categoryMananger: CategoryManageable
     private let deleteCategoryUseCase: DeleteCategoryUseCase
     private let actions: CategoryViewModelActions?
     private var selectedCategory: Category?
     
-    init(deleteCategoryUseCase: DeleteCategoryUseCase, categoryManager: CategoryManagable, actions: CategoryViewModelActions? = nil) {
+    init(deleteCategoryUseCase: DeleteCategoryUseCase, categoryManager: CategoryManageable, actions: CategoryViewModelActions? = nil) {
         self.deleteCategoryUseCase = deleteCategoryUseCase
         self.categoryMananger = categoryManager
         self.actions = actions

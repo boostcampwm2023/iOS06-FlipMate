@@ -9,9 +9,9 @@ import Foundation
 
 final class DefaultWithdrawUesCase: WithdrawUseCase {
     private let repository: AuthenticationRepository
-    private let signOutManager: SignOutManagable
+    private let signOutManager: SignOutManageable
     
-    init(repository: AuthenticationRepository, signOutManager: SignOutManagable) {
+    init(repository: AuthenticationRepository, signOutManager: SignOutManageable) {
         self.repository = repository
         self.signOutManager = signOutManager
     }

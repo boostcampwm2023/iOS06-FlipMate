@@ -11,9 +11,9 @@ final class TabBarDIContainer: TabBarFlowCoordinatorDependencies {
     
     struct Dependencies {
         let provider: Providable
-        let categoryManager: CategoryManagable
-        let signOutManager: SignOutManagable
-        let userInfoManager: UserInfoManagable
+        let categoryManager: CategoryManageable
+        let signOutManager: SignOutManageable
+        let userInfoManager: UserInfoManageable
     }
     
     private let dependencies: Dependencies

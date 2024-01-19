@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-protocol UserInfoManagable {
+protocol UserInfoManageable {
     var nicknameChangePublisher: AnyPublisher<String, Never> { get }
     var profileImageChangePublihser: AnyPublisher<String?, Never> { get }
     var totalTimeChangePublihser: AnyPublisher<Int, Never> { get }
@@ -22,7 +22,7 @@ protocol UserInfoManagable {
     func initManager()
 }
 
-final class UserInfoManager: UserInfoManagable {
+final class UserInfoManager: UserInfoManageable {
     // MARK: - Properties
     private var nickname: String = ""
     private var profileImageURL: String?

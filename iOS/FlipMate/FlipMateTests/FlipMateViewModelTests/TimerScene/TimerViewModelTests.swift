@@ -10,7 +10,7 @@ import XCTest
 import Combine
 @testable import FlipMate
 
-private final class MockTimerManager: TimerManagable {
+private final class MockTimerManager: TimerManageable {
     var state: FlipMate.TimerState
     
     init(state: FlipMate.TimerState) {
