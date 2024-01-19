@@ -31,7 +31,12 @@ final class ChartViewController: BaseViewController {
         return segmentedControl
     }()
     
-    private var weeklyCalendarView: WeeklyCalendarView
+    private lazy var weeklyCalendarView: WeeklyCalendarView = {
+        let calendarView = WeeklyCalendarView()
+        calendarView.delegate = self
+        return calendarView
+    }()
+    
     private var donutChartView = DonutChartView()
     private var weeklyChartView = UIView()
     
@@ -46,7 +51,6 @@ final class ChartViewController: BaseViewController {
     // MARK: - init
     init(viewModel: ChartViewModelProtocol) {
         self.viewModel = viewModel
-        self.weeklyCalendarView = WeeklyCalendarView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -96,6 +100,15 @@ final class ChartViewController: BaseViewController {
     }
 }
 
+extension ChartViewController: WeeklyCalendarViewDelegate {
+    func didSelectDate(_ date: Date) {
+        FMLogger.chart.debug("해당 날짜가 선택되었습니다. \(date.dateToString(format: .yyyyMMdd))")
+    }
+    
+    func deSelectDate(_ date: Date) {
+        FMLogger.chart.debug("해당 날짜가 선택 해제되었습니다. \(date.dateToString(format: .yyyyMMdd))")
+    }
+}
 private extension ChartViewController {
     @objc func didChangeValue(segment: UISegmentedControl) {
         shouldHideDailyChartView = segment.selectedSegmentIndex != 0

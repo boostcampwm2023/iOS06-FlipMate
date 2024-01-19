@@ -7,22 +7,30 @@
 
 import UIKit
 
+enum CalendarScrollState {
+    case left
+    case none
+    case right
+}
+    
+protocol WeeklyCalendarViewDelegate: AnyObject {
+    func didSelectDate(_ date: Date)
+    func deSelectDate(_ date: Date)
+}
+
 final class WeeklyCalendarView: UIView {
     typealias CalendarDataSource = UICollectionViewDiffableDataSource<WeeklySection, WeeklySectionItem>
     typealias Snapshot = NSDiffableDataSourceSnapshot<WeeklySection, WeeklySectionItem>
     
     // MARK: - Properties
-    private enum ScrollState {
-        case left
-        case none
-        case right
-    }
-    
     private var dataSource: CalendarDataSource?
-    private var scrollState: ScrollState = .none
+    private var calendarScrollState: CalendarScrollState = .none
     private var currentWeekDate = Date()
     private var calendar = Calendar.current
-    private var viewModel: ChartViewModelProtocol
+    
+    private let calendarManager = CalendarManager()
+    
+    weak var delegate: WeeklyCalendarViewDelegate?
     
     private let dateLabel: UILabel = {
         let label = UILabel()
@@ -48,9 +56,8 @@ final class WeeklyCalendarView: UIView {
         return collectionView
     }()
     
-    init(viewModel: ChartViewModelProtocol) {
-        self.viewModel = viewModel
-        super.init(frame: .zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         configureUI()
         configureWeekStackView()
         setDataSource()
@@ -67,6 +74,7 @@ final class WeeklyCalendarView: UIView {
     }
 }
 
+// MARK: - DiffableDataSource
 private extension WeeklyCalendarView {
     func setDataSource() {
         dataSource = CalendarDataSource(
@@ -85,20 +93,20 @@ private extension WeeklyCalendarView {
     func setSnapshot() {
         var snapshot = Snapshot()
         let sections: [WeeklySection] = [.section([])]
-        let currentWeekDate = Date()
-        let lastWeekDate = addDays(date: currentWeekDate, days: Constant.lastWeekValue)
-        let nextWeekDate = addDays(date: currentWeekDate, days: Constant.nextWeekValue)
+        let currentWeekItem = calendarManager.currentWeekItem()
+        let previousWeekItem = calendarManager.previousWeekItem()
+        let nextWeekItem = calendarManager.nextWeekItem()
         snapshot.appendSections(sections)
-        snapshot.appendItems(weekendItem(lastWeekDate))
-        snapshot.appendItems(weekendItem(currentWeekDate))
-        snapshot.appendItems(weekendItem(nextWeekDate))
+        snapshot.appendItems(previousWeekItem)
+        snapshot.appendItems(currentWeekItem)
+        snapshot.appendItems(nextWeekItem)
         dateLabel.text = monthTitle(from: currentWeekDate)
         dataSource?.apply(snapshot)
     }
     
     func findItemIndex(at date: String) -> Int? {
         guard let snapshot = dataSource?.snapshot(),
-              let targetItem = snapshot.itemIdentifiers.filter { $0.date == date }.first else { return nil }
+              let targetItem = snapshot.itemIdentifiers.filter({ $0.date == date }).first else { return nil }
         return snapshot.indexOfItem(targetItem)
     }
     
@@ -109,65 +117,19 @@ private extension WeeklyCalendarView {
     }
 }
 
+// MARK: - Scroll
 private extension WeeklyCalendarView {
-    func weekendItem(_ date: Date) -> [WeeklySectionItem] {
-        var weekendDate = [Date]()
-        var current = findSunday(date: date)
-        let nextSunday = addDays(date: current, days: Constant.nextWeekValue)
-        
-        while current < nextSunday {
-            weekendDate.append(current)
-            current = addDays(date: current, days: 1)
-        }
-        
-        return weekendDate.map { WeeklySectionItem.dateCell($0.dateToString(format: .yyyyMMdd)) }
-    }
-    
-    func findSunday(date: Date) -> Date {
-        var current = date
-        let oneWeekAgo = addDays(date: current, days: Constant.lastWeekValue)
-        
-        while current > oneWeekAgo {
-            let currentWeekDay = calendar.dateComponents([.weekday], from: current).weekday
-            if currentWeekDay == 1 {
-                return current
-            }
-            current = addDays(date: current, days: -1)
-        }
-        return current
-    }
-    
-    func addDays(date: Date, days: Int) -> Date {
-        return calendar.date(byAdding: .day, value: days, to: date) ?? Date()
-    }
-}
-
-private extension WeeklyCalendarView {
-    func leftScroll() {
+    func didScrollCalendar(calendarScrollState: CalendarScrollState) {
         var snapshot = Snapshot()
         let sections: [WeeklySection] = [.section([])]
-        let followingWeekDate = currentWeekDate
-        currentWeekDate = addDays(date: followingWeekDate, days: Constant.lastWeekValue)
-        let previousWeekDate = addDays(date: currentWeekDate, days: Constant.lastWeekValue)
+        calendarManager.updateCurrentWeek(calendarScrollState: calendarScrollState)
+        let currentWeekItem = calendarManager.currentWeekItem()
+        let previousWeekItem = calendarManager.previousWeekItem()
+        let nextWeekItem = calendarManager.nextWeekItem()
         snapshot.appendSections(sections)
-        snapshot.appendItems(weekendItem(previousWeekDate))
-        snapshot.appendItems(weekendItem(currentWeekDate))
-        snapshot.appendItems(weekendItem(followingWeekDate))
-        dateLabel.text = monthTitle(from: currentWeekDate)
-        dataSource?.apply(snapshot, animatingDifferences: false)
-        weekCollectionView.scrollToItem(at: IndexPath(row: Constant.currentWeekSundayIndex, section: 0), at: .centeredHorizontally, animated: false)
-    }
-    
-    func rightScroll() {
-        var snapshot = Snapshot()
-        let sections: [WeeklySection] = [.section([])]
-        let previousWeekDate = currentWeekDate
-        currentWeekDate = addDays(date: previousWeekDate, days: Constant.nextWeekValue)
-        let followingWeekDate = addDays(date: currentWeekDate, days: Constant.nextWeekValue)
-        snapshot.appendSections(sections)
-        snapshot.appendItems(weekendItem(previousWeekDate))
-        snapshot.appendItems(weekendItem(currentWeekDate))
-        snapshot.appendItems(weekendItem(followingWeekDate))
+        snapshot.appendItems(previousWeekItem)
+        snapshot.appendItems(currentWeekItem)
+        snapshot.appendItems(nextWeekItem)
         dateLabel.text = monthTitle(from: currentWeekDate)
         dataSource?.apply(snapshot, animatingDifferences: false)
         weekCollectionView.scrollToItem(at: IndexPath(row: Constant.currentWeekSundayIndex, section: 0), at: .centeredHorizontally, animated: false)
@@ -217,13 +179,14 @@ private extension WeeklyCalendarView {
     }
 }
 
+// MARK: - UICollectionViewDelegate
 extension WeeklyCalendarView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? WeekCollectionViewCell else { return }
         guard let item = dataSource?.itemIdentifier(for: indexPath) else { return }
         guard let selectedDate = item.date.toDate(.yyyyMMdd) else { return }
         cell.updateBackgroundColor()
-        viewModel.dateDidSelected(date: selectedDate)
+        delegate?.didSelectDate(selectedDate)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -233,32 +196,27 @@ extension WeeklyCalendarView: UICollectionViewDelegate {
     }
 }
 
+// MARK: - UIScrollViewDelegate
 extension WeeklyCalendarView: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         switch targetContentOffset.pointee.x {
         case 0:
-            scrollState = .left
+            calendarScrollState = .left
         case frame.width:
-            scrollState = .none
+            calendarScrollState = .none
         case frame.width * CGFloat(2):
-            scrollState = .right
+            calendarScrollState = .right
         default:
             return
         }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        switch scrollState {
-        case .left:
-            leftScroll()
-        case .none:
-            return
-        case .right:
-            rightScroll()
-        }
+        didScrollCalendar(calendarScrollState: calendarScrollState)
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension WeeklyCalendarView: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
@@ -275,6 +233,7 @@ extension WeeklyCalendarView: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - Constant
 private extension WeeklyCalendarView {
     enum Constant {
         static let currentWeekSundayIndex = 7

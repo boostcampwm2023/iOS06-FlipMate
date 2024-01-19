@@ -10,6 +10,7 @@
 		0A814BC3CFA46D0501C8B894 /* Pods_FlipMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288FECD685A9C6B6E481147C /* Pods_FlipMate.framework */; };
 		2C1F2BBB2B20D8D60026C30B /* SocialUserInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */; };
 		2C1F2BBD2B20DA770026C30B /* ProfileHeaderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1F2BBC2B20DA770026C30B /* ProfileHeaderItem.swift */; };
+		2C2176E32B5AC156000422F9 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2176E22B5AC156000422F9 /* CalendarManager.swift */; };
 		2C277ABB2B497FB500567CAC /* DonutChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C277ABA2B497FB500567CAC /* DonutChartView.swift */; };
 		2C277ABD2B4AA73500567CAC /* CGFloat++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C277ABC2B4AA73500567CAC /* CGFloat++Extension.swift */; };
 		2C277ABF2B4AB22400567CAC /* WeeklyCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C277ABE2B4AB22400567CAC /* WeeklyCalendarView.swift */; };
@@ -269,6 +270,7 @@
 		2B285F39D7D27E5C564F4D31 /* Pods_FlipMateTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMateTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialUserInfoHeaderView.swift; sourceTree = "<group>"; };
 		2C1F2BBC2B20DA770026C30B /* ProfileHeaderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderItem.swift; sourceTree = "<group>"; };
+		2C2176E22B5AC156000422F9 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		2C277ABA2B497FB500567CAC /* DonutChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutChartView.swift; sourceTree = "<group>"; };
 		2C277ABC2B4AA73500567CAC /* CGFloat++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat++Extension.swift"; sourceTree = "<group>"; };
 		2C277ABE2B4AB22400567CAC /* WeeklyCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarView.swift; sourceTree = "<group>"; };
@@ -530,6 +532,14 @@
 				2B285F39D7D27E5C564F4D31 /* Pods_FlipMateTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2C2176E12B5AC147000422F9 /* CalendarManager */ = {
+			isa = PBXGroup;
+			children = (
+				2C2176E22B5AC156000422F9 /* CalendarManager.swift */,
+			);
+			path = CalendarManager;
 			sourceTree = "<group>";
 		};
 		2C277AC22B4ABC9100567CAC /* Model */ = {
@@ -1143,6 +1153,7 @@
 		600908FE2AFCDF8D0065DFFB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				2C2176E12B5AC147000422F9 /* CalendarManager */,
 				2CE91C712B25970700EACCD7 /* UserInfoManager */,
 				2C87C28F2B1F210F00A26313 /* ImageDownloader */,
 				2C87C28C2B1E315600A26313 /* SignOutManager */,
@@ -1750,6 +1761,7 @@
 				2CDCD06C2B18E6960080DCDE /* UserDefault.swift in Sources */,
 				60F67C6A2B0E1868002C8BF3 /* DefaultCategoryUseCase.swift in Sources */,
 				2C5CDA4B2B0252C1007AFC57 /* LoginType.swift in Sources */,
+				2C2176E32B5AC156000422F9 /* CalendarManager.swift in Sources */,
 				600195A02B0DFA3900F02BA4 /* StatusResponseDTO.swift in Sources */,
 				2C9F620D2B17241200AE63F9 /* Friend.swift in Sources */,
 				60F6FD732B0B5E130057CE0B /* SignUpViewController.swift in Sources */,
