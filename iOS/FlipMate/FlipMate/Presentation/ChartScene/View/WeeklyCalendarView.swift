@@ -23,14 +23,14 @@ final class WeeklyCalendarView: UIView {
     typealias Snapshot = NSDiffableDataSourceSnapshot<WeeklySection, WeeklySectionItem>
     
     // MARK: - Properties
+    weak var delegate: WeeklyCalendarViewDelegate?
+
     private var dataSource: CalendarDataSource?
-    private var calendarScrollState: CalendarScrollState = .none
-    private var currentWeekDate = Date()
-    private var calendar = Calendar.current
-    
     private let calendarManager = CalendarManager()
     
-    weak var delegate: WeeklyCalendarViewDelegate?
+    private var calendarScrollState: CalendarScrollState = .none
+    private var selectedDate = Date()
+    private var isfirstLayoutUpdated: Bool = false
     
     private let dateLabel: UILabel = {
         let label = UILabel()
@@ -56,6 +56,7 @@ final class WeeklyCalendarView: UIView {
         return collectionView
     }()
     
+    // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
@@ -64,13 +65,14 @@ final class WeeklyCalendarView: UIView {
         setSnapshot()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        selectItem(at: Date())
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Life cycle
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        selectTodayItem()
     }
 }
 
@@ -100,7 +102,7 @@ private extension WeeklyCalendarView {
         snapshot.appendItems(previousWeekItem)
         snapshot.appendItems(currentWeekItem)
         snapshot.appendItems(nextWeekItem)
-        dateLabel.text = monthTitle(from: currentWeekDate)
+        dateLabel.text = monthTitle(from: calendarManager.currentWeek)
         dataSource?.apply(snapshot)
     }
     
@@ -130,7 +132,7 @@ private extension WeeklyCalendarView {
         snapshot.appendItems(previousWeekItem)
         snapshot.appendItems(currentWeekItem)
         snapshot.appendItems(nextWeekItem)
-        dateLabel.text = monthTitle(from: currentWeekDate)
+        dateLabel.text = monthTitle(from: calendarManager.currentWeek)
         dataSource?.apply(snapshot, animatingDifferences: false)
         weekCollectionView.scrollToItem(at: IndexPath(row: Constant.currentWeekSundayIndex, section: 0), at: .centeredHorizontally, animated: false)
     }
@@ -169,6 +171,13 @@ private extension WeeklyCalendarView {
             weekStackView.addArrangedSubview(label)
         }
     }
+    
+    func selectTodayItem() {
+        if !isfirstLayoutUpdated {
+            selectItem(at: Date())
+            isfirstLayoutUpdated.toggle()
+        }
+    }
 }
 
 private extension WeeklyCalendarView {
@@ -185,13 +194,17 @@ extension WeeklyCalendarView: UICollectionViewDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) as? WeekCollectionViewCell else { return }
         guard let item = dataSource?.itemIdentifier(for: indexPath) else { return }
         guard let selectedDate = item.date.toDate(.yyyyMMdd) else { return }
+        self.selectedDate = selectedDate
         cell.updateBackgroundColor()
         delegate?.didSelectDate(selectedDate)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? WeekCollectionViewCell else { return }
+        guard let item = dataSource?.itemIdentifier(for: indexPath) else { return }
+        guard let deSelectedDate = item.date.toDate(.yyyyMMdd) else { return }
         cell.updateBackgroundColor()
+        delegate?.deSelectDate(deSelectedDate)
         // TODO: - DonutChartView 초기화.
     }
 }

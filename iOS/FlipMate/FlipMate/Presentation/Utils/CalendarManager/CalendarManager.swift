@@ -17,7 +17,7 @@ final class CalendarManager {
         return addDays(date: currentWeek, days: 7)
     }
     
-    private var currentWeek = Date()
+    private(set) var currentWeek = Date()
 
     // MARK: - Methods
     func updateCurrentWeek(date: Date) {
