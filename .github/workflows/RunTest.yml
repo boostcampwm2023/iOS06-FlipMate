@@ -19,4 +19,4 @@ jobs:
     - name: Start xcode build
       run: |
         pod install --repo-update --clean-install --project-directory=iOS/FlipMate/
-        xcodebuild clean test -workspace iOS/FlipMate/FlipMate.xcworkspace -scheme FlipMate -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=latest'
+        xcodebuild clean test -workspace iOS/FlipMate/FlipMate.xcworkspace -scheme FlipMate -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=latest'
