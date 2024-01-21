@@ -29,8 +29,12 @@ final class WeeklyCalendarView: UIView {
     private let calendarManager = CalendarManager()
     
     private var calendarScrollState: CalendarScrollState = .none
-    private var selectedDate = Date()
     private var isfirstLayoutUpdated: Bool = false
+    
+    private var selectedDate: String = {
+        let today = Date()
+        return today.dateToString(format: .yyyyMMdd)
+    }()
     
     private let dateLabel: UILabel = {
         let label = UILabel()
@@ -86,7 +90,13 @@ private extension WeeklyCalendarView {
                 case .dateCell(let date):
                     let cell: WeekCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
                     cell.updateDate(date)
-                    cell.updateBackgroundColor()
+                    
+                    if self.selectedDate == date {
+                        cell.showCircleView()
+                    } else {
+                        cell.hideCircleView()
+                    }
+                    
                     return cell
                 }
             })
@@ -116,6 +126,7 @@ private extension WeeklyCalendarView {
         guard let targetIndex = findItemIndex(at: date.dateToString(format: .yyyyMMdd)) else { return }
         let indexPath = IndexPath(row: targetIndex, section: 0)
         weekCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredHorizontally)
+        delegate?.didSelectDate(date)
     }
 }
 
@@ -194,8 +205,8 @@ extension WeeklyCalendarView: UICollectionViewDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) as? WeekCollectionViewCell else { return }
         guard let item = dataSource?.itemIdentifier(for: indexPath) else { return }
         guard let selectedDate = item.date.toDate(.yyyyMMdd) else { return }
-        self.selectedDate = selectedDate
-        cell.updateBackgroundColor()
+        cell.showCircleView()
+        self.selectedDate = item.date
         delegate?.didSelectDate(selectedDate)
     }
     
@@ -203,7 +214,7 @@ extension WeeklyCalendarView: UICollectionViewDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) as? WeekCollectionViewCell else { return }
         guard let item = dataSource?.itemIdentifier(for: indexPath) else { return }
         guard let deSelectedDate = item.date.toDate(.yyyyMMdd) else { return }
-        cell.updateBackgroundColor()
+        cell.hideCircleView()
         delegate?.deSelectDate(deSelectedDate)
         // TODO: - DonutChartView 초기화.
     }

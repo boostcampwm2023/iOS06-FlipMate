@@ -12,8 +12,14 @@ final class WeekCollectionViewCell: UICollectionViewCell {
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.font = FlipMateFont.smallBold.font
-        label.text = "0"
         return label
+    }()
+    
+    private let circleView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 15
+        view.backgroundColor = .red
+        return view
     }()
     
     // MARK: - init
@@ -23,7 +29,7 @@ final class WeekCollectionViewCell: UICollectionViewCell {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError("Don't use StoryBoard")
     }
     
     // MARK: - life Cycle
@@ -36,21 +42,32 @@ final class WeekCollectionViewCell: UICollectionViewCell {
         dateLabel.text = date.toDate(.yyyyMMdd)?.dateToString(format: .day)
     }
     
-    func updateBackgroundColor() {
-        backgroundColor = isSelected ? FlipMateColor.gray3.color : .systemBackground
+    func showCircleView() {
+        circleView.isHidden = false
+    }
+    
+    func hideCircleView() {
+        circleView.isHidden = true
     }
 }
 
 private extension WeekCollectionViewCell {
     func configureUI() {
-        [ dateLabel ] .forEach {
+        [ dateLabel, circleView ] .forEach {
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         NSLayoutConstraint.activate([
             dateLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            dateLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+            dateLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            circleView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            circleView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            circleView.widthAnchor.constraint(equalToConstant: 30),
+            circleView.heightAnchor.constraint(equalToConstant: 30)
         ])
+        
+        bringSubviewToFront(dateLabel)
     }
 }
