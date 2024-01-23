@@ -12,6 +12,8 @@ struct SocialViewModelActions {
     var showFriendAddViewController: () -> Void
     var showSocialDetailViewController: (Friend) -> Void
     var showMyPageViewController: () -> Void
+    var showFollowingsViewController: () -> Void
+    var showFollowersViewController: () -> Void
 }
 
 protocol SocialViewModelInput {
@@ -21,6 +23,8 @@ protocol SocialViewModelInput {
     func friendCellDidTapped(friend: Friend)
     func didRefresh()
     func myPageButtonTapped()
+    func followingsLabelTapped()
+    func followersLabelTapped()
 }
 
 protocol SocialViewModelOutput {
@@ -114,6 +118,14 @@ final class SocialViewModel: SocialViewModelProtocol {
     
     func myPageButtonTapped() {
         actions?.showMyPageViewController()
+    }
+    
+    func followingsLabelTapped() {
+        actions?.showFollowingsViewController()
+    }
+    
+    func followersLabelTapped() {
+        actions?.showFollowersViewController()
     }
     
     func didRefresh() {
