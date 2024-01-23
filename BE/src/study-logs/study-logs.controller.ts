@@ -140,8 +140,4 @@ export class StatsController {
       ),
     };
   }
-
-  @Get('/monthly')
-  @ApiOperation({ summary: '월간 통계 조회하기' })
-  getMonthlyStats() {}
 }

@@ -9,6 +9,7 @@ import { S3Service } from 'src/common/s3.service';
 import { ENV } from 'src/common/const/env-keys.const';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { getImageUrl } from 'src/common/utils/utils';
+import { NicknameValidationDto } from './dto/response/nickname-validation.dto';
 
 @Injectable()
 export class UsersService {
@@ -101,7 +102,7 @@ export class UsersService {
     return updatedUser;
   }
 
-  async isUniqueNickname(nickname: string): Promise<object> {
+  async isUniqueNickname(nickname: string): Promise<NicknameValidationDto> {
     const isDuplicated = await this.usersRepository.exist({
       where: { nickname },
     });
