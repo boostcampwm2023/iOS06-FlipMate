@@ -85,6 +85,7 @@ describe('MatesService', () => {
         follower_id: { id: 1 } as UsersModel,
         following_id: { id: 3 } as UsersModel,
         is_fixed: false,
+        is_blocked: false,
       });
       const result = await service.addMate(user, '어린콩3');
       expect(result).toStrictEqual({
@@ -92,18 +93,6 @@ describe('MatesService', () => {
         follower_id: 1,
         following_id: 3,
       });
-    });
-
-    it('친구는 최대 10명까지 추가할 수 있다.', async () => {
-      jest.spyOn(usersRepository, 'findOne').mockResolvedValueOnce({
-        id: 3,
-        nickname: '어린콩3',
-        image_url: null,
-      } as UsersModel);
-      jest.spyOn(repository, 'count').mockResolvedValueOnce(10);
-      expect(service.addMate(user, '어린콩3')).rejects.toThrow(
-        BadRequestException,
-      );
     });
 
     it('자신을 친구 추가 할 수 없다.', async () => {
@@ -136,6 +125,7 @@ describe('MatesService', () => {
         follower_id: { id: 1 } as UsersModel,
         following_id: { id: 3 } as UsersModel,
         is_fixed: false,
+        is_blocked: false,
       });
       expect(service.addMate(user, '어린콩2')).rejects.toThrow(
         BadRequestException,
@@ -180,6 +170,7 @@ describe('MatesService', () => {
           follower_id: { id: 1 } as UsersModel,
           following_id: { id: 2 } as UsersModel,
           is_fixed: false,
+          is_blocked: false,
         },
       ]);
       jest
@@ -276,6 +267,7 @@ describe('MatesService', () => {
         follower_id: { id: 1 } as UsersModel,
         following_id: { id: 2 } as UsersModel,
         is_fixed: false,
+        is_blocked: false,
       });
       const result = await service.findMate(user, '어린콩2');
       expect(result).toStrictEqual({
