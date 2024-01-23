@@ -45,6 +45,14 @@ final class SocialDIContainer: SocialFlowCoordinatorDependencies {
         return FriendAddViewController(viewModel: makeFriendAddViewModel(actions: actions))
     }
     
+    func makeFollowingsViewController(actions: FollowingsViewModelActions) -> UIViewController {
+        return FollowingsViewController(viewModel: makeFollowingsViewModel(actions: actions))
+    }
+    
+    func makeFollowersViewController(actions: FollowersViewModelActions) -> UIViewController {
+        return FollowersViewController()
+    }
+    
     private func makeFriendAddViewModel(actions: FriendAddViewModelActions) -> FriendAddViewModel {
         let repository = DefaultFriendRepository(provider: dependencies.provider)
         return FriendAddViewModel(
@@ -52,6 +60,16 @@ final class SocialDIContainer: SocialFlowCoordinatorDependencies {
             searchUseCase: DefaultSearchFriendUseCase(repository: repository),
             actions: actions,
             userInfoManager: dependencies.userInfoManager)
+    }
+    
+    private func makeFollowingsViewModel(actions: FollowingsViewModelActions) -> FollowingsViewModel {
+        let repository = DefaultSocialRepository(provider: dependencies.provider)
+        return FollowingsViewModel(fetchFollowingsUseCase: DefaultFetchFollowingsUseCase(repository: repository), actions: actions)
+    }
+    
+    private func makeFollowersViewModel(actions: FollowersViewModelActions) -> FollowersViewModel {
+        let repository = DefaultSocialRepository(provider: dependencies.provider)
+        return FollowersViewModel(fetchFollowersUseCase: DefaultFetchFollowersUseCase(repository: repository), actions: actions)
     }
     
     func makeSocialDetailViewController(actions: SocialDetailViewModelActions, friend: Friend) -> UIViewController {
