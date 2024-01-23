@@ -87,6 +87,7 @@
 "time" = "Time";
 "totalTime" = "Total Time";
 "etc" = "etc";
+"noStudyLog" = "There is no studyLog";
 
 // MARK: - WeeklyChartView
 "day" = "day";

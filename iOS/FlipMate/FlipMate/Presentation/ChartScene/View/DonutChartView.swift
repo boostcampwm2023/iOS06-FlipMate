@@ -109,7 +109,7 @@ private extension DonutChartView {
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
         
         let totalTimeLayer = CATextLayer()
-        totalTimeLayer.frame = CGRect(x: center.x, y: center.y, width: 0, height: 0).insetBy(dx: -60, dy: -50)
+        totalTimeLayer.frame = CGRect(x: center.x, y: center.y, width: 0, height: 0).insetBy(dx: -60, dy: -40)
         totalTimeLayer.foregroundColor = UIColor.black.cgColor
         totalTimeLayer.alignmentMode = .center
         totalTimeLayer.fontSize = Constant.totalTimeTextFontSize
@@ -148,7 +148,7 @@ private extension DonutChartView {
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
         
         let totalTimeLayer = CATextLayer()
-        totalTimeLayer.frame = CGRect(x: center.x, y: center.y, width: 0, height: 0).insetBy(dx: -100, dy: -50)
+        totalTimeLayer.frame = CGRect(x: center.x, y: center.y, width: 0, height: 0).insetBy(dx: -150, dy: -50)
         totalTimeLayer.foregroundColor = UIColor.black.cgColor
         totalTimeLayer.alignmentMode = .center
         totalTimeLayer.fontSize = Constant.noResultTextFontSize
@@ -171,8 +171,8 @@ private extension DonutChartView {
         static let totalTimeTextFontSize: CGFloat = 20
         static let timeTextFontSize: CGFloat = 30
         static let noResultTextFontSize: CGFloat = 20
-        static let totalTimeText = "총 학습 시간"
-        static let noResultText = "학습 기록이 없습니다."
+        static let totalTimeText = NSLocalizedString("totalTime", comment: "")
+        static let noResultText = NSLocalizedString("noStudyLog", comment: "")
         static let hypotenuse: CGFloat = 130
         
         
