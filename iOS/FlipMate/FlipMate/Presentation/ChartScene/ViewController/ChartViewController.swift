@@ -103,6 +103,7 @@ final class ChartViewController: BaseViewController {
 extension ChartViewController: WeeklyCalendarViewDelegate {
     func didSelectDate(_ date: Date) {
         FMLogger.chart.debug("해당 날짜가 선택되었습니다. \(date.dateToString(format: .yyyyMMdd))")
+        viewModel.dateDidSelected(date: date)
     }
     
     func deSelectDate(_ date: Date) {

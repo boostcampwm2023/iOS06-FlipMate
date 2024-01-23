@@ -16,6 +16,8 @@ final class DonutChartView: UIView {
         }
     }
     
+    private var pathArray = [UIBezierPath]()
+    private var textLayerArray = [CATextLayer]()
     // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,7 +29,6 @@ final class DonutChartView: UIView {
     }
 
     // MARK: - Life Cycle
-    
     override func draw(_ rect: CGRect) {
         drawDonutChartLayer()
         drawMiddleCircle()
@@ -53,6 +54,9 @@ private extension DonutChartView {
         let categories = studyLog.category, totalTime = CGFloat(studyLog.totalTime)
         var startAngle: CGFloat = 0.0, endAngle: CGFloat = 0.0, middleAngle: CGFloat = 0.0
         
+        pathArray.forEach { $0.removeAllPoints() }
+        textLayerArray.forEach { $0.removeFromSuperlayer() }
+        
         // MARK: - if TotalTime == 0 -> 차트 X
         
         for category in categories {
@@ -73,6 +77,7 @@ private extension DonutChartView {
             textLayer.font = Constant.chartTextFont as CFTypeRef
             textLayer.isWrapped = true
             layer.addSublayer(textLayer)
+            textLayerArray.append(textLayer)
             
             let path = UIBezierPath()
             path.move(to: center)
@@ -87,6 +92,7 @@ private extension DonutChartView {
             UIColor.systemBackground.set()
             path.lineWidth = Constant.lineWidth
             path.stroke()
+            pathArray.append(path)
         }
     }
     

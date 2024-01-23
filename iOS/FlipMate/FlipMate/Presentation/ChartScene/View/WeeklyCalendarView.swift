@@ -93,6 +93,7 @@ private extension WeeklyCalendarView {
                     
                     if self.selectedDate == date {
                         cell.showCircleView()
+                        self.weekCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
                     } else {
                         cell.hideCircleView()
                     }
