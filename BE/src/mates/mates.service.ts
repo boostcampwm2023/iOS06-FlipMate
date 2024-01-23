@@ -97,6 +97,7 @@ export class MatesService {
     user_id: number,
     datetime: string,
     timezone: string,
+    page: number = 0,
   ): Promise<object[]> {
     if (!user_id || !datetime || !timezone) {
       throw new BadRequestException('인자의 형식이 잘못되었습니다.');
@@ -110,6 +111,7 @@ export class MatesService {
       nowUserTime,
       offset,
       user_id,
+      page,
     );
     return Promise.all(
       studyTimeByFollowing.map(async (record) => {
@@ -134,7 +136,9 @@ export class MatesService {
     followerDate: string,
     followerTimezone: string,
     followerId: number,
+    page: number,
   ) {
+    const COUNT_PER_PAGE = 9;
     return this.userRepository.query(
       `
         SELECT u.id, u.nickname, u.image_url, COALESCE(SUM(s.learning_time), 0) AS total_time
@@ -144,8 +148,15 @@ export class MatesService {
         WHERE m.follower_id = ? 
         GROUP BY u.id, m.is_fixed
         ORDER BY m.is_fixed DESC, u.is_studying DESC, total_time DESC
+        LIMIT ? OFFSET ?
       `,
-      [followerDate, followerTimezone, followerId],
+      [
+        followerDate,
+        followerTimezone,
+        followerId,
+        COUNT_PER_PAGE,
+        page * COUNT_PER_PAGE,
+      ],
     );
   }
 
@@ -176,16 +187,6 @@ export class MatesService {
 
     if (!user || !following) {
       throw new NotFoundException('해당 유저는 존재하지 않습니다.');
-    }
-
-    const matesCount = await this.matesRepository.count({
-      where: { follower_id: user },
-    });
-
-    if (matesCount >= MATES_MAXIMUM) {
-      throw new BadRequestException(
-        `친구는 최대 ${MATES_MAXIMUM}명까지 추가할 수 있습니다.`,
-      );
     }
 
     const isExist = await this.matesRepository.findOne({
