@@ -15,6 +15,8 @@ import { ENV } from 'src/common/const/env-keys.const';
 import { StudyLogsService } from 'src/study-logs/study-logs.service';
 import moment from 'moment';
 import { MATES_MAXIMUM } from 'src/common/const/service-var.const';
+import { MatesInfoDto } from './dto/response/mates-info.dto';
+import { FollowerInfoDto } from './dto/response/follower-info.dto';
 
 @Injectable()
 export class MatesService {
@@ -60,8 +62,11 @@ export class MatesService {
     };
   }
 
-  async getFollowersInfo(user_id: number, page: number) {
-    const take = 1;
+  async getFollowersInfo(
+    user_id: number,
+    page: number,
+  ): Promise<FollowerInfoDto[]> {
+    const take = 10;
     const followers = await this.matesRepository.query(
       `SELECT 
          u.id, 
@@ -87,9 +92,12 @@ export class MatesService {
     }));
   }
 
-  async getBlockedFollowersInfo(user_id: number, page: number) {
+  async getBlockedFollowersInfo(
+    user_id: number,
+    page: number,
+  ): Promise<MatesInfoDto[]> {
     const take = 10;
-    const blockedFollowers = await this.matesRepository.query(
+    return this.matesRepository.query(
       `SELECT u.id, u.nickname, u.image_url 
        FROM mates 
        INNER JOIN users_model as u ON u.id = mates.follower_id 
@@ -99,17 +107,14 @@ export class MatesService {
        OFFSET ?`,
       [user_id, take, (page - 1) * take],
     );
-
-    return {
-      data: blockedFollowers,
-      page: blockedFollowers.length === take ? page + 1 : null,
-      count: blockedFollowers.length,
-    };
   }
 
-  async getFollowingsInfo(user_id: number, page: number) {
+  async getFollowingsInfo(
+    user_id: number,
+    page: number,
+  ): Promise<MatesInfoDto[]> {
     const take = 10;
-    const followings = await this.matesRepository.query(
+    return this.matesRepository.query(
       `SELECT u.id, u.nickname, u.image_url 
        FROM mates 
        INNER JOIN users_model as u ON u.id = mates.following_id 
@@ -119,12 +124,6 @@ export class MatesService {
        OFFSET ?`,
       [user_id, take, (page - 1) * take],
     );
-
-    return {
-      data: followings,
-      page: followings.length === take ? page + 1 : null,
-      count: followings.length,
-    };
   }
 
   async getMates(
