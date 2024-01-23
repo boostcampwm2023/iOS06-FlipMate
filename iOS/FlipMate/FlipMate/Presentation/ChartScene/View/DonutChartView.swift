@@ -18,6 +18,7 @@ final class DonutChartView: UIView {
     
     private var pathArray = [UIBezierPath]()
     private var textLayerArray = [CATextLayer]()
+    
     // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,15 +50,16 @@ private extension DonutChartView {
 // MARK: - Chart Layer funcs
 private extension DonutChartView {
     func drawDonutChartLayer() {
-        guard let studyLog else { return }
+        guard let studyLog, studyLog.totalTime != 0 else {
+            pathArray.forEach { $0.removeAllPoints() }
+            return
+        }
+        
+        textLayerArray.forEach { $0.removeFromSuperlayer() }
+
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
         let categories = studyLog.category, totalTime = CGFloat(studyLog.totalTime)
         var startAngle: CGFloat = 0.0, endAngle: CGFloat = 0.0, middleAngle: CGFloat = 0.0
-        
-        pathArray.forEach { $0.removeAllPoints() }
-        textLayerArray.forEach { $0.removeFromSuperlayer() }
-        
-        // MARK: - if TotalTime == 0 -> 차트 X
         
         for category in categories {
             guard let studyTime = category.studyTime, studyTime != 0 else { return }
@@ -97,15 +99,64 @@ private extension DonutChartView {
     }
     
     func drawMiddleCircle() {
+        guard let studyLog, studyLog.totalTime != 0 else {
+            textLayerArray.forEach { $0.removeFromSuperlayer() }
+            pathArray.forEach { $0.removeAllPoints() }
+            drawNoResultText()
+            return
+        }
+
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
+        
+        let totalTimeLayer = CATextLayer()
+        totalTimeLayer.frame = CGRect(x: center.x, y: center.y, width: 0, height: 0).insetBy(dx: -60, dy: -50)
+        totalTimeLayer.foregroundColor = UIColor.black.cgColor
+        totalTimeLayer.alignmentMode = .center
+        totalTimeLayer.fontSize = Constant.totalTimeTextFontSize
+        totalTimeLayer.font = Constant.systemTextFont as CFTypeRef
+        totalTimeLayer.string = Constant.totalTimeText
+        totalTimeLayer.isWrapped = true
+
+        let timeLayer = CATextLayer()
+        timeLayer.frame = CGRect(x: center.x, y: center.y + 20, width: 0, height: 0).insetBy(dx: -60, dy: -20)
+        timeLayer.foregroundColor = UIColor.black.cgColor
+        timeLayer.alignmentMode = .center
+        timeLayer.fontSize = Constant.timeTextFontSize
+        timeLayer.font = Constant.systemTextFont as CFTypeRef
+        timeLayer.string = studyLog.totalTime.secondsToStringTime()
+        timeLayer.isWrapped = true
+        
+        [ totalTimeLayer, timeLayer ] .forEach {
+            layer.addSublayer($0)
+            textLayerArray.append($0)
+        }
+        
         let middleCircle = UIBezierPath(
             arcCenter: center,
             radius: Constant.middleCircleRadius,
             startAngle: Constant.middleCircleStartAngle,
             endAngle: Constant.middleCircleEndAngle,
             clockwise: true)
+        
         UIColor.systemBackground.set()
         middleCircle.fill()
+        
+        pathArray.append(middleCircle)
+    }
+    
+    func drawNoResultText() {
+        let center = CGPoint(x: bounds.midX, y: bounds.midY)
+        
+        let totalTimeLayer = CATextLayer()
+        totalTimeLayer.frame = CGRect(x: center.x, y: center.y, width: 0, height: 0).insetBy(dx: -100, dy: -50)
+        totalTimeLayer.foregroundColor = UIColor.black.cgColor
+        totalTimeLayer.alignmentMode = .center
+        totalTimeLayer.fontSize = Constant.noResultTextFontSize
+        totalTimeLayer.font = Constant.systemTextFont as CFTypeRef
+        totalTimeLayer.string = Constant.noResultText
+        totalTimeLayer.isWrapped = true
+        layer.addSublayer(totalTimeLayer)
+        textLayerArray.append(totalTimeLayer)
     }
 }
 
@@ -115,8 +166,15 @@ private extension DonutChartView {
         static let radiusSpacing: CGFloat = 30
         
         static let chartTextFont = "AvenirNext-Bold"
+        static let systemTextFont = "System-Bold"
         static let chartTextFontSize: CGFloat = 15
+        static let totalTimeTextFontSize: CGFloat = 20
+        static let timeTextFontSize: CGFloat = 30
+        static let noResultTextFontSize: CGFloat = 20
+        static let totalTimeText = "총 학습 시간"
+        static let noResultText = "학습 기록이 없습니다."
         static let hypotenuse: CGFloat = 130
+        
         
         static let middleCircleRadius: CGFloat = 100
         static let middleCircleStartAngle: CGFloat = 0
