@@ -85,6 +85,7 @@ describe('MatesService', () => {
         follower_id: { id: 1 } as UsersModel,
         following_id: { id: 3 } as UsersModel,
         is_fixed: false,
+        is_blocked: false,
       });
       const result = await service.addMate(user, '어린콩3');
       expect(result).toStrictEqual({
@@ -136,6 +137,7 @@ describe('MatesService', () => {
         follower_id: { id: 1 } as UsersModel,
         following_id: { id: 3 } as UsersModel,
         is_fixed: false,
+        is_blocked: false,
       });
       expect(service.addMate(user, '어린콩2')).rejects.toThrow(
         BadRequestException,
@@ -180,6 +182,7 @@ describe('MatesService', () => {
           follower_id: { id: 1 } as UsersModel,
           following_id: { id: 2 } as UsersModel,
           is_fixed: false,
+          is_blocked: false,
         },
       ]);
       jest
@@ -276,6 +279,7 @@ describe('MatesService', () => {
         follower_id: { id: 1 } as UsersModel,
         following_id: { id: 2 } as UsersModel,
         is_fixed: false,
+        is_blocked: false,
       });
       const result = await service.findMate(user, '어린콩2');
       expect(result).toStrictEqual({
