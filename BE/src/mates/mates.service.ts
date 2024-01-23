@@ -301,8 +301,7 @@ export class MatesService {
       },
       { is_fixed: is_fixed },
     );
-
-    if (!result) {
+    if (result.affected === 0) {
       throw new NotFoundException('해당 친구 관계는 존재하지 않습니다.');
     }
   }
@@ -320,7 +319,7 @@ export class MatesService {
       { is_blocked: is_blocked },
     );
 
-    if (!result) {
+    if (result.affected === 0) {
       throw new NotFoundException('해당 친구 관계는 존재하지 않습니다.');
     }
   }
