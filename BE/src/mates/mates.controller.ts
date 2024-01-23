@@ -23,6 +23,7 @@ import { StatusMessageDto } from './dto/response/status-message.dto';
 import { AccessTokenGuard } from 'src/auth/guard/bearer-token.guard';
 import { UsersModel } from 'src/users/entity/users.entity';
 import { ResponseDto } from 'src/common/response.dto';
+import { PaginationQueryDto } from './dto/request/pagination-query.dto';
 
 @Controller('mates')
 @ApiTags('소셜 페이지')
@@ -57,16 +58,23 @@ export class MatesController {
   @UseGuards(AccessTokenGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: '나를 팔로우 하는 사람들 조회하기' })
-  getFollowers(@User('id') user_id: number): Promise<object> {
-    return this.matesService.getFollowersInfo(user_id);
+  getFollowers(
+    @User('id') user_id: number,
+    @Query() query: PaginationQueryDto,
+  ): Promise<object> {
+    console.log(query);
+    return this.matesService.getFollowersInfo(user_id, query.cursor);
   }
 
   @Get('/followings')
   @UseGuards(AccessTokenGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: '내가 팔로우 하는 사람들 조회하기' })
-  getFollowings(@User('id') user_id: number): Promise<object> {
-    return this.matesService.getFollowingsInfo(user_id);
+  getFollowings(
+    @User('id') user_id: number,
+    @Query() query: PaginationQueryDto,
+  ): Promise<object> {
+    return this.matesService.getFollowingsInfo(user_id, query.cursor);
   }
 
   @Get('/status')
@@ -244,7 +252,10 @@ export class MatesController {
   @UseGuards(AccessTokenGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: '내가 차단한 사람들 조회하기' })
-  getBlockedMate(@User('id') user_id: number): Promise<object> {
-    return this.matesService.getBlockedFollowersInfo(user_id);
+  getBlockedMate(
+    @User('id') user_id: number,
+    @Query() query: PaginationQueryDto,
+  ): Promise<object> {
+    return this.matesService.getBlockedFollowersInfo(user_id, query.cursor);
   }
 }

@@ -60,37 +60,75 @@ export class MatesService {
     };
   }
 
-  getFollowersInfo(user_id: number) {
-    return this.matesRepository.query(
-      `SELECT u.id, u.nickname, u.image_url 
+  async getFollowersInfo(user_id: number, cursor: number) {
+    const take = 10;
+    const followers = await this.matesRepository.query(
+      `SELECT 
+         u.id, 
+         u.nickname, 
+         u.image_url,
+         CASE 
+           WHEN mf.follower_id IS NOT NULL THEN true
+           ELSE false
+         END as is_followed
        FROM mates 
        INNER JOIN users_model as u ON u.id = mates.follower_id 
+       LEFT JOIN mates as mf ON mf.follower_id = ? AND mf.following_id = u.id
        WHERE mates.following_id = ? AND mates.is_blocked = false
-       ORDER BY u.nickname`,
-      [user_id],
+       ORDER BY u.nickname
+       LIMIT ?
+       OFFSET ?`,
+      [user_id, user_id, take, (cursor - 1) * take],
     );
+
+    return {
+      data: followers.map((follower) => ({
+        ...follower,
+        is_followed: follower.is_followed === 1,
+      })),
+      cursor: followers.length === take ? cursor + 1 : null,
+      count: followers.length,
+    };
   }
 
-  getBlockedFollowersInfo(user_id: number) {
-    return this.matesRepository.query(
+  async getBlockedFollowersInfo(user_id: number, cursor: number) {
+    const take = 10;
+    const blockedFollowers = await this.matesRepository.query(
       `SELECT u.id, u.nickname, u.image_url 
        FROM mates 
        INNER JOIN users_model as u ON u.id = mates.follower_id 
        WHERE mates.following_id = ? AND mates.is_blocked = true
-       ORDER BY u.nickname`,
-      [user_id],
+       ORDER BY u.nickname
+       LIMIT ?
+       OFFSET ?`,
+      [user_id, take, (cursor - 1) * take],
     );
+
+    return {
+      data: blockedFollowers,
+      cursor: blockedFollowers.length === take ? cursor + 1 : null,
+      count: blockedFollowers.length,
+    };
   }
 
-  getFollowingsInfo(user_id: number) {
-    return this.matesRepository.query(
+  async getFollowingsInfo(user_id: number, cursor: number) {
+    const take = 10;
+    const followings = await this.matesRepository.query(
       `SELECT u.id, u.nickname, u.image_url 
        FROM mates 
        INNER JOIN users_model as u ON u.id = mates.following_id 
        WHERE mates.follower_id = ?
-       ORDER BY u.nickname`,
-      [user_id],
+       ORDER BY u.nickname
+       LIMIT ?
+       OFFSET ?`,
+      [user_id, take, (cursor - 1) * take],
     );
+
+    return {
+      data: followings,
+      cursor: followings.length === take ? cursor + 1 : null,
+      count: followings.length,
+    };
   }
 
   async getMates(
