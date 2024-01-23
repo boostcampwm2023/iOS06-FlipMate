@@ -49,9 +49,10 @@ export class MatesController {
     @User('id') user_id: number,
     @Query('datetime') datetime: string,
     @Query('timezone') timezone: string,
-    @Query('page') page: number,
+    @Query('page') page: string = '0',
   ): Promise<object> {
-    return this.matesService.getMates(user_id, datetime, timezone, page);
+    const page_num = parseInt(page);
+    return this.matesService.getMates(user_id, datetime, timezone, page_num);
   }
 
   @Get('/followers')
