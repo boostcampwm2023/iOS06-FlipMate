@@ -8,7 +8,7 @@
 import UIKit
 
 final class SocialUserInfoHeaderView: UICollectionReusableView {
-      
+    
     // MARK: - Constant
     private enum Constant {
         static let defaultNickName = NSLocalizedString("nickname", comment: "")
@@ -81,7 +81,7 @@ final class SocialUserInfoHeaderView: UICollectionReusableView {
         return view
     }()
     
-    private lazy var followingStackView: UIStackView = {
+    lazy var followingStackView: UIStackView = {
         let view = UIStackView()
         
         view.axis = .horizontal
@@ -112,7 +112,7 @@ final class SocialUserInfoHeaderView: UICollectionReusableView {
         return label
     }()
     
-    private lazy var followerStackView: UIStackView = {
+    lazy var followerStackView: UIStackView = {
         let view = UIStackView()
         
         view.axis = .horizontal
@@ -166,7 +166,7 @@ final class SocialUserInfoHeaderView: UICollectionReusableView {
         divider.backgroundColor = .gray
         return divider
     }()
-        
+    
     // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
