@@ -80,8 +80,7 @@ final class FollowTableViewCell: UITableViewCell {
             profileImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: LayoutConstant.leadingAnchor),
             profileImageView.heightAnchor.constraint(equalToConstant: LayoutConstant.profileImageHeight),
             profileImageView.widthAnchor.constraint(equalToConstant: LayoutConstant.profileImageWidth),
-            profileImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: LayoutConstant.topAnchor),
-            profileImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: LayoutConstant.bottomAnchor)
+            profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
         
         NSLayoutConstraint.activate([

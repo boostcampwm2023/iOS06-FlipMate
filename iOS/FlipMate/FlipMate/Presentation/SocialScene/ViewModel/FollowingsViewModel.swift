@@ -25,11 +25,11 @@ typealias FollowingsViewModelProtocol = FollowingsViewModelInput & FollowingsVie
 
 final class FollowingsViewModel: FollowingsViewModelProtocol {
     private var cancellables = Set<AnyCancellable>()
-    private var followingsSubject = CurrentValueSubject<[Follower], Never>([])
+    private var followingsSubject = PassthroughSubject<[Follower], Never>()
     private let fetchFollowingsUseCase: FetchFollowingsUseCase
     private let actions: FollowingsViewModelActions?
     
-    init( fetchFollowingsUseCase: FetchFollowingsUseCase, actions: FollowingsViewModelActions? = nil) {
+    init(fetchFollowingsUseCase: FetchFollowingsUseCase, actions: FollowingsViewModelActions? = nil) {
         self.fetchFollowingsUseCase = fetchFollowingsUseCase
         self.actions = actions
     }
@@ -45,7 +45,7 @@ final class FollowingsViewModel: FollowingsViewModelProtocol {
     func fetchFollowings() {
         fetchFollowingsUseCase.fetchMyFollowings()
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] completion in
+            .sink { completion in
                 switch completion {
                 case .finished:
                     FMLogger.friend.log("팔로잉 불러오기 성공")

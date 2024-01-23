@@ -14,6 +14,7 @@ struct FollowersViewModelActions {
 
 protocol FollowersViewModelInput {
     func followerButtonTouched()
+    func fetchFollowers()
 }
 
 protocol FollowersViewModelOutput {
@@ -24,7 +25,7 @@ typealias FollowersViewModelProtocol = FollowersViewModelInput & FollowersViewMo
 
 final class FollowersViewModel: FollowersViewModelProtocol {
     private var cancellables = Set<AnyCancellable>()
-    private var followersSubject = CurrentValueSubject<[Follower], Never>([])
+    private var followersSubject = PassthroughSubject<[Follower], Never>()
     private let fetchFollowersUseCase: FetchFollowersUseCase
     private let actions: FollowersViewModelActions?
     
@@ -41,10 +42,10 @@ final class FollowersViewModel: FollowersViewModelProtocol {
         
     }
     
-    private func fetchFollowers() {
+    func fetchFollowers() {
         fetchFollowersUseCase.fetchMyFollowers()
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] completion in
+            .sink { completion in
                 switch completion {
                 case .finished:
                     FMLogger.friend.log("팔로워 불러오기 성공")

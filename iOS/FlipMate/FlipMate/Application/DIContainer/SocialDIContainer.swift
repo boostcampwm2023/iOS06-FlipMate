@@ -35,7 +35,8 @@ final class SocialDIContainer: SocialFlowCoordinatorDependencies {
         return SocialViewModel(
             actions: actions,
             getFriendsUseCase: DefaultGetFriendsUseCase(repsoitory: repository),
-            fetchFriendsUseCase: DefaultFetchFriendsUseCase(repsoitory: repository),
+            fetchFriendsUseCase: DefaultFetchFriendsUseCase(repsoitory: repository), 
+            fetchFollowersUseCase: DefaultFetchFollowersUseCase(repository: repository),
             friendStatusPollingManager: FriendStatusPollingManager(timerManager: TimerManager()),
             userInfoManager: dependencies.userInfoManager,
             timerManager: TimerManager(timeInterval: .seconds(4)))
@@ -50,7 +51,7 @@ final class SocialDIContainer: SocialFlowCoordinatorDependencies {
     }
     
     func makeFollowersViewController(actions: FollowersViewModelActions) -> UIViewController {
-        return FollowersViewController()
+        return FollowersViewController(viewModel: makeFollowersViewModel(actions: actions))
     }
     
     private func makeFriendAddViewModel(actions: FriendAddViewModelActions) -> FriendAddViewModel {

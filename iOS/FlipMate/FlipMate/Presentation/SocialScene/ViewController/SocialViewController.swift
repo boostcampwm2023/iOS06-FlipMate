@@ -160,6 +160,15 @@ final class SocialViewController: BaseViewController {
                 header.update(learningTime: totalTime)
             }
             .store(in: &cancellables)
+        
+        viewModel.followersNumberPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] number in
+                guard let self = self else { return }
+                guard let header = findHeader() else { return }
+                header.update(follower: number)
+            }
+            .store(in: &cancellables)
     }
     
     func bindFriendsRelatedPublisher() {

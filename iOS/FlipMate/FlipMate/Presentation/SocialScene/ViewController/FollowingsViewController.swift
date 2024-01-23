@@ -9,6 +9,10 @@ import UIKit
 import Combine
 
 final class FollowingsViewController: BaseViewController {
+    enum Constant {
+        static let tableViewRowHeight: CGFloat = 70
+    }
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -22,7 +26,7 @@ final class FollowingsViewController: BaseViewController {
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Follower>
     private var dataSource: DiffableDataSource!
     
-    init(viewModel: FollowingsViewModel) {
+    init(viewModel: FollowingsViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -31,22 +35,22 @@ final class FollowingsViewController: BaseViewController {
         fatalError("Don't use storyboard")
     }
     
-    override func viewDidLoad() {
-        viewModel.fetchFollowings()
-    }
-    
     override func configureUI() {
         self.tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height))
         self.tableView.register(FollowTableViewCell.self, forCellReuseIdentifier: FollowTableViewCell.identifier)
+        self.tableView.rowHeight = Constant.tableViewRowHeight
         self.view.addSubview(tableView)
         configureDatasource()
     }
     
     override func bind() {
+        viewModel.fetchFollowings()
+        
         viewModel.followingsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] follower in
                 guard let self = self else { return }
+                debugPrint(follower)
                 self.updateData(by: follower)
             }
             .store(in: &cancellables)

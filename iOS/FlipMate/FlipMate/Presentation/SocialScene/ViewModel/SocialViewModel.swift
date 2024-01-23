@@ -30,6 +30,7 @@ protocol SocialViewModelInput {
 protocol SocialViewModelOutput {
     var freindsPublisher: AnyPublisher<[Friend], Never> { get }
     var nicknamePublisher: AnyPublisher<String, Never> { get }
+    var followersNumberPublisher: AnyPublisher<Int, Never> { get }
     var profileImagePublisher: AnyPublisher<String?, Never> { get }
     var totalTimePublisher: AnyPublisher<Int, Never> { get }
     var updateFriendStatus: AnyPublisher<[UpdateFriend], Never> { get }
@@ -43,12 +44,14 @@ final class SocialViewModel: SocialViewModelProtocol {
     private var freindsSubject = PassthroughSubject<[Friend], Never>()
     private var updateFriendSubject = PassthroughSubject<[UpdateFriend], Never>()
     private var stopFriendSubject = PassthroughSubject<[StopFriend], Never>()
+    private var followersNumberSubject = PassthroughSubject<Int, Never>()
     
     // MARK: - Properties
     private var cancellables = Set<AnyCancellable>()
     private let actions: SocialViewModelActions?
     private let getFriendsUseCase: GetFriendsUseCase
     private let fetchFriendsUseCase: FetchFriendsUseCase
+    private let fetchFollowersUseCase: FetchFollowersUseCase
     
     // MARK: - Managers
     private var friendStatusPollingManager: FriendStatusPollingManageable
@@ -59,12 +62,14 @@ final class SocialViewModel: SocialViewModelProtocol {
     init(actions: SocialViewModelActions? = nil, 
          getFriendsUseCase: GetFriendsUseCase,
          fetchFriendsUseCase: FetchFriendsUseCase,
+         fetchFollowersUseCase: FetchFollowersUseCase,
          friendStatusPollingManager: FriendStatusPollingManageable,
          userInfoManager: UserInfoManagerProtocol,
          timerManager: TimerManagerProtocol) {
         self.actions = actions
         self.getFriendsUseCase = getFriendsUseCase
         self.fetchFriendsUseCase = fetchFriendsUseCase
+        self.fetchFollowersUseCase = fetchFollowersUseCase
         self.friendStatusPollingManager = friendStatusPollingManager
         self.userInfoManager = userInfoManager
         self.timerManager = timerManager
@@ -77,6 +82,10 @@ final class SocialViewModel: SocialViewModelProtocol {
     
     var nicknamePublisher: AnyPublisher<String, Never> {
         return userInfoManager.nicknameChangePublisher
+    }
+    
+    var followersNumberPublisher: AnyPublisher<Int, Never> {
+        return followersNumberSubject.eraseToAnyPublisher()
     }
     
     var profileImagePublisher: AnyPublisher<String?, Never> {
@@ -106,6 +115,7 @@ final class SocialViewModel: SocialViewModelProtocol {
     
     func viewWillAppear() {
         getFriendState()
+        fetchFollowers()
         FMLogger.friend.debug("친구 상태 폴링 시작")
         timerManager.start(completion: fetchFriendStatus)
     }
@@ -175,6 +185,23 @@ private extension SocialViewModel {
                 guard let self = self else { return }
                 self.friendStatusPollingManager.startPolling(friendsStatus: friendStatus)
                 self.friendStatusPollingManager.update(preFriendStatusArray: friendStatus)
+            }
+            .store(in: &cancellables)
+    }
+    
+    func fetchFollowers() {
+        fetchFollowersUseCase.fetchMyFollowers()
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    FMLogger.friend.debug("팔로워 불러오기 성공")
+                case .failure(let error):
+                    FMLogger.friend.debug("팔로워 불러오기 실패 \(error)")
+                }
+            } receiveValue: { [weak self] followers in
+                guard let self = self else { return }
+                self.followersNumberSubject.send(followers.count)
             }
             .store(in: &cancellables)
     }
