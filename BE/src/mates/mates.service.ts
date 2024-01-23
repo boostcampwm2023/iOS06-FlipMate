@@ -60,8 +60,8 @@ export class MatesService {
     };
   }
 
-  async getFollowersInfo(user_id: number, cursor: number) {
-    const take = 10;
+  async getFollowersInfo(user_id: number, page: number) {
+    const take = 1;
     const followers = await this.matesRepository.query(
       `SELECT 
          u.id, 
@@ -78,20 +78,16 @@ export class MatesService {
        ORDER BY u.nickname
        LIMIT ?
        OFFSET ?`,
-      [user_id, user_id, take, (cursor - 1) * take],
+      [user_id, user_id, take, (page - 1) * take],
     );
 
-    return {
-      data: followers.map((follower) => ({
-        ...follower,
-        is_followed: follower.is_followed === 1,
-      })),
-      cursor: followers.length === take ? cursor + 1 : null,
-      count: followers.length,
-    };
+    return followers.map((follower) => ({
+      ...follower,
+      is_followed: follower.is_followed === 1,
+    }));
   }
 
-  async getBlockedFollowersInfo(user_id: number, cursor: number) {
+  async getBlockedFollowersInfo(user_id: number, page: number) {
     const take = 10;
     const blockedFollowers = await this.matesRepository.query(
       `SELECT u.id, u.nickname, u.image_url 
@@ -101,17 +97,17 @@ export class MatesService {
        ORDER BY u.nickname
        LIMIT ?
        OFFSET ?`,
-      [user_id, take, (cursor - 1) * take],
+      [user_id, take, (page - 1) * take],
     );
 
     return {
       data: blockedFollowers,
-      cursor: blockedFollowers.length === take ? cursor + 1 : null,
+      page: blockedFollowers.length === take ? page + 1 : null,
       count: blockedFollowers.length,
     };
   }
 
-  async getFollowingsInfo(user_id: number, cursor: number) {
+  async getFollowingsInfo(user_id: number, page: number) {
     const take = 10;
     const followings = await this.matesRepository.query(
       `SELECT u.id, u.nickname, u.image_url 
@@ -121,12 +117,12 @@ export class MatesService {
        ORDER BY u.nickname
        LIMIT ?
        OFFSET ?`,
-      [user_id, take, (cursor - 1) * take],
+      [user_id, take, (page - 1) * take],
     );
 
     return {
       data: followings,
-      cursor: followings.length === take ? cursor + 1 : null,
+      page: followings.length === take ? page + 1 : null,
       count: followings.length,
     };
   }

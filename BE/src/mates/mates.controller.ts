@@ -63,7 +63,7 @@ export class MatesController {
     @Query() query: PaginationQueryDto,
   ): Promise<object> {
     console.log(query);
-    return this.matesService.getFollowersInfo(user_id, query.cursor);
+    return this.matesService.getFollowersInfo(user_id, query.page);
   }
 
   @Get('/followings')
@@ -74,7 +74,7 @@ export class MatesController {
     @User('id') user_id: number,
     @Query() query: PaginationQueryDto,
   ): Promise<object> {
-    return this.matesService.getFollowingsInfo(user_id, query.cursor);
+    return this.matesService.getFollowingsInfo(user_id, query.page);
   }
 
   @Get('/status')
@@ -256,6 +256,6 @@ export class MatesController {
     @User('id') user_id: number,
     @Query() query: PaginationQueryDto,
   ): Promise<object> {
-    return this.matesService.getBlockedFollowersInfo(user_id, query.cursor);
+    return this.matesService.getBlockedFollowersInfo(user_id, query.page);
   }
 }
