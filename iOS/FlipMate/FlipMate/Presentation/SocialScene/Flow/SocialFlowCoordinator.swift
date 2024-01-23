@@ -13,6 +13,8 @@ protocol SocialFlowCoordinatorDependencies {
     func makeSocialViewController(actions: SocialViewModelActions) -> UIViewController
     func makeFriendAddViewController(actions: FriendAddViewModelActions) -> UIViewController
     func makeSocialDetailViewController(actions: SocialDetailViewModelActions, friend: Friend) -> UIViewController
+    func makeFollowingsViewController(actions: FollowingsViewModelActions) -> UIViewController
+    func makeFollowersViewController(actions: FollowersViewModelActions) -> UIViewController
     func makeMyPageDIContainer() -> MyPageDIContainer
 }
 
@@ -30,7 +32,9 @@ final class SocialFlowCoordinator: Coordinator {
         let actions = SocialViewModelActions(
             showFriendAddViewController: showFreindAddViewController,
             showSocialDetailViewController: showSocialDetailViewController,
-            showMyPageViewController: showMyPageViewController)
+            showMyPageViewController: showMyPageViewController,
+            showFollowingsViewController: showFollowingsViewController,
+            showFollowersViewController: showFollowersViewController)
         let socialViewController = dependencies.makeSocialViewController(actions: actions)
         navigationController?.viewControllers = [socialViewController]
     }
@@ -65,6 +69,18 @@ final class SocialFlowCoordinator: Coordinator {
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
         coordinator.start()
+    }
+    
+    func showFollowingsViewController() {
+        let actions = FollowingsViewModelActions(viewDidFinish: dismissNavigationController)
+        let followingsViewController = dependencies.makeFollowingsViewController(actions: actions)
+        navigationController?.pushViewController(followingsViewController, animated: true)
+    }
+    
+    func showFollowersViewController() {
+        let actions = FollowersViewModelActions(viewDidFinish: dismissNavigationController)
+        let followersViewController = dependencies.makeFollowersViewController(actions: actions)
+        navigationController?.pushViewController(followersViewController, animated: true)
     }
     
     func didFinishUnfollow() {
