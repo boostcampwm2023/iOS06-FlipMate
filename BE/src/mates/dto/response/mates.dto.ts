@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class MatesDto {
   @ApiProperty({
     type: 'number',
-    example: '1',
+    example: 1,
     description: '친구 관계 id',
   })
   id: number;

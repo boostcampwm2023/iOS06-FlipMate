@@ -13,6 +13,7 @@ import {
   ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
+  ApiOkResponse,
   ApiOperation,
   ApiQuery,
   ApiTags,
@@ -23,6 +24,9 @@ import { StatusMessageDto } from './dto/response/status-message.dto';
 import { AccessTokenGuard } from 'src/auth/guard/bearer-token.guard';
 import { UsersModel } from 'src/users/entity/users.entity';
 import { ResponseDto } from 'src/common/response.dto';
+import { PaginationQueryDto } from './dto/request/pagination-query.dto';
+import { MatesInfoDto } from './dto/response/mates-info.dto';
+import { FollowerInfoDto } from './dto/response/follower-info.dto';
 
 @Controller('mates')
 @ApiTags('소셜 페이지')
@@ -59,16 +63,32 @@ export class MatesController {
   @UseGuards(AccessTokenGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: '나를 팔로우 하는 사람들 조회하기' })
-  getFollowers(@User('id') user_id: number): Promise<object> {
-    return this.matesService.getFollowersInfo(user_id);
+  @ApiOkResponse({
+    type: FollowerInfoDto,
+    isArray: true,
+    description: '나를 팔로우한 사람들 정보(차단한 사람들은 제외)',
+  })
+  getFollowers(
+    @User('id') user_id: number,
+    @Query() query: PaginationQueryDto,
+  ): Promise<FollowerInfoDto[]> {
+    return this.matesService.getFollowersInfo(user_id, query.page);
   }
 
   @Get('/followings')
   @UseGuards(AccessTokenGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: '내가 팔로우 하는 사람들 조회하기' })
-  getFollowings(@User('id') user_id: number): Promise<object> {
-    return this.matesService.getFollowingsInfo(user_id);
+  @ApiOkResponse({
+    type: MatesInfoDto,
+    isArray: true,
+    description: '팔로우 한 사람들 정보',
+  })
+  getFollowings(
+    @User('id') user_id: number,
+    @Query() query: PaginationQueryDto,
+  ): Promise<MatesInfoDto[]> {
+    return this.matesService.getFollowingsInfo(user_id, query.page);
   }
 
   @Get('/status')
@@ -194,6 +214,9 @@ export class MatesController {
       },
     },
   })
+  @ApiOkResponse({
+    type: ResponseDto,
+  })
   async fixationMate(
     @User('id') id: number,
     @Body('following_id') following_id: number,
@@ -229,6 +252,9 @@ export class MatesController {
       },
     },
   })
+  @ApiOkResponse({
+    type: ResponseDto,
+  })
   async blockMate(
     @User('id') id: number,
     @Body('follower_id') follower_id: number,
@@ -246,7 +272,15 @@ export class MatesController {
   @UseGuards(AccessTokenGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: '내가 차단한 사람들 조회하기' })
-  getBlockedMate(@User('id') user_id: number): Promise<object> {
-    return this.matesService.getBlockedFollowersInfo(user_id);
+  @ApiOkResponse({
+    type: MatesInfoDto,
+    isArray: true,
+    description: '차단한 사람들 정보',
+  })
+  getBlockedMate(
+    @User('id') user_id: number,
+    @Query() query: PaginationQueryDto,
+  ): Promise<MatesInfoDto[]> {
+    return this.matesService.getBlockedFollowersInfo(user_id, query.page);
   }
 }

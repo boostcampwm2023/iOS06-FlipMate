@@ -15,6 +15,8 @@ import { ENV } from 'src/common/const/env-keys.const';
 import { StudyLogsService } from 'src/study-logs/study-logs.service';
 import moment from 'moment';
 import { MATES_MAXIMUM } from 'src/common/const/service-var.const';
+import { MatesInfoDto } from './dto/response/mates-info.dto';
+import { FollowerInfoDto } from './dto/response/follower-info.dto';
 
 @Injectable()
 export class MatesService {
@@ -60,36 +62,67 @@ export class MatesService {
     };
   }
 
-  getFollowersInfo(user_id: number) {
-    return this.matesRepository.query(
-      `SELECT u.id, u.nickname, u.image_url 
+  async getFollowersInfo(
+    user_id: number,
+    page: number,
+  ): Promise<FollowerInfoDto[]> {
+    const take = 10;
+    const followers = await this.matesRepository.query(
+      `SELECT 
+         u.id, 
+         u.nickname, 
+         u.image_url,
+         CASE 
+           WHEN mf.follower_id IS NOT NULL THEN true
+           ELSE false
+         END as is_followed
        FROM mates 
        INNER JOIN users_model as u ON u.id = mates.follower_id 
+       LEFT JOIN mates as mf ON mf.follower_id = ? AND mf.following_id = u.id
        WHERE mates.following_id = ? AND mates.is_blocked = false
-       ORDER BY u.nickname`,
-      [user_id],
+       ORDER BY u.nickname
+       LIMIT ?
+       OFFSET ?`,
+      [user_id, user_id, take, (page - 1) * take],
     );
+
+    return followers.map((follower) => ({
+      ...follower,
+      is_followed: follower.is_followed === 1,
+    }));
   }
 
-  getBlockedFollowersInfo(user_id: number) {
+  async getBlockedFollowersInfo(
+    user_id: number,
+    page: number,
+  ): Promise<MatesInfoDto[]> {
+    const take = 10;
     return this.matesRepository.query(
       `SELECT u.id, u.nickname, u.image_url 
        FROM mates 
        INNER JOIN users_model as u ON u.id = mates.follower_id 
        WHERE mates.following_id = ? AND mates.is_blocked = true
-       ORDER BY u.nickname`,
-      [user_id],
+       ORDER BY u.nickname
+       LIMIT ?
+       OFFSET ?`,
+      [user_id, take, (page - 1) * take],
     );
   }
 
-  getFollowingsInfo(user_id: number) {
+  async getFollowingsInfo(
+    user_id: number,
+    page: number,
+  ): Promise<MatesInfoDto[]> {
+    const take = 10;
     return this.matesRepository.query(
       `SELECT u.id, u.nickname, u.image_url 
        FROM mates 
        INNER JOIN users_model as u ON u.id = mates.following_id 
        WHERE mates.follower_id = ?
-       ORDER BY u.nickname`,
-      [user_id],
+       ORDER BY u.nickname
+       LIMIT ?
+       OFFSET ?`,
+      [user_id, take, (page - 1) * take],
     );
   }
 
@@ -269,7 +302,7 @@ export class MatesService {
       { is_fixed: is_fixed },
     );
 
-    if (!result) {
+    if (result.affected === 0) {
       throw new NotFoundException('해당 친구 관계는 존재하지 않습니다.');
     }
   }
@@ -287,7 +320,7 @@ export class MatesService {
       { is_blocked: is_blocked },
     );
 
-    if (!result) {
+    if (result.affected === 0) {
       throw new NotFoundException('해당 친구 관계는 존재하지 않습니다.');
     }
   }

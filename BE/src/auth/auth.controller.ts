@@ -20,7 +20,9 @@ import { User } from 'src/users/decorator/user.decorator';
 import {
   ApiBearerAuth,
   ApiConsumes,
+  ApiCreatedResponse,
   ApiExcludeEndpoint,
+  ApiOkResponse,
   ApiOperation,
   ApiResponse,
   ApiTags,
@@ -32,6 +34,8 @@ import { ConfigService } from '@nestjs/config';
 import { ENV } from 'src/common/const/env-keys.const';
 import { getImageUrl } from 'src/common/utils/utils';
 import { ResponseDto } from 'src/common/response.dto';
+import { UpdateInfoDto } from './dto/response/update-info.dto';
+import { GetInfoDto } from './dto/response/get-info.dto';
 
 @ApiTags('로그인 페이지')
 @Controller('auth')
@@ -81,7 +85,10 @@ export class AuthController {
   @UseInterceptors(FileInterceptor('image'))
   @ApiOperation({ summary: '유저 정보 설정 (완)' })
   @ApiConsumes('multipart/form-data')
-  @ApiResponse({ status: 200, description: '프로필 변경 성공' })
+  @ApiCreatedResponse({
+    type: UpdateInfoDto,
+    description: '유저 정보가 성공적으로 업데이트 되었습니다.',
+  })
   @ApiResponse({ status: 400, description: '잘못된 요청' })
   @ApiResponse({ status: 401, description: '인증 실패' })
   @ApiBearerAuth()
@@ -89,7 +96,7 @@ export class AuthController {
     @User('id') user_id: number,
     @Body() user: UpdateUserDto,
     @UploadedFile() file: Express.Multer.File,
-  ): Promise<any> {
+  ): Promise<UpdateInfoDto> {
     let image_url: string;
     if (file) {
       const isNomal = await this.usersService.isNormalImage(file);
@@ -120,11 +127,11 @@ export class AuthController {
   @Get('info')
   @UseGuards(AccessTokenGuard)
   @ApiOperation({ summary: '유저 정보 조회 (완)' })
-  @ApiResponse({ status: 200, description: '프로필 조회 성공' })
+  @ApiOkResponse({ type: GetInfoDto, description: '프로필 조회 성공' })
   @ApiResponse({ status: 400, description: '잘못된 요청' })
   @ApiResponse({ status: 401, description: '인증 실패' })
   @ApiBearerAuth()
-  async getUser(@User('id') user_id: number): Promise<any> {
+  async getUser(@User('id') user_id: number): Promise<GetInfoDto> {
     const user = await this.usersService.findUserById(user_id);
     const followsCount = await this.usersService.getFollowsCount(user_id);
     return {
@@ -142,7 +149,7 @@ export class AuthController {
   @Patch('timezone')
   @UseGuards(AccessTokenGuard)
   @ApiOperation({ summary: '유저 타임존 설정 (완)' })
-  @ApiResponse({ status: 200, description: '타임존 설정 성공' })
+  @ApiOkResponse({ type: ResponseDto, description: '타임존 설정 성공' })
   @ApiResponse({ status: 400, description: '잘못된 요청' })
   @ApiResponse({ status: 401, description: '인증 실패' })
   @ApiBearerAuth()
