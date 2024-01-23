@@ -301,6 +301,7 @@ export class MatesService {
       },
       { is_fixed: is_fixed },
     );
+
     if (result.affected === 0) {
       throw new NotFoundException('해당 친구 관계는 존재하지 않습니다.');
     }
