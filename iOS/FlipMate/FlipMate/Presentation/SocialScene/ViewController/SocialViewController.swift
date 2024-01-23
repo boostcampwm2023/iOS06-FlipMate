@@ -232,6 +232,12 @@ private extension SocialViewController {
         guard let header = friendsCollectionView.visibleSupplementaryViews(
             ofKind: UICollectionView.elementKindSectionHeader).first
                 as? SocialUserInfoHeaderView else { return nil }
+        
+        let followersGesture = UITapGestureRecognizer(target: self, action: #selector(followersTapped))
+        let followingsGesture = UITapGestureRecognizer(target: self, action: #selector(followingsTapped))
+        header.followerStackView.addGestureRecognizer(followersGesture)
+        header.followingStackView.addGestureRecognizer(followingsGesture)
+        
         return header
     }
     
@@ -306,5 +312,15 @@ private extension SocialViewController {
     private enum LearningTimeLabelConstant {
         static var bottom: CGFloat = 8
         static var title = "00:00:00"
+    }
+}
+
+private extension SocialViewController {
+    @objc func followersTapped() {
+        viewModel.followersLabelTapped()
+    }
+    
+    @objc func followingsTapped() {
+        viewModel.followingsLabelTapped()
     }
 }

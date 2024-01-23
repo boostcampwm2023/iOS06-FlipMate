@@ -269,6 +269,7 @@
 		EDB02C1B2B568A80003F515F /* Follower.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB02C1A2B568A80003F515F /* Follower.swift */; };
 		EDB02C1D2B568AFB003F515F /* DefaultFetchFollowingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB02C1C2B568AFB003F515F /* DefaultFetchFollowingsUseCase.swift */; };
 		EDB02C1F2B568B04003F515F /* DefaultFetchFollowersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB02C1E2B568B04003F515F /* DefaultFetchFollowersUseCase.swift */; };
+		EDB02C212B5E7E3F003F515F /* FollowersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB02C202B5E7E3F003F515F /* FollowersViewModel.swift */; };
 		EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851C62B021492009031EA /* TabBarViewController.swift */; };
 		EDC851D22B04EE83009031EA /* CategoryListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851D12B04EE83009031EA /* CategoryListCollectionViewCell.swift */; };
 		EDC851D92B05C37C009031EA /* DeviceMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851D82B05C37C009031EA /* DeviceMotionManager.swift */; };
@@ -549,6 +550,7 @@
 		EDB02C1A2B568A80003F515F /* Follower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follower.swift; sourceTree = "<group>"; };
 		EDB02C1C2B568AFB003F515F /* DefaultFetchFollowingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFetchFollowingsUseCase.swift; sourceTree = "<group>"; };
 		EDB02C1E2B568B04003F515F /* DefaultFetchFollowersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFetchFollowersUseCase.swift; sourceTree = "<group>"; };
+		EDB02C202B5E7E3F003F515F /* FollowersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersViewModel.swift; sourceTree = "<group>"; };
 		EDC851C62B021492009031EA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		EDC851D12B04EE83009031EA /* CategoryListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCollectionViewCell.swift; sourceTree = "<group>"; };
 		EDC851D82B05C37C009031EA /* DeviceMotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceMotionManager.swift; path = FlipMate/Presentation/Utils/MotionManager/DeviceMotionManager.swift; sourceTree = SOURCE_ROOT; };
@@ -696,8 +698,8 @@
 				2C5CDA4E2B025403007AFC57 /* SocialViewController.swift */,
 				ED68659C2B15E928001A2AAD /* SocialDetailViewController.swift */,
 				2C9F61FD2B15F48600AE63F9 /* FriendAddViewController.swift */,
-				EDA60F672B4FD32400F0104D /* FollowersViewController.swift */,
 				EDB02C0E2B567CF3003F515F /* FollowingsViewController.swift */,
+				EDA60F672B4FD32400F0104D /* FollowersViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1572,6 +1574,7 @@
 				2CDCD0412B1873F60080DCDE /* SocialViewModel.swift */,
 				2C9F620A2B171C8300AE63F9 /* FriendAddViewModel.swift */,
 				EDB02C102B567E1B003F515F /* FollowingsViewModel.swift */,
+				EDB02C202B5E7E3F003F515F /* FollowersViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2074,6 +2077,7 @@
 				2C88DCF22B124238000B4686 /* AppFlowCoordinator.swift in Sources */,
 				2C1F2BBB2B20D8D60026C30B /* SocialUserInfoHeaderView.swift in Sources */,
 				2CDCD0642B18CEDF0080DCDE /* FriendsResponseDTO.swift in Sources */,
+				EDB02C212B5E7E3F003F515F /* FollowersViewModel.swift in Sources */,
 				ED1B3F292B1F8AA300FB9DBC /* WeeklyChartLogResponseDTO.swift in Sources */,
 				EDC851C72B021492009031EA /* TabBarViewController.swift in Sources */,
 				2CE84EF12B0B77BD00E2FB71 /* UICollectionView++Extension.swift in Sources */,
