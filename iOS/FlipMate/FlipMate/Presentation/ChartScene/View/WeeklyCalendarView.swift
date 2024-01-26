@@ -173,8 +173,7 @@ private extension WeeklyCalendarView {
     }
     
     func configureWeekStackView() {
-        // TODO: - 다국어 지원
-        let week = ["일", "월", "화", "수", "목", "금", "토"]
+        guard let week = DateFormatter().shortWeekdaySymbols else { return }
         week.forEach {
             let label = UILabel()
             label.text = $0
@@ -217,7 +216,6 @@ extension WeeklyCalendarView: UICollectionViewDelegate {
         guard let deSelectedDate = item.date.toDate(.yyyyMMdd) else { return }
         cell.hideCircleView()
         delegate?.deSelectDate(deSelectedDate)
-        // TODO: - DonutChartView 초기화.
     }
 }
 
