@@ -31,13 +31,24 @@ final class ChartViewController: BaseViewController {
         return segmentedControl
     }()
     
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
+    
+    private lazy var scrollContentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private lazy var weeklyCalendarView: WeeklyCalendarView = {
         let calendarView = WeeklyCalendarView()
         calendarView.delegate = self
         return calendarView
     }()
     
-    private var donutChartView = DonutChartView()
+    private var donutChartView = CustomChartView()
     private var weeklyChartView = UIView()
     
     var shouldHideDailyChartView: Bool? {
@@ -64,26 +75,51 @@ final class ChartViewController: BaseViewController {
     }
     
     override func configureUI() {
-        [ segmentedControl, weeklyCalendarView, donutChartView ] .forEach {
+        [ segmentedControl, scrollView ] .forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+        
+        [ weeklyCalendarView, donutChartView ] .forEach {
+            scrollContentView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        scrollView.addSubview(scrollContentView)
         
         NSLayoutConstraint.activate([
             segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
             segmentedControl.heightAnchor.constraint(equalToConstant: 50),
-            segmentedControl.widthAnchor.constraint(equalToConstant: 180),
-            
-            weeklyCalendarView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor),
-            weeklyCalendarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            weeklyCalendarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            segmentedControl.widthAnchor.constraint(equalToConstant: 180)
+        ])
+        
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            weeklyCalendarView.topAnchor.constraint(equalTo: scrollContentView.topAnchor),
+            weeklyCalendarView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor),
+            weeklyCalendarView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor),
             weeklyCalendarView.heightAnchor.constraint(equalToConstant: 150),
             
-            donutChartView.topAnchor.constraint(equalTo: weeklyCalendarView.bottomAnchor, constant: 30),
-            donutChartView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
-            donutChartView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -5),
-            donutChartView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
+            donutChartView.topAnchor.constraint(equalTo: weeklyCalendarView.bottomAnchor),
+            donutChartView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 5),
+            donutChartView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor, constant: -5),
+//            donutChartView.heightAnchor.constraint(equalToConstant: view.frame.width),
+            donutChartView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor, constant: -80)
+        ])
+        
+        NSLayoutConstraint.activate([
+            scrollContentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            scrollContentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            scrollContentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            scrollContentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            scrollContentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
     }
     
@@ -94,7 +130,7 @@ final class ChartViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] studyLog in
                 guard let self = self else { return }
-                donutChartView.fetchStudyLog(studyLog)
+                donutChartView.fetchLog(studyLog: studyLog)
             }
             .store(in: &cancellables)
     }
@@ -110,6 +146,7 @@ extension ChartViewController: WeeklyCalendarViewDelegate {
         FMLogger.chart.debug("해당 날짜가 선택 해제되었습니다. \(date.dateToString(format: .yyyyMMdd))")
     }
 }
+
 private extension ChartViewController {
     @objc func didChangeValue(segment: UISegmentedControl) {
         shouldHideDailyChartView = segment.selectedSegmentIndex != 0

@@ -125,6 +125,8 @@
 		2C9F62512B176FFE00AE63F9 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595A82B0C7F3500558FAA /* HTTPMethod.swift */; };
 		2C9F62532B17700500AE63F9 /* BaseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A02B0DA4E6008CBC85 /* BaseComponents.swift */; };
 		2C9F62542B17701300AE63F9 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422E2B0F747B001E2803 /* KeyChainManager.swift */; };
+		2CB4AFE22B64D3CD003F5D0F /* LabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4AFE12B64D3CD003F5D0F /* LabelView.swift */; };
+		2CB4AFE42B64E94A003F5D0F /* CustonChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4AFE32B64E94A003F5D0F /* CustonChartView.swift */; };
 		2CD272ED2B21A619000CB9E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CD272EF2B21A619000CB9E5 /* Localizable.strings */; };
 		2CD272F32B21C748000CB9E5 /* StudingPingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD272F22B21C748000CB9E5 /* StudingPingUseCase.swift */; };
 		2CD272F52B21C789000CB9E5 /* DefaultStudingPingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD272F42B21C789000CB9E5 /* DefaultStudingPingUseCase.swift */; };
@@ -364,6 +366,8 @@
 		2C9F62362B17517100AE63F9 /* MockFriendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFriendUseCase.swift; sourceTree = "<group>"; };
 		2C9F62402B1769FD00AE63F9 /* FriendUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendUseCaseTests.swift; sourceTree = "<group>"; };
 		2C9F62462B176AEC00AE63F9 /* MockFriendRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFriendRepository.swift; sourceTree = "<group>"; };
+		2CB4AFE12B64D3CD003F5D0F /* LabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelView.swift; sourceTree = "<group>"; };
+		2CB4AFE32B64E94A003F5D0F /* CustonChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustonChartView.swift; sourceTree = "<group>"; };
 		2CD272EE2B21A619000CB9E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2CD272F02B21A622000CB9E5 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2CD272F12B21A62B000CB9E5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1422,6 +1426,8 @@
 				2C277ABA2B497FB500567CAC /* DonutChartView.swift */,
 				2C277ABE2B4AB22400567CAC /* WeeklyCalendarView.swift */,
 				2C277AC02B4AB98000567CAC /* WeekCollectionViewCell.swift */,
+				2CB4AFE12B64D3CD003F5D0F /* LabelView.swift */,
+				2CB4AFE32B64E94A003F5D0F /* CustonChartView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1905,6 +1911,7 @@
 				2C2F217E2B0F4D7F00B45BA8 /* DefaultStudyLogRepository.swift in Sources */,
 				2C5CDA4F2B025403007AFC57 /* SocialViewController.swift in Sources */,
 				2CE91C732B25971000EACCD7 /* UserInfoManager.swift in Sources */,
+				2CB4AFE42B64E94A003F5D0F /* CustonChartView.swift in Sources */,
 				2C88DD052B1256D0000B4686 /* TabBarFlowCoordinator.swift in Sources */,
 				ED9B2A812B06048D008FE1C5 /* CategoryViewModel.swift in Sources */,
 				60DE49402B05E67200ACE6DD /* FlipMateConstant.swift in Sources */,
@@ -1922,6 +1929,7 @@
 				2CDCD04A2B18895E0080DCDE /* DefaultSocialRepository.swift in Sources */,
 				ED3595C12B0DC2F100558FAA /* CategoryColorSelectView.swift in Sources */,
 				60DFDDDB2B14FE0100FEF98A /* SignUpResponseDTO.swift in Sources */,
+				2CB4AFE22B64D3CD003F5D0F /* LabelView.swift in Sources */,
 				60EB7F5D2B1F4F9E00F8C613 /* ProfileSettingsViewModel.swift in Sources */,
 				ED38421B2B0F1B7E001E2803 /* GoogleAuthRequestDTO.swift in Sources */,
 				2C9F62242B173ADA00AE63F9 /* UserProfileResposeDTO.swift in Sources */,
