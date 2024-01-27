@@ -74,8 +74,8 @@ private extension CustomChartView {
         ])
     }
     
-    
     func fetchLabelList(studyLog: StudyLog) {
+        labelListView.subviews.forEach { $0.removeFromSuperview() }
         if studyLog.totalTime == 0 { return }
         
         var count: CGFloat = 1.0
@@ -85,6 +85,7 @@ private extension CustomChartView {
         let spacingY = Constants.spacingY
         
         studyLog.category.forEach { category in
+            if category.studyTime == 0 { return }
             let labelView = LabelView()
             let chartLabel = ChartLabel(title: category.subject, hexString: category.color)
             labelView.updateLabel(label: chartLabel)
