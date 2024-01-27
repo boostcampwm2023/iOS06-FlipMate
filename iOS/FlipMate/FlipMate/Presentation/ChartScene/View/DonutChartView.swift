@@ -110,7 +110,7 @@ private extension DonutChartView {
         
         let totalTimeLayer = CATextLayer()
         totalTimeLayer.frame = CGRect(x: center.x, y: center.y, width: 0, height: 0).insetBy(dx: -60, dy: -40)
-        totalTimeLayer.foregroundColor = UIColor.black.cgColor
+        totalTimeLayer.foregroundColor = UIColor.label.cgColor
         totalTimeLayer.alignmentMode = .center
         totalTimeLayer.fontSize = Constant.totalTimeTextFontSize
         totalTimeLayer.font = Constant.systemTextFont as CFTypeRef
@@ -119,7 +119,7 @@ private extension DonutChartView {
 
         let timeLayer = CATextLayer()
         timeLayer.frame = CGRect(x: center.x, y: center.y + 20, width: 0, height: 0).insetBy(dx: -60, dy: -20)
-        timeLayer.foregroundColor = UIColor.black.cgColor
+        timeLayer.foregroundColor = UIColor.label.cgColor
         timeLayer.alignmentMode = .center
         timeLayer.fontSize = Constant.timeTextFontSize
         timeLayer.font = Constant.systemTextFont as CFTypeRef
@@ -149,7 +149,7 @@ private extension DonutChartView {
         
         let totalTimeLayer = CATextLayer()
         totalTimeLayer.frame = CGRect(x: center.x, y: center.y, width: 0, height: 0).insetBy(dx: -150, dy: -50)
-        totalTimeLayer.foregroundColor = UIColor.black.cgColor
+        totalTimeLayer.foregroundColor = UIColor.label.cgColor
         totalTimeLayer.alignmentMode = .center
         totalTimeLayer.fontSize = Constant.noResultTextFontSize
         totalTimeLayer.font = Constant.systemTextFont as CFTypeRef
