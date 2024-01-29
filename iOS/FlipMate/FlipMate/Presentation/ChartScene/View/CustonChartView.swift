@@ -15,16 +15,22 @@ final class CustomChartView: UIView {
         stackView.distribution = .equalSpacing
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.layer.cornerRadius = 20
+        stackView.layer.masksToBounds = true
         return stackView
     }()
     
-    private lazy var labelListView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemBackground
+    private lazy var labelListView: LabelListView = {
+        let view = LabelListView()
+        view.backgroundColor = FlipMateColor.gray2.color
         return view
     }()
     
-    private let donutChartView = DonutChartView()
+    private let donutChartView: DonutChartView = {
+        let view = DonutChartView()
+        view.backgroundColor = FlipMateColor.gray2.color
+        return view
+    }()
     
     // MARK: - init
     override init(frame: CGRect) {
@@ -54,8 +60,6 @@ private extension CustomChartView {
             stackView.addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-
-        labelListView.backgroundColor = .systemBackground
         
         addSubview(stackView)
         
@@ -75,33 +79,12 @@ private extension CustomChartView {
     }
     
     func fetchLabelList(studyLog: StudyLog) {
-        labelListView.subviews.forEach { $0.removeFromSuperview() }
+        labelListView.removeAllLabel()
         if studyLog.totalTime == 0 { return }
-        
-        var count: CGFloat = 1.0
-        var positionX = Constants.defaultPositionX
-        var positionY = Constants.defaultPositionY
-        let spacingX = Constants.spacingX
-        let spacingY = Constants.spacingY
-        
-        studyLog.category.forEach { category in
-            if category.studyTime == 0 { return }
-            let labelView = LabelView()
-            let chartLabel = ChartLabel(title: category.subject, hexString: category.color)
-            labelView.updateLabel(label: chartLabel)
-            
-            if frame.width - positionX < labelView.widthSize {
-                positionX = Constants.defaultPositionX
-                positionY += spacingY
-                count += 1
-            }
-            
-            labelView.frame = CGRect(x: positionX, y: positionY, width: labelView.widthSize, height: Constants.labelViewHegith)
-            labelListView.addSubview(labelView)
-            positionX += labelView.widthSize + spacingX
-        }
-        
-        labelListView.heightAnchor.constraint(equalToConstant: count * spacingY).isActive = true
+        let labels = studyLog.category
+            .filter { $0.studyTime != 0 }
+            .map { ChartLabel(title: $0.subject, hexString: $0.color) }
+        labelListView.addLabel(labels)
     }
 }
 
