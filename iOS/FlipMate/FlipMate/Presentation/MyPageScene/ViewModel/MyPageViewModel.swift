@@ -49,12 +49,12 @@ final class MyPageViewModel: MyPageViewModelProtocol {
     private let withdrawUseCase: WithdrawUseCase
     private let actions: MyPageViewModelActions?
     
-    private let userInfoManager: UserInfoManagerProtocol
+    private let userInfoManager: UserInfoManageable
     
     init(signOutUseCase: SignOutUseCase,
          withdrawUseCase: WithdrawUseCase,
          actions: MyPageViewModelActions? = nil,
-         userInfoManager: UserInfoManagerProtocol) {
+         userInfoManager: UserInfoManageable) {
         self.signOutUseCsae = signOutUseCase
         self.withdrawUseCase = withdrawUseCase
         self.actions = actions

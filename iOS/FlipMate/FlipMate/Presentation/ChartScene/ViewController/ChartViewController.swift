@@ -94,14 +94,19 @@ private extension ChartViewController {
     }
     
     func setDailyChart() {
+        let provider = Provider(
+            urlSession: URLSession.shared,
+            signOutManager: SignOutManager(userInfoManager: UserInfoManager(),
+                                           keychainManager: KeychainManager()),
+            keychainManager: KeychainManager())
         let dailyChartView = DailyChartView(
             viewModel: ChartViewModel(
                 fetchDailyChartUseCase: DefaultFetchDailyChartUseCase(
                     repository: DefaultChartRepository(
-                        provider: Provider(urlSession: URLSession.shared))),
+                        provider: provider)),
                 fetchWeeklyChartUseCase: DefaultFetchWeeklyChartUseCase(
                     repository: DefaultChartRepository(
-                        provider: Provider(urlSession: URLSession.shared))),
+                        provider: provider)),
                 actions: nil))
         let hostingController = UIHostingController(rootView: dailyChartView)
         addChild(hostingController)
@@ -113,14 +118,19 @@ private extension ChartViewController {
     }
     
     func setWeeklyChart() {
+        let provider = Provider(
+            urlSession: URLSession.shared,
+            signOutManager: SignOutManager(userInfoManager: UserInfoManager(),
+                                           keychainManager: KeychainManager()),
+            keychainManager: KeychainManager())
         let weeklyChartView = WeeklyChartView(
             viewModel: ChartViewModel(
                 fetchDailyChartUseCase: DefaultFetchDailyChartUseCase(
                     repository: DefaultChartRepository(
-                        provider: Provider(urlSession: URLSession.shared))),
+                        provider: provider)),
                 fetchWeeklyChartUseCase: DefaultFetchWeeklyChartUseCase(
                     repository: DefaultChartRepository(
-                        provider: Provider(urlSession: URLSession.shared))),
+                        provider: provider)),
                 actions: nil))
         let hostingController = UIHostingController(rootView: weeklyChartView)
         addChild(hostingController)

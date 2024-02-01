@@ -25,4 +25,27 @@ final class EndPoint<R: Decodable>: RequestResponseable {
         self.data = data
         self.headers = headers
     }
+    
+    func makeURLRequest(with token: String?) throws -> URLRequest {
+        let url = try makeURL()
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = method.rawValue
+        urlRequest.httpBody = data
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if let token = token {
+            urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+        
+        headers?.forEach { urlRequest.setValue($0.value, forHTTPHeaderField: $0.field)}
+        return urlRequest
+    }
+    
+    private func makeURL() throws -> URL {
+        let fullPath = "\(baseURL)\(path)"
+        guard let components = URLComponents(string: fullPath) else { throw NetworkError.invalidURLComponents }
+        
+        guard let url = components.url else { throw NetworkError.invalidURLComponents }
+        return url
+    }
 }

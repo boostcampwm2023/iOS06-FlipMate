@@ -11,7 +11,7 @@ final class TimerSceneDIContainer: TimerFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
         let categoryManager: CategoryManageable
-        let userInfoManager: UserInfoManagerProtocol
+        let userInfoManager: UserInfoManageable
     }
     
     private let dependencies: Dependencies

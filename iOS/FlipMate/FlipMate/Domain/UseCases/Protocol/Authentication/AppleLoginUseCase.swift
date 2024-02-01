@@ -8,5 +8,5 @@
 import Foundation
 
 protocol AppleLoginUseCase {
-    func appleLogin(accessToken: String) async throws -> User
+    func appleLogin(accessToken: String, userID: String) async throws -> User
 }

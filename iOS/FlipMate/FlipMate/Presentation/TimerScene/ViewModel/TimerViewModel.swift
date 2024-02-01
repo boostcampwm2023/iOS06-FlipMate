@@ -68,8 +68,8 @@ final class TimerViewModel: TimerViewModelProtocol {
     
     // MARK: - Managers
     private let categoryManager: CategoryManageable
-    private let timerManager: TimerManagerProtocol
-    private let userInfoManager: UserInfoManagerProtocol
+    private let timerManager: TimerManageable
+    private let userInfoManager: UserInfoManageable
     
     // MARK: - init
     init(startTimerUseCase: StartTimerUseCase,
@@ -79,8 +79,8 @@ final class TimerViewModel: TimerViewModelProtocol {
          patchTimeZoneUseCase: PatchTimeZoneUseCase,
          actions: TimerViewModelActions? = nil,
          categoryManager: CategoryManageable,
-         userInfoManager: UserInfoManagerProtocol,
-         timerManager: TimerManagerProtocol) {
+         userInfoManager: UserInfoManageable,
+         timerManager: TimerManageable) {
         self.startTimerUseCase = startTimerUseCase
         self.getStudyLogUseCase = getStudyLogUseCase
         self.getUserInfoUseCase = getUserInfoUseCase

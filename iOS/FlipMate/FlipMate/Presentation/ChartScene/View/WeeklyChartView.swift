@@ -64,9 +64,17 @@ private extension WeeklyChartView {
             ChartViewModel(
                 fetchDailyChartUseCase: DefaultFetchDailyChartUseCase(
                     repository: DefaultChartRepository(
-                        provider: Provider(urlSession: URLSession.shared))),
+                        provider: Provider(
+                            urlSession: URLSession.shared,
+                            signOutManager: SignOutManager(userInfoManager: UserInfoManager(),
+                                                           keychainManager: KeychainManager()),
+                            keychainManager: KeychainManager()))),
                 fetchWeeklyChartUseCase: DefaultFetchWeeklyChartUseCase(
                     repository: DefaultChartRepository(
-                        provider: Provider(urlSession: URLSession.shared))),
+                        provider: Provider(
+                            urlSession: URLSession.shared,
+                            signOutManager: SignOutManager(userInfoManager: UserInfoManager(),
+                                                           keychainManager: KeychainManager()),
+                            keychainManager: KeychainManager()))),
                 actions: ChartViewModelActions()))
 }
