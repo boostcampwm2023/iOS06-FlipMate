@@ -22,13 +22,13 @@ final class CustomChartView: UIView {
     
     private lazy var labelListView: LabelListView = {
         let view = LabelListView()
-        view.backgroundColor = FlipMateColor.gray2.color
+        view.backgroundColor = FlipMateColor.gray5.color
         return view
     }()
     
     private let donutChartView: DonutChartView = {
         let view = DonutChartView()
-        view.backgroundColor = FlipMateColor.gray2.color
+        view.backgroundColor = FlipMateColor.gray5.color
         return view
     }()
     

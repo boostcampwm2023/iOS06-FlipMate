@@ -22,7 +22,6 @@ final class DonutChartView: UIView {
     // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -37,13 +36,6 @@ final class DonutChartView: UIView {
     
     func fetchStudyLog(_ studyLog: StudyLog) {
         self.studyLog = studyLog
-    }
-}
-
-// MARK: - Configure UI
-private extension DonutChartView {
-    func configureUI() {
-        backgroundColor = .systemBackground
     }
 }
 
@@ -62,7 +54,7 @@ private extension DonutChartView {
         var startAngle: CGFloat = 0.0, endAngle: CGFloat = 0.0, middleAngle: CGFloat = 0.0
         
         for category in categories {
-            guard let studyTime = category.studyTime, studyTime != 0 else { return }
+            guard let studyTime = category.studyTime, studyTime != 0 else { continue }
             let percentage = (CGFloat(studyTime) / totalTime)
             startAngle = endAngle
             endAngle = startAngle + CGFloat(percentage)
@@ -72,7 +64,7 @@ private extension DonutChartView {
             let yPos: CGFloat = sin((middleAngle.toRadian())) * Constant.hypotenuse
             let textLayer = CATextLayer()
             textLayer.frame = CGRect(x: center.x + xPos, y: center.y + yPos, width: 0, height: 0).insetBy(dx: -60, dy: -7.5)
-            textLayer.foregroundColor = UIColor.white.cgColor
+            textLayer.foregroundColor = FlipMateColor.gray5.color?.cgColor
             textLayer.string = "\(Int(round(percentage * 100)))%"
             textLayer.alignmentMode = .center
             textLayer.fontSize = Constant.chartTextFontSize
@@ -91,7 +83,7 @@ private extension DonutChartView {
             UIColor(hexString: category.color)?.set()
             path.fill()
             path.close()
-            UIColor.systemBackground.set()
+            FlipMateColor.gray5.color?.set()
             path.lineWidth = Constant.lineWidth
             path.stroke()
             pathArray.append(path)
@@ -110,7 +102,7 @@ private extension DonutChartView {
         
         let totalTimeLayer = CATextLayer()
         totalTimeLayer.frame = CGRect(x: center.x, y: center.y, width: 0, height: 0).insetBy(dx: -60, dy: -40)
-        totalTimeLayer.foregroundColor = UIColor.label.cgColor
+        totalTimeLayer.foregroundColor = UIColor.black.cgColor
         totalTimeLayer.alignmentMode = .center
         totalTimeLayer.fontSize = Constant.totalTimeTextFontSize
         totalTimeLayer.font = Constant.systemTextFont as CFTypeRef
@@ -119,7 +111,7 @@ private extension DonutChartView {
 
         let timeLayer = CATextLayer()
         timeLayer.frame = CGRect(x: center.x, y: center.y + 20, width: 0, height: 0).insetBy(dx: -60, dy: -20)
-        timeLayer.foregroundColor = UIColor.label.cgColor
+        timeLayer.foregroundColor = UIColor.black.cgColor
         timeLayer.alignmentMode = .center
         timeLayer.fontSize = Constant.timeTextFontSize
         timeLayer.font = Constant.systemTextFont as CFTypeRef
@@ -138,7 +130,7 @@ private extension DonutChartView {
             endAngle: Constant.middleCircleEndAngle,
             clockwise: true)
         
-        UIColor.systemBackground.set()
+        FlipMateColor.gray5.color?.set()
         middleCircle.fill()
         
         pathArray.append(middleCircle)
@@ -149,7 +141,7 @@ private extension DonutChartView {
         
         let totalTimeLayer = CATextLayer()
         totalTimeLayer.frame = CGRect(x: center.x, y: center.y, width: 0, height: 0).insetBy(dx: -150, dy: -50)
-        totalTimeLayer.foregroundColor = UIColor.label.cgColor
+        totalTimeLayer.foregroundColor = UIColor.black.cgColor
         totalTimeLayer.alignmentMode = .center
         totalTimeLayer.fontSize = Constant.noResultTextFontSize
         totalTimeLayer.font = Constant.systemTextFont as CFTypeRef

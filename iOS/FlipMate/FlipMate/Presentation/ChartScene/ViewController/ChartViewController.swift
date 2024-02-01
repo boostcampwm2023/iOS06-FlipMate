@@ -107,10 +107,9 @@ final class ChartViewController: BaseViewController {
             weeklyCalendarView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor),
             weeklyCalendarView.heightAnchor.constraint(equalToConstant: 150),
             
-            donutChartView.topAnchor.constraint(equalTo: weeklyCalendarView.bottomAnchor),
-            donutChartView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 5),
-            donutChartView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor, constant: -5),
-//            donutChartView.heightAnchor.constraint(equalToConstant: view.frame.width),
+            donutChartView.topAnchor.constraint(equalTo: weeklyCalendarView.bottomAnchor, constant: 20),
+            donutChartView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 15),
+            donutChartView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor, constant: -15),
             donutChartView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor, constant: -80)
         ])
         
