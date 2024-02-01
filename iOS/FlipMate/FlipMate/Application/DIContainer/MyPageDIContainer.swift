@@ -10,8 +10,8 @@ import UIKit
 final class MyPageDIContainer: MyPageFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
-        let signOutManager: SignOutManagerProtocol
-        let userInfoManager: UserInfoManagerProtocol
+        let signOutManager: SignOutManageable
+        let userInfoManager: UserInfoManageable
     }
     
     private let dependencies: Dependencies
@@ -35,10 +35,11 @@ final class MyPageDIContainer: MyPageFlowCoordinatorDependencies {
     private func makeMyPageViewModel(actions: MyPageViewModelActions) -> MyPageViewModel {
         let repository = DefaultAuthenticationRepository(provider: dependencies.provider)
         return MyPageViewModel(
-            signOutUseCase: DefaultSignOutUseCase(repository: repository,
-                                                  signoutManager: dependencies.signOutManager),
-            withdrawUseCase: DefaultWithdrawUesCase(repository: repository,
-                                                    signOutManager: dependencies.signOutManager),
+            signOutUseCase: DefaultSignOutUseCase(
+                signoutManager: dependencies.signOutManager),
+            withdrawUseCase: DefaultWithdrawUesCase(
+                repository: repository,
+                signOutManager: dependencies.signOutManager),
             actions: actions,
             userInfoManager: dependencies.userInfoManager)
     }

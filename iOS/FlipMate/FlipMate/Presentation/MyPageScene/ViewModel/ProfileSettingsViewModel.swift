@@ -43,12 +43,12 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     private var isSignUpCompletedSubject = PassthroughSubject<Void, Never>()
     private var errorSubject = PassthroughSubject<Error, Never>()
     private let actions: ProfileSettingsViewModelActions?
-    private let userInfoManager: UserInfoManagerProtocol
+    private let userInfoManager: UserInfoManageable
     
     init(validateNicknameUseCase: ValidateNicknameUseCase,
          setupProfileInfoUseCase: SetupProfileInfoUseCase,
          actions: ProfileSettingsViewModelActions?,
-         userInfoManager: UserInfoManagerProtocol) {
+         userInfoManager: UserInfoManageable) {
         self.validateNicknameUseCase = validateNicknameUseCase
         self.setupProfileInfoUseCase = setupProfileInfoUseCase
         self.actions = actions
@@ -60,14 +60,8 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     }
     
     func nickNameChanged(_ newNickName: String) {
-        Task {
-            do {
-                let nickNameValidationStatus = try await validateNicknameUseCase.isNickNameValid(newNickName)
-                isValidNickNameSubject.send(nickNameValidationStatus)
-            } catch let error {
-                errorSubject.send(error)
-            }
-        }
+        let nickNameValidationStatus = validateNicknameUseCase.isNickNameValid(newNickName)
+        isValidNickNameSubject.send(nickNameValidationStatus)
     }
     
     func profileImageChanged() {

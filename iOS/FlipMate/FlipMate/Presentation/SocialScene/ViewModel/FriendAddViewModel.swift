@@ -23,7 +23,7 @@ protocol FriendAddViewModelInput {
 protocol FriendAddViewModelOutput {
     var myNicknamePublihser: AnyPublisher<String, Never> { get }
     var searchFreindPublisher: AnyPublisher<FreindSeacrhItem, Never> { get }
-    var searchErrorPublisher: AnyPublisher<Void, Never> { get }
+    var searchErrorPublisher: AnyPublisher<Error, Never> { get }
     var nicknameCountPublisher: AnyPublisher<Int, Never> { get }
     var followErrorPublisher: AnyPublisher<Void, Never> { get }
 }
@@ -33,7 +33,7 @@ typealias FriendAddViewModelProtocol = FriendAddViewModelInput & FriendAddViewMo
 final class FriendAddViewModel: FriendAddViewModelProtocol {
     // MARK: - Subject
     private var searchResultSubject = PassthroughSubject<FreindSeacrhItem, Never>()
-    private var searchErrorSubject = PassthroughSubject<Void, Never>()
+    private var searchErrorSubject = PassthroughSubject<Error, Never>()
     private var nicknameCountSubject = PassthroughSubject<Int, Never>()
     private var followErrorSubject = PassthroughSubject<Void, Never>()
     
@@ -43,12 +43,12 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     private let followUseCase: FollowFriendUseCase
     private let searchUseCase: SearchFriendUseCase
     private let actions: FriendAddViewModelActions?
-    private let userInfoManger: UserInfoManagerProtocol
+    private let userInfoManger: UserInfoManageable
     
     init(followUseCase: FollowFriendUseCase,
          searchUseCase: SearchFriendUseCase,
          actions: FriendAddViewModelActions? = nil,
-         userInfoManager: UserInfoManagerProtocol) {
+         userInfoManager: UserInfoManageable) {
         self.followUseCase = followUseCase
         self.searchUseCase = searchUseCase
         self.actions = actions
@@ -60,7 +60,7 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
         return searchResultSubject.eraseToAnyPublisher()
     }
     
-    var searchErrorPublisher: AnyPublisher<Void, Never> {
+    var searchErrorPublisher: AnyPublisher<Error, Never> {
         return searchErrorSubject.eraseToAnyPublisher()
     }
     
@@ -106,7 +106,7 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
                     FMLogger.friend.debug("친구 검색 성공")
                 case .failure(let error):
                     FMLogger.friend.error("친구 검색 에러 발생 \(error.localizedDescription)")
-                    self.searchErrorSubject.send()
+                    self.searchErrorSubject.send(error)
                 }
             } receiveValue: { [weak self] friendSearchResult in
                 guard let self = self else { return }

@@ -8,17 +8,19 @@
 import Foundation
 import Combine
 
-protocol SignOutManagerProtocol {
+protocol SignOutManageable {
     var signOutPublisher: AnyPublisher<Bool, Never> { get }
     func signOut()
 }
 
-final class SignOutManager: SignOutManagerProtocol {
+final class SignOutManager: SignOutManageable {
     private var signOutSubject = PassthroughSubject<Bool, Never>()
-    private let userInfoManager: UserInfoManagerProtocol
+    private let userInfoManager: UserInfoManageable
+    private let keychainManager: KeychainManageable
     
-    init(userInfoManager: UserInfoManagerProtocol) {
+    init(userInfoManager: UserInfoManageable, keychainManager: KeychainManageable) {
         self.userInfoManager = userInfoManager
+        self.keychainManager = keychainManager
     }
     
     var signOutPublisher: AnyPublisher<Bool, Never> {
@@ -26,8 +28,8 @@ final class SignOutManager: SignOutManagerProtocol {
     }
     
     func signOut() {
-        try? KeychainManager.deleteAccessToken()
-        try? KeychainManager.deleteAppleUserID()
+        try? keychainManager.deleteAccessToken()
+        try? keychainManager.deleteAppleUserID()
         // MAKR: - UserInfoManager 초기화
         userInfoManager.initManager()
         signOutSubject.send(true)

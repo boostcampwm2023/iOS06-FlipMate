@@ -11,8 +11,9 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
         let categoryManager: CategoryManageable
-        let signOutManager: SignOutManagerProtocol
-        let userInfoManager: UserInfoManagerProtocol
+        let signOutManager: SignOutManageable
+        let userInfoManager: UserInfoManageable
+        let keychainManager: KeychainManageable
     }
     
     private let dependencies: Dependencies
@@ -23,18 +24,14 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
     
     func makeLoginViewController(actions: LoginViewModelActions) -> UIViewController {
         let repository = DefaultAuthenticationRepository(provider: dependencies.provider)
-        let signOutManager = dependencies.signOutManager
         return LoginViewController(
             loginViewModel: LoginViewModel(
                 googleLoginUseCase: DefaultGoogleLoginUseCase(
                     repository: repository,
-                    signoutManager: signOutManager),
+                    keychainManager: dependencies.keychainManager),
                 appleLoginUseCase: DefaultAppleLoginUseCase(
                     repository: repository,
-                    signoutManager: signOutManager),
-                signoutUseCase: DefaultSignOutUseCase(
-                    repository: repository,
-                    signoutManager: signOutManager),
+                    keychainManager: dependencies.keychainManager),
                 actions: actions)
             )
     }

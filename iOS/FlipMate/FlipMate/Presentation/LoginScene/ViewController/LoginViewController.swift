@@ -92,7 +92,7 @@ final class LoginViewController: BaseViewController {
     // MARK: - UI Setting
     override func configureUI() {
         view.backgroundColor = .systemBackground
-
+        
         [ logoImageView,
           logoMainTitleLabel,
           logoSubTitleLabel,
@@ -128,14 +128,12 @@ final class LoginViewController: BaseViewController {
             .sink { [weak self] isMember in
                 guard let self = self else { return }
                 self.enableButtons()
-                if let isMember = isMember {
-                    if isMember {
-                        FMLogger.device.log("타이머 창으로 이동합니다")
-                        loginViewModel.didFinishLoginAndIsMember()
-                    } else {
-                        FMLogger.device.log("회원가입 창으로 이동합니다")
-                        loginViewModel.didFinishLoginAndIsNotMember()
-                    }
+                if isMember {
+                    FMLogger.device.log("타이머 창으로 이동합니다")
+                    loginViewModel.didFinishLoginAndIsMember()
+                } else {
+                    FMLogger.device.log("회원가입 창으로 이동합니다")
+                    loginViewModel.didFinishLoginAndIsNotMember()
                 }
             }
             .store(in: &cancellables)

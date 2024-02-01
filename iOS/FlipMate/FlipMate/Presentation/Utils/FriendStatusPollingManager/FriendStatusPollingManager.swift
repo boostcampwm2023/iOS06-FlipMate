@@ -25,7 +25,7 @@ protocol FriendStatusPollingManageable {
 final class FriendStatusPollingManager: FriendStatusPollingManageable {
     private var preFriendStatusArray: [FriendStatus] = []
     private var updateFriendArray: [UpdateFriend] = []
-    private let timerManager: TimerManagerProtocol
+    private let timerManager: TimerManageable
     
     private var updateLearningFriends = PassthroughSubject<[UpdateFriend], Never>()
     private var updateStopFriends = PassthroughSubject<[StopFriend], Never>()
@@ -38,7 +38,7 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
         return updateStopFriends.eraseToAnyPublisher()
     }
     
-    init(timerManager: TimerManagerProtocol) {
+    init(timerManager: TimerManageable) {
         self.timerManager = timerManager
     }
     
