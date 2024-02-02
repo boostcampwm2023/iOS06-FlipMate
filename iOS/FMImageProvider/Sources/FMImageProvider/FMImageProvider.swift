@@ -18,14 +18,15 @@ public final class FMImageProvider {
     /// - Parameters:
     ///   - memoryCacher: 메모리 캐싱을 담당하는 객체 
     ///   - diskCacher:  디스크 캐싱을 담당하는 객체
-    internal init(memoryCacher: MemoryCacheable, diskCacher: DiskCacheable) {
+    internal init(memoryCacher: MemoryCacheable, diskCacher: DiskCacheable, imageDownloader: ImageDownloadable) {
         self.memoryCacher = memoryCacher
         self.diskCacher = diskCacher
+        self.imageDownloader = imageDownloader
     }
 
     /// FMImageProvider 초기자
     public convenience init() {
-        self.init(memoryCacher: MemoryCacher(), diskCacher: DiskCacher())
+        self.init(memoryCacher: MemoryCacher(), diskCacher: DiskCacher(), imageDownloader: ImageDownloader())
     }
     
     /// 이미지 데이터 가져오기
