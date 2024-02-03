@@ -35,15 +35,11 @@ final class CustomChartView: UIView {
     // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("Don't use Storyboard")
-    }
-    
-    // MARK: - Life cycle
-    override func layoutSubviews() {
-        configureUI()
     }
     
     // MARK: - Methdos

@@ -48,7 +48,15 @@ final class ChartViewController: BaseViewController {
         return calendarView
     }()
     
-    private var donutChartView = CustomChartView()
+    private lazy var donutChartView: CustomChartView = {
+        let chartView = CustomChartView(frame: CGRect(
+            x: .zero,
+            y: .zero,
+            width: view.frame.width,
+            height: view.frame.width))
+        return chartView
+    }()
+    
     private var weeklyChartView = UIView()
     
     var shouldHideDailyChartView: Bool? {
