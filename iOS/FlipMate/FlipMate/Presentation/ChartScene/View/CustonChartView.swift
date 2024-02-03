@@ -9,17 +9,6 @@ import UIKit
 
 final class CustomChartView: UIView {
     // MARK: - UI Components
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
-        stackView.alignment = .center
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.layer.cornerRadius = 20
-        stackView.layer.masksToBounds = true
-        return stackView
-    }()
-    
     private lazy var labelListView: LabelListView = {
         let view = LabelListView()
         view.backgroundColor = FlipMateColor.gray5.color
@@ -53,24 +42,20 @@ final class CustomChartView: UIView {
 private extension CustomChartView {
     func configureUI() {
         [ donutChartView, labelListView ] .forEach {
-            stackView.addArrangedSubview($0)
+            addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        addSubview(stackView)
-        
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
+            donutChartView.topAnchor.constraint(equalTo: topAnchor),
             donutChartView.leadingAnchor.constraint(equalTo: leadingAnchor),
             donutChartView.trailingAnchor.constraint(equalTo: trailingAnchor),
             donutChartView.heightAnchor.constraint(equalToConstant: frame.width),
             
+            labelListView.topAnchor.constraint(equalTo: donutChartView.bottomAnchor),
             labelListView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            labelListView.trailingAnchor.constraint(equalTo: trailingAnchor)
+            labelListView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            labelListView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     

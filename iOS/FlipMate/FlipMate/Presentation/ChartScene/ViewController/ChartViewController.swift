@@ -54,6 +54,8 @@ final class ChartViewController: BaseViewController {
             y: .zero,
             width: view.frame.width,
             height: view.frame.width))
+        chartView.layer.cornerRadius = 20
+        chartView.layer.masksToBounds = true
         return chartView
     }()
     
