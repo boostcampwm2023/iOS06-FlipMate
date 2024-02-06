@@ -10,7 +10,7 @@ import UIKit
 
 protocol ChartFlowCoordinatorDependencies {
     func makeChartFlowCoordinator(navigationController: UINavigationController) -> ChartFlowCoordinator
-    func makeChartViewController(actions: ChartViewModelActions) -> UIViewController
+    func makeChartViewController() -> UIViewController
 }
 
 final class ChartFlowCoordinator: Coordinator {
@@ -24,8 +24,7 @@ final class ChartFlowCoordinator: Coordinator {
     }
     
     func start() {
-        let actions = ChartViewModelActions()
-        let chartViewController = dependencies.makeChartViewController(actions: actions)
+        let chartViewController = dependencies.makeChartViewController()
         navigationController.viewControllers = [chartViewController]
     }
 }

@@ -145,6 +145,7 @@
 "time" = "時間";
 "totalTime" = "総学習時間";
 "etc" = "その他";
+"noStudyLog" = "学習記録はありません。";
 
 // MARK: - WeeklyChartView
 "day" = "曜日";

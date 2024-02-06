@@ -8,53 +8,54 @@
 import Foundation
 import Combine
 
-struct ChartViewModelActions {
-    
+protocol ChartViewModelInput {
+    func viewDidLoad()
+    func dateDidSelected(date: Date)
 }
 
-final class ChartViewModel: ObservableObject {
-    @Published var dailyChartLog: CategoryChartLog = .init(studyLog: StudyLog(totalTime: 0, category: []), percentage: 0)
-    @Published var weeklyChartLog: WeeklyChartLog = .init(totalTime: 0, dailyData: [], percentage: 0)
+protocol ChartViewModelOutput {
+    var dailyChartPublisher: AnyPublisher<StudyLog, Never> { get }
+}
+
+typealias ChartViewModelProtocol = ChartViewModelInput & ChartViewModelOutput
+
+final class ChartViewModel: ChartViewModelProtocol {
     
-    private var cancellables = Set<AnyCancellable>()
-    private let fetchDailyChartUseCase: FetchDailyChartUseCase
-    private let fetchWeeklyChartUseCase: FetchWeeklyChartUseCase
-    private let actions: ChartViewModelActions?
+    // MARK: - Properties
+    private var selectedDate = Date()
     
-    init(fetchDailyChartUseCase: FetchDailyChartUseCase,
-         fetchWeeklyChartUseCase: FetchWeeklyChartUseCase,
-         actions: ChartViewModelActions? = nil) {
-        self.fetchDailyChartUseCase = fetchDailyChartUseCase
-        self.fetchWeeklyChartUseCase = fetchWeeklyChartUseCase
-        self.actions = actions
+    // MARK: - UseCase
+//    private let chartUseCase: ChartUseCase
+    private let dailyChartUseCase: FetchDailyChartUseCase
+    
+    // MARK: - Subject
+    private let dailyChartSubject = PassthroughSubject<StudyLog, Never>()
+    
+    // MARK: - Publihser
+    var dailyChartPublisher: AnyPublisher<StudyLog, Never> {
+        return dailyChartSubject.eraseToAnyPublisher()
     }
     
-    func selectedDateDidChange(newDate: Date) async throws {
-        try await fetchDailyData(date: newDate)
+    init(dailyChartUseCase: FetchDailyChartUseCase) {
+        self.dailyChartUseCase = dailyChartUseCase
     }
     
-    func fetchTodayData() async throws {
-        let today = Date()
-        try await fetchDailyData(date: today)
+    // MARK: - input
+    func viewDidLoad() {
+        fetchDailyChartLog(at: selectedDate)
     }
     
-    func showWeeklyChart() async throws {
-        try await fetchWeeklyData()
+    func dateDidSelected(date: Date) {
+        selectedDate = date
+        fetchDailyChartLog(at: selectedDate)
     }
 }
 
 private extension ChartViewModel {
-    func fetchDailyData(date: Date) async throws {
-        let newDailyChartLog = try await fetchDailyChartUseCase.fetchDailyChartLog(at: date)
-        DispatchQueue.main.async {
-            self.dailyChartLog = newDailyChartLog
-        }
-    }
-    
-    func fetchWeeklyData() async throws {
-        let newWeeklyChartLog = try await fetchWeeklyChartUseCase.fetchWeeklyChartLog()
-        DispatchQueue.main.async {
-            self.weeklyChartLog = newWeeklyChartLog
+    func fetchDailyChartLog(at date: Date) {
+        Task {
+            let log = try await dailyChartUseCase.fetchDailyChartLog(at: date)
+            dailyChartSubject.send(log.studyLog)
         }
     }
 }
