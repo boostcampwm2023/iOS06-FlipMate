@@ -25,7 +25,8 @@ final class ChartViewModel: ChartViewModelProtocol {
     private var selectedDate = Date()
     
     // MARK: - UseCase
-    private let chartUseCase: ChartUseCase
+//    private let chartUseCase: ChartUseCase
+    private let dailyChartUseCase: FetchDailyChartUseCase
     
     // MARK: - Subject
     private let dailyChartSubject = PassthroughSubject<StudyLog, Never>()
@@ -35,8 +36,8 @@ final class ChartViewModel: ChartViewModelProtocol {
         return dailyChartSubject.eraseToAnyPublisher()
     }
     
-    init(chartUseCase: ChartUseCase) {
-        self.chartUseCase = chartUseCase
+    init(dailyChartUseCase: FetchDailyChartUseCase) {
+        self.dailyChartUseCase = dailyChartUseCase
     }
     
     // MARK: - input
@@ -53,7 +54,7 @@ final class ChartViewModel: ChartViewModelProtocol {
 private extension ChartViewModel {
     func fetchDailyChartLog(at date: Date) {
         Task {
-            let log = try await chartUseCase.fetchDailyChartLog(at: date)
+            let log = try await dailyChartUseCase.fetchDailyChartLog(at: date)
             dailyChartSubject.send(log.studyLog)
         }
     }

@@ -27,7 +27,7 @@ final class ChartDIContainer: ChartFlowCoordinatorDependencies {
     func makeChartViewController() -> UIViewController {
         return ChartViewController(
             viewModel: ChartViewModel(
-                chartUseCase: DefaultChartUseCase(
+                dailyChartUseCase: DefaultFetchDailyChartUseCase(
                     repository: DefaultChartRepository(
                         provider: dependencies.provider
                     )

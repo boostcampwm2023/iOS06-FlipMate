@@ -231,6 +231,7 @@
 		2C8D21D22B7216EF00632718 /* FlipMateColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA532B025426007AFC57 /* FlipMateColor.swift */; };
 		2C8D21D32B7216EF00632718 /* FlipMateFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA552B025426007AFC57 /* FlipMateFont.swift */; };
 		2C8D21D52B7217C800632718 /* DefaultWithdrawUesCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D21D42B7217C800632718 /* DefaultWithdrawUesCase.swift */; };
+		2C8D21D72B721DB400632718 /* WithdrawUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D21D62B721DB400632718 /* WithdrawUseCase.swift */; };
 		2CD272ED2B21A619000CB9E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CD272EF2B21A619000CB9E5 /* Localizable.strings */; };
 		2DD8D73E476DE7C9EAF99CD3 /* Pods_FlipMate_FlipMateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4022DA62BEB41D4AE6C12507 /* Pods_FlipMate_FlipMateUITests.framework */; };
 		429B3DF652F07625CAB531EF /* Pods_FlipMateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B285F39D7D27E5C564F4D31 /* Pods_FlipMateTests.framework */; };
@@ -342,6 +343,7 @@
 		2C88DD0E2B14C22C000B4686 /* TimerFinishViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishViewModel.swift; sourceTree = "<group>"; };
 		2C8D20F42B678A6C00632718 /* LabelListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListView.swift; sourceTree = "<group>"; };
 		2C8D21D42B7217C800632718 /* DefaultWithdrawUesCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultWithdrawUesCase.swift; sourceTree = "<group>"; };
+		2C8D21D62B721DB400632718 /* WithdrawUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawUseCase.swift; sourceTree = "<group>"; };
 		2C9F61F62B14EFA200AE63F9 /* CategoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManager.swift; sourceTree = "<group>"; };
 		2C9F61F82B14F33600AE63F9 /* CategoryManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManageable.swift; sourceTree = "<group>"; };
 		2C9F61FA2B15C96100AE63F9 /* CategoryModifyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModifyViewModel.swift; sourceTree = "<group>"; };
@@ -1317,6 +1319,7 @@
 				ED3842262B0F1E0C001E2803 /* GoogleLoginUseCase.swift */,
 				6087AEB12B4A6B2E00B29637 /* AppleLoginUseCase.swift */,
 				6087AEB32B4A6B3900B29637 /* SignOutUseCase.swift */,
+				2C8D21D62B721DB400632718 /* WithdrawUseCase.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -2048,6 +2051,7 @@
 				2C8D21952B7216EF00632718 /* UIView++Extension.swift in Sources */,
 				2C8D21962B7216EF00632718 /* UITextField++Extension.swift in Sources */,
 				2C8D21972B7216EF00632718 /* UIColor++Extension.swift in Sources */,
+				2C8D21D72B721DB400632718 /* WithdrawUseCase.swift in Sources */,
 				2C8D21982B7216EF00632718 /* Data++Extension.swift in Sources */,
 				2C8D21992B7216EF00632718 /* DefaultAuthenticationRepository.swift in Sources */,
 				2C8D219A2B7216EF00632718 /* DefaultTimerRepository.swift in Sources */,
