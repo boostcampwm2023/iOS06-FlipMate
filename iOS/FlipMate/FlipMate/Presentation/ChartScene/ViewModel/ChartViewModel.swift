@@ -15,7 +15,7 @@ protocol ChartViewModelInput {
 
 protocol ChartViewModelOutput {
     var dailyChartPublisher: AnyPublisher<StudyLog, Never> { get }
-    var weeklyChartPulisher: AnyPublisher<DailyData, Never> { get }
+    var weeklyChartPulisher: AnyPublisher<[DailyData], Never> { get }
 }
 
 typealias ChartViewModelProtocol = ChartViewModelInput & ChartViewModelOutput
@@ -31,13 +31,13 @@ final class ChartViewModel: ChartViewModelProtocol {
 
     // MARK: - Subject
     private let dailyChartSubject = PassthroughSubject<StudyLog, Never>()
-    private let weeklyChartSubject = PassthroughSubject<StudyLog, Never>()
+    private let weeklyChartSubject = PassthroughSubject<[DailyData], Never>()
     // MARK: - Publihser
     var dailyChartPublisher: AnyPublisher<StudyLog, Never> {
         return dailyChartSubject.eraseToAnyPublisher()
     }
     
-    var weeklyChartPulisher: AnyPublisher<StudyLog, Never> {
+    var weeklyChartPulisher: AnyPublisher<[DailyData], Never> {
         return weeklyChartSubject.eraseToAnyPublisher()
     }
     

@@ -82,7 +82,6 @@ final class ChartViewController: BaseViewController {
             weeklyCalendarView.isHidden = shouldHideDailyChartView
             barChartView.isHidden = !shouldHideDailyChartView
             weeklyChartLabel.isHidden = !shouldHideDailyChartView
-            barChartView.fetchData(dataPoints: [10, 20, 30, 15, 100, 44, 73])
         }
     }
     
@@ -166,6 +165,15 @@ final class ChartViewController: BaseViewController {
             .sink { [weak self] studyLog in
                 guard let self = self else { return }
                 donutChartView.fetchLog(studyLog: studyLog)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.weeklyChartPulisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] dailyData in
+                guard let self = self else { return }
+                let dataPoints = dailyData.map { CGFloat($0.studyTime) }
+                barChartView.fetchData(dataPoints: dataPoints)
             }
             .store(in: &cancellables)
     }
