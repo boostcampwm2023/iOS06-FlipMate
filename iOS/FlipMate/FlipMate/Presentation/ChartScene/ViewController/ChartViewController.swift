@@ -65,6 +65,7 @@ final class ChartViewController: BaseViewController {
         didSet {
             guard let shouldHideDailyChartView = self.shouldHideDailyChartView else { return }
             donutChartView.isHidden = shouldHideDailyChartView
+            weeklyCalendarView.isHidden = shouldHideDailyChartView
             weeklyChartView.isHidden = !donutChartView.isHidden
         }
     }
