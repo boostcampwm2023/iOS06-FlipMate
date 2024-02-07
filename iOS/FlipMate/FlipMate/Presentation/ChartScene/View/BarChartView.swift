@@ -9,6 +9,7 @@ import UIKit
 
 final class BarChartView: UIView {
     // MARK: - Properties
+    private var textLayerArray = [CATextLayer]()
     private var dailyDatas: [DailyData]? {
         didSet {
             setNeedsDisplay()
@@ -36,6 +37,8 @@ final class BarChartView: UIView {
 
 private extension BarChartView {
     func drawBarChart() {
+        textLayerArray.forEach { $0.removeFromSuperlayer() }
+
         guard let context = UIGraphicsGetCurrentContext(),
               let dailyDatas = dailyDatas, let maxPoint = dailyDatas.map({ $0.studyTime }).max(),
               let darkBlueColor = FlipMateColor.darkBlue.color?.cgColor else { return }
@@ -52,22 +55,24 @@ private extension BarChartView {
             let yPosition = frame.height - barHeight
             let barRect = CGRect(x: xPosition, y: yPosition, width: barWidth, height: barHeight)
             context.fill(barRect)
-            drawStudyTimeText(xPos: xPosition, yPos: yPosition, point: dataPoint, width: barWidth)
+            addTextLayer(position: CGPoint(x: xPosition, y: yPosition), text: "\(dailyData.studyTime)", width: barWidth)
+            addTextLayer(position: CGPoint(x: xPosition, y: frame.height + 40), text: "\(dailyData.day)", width: barWidth)
             xPosition += barWidth + Constant.xSpacing
         }
     }
     
-    func drawStudyTimeText(xPos: CGFloat, yPos: CGFloat, point: CGFloat, width: CGFloat) {
+    func addTextLayer(position: CGPoint, text: String, width: CGFloat) {
         let textLayer = CATextLayer()
         textLayer.frame = CGRect(x: 0, y: 0, width: width, height: Constant.chartTextFontSize)
-        textLayer.position = CGPoint(x: xPos + width / 2, y: yPos - 20)
+        textLayer.position = CGPoint(x: position.x + width / 2, y: position.y - 20)
         textLayer.foregroundColor = FlipMateColor.gray5.color?.cgColor
-        textLayer.string = "\(Int(point))"
+        textLayer.string = text
         textLayer.alignmentMode = .center
         textLayer.fontSize = Constant.chartTextFontSize
         textLayer.font = Constant.chartTextFont as CFTypeRef
         textLayer.isWrapped = true
         layer.addSublayer(textLayer)
+        textLayerArray.append(textLayer)
     }
 }
 
