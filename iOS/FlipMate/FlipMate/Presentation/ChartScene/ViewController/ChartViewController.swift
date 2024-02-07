@@ -170,10 +170,9 @@ final class ChartViewController: BaseViewController {
         
         viewModel.weeklyChartPulisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] dailyData in
+            .sink { [weak self] dailyDatas in
                 guard let self = self else { return }
-                let dataPoints = dailyData.map { CGFloat($0.studyTime) }
-                barChartView.fetchData(dataPoints: dataPoints)
+                barChartView.fetchData(dailyDatas: dailyDatas)
             }
             .store(in: &cancellables)
     }

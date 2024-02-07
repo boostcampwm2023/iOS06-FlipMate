@@ -9,7 +9,7 @@ import UIKit
 
 final class BarChartView: UIView {
     // MARK: - Properties
-    private var dataPoints: [CGFloat]? {
+    private var dailyDatas: [DailyData]? {
         didSet {
             setNeedsDisplay()
         }
@@ -26,26 +26,48 @@ final class BarChartView: UIView {
     
     // MARK: - Life cycle
     override func draw(_ rect: CGRect) {
+        drawBarChart()
+    }
+    
+    func fetchData(dailyDatas: [DailyData]) {
+        self.dailyDatas = dailyDatas
+    }
+}
+
+private extension BarChartView {
+    func drawBarChart() {
         guard let context = UIGraphicsGetCurrentContext(),
-              let dataPoints = dataPoints, let maxPoint = dataPoints.max(),
+              let dailyDatas = dailyDatas, let maxPoint = dailyDatas.map({ $0.studyTime }).max(),
               let darkBlueColor = FlipMateColor.darkBlue.color?.cgColor else { return }
 
-        context.clear(rect)
+        context.clear(frame)
         context.setFillColor(darkBlueColor)
         
-        let barWidth = rect.width / CGFloat(dataPoints.count) - Constant.xSpacing
+        let barWidth = frame.width / CGFloat(dailyDatas.count) - Constant.xSpacing
         var xPosition = Constant.xPos
         
-        for dataPoint in dataPoints {
-            let barHeight = (dataPoint / maxPoint) * rect.height
-            let barRect = CGRect(x: xPosition, y: rect.height - barHeight, width: barWidth, height: barHeight)
+        for dailyData in dailyDatas {
+            let dataPoint = CGFloat(dailyData.studyTime)
+            let barHeight = (dataPoint / CGFloat(maxPoint)) * frame.height
+            let yPosition = frame.height - barHeight
+            let barRect = CGRect(x: xPosition, y: yPosition, width: barWidth, height: barHeight)
             context.fill(barRect)
+            drawStudyTimeText(xPos: xPosition, yPos: yPosition, point: dataPoint, width: barWidth)
             xPosition += barWidth + Constant.xSpacing
         }
     }
     
-    func fetchData(dataPoints: [CGFloat]) {
-        self.dataPoints = dataPoints
+    func drawStudyTimeText(xPos: CGFloat, yPos: CGFloat, point: CGFloat, width: CGFloat) {
+        let textLayer = CATextLayer()
+        textLayer.frame = CGRect(x: 0, y: 0, width: width, height: Constant.chartTextFontSize)
+        textLayer.position = CGPoint(x: xPos + width / 2, y: yPos - 20)
+        textLayer.foregroundColor = FlipMateColor.gray5.color?.cgColor
+        textLayer.string = "\(Int(point))"
+        textLayer.alignmentMode = .center
+        textLayer.fontSize = Constant.chartTextFontSize
+        textLayer.font = Constant.chartTextFont as CFTypeRef
+        textLayer.isWrapped = true
+        layer.addSublayer(textLayer)
     }
 }
 
@@ -53,5 +75,7 @@ private extension BarChartView {
     enum Constant {
         static let xPos: CGFloat = 10
         static let xSpacing: CGFloat = 20
+        static let chartTextFont = "AvenirNext-Bold"
+        static let chartTextFontSize: CGFloat = 15
     }
 }
