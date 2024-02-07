@@ -13,6 +13,7 @@ final class ChartViewController: BaseViewController {
     private enum Constant {
         static let daily = NSLocalizedString("daily", comment: "")
         static let weekly = NSLocalizedString("weekly", comment: "")
+        static let weeklyChart = NSLocalizedString("weeklyLearingChart", comment: "")
     }
     
     // MARK: - Properties
@@ -59,6 +60,15 @@ final class ChartViewController: BaseViewController {
         return chartView
     }()
     
+    private lazy var weeklyChartLabel: UILabel = {
+        let label = UILabel()
+        label.text = Constant.weeklyChart
+        label.font = FlipMateFont.largeBold.font
+        label.textColor = .label
+        label.isHidden = true
+        return label
+    }()
+    
     private lazy var barChartView: BarChartView = {
         let barChartView = BarChartView()
         barChartView.isHidden = true
@@ -70,7 +80,8 @@ final class ChartViewController: BaseViewController {
             guard let shouldHideDailyChartView = self.shouldHideDailyChartView else { return }
             donutChartView.isHidden = shouldHideDailyChartView
             weeklyCalendarView.isHidden = shouldHideDailyChartView
-            barChartView.isHidden = !donutChartView.isHidden
+            barChartView.isHidden = !shouldHideDailyChartView
+            weeklyChartLabel.isHidden = !shouldHideDailyChartView
             barChartView.fetchData(dataPoints: [10, 20, 30, 15, 100, 44, 73])
         }
     }
@@ -96,7 +107,7 @@ final class ChartViewController: BaseViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        [ weeklyCalendarView, donutChartView, barChartView ] .forEach {
+        [ weeklyCalendarView, donutChartView, weeklyChartLabel, barChartView ] .forEach {
             scrollContentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -128,7 +139,11 @@ final class ChartViewController: BaseViewController {
             donutChartView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor, constant: -15),
             donutChartView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor, constant: -80),
             
-            barChartView.topAnchor.constraint(equalTo: scrollContentView.topAnchor),
+            weeklyChartLabel.topAnchor.constraint(equalTo: scrollContentView.topAnchor, constant: 15),
+            weeklyChartLabel.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 15),
+            weeklyChartLabel.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor),
+            
+            barChartView.topAnchor.constraint(equalTo: weeklyChartLabel.bottomAnchor, constant: 40),
             barChartView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor),
             barChartView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor),
             barChartView.heightAnchor.constraint(equalTo: scrollContentView.widthAnchor)
