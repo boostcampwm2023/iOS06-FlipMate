@@ -60,11 +60,7 @@ final class ChartViewController: BaseViewController {
     }()
     
     private lazy var barChartView: BarChartView = {
-        let barChartView = BarChartView(frame: CGRect(
-            x: .zero,
-            y: .zero,
-            width: view.frame.width,
-            height: view.frame.width))
+        let barChartView = BarChartView()
         barChartView.isHidden = true
         return barChartView
     }()
@@ -75,6 +71,7 @@ final class ChartViewController: BaseViewController {
             donutChartView.isHidden = shouldHideDailyChartView
             weeklyCalendarView.isHidden = shouldHideDailyChartView
             barChartView.isHidden = !donutChartView.isHidden
+            barChartView.fetchData(dataPoints: [10, 20, 30, 15, 100, 44, 73])
         }
     }
     
@@ -134,7 +131,7 @@ final class ChartViewController: BaseViewController {
             barChartView.topAnchor.constraint(equalTo: scrollContentView.topAnchor),
             barChartView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor),
             barChartView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor),
-            barChartView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor)
+            barChartView.heightAnchor.constraint(equalTo: scrollContentView.widthAnchor)
         ])
         
         NSLayoutConstraint.activate([
