@@ -59,14 +59,22 @@ final class ChartViewController: BaseViewController {
         return chartView
     }()
     
-    private var weeklyChartView = UIView()
+    private lazy var barChartView: BarChartView = {
+        let barChartView = BarChartView(frame: CGRect(
+            x: .zero,
+            y: .zero,
+            width: view.frame.width,
+            height: view.frame.width))
+        barChartView.isHidden = true
+        return barChartView
+    }()
     
     var shouldHideDailyChartView: Bool? {
         didSet {
             guard let shouldHideDailyChartView = self.shouldHideDailyChartView else { return }
             donutChartView.isHidden = shouldHideDailyChartView
             weeklyCalendarView.isHidden = shouldHideDailyChartView
-            weeklyChartView.isHidden = !donutChartView.isHidden
+            barChartView.isHidden = !donutChartView.isHidden
         }
     }
     
@@ -91,7 +99,7 @@ final class ChartViewController: BaseViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        [ weeklyCalendarView, donutChartView ] .forEach {
+        [ weeklyCalendarView, donutChartView, barChartView ] .forEach {
             scrollContentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -121,7 +129,12 @@ final class ChartViewController: BaseViewController {
             donutChartView.topAnchor.constraint(equalTo: weeklyCalendarView.bottomAnchor, constant: 20),
             donutChartView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 15),
             donutChartView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor, constant: -15),
-            donutChartView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor, constant: -80)
+            donutChartView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor, constant: -80),
+            
+            barChartView.topAnchor.constraint(equalTo: scrollContentView.topAnchor),
+            barChartView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor),
+            barChartView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor),
+            barChartView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor)
         ])
         
         NSLayoutConstraint.activate([
