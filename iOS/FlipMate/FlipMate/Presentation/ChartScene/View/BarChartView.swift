@@ -51,7 +51,8 @@ private extension BarChartView {
         
         for dailyData in dailyDatas {
             let dataPoint = CGFloat(dailyData.studyTime)
-            let barHeight = (dataPoint / CGFloat(maxPoint)) * frame.height
+            var barHeight = dataPoint / CGFloat(maxPoint) * frame.height
+            if barHeight.isNaN { barHeight = 0.0 }
             let yPosition = frame.height - barHeight
             let barRect = CGRect(x: xPosition, y: yPosition, width: barWidth, height: barHeight)
             context.fill(barRect)
