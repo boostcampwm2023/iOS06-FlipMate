@@ -8,5 +8,5 @@
 import Foundation
 
 protocol FetchWeeklyChartUseCase {
-    func fetchWeeklyChartLog() async throws -> WeeklyChartLog
+    func fetchWeeklyChartLog(at date: Date) async throws -> WeeklyChartLog
 }

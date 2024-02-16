@@ -15,6 +15,7 @@ protocol ChartViewModelInput {
 
 protocol ChartViewModelOutput {
     var dailyChartPublisher: AnyPublisher<StudyLog, Never> { get }
+    var weeklyChartPulisher: AnyPublisher<[DailyData], Never> { get }
 }
 
 typealias ChartViewModelProtocol = ChartViewModelInput & ChartViewModelOutput
@@ -25,24 +26,31 @@ final class ChartViewModel: ChartViewModelProtocol {
     private var selectedDate = Date()
     
     // MARK: - UseCase
-//    private let chartUseCase: ChartUseCase
     private let dailyChartUseCase: FetchDailyChartUseCase
-    
+    private let weeklyChartUseCase: FetchWeeklyChartUseCase
+
     // MARK: - Subject
     private let dailyChartSubject = PassthroughSubject<StudyLog, Never>()
-    
+    private let weeklyChartSubject = PassthroughSubject<[DailyData], Never>()
     // MARK: - Publihser
     var dailyChartPublisher: AnyPublisher<StudyLog, Never> {
         return dailyChartSubject.eraseToAnyPublisher()
     }
     
-    init(dailyChartUseCase: FetchDailyChartUseCase) {
+    var weeklyChartPulisher: AnyPublisher<[DailyData], Never> {
+        return weeklyChartSubject.eraseToAnyPublisher()
+    }
+    
+    init(dailyChartUseCase: FetchDailyChartUseCase,
+         weeklyChartUseCase: FetchWeeklyChartUseCase) {
         self.dailyChartUseCase = dailyChartUseCase
+        self.weeklyChartUseCase = weeklyChartUseCase
     }
     
     // MARK: - input
     func viewDidLoad() {
         fetchDailyChartLog(at: selectedDate)
+        fetchWeeklyChartLog(at: selectedDate)
     }
     
     func dateDidSelected(date: Date) {
@@ -56,6 +64,13 @@ private extension ChartViewModel {
         Task {
             let log = try await dailyChartUseCase.fetchDailyChartLog(at: date)
             dailyChartSubject.send(log.studyLog)
+        }
+    }
+    
+    func fetchWeeklyChartLog(at date: Date) {
+        Task {
+            let log = try await weeklyChartUseCase.fetchWeeklyChartLog(at: date)
+            weeklyChartSubject.send(log.dailyData)
         }
     }
 }

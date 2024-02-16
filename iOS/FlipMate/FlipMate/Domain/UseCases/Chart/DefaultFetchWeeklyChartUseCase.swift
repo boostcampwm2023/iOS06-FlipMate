@@ -14,7 +14,7 @@ final class DefaultFetchWeeklyChartUseCase: FetchWeeklyChartUseCase {
         self.repository = repository
     }
     
-    func fetchWeeklyChartLog() async throws -> WeeklyChartLog {
+    func fetchWeeklyChartLog(at date: Date) async throws -> WeeklyChartLog {
         return try await repository.fetchWeeklyLog()
     }
 }

@@ -13,6 +13,7 @@ final class ChartViewController: BaseViewController {
     private enum Constant {
         static let daily = NSLocalizedString("daily", comment: "")
         static let weekly = NSLocalizedString("weekly", comment: "")
+        static let weeklyChart = NSLocalizedString("weeklyLearingChart", comment: "")
     }
     
     // MARK: - Properties
@@ -59,13 +60,28 @@ final class ChartViewController: BaseViewController {
         return chartView
     }()
     
-    private var weeklyChartView = UIView()
+    private lazy var weeklyChartLabel: UILabel = {
+        let label = UILabel()
+        label.text = Constant.weeklyChart
+        label.font = FlipMateFont.largeBold.font
+        label.textColor = .label
+        label.isHidden = true
+        return label
+    }()
+    
+    private lazy var barChartView: BarChartView = {
+        let barChartView = BarChartView()
+        barChartView.isHidden = true
+        return barChartView
+    }()
     
     var shouldHideDailyChartView: Bool? {
         didSet {
             guard let shouldHideDailyChartView = self.shouldHideDailyChartView else { return }
             donutChartView.isHidden = shouldHideDailyChartView
-            weeklyChartView.isHidden = !donutChartView.isHidden
+            weeklyCalendarView.isHidden = shouldHideDailyChartView
+            barChartView.isHidden = !shouldHideDailyChartView
+            weeklyChartLabel.isHidden = !shouldHideDailyChartView
         }
     }
     
@@ -90,7 +106,7 @@ final class ChartViewController: BaseViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        [ weeklyCalendarView, donutChartView ] .forEach {
+        [ weeklyCalendarView, donutChartView, weeklyChartLabel, barChartView ] .forEach {
             scrollContentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -120,7 +136,16 @@ final class ChartViewController: BaseViewController {
             donutChartView.topAnchor.constraint(equalTo: weeklyCalendarView.bottomAnchor, constant: 20),
             donutChartView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 15),
             donutChartView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor, constant: -15),
-            donutChartView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor, constant: -80)
+            donutChartView.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor, constant: -80),
+            
+            weeklyChartLabel.topAnchor.constraint(equalTo: scrollContentView.topAnchor, constant: 15),
+            weeklyChartLabel.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor, constant: 15),
+            weeklyChartLabel.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor),
+            
+            barChartView.topAnchor.constraint(equalTo: weeklyChartLabel.bottomAnchor, constant: 40),
+            barChartView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor),
+            barChartView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor),
+            barChartView.heightAnchor.constraint(equalTo: scrollContentView.widthAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -140,6 +165,14 @@ final class ChartViewController: BaseViewController {
             .sink { [weak self] studyLog in
                 guard let self = self else { return }
                 donutChartView.fetchLog(studyLog: studyLog)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.weeklyChartPulisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] dailyDatas in
+                guard let self = self else { return }
+                barChartView.fetchData(dailyDatas: dailyDatas)
             }
             .store(in: &cancellables)
     }
