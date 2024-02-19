@@ -216,10 +216,10 @@ final class SocialDetailViewController: BaseViewController {
         return stackView
     }()
     
-    private var chartView: UIView = {
-        let view = UIView()
-        
-        return view
+    private var lineChartView: LineChartView = {
+        let lineChartView = LineChartView()
+        lineChartView.translatesAutoresizingMaskIntoConstraints = false
+        return lineChartView
     }()
     
     // MARK: - Properties
@@ -241,14 +241,13 @@ final class SocialDetailViewController: BaseViewController {
     override func configureUI() {
         setStudyLogStackView()
         setStudyTimeStackView()
-        setChart()
         configureNavigationBar()
         
         [scrollView, profileImageView, nickNameLabel, unfollowButton, divider].forEach {
             view.addSubview($0)
         }
         
-        [studyLogStackView, studyTimeStackView].forEach {
+        [studyLogStackView, studyTimeStackView, lineChartView].forEach {
             contentView.addSubview($0)
         }
         
@@ -307,10 +306,11 @@ final class SocialDetailViewController: BaseViewController {
         ])
         
         NSLayoutConstraint.activate([
-            chartView.topAnchor.constraint(equalTo: studyLogStackView.bottomAnchor, constant: LayoutConstant.chartTop),
-            chartView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstant.chartLeading),
-            chartView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstant.chartTrailing),
-            chartView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: LayoutConstant.chartBottom)
+            lineChartView.topAnchor.constraint(equalTo: studyLogStackView.bottomAnchor, constant: LayoutConstant.chartTop),
+            lineChartView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstant.chartLeading),
+            lineChartView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstant.chartTrailing),
+            lineChartView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: LayoutConstant.chartBottom),
+            lineChartView.heightAnchor.constraint(equalTo: contentView.widthAnchor)
         ])
         
         // swiftlint:enable function_body_length
@@ -352,17 +352,6 @@ private extension SocialDetailViewController {
         [dailyStudyTimeLabel, weeklyStudyTimeLabel, primaryCategoryLabel].forEach {
             studyTimeStackView.addArrangedSubview($0)
         }
-    }
-    
-    func setChart() {
-        let socialChartView = SocialChartView(viewModel: viewModel)
-        let hostingController = UIHostingController(rootView: socialChartView)
-        addChild(hostingController)
-        guard let newChartView = hostingController.view else { return }
-        self.chartView = newChartView
-        self.contentView.addSubview(newChartView)
-        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
-        hostingController.didMove(toParent: self)
     }
     
     func configureNavigationBar() {
