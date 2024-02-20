@@ -97,19 +97,33 @@ private extension LineChartView {
                 if !isFirstDataPoint {
                     path.move(to: CGPoint(x: xPosition, y: yPosition))
                     isFirstDataPoint.toggle()
+                    drawDot(xPos: xPosition, yPos: yPosition, color: dataColorSet[dataIndex])
                     continue
                 }
                 xPosition += Int(lineWidth)
                 path.addLine(to: CGPoint(x: xPosition, y: yPosition))
+                drawDot(xPos: xPosition, yPos: yPosition, color: dataColorSet[dataIndex])
                 path.stroke()
             }
         }
+    }
+    
+    func drawDot(xPos: Int, yPos: Int, color: UIColor) {
+        guard let context = UIGraphicsGetCurrentContext() else { return }
+        context.setFillColor(color.cgColor)
+        context.addEllipse(in: CGRect(
+            x: xPos - Constant.dotRadius,
+            y: yPos - Constant.dotRadius,
+            width: Constant.dotRadius * 2,
+            height: Constant.dotRadius * 2))
+        context.fillPath()
     }
 }
 
 private extension LineChartView {
     enum Constant {
         static let maxLineCount = 3
+        static let dotRadius = 5
         static let chartTextFont = "AvenirNext-Bold"
         static let chartTextFontSize: CGFloat = 15
     }
