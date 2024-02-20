@@ -102,18 +102,19 @@ private extension SocialDetailViewModel {
     func handleChartInfo(_ chartInfo: SocialChart) {
         guard chartInfo.myData.count >= 7, chartInfo.friendData.count >= 7 else { return }
         
-        let myChartData = generateStudyTimeData(from: chartInfo.myData)
-        let friendChartData = generateStudyTimeData(from: chartInfo.friendData)
+        let myChartData = generateSeriesData(from: chartInfo.myData, user: NSLocalizedString("me", comment: ""), isMySereis: true)
+        let friendChartData = generateSeriesData(from: chartInfo.friendData, user: NSLocalizedString("friend", comment: ""), isMySereis: false)
         
-        let newSeries: [Series] = [Series(user: NSLocalizedString("me", comment: ""), studyTime: myChartData),
-                                   Series(user: NSLocalizedString("friend", comment: ""), studyTime: friendChartData)]
+        let newSeries: [Series] = [myChartData, friendChartData]
         
         seriesSubject.send(newSeries)
     }
     
-    func generateStudyTimeData(from data: [Int]) -> [StudyTime] {
-        return (0..<7).map { index in
-            StudyTime(weekday: Date(timeIntervalSinceNow: -86400 * Double(6 - index)), studyTime: data[index])
+    func generateSeriesData(from data: [Int], user: String, isMySereis: Bool) -> Series {
+        let weekdays = (0..<7).map { index in
+            Date(timeIntervalSinceNow: -86400 * Double(6 - index))
         }
+        
+        return Series(isMySeries: isMySereis, user: user, studyTime: data, weekdays: weekdays)
     }
 }

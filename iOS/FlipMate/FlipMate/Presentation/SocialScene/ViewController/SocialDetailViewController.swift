@@ -333,6 +333,12 @@ final class SocialDetailViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] series in
                 guard let self = self else { return }
+                let xAxisValue = series.first?.weekdays.map { $0.dateToString(format: .day) }
+                series.forEach {
+                    var color: UIColor = $0.isMySeries ? .green : .blue
+                    self.lineChartView.appendData(data: $0.studyTime, color: color, name: $0.user)
+                }
+                self.lineChartView.updateXAxisValue(values: xAxisValue)
             }
             .store(in: &cancellables)
     }

@@ -10,19 +10,19 @@ import UIKit
 final class LineChartView: UIView {
     
     // MARK: - Properties
-    private var dataSet: [[Int]]? {
+    private var dataSet: [[Int]] = .init() {
         didSet {
             setNeedsDisplay()
         }
     }
     
     private var dataCount: Int {
-        return dataSet?.first?.count ?? 0
+        return dataSet.first?.count ?? 0
     }
     
     private var textLayerArray = [CATextLayer]()
     private var xAxisValues: [String] = []
-    private lazy var dataColorSet: [UIColor] = Array(repeating: UIColor.red, count: dataCount)
+    private lazy var dataColorSet: [UIColor] = Array(repeating: UIColor.red, count: Constant.maxLineCount)
     
     // MARK: init
     override init(frame: CGRect) {
@@ -38,9 +38,44 @@ final class LineChartView: UIView {
         drawLineChart(rect)
     }
     
+    func appendData(data: [Int], color: UIColor, name: String) {
+        dataSet.append(data)
+        lineColor(at: dataSet.endIndex - 1, color: color)
+    }
+    
+    func updateXAxisValue(values: [String]?) {
+        guard let values else { return }
+        xAxisValues = values
+        let width = frame.width / CGFloat(values.count)
+        for (index, value) in values.enumerated() {
+            addTextLayer(position: CGPoint(x: CGFloat(index) * width, y: frame.height), text: value, width: width)
+        }
+    }
+}
+
+private extension LineChartView {
+    func lineColor(at index: Int, color: UIColor) {
+        guard (0..<dataColorSet.count).contains(index) else { return }
+        dataColorSet[index] = color
+    }
+    
+    func addTextLayer(position: CGPoint, text: String, width: CGFloat) {
+        let textLayer = CATextLayer()
+        textLayer.frame = CGRect(x: 0, y: 0, width: width, height: Constant.chartTextFontSize)
+        textLayer.position = CGPoint(x: position.x + width / 2, y: position.y - 20)
+        textLayer.foregroundColor = FlipMateColor.gray5.color?.cgColor
+        textLayer.string = text
+        textLayer.alignmentMode = .center
+        textLayer.fontSize = Constant.chartTextFontSize
+        textLayer.font = Constant.chartTextFont as CFTypeRef
+        textLayer.isWrapped = true
+        layer.addSublayer(textLayer)
+        textLayerArray.append(textLayer)
+    }
+    
     func drawLineChart(_ rect: CGRect) {
-        guard let dataSet,
-              let maxPoint = dataSet.flatMap({ $0 }).max() else { return }
+        guard let maxPoint = dataSet.flatMap({ $0 }).max(),
+              !dataColorSet.isEmpty else { return }
         
         let lineWidth = rect.width / CGFloat(dataCount)
         
@@ -70,41 +105,11 @@ final class LineChartView: UIView {
             }
         }
     }
-    
-    func addTextLayer(position: CGPoint, text: String, width: CGFloat) {
-        let textLayer = CATextLayer()
-        textLayer.frame = CGRect(x: 0, y: 0, width: width, height: Constant.chartTextFontSize)
-        textLayer.position = CGPoint(x: position.x + width / 2, y: position.y - 20)
-        textLayer.foregroundColor = FlipMateColor.gray5.color?.cgColor
-        textLayer.string = text
-        textLayer.alignmentMode = .center
-        textLayer.fontSize = Constant.chartTextFontSize
-        textLayer.font = Constant.chartTextFont as CFTypeRef
-        textLayer.isWrapped = true
-        layer.addSublayer(textLayer)
-        textLayerArray.append(textLayer)
-    }
-    
-    func fetchData(data: [[Int]]) {
-        self.dataSet = data
-    }
-    
-    func lineColor(at index: Int, color: UIColor) {
-        guard (0..<dataColorSet.count).contains(index) else { return }
-        dataColorSet[index] = color
-    }
-    
-    func updateXAxisValue(values: [String]) {
-        xAxisValues = values
-        let width = frame.width / CGFloat(values.count)
-        for (index, value) in values.enumerated() {
-            addTextLayer(position: CGPoint(x: CGFloat(index) * width, y: frame.height), text: value, width: width)
-        }
-    }
 }
 
 private extension LineChartView {
     enum Constant {
+        static let maxLineCount = 3
         static let chartTextFont = "AvenirNext-Bold"
         static let chartTextFontSize: CGFloat = 15
     }
