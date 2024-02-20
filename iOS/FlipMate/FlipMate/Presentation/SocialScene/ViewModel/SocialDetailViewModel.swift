@@ -13,22 +13,40 @@ struct SocialDetailViewModelActions {
     var didFinishUnfollow: () -> Void
 }
 
-final class SocialDetailViewModel: ObservableObject {
-    @Published var socialChart: SocialChart = .init(myData: [], friendData: [], primaryCategory: nil)
-    @Published var userSeries: [Series] = []
-    
+protocol SocialDetailViewModelInput {
+    func viewDidLoad()
+    func didUnfollowFriend()
+    func dismissButtonDidTapped()
+}
+
+protocol SocialDetailViewModelOutput {
+    var friendPublisher: AnyPublisher<Friend, Never> { get }
+    var seriesPublusher: AnyPublisher<[Series], Never> { get }
+}
+
+typealias SocialDetailViewModelProtocol = SocialDetailViewModelInput & SocialDetailViewModelOutput
+
+final class SocialDetailViewModel: SocialDetailViewModelProtocol {
+    // MARK: - Properties
     private var cancellables = Set<AnyCancellable>()
     private let friend: Friend
+    private let actions: SocialDetailViewModelActions?
+    
+    // MARK: - UseCase
     private let loadChartUseCase: LoadChartUseCase
     private let unfollowUseCase: UnfollowFriendUseCase
-    private let actions: SocialDetailViewModelActions?
     
     // MARK: - Subject
     private lazy var friendSubject = CurrentValueSubject<Friend, Never>(friend)
+    private let seriesSubject = PassthroughSubject<[Series], Never>()
     
     // MARK: - Publisher
     var friendPublisher: AnyPublisher<Friend, Never> {
         return friendSubject.eraseToAnyPublisher()
+    }
+    
+    var seriesPublusher: AnyPublisher<[Series], Never> {
+        return seriesSubject.eraseToAnyPublisher()
     }
     
     init(friend: Friend,
@@ -53,8 +71,7 @@ final class SocialDetailViewModel: ObservableObject {
                 }
             } receiveValue: { [weak self] chartInfo in
                 guard let self = self else { return }
-                self.socialChart = chartInfo
-                self.handleChartInfo(socialChart)
+                self.handleChartInfo(chartInfo)
             }
             .store(in: &cancellables)
     }
@@ -91,7 +108,7 @@ private extension SocialDetailViewModel {
         let newSeries: [Series] = [Series(user: NSLocalizedString("me", comment: ""), studyTime: myChartData),
                                    Series(user: NSLocalizedString("friend", comment: ""), studyTime: friendChartData)]
         
-        self.userSeries = newSeries
+        seriesSubject.send(newSeries)
     }
     
     func generateStudyTimeData(from data: [Int]) -> [StudyTime] {

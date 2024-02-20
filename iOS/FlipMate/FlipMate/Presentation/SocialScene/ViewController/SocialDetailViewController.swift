@@ -329,13 +329,10 @@ final class SocialDetailViewController: BaseViewController {
             }
             .store(in: &cancellables)
         
-        viewModel.$socialChart
-            .sink { [weak self] socialChart in
+        viewModel.seriesPublusher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] series in
                 guard let self = self else { return }
-                self.weeklyStudyTimeLabel.text = socialChart.friendData.reduce(0, { $0 + $1 }).secondsToStringTime()
-                if let category = socialChart.primaryCategory {
-                    self.primaryCategoryLabel.text = category
-                }
             }
             .store(in: &cancellables)
     }
