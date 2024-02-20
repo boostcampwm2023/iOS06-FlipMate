@@ -10,19 +10,19 @@ import UIKit
 final class LineChartView: UIView {
     
     // MARK: - Properties
-    private var textLayerArray = [CATextLayer]()
-
     private var dataSet: [[Int]]? {
         didSet {
             setNeedsDisplay()
         }
     }
     
-    private var xAxisValues: [String] = []
-
     private var dataCount: Int {
         return dataSet?.first?.count ?? 0
     }
+    
+    private var textLayerArray = [CATextLayer]()
+    private var xAxisValues: [String] = []
+    private lazy var dataColorSet: [UIColor] = Array(repeating: UIColor.red, count: dataCount)
     
     // MARK: init
     override init(frame: CGRect) {
@@ -44,7 +44,7 @@ final class LineChartView: UIView {
         
         let lineWidth = rect.width / CGFloat(dataCount)
         
-        for data in dataSet {
+        for (dataIndex, data) in dataSet.enumerated() {
             var xPosition = Int(lineWidth) / 2
             var yBottomPosition = rect.maxY - 40
             var isFirstDataPoint = false
@@ -53,6 +53,7 @@ final class LineChartView: UIView {
             path.lineWidth = 3
             path.lineCapStyle = .round
             path.lineJoinStyle = .round
+            dataColorSet[dataIndex].set()
             
             for dataPoint in data {
                 var lineHeight = CGFloat(dataPoint) / CGFloat(maxPoint) * (frame.height - 50)
@@ -88,6 +89,10 @@ final class LineChartView: UIView {
         self.dataSet = data
     }
     
+    func lineColor(at index: Int, color: UIColor) {
+        guard (0..<dataColorSet.count).contains(index) else { return }
+        dataColorSet[index] = color
+    }
     
     func updateXAxisValue(values: [String]) {
         xAxisValues = values
