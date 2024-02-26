@@ -218,8 +218,15 @@ final class SocialDetailViewController: BaseViewController {
     
     private var lineChartView: LineChartView = {
         let lineChartView = LineChartView()
+        lineChartView.backgroundColor = .systemBackground
         lineChartView.translatesAutoresizingMaskIntoConstraints = false
         return lineChartView
+    }()
+    
+    private var labelListView: LabelListView = {
+        let labelListView = LabelListView()
+        labelListView.translatesAutoresizingMaskIntoConstraints = false
+        return labelListView
     }()
     
     // MARK: - Properties
@@ -247,7 +254,7 @@ final class SocialDetailViewController: BaseViewController {
             view.addSubview($0)
         }
         
-        [studyLogStackView, studyTimeStackView, lineChartView].forEach {
+        [studyLogStackView, studyTimeStackView, lineChartView, labelListView].forEach {
             contentView.addSubview($0)
         }
         
@@ -309,8 +316,12 @@ final class SocialDetailViewController: BaseViewController {
             lineChartView.topAnchor.constraint(equalTo: studyLogStackView.bottomAnchor, constant: LayoutConstant.chartTop),
             lineChartView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstant.chartLeading),
             lineChartView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstant.chartTrailing),
-            lineChartView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: LayoutConstant.chartBottom),
-            lineChartView.heightAnchor.constraint(equalTo: contentView.widthAnchor)
+            lineChartView.heightAnchor.constraint(equalTo: contentView.widthAnchor),
+            
+            labelListView.topAnchor.constraint(equalTo: lineChartView.bottomAnchor),
+            labelListView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstant.chartLeading),
+            labelListView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstant.chartTrailing),
+            labelListView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         
         // swiftlint:enable function_body_length
@@ -334,11 +345,12 @@ final class SocialDetailViewController: BaseViewController {
             .sink { [weak self] series in
                 guard let self = self else { return }
                 let xAxisValue = series.first?.weekdays.map { $0.dateToString(format: .day) }
-                series.forEach {
-                    var color: UIColor = $0.isMySeries ? .green : .blue
-                    self.lineChartView.appendData(data: $0.studyTime, color: color, name: $0.user)
-                }
+                let labels = series.map { ChartLabel(title: $0.user, hexString: $0.hexString)}
                 self.lineChartView.updateXAxisValue(values: xAxisValue)
+                self.labelListView.addLabel(labels)
+                series.forEach {
+                    self.lineChartView.appendData(data: $0.studyTime, hexString: $0.hexString, name: $0.user)
+                }
             }
             .store(in: &cancellables)
     }

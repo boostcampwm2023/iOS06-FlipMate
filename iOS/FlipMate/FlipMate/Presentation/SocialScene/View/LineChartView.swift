@@ -38,9 +38,9 @@ final class LineChartView: UIView {
         drawLineChart(rect)
     }
     
-    func appendData(data: [Int], color: UIColor, name: String) {
+    func appendData(data: [Int], hexString: String, name: String) {
         dataSet.append(data)
-        lineColor(at: dataSet.endIndex - 1, color: color)
+        lineColor(at: dataSet.endIndex - 1, hexString: hexString)
     }
     
     func updateXAxisValue(values: [String]?) {
@@ -55,21 +55,21 @@ final class LineChartView: UIView {
 }
 
 private extension LineChartView {
-    func lineColor(at index: Int, color: UIColor) {
-        guard (0..<dataColorSet.count).contains(index) else { return }
+    func lineColor(at index: Int, hexString: String) {
+        guard (0..<dataColorSet.count).contains(index), let color = UIColor(hexString: hexString) else { return }
         dataColorSet[index] = color
     }
     
-    func addTextLayer(position: CGPoint, text: String, width: CGFloat, alignmentMode: CATextLayerAlignmentMode = .center) {
+    func addTextLayer(position: CGPoint, text: String, fontSize: CGFloat = 15, width: CGFloat, alignmentMode: CATextLayerAlignmentMode = .center) {
         let textLayer = CATextLayer()
         let xPos = position.x + width / 2
         let yPos = position.y - Constant.bottomSpacing / 2
-        textLayer.frame = CGRect(x: 0, y: 0, width: width, height: Constant.chartTextFontSize)
+        textLayer.frame = CGRect(x: 0, y: 0, width: width, height: fontSize)
         textLayer.position = CGPoint(x: xPos, y: yPos)
         textLayer.foregroundColor = FlipMateColor.gray5.color?.cgColor
         textLayer.string = text
         textLayer.alignmentMode = alignmentMode
-        textLayer.fontSize = Constant.chartTextFontSize
+        textLayer.fontSize = fontSize
         textLayer.font = Constant.chartTextFont as CFTypeRef
         textLayer.isWrapped = true
         layer.addSublayer(textLayer)
@@ -132,7 +132,8 @@ private extension LineChartView {
             let path = UIBezierPath()
             let yPosition = yBottomPosition - (Int(frame.height - Constant.bottomSpacing) * index / 5) + Constant.ySpacing
             addTextLayer(position: CGPoint(x: xPosition, y: yPosition + Int(Constant.bottomSpacing) / 2), 
-                         text: "\(point)",
+                         text: point.secondsToStringTime(),
+                         fontSize: 11,
                          width: textWidth,
                          alignmentMode: .left)
             path.setLineDash([6, 3], count: 2, phase: 0)
@@ -154,6 +155,5 @@ private extension LineChartView {
         static let ySpacing = 5
         static let numberOfDash = 5
         static let chartTextFont = "AvenirNext-Bold"
-        static let chartTextFontSize: CGFloat = 15
     }
 }

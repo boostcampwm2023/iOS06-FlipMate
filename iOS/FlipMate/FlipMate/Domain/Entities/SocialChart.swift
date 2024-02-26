@@ -28,4 +28,5 @@ struct Series: Identifiable {
     let user: String
     let studyTime: [Int]
     let weekdays: [Date]
+    let hexString: String
 }
