@@ -45,10 +45,11 @@ final class LineChartView: UIView {
     
     func updateXAxisValue(values: [String]?) {
         guard let values else { return }
-        xAxisValues = values
-        let width = frame.width / CGFloat(values.count)
+        let width = (frame.width - Constant.xSpacing) / CGFloat(values.count)
         for (index, value) in values.enumerated() {
-            addTextLayer(position: CGPoint(x: CGFloat(index) * width, y: frame.height), text: value, width: width)
+            let xPos = CGFloat(index) * width + Constant.xSpacing
+            let yPos = frame.height
+            addTextLayer(position: CGPoint(x: xPos, y: frame.height), text: value, width: width)
         }
     }
 }
@@ -59,13 +60,15 @@ private extension LineChartView {
         dataColorSet[index] = color
     }
     
-    func addTextLayer(position: CGPoint, text: String, width: CGFloat) {
+    func addTextLayer(position: CGPoint, text: String, width: CGFloat, alignmentMode: CATextLayerAlignmentMode = .center) {
         let textLayer = CATextLayer()
+        let xPos = position.x + width / 2
+        let yPos = position.y - Constant.bottomSpacing / 2
         textLayer.frame = CGRect(x: 0, y: 0, width: width, height: Constant.chartTextFontSize)
-        textLayer.position = CGPoint(x: position.x + width / 2, y: position.y - 20)
+        textLayer.position = CGPoint(x: xPos, y: yPos)
         textLayer.foregroundColor = FlipMateColor.gray5.color?.cgColor
         textLayer.string = text
-        textLayer.alignmentMode = .center
+        textLayer.alignmentMode = alignmentMode
         textLayer.fontSize = Constant.chartTextFontSize
         textLayer.font = Constant.chartTextFont as CFTypeRef
         textLayer.isWrapped = true
@@ -74,14 +77,14 @@ private extension LineChartView {
     }
     
     func drawLineChart(_ rect: CGRect) {
-        guard let maxPoint = dataSet.flatMap({ $0 }).max(),
+        guard let maxPoint = dataSet.flatMap({ $0 }).max().map({ Int(ceil(Double($0) / 5) * 5) }),
               !dataColorSet.isEmpty else { return }
-        
-        let lineWidth = rect.width / CGFloat(dataCount)
+        let lineWidth = (rect.width - Constant.xSpacing) / CGFloat(dataCount)
+        drawDashLine(maxPoint: maxPoint)
         
         for (dataIndex, data) in dataSet.enumerated() {
             var xPosition = Int(lineWidth) / 2
-            var yBottomPosition = rect.maxY - 40
+            let yBottomPosition = rect.maxY - Constant.bottomSpacing
             var isFirstDataPoint = false
             
             let path = UIBezierPath()
@@ -91,18 +94,18 @@ private extension LineChartView {
             dataColorSet[dataIndex].set()
             
             for dataPoint in data {
-                var lineHeight = CGFloat(dataPoint) / CGFloat(maxPoint) * (frame.height - 50)
-                var yPosition = Int(yBottomPosition) - Int(lineHeight)
+                var lineHeight = CGFloat(dataPoint) / CGFloat(maxPoint) * (frame.height - Constant.bottomSpacing)
+                let yPosition = Int(yBottomPosition) - Int(lineHeight) + Constant.ySpacing
                 if lineHeight.isNaN { lineHeight = 0.0 }
                 if !isFirstDataPoint {
-                    path.move(to: CGPoint(x: xPosition, y: yPosition))
+                    path.move(to: CGPoint(x: xPosition + Int(Constant.xSpacing), y: yPosition))
                     isFirstDataPoint.toggle()
-                    drawDot(xPos: xPosition, yPos: yPosition, color: dataColorSet[dataIndex])
+                    drawDot(xPos: xPosition + Int(Constant.xSpacing), yPos: yPosition, color: dataColorSet[dataIndex])
                     continue
                 }
                 xPosition += Int(lineWidth)
-                path.addLine(to: CGPoint(x: xPosition, y: yPosition))
-                drawDot(xPos: xPosition, yPos: yPosition, color: dataColorSet[dataIndex])
+                path.addLine(to: CGPoint(x: xPosition + Int(Constant.xSpacing), y: yPosition))
+                drawDot(xPos: xPosition + Int(Constant.xSpacing), yPos: yPosition, color: dataColorSet[dataIndex])
                 path.stroke()
             }
         }
@@ -118,12 +121,38 @@ private extension LineChartView {
             height: Constant.dotRadius * 2))
         context.fillPath()
     }
+    
+    func drawDashLine(maxPoint: Int) {
+        let dashPoints = (0...Constant.numberOfDash).map { maxPoint / 5 * $0 }
+        let xPosition = 0
+        let textWidth: CGFloat = 60
+        let yBottomPosition = Int(frame.height - Constant.bottomSpacing)
+        
+        for (index, point) in dashPoints.enumerated() {
+            let path = UIBezierPath()
+            let yPosition = yBottomPosition - (Int(frame.height - Constant.bottomSpacing) * index / 5) + Constant.ySpacing
+            addTextLayer(position: CGPoint(x: xPosition, y: yPosition + Int(Constant.bottomSpacing) / 2), 
+                         text: "\(point)",
+                         width: textWidth,
+                         alignmentMode: .left)
+            path.setLineDash([6, 3], count: 2, phase: 0)
+            path.move(to: CGPoint(x: Int(Constant.xSpacing), y: yPosition))
+            path.addLine(to: CGPoint(x: frame.width - Constant.rightSpacing, y: CGFloat(yPosition)))
+            UIColor.gray2.set()
+            path.stroke()
+        }
+    }
 }
 
 private extension LineChartView {
     enum Constant {
         static let maxLineCount = 3
         static let dotRadius = 5
+        static let xSpacing: CGFloat = 50
+        static let bottomSpacing: CGFloat = 40
+        static let rightSpacing: CGFloat = 20
+        static let ySpacing = 5
+        static let numberOfDash = 5
         static let chartTextFont = "AvenirNext-Bold"
         static let chartTextFontSize: CGFloat = 15
     }
