@@ -24,6 +24,9 @@ struct StudyTime: Identifiable {
 struct Series: Identifiable {
     let id: UUID = UUID()
     
+    let isMySeries: Bool
     let user: String
-    let studyTime: [StudyTime]
+    let studyTime: [Int]
+    let weekdays: [Date]
+    let hexString: String
 }

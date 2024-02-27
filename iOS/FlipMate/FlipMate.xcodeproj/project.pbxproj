@@ -62,7 +62,6 @@
 		2C8D21292B7216EE00632718 /* SocialFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD03F2B1872060080DCDE /* SocialFlowCoordinator.swift */; };
 		2C8D212A2B7216EE00632718 /* FreindAddResultViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62072B16398D00AE63F9 /* FreindAddResultViewProtocol.swift */; };
 		2C8D212B2B7216EE00632718 /* MyNickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62002B1601F200AE63F9 /* MyNickNameView.swift */; };
-		2C8D212C2B7216EE00632718 /* SocialChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865A12B162B8F001A2AAD /* SocialChartView.swift */; };
 		2C8D212D2B7216EE00632718 /* SocialUserInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */; };
 		2C8D212E2B7216EE00632718 /* FriendSearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62022B16021E00AE63F9 /* FriendSearchResultView.swift */; };
 		2C8D212F2B7216EE00632718 /* NoResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F62042B160B3900AE63F9 /* NoResultView.swift */; };
@@ -234,6 +233,7 @@
 		2C8D21D72B721DB400632718 /* WithdrawUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D21D62B721DB400632718 /* WithdrawUseCase.swift */; };
 		2C8D21D92B735E2B00632718 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D21D82B735E2B00632718 /* BarChartView.swift */; };
 		2CD272ED2B21A619000CB9E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CD272EF2B21A619000CB9E5 /* Localizable.strings */; };
+		2CE0E5BD2B833602000D231C /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0E5BC2B833602000D231C /* LineChartView.swift */; };
 		2DD8D73E476DE7C9EAF99CD3 /* Pods_FlipMate_FlipMateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4022DA62BEB41D4AE6C12507 /* Pods_FlipMate_FlipMateUITests.framework */; };
 		429B3DF652F07625CAB531EF /* Pods_FlipMateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B285F39D7D27E5C564F4D31 /* Pods_FlipMateTests.framework */; };
 		600908C72AFCD7E00065DFFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 600908C62AFCD7E00065DFFB /* Assets.xcassets */; };
@@ -380,6 +380,7 @@
 		2CDCD0662B18D0330080DCDE /* FriendUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendUser.swift; sourceTree = "<group>"; };
 		2CDCD0682B18D0D10080DCDE /* FriendSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchItem.swift; sourceTree = "<group>"; };
 		2CDCD06B2B18E6960080DCDE /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		2CE0E5BC2B833602000D231C /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
 		2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView++Extension.swift"; sourceTree = "<group>"; };
 		2CE84EF42B0B783800E2FB71 /* UICollectionViewCell++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell++Extension.swift"; sourceTree = "<group>"; };
@@ -498,7 +499,6 @@
 		ED38422E2B0F747B001E2803 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		ED3842302B0F94E6001E2803 /* DefaultCategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCategoryRepository.swift; sourceTree = "<group>"; };
 		ED68659C2B15E928001A2AAD /* SocialDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDetailViewController.swift; sourceTree = "<group>"; };
-		ED6865A12B162B8F001A2AAD /* SocialChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialChartView.swift; sourceTree = "<group>"; };
 		ED6865A32B1649ED001A2AAD /* String++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String++Extension.swift"; sourceTree = "<group>"; };
 		ED6865A62B17932F001A2AAD /* SocialDetailRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDetailRequestDTO.swift; sourceTree = "<group>"; };
 		ED6865A82B17933C001A2AAD /* SocialDetailResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDetailResponseDTO.swift; sourceTree = "<group>"; };
@@ -797,11 +797,11 @@
 			isa = PBXGroup;
 			children = (
 				2C9F62002B1601F200AE63F9 /* MyNickNameView.swift */,
-				ED6865A12B162B8F001A2AAD /* SocialChartView.swift */,
 				2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */,
 				2C9F62022B16021E00AE63F9 /* FriendSearchResultView.swift */,
 				2C9F62042B160B3900AE63F9 /* NoResultView.swift */,
 				60C2F2852B172D6900EBDD78 /* FriendsCollectionViewCell.swift */,
+				2CE0E5BC2B833602000D231C /* LineChartView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1946,7 +1946,6 @@
 				2C8D21292B7216EE00632718 /* SocialFlowCoordinator.swift in Sources */,
 				2C8D212A2B7216EE00632718 /* FreindAddResultViewProtocol.swift in Sources */,
 				2C8D212B2B7216EE00632718 /* MyNickNameView.swift in Sources */,
-				2C8D212C2B7216EE00632718 /* SocialChartView.swift in Sources */,
 				2C8D21D52B7217C800632718 /* DefaultWithdrawUesCase.swift in Sources */,
 				2C8D212D2B7216EE00632718 /* SocialUserInfoHeaderView.swift in Sources */,
 				2C8D212E2B7216EE00632718 /* FriendSearchResultView.swift in Sources */,
@@ -2026,6 +2025,7 @@
 				2C8D21782B7216EF00632718 /* DefaultReadCategoryUseCase.swift in Sources */,
 				2C8D21792B7216EF00632718 /* DefaultUpdateCategoryUseCase.swift in Sources */,
 				2C8D217A2B7216EF00632718 /* DefaultDeleteCategoryUseCase.swift in Sources */,
+				2CE0E5BD2B833602000D231C /* LineChartView.swift in Sources */,
 				2C8D217B2B7216EF00632718 /* DefaultGoogleLoginUseCase.swift in Sources */,
 				2C8D217C2B7216EF00632718 /* DefaultAppleLoginUseCase.swift in Sources */,
 				2C8D217D2B7216EF00632718 /* DefaultSignOutUseCase.swift in Sources */,

@@ -20,7 +20,7 @@ final class LabelView: UIView {
     private let labelTitle: UILabel = {
         let label = UILabel()
         label.font = FlipMateFont.smallRegular.font
-        label.textColor = .black
+        label.textColor = .label
         return label
     }()
     
