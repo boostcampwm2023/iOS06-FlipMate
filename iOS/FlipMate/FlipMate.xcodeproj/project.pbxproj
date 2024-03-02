@@ -369,6 +369,7 @@
 		2CD272F12B21A62B000CB9E5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2CD272F22B21C748000CB9E5 /* StudingPingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudingPingUseCase.swift; sourceTree = "<group>"; };
 		2CD272F42B21C789000CB9E5 /* DefaultStudingPingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStudingPingUseCase.swift; sourceTree = "<group>"; };
+		2CD4EABB2B9315AF00F5F8EB /* FMCharts */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FMCharts; sourceTree = "<group>"; };
 		2CDCD03C2B1871E60080DCDE /* SocialDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDIContainer.swift; sourceTree = "<group>"; };
 		2CDCD03F2B1872060080DCDE /* SocialFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFlowCoordinator.swift; sourceTree = "<group>"; };
 		2CDCD0412B1873F60080DCDE /* SocialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewModel.swift; sourceTree = "<group>"; };
@@ -911,6 +912,7 @@
 		600908B12AFCD7DF0065DFFB = {
 			isa = PBXGroup;
 			children = (
+				2CD4EABB2B9315AF00F5F8EB /* FMCharts */,
 				60243EEF2B05D24D0098A92F /* .swiftlint.yml */,
 				600908BC2AFCD7DF0065DFFB /* FlipMate */,
 				600908D32AFCD7E00065DFFB /* FlipMateTests */,
