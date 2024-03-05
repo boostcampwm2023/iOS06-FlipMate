@@ -94,6 +94,7 @@
 
 - MVVM-C, Clean Architecture
 - DI Container, Coordinator Pattern
+<img width="1170" alt="ios clean architecture image" src="https://github.com/boostcampwm2023/iOS06-FlipMate/assets/22342277/426982d9-b1ed-4970-9c1b-eeda874cbd54">
 <img width="1170" alt="image" src="https://github.com/boostcampwm2023/iOS06-FlipMate/assets/48830320/127f9da2-05e6-4b84-9ca3-ab628f7b0994">
 
 </br>
