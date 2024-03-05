@@ -8,7 +8,7 @@
 import Foundation
 
 final public class BarChartDataEntry: ChartDataEntry {
-    public override init(xValues: [Double], yValues: [Double]) {
+    public override init(xValues: String, yValues: Double) {
         super.init(xValues: xValues, yValues: yValues)
     }
 }

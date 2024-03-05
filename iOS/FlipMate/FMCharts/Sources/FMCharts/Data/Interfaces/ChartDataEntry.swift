@@ -9,27 +9,12 @@ import Foundation
 
 public class ChartDataEntry {
     // MARK: - Properties
-    public var xValues: [Double]
-    public var yValues: [Double]
-    
-    public var isEmpty: Bool {
-        return yValues.isEmpty
-    }
-    
-    public var count: Int {
-        return yValues.count
-    }
+    public var xValues: String
+    public var yValues: Double
     
     // MARK: - init
-    public init(xValues: [Double], yValues: [Double]) {
+    public init(xValues: String, yValues: Double) {
         self.xValues = xValues
         self.yValues = yValues
-    }
-}
-
-// MARK: - Methods
-extension ChartDataEntry {
-    public func max() -> Double {
-        return yValues.max() ?? 0.0
     }
 }

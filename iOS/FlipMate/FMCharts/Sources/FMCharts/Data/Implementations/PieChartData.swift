@@ -8,7 +8,7 @@
 import Foundation
 
 final public class PieChartData: ChartData {
-    public override init(entry: ChartDataEntry, label: String) {
-        super.init(entry: entry, label: label)
+    public override init(dataSet: ChartDataSet, label: String) {
+        super.init(dataSet: dataSet, label: label)
     }
 }
