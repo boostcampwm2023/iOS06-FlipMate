@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class PieChartDataEntry: ChartDataEntry {
+final public class PieChartDataEntry: ChartDataEntry {
     public override init(xValues: [Double], yValues: [Double]) {
         super.init(xValues: xValues, yValues: yValues)
     }

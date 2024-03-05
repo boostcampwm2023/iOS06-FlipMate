@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class LineChartDataEntry: ChartDataEntry {
+final public class LineChartDataEntry: ChartDataEntry {
     public override init(xValues: [Double], yValues: [Double]) {
         super.init(xValues: xValues, yValues: yValues)
     }
