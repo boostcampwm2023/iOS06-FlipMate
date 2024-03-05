@@ -12,6 +12,10 @@ public class ChartData {
     public var entry: ChartDataEntry
     public var label: String
         
+    public var count: Int {
+        return entry.count
+    }
+    
     // MARK: - init
     public init(entry: ChartDataEntry, label: String) {
         self.entry = entry

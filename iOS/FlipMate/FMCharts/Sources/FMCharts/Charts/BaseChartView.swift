@@ -10,6 +10,7 @@ import UIKit
 public class BaseChartView: UIView {
     // MARK: - Properties
     public var data: ChartData?
+    public var drawManager: ChartDrawProtocol?
     
     // MARK: - init
     public override init(frame: CGRect) {
