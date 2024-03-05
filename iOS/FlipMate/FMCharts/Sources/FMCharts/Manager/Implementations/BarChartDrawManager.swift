@@ -39,14 +39,16 @@ extension BarChartDrawManager {
         context.clear(frame)
         context.setFillColor(color)
         
-        for entry in data.entry.yValues {
-            let dataPoint = entry
-            var barHeight = dataPoint / maxData * (frame.height - Constant.topMargin)
+        for entry in data.dataSet.entry {
+            let dataPoint = entry.yValues
+            let maxBarHeight = frame.height - Constant.barMargin
+            var barHeight = maxBarHeight * (dataPoint / maxData)
             if barHeight.isNaN { barHeight = .zero }
-            let yPos = frame.height - barHeight
+            let yPos = maxBarHeight - barHeight + Constant.topMargin
             let barRect = CGRect(x: xPos, y: yPos, width: barWidth, height: barHeight)
             context.fill(barRect)
-            drawText(context: context, position: CGPoint(x: xPos, y: yPos - Constant.topMargin), text: "\(entry)", width: barWidth)
+            drawText(context: context, position: CGPoint(x: xPos, y: yPos - Constant.topMargin), text: "\(entry.yValues)", width: barWidth)
+            drawText(context: context, position: CGPoint(x: xPos, y: frame.height - 20), text: entry.xValues, width: barWidth)
             xPos += barWidth + Constant.leftMargin + Constant.rightMargin
         }
     }
@@ -55,8 +57,10 @@ extension BarChartDrawManager {
 // MARK: - Constant
 extension BarChartDrawManager {
     private enum Constant {
-        static let topMargin: CGFloat = 20
+        static let barMargin: CGFloat = 60
+        static let topMargin: CGFloat = 30
         static let leftMargin: CGFloat = 10
         static let rightMargin: CGFloat = 10
+        static let textHeight: CGFloat = 20
     }
 }

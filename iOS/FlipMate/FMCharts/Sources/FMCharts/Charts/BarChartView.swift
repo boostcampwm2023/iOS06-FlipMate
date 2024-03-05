@@ -29,7 +29,7 @@ public class BarChartView: BaseChartView {
     // MARK: - Life cycle
     public override func draw(_ rect: CGRect) {
         super.draw(rect)
-        guard let data = data, !data.entry.isEmpty else { return }
+        guard let data = data, !data.isEmpty else { return }
         drawManager?.draw()
     }
 }

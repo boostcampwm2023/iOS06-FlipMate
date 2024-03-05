@@ -30,6 +30,6 @@ public class BaseChartView: UIView {
 // MARK: - Methods
 extension BaseChartView {
     public func numberOfData() -> Int {
-        return data?.entry.count ?? -1
+        return data?.dataSet.count ?? -1
     }
 }
