@@ -49,7 +49,6 @@ final class ChartViewModel: ChartViewModelProtocol {
     
     // MARK: - input
     func viewDidLoad() {
-        fetchDailyChartLog(at: selectedDate)
         fetchWeeklyChartLog(at: selectedDate)
     }
     
