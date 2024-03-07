@@ -11,7 +11,51 @@ public class PieChartView: BaseChartView {
     // MARK: - Properties
     public override var data: ChartData? {
         didSet {
-            drawManager?.fetchData(data: data)
+            setNeedsDisplay()
+        }
+    }
+    
+    private var _mainTitle = "mainTitle"
+    private var _mainTitleFontSize: CGFloat = 30
+    private var _subTitle = "subTitle"
+    private var _subTitleFontSize: CGFloat = 20
+
+    public var mainTitle: String {
+        get {
+            return self._mainTitle
+        }
+        set {
+            _mainTitle = newValue
+            setNeedsDisplay()
+        }
+    }
+    
+    public var mainTitleFontSize: CGFloat {
+        get {
+            return self._mainTitleFontSize
+        }
+        set {
+            _mainTitleFontSize = newValue
+            setNeedsDisplay()
+        }
+    }
+    
+    public var subTitle: String {
+        get {
+            return self._subTitle
+        }
+        set {
+            _subTitle = newValue
+            setNeedsDisplay()
+        }
+    }
+    
+    public var subTitleFontSize: CGFloat {
+        get {
+            return self._subTitleFontSize
+        }
+        set {
+            _subTitleFontSize = newValue
             setNeedsDisplay()
         }
     }
@@ -19,7 +63,7 @@ public class PieChartView: BaseChartView {
     // MARK: - init
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        drawManager = PieChartDrawManager(frame: frame)
+        drawManager = PieChartDrawManager(chartView: self)
         
     }
     
@@ -29,8 +73,13 @@ public class PieChartView: BaseChartView {
     
     // MARK: - Life Cycle
     public override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        guard let data = data, !data.isEmpty else { return }
-        drawManager?.draw()
+        guard let data = data as? PieChartData,
+              let dataSet = data.dataSet,
+              !data.isEmpty,
+              dataSet.entry.reduce(0, { $0 + $1.yValues }) != .zero else {
+            super.draw(rect)
+            return
+        }
+        drawManager?.drawData()
     }
 }
