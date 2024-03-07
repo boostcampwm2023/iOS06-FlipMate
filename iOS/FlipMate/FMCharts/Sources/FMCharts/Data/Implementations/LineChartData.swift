@@ -8,7 +8,12 @@
 import Foundation
 
 final public class LineChartData: ChartData {
-    public override init(dataSet: ChartDataSet, label: String) {
-        super.init(dataSet: dataSet, label: label)
+    override init(dataSets: [ChartDataSet]) {
+        super.init(dataSets: dataSets)
+    }
+    
+    public convenience init(dataSets: [ChartDataSet], label: String) {
+        self.init(dataSets: dataSets)
+        self.label = label
     }
 }

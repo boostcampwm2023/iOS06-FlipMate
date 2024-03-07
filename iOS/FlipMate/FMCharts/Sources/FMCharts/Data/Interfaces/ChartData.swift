@@ -9,27 +9,26 @@ import Foundation
 
 public class ChartData {
     // MARK: - Properties
-    public var dataSet: ChartDataSet
-    public var label: String
+    var dataSets: [ChartDataSet]
+    var label: String = ""
         
     public var isEmpty: Bool {
-        return dataSet.isEmpty
+        return dataSets.isEmpty
     }
     
     public var count: Int {
-        return dataSet.count
+        return dataSets.count
     }
     
     // MARK: - init
-    public init(dataSet: ChartDataSet, label: String) {
-        self.dataSet = dataSet
-        self.label = label
+    init(dataSets: [ChartDataSet]) {
+        self.dataSets = dataSets
     }
 }
 
 // MARK: - Methods
 extension ChartData {
     func max() -> Double {
-        return dataSet.max()
+        return dataSets.map { $0.max() }.max() ?? 0.0
     }
 }

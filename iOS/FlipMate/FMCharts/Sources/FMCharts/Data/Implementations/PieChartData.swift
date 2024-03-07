@@ -8,7 +8,15 @@
 import Foundation
 
 final public class PieChartData: ChartData {
-    public override init(dataSet: ChartDataSet, label: String) {
-        super.init(dataSet: dataSet, label: label)
+    public var dataSet: ChartDataSet? {
+        return self.dataSets.first
+    }
+    
+    override init(dataSets: [ChartDataSet]) {
+        super.init(dataSets: dataSets)
+    }
+    
+    public convenience init(dataSet: ChartDataSet) {
+        self.init(dataSets: [dataSet])
     }
 }

@@ -9,58 +9,43 @@ import UIKit
 
 final public class BarChartDrawManager: ChartDrawProtocol {
     // MARK: - Properties
-    private var frame: CGRect?
-    private var data: ChartData?
+    private weak var barChartView: BaseChartView?
 
     // MARK: - init
-    public init(frame: CGRect) {
-        self.frame = frame
+    public init(barChartView: BaseChartView) {
+        self.barChartView = barChartView
     }
 }
 
 // MKAR: - Methods
 extension BarChartDrawManager {
-    public func fetchData(data: ChartData?) {
-        self.data = data
-    }
-    
-    public func draw() {
+    public func drawData() {
         guard let context = UIGraphicsGetCurrentContext(),
-              let frame = frame,
-              let data = data else {
-            return
-        }
-        
-        let color = UIColor.blue.cgColor
+              let barChartView = barChartView,
+              let data = barChartView.data as? BarChartData,
+              let dataSet = data.dataSet as? BarChartDataSet,
+              let color = UIColor(hexString: dataSet.barColor)?.cgColor else { return }
+    
+        let frame = barChartView.frame
         let maxData = data.max()
-        let barWidth = frame.width / CGFloat(data.count) - (Constant.leftMargin + Constant.rightMargin)
-        var xPos = Constant.leftMargin
+        let barWidth = frame.width / CGFloat(data.count) - (dataSet.chartLeftMargin + dataSet.chartRightMargin)
+        
+        var xPos = dataSet.chartLeftMargin
         
         context.clear(frame)
         context.setFillColor(color)
         
-        for entry in data.dataSet.entry {
+        for entry in dataSet.entry {
             let dataPoint = entry.yValues
-            let maxBarHeight = frame.height - Constant.barMargin
+            let maxBarHeight = frame.height - dataSet.barTopMargin
             var barHeight = maxBarHeight * (dataPoint / maxData)
             if barHeight.isNaN { barHeight = .zero }
-            let yPos = maxBarHeight - barHeight + Constant.topMargin
+            let yPos = maxBarHeight - barHeight + dataSet.chartTopMargin
             let barRect = CGRect(x: xPos, y: yPos, width: barWidth, height: barHeight)
             context.fill(barRect)
-            drawText(context: context, position: CGPoint(x: xPos, y: yPos - Constant.topMargin), text: "\(entry.yValues)", width: barWidth)
-            drawText(context: context, position: CGPoint(x: xPos, y: frame.height - 20), text: entry.xValues, width: barWidth)
-            xPos += barWidth + Constant.leftMargin + Constant.rightMargin
+            drawText(context: context, position: CGPoint(x: xPos, y: yPos - dataSet.chartTopMargin), text: "\(entry.yValues)", width: barWidth)
+            drawText(context: context, position: CGPoint(x: xPos, y: frame.height - dataSet.textHeight), text: entry.xValues, width: barWidth)
+            xPos += barWidth + dataSet.chartLeftMargin + dataSet.chartRightMargin
         }
-    }
-}
-
-// MARK: - Constant
-extension BarChartDrawManager {
-    private enum Constant {
-        static let barMargin: CGFloat = 60
-        static let topMargin: CGFloat = 30
-        static let leftMargin: CGFloat = 10
-        static let rightMargin: CGFloat = 10
-        static let textHeight: CGFloat = 20
     }
 }
