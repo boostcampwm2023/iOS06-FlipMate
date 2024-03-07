@@ -8,17 +8,17 @@
 import UIKit
 
 public protocol ChartDrawProtocol {
-    func draw()
-    func fetchData(data: ChartData?)
+    func drawData()
 }
 
 extension ChartDrawProtocol {
     func drawText(context: CGContext,
-                 position: CGPoint,
-                 text: String,
-                 fontSize: CGFloat = 15,
-                 width: CGFloat,
-                 alignmentMode: NSTextAlignment = .center) {
+                  position: CGPoint,
+                  text: String,
+                  fontSize: CGFloat = 15,
+                  fontColor: String = "C5C5C6FF",
+                  width: CGFloat,
+                  alignmentMode: NSTextAlignment = .center) {
         context.saveGState()
 
         let paragraphStyle = NSMutableParagraphStyle()
@@ -26,11 +26,11 @@ extension ChartDrawProtocol {
         
         let attrs: [NSAttributedString.Key: Any?] = [
             NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: fontSize),
-            NSAttributedString.Key.paragraphStyle: paragraphStyle, .foregroundColor: UIColor.systemGray
+            NSAttributedString.Key.paragraphStyle: paragraphStyle, .foregroundColor: UIColor(hexString: fontColor)
         ]
 
         text.draw(
-            with: CGRect(x: position.x, y: position.y, width: width, height: fontSize),
+            with: CGRect(x: position.x, y: position.y, width: width, height: fontSize + 2),
             options: .usesLineFragmentOrigin, attributes: attrs, context: nil
         )
         
