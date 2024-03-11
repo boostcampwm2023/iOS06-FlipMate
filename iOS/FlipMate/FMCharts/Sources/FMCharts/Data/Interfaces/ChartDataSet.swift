@@ -23,6 +23,11 @@ public class ChartDataSet {
     public init(entry: [ChartDataEntry]) {
         self.entry = entry
     }
+    
+    public func entryForIndex(at index: Int) -> ChartDataEntry? {
+        guard (0..<count).contains(index) else { return nil }
+        return entry[index]
+    }
 }
 
 // MARK: - Methods
