@@ -7,20 +7,22 @@
 
 import Foundation
 
-public protocol LineChartDataSetProtocol {
+public protocol LineChartDataSetProtocol: ChartDataSetBase {
     var lineWidth: Double { get }
     var lineColor: String { get }
-    var dotWidth: Double { get }
-    var dotheight: Double { get }
+    var dotRadius: Double { get }
     var dotColor: String { get }
+    var dashLineColor: String { get }
+    var numberOfDashLine: Int { get }
 }
 
 final public class LineChartDataSet: ChartDataSet, LineChartDataSetProtocol {
     public var lineWidth: Double = 3
     public var lineColor: String = .init()
-    public var dotWidth: Double = .init()
-    public var dotheight: Double = .init()
+    public var dotRadius: Double = .init()
     public var dotColor: String = .init()
+    public var dashLineColor: String = .init()
+    public var numberOfDashLine: Int = 5
     
     public override init(entry: [ChartDataEntry]) {
         super.init(entry: entry)
