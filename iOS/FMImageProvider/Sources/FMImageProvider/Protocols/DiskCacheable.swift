@@ -10,4 +10,5 @@ import Foundation
 protocol DiskCacheable {
     func save(key url: String, imageData: Data) throws
     func load(key url: String) throws -> Data
+    func removeAll()
 }

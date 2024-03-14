@@ -10,4 +10,5 @@ import Foundation
 protocol MemoryCacheable {
     func save(key url: String, imageData: Data)
     func load(key url: String) throws -> Data
+    func removeAll()
 }
