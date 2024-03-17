@@ -9,14 +9,6 @@
 import XCTest
 @testable import FMImageProvider
 
-enum ImageData {
-    static let dummy = Data(count: 1000)
-}
-
-enum CacheKey {
-    static let dummy = "https://dummyURL"
-}
-
 final class MemoryCacherTests: XCTestCase {
     private var sut: MemoryCacher!
 
