@@ -21,7 +21,7 @@ final class MemoryCacher: MemoryCacheable {
     
     func load(key url: String) throws -> Data {
         guard let imageData = memoryStorage.object(forKey: NSString(string: url)) else {
-            throw FMImageProviderError.ImageCacherError.invalidKey
+            throw FMImageProviderError.MemoryCacherError.invalidKey
         }
         return Data(imageData)
     }

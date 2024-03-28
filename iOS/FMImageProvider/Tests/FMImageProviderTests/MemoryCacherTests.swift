@@ -61,7 +61,7 @@ final class MemoryCacherTests: XCTestCase {
             _ = try sut.load(key: CacheKey.dummy)
             XCTFail("cache not removed")
         } catch let error  {
-            XCTAssertEqual(error as? FMImageProviderError.ImageCacherError, FMImageProviderError.ImageCacherError.invalidKey)
+            XCTAssertEqual(error as? FMImageProviderError.MemoryCacherError, FMImageProviderError.MemoryCacherError.invalidKey)
         }
     }
 }
