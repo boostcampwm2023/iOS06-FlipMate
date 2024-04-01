@@ -96,4 +96,10 @@ public final class FMImageProvider {
         try diskCacher.save(key: key, imageData: data)
         return data
     }
+    
+    /// 저장된 캐시 지우기
+    public func clearAllCaches() throws {
+        memoryCacher.removeAll()
+        try diskCacher.removeAll()
+    }
 }
