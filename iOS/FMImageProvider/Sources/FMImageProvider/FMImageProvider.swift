@@ -51,12 +51,14 @@ public final class FMImageProvider {
         
         // 메모리 캐시 확인
         if let data = try? memoryCacher.load(key: key) {
+            FMLogger.general.log("memory cache hit")
             completion(.success(data))
             return
         }
         
         // 디스크 캐시 확인
         if let data = try? diskCacher.load(key: key) {
+            FMLogger.general.log("disk cache hit")
             memoryCacher.save(key: key, imageData: data)
             completion(.success(data))
             return
@@ -77,11 +79,13 @@ public final class FMImageProvider {
         
         // 메모리 캐시 확인
         if let data = try? memoryCacher.load(key: key) {
+            FMLogger.general.log("memory cache hit")
             return data
         }
         
         // 디스크 캐시 확인
         if let data = try? diskCacher.load(key: key) {
+            FMLogger.general.log("disk cache hit")
             memoryCacher.save(key: key, imageData: data)
             return data
         }
