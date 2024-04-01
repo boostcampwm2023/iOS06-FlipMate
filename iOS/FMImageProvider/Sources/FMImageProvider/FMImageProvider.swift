@@ -91,7 +91,7 @@ public final class FMImageProvider {
         }
         
         // 둘 다 없으면 url로부터 다운로드
-        let data = try await fetchImageData(from: url)
+        let data = try await imageDownloader.fetchImage(from: url)
         memoryCacher.save(key: key, imageData: data)
         try diskCacher.save(key: key, imageData: data)
         return data
