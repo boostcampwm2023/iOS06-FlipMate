@@ -36,10 +36,16 @@ final class MemoryCacher: MemoryCacheable {
         return Data(imageData)
     }
     
+    /// 메모리 캐시에 저장된 모든 객체를 삭제하는 함수
     func removeAll() {
         memoryStorage.removeAllObjects()
     }
-    
+}
+
+// MARK: - Private Methods
+extension MemoryCacher {
+    /// 저장된 캐시 객체를 삭제하는 함수
+    /// - Parameter url: 삭제할 객체의 key
     private func remove(key url: String) {
         memoryStorage.removeObject(forKey: NSString(string: url))
     }
