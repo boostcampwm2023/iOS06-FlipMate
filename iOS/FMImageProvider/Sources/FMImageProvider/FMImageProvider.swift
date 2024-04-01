@@ -25,8 +25,20 @@ public final class FMImageProvider {
     }
 
     /// FMImageProvider 초기자
-    public convenience init() {
-        self.init(memoryCacher: MemoryCacher(), diskCacher: DiskCacher(), imageDownloader: ImageDownloader())
+    public convenience init?() {
+        let memoryStorage = NSCache<NSString, NSData>()
+        let fileManager = FileManager.default
+        let configuration = URLSessionConfiguration.default
+        configuration.urlCache = nil
+        let session = URLSession(configuration: configuration)
+        
+        let memoryCacher = MemoryCacher(memoryStorage: memoryStorage)
+        guard let diskCacher = DiskCacher(fileManager: fileManager) else {
+            return nil
+        }
+        let imageDownloader = ImageDownloader(session: session)
+        
+        self.init(memoryCacher: memoryCacher, diskCacher: diskCacher, imageDownloader: imageDownloader)
     }
     
     /// 이미지 데이터 가져오기
