@@ -66,6 +66,18 @@ public final class FMImageProvider {
         
         // 둘 다 없으면 url로부터 다운로드
         imageDownloader.fetchImage(from: url) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    print("메모리 및 디스크 캐셔에 저장")
+                    self.memoryCacher.save(key: key, imageData: data)
+                    try self.diskCacher.save(key: key, imageData: data)
+                } catch let error {
+                    FMLogger.general.error("Disk Cache Save Failed: \(error)")
+                }
+            case .failure:
+                break
+            }
             completion(result)
         }
     }
