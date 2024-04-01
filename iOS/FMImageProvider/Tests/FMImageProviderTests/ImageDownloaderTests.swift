@@ -49,6 +49,7 @@ final class ImageDownloaderTests: XCTestCase {
     }
     
     override func tearDownWithError() throws {
+        MockURLProtocol.requestHandler = nil
         sut = nil
     }
     
@@ -65,6 +66,7 @@ final class ImageDownloaderTests: XCTestCase {
                 expectation.fulfill()
             case .failure(let error):
                 XCTFail("test failed with error: \(error)")
+                expectation.fulfill()
             }
         }
         wait(for: [expectation], timeout: 5)
