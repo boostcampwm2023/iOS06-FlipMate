@@ -48,6 +48,23 @@ class LRUCache {
         insertToHead(key, newNode)
         checkCapacityAndClearCache()
     }
+    
+    func makeArray() -> [CacheData] {
+        var arr: [CacheData] = []
+        while true {
+            guard let newValue = nodeList.popFirst() else {
+                break
+            }
+            arr.append(newValue)
+        }
+        return arr
+    }
+    
+    func initWithArr(_ arr: [CacheData]) {
+        arr.reversed().forEach { cacheData in
+            self.insert(cacheData.key, cacheData)
+        }
+    }
 }
 
 private extension LRUCache {
