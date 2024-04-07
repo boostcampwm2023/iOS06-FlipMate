@@ -41,8 +41,10 @@ struct CacheData<Key: Hashable, Data>: Cacheable {
 
 class LRUCache<Value: Cacheable> {
     typealias Key = Value.CacheKey
+    typealias Node = DoublyLinkedList<Value>.Node
+    
     var nodeList = DoublyLinkedList<Value>()
-    var nodeDict: [Key: Node<Value>] = [:]
+    var nodeDict: [Key: Node] = [:]
     private let capacity: Int
     private var currentCost: Int
     
@@ -70,18 +72,18 @@ class LRUCache<Value: Cacheable> {
 }
 
 private extension LRUCache {
-    func moveToHead(_ key: Key, _ node: Node<Value>) {
+    func moveToHead(_ key: Key, _ node: Node) {
         remove(key, node)
         insertToHead(key, node)
     }
     
-    func remove(_ key: Key, _ node: Node<Value>) {
+    func remove(_ key: Key, _ node: Node) {
         _ = nodeList.remove(node: node)
         currentCost -= node.data.cost
         nodeDict[key] = nil
     }
 
-    func insertToHead(_ key: Key, _ node: Node<Value>) {
+    func insertToHead(_ key: Key, _ node: Node) {
         nodeList.prepend(node.data)
         currentCost += node.data.cost
         nodeDict[key] = node

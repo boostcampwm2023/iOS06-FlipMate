@@ -7,19 +7,19 @@
 
 import Foundation
 
-class Node<T: Equatable> {
-    var prev: Node?
-    var next: Node?
-    let data: T
-    
-    init(data: T) {
-        self.data = data
-    }
-}
-
 class DoublyLinkedList<T: Equatable> {
-    var head: Node<T>?
-    var tail: Node<T>?
+    class Node {
+        var prev: Node?
+        var next: Node?
+        let data: T
+        
+        init(data: T) {
+            self.data = data
+        }
+    }
+    
+    var head: Node?
+    var tail: Node?
     
     var isEmpty: Bool {
         return head == nil
@@ -59,7 +59,15 @@ class DoublyLinkedList<T: Equatable> {
         }
     }
     
-    func insert(after node: Node<T>, _ data: T) {
+    func popFirst() -> T? {
+        if isEmpty {
+            return nil
+        } else {
+            return remove(node: head!)
+        }
+    }
+    
+    func insert(after node: Node, _ data: T) {
         let newNode = Node(data: data)
         if node === tail {
             append(data)
@@ -71,7 +79,7 @@ class DoublyLinkedList<T: Equatable> {
         }
     }
     
-    func remove(node: Node<T>) -> T? {
+    func remove(node: Node) -> T? {
         if node === head {
             head = node.next
             head?.prev = nil
