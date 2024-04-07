@@ -7,44 +7,23 @@
 
 import Foundation
 
-protocol Cacheable: Equatable {
-    associatedtype CacheKey: Hashable
-    associatedtype CachedData
-    
-    var cost: Int { get set }
-    var key: CacheKey { get set }
-    var data: CachedData { get set }
-    
-    static func == (lhs: Self, rhs: Self) -> Bool
-}
-
-extension Cacheable {
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.key == rhs.key
-    }
-}
-
-struct CacheData<Key: Hashable, Data>: Cacheable {
-    typealias CacheKey = Key
-    typealias CachedData = Data
-    
+struct CacheData: Equatable {
     var cost: Int
-    var key: CacheKey
-    var data: CachedData
+    var key: String
+    var data: Data
     
-    init(cost: Int, key: CacheKey, data: CachedData) {
+    init(cost: Int, key: String, data: Data) {
         self.cost = cost
         self.key = key
         self.data = data
     }
 }
 
-class LRUCache<Value: Cacheable> {
-    typealias Key = Value.CacheKey
-    typealias Node = DoublyLinkedList<Value>.Node
+class LRUCache {
+    typealias Node = DoublyLinkedList<CacheData>.Node
     
-    var nodeList = DoublyLinkedList<Value>()
-    var nodeDict: [Key: Node] = [:]
+    var nodeList = DoublyLinkedList<CacheData>()
+    var nodeDict: [String: Node] = [:]
     private let capacity: Int
     private var currentCost: Int
     
@@ -53,7 +32,7 @@ class LRUCache<Value: Cacheable> {
         self.currentCost = 0
     }
     
-    func get(_ key: Key) -> Value? {
+    func get(_ key: String) -> CacheData? {
         guard let node = nodeDict[key] else {
             return nil
         }
@@ -61,7 +40,7 @@ class LRUCache<Value: Cacheable> {
         return node.data
     }
     
-    func insert(_ key: Key, _ value: Value) {
+    func insert(_ key: String, _ value: CacheData) {
         if let oldNode = nodeDict[key] {
             remove(key, oldNode)
         }
@@ -72,18 +51,18 @@ class LRUCache<Value: Cacheable> {
 }
 
 private extension LRUCache {
-    func moveToHead(_ key: Key, _ node: Node) {
+    func moveToHead(_ key: String, _ node: Node) {
         remove(key, node)
         insertToHead(key, node)
     }
     
-    func remove(_ key: Key, _ node: Node) {
+    func remove(_ key: String, _ node: Node) {
         _ = nodeList.remove(node: node)
         currentCost -= node.data.cost
         nodeDict[key] = nil
     }
 
-    func insertToHead(_ key: Key, _ node: Node) {
+    func insertToHead(_ key: String, _ node: Node) {
         nodeList.prepend(node.data)
         currentCost += node.data.cost
         nodeDict[key] = node
