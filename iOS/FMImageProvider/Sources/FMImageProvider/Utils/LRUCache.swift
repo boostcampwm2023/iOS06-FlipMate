@@ -27,11 +27,16 @@ class LRUCache {
     private let capacity: Int
     private var currentCost: Int
     
+    /// capacity와 함께 LRU캐시 초기화. 각 데이터들의 cost 합이 capacity를 넘으면 가장 오래전에 사용된 데이터를 캐시에서 제거한다.
+    /// - Parameter capacity: 디스크 캐시 최대 용량
     init(capacity: Int) {
         self.capacity = capacity
         self.currentCost = 0
     }
     
+    /// key에 대응하는 data를 반환하는 함수
+    /// - Parameter key: 이미지 url로부터 생성된 key
+    /// - Returns: key에 대응하는 캐시 데이터
     func get(_ key: String) -> CacheData? {
         guard let node = nodeDict[key] else {
             return nil
@@ -40,6 +45,10 @@ class LRUCache {
         return node.data
     }
     
+    /// LRU 캐시에 데이터를 저장하는 함수
+    /// - Parameters:
+    ///   - key: 이미지 url로부터 생성된 key
+    ///   - value: key에 대응하는 캐시 데이터
     func insert(_ key: String, _ value: CacheData) {
         if let oldNode = nodeDict[key] {
             remove(key, oldNode)
@@ -49,6 +58,8 @@ class LRUCache {
         checkCapacityAndClearCache()
     }
     
+    /// 이중연결리스트를 파일로 저장하기 위해 배열로 변환하는 함수
+    /// - Returns: 배열로 변환된 데이터 목록
     func makeArray() -> [CacheData] {
         var arr: [CacheData] = []
         while true {
@@ -60,6 +71,9 @@ class LRUCache {
         return arr
     }
     
+    /// LRU 알고리즘을 적용 및 관리하기 위해 배열을 LRUCache 내부 자료구조로 변환하는 함수.
+    /// 해당 자료구조는 이중연결리스트이다.
+    /// - Parameter arr: 변환할 데이터 목록 배열
     func initWithArr(_ arr: [CacheData]) {
         arr.reversed().forEach { cacheData in
             self.insert(cacheData.key, cacheData)
