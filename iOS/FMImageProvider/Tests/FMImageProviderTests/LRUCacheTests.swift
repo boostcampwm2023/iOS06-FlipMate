@@ -9,7 +9,7 @@ import XCTest
 @testable import FMImageProvider
 
 final class LRUCacheTests: XCTestCase {
-    private var sut: LRUCache<CacheData<String, Int>>!
+    private var sut: LRUCache!
 
     override func setUpWithError() throws {
         sut = LRUCache(capacity: 2)
@@ -21,7 +21,7 @@ final class LRUCacheTests: XCTestCase {
     
     func test_get_성공() {
         let key = "key1"
-        let data = CacheData(cost: 1, key: key, data: 10)
+        let data = CacheData(cost: 1, key: key, data: Data(count: 10))
         sut.insert(key, data)
         
         let fetchedValue = sut.get(key)
@@ -38,7 +38,7 @@ final class LRUCacheTests: XCTestCase {
     
     func test_insert_성공() {
         let key = "key1"
-        let data = CacheData(cost: 1, key: key, data: 10)
+        let data = CacheData(cost: 1, key: key, data: Data(count: 10))
         
         sut.insert(key, data)
         
@@ -47,11 +47,11 @@ final class LRUCacheTests: XCTestCase {
         XCTAssertEqual(node?.data, data)
     }
     
-    func test_insert_capacity초과_LRU작동() {
+    func test_insert_capacity초과_LRU작동_성공() {
         let key1 = "key1", key2 = "key2", key3 = "key3"
-        let data1 = CacheData(cost: 1, key: key1, data: 10)
-        let data2 = CacheData(cost: 1, key: key2, data: 20)
-        let data3 = CacheData(cost: 1, key: key3, data: 30)
+        let data1 = CacheData(cost: 1, key: key1, data: Data(count: 10))
+        let data2 = CacheData(cost: 1, key: key2, data: Data(count: 20))
+        let data3 = CacheData(cost: 1, key: key3, data: Data(count: 30))
         
         sut.insert(key1, data1)
         sut.insert(key2, data2)
@@ -67,5 +67,19 @@ final class LRUCacheTests: XCTestCase {
         let fetchedValue3 = sut.get(key3)
         XCTAssertNotNil(fetchedValue3)
         XCTAssertEqual(fetchedValue3?.data, data3.data)
+    }
+    
+    func test_LRU캐시내용으로_배열생성_성공() {
+        let key1 = "key1", key2 = "key2", key3 = "key3"
+        let data1 = CacheData(cost: 1, key: key1, data: Data(count: 10))
+        let data2 = CacheData(cost: 1, key: key2, data: Data(count: 20))
+        let data3 = CacheData(cost: 1, key: key3, data: Data(count: 30))
+        
+        sut.insert(key1, data1)
+        sut.insert(key2, data2)
+        sut.insert(key3, data3)
+        
+        let arr = sut.makeArray()
+        print(arr)
     }
 }
