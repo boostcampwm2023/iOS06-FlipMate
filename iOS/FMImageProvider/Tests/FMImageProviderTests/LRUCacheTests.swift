@@ -70,6 +70,8 @@ final class LRUCacheTests: XCTestCase {
     }
     
     func test_LRU캐시내용으로_배열생성_성공() {
+        sut = LRUCache(capacity: 3)
+        
         let key1 = "key1", key2 = "key2", key3 = "key3"
         let data1 = CacheData(cost: 1, key: key1, data: Data(count: 10))
         let data2 = CacheData(cost: 1, key: key2, data: Data(count: 20))
@@ -79,7 +81,24 @@ final class LRUCacheTests: XCTestCase {
         sut.insert(key2, data2)
         sut.insert(key3, data3)
         
-        let arr = sut.makeArray()
-        print(arr)
+        let arr = [data3, data2, data1]
+        let result = sut.makeArray()
+        XCTAssertEqual(arr, result)
+    }
+    
+    func test_배열로_LRU캐시_생성_성공() {
+        sut = LRUCache(capacity: 3)
+        
+        let key1 = "key1", key2 = "key2", key3 = "key3"
+        let data1 = CacheData(cost: 1, key: key1, data: Data(count: 10))
+        let data2 = CacheData(cost: 1, key: key2, data: Data(count: 20))
+        let data3 = CacheData(cost: 1, key: key3, data: Data(count: 30))
+        
+        let arr = [data3, data2, data1]
+        
+        sut.initWithArr(arr)
+        
+        XCTAssertEqual(sut.nodeList.head?.data, data3)
+        XCTAssertEqual(sut.nodeList.tail?.data, data1)
     }
 }
