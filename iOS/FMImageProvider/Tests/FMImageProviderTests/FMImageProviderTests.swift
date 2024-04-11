@@ -92,7 +92,8 @@ final class FMImageProviderTests: XCTestCase {
         let memoryObject = memoryStorage.object(forKey: "https://example.com") as? Data
         let cacheCount = diskStorage.diskCache.count
         
-        guard memoryObject! == ImageData.dummy, cacheCount == 1 else {
+        // 캐시 1개 / LRU캐시표현체 1개 총 2개의 caceCount가 있음
+        guard memoryObject! == ImageData.dummy, cacheCount == 2 else {
             XCTFail()
             return
         }
