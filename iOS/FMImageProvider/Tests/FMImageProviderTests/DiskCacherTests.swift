@@ -13,6 +13,10 @@ enum FileType {
     case file
 }
 
+fileprivate enum Constant {
+    static let diskCapacity = 100
+}
+
 final class FakeFileManager: FileManager {
     var diskCache: [String:Data] = [:]
     private var fileTypeCache: [String:FileType] = [:]
@@ -71,7 +75,7 @@ final class DiskCacherTests: XCTestCase {
     private let fileManager = FakeFileManager()
 
     override func setUpWithError() throws {
-        sut = DiskCacher(fileManager: fileManager)
+        sut = DiskCacher(fileManager: fileManager, capacity: Constant.diskCapacity)
     }
 
     override func tearDownWithError() throws {

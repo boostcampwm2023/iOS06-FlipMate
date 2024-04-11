@@ -9,12 +9,16 @@
 import XCTest
 @testable import FMImageProvider
 
+fileprivate enum Constant {
+    static let memoryCapacity = 100_000_000
+}
+
 final class MemoryCacherTests: XCTestCase {
     private var sut: MemoryCacher!
 
     override func setUpWithError() throws {
         let storage = NSCache<NSString, NSData>()
-        sut = MemoryCacher(memoryStorage: storage)
+        sut = MemoryCacher(memoryStorage: storage, capacity: Constant.memoryCapacity)
     }
 
     override func tearDownWithError() throws {
@@ -24,7 +28,7 @@ final class MemoryCacherTests: XCTestCase {
     func test_메모리_캐시_저장_성공() {
         // arrange
         let storage = NSCache<NSString, NSData>()
-        sut = MemoryCacher(memoryStorage: storage)
+        sut = MemoryCacher(memoryStorage: storage, capacity: Constant.memoryCapacity)
         
         // act
         sut.save(key: CacheKey.dummy, imageData: ImageData.dummy)
@@ -38,7 +42,7 @@ final class MemoryCacherTests: XCTestCase {
         // arrange
         let storage = NSCache<NSString, NSData>()
         storage.setObject(NSData(data: ImageData.dummy), forKey: NSString(string: CacheKey.dummy))
-        sut = MemoryCacher(memoryStorage: storage)
+        sut = MemoryCacher(memoryStorage: storage, capacity: Constant.memoryCapacity)
         
         // act
         let result = try sut.load(key: CacheKey.dummy)
@@ -51,7 +55,7 @@ final class MemoryCacherTests: XCTestCase {
         // arrange
         let storage = NSCache<NSString, NSData>()
         storage.setObject(NSData(data: ImageData.dummy), forKey: NSString(string: CacheKey.dummy))
-        sut = MemoryCacher(memoryStorage: storage)
+        sut = MemoryCacher(memoryStorage: storage, capacity: Constant.memoryCapacity)
         
         // act
         sut.removeAll()

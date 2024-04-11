@@ -8,12 +8,18 @@
 import XCTest
 @testable import FMImageProvider
 
+fileprivate enum Constant {
+    static let memoryCapacity = 100_000_000
+    static let diskCapacity = 100_000_000
+    static let exampleURL = "https://example.com"
+}
+
 final class FMImageProviderTests: XCTestCase {
     private var sut: FMImageProvider!
 
     override func setUpWithError() throws {
-        let memoryCacher = MemoryCacher(memoryStorage: NSCache<NSString, NSData>())
-        guard let diskCacher = DiskCacher(fileManager: FakeFileManager()) else {
+        let memoryCacher = MemoryCacher(memoryStorage: NSCache<NSString, NSData>(), capacity: Constant.memoryCapacity)
+        guard let diskCacher = DiskCacher(fileManager: FakeFileManager(), capacity: Constant.diskCapacity) else {
             assertionFailure("디스크 캐시 초기화 실패")
             return
         }
@@ -34,7 +40,7 @@ final class FMImageProviderTests: XCTestCase {
         }
         
         let expectation = XCTestExpectation(description: "response")
-        sut.fetchImageData(from: URL(string: "https://example.com")!) { result in
+        sut.fetchImageData(from: URL(string: Constant.exampleURL)!) { result in
             switch result {
             case .success(let data):
                 print(data)
@@ -53,16 +59,16 @@ final class FMImageProviderTests: XCTestCase {
             return (HTTPURLResponse(), ImageData.dummy)
         }
         
-        let data = try await sut.fetchImageData(from: URL(string: "https://example.com")!)
+        let data = try await sut.fetchImageData(from: URL(string: Constant.exampleURL)!)
         XCTAssertEqual(data, ImageData.dummy)
     }
     
     func test_clearAllCaches_성공() throws {
         let memoryStorage = NSCache<NSString, NSData>()
-        let memoryCacher = MemoryCacher(memoryStorage: memoryStorage)
+        let memoryCacher = MemoryCacher(memoryStorage: memoryStorage, capacity: Constant.memoryCapacity)
         
         let diskStorage = FakeFileManager()
-        guard let diskCacher = DiskCacher(fileManager: diskStorage) else {
+        guard let diskCacher = DiskCacher(fileManager: diskStorage, capacity: Constant.diskCapacity) else {
             assertionFailure("디스크 캐시 초기화 실패")
             return
         }
@@ -78,7 +84,7 @@ final class FMImageProviderTests: XCTestCase {
         }
         
         let expectation = XCTestExpectation()
-        sut.fetchImageData(from: URL(string: "https://example.com")!) { _ in
+        sut.fetchImageData(from: URL(string: Constant.exampleURL)!) { _ in
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 5)
