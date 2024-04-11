@@ -23,6 +23,7 @@ enum FMImageProviderError: Error, Equatable {
         case cacheDirectoryNil
         case createFileFailed
         case contentLoadFail
+        case filePathNotInLRUCache
         
         var errorDescription: String? {
             switch self {
@@ -32,6 +33,8 @@ enum FMImageProviderError: Error, Equatable {
                 return "creating file failed from fileManager"
             case .contentLoadFail:
                 return "content load failed from fileManager"
+            case .filePathNotInLRUCache:
+                return "filePath not registered in LRU Cache"
             }
         }
     }
