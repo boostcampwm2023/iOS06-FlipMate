@@ -7,22 +7,20 @@
 
 import Foundation
 
-struct CacheData: Equatable {
-    var cost: Int
-    var key: String
-    var data: Data
+struct LRUCacheData: Equatable, Codable {
+    let cost: Int
+    let filePath: String
     
-    init(cost: Int, key: String, data: Data) {
+    init(cost: Int, key: String) {
         self.cost = cost
-        self.key = key
-        self.data = data
+        self.filePath = key
     }
 }
 
 class LRUCache {
-    typealias Node = DoublyLinkedList<CacheData>.Node
+    typealias Node = DoublyLinkedList<LRUCacheData>.Node
     
-    var nodeList = DoublyLinkedList<CacheData>()
+    var nodeList = DoublyLinkedList<LRUCacheData>()
     var nodeDict: [String: Node] = [:]
     private let capacity: Int
     private var currentCost: Int
@@ -37,7 +35,7 @@ class LRUCache {
     /// key에 대응하는 data를 반환하는 함수
     /// - Parameter key: 이미지 url로부터 생성된 key
     /// - Returns: key에 대응하는 캐시 데이터
-    func get(_ key: String) -> CacheData? {
+    func get(_ key: String) -> LRUCacheData? {
         guard let node = nodeDict[key] else {
             return nil
         }
@@ -49,7 +47,7 @@ class LRUCache {
     /// - Parameters:
     ///   - key: 이미지 url로부터 생성된 key
     ///   - value: key에 대응하는 캐시 데이터
-    func insert(_ key: String, _ value: CacheData) {
+    func insert(_ key: String, _ value: LRUCacheData) {
         if let oldNode = nodeDict[key] {
             remove(key, oldNode)
         }
@@ -60,8 +58,8 @@ class LRUCache {
     
     /// 이중연결리스트를 파일로 저장하기 위해 배열로 변환하는 함수
     /// - Returns: 배열로 변환된 데이터 목록
-    func makeArray() -> [CacheData] {
-        var arr: [CacheData] = []
+    func makeArray() -> [LRUCacheData] {
+        var arr: [LRUCacheData] = []
         while true {
             guard let newValue = nodeList.popFirst() else {
                 break
@@ -74,9 +72,9 @@ class LRUCache {
     /// LRU 알고리즘을 적용 및 관리하기 위해 배열을 LRUCache 내부 자료구조로 변환하는 함수.
     /// 해당 자료구조는 이중연결리스트이다.
     /// - Parameter arr: 변환할 데이터 목록 배열
-    func initWithArr(_ arr: [CacheData]) {
+    func initWithArr(_ arr: [LRUCacheData]) {
         arr.reversed().forEach { cacheData in
-            self.insert(cacheData.key, cacheData)
+            self.insert(cacheData.filePath, cacheData)
         }
     }
 }
@@ -105,7 +103,7 @@ private extension LRUCache {
                 break
             }
             currentCost -= tailNode.cost
-            let key = tailNode.key
+            let key = tailNode.filePath
             nodeDict[key] = nil
         }
     }
