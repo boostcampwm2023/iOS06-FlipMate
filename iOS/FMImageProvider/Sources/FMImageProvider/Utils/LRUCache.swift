@@ -56,6 +56,13 @@ class LRUCache {
         checkCapacityAndClearCache()
     }
     
+    /// LRU캐시를 전부 초기화하는 함수
+    func removeAll() {
+        nodeList = DoublyLinkedList<LRUCacheData>()
+        nodeDict = [:]
+        currentCost = 0
+    }
+    
     /// 이중연결리스트를 파일로 저장하기 위해 배열로 변환하는 함수
     /// - Returns: 배열로 변환된 데이터 목록
     func makeArray() -> [LRUCacheData] {
