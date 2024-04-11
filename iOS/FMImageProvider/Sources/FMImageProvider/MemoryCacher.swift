@@ -10,10 +10,10 @@ import Foundation
 final class MemoryCacher: MemoryCacheable {
     private var memoryStorage: NSCache<NSString, NSData>
     
-    init(memoryStorage: NSCache<NSString, NSData>) {
+    init(memoryStorage: NSCache<NSString, NSData>, capacity: Int) {
         memoryStorage.name = "FMImageProviderCache"
         memoryStorage.countLimit = 0
-        memoryStorage.totalCostLimit = 1_000_000_000 // 최대 메모리 캐시 크기 100MB
+        memoryStorage.totalCostLimit = capacity
         self.memoryStorage = memoryStorage
     }
         
