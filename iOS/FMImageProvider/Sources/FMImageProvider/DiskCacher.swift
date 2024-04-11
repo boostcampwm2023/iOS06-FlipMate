@@ -62,7 +62,7 @@ extension DiskCacher {
         guard let cacheDirectoryPath = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first else {
             throw FMImageProviderError.DiskCacherError.cacheDirectoryNil
         }
-        let diskCacheDirectory = cacheDirectoryPath.appendingPathComponent("FlipMateImages")
+        let diskCacheDirectory = cacheDirectoryPath.appendingPathComponent(Constant.cacheDirectoryName)
         if !fileManager.fileExists(atPath: diskCacheDirectory.path) {
             try fileManager.createDirectory(at: diskCacheDirectory, withIntermediateDirectories: true)
         }
@@ -96,4 +96,7 @@ extension DiskCacher {
         let truncatedHexString = String(hexString.prefix(16))
         return truncatedHexString
     }
+enum Constant {
+    static let cacheDirectoryName = "FlipMateImages"
+    static let lruCacheRepresentorName = "CacheRepresentor"
 }
