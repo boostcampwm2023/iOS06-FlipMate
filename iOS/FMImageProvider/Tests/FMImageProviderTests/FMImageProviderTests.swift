@@ -17,9 +17,9 @@ fileprivate enum Constant {
 final class FMImageProviderTests: XCTestCase {
     private var sut: FMImageProvider!
 
-    override func setUpWithError() throws {
+    override func setUp() async throws {
         let memoryCacher = MemoryCacher(memoryStorage: NSCache<NSString, NSData>(), capacity: Constant.memoryCapacity)
-        guard let diskCacher = DiskCacher(fileManager: FakeFileManager(), capacity: Constant.diskCapacity) else {
+        guard let diskCacher = await DiskCacher(fileManager: FakeFileManager(), capacity: Constant.diskCapacity) else {
             assertionFailure("디스크 캐시 초기화 실패")
             return
         }
@@ -63,12 +63,12 @@ final class FMImageProviderTests: XCTestCase {
         XCTAssertEqual(data, ImageData.dummy)
     }
     
-    func test_clearAllCaches_성공() throws {
+    func test_clearAllCaches_성공() async throws {
         let memoryStorage = NSCache<NSString, NSData>()
         let memoryCacher = MemoryCacher(memoryStorage: memoryStorage, capacity: Constant.memoryCapacity)
         
         let diskStorage = FakeFileManager()
-        guard let diskCacher = DiskCacher(fileManager: diskStorage, capacity: Constant.diskCapacity) else {
+        guard let diskCacher = await DiskCacher(fileManager: diskStorage, capacity: Constant.diskCapacity) else {
             assertionFailure("디스크 캐시 초기화 실패")
             return
         }
@@ -87,7 +87,7 @@ final class FMImageProviderTests: XCTestCase {
         sut.fetchImageData(from: URL(string: Constant.exampleURL)!) { _ in
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 5)
+        await fulfillment(of: [expectation], timeout: 5)
         
         let memoryObject = memoryStorage.object(forKey: "https://example.com") as? Data
         let cacheCount = diskStorage.diskCache.count
@@ -98,7 +98,7 @@ final class FMImageProviderTests: XCTestCase {
             return
         }
         
-        try sut.clearAllCaches()
+        try await sut.clearAllCaches()
         
         let clearedMemoryObject = memoryStorage.object(forKey: "https://example.com") as? Data
         let diskCacheCount = diskStorage.diskCache.count

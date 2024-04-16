@@ -25,7 +25,7 @@ public final class FMImageProvider {
     }
 
     /// FMImageProvider 초기자
-    public convenience init?(memoryCapacity: Int = 1_000_000_000, diskCapacity: Int = 1_000_000_000) {
+    public convenience init?(memoryCapacity: Int = 1_000_000_000, diskCapacity: Int = 1_000_000_000) async {
         let memoryStorage = NSCache<NSString, NSData>()
         let fileManager = FileManager.default
         let configuration = URLSessionConfiguration.default
@@ -33,7 +33,7 @@ public final class FMImageProvider {
         let session = URLSession(configuration: configuration)
         
         let memoryCacher = MemoryCacher(memoryStorage: memoryStorage, capacity: memoryCapacity)
-        guard let diskCacher = DiskCacher(fileManager: fileManager, capacity: diskCapacity) else {
+        guard let diskCacher = await DiskCacher(fileManager: fileManager, capacity: diskCapacity) else {
             return nil
         }
         let imageDownloader = ImageDownloader(session: session)
@@ -47,38 +47,42 @@ public final class FMImageProvider {
     ///   - url: 이미지를 가져올 url 주소
     ///   - completion:이미지 데이터를 반환할 completion handler
     public func fetchImageData(from url: URL, completion: @escaping (Result<Data, Error>) -> ()) {
-        let key = url.absoluteString
-        
-        // 메모리 캐시 확인
-        if let data = try? memoryCacher.load(key: key) {
-            FMLogger.general.log("memory cache hit")
-            completion(.success(data))
-            return
-        }
-        
-        // 디스크 캐시 확인
-        if let data = try? diskCacher.load(key: key) {
-            FMLogger.general.log("disk cache hit")
-            memoryCacher.save(key: key, imageData: data)
-            completion(.success(data))
-            return
-        }
-        
-        // 둘 다 없으면 url로부터 다운로드
-        imageDownloader.fetchImage(from: url) { result in
-            switch result {
-            case .success(let data):
-                do {
-                    print("메모리 및 디스크 캐셔에 저장")
-                    self.memoryCacher.save(key: key, imageData: data)
-                    try self.diskCacher.save(key: key, imageData: data)
-                } catch let error {
-                    FMLogger.general.error("Disk Cache Save Failed: \(error)")
-                }
-            case .failure:
-                break
+        Task {
+            let key = url.absoluteString
+            
+            // 메모리 캐시 확인
+            if let data = try? memoryCacher.load(key: key) {
+                FMLogger.general.log("memory cache hit")
+                completion(.success(data))
+                return
             }
-            completion(result)
+            
+            // 디스크 캐시 확인
+            if let data = try? await diskCacher.load(key: key) {
+                FMLogger.general.log("disk cache hit")
+                memoryCacher.save(key: key, imageData: data)
+                completion(.success(data))
+                return
+            }
+            
+            // 둘 다 없으면 url로부터 다운로드
+            imageDownloader.fetchImage(from: url) { result in
+                switch result {
+                case .success(let data):
+                    Task {
+                        do {
+                            print("메모리 및 디스크 캐셔에 저장")
+                            self.memoryCacher.save(key: key, imageData: data)
+                            try await self.diskCacher.save(key: key, imageData: data)
+                        } catch let error {
+                            FMLogger.general.error("Disk Cache Save Failed: \(error)")
+                        }
+                    }
+                case .failure:
+                    break
+                }
+                completion(result)
+            }
         }
     }
     
@@ -96,7 +100,7 @@ public final class FMImageProvider {
         }
         
         // 디스크 캐시 확인
-        if let data = try? diskCacher.load(key: key) {
+        if let data = try? await diskCacher.load(key: key) {
             FMLogger.general.log("disk cache hit")
             memoryCacher.save(key: key, imageData: data)
             return data
@@ -105,13 +109,13 @@ public final class FMImageProvider {
         // 둘 다 없으면 url로부터 다운로드
         let data = try await imageDownloader.fetchImage(from: url)
         memoryCacher.save(key: key, imageData: data)
-        try diskCacher.save(key: key, imageData: data)
+        try await diskCacher.save(key: key, imageData: data)
         return data
     }
     
     /// 저장된 캐시 지우기
-    public func clearAllCaches() throws {
+    public func clearAllCaches() async throws {
         memoryCacher.removeAll()
-        try diskCacher.removeAll()
+        try await diskCacher.removeAll()
     }
 }

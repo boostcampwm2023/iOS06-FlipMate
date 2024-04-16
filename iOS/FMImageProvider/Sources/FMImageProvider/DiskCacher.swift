@@ -20,12 +20,14 @@ struct LRUCacheRepresentor: Codable {
     }
 }
 
-final class DiskCacher: DiskCacheable {
+extension FileManager: @unchecked Sendable {}
+
+actor DiskCacher: DiskCacheable {
     private let fileManager: FileManager
     private var cacheDirectory: URL?
     private let lruCache: LRUCache
     
-    init?(fileManager: FileManager, capacity: Int) {
+    init?(fileManager: FileManager, capacity: Int) async {
         self.fileManager = fileManager
         self.lruCache = LRUCache(capacity: capacity)
         do {
@@ -42,7 +44,7 @@ final class DiskCacher: DiskCacheable {
     /// - Parameters:
     ///   - url: 이미지 주소 url
     ///   - imageData: 이미지 데이터
-    func save(key url: String, imageData: Data) throws {
+    func save(key url: String, imageData: Data) async throws {
         let filePath = try getFilePath(forKey: url)
         lruCache.insert(url, LRUCacheData(cost: imageData.count, key: filePath.path))
         guard fileManager.createFile(atPath: filePath.path, contents: imageData) else {
@@ -54,7 +56,7 @@ final class DiskCacher: DiskCacheable {
     /// 주어진 url을 해시 변한한 값을 파일 이름으로 하여 해당 파일을 디스크로부터 불러와 반환
     /// - Parameter url: 이미지 주소 url
     /// - Returns: 불러온 이미지 데이터
-    func load(key url: String) throws -> Data {
+    func load(key url: String) async throws -> Data {
         guard let filePath = lruCache.get(url)?.filePath else {
             throw FMImageProviderError.DiskCacherError.contentLoadFail
         }
@@ -65,7 +67,7 @@ final class DiskCacher: DiskCacheable {
     }
     
     /// 캐시 디렉토리 및 하위 파일들을 삭제한다
-    func removeAll() throws {
+    func removeAll() async throws {
         guard let directoryPath = cacheDirectory else {
             throw FMImageProviderError.DiskCacherError.cacheDirectoryNil
         }

@@ -74,33 +74,33 @@ final class DiskCacherTests: XCTestCase {
     private var sut: DiskCacher!
     private let fileManager = FakeFileManager()
 
-    override func setUpWithError() throws {
-        sut = DiskCacher(fileManager: fileManager, capacity: Constant.diskCapacity)
+    override func setUp() async throws {
+        sut = await DiskCacher(fileManager: fileManager, capacity: Constant.diskCapacity)
     }
 
     override func tearDownWithError() throws {
         sut = nil
     }
 
-    func test_디스크_캐시_save_load_성공() throws {
-        try sut.save(key: CacheKey.dummy, imageData: ImageData.dummy)
+    func test_디스크_캐시_save_load_성공() async throws {
+        try await sut.save(key: CacheKey.dummy, imageData: ImageData.dummy)
         
-        let result = try sut.load(key: CacheKey.dummy)
+        let result = try await sut.load(key: CacheKey.dummy)
         XCTAssertEqual(ImageData.dummy, result)
     }
     
-    func test_디스크_캐시_load_실패_데이터_없음() throws {
+    func test_디스크_캐시_load_실패_데이터_없음() async throws {
         do {
-            _ = try sut.load(key: CacheKey.dummy)
+            _ = try await sut.load(key: CacheKey.dummy)
         } catch let error {
             XCTAssertEqual(error as? FMImageProviderError.DiskCacherError, .contentLoadFail)
         }
     }
     
-    func test_디스크_캐시_removeAll_성공() throws {
-        try sut.save(key: CacheKey.dummy, imageData: ImageData.dummy)
+    func test_디스크_캐시_removeAll_성공() async throws {
+        try await sut.save(key: CacheKey.dummy, imageData: ImageData.dummy)
         
-        try sut.removeAll()
+        try await sut.removeAll()
         
         let cacheCount = fileManager.diskCache.count
         XCTAssertEqual(cacheCount, 0)
