@@ -17,7 +17,7 @@ struct LRUCacheData: Equatable, Codable {
     }
 }
 
-class LRUCache {
+final class LRUCache {
     typealias Node = DoublyLinkedList<LRUCacheData>.Node
     
     var nodeList = DoublyLinkedList<LRUCacheData>()

@@ -7,8 +7,8 @@
 
 import Foundation
 
-class DoublyLinkedList<T: Equatable> {
-    class Node {
+final class DoublyLinkedList<T: Equatable> {
+    final class Node {
         var prev: Node?
         var next: Node?
         let data: T
