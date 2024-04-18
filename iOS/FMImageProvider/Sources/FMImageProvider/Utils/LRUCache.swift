@@ -54,7 +54,6 @@ final class LRUCache {
     func insert(_ key: String, _ value: LRUCacheData) {
         if let oldNode = nodeDict[key] {
             remove(key, oldNode)
-            removedNodeSubject.send(oldNode.data.filePath)
         }
         let newNode = Node(data: value)
         insertToHead(key, newNode)
@@ -117,6 +116,7 @@ private extension LRUCache {
             currentCost -= tailNode.cost
             let key = tailNode.filePath
             nodeDict[key] = nil
+            removedNodeSubject.send(key)
         }
     }
 }
