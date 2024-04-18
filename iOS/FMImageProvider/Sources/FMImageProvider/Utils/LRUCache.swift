@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 struct LRUCacheData: Equatable, Codable {
     let cost: Int
@@ -22,6 +23,8 @@ final class LRUCache {
     
     var nodeList = DoublyLinkedList<LRUCacheData>()
     var nodeDict: [String: Node] = [:]
+    var removedNodePublisher: AnyPublisher<String, Error> 
+    private var removedNodeSubject = PassthroughSubject<String, Error>()
     private let capacity: Int
     private var currentCost: Int
     
@@ -30,6 +33,7 @@ final class LRUCache {
     init(capacity: Int) {
         self.capacity = capacity
         self.currentCost = 0
+        removedNodePublisher = removedNodeSubject.eraseToAnyPublisher()
     }
     
     /// key에 대응하는 data를 반환하는 함수
@@ -50,6 +54,7 @@ final class LRUCache {
     func insert(_ key: String, _ value: LRUCacheData) {
         if let oldNode = nodeDict[key] {
             remove(key, oldNode)
+            removedNodeSubject.send(oldNode.data.filePath)
         }
         let newNode = Node(data: value)
         insertToHead(key, newNode)
