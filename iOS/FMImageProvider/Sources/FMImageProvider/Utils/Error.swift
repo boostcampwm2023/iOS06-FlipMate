@@ -41,11 +41,14 @@ enum FMImageProviderError: Error, Equatable {
     
     enum ImageDownloaderError: LocalizedError {
         case noURL
+        case noData
         
         var errorDescription: String? {
             switch self {
             case .noURL:
                 return "no URL"
+            case .noData:
+                return "no data"
             }
         }
     }

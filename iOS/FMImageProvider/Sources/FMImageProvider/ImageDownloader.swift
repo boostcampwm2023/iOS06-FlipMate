@@ -21,18 +21,17 @@ final class ImageDownloader: ImageDownloadable {
     ///   정상적인 결과를 반환받는다면 이미지 Data와 nil을 매개변수로 받는다.
     ///   에러가 있다면 nil과 에러를 매개변수로 받는다.
     func fetchImage(from url: URL, completion: @escaping (Result<Data, Error>) -> ()) {
-        let downloadTask = session.downloadTask(with: url) { urlOrNil, responseOrNil, errorOrNil in // status code 에러에 대응하기
-            guard let fileURL = urlOrNil else {
-                completion(.failure(FMImageProviderError.ImageDownloaderError.noURL))
+        let request = URLRequest(url: url)
+        let downloadTask = session.dataTask(with: request) { dataOrNil, responseOrNil, errorOrNil in // status code 에러에 대응하기
+            if let error = errorOrNil {
+                completion(.failure(error))
                 return
             }
-            do {
-                let data = try Data(contentsOf: fileURL)
-                try FileManager.default.removeItem(at: fileURL)
-                completion(.success(data))
-            } catch {
-                completion(.failure(error))
+            guard let data = dataOrNil else {
+                completion(.failure(FMImageProviderError.ImageDownloaderError.noData))
+                return
             }
+            completion(.success(data))
         }
         
         downloadTask.resume()
@@ -44,9 +43,7 @@ final class ImageDownloader: ImageDownloadable {
     /// - Returns: 다운로드 받은 이미지 데이터
     @available (iOS 15, *)
     func fetchImage(from url: URL) async throws -> Data {
-        let (fileURL, _) = try await session.download(from: url, delegate: nil) // status code 에러에 대응하기
-        let data = try Data(contentsOf: fileURL)
-        try FileManager.default.removeItem(at: fileURL)
+        let (data, _) = try await session.data(from: url, delegate: nil) // status code 에러에 대응하기
         return data
     }
 }
