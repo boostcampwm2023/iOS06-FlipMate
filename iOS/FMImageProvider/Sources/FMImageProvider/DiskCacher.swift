@@ -27,16 +27,17 @@ actor DiskCacher: DiskCacheable {
     private var cacheDirectory: URL?
     private let lruCache: LRUCache
     
-    init?(fileManager: FileManager, capacity: Int) async {
+    init(fileManager: FileManager, capacity: Int) {
         self.fileManager = fileManager
         self.lruCache = LRUCache(capacity: capacity)
-        do {
-            self.cacheDirectory = try getCacheDirectoryPath()
-        } catch let error {
-            FMLogger.general.error("initialize failed: \(error)")
-            return nil
+        Task {
+            do {
+                try await setCacheDirectoryPath()
+            } catch let error {
+                FMLogger.general.error("initialize failed: \(error)")
+            }
+            try? await getLRUCacheStatus()
         }
-        try? getLRUCacheStatus()
     }
     
     // MARK: - Interface Methods
@@ -82,6 +83,7 @@ actor DiskCacher: DiskCacheable {
 
 // MARK: - Private Methods
 extension DiskCacher {
+    
     /// 캐시 파일을 저장할 디렉토리 경로를 불러오는 함수
     /// - Returns: 캐시 파일을 저장할 디렉토리 경로
     private func getCacheDirectoryPath() throws -> URL {
@@ -93,6 +95,12 @@ extension DiskCacher {
             try fileManager.createDirectory(at: diskCacheDirectory, withIntermediateDirectories: true)
         }
         return diskCacheDirectory
+    }
+    
+    /// 캐시 경로를 cacheDirectory에 저장하는 함수
+    private func setCacheDirectoryPath() throws {
+        let path = try getCacheDirectoryPath()
+        self.cacheDirectory = path
     }
     
     /// 캐시 디렉토리 내부의 파일을 삭제하는 함수

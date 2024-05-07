@@ -20,7 +20,7 @@ final class DiskCacherTests: XCTestCase {
     private let fileManager = FileManager.default
 
     override func setUp() async throws {
-        sut = await DiskCacher(fileManager: fileManager, capacity: Constant.diskCapacity)
+        sut = DiskCacher(fileManager: fileManager, capacity: Constant.diskCapacity)
     }
 
     override func tearDownWithError() throws {

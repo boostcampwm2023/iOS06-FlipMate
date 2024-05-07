@@ -20,10 +20,7 @@ final class FMImageProviderTests: XCTestCase {
 
     override func setUp() async throws {
         let memoryCacher = MemoryCacher(memoryStorage: NSCache<NSString, NSData>(), capacity: Constant.memoryCapacity)
-        guard let diskCacher = await DiskCacher(fileManager: FileManager.default, capacity: Constant.diskCapacity) else {
-            assertionFailure("디스크 캐시 초기화 실패")
-            return
-        }
+        let diskCacher = DiskCacher(fileManager: FileManager.default, capacity: Constant.diskCapacity)
         let configuration = URLSessionConfiguration.default
         configuration.protocolClasses = [MockURLProtocol.self]
         let imageDownloader = ImageDownloader(session: URLSession(configuration: configuration))
@@ -70,11 +67,8 @@ final class FMImageProviderTests: XCTestCase {
         let memoryCacher = MemoryCacher(memoryStorage: memoryStorage, capacity: Constant.memoryCapacity)
         
         let diskStorage = FileManager.default
-        guard let diskCacher = await DiskCacher(fileManager: diskStorage, capacity: Constant.diskCapacity) else {
-            assertionFailure("디스크 캐시 초기화 실패")
-            return
-        }
-        
+        let diskCacher = DiskCacher(fileManager: diskStorage, capacity: Constant.diskCapacity)
+            
         let configuration = URLSessionConfiguration.default
         configuration.protocolClasses = [MockURLProtocol.self]
         let session = URLSession(configuration: configuration)

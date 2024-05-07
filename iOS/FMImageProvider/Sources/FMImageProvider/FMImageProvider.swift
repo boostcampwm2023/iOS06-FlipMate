@@ -10,6 +10,8 @@ import Combine
 
 // FlipMate의 이미지 데이터 관리 및 제공 객체
 public final class FMImageProvider {
+    let shared = FMImageProvider()
+    
     private let memoryCacher: MemoryCacheable
     private let diskCacher: DiskCacheable
     private let imageDownloader: ImageDownloadable
@@ -25,7 +27,7 @@ public final class FMImageProvider {
     }
 
     /// FMImageProvider 초기자
-    public convenience init?(memoryCapacity: Int = 1_000_000_000, diskCapacity: Int = 1_000_000_000) async {
+    public convenience init?(memoryCapacity: Int = 1_000_000_000, diskCapacity: Int = 1_000_000_000) {
         let memoryStorage = NSCache<NSString, NSData>()
         let fileManager = FileManager.default
         let configuration = URLSessionConfiguration.default
@@ -33,9 +35,7 @@ public final class FMImageProvider {
         let session = URLSession(configuration: configuration)
         
         let memoryCacher = MemoryCacher(memoryStorage: memoryStorage, capacity: memoryCapacity)
-        guard let diskCacher = await DiskCacher(fileManager: fileManager, capacity: diskCapacity) else {
-            return nil
-        }
+        let diskCacher = DiskCacher(fileManager: fileManager, capacity: diskCapacity)
         let imageDownloader = ImageDownloader(session: session)
         
         self.init(memoryCacher: memoryCacher, diskCacher: diskCacher, imageDownloader: imageDownloader)
