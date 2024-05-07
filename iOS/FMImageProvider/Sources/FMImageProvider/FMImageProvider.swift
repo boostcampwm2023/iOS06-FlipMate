@@ -10,7 +10,7 @@ import Combine
 
 // FlipMate의 이미지 데이터 관리 및 제공 객체
 public final class FMImageProvider {
-    let shared = FMImageProvider()
+    public static let shared = FMImageProvider()
     
     private let memoryCacher: MemoryCacheable
     private let diskCacher: DiskCacheable
@@ -27,7 +27,7 @@ public final class FMImageProvider {
     }
 
     /// FMImageProvider 초기자
-    public convenience init?(memoryCapacity: Int = 1_000_000_000, diskCapacity: Int = 1_000_000_000) {
+    public convenience init(memoryCapacity: Int = 1_000_000_000, diskCapacity: Int = 1_000_000_000) {
         let memoryStorage = NSCache<NSString, NSData>()
         let fileManager = FileManager.default
         let configuration = URLSessionConfiguration.default
