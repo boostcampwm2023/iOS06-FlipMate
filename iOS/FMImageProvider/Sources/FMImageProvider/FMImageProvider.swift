@@ -58,11 +58,15 @@ public final class FMImageProvider {
             }
             
             // 디스크 캐시 확인
-            if let data = try? await diskCacher.load(key: key) {
-                FMLogger.general.log("disk cache hit")
-                memoryCacher.save(key: key, imageData: data)
-                completion(.success(data))
-                return
+            do {
+                if let data = try await diskCacher.load(key: key) {
+                    FMLogger.general.log("disk cache hit")
+                    memoryCacher.save(key: key, imageData: data)
+                    completion(.success(data))
+                    return
+                }
+            } catch {
+                try await diskCacher.removeAll()
             }
             
             // 둘 다 없으면 url로부터 다운로드
@@ -101,10 +105,14 @@ public final class FMImageProvider {
         }
         
         // 디스크 캐시 확인
-        if let data = try? await diskCacher.load(key: key) {
-            FMLogger.general.log("disk cache hit")
-            memoryCacher.save(key: key, imageData: data)
-            return data
+        do {
+            if let data = try await diskCacher.load(key: key) {
+                FMLogger.general.log("disk cache hit")
+                memoryCacher.save(key: key, imageData: data)
+                return data
+            }
+        } catch {
+            try await diskCacher.removeAll()
         }
         
         // 둘 다 없으면 url로부터 다운로드

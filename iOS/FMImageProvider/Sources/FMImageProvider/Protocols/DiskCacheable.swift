@@ -9,6 +9,6 @@ import Foundation
 
 protocol DiskCacheable {
     func save(key url: String, imageData: Data) async throws
-    func load(key url: String) async throws -> Data
+    func load(key url: String) async throws -> Data?
     func removeAll() async throws
 }
