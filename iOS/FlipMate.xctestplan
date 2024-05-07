@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "F92E631E-964D-4631-98E3-2DA974D143B3",
+      "id" : "DCA1C60F-CB66-4CB2-9B87-4A08F1661784",
       "name" : "Test Scheme Action",
       "options" : {
 
@@ -9,15 +9,6 @@
     }
   ],
   "defaultOptions" : {
-    "codeCoverage" : {
-      "targets" : [
-        {
-          "containerPath" : "container:FlipMate.xcodeproj",
-          "identifier" : "600908B92AFCD7DF0065DFFB",
-          "name" : "FlipMate"
-        }
-      ]
-    },
     "targetForVariableExpansion" : {
       "containerPath" : "container:FlipMate.xcodeproj",
       "identifier" : "600908B92AFCD7DF0065DFFB",
@@ -26,6 +17,7 @@
   },
   "testTargets" : [
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:FlipMate.xcodeproj",
         "identifier" : "600908CF2AFCD7E00065DFFB",

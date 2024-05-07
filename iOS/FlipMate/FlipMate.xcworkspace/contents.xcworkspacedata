@@ -8,6 +8,6 @@
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../FlipMateTests.xctestplan">
+      location = "group:../FlipMate.xctestplan">
    </FileRef>
 </Workspace>
