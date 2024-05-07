@@ -69,11 +69,13 @@ final class LRUCache {
     /// - Returns: 배열로 변환된 데이터 목록
     func makeArray() -> [LRUCacheData] {
         var arr: [LRUCacheData] = []
-        while true {
-            guard let newValue = nodeList.popFirst() else {
-                break
+        var currentNode: Node? = nodeList.head
+        while currentNode != nil  {
+            guard let data = currentNode?.data else {
+                continue
             }
-            arr.append(newValue)
+            arr.append(data)
+            currentNode = currentNode?.next
         }
         return arr
     }
