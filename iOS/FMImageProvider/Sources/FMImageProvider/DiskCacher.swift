@@ -153,7 +153,7 @@ extension DiskCacher {
     }
 }
 
-enum Constant {
+fileprivate enum Constant {
     static let cacheDirectoryName = "FlipMateImages"
     static let lruCacheRepresentorName = "CacheRepresentor"
 }
