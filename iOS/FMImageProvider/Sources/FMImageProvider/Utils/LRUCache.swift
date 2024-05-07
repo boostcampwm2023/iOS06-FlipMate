@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 struct LRUCacheData: Equatable, Codable {
     let cost: Int
@@ -19,12 +18,11 @@ struct LRUCacheData: Equatable, Codable {
 }
 
 final class LRUCache {
+    
     typealias Node = DoublyLinkedList<LRUCacheData>.Node
     
     var nodeList = DoublyLinkedList<LRUCacheData>()
     var nodeDict: [String: Node] = [:]
-    var removedNodePublisher: AnyPublisher<String, Error> 
-    private var removedNodeSubject = PassthroughSubject<String, Error>()
     private let capacity: Int
     private var currentCost: Int
     
@@ -33,7 +31,6 @@ final class LRUCache {
     init(capacity: Int) {
         self.capacity = capacity
         self.currentCost = 0
-        removedNodePublisher = removedNodeSubject.eraseToAnyPublisher()
     }
     
     /// key에 대응하는 data를 반환하는 함수
@@ -51,13 +48,14 @@ final class LRUCache {
     /// - Parameters:
     ///   - key: 이미지 url로부터 생성된 key
     ///   - value: key에 대응하는 캐시 데이터
-    func insert(_ key: String, _ value: LRUCacheData) {
+    func insert(_ key: String, _ value: LRUCacheData) -> [String]? {
         if let oldNode = nodeDict[key] {
             remove(key, oldNode)
         }
         let newNode = Node(data: value)
         insertToHead(key, newNode)
-        checkCapacityAndClearCache()
+        let removedKeys = checkCapacityAndClearCache()
+        return removedKeys
     }
     
     /// LRU캐시를 전부 초기화하는 함수
@@ -85,7 +83,7 @@ final class LRUCache {
     /// - Parameter arr: 변환할 데이터 목록 배열
     func initWithArr(_ arr: [LRUCacheData]) {
         arr.reversed().forEach { cacheData in
-            self.insert(cacheData.filePath, cacheData)
+            _ = self.insert(cacheData.filePath, cacheData)
         }
     }
 }
@@ -108,7 +106,9 @@ private extension LRUCache {
         nodeDict[key] = node
     }
     
-    func checkCapacityAndClearCache() {
+    func checkCapacityAndClearCache() -> [String]? {
+        var removedKeys: [String] = []
+        
         while currentCost > capacity {
             guard let tailNode = nodeList.pop() else {
                 break
@@ -116,7 +116,9 @@ private extension LRUCache {
             currentCost -= tailNode.cost
             let key = tailNode.filePath
             nodeDict[key] = nil
-            removedNodeSubject.send(key)
+            removedKeys.append(key)
         }
+        
+        return removedKeys
     }
 }

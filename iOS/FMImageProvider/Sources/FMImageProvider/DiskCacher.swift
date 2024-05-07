@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 import CryptoKit
 
 struct LRUCacheRepresentor: Codable {
@@ -27,7 +26,6 @@ actor DiskCacher: DiskCacheable {
     private let fileManager: FileManager
     private var cacheDirectory: URL?
     private let lruCache: LRUCache
-    private var cancellables = Set<AnyCancellable>()
     
     init?(fileManager: FileManager, capacity: Int) async {
         self.fileManager = fileManager
@@ -48,9 +46,14 @@ actor DiskCacher: DiskCacheable {
     ///   - imageData: 이미지 데이터
     func save(key url: String, imageData: Data) async throws {
         let filePath = try getFilePath(forKey: url)
-        lruCache.insert(url, LRUCacheData(cost: imageData.count, key: filePath.path))
+        let removedKeys = lruCache.insert(url, LRUCacheData(cost: imageData.count, key: filePath.path))
         guard fileManager.createFile(atPath: filePath.path, contents: imageData) else {
             throw FMImageProviderError.DiskCacherError.createFileFailed
+        }
+        if let keys = removedKeys {
+            try keys.forEach { key in
+                try fileManager.removeItem(atPath: key)
+            }
         }
         try saveLRUCacheStatus()
     }
@@ -80,26 +83,6 @@ actor DiskCacher: DiskCacheable {
 
 // MARK: - Private Methods
 extension DiskCacher {
-    /// LRUCache에서 데이터가 삭제될 때 실제 디스크 캐시 데이터도 같이 삭제시켜주기 위해 LRUCache의 publisher를 구독
-    private func bindWithLRUCache() {
-        lruCache.removedNodePublisher
-            .sink { result in
-                switch result {
-                case .finished:
-                    break
-                case .failure(let error):
-                    FMLogger.general.error("Error while publishing removed node info : \(error)")
-                }
-            } receiveValue: { filePathToDelete in
-                do {
-                    try self.fileManager.removeItem(atPath: filePathToDelete)
-                } catch let error {
-                    FMLogger.general.error("Error while removing file using fileManager: \(error)")
-                }
-            }
-            .store(in: &cancellables)
-    }
-    
     /// 캐시 파일을 저장할 디렉토리 경로를 불러오는 함수
     /// - Returns: 캐시 파일을 저장할 디렉토리 경로
     private func getCacheDirectoryPath() throws -> URL {
