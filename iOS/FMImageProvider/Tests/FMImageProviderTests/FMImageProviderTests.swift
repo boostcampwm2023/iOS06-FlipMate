@@ -56,7 +56,6 @@ final class FMImageProviderTests: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
     
-    @available(iOS 15.0, *)
     func test_fetchImageData_async_성공() async throws {
         MockURLProtocol.requestHandler = { request in
             return (HTTPURLResponse(), ImageData.dummy)

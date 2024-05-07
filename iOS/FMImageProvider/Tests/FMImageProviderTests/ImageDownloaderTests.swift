@@ -72,7 +72,6 @@ final class ImageDownloaderTests: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
     
-    @available(iOS 15.0, *)
     func test_fetchImage_async_성공() async throws {
         MockURLProtocol.requestHandler = { request in
             return (HTTPURLResponse(), ImageData.dummy)

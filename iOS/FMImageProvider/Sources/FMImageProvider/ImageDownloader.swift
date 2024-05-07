@@ -41,9 +41,8 @@ final class ImageDownloader: ImageDownloadable {
     /// concurrency를 사용
     /// - Parameter url: 이미지 URL
     /// - Returns: 다운로드 받은 이미지 데이터
-    @available (iOS 15, *)
     func fetchImage(from url: URL) async throws -> Data {
-        let (data, _) = try await session.data(from: url, delegate: nil) // status code 에러에 대응하기
+        let (data, _) = try await session.data(from: url) // status code 에러에 대응하기
         return data
     }
 }

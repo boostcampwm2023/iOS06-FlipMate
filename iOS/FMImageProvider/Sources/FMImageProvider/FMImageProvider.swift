@@ -94,7 +94,6 @@ public final class FMImageProvider {
     /// concurrency를 사용한 async 함수로 이미지 데이터 제공
     /// - Parameter url: 이미지를 가져올 url 주소
     /// - Returns: 가져온 이미지 데이터
-    @available(iOS 15.0, *)
     public func fetchImageData(from url: URL) async throws -> Data {
         let key = url.absoluteString
         

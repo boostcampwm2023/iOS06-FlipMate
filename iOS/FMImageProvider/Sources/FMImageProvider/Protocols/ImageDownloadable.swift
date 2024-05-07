@@ -9,6 +9,5 @@ import Foundation
 
 protocol ImageDownloadable {
     func fetchImage(from url: URL, completion: @escaping (Result<Data, Error>) -> ())
-    @available (iOS 15, *)
     func fetchImage(from url: URL) async throws -> Data
 }
