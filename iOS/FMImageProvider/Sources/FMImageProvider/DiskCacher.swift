@@ -85,7 +85,7 @@ extension DiskCacher {
     /// 캐시 파일을 저장할 디렉토리 경로를 불러오는 함수
     /// - Returns: 캐시 파일을 저장할 디렉토리 경로
     private func getCacheDirectoryPath() throws -> URL {
-        guard let cacheDirectoryPath = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first else {
+        guard let cacheDirectoryPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
             throw FMImageProviderError.DiskCacherError.cacheDirectoryNil
         }
         let diskCacheDirectory = cacheDirectoryPath.appendingPathComponent(Constant.cacheDirectoryName)
