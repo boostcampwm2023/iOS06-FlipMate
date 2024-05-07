@@ -93,6 +93,8 @@ final class DoublyLinkedList<T: Equatable> {
             node.prev?.next = node.next
             node.next?.prev = node.prev
         }
+        node.prev = nil
+        node.next = nil
         return node.data
     }
 }
