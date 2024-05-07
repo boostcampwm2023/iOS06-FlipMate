@@ -12,6 +12,7 @@ fileprivate enum Constant {
     static let memoryCapacity = 100_000_000
     static let diskCapacity = 100_000_000
     static let exampleURL = "https://example.com"
+    static let cacheDirectoryName = "FlipMateImages"
 }
 
 final class FMImageProviderTests: XCTestCase {
@@ -19,7 +20,7 @@ final class FMImageProviderTests: XCTestCase {
 
     override func setUp() async throws {
         let memoryCacher = MemoryCacher(memoryStorage: NSCache<NSString, NSData>(), capacity: Constant.memoryCapacity)
-        guard let diskCacher = await DiskCacher(fileManager: FakeFileManager(), capacity: Constant.diskCapacity) else {
+        guard let diskCacher = await DiskCacher(fileManager: FileManager.default, capacity: Constant.diskCapacity) else {
             assertionFailure("디스크 캐시 초기화 실패")
             return
         }
@@ -31,6 +32,7 @@ final class FMImageProviderTests: XCTestCase {
 
     override func tearDownWithError() throws {
         MockURLProtocol.requestHandler = nil
+        try removeDiskCache()
         sut = nil
     }
     
@@ -68,7 +70,7 @@ final class FMImageProviderTests: XCTestCase {
         let memoryStorage = NSCache<NSString, NSData>()
         let memoryCacher = MemoryCacher(memoryStorage: memoryStorage, capacity: Constant.memoryCapacity)
         
-        let diskStorage = FakeFileManager()
+        let diskStorage = FileManager.default
         guard let diskCacher = await DiskCacher(fileManager: diskStorage, capacity: Constant.diskCapacity) else {
             assertionFailure("디스크 캐시 초기화 실패")
             return
@@ -90,21 +92,30 @@ final class FMImageProviderTests: XCTestCase {
         }
         await fulfillment(of: [expectation], timeout: 5)
         
-        let memoryObject = memoryStorage.object(forKey: "https://example.com") as? Data
-        let cacheCount = diskStorage.diskCache.count
-        
-        // 캐시 1개 / LRU캐시표현체 1개 총 2개의 caceCount가 있음
-        guard memoryObject! == ImageData.dummy, cacheCount == 2 else {
-            XCTFail()
-            return
-        }
-        
         try await sut.clearAllCaches()
         
         let clearedMemoryObject = memoryStorage.object(forKey: "https://example.com") as? Data
-        let diskCacheCount = diskStorage.diskCache.count
         
         XCTAssertEqual(clearedMemoryObject, nil)
-        XCTAssertEqual(diskCacheCount, 0)
+        do {
+            _ = try await diskCacher.load(key: Constant.exampleURL)
+            XCTFail("removeALl 실행했지만 디스크 캐시 삭제되지 않음")
+        } catch let error {
+            XCTAssertEqual(error as? FMImageProviderError.DiskCacherError, .contentLoadFail)
+        }
+    }
+}
+
+private extension FMImageProviderTests {
+    
+    func removeDiskCache() throws {
+        let fileManager = FileManager.default
+        guard let cacheDirectoryPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            throw FMImageProviderError.DiskCacherError.cacheDirectoryNil
+        }
+        let diskCacheDirectory = cacheDirectoryPath.appendingPathComponent(Constant.cacheDirectoryName)
+        if fileManager.fileExists(atPath: diskCacheDirectory.path) {
+            try fileManager.removeItem(at: diskCacheDirectory)
+        }
     }
 }

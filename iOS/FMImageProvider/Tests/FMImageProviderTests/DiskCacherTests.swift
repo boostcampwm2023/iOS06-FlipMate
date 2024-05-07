@@ -8,101 +8,84 @@
 import XCTest
 @testable import FMImageProvider
 
-enum FileType {
-    case directory
-    case file
-}
 
 fileprivate enum Constant {
-    static let diskCapacity = 100
-}
-
-final class FakeFileManager: FileManager {
-    var diskCache: [String:Data] = [:]
-    private var fileTypeCache: [String:FileType] = [:]
-    
-    override func urls(for directory: FileManager.SearchPathDirectory, in domainMask: FileManager.SearchPathDomainMask) -> [URL] {
-        let url = URL(fileURLWithPath: "/path/to/cacheDirectory/")
-        return [url]
-    }
-    
-    override func createFile(atPath path: String, contents data: Data?, attributes attr: [FileAttributeKey : Any]? = nil) -> Bool {
-        diskCache[path] = data
-        fileTypeCache[path] = .file
-        return true
-    }
-    
-    override func createDirectory(atPath path: String, withIntermediateDirectories createIntermediates: Bool, attributes: [FileAttributeKey : Any]? = nil) throws {
-        fileTypeCache[path] = .directory
-        return
-    }
-    
-    override func createDirectory(at url: URL, withIntermediateDirectories createIntermediates: Bool, attributes: [FileAttributeKey : Any]? = nil) throws {
-        fileTypeCache[url.path] = .directory
-        return
-    }
-    
-    override func contents(atPath path: String) -> Data? {
-        let data = diskCache[path]
-        return data
-    }
-    
-    override func removeItem(at URL: URL) throws {
-        FMLogger.test.log("\(URL.path)")
-        switch fileTypeCache[URL.path] {
-        case .directory:
-            diskCache = [:]
-            fileTypeCache = [:]
-        case .file:
-            diskCache[URL.path] = nil
-            fileTypeCache[URL.path] = nil
-        default:
-            break
-        }
-    }
-    
-    override func fileExists(atPath path: String) -> Bool {
-        if let _ = diskCache[path] {
-            return true
-        } else {
-            return false
-        }
-    }
+    static let cacheDirectoryName = "FlipMateImages"
+    static let diskCapacity = 30
 }
 
 final class DiskCacherTests: XCTestCase {
+    
     private var sut: DiskCacher!
-    private let fileManager = FakeFileManager()
+    private let fileManager = FileManager.default
 
     override func setUp() async throws {
         sut = await DiskCacher(fileManager: fileManager, capacity: Constant.diskCapacity)
     }
 
     override func tearDownWithError() throws {
+        try removeDiskCache()
         sut = nil
     }
 
     func test_디스크_캐시_save_load_성공() async throws {
-        try await sut.save(key: CacheKey.dummy, imageData: ImageData.dummy)
+        try await sut.save(key: CacheKey.dummy1, imageData: ImageData.dummy)
         
-        let result = try await sut.load(key: CacheKey.dummy)
+        let result = try await sut.load(key: CacheKey.dummy1)
         XCTAssertEqual(ImageData.dummy, result)
     }
     
     func test_디스크_캐시_load_실패_데이터_없음() async throws {
         do {
-            _ = try await sut.load(key: CacheKey.dummy)
+            _ = try await sut.load(key: CacheKey.dummy1)
         } catch let error {
             XCTAssertEqual(error as? FMImageProviderError.DiskCacherError, .contentLoadFail)
         }
     }
     
     func test_디스크_캐시_removeAll_성공() async throws {
-        try await sut.save(key: CacheKey.dummy, imageData: ImageData.dummy)
-        
+        try await sut.save(key: CacheKey.dummy1, imageData: ImageData.dummy)
+        try await sut.save(key: CacheKey.dummy2, imageData: ImageData.dummy)
         try await sut.removeAll()
         
-        let cacheCount = fileManager.diskCache.count
-        XCTAssertEqual(cacheCount, 0)
+        do {
+            _ = try await sut.load(key: CacheKey.dummy1)
+        } catch let error {
+            XCTAssertEqual(error as? FMImageProviderError.DiskCacherError, .contentLoadFail)
+        }
+    }
+    
+    func test_디스크_캐시_capacity_초과_성공() async throws {
+        try await sut.save(key: CacheKey.dummy1, imageData: ImageData.dummy)
+        try await sut.save(key: CacheKey.dummy2, imageData: ImageData.dummy)
+        try await sut.save(key: CacheKey.dummy3, imageData: ImageData.dummy)
+        try await sut.save(key: CacheKey.dummy4, imageData: ImageData.dummy)
+        
+        do {
+            let dummy1 = try await sut.load(key: CacheKey.dummy1)
+            XCTAssertEqual(dummy1, nil)
+        } catch let error {
+            XCTAssertEqual(error as? FMImageProviderError.DiskCacherError, .contentLoadFail)
+        }
+        
+        let dummy2 = try await sut.load(key: CacheKey.dummy2)
+        let dummy3 = try await sut.load(key: CacheKey.dummy3)
+        let dummy4 = try await sut.load(key: CacheKey.dummy4)
+        XCTAssertEqual(dummy2, ImageData.dummy)
+        XCTAssertEqual(dummy3, ImageData.dummy)
+        XCTAssertEqual(dummy4, ImageData.dummy)
+    }
+}
+
+private extension DiskCacherTests {
+    
+    func removeDiskCache() throws {
+        guard let cacheDirectoryPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            throw FMImageProviderError.DiskCacherError.cacheDirectoryNil
+        }
+        let diskCacheDirectory = cacheDirectoryPath.appendingPathComponent(Constant.cacheDirectoryName)
+        if fileManager.fileExists(atPath: diskCacheDirectory.path) {
+            try fileManager.removeItem(at: diskCacheDirectory)
+        }
     }
 }

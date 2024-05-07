@@ -22,7 +22,7 @@ final class LRUCacheTests: XCTestCase {
     func test_get_성공() {
         let key = "key1"
         let data = LRUCacheData(cost: 1, key: key)
-        sut.insert(key, data)
+        _ = sut.insert(key, data)
         
         let fetchedValue = sut.get(key)
         XCTAssertNotNil(fetchedValue)
@@ -40,7 +40,7 @@ final class LRUCacheTests: XCTestCase {
         let key = "key1"
         let data = LRUCacheData(cost: 1, key: key)
         
-        sut.insert(key, data)
+        _ = sut.insert(key, data)
         
         let node = sut.nodeList.head
         XCTAssertNotNil(node)
@@ -52,28 +52,10 @@ final class LRUCacheTests: XCTestCase {
         let data1 = LRUCacheData(cost: 1, key: key1)
         let data2 = LRUCacheData(cost: 1, key: key2)
         let data3 = LRUCacheData(cost: 1, key: key3)
-        
-        let expectation = XCTestExpectation()
-        let cancellable = sut.removedNodePublisher
-            .sink { result in
-                switch result {
-                case .finished:
-                    expectation.fulfill()
-                    break
-                case .failure(let error):
-                    expectation.fulfill()
-                    XCTFail("\(error)")
-                }
-            } receiveValue: { filePathToDelete in
-                XCTAssertEqual(filePathToDelete, key1)
-                expectation.fulfill()
-            }
 
-        sut.insert(key1, data1)
-        sut.insert(key2, data2)
-        sut.insert(key3, data3)
-        
-        wait(for: [expectation], timeout: 5)
+        _ = sut.insert(key1, data1)
+        _ = sut.insert(key2, data2)
+        _ = sut.insert(key3, data3)
         
         let fetchedValue1 = sut.get(key1)
         XCTAssertNil(fetchedValue1) // Key1 should be evicted
@@ -85,8 +67,6 @@ final class LRUCacheTests: XCTestCase {
         let fetchedValue3 = sut.get(key3)
         XCTAssertNotNil(fetchedValue3)
         XCTAssertEqual(fetchedValue3?.filePath, data3.filePath)
-        
-        cancellable.cancel()
     }
     
     func test_LRU캐시내용으로_배열생성_성공() {
@@ -97,9 +77,9 @@ final class LRUCacheTests: XCTestCase {
         let data2 = LRUCacheData(cost: 1, key: key2)
         let data3 = LRUCacheData(cost: 1, key: key3)
         
-        sut.insert(key1, data1)
-        sut.insert(key2, data2)
-        sut.insert(key3, data3)
+        _ = sut.insert(key1, data1)
+        _ = sut.insert(key2, data2)
+        _ = sut.insert(key3, data3)
         
         let arr = [data3, data2, data1]
         let result = sut.makeArray()

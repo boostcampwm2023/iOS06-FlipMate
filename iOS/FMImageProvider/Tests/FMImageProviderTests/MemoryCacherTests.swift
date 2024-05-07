@@ -31,21 +31,21 @@ final class MemoryCacherTests: XCTestCase {
         sut = MemoryCacher(memoryStorage: storage, capacity: Constant.memoryCapacity)
         
         // act
-        sut.save(key: CacheKey.dummy, imageData: ImageData.dummy)
+        sut.save(key: CacheKey.dummy1, imageData: ImageData.dummy)
         
         // assert
-        let result = storage.object(forKey: CacheKey.dummy as NSString) as? Data
+        let result = storage.object(forKey: CacheKey.dummy1 as NSString) as? Data
         XCTAssertEqual(ImageData.dummy, result)
     }
     
     func test_메모리_캐시_load_성공() throws {
         // arrange
         let storage = NSCache<NSString, NSData>()
-        storage.setObject(NSData(data: ImageData.dummy), forKey: NSString(string: CacheKey.dummy))
+        storage.setObject(NSData(data: ImageData.dummy), forKey: NSString(string: CacheKey.dummy1))
         sut = MemoryCacher(memoryStorage: storage, capacity: Constant.memoryCapacity)
         
         // act
-        let result = try sut.load(key: CacheKey.dummy)
+        let result = try sut.load(key: CacheKey.dummy1)
         
         // assert
         XCTAssertEqual(result, ImageData.dummy)
@@ -54,7 +54,7 @@ final class MemoryCacherTests: XCTestCase {
     func test_메모리_캐시_removeAll_성공() throws {
         // arrange
         let storage = NSCache<NSString, NSData>()
-        storage.setObject(NSData(data: ImageData.dummy), forKey: NSString(string: CacheKey.dummy))
+        storage.setObject(NSData(data: ImageData.dummy), forKey: NSString(string: CacheKey.dummy1))
         sut = MemoryCacher(memoryStorage: storage, capacity: Constant.memoryCapacity)
         
         // act
@@ -62,7 +62,7 @@ final class MemoryCacherTests: XCTestCase {
         
         // assert
         do {
-            _ = try sut.load(key: CacheKey.dummy)
+            _ = try sut.load(key: CacheKey.dummy1)
             XCTFail("cache not removed")
         } catch let error  {
             XCTAssertEqual(error as? FMImageProviderError.MemoryCacherError, FMImageProviderError.MemoryCacherError.invalidKey)
