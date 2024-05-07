@@ -76,6 +76,7 @@ actor DiskCacher: DiskCacheable {
         }
         try fileManager.removeItem(at: directoryPath)
         lruCache.removeAll()
+        _ = try getCacheDirectoryPath()
     }
 }
 
