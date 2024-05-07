@@ -216,10 +216,17 @@ final class SocialDetailViewController: BaseViewController {
         return stackView
     }()
     
-    private var chartView: UIView = {
-        let view = UIView()
-        
-        return view
+    private var lineChartView: LineChartView = {
+        let lineChartView = LineChartView()
+        lineChartView.backgroundColor = .systemBackground
+        lineChartView.translatesAutoresizingMaskIntoConstraints = false
+        return lineChartView
+    }()
+    
+    private var labelListView: LabelListView = {
+        let labelListView = LabelListView()
+        labelListView.translatesAutoresizingMaskIntoConstraints = false
+        return labelListView
     }()
     
     // MARK: - Properties
@@ -241,14 +248,13 @@ final class SocialDetailViewController: BaseViewController {
     override func configureUI() {
         setStudyLogStackView()
         setStudyTimeStackView()
-        setChart()
         configureNavigationBar()
         
         [scrollView, profileImageView, nickNameLabel, unfollowButton, divider].forEach {
             view.addSubview($0)
         }
         
-        [studyLogStackView, studyTimeStackView].forEach {
+        [studyLogStackView, studyTimeStackView, lineChartView, labelListView].forEach {
             contentView.addSubview($0)
         }
         
@@ -307,10 +313,15 @@ final class SocialDetailViewController: BaseViewController {
         ])
         
         NSLayoutConstraint.activate([
-            chartView.topAnchor.constraint(equalTo: studyLogStackView.bottomAnchor, constant: LayoutConstant.chartTop),
-            chartView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstant.chartLeading),
-            chartView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstant.chartTrailing),
-            chartView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: LayoutConstant.chartBottom)
+            lineChartView.topAnchor.constraint(equalTo: studyLogStackView.bottomAnchor, constant: LayoutConstant.chartTop),
+            lineChartView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstant.chartLeading),
+            lineChartView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstant.chartTrailing),
+            lineChartView.heightAnchor.constraint(equalTo: contentView.widthAnchor),
+            
+            labelListView.topAnchor.constraint(equalTo: lineChartView.bottomAnchor),
+            labelListView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstant.chartLeading),
+            labelListView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstant.chartTrailing),
+            labelListView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         
         // swiftlint:enable function_body_length
@@ -329,12 +340,16 @@ final class SocialDetailViewController: BaseViewController {
             }
             .store(in: &cancellables)
         
-        viewModel.$socialChart
-            .sink { [weak self] socialChart in
+        viewModel.seriesPublusher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] series in
                 guard let self = self else { return }
-                self.weeklyStudyTimeLabel.text = socialChart.friendData.reduce(0, { $0 + $1 }).secondsToStringTime()
-                if let category = socialChart.primaryCategory {
-                    self.primaryCategoryLabel.text = category
+                let xAxisValue = series.first?.weekdays.map { $0.dateToString(format: .day) }
+                let labels = series.map { ChartLabel(title: $0.user, hexString: $0.hexString)}
+                self.lineChartView.updateXAxisValue(values: xAxisValue)
+                self.labelListView.addLabel(labels)
+                series.forEach {
+                    self.lineChartView.appendData(data: $0.studyTime, hexString: $0.hexString, name: $0.user)
                 }
             }
             .store(in: &cancellables)
@@ -352,17 +367,6 @@ private extension SocialDetailViewController {
         [dailyStudyTimeLabel, weeklyStudyTimeLabel, primaryCategoryLabel].forEach {
             studyTimeStackView.addArrangedSubview($0)
         }
-    }
-    
-    func setChart() {
-        let socialChartView = SocialChartView(viewModel: viewModel)
-        let hostingController = UIHostingController(rootView: socialChartView)
-        addChild(hostingController)
-        guard let newChartView = hostingController.view else { return }
-        self.chartView = newChartView
-        self.contentView.addSubview(newChartView)
-        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
-        hostingController.didMove(toParent: self)
     }
     
     func configureNavigationBar() {

@@ -144,6 +144,7 @@ If you have any questions or concerns about this privacy policy, or if you have 
 "time" = "Time";
 "totalTime" = "Total Time";
 "etc" = "etc";
+"noStudyLog" = "There is no studyLog";
 
 // MARK: - WeeklyChartView
 "day" = "day";
