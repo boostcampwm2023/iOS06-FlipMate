@@ -88,14 +88,10 @@ final class FMImageProviderTests: XCTestCase {
         try await sut.clearAllCaches()
         
         let clearedMemoryObject = memoryStorage.object(forKey: "https://example.com") as? Data
-        
         XCTAssertEqual(clearedMemoryObject, nil)
-        do {
-            _ = try await diskCacher.load(key: Constant.exampleURL)
-            XCTFail("removeALl 실행했지만 디스크 캐시 삭제되지 않음")
-        } catch let error {
-            XCTAssertEqual(error as? FMImageProviderError.DiskCacherError, .contentLoadFail)
-        }
+        
+        let dummy = try await diskCacher.load(key: Constant.exampleURL)
+        XCTAssertEqual(dummy, nil)
     }
 }
 
