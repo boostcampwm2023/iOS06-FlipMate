@@ -64,9 +64,11 @@ actor DiskCacher: DiskCacheable {
     /// - Returns: 불러온 이미지 데이터
     func load(key url: String) async throws -> Data? {
         guard let filePath = lruCache.get(url)?.filePath else {
+            return nil
+        }
+        guard let imageData = fileManager.contents(atPath: filePath) else {
             throw FMImageProviderError.DiskCacherError.contentLoadFail
         }
-        let imageData = fileManager.contents(atPath: filePath)
         return imageData
     }
     
