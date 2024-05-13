@@ -58,9 +58,10 @@ final class KeychainManager: KeychainManageable {
             throw KeychainError.noToken
         }
         
-        guard let tokenData = result as? Data, let token = String(data: tokenData, encoding: .utf8) else {
+        guard let tokenData = result as? Data else {
             throw KeychainError.noToken
         }
+        let token = String(decoding: tokenData, as: UTF8.self)
         
         return token
     }
@@ -119,9 +120,11 @@ final class KeychainManager: KeychainManageable {
             throw KeychainError.noToken
         }
         
-        guard let idData = result as? Data, let id = String(data: idData, encoding: .utf8) else {
+        guard let idData = result as? Data else {
             throw KeychainError.noToken
         }
+        
+        let id = String(decoding: idData, as: UTF8.self)
         
         return id
     }
