@@ -6,17 +6,18 @@
 //
 
 import UIKit
+import FMImageProvider
 
 extension UIImageView {
-    private func downLoadImage(with url: String) async throws {
-        let image = try await ImageDownLoader.shared.image(from: url)
-        self.image = image
+    private func downLoadImage(with url: URL) async throws {
+        let image = try await FMImageProvider.shared.fetchImageData(from: url)
+        self.image = UIImage(data: image)
     }
     
     func setImage(url: String?) {
         Task {
             do {
-                guard let imageURL = url else {
+                guard let imageURL = URL(string: url ?? "") else {
                     self.image = UIImage(resource: .defaultProfile)
                     return
                 }

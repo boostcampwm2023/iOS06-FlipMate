@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -83,9 +83,9 @@
 		2C8D213F2B7216EF00632718 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDAD39B2B4D2E43003A9D18 /* PrivacyPolicyViewController.swift */; };
 		2C8D21402B7216EF00632718 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2176E22B5AC156000422F9 /* CalendarManager.swift */; };
 		2C8D21412B7216EF00632718 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE91C722B25971000EACCD7 /* UserInfoManager.swift */; };
-		2C8D21422B7216EF00632718 /* ImageDownLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2902B1F212200A26313 /* ImageDownLoader.swift */; };
-		2C8D21432B7216EF00632718 /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2942B1F345800A26313 /* ImageFetcher.swift */; };
-		2C8D21442B7216EF00632718 /* ImageDownLoaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2962B1F346700A26313 /* ImageDownLoaderError.swift */; };
+		2C8D21422B7216EF00632718 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		2C8D21432B7216EF00632718 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		2C8D21442B7216EF00632718 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2C8D21452B7216EF00632718 /* SignOutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C28D2B1E316800A26313 /* SignOutManager.swift */; };
 		2C8D21462B7216EF00632718 /* FriendStatusPollingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2762B1C789A00A26313 /* FriendStatusPollingManager.swift */; };
 		2C8D21472B7216EF00632718 /* NickNameValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DFDDDD2B16384500FEF98A /* NickNameValidator.swift */; };
@@ -238,15 +238,16 @@
 		429B3DF652F07625CAB531EF /* Pods_FlipMateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B285F39D7D27E5C564F4D31 /* Pods_FlipMateTests.framework */; };
 		600908C72AFCD7E00065DFFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 600908C62AFCD7E00065DFFB /* Assets.xcassets */; };
 		600908CA2AFCD7E00065DFFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 600908C82AFCD7E00065DFFB /* LaunchScreen.storyboard */; };
-		600908DF2AFCD7E00065DFFB /* FlipMateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908DE2AFCD7E00065DFFB /* FlipMateUITests.swift */; };
-		600908E12AFCD7E00065DFFB /* FlipMateUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908E02AFCD7E00065DFFB /* FlipMateUITestsLaunchTests.swift */; };
 		600D81362B51344500670882 /* TimerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE4D2B4B82B1006B1CF9 /* TimerViewModelTests.swift */; };
 		600D813C2B5148CC00670882 /* FriendAddViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F622E2B17505B00AE63F9 /* FriendAddViewModelTests.swift */; };
 		60243EF02B05D24D0098A92F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 60243EEF2B05D24D0098A92F /* .swiftlint.yml */; };
 		602C9D472B4E9A310021F2DE /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE492B4B826F006B1CF9 /* LoginViewModelTests.swift */; };
 		602C9D482B4F95D30021F2DE /* SignUpViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE4B2B4B829B006B1CF9 /* SignUpViewModelTests.swift */; };
+		60490B922BEA8B93008958C3 /* DummyManagers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C7918C2B5819F10019E81F /* DummyManagers.swift */; };
+		60490B932BEA8B97008958C3 /* DummyUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C791892B5810FA0019E81F /* DummyUseCases.swift */; };
 		6067DD832B2737F9004625AF /* Selection.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 6067DD822B2737F9004625AF /* Selection.ahap */; };
 		6096F91E2B04F3CA00D0B972 /* FaceDown.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 6096F91D2B04F3CA00D0B972 /* FaceDown.ahap */; };
+		60BB72782BEA709D00E2A7E9 /* FMImageProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 60BB72772BEA709D00E2A7E9 /* FMImageProvider */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -326,10 +327,7 @@
 		2C87C2822B1DF30E00A26313 /* GetUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserInfoUseCase.swift; sourceTree = "<group>"; };
 		2C87C2842B1DF32A00A26313 /* DefaultGetUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGetUserInfoUseCase.swift; sourceTree = "<group>"; };
 		2C87C28D2B1E316800A26313 /* SignOutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignOutManager.swift; path = FlipMate/Presentation/Utils/SignOutManager.swift; sourceTree = SOURCE_ROOT; };
-		2C87C2902B1F212200A26313 /* ImageDownLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownLoader.swift; sourceTree = "<group>"; };
 		2C87C2922B1F344500A26313 /* UIImageView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView++Extension.swift"; sourceTree = "<group>"; };
-		2C87C2942B1F345800A26313 /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
-		2C87C2962B1F346700A26313 /* ImageDownLoaderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownLoaderError.swift; sourceTree = "<group>"; };
 		2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		2C88DCF32B124272000B4686 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		2C88DCF52B124292000B4686 /* TimerSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSceneDIContainer.swift; sourceTree = "<group>"; };
@@ -402,8 +400,6 @@
 		600908CB2AFCD7E00065DFFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		600908D02AFCD7E00065DFFB /* FlipMateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlipMateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		600908DA2AFCD7E00065DFFB /* FlipMateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlipMateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		600908DE2AFCD7E00065DFFB /* FlipMateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipMateUITests.swift; sourceTree = "<group>"; };
-		600908E02AFCD7E00065DFFB /* FlipMateUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipMateUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		601773E32B021E6000D175D9 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		601EB73A2B148F9A00C5B216 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		601EB73C2B14D67600C5B216 /* SetupProfileInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupProfileInfoUseCase.swift; sourceTree = "<group>"; };
@@ -529,6 +525,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60BB72782BEA709D00E2A7E9 /* FMImageProvider in Frameworks */,
 				0A814BC3CFA46D0501C8B894 /* Pods_FlipMate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -733,16 +730,6 @@
 			path = SignOutManager;
 			sourceTree = "<group>";
 		};
-		2C87C28F2B1F210F00A26313 /* ImageDownloader */ = {
-			isa = PBXGroup;
-			children = (
-				2C87C2902B1F212200A26313 /* ImageDownLoader.swift */,
-				2C87C2942B1F345800A26313 /* ImageFetcher.swift */,
-				2C87C2962B1F346700A26313 /* ImageDownLoaderError.swift */,
-			);
-			path = ImageDownloader;
-			sourceTree = "<group>";
-		};
 		2C88DCF72B1242C7000B4686 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
@@ -914,7 +901,6 @@
 				60243EEF2B05D24D0098A92F /* .swiftlint.yml */,
 				600908BC2AFCD7DF0065DFFB /* FlipMate */,
 				600908D32AFCD7E00065DFFB /* FlipMateTests */,
-				600908DD2AFCD7E00065DFFB /* FlipMateUITests */,
 				600908BB2AFCD7DF0065DFFB /* Products */,
 				48114A3517087E7FD0C9546F /* Pods */,
 				03C3410571D585C249FC9CC2 /* Frameworks */,
@@ -955,15 +941,6 @@
 				2C9F62282B174FDB00AE63F9 /* FlipMateViewModelTests */,
 			);
 			path = FlipMateTests;
-			sourceTree = "<group>";
-		};
-		600908DD2AFCD7E00065DFFB /* FlipMateUITests */ = {
-			isa = PBXGroup;
-			children = (
-				600908DE2AFCD7E00065DFFB /* FlipMateUITests.swift */,
-				600908E02AFCD7E00065DFFB /* FlipMateUITestsLaunchTests.swift */,
-			);
-			path = FlipMateUITests;
 			sourceTree = "<group>";
 		};
 		600908ED2AFCDB6E0065DFFB /* Application */ = {
@@ -1144,7 +1121,6 @@
 			children = (
 				2C2176E12B5AC147000422F9 /* CalendarManager */,
 				2CE91C712B25970700EACCD7 /* UserInfoManager */,
-				2C87C28F2B1F210F00A26313 /* ImageDownloader */,
 				2C87C28C2B1E315600A26313 /* SignOutManager */,
 				2C87C2752B1C788700A26313 /* FriendStatusPollingManager */,
 				60DFDDDC2B16383900FEF98A /* NickNameValidator */,
@@ -1638,6 +1614,9 @@
 			dependencies = (
 			);
 			name = FlipMate;
+			packageProductDependencies = (
+				60BB72772BEA709D00E2A7E9 /* FMImageProvider */,
+			);
 			productName = FlipMate;
 			productReference = 600908BA2AFCD7DF0065DFFB /* FlipMate.app */;
 			productType = "com.apple.product-type.application";
@@ -1715,6 +1694,9 @@
 				ja,
 			);
 			mainGroup = 600908B12AFCD7DF0065DFFB;
+			packageReferences = (
+				60BB72762BEA709D00E2A7E9 /* XCLocalSwiftPackageReference "../FMImageProvider" */,
+			);
 			productRefGroup = 600908BB2AFCD7DF0065DFFB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1882,8 +1864,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				600908E12AFCD7E00065DFFB /* FlipMateUITestsLaunchTests.swift in Sources */,
-				600908DF2AFCD7E00065DFFB /* FlipMateUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1968,9 +1948,9 @@
 				2C8D213F2B7216EF00632718 /* PrivacyPolicyViewController.swift in Sources */,
 				2C8D21402B7216EF00632718 /* CalendarManager.swift in Sources */,
 				2C8D21412B7216EF00632718 /* UserInfoManager.swift in Sources */,
-				2C8D21422B7216EF00632718 /* ImageDownLoader.swift in Sources */,
-				2C8D21432B7216EF00632718 /* ImageFetcher.swift in Sources */,
-				2C8D21442B7216EF00632718 /* ImageDownLoaderError.swift in Sources */,
+				2C8D21422B7216EF00632718 /* (null) in Sources */,
+				2C8D21432B7216EF00632718 /* (null) in Sources */,
+				2C8D21442B7216EF00632718 /* (null) in Sources */,
 				2C8D21452B7216EF00632718 /* SignOutManager.swift in Sources */,
 				2C8D21462B7216EF00632718 /* FriendStatusPollingManager.swift in Sources */,
 				2C8D21472B7216EF00632718 /* NickNameValidator.swift in Sources */,
@@ -2124,8 +2104,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				600D813C2B5148CC00670882 /* FriendAddViewModelTests.swift in Sources */,
+				60490B922BEA8B93008958C3 /* DummyManagers.swift in Sources */,
 				602C9D482B4F95D30021F2DE /* SignUpViewModelTests.swift in Sources */,
 				600D81362B51344500670882 /* TimerViewModelTests.swift in Sources */,
+				60490B932BEA8B97008958C3 /* DummyUseCases.swift in Sources */,
 				602C9D472B4E9A310021F2DE /* LoginViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2370,7 +2352,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				DEVELOPMENT_TEAM = MV89SHQKF4;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2396,7 +2378,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				DEVELOPMENT_TEAM = MV89SHQKF4;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2421,7 +2403,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				DEVELOPMENT_TEAM = MV89SHQKF4;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2442,7 +2424,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				DEVELOPMENT_TEAM = MV89SHQKF4;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2496,6 +2478,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		60BB72762BEA709D00E2A7E9 /* XCLocalSwiftPackageReference "../FMImageProvider" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../FMImageProvider;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		60BB72772BEA709D00E2A7E9 /* FMImageProvider */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FMImageProvider;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 600908B22AFCD7DF0065DFFB /* Project object */;
 }
