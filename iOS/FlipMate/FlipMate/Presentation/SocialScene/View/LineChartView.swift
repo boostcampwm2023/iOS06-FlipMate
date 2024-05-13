@@ -49,7 +49,7 @@ final class LineChartView: UIView {
         for (index, value) in values.enumerated() {
             let xPos = CGFloat(index) * width + Constant.xSpacing
             let yPos = frame.height
-            addTextLayer(position: CGPoint(x: xPos, y: frame.height), text: value, width: width)
+            addTextLayer(position: CGPoint(x: xPos, y: yPos), text: value, width: width)
         }
     }
 }
