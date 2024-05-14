@@ -5,6 +5,7 @@
 //  Created by 권승용 on 11/29/23.
 //
 
+import Core
 import UIKit
 
 final class FriendsCollectionViewCell: UICollectionViewCell {

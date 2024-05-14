@@ -5,6 +5,7 @@
 //  Created by 신민규 on 11/13/23.
 //
 
+import Core
 import UIKit
 
 protocol TimeZoneDelegate: AnyObject {

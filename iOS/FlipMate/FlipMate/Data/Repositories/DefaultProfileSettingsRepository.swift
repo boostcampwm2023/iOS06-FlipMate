@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Core
 
 final class DefaultProfileSettingsRepository: ProfileSettingsRepository {
     private let provider: Providable

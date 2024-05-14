@@ -12,12 +12,12 @@ enum FMConstant {
 }
 
 public enum FMLogger {
-    static let general = Logger(subsystem: FMConstant.bundleID, category: "general")
-    static let user = Logger(subsystem: FMConstant.bundleID, category: "user")
-    static let device = Logger(subsystem: FMConstant.bundleID, category: "device")
-    static let viewLifeCycle = Logger(subsystem: FMConstant.bundleID, category: "viewLifeCycle")
-    static let appLifeCycle = Logger(subsystem: FMConstant.bundleID, category: "appLifeCycle")
-    static let timer = Logger(subsystem: FMConstant.bundleID, category: "timer")
-    static let friend = Logger(subsystem: FMConstant.bundleID, category: "friend")
-    static let chart = Logger(subsystem: FMConstant.bundleID, category: "chart")
+    public static let general = Logger(subsystem: FMConstant.bundleID, category: "general")
+    public static let user = Logger(subsystem: FMConstant.bundleID, category: "user")
+    public static let device = Logger(subsystem: FMConstant.bundleID, category: "device")
+    public static let viewLifeCycle = Logger(subsystem: FMConstant.bundleID, category: "viewLifeCycle")
+    public static let appLifeCycle = Logger(subsystem: FMConstant.bundleID, category: "appLifeCycle")
+    public static let timer = Logger(subsystem: FMConstant.bundleID, category: "timer")
+    public static let friend = Logger(subsystem: FMConstant.bundleID, category: "friend")
+    public static let chart = Logger(subsystem: FMConstant.bundleID, category: "chart")
 }

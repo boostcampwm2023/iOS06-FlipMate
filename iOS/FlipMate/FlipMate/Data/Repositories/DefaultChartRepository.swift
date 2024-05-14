@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Core
 
 final class DefaultChartRepository: ChartRepository {
     private let provider: Providable

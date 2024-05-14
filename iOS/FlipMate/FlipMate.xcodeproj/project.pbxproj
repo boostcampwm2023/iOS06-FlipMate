@@ -222,8 +222,6 @@
 		2C8D21CB2B7216EF00632718 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430982B0C8427008CBC85 /* Provider.swift */; };
 		2C8D21CC2B7216EF00632718 /* URLSessionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34309A2B0C8674008CBC85 /* URLSessionable.swift */; };
 		2C8D21CD2B7216EF00632718 /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A22B0DA5A5008CBC85 /* HTTPHeader.swift */; };
-		2C8D21CF2B7216EF00632718 /* FlipMateConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE493F2B05E67200ACE6DD /* FlipMateConstant.swift */; };
-		2C8D21D02B7216EF00632718 /* FlipMateLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE493C2B05DEA400ACE6DD /* FlipMateLogger.swift */; };
 		2C8D21D12B7216EF00632718 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA512B025426007AFC57 /* BaseViewController.swift */; };
 		2C8D21D22B7216EF00632718 /* FlipMateColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA532B025426007AFC57 /* FlipMateColor.swift */; };
 		2C8D21D32B7216EF00632718 /* FlipMateFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA552B025426007AFC57 /* FlipMateFont.swift */; };
@@ -236,6 +234,7 @@
 		600908CA2AFCD7E00065DFFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 600908C82AFCD7E00065DFFB /* LaunchScreen.storyboard */; };
 		600D81362B51344500670882 /* TimerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE4D2B4B82B1006B1CF9 /* TimerViewModelTests.swift */; };
 		600D813C2B5148CC00670882 /* FriendAddViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F622E2B17505B00AE63F9 /* FriendAddViewModelTests.swift */; };
+		601F396D2BF386DC001689A0 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 601F396C2BF386DC001689A0 /* Core */; };
 		60243EF02B05D24D0098A92F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 60243EEF2B05D24D0098A92F /* .swiftlint.yml */; };
 		602C9D472B4E9A310021F2DE /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE492B4B826F006B1CF9 /* LoginViewModelTests.swift */; };
 		602C9D482B4F95D30021F2DE /* SignUpViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE4B2B4B829B006B1CF9 /* SignUpViewModelTests.swift */; };
@@ -442,8 +441,6 @@
 		60C2F2852B172D6900EBDD78 /* FriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewCell.swift; sourceTree = "<group>"; };
 		60C791892B5810FA0019E81F /* DummyUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyUseCases.swift; sourceTree = "<group>"; };
 		60C7918C2B5819F10019E81F /* DummyManagers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyManagers.swift; sourceTree = "<group>"; };
-		60DE493C2B05DEA400ACE6DD /* FlipMateLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipMateLogger.swift; sourceTree = "<group>"; };
-		60DE493F2B05E67200ACE6DD /* FlipMateConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipMateConstant.swift; sourceTree = "<group>"; };
 		60DFDDD82B14FD7800FEF98A /* StatusResponseWithErrorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusResponseWithErrorDTO.swift; sourceTree = "<group>"; };
 		60DFDDDA2B14FE0100FEF98A /* SignUpResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponseDTO.swift; sourceTree = "<group>"; };
 		60DFDDDD2B16384500FEF98A /* NickNameValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameValidator.swift; sourceTree = "<group>"; };
@@ -507,6 +504,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				604309E82BF1AFE800768D87 /* GoogleSignInSwift in Frameworks */,
+				601F396D2BF386DC001689A0 /* Core in Frameworks */,
 				60BB72782BEA709D00E2A7E9 /* FMImageProvider in Frameworks */,
 				604309E62BF1AFE800768D87 /* GoogleSignIn in Frameworks */,
 			);
@@ -845,6 +843,7 @@
 				600908BC2AFCD7DF0065DFFB /* FlipMate */,
 				600908D32AFCD7E00065DFFB /* FlipMateTests */,
 				600908BB2AFCD7DF0065DFFB /* Products */,
+				601F396B2BF386DC001689A0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1101,8 +1100,6 @@
 		600909012AFCDFD10065DFFB /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				60DE493E2B05E66500ACE6DD /* Constant */,
-				60DE493B2B05DE6700ACE6DD /* Logger */,
 				2C5CDA502B025426007AFC57 /* Base */,
 				2C5CDA522B025426007AFC57 /* Color */,
 				2C5CDA542B025426007AFC57 /* Font */,
@@ -1199,6 +1196,13 @@
 				ED6865C72B1E44B1001A2AAD /* ChartRepository.swift */,
 			);
 			path = Repositories;
+			sourceTree = "<group>";
+		};
+		601F396B2BF386DC001689A0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		608646512B0DDBCC00B0C1BC /* Category */ = {
@@ -1346,22 +1350,6 @@
 				60C7918C2B5819F10019E81F /* DummyManagers.swift */,
 			);
 			path = DummyManagers;
-			sourceTree = "<group>";
-		};
-		60DE493B2B05DE6700ACE6DD /* Logger */ = {
-			isa = PBXGroup;
-			children = (
-				60DE493C2B05DEA400ACE6DD /* FlipMateLogger.swift */,
-			);
-			path = Logger;
-			sourceTree = "<group>";
-		};
-		60DE493E2B05E66500ACE6DD /* Constant */ = {
-			isa = PBXGroup;
-			children = (
-				60DE493F2B05E67200ACE6DD /* FlipMateConstant.swift */,
-			);
-			path = Constant;
 			sourceTree = "<group>";
 		};
 		60DFDDDC2B16383900FEF98A /* NickNameValidator */ = {
@@ -1555,6 +1543,7 @@
 				60BB72772BEA709D00E2A7E9 /* FMImageProvider */,
 				604309E52BF1AFE800768D87 /* GoogleSignIn */,
 				604309E72BF1AFE800768D87 /* GoogleSignInSwift */,
+				601F396C2BF386DC001689A0 /* Core */,
 			);
 			productName = FlipMate;
 			productReference = 600908BA2AFCD7DF0065DFFB /* FlipMate.app */;
@@ -1870,8 +1859,6 @@
 				2C8D21CB2B7216EF00632718 /* Provider.swift in Sources */,
 				2C8D21CC2B7216EF00632718 /* URLSessionable.swift in Sources */,
 				2C8D21CD2B7216EF00632718 /* HTTPHeader.swift in Sources */,
-				2C8D21CF2B7216EF00632718 /* FlipMateConstant.swift in Sources */,
-				2C8D21D02B7216EF00632718 /* FlipMateLogger.swift in Sources */,
 				2C8D21D12B7216EF00632718 /* BaseViewController.swift in Sources */,
 				2C8D21D22B7216EF00632718 /* FlipMateColor.swift in Sources */,
 				2C8D21D32B7216EF00632718 /* FlipMateFont.swift in Sources */,
@@ -2229,6 +2216,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		601F396C2BF386DC001689A0 /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Core;
+		};
 		604309E52BF1AFE800768D87 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 604309E42BF1AFE800768D87 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
