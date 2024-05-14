@@ -114,6 +114,9 @@ struct Provider: Providable {
 extension Provider {
     func configureAPIError(with errorResult: StatusResponseWithErrorDTO) -> APIError {
         switch errorResult.statusCode {
+            // 카테고리 이름 중복
+        case 400:
+            return .duplicatedCategoryName
             // 닉네임 중복
         case 40000:
             return .duplicatedNickName

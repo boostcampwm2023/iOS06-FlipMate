@@ -1,14 +1,14 @@
 //
 //  String++Extension.swift
-//  FlipMate
 //
-//  Created by 신민규 on 11/29/23.
+//
+//  Created by 권승용 on 5/14/24.
 //
 
 import Foundation
 
 extension String {
-    func toDate(_ dateFormat: Date.FMDateFormmat) -> Date? {
+    public func toDate(_ dateFormat: Date.FMDateFormmat) -> Date? {
         return DateFormatter.FMDateFormat(dateFormat: dateFormat).date(from: self)
     }
 }

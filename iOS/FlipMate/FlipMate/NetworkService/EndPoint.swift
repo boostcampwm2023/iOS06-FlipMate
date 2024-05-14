@@ -5,6 +5,7 @@
 //  Created by 임현규 on 2023/11/21.
 //
 
+import Core
 import Foundation
 
 typealias RequestResponseable = Responsable & Requestable

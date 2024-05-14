@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import Core
 
 protocol FollowFriendUseCase {
     func follow(at nickname: String) -> AnyPublisher<String, NetworkError>

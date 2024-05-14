@@ -68,7 +68,7 @@ final class SignUpViewModel: SignUpViewModelProtocol {
                     isValidNickNameSubject.send(.duplicated)
                 case .imageNotSafe:
                     imageNotSafeSubject.send()
-                case .unknown:
+                default:
                     errorSubject.send(errorBody)
                 }
             } catch let error {

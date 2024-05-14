@@ -5,6 +5,7 @@
 //  Created by 권승용 on 1/8/24.
 //
 
+import Core
 import Foundation
 import XCTest
 import Combine
@@ -29,13 +30,13 @@ private final class SetupProfileInfoUseCaseStub: SetupProfileInfoUseCase {
 
 private final class SetupProfileInfoUseCaseDuplicatedStub: SetupProfileInfoUseCase {
     func setupProfileInfo(nickName: String, profileImageData: Data) async throws -> FlipMate.UserInfo {
-        throw APIError.errorResponse(StatusResponseWithErrorDTO(statusCode: 40000, message: "", error: "", path: "", timestamp: ""))
+        throw APIError.duplicatedNickName
     }
 }
 
 private final class SetupProfileInfoUseCaseImageNotSafeStub: SetupProfileInfoUseCase {
     func setupProfileInfo(nickName: String, profileImageData: Data) async throws -> FlipMate.UserInfo {
-        throw APIError.errorResponse(StatusResponseWithErrorDTO(statusCode: 40001, message: "", error: "", path: "", timestamp: ""))
+        throw APIError.imageNotSafe
     }
 }
 

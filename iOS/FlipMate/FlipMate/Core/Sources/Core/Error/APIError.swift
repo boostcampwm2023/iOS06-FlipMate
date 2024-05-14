@@ -8,6 +8,7 @@
 import Foundation
 
 public enum APIError: Error {
+    case duplicatedCategoryName
     case duplicatedNickName
     case imageNotSafe
     case unknown
