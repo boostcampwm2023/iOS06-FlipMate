@@ -5,8 +5,8 @@
 //  Created by 임현규 on 2023/11/21.
 //
 
-import Foundation
 import Core
+import Foundation
 import Combine
 
 protocol Providable {
@@ -47,7 +47,7 @@ struct Provider: Providable {
                         
                         let errorResult = try JSONDecoder().decode(StatusResponseWithErrorDTO.self, from: data)
                         FMLogger.general.error("에러 코드 : \(errorResult.statusCode)\n내용 : \(errorResult.message)")
-                        throw APIError.errorResponse(errorResult)
+                        throw configureAPIError(with: errorResult)
                     }
                     
                     guard !data.isEmpty else {
@@ -90,7 +90,7 @@ struct Provider: Providable {
                 
                 let errorResult = try JSONDecoder().decode(StatusResponseWithErrorDTO.self, from: data)
                 FMLogger.general.error("에러 코드 : \(errorResult.statusCode)\n내용 : \(errorResult.message)")
-                throw APIError.errorResponse(errorResult)
+                throw configureAPIError(with: errorResult)
             } catch let error as APIError {
                 throw error
             } catch {
@@ -111,13 +111,17 @@ struct Provider: Providable {
     }
 }
 
-enum APIError: LocalizedError {
-    case errorResponse(StatusResponseWithErrorDTO)
-    
-    var errorDescription: String? {
-        switch self {
-        case .errorResponse(let response):
-            return response.message
+extension Provider {
+    func configureAPIError(with errorResult: StatusResponseWithErrorDTO) -> APIError {
+        switch errorResult.statusCode {
+            // 닉네임 중복
+        case 40000:
+            return .duplicatedNickName
+            // 이미지 유해함
+        case 40001:
+            return .imageNotSafe
+        default:
+            return .unknown
         }
     }
 }
