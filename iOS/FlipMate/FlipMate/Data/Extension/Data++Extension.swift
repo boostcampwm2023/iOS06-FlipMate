@@ -7,25 +7,23 @@
 
 import Foundation
 
-// swiftlint:disable force_unwrapping
 extension Data {
     static func makeMultiPartRequestBody(userName: String, jpegImageData: Data, boundary: String) -> Data {
         var body = Data()
         
         // nickname 추가
-        body.append("--\(boundary)\r\n".data(using: .utf8)!)
-        body.append("Content-Disposition: form-data; name=\"nickname\"\r\n\r\n".data(using: .utf8)!)
-        body.append(userName.data(using: .utf8)!)
-        body.append("\r\n".data(using: .utf8)!)
+        body.append(Data("--\(boundary)\r\n".utf8))
+        body.append(Data("Content-Disposition: form-data; name=\"nickname\"\r\n\r\n".utf8))
+        body.append(Data(userName.utf8))
+        body.append(Data("\r\n".utf8))
         
         // 이미지 데이터 추가
-        body.append("--\(boundary)\r\n".data(using: .utf8)!)
-        body.append("Content-Disposition: form-data; name=\"image\"; filename=\"profileImage.jpeg\"\r\n".data(using: .utf8)!)
-        body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+        body.append(Data("--\(boundary)\r\n".utf8))
+        body.append(Data("Content-Disposition: form-data; name=\"image\"; filename=\"profileImage.jpeg\"\r\n".utf8))
+        body.append(Data("Content-Type: image/jpeg\r\n\r\n".utf8))
         body.append(jpegImageData)
-        body.append("\r\n".data(using: .utf8)!)
-        body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+        body.append(Data("\r\n".utf8))
+        body.append(Data("--\(boundary)--\r\n".utf8))
         return body
     }
 }
-// swiftlint: enable force_unwrapping

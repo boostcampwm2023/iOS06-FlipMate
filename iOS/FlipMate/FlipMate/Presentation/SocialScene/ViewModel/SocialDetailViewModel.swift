@@ -102,8 +102,16 @@ private extension SocialDetailViewModel {
     func handleChartInfo(_ chartInfo: SocialChart) {
         guard chartInfo.myData.count >= 7, chartInfo.friendData.count >= 7 else { return }
         
-        let myChartData = generateSeriesData(from: chartInfo.myData, user: NSLocalizedString("me", comment: ""), isMySereis: true, hexString: "78FB4EFF")
-        let friendChartData = generateSeriesData(from: chartInfo.friendData, user: NSLocalizedString("friend", comment: ""), isMySereis: false, hexString: "285FF4FF")
+        let myChartData = generateSeriesData(
+            from: chartInfo.myData,
+            user: NSLocalizedString("me", comment: ""),
+            isMySereis: true,
+            hexString: "78FB4EFF")
+        let friendChartData = generateSeriesData(
+            from: chartInfo.friendData,
+            user: NSLocalizedString("friend", comment: ""),
+            isMySereis: false,
+            hexString: "285FF4FF")
         
         let newSeries: [Series] = [myChartData, friendChartData]
         

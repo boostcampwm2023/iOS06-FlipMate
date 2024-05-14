@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A814BC3CFA46D0501C8B894 /* Pods_FlipMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288FECD685A9C6B6E481147C /* Pods_FlipMate.framework */; };
 		2C8D20F62B7216EE00632718 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */; };
 		2C8D20F72B7216EE00632718 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908BD2AFCD7DF0065DFFB /* AppDelegate.swift */; };
 		2C8D20F82B7216EE00632718 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908BF2AFCD7DF0065DFFB /* SceneDelegate.swift */; };
@@ -234,8 +233,6 @@
 		2C8D21D92B735E2B00632718 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D21D82B735E2B00632718 /* BarChartView.swift */; };
 		2CD272ED2B21A619000CB9E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CD272EF2B21A619000CB9E5 /* Localizable.strings */; };
 		2CE0E5BD2B833602000D231C /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0E5BC2B833602000D231C /* LineChartView.swift */; };
-		2DD8D73E476DE7C9EAF99CD3 /* Pods_FlipMate_FlipMateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4022DA62BEB41D4AE6C12507 /* Pods_FlipMate_FlipMateUITests.framework */; };
-		429B3DF652F07625CAB531EF /* Pods_FlipMateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B285F39D7D27E5C564F4D31 /* Pods_FlipMateTests.framework */; };
 		600908C72AFCD7E00065DFFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 600908C62AFCD7E00065DFFB /* Assets.xcassets */; };
 		600908CA2AFCD7E00065DFFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 600908C82AFCD7E00065DFFB /* LaunchScreen.storyboard */; };
 		600D81362B51344500670882 /* TimerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE4D2B4B82B1006B1CF9 /* TimerViewModelTests.swift */; };
@@ -243,6 +240,8 @@
 		60243EF02B05D24D0098A92F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 60243EEF2B05D24D0098A92F /* .swiftlint.yml */; };
 		602C9D472B4E9A310021F2DE /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE492B4B826F006B1CF9 /* LoginViewModelTests.swift */; };
 		602C9D482B4F95D30021F2DE /* SignUpViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE4B2B4B829B006B1CF9 /* SignUpViewModelTests.swift */; };
+		604309E62BF1AFE800768D87 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 604309E52BF1AFE800768D87 /* GoogleSignIn */; };
+		604309E82BF1AFE800768D87 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 604309E72BF1AFE800768D87 /* GoogleSignInSwift */; };
 		60490B922BEA8B93008958C3 /* DummyManagers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C7918C2B5819F10019E81F /* DummyManagers.swift */; };
 		60490B932BEA8B97008958C3 /* DummyUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C791892B5810FA0019E81F /* DummyUseCases.swift */; };
 		6067DD832B2737F9004625AF /* Selection.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 6067DD822B2737F9004625AF /* Selection.ahap */; };
@@ -258,19 +257,9 @@
 			remoteGlobalIDString = 600908B92AFCD7DF0065DFFB;
 			remoteInfo = FlipMate;
 		};
-		600908DB2AFCD7E00065DFFB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 600908B22AFCD7DF0065DFFB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 600908B92AFCD7DF0065DFFB;
-			remoteInfo = FlipMate;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		22B8C8EC4954AA20D64D3139 /* Pods-FlipMate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate.release.xcconfig"; path = "Target Support Files/Pods-FlipMate/Pods-FlipMate.release.xcconfig"; sourceTree = "<group>"; };
-		288FECD685A9C6B6E481147C /* Pods_FlipMate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2B285F39D7D27E5C564F4D31 /* Pods_FlipMateTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMateTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialUserInfoHeaderView.swift; sourceTree = "<group>"; };
 		2C1F2BBC2B20DA770026C30B /* ProfileHeaderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderItem.swift; sourceTree = "<group>"; };
 		2C2176E22B5AC156000422F9 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
@@ -388,8 +377,6 @@
 		2CE91C6F2B25888C00EACCD7 /* UIViewController++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController++Extension.swift"; sourceTree = "<group>"; };
 		2CE91C722B25971000EACCD7 /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
 		2CE91C742B25AE9700EACCD7 /* DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
-		3CDE44797543C08CA812941B /* Pods-FlipMate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate.debug.xcconfig"; path = "Target Support Files/Pods-FlipMate/Pods-FlipMate.debug.xcconfig"; sourceTree = "<group>"; };
-		4022DA62BEB41D4AE6C12507 /* Pods_FlipMate_FlipMateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlipMate_FlipMateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6001959F2B0DFA3900F02BA4 /* StatusResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusResponseDTO.swift; sourceTree = "<group>"; };
 		600908BA2AFCD7DF0065DFFB /* FlipMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlipMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		600908BD2AFCD7DF0065DFFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -399,7 +386,6 @@
 		600908C92AFCD7E00065DFFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		600908CB2AFCD7E00065DFFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		600908D02AFCD7E00065DFFB /* FlipMateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlipMateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		600908DA2AFCD7E00065DFFB /* FlipMateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlipMateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		601773E32B021E6000D175D9 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		601EB73A2B148F9A00C5B216 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		601EB73C2B14D67600C5B216 /* SetupProfileInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupProfileInfoUseCase.swift; sourceTree = "<group>"; };
@@ -471,10 +457,6 @@
 		60FBEE492B4B826F006B1CF9 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		60FBEE4B2B4B829B006B1CF9 /* SignUpViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModelTests.swift; sourceTree = "<group>"; };
 		60FBEE4D2B4B82B1006B1CF9 /* TimerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModelTests.swift; sourceTree = "<group>"; };
-		65D7B3C8248401D64CA3EF90 /* Pods-FlipMateTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMateTests.release.xcconfig"; path = "Target Support Files/Pods-FlipMateTests/Pods-FlipMateTests.release.xcconfig"; sourceTree = "<group>"; };
-		8ED331B3B7BDE8C6BB68666F /* Pods-FlipMate-FlipMateUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate-FlipMateUITests.debug.xcconfig"; path = "Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		D2F176F76D65D7B591BA21B0 /* Pods-FlipMate-FlipMateUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMate-FlipMateUITests.release.xcconfig"; path = "Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests.release.xcconfig"; sourceTree = "<group>"; };
-		E627FDBCC589BEB94FCC114A /* Pods-FlipMateTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlipMateTests.debug.xcconfig"; path = "Target Support Files/Pods-FlipMateTests/Pods-FlipMateTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED1B3F282B1F8AA300FB9DBC /* WeeklyChartLogResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyChartLogResponseDTO.swift; sourceTree = "<group>"; };
 		ED3595A82B0C7F3500558FAA /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		ED3595AA2B0C81B800558FAA /* Responsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responsable.swift; sourceTree = "<group>"; };
@@ -525,8 +507,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				604309E82BF1AFE800768D87 /* GoogleSignInSwift in Frameworks */,
 				60BB72782BEA709D00E2A7E9 /* FMImageProvider in Frameworks */,
-				0A814BC3CFA46D0501C8B894 /* Pods_FlipMate.framework in Frameworks */,
+				604309E62BF1AFE800768D87 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,31 +517,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				429B3DF652F07625CAB531EF /* Pods_FlipMateTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		600908D72AFCD7E00065DFFB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2DD8D73E476DE7C9EAF99CD3 /* Pods_FlipMate_FlipMateUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		03C3410571D585C249FC9CC2 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				288FECD685A9C6B6E481147C /* Pods_FlipMate.framework */,
-				4022DA62BEB41D4AE6C12507 /* Pods_FlipMate_FlipMateUITests.framework */,
-				2B285F39D7D27E5C564F4D31 /* Pods_FlipMateTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		2C2176E12B5AC147000422F9 /* CalendarManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -882,19 +846,6 @@
 			path = UserInfoManager;
 			sourceTree = "<group>";
 		};
-		48114A3517087E7FD0C9546F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				3CDE44797543C08CA812941B /* Pods-FlipMate.debug.xcconfig */,
-				22B8C8EC4954AA20D64D3139 /* Pods-FlipMate.release.xcconfig */,
-				8ED331B3B7BDE8C6BB68666F /* Pods-FlipMate-FlipMateUITests.debug.xcconfig */,
-				D2F176F76D65D7B591BA21B0 /* Pods-FlipMate-FlipMateUITests.release.xcconfig */,
-				E627FDBCC589BEB94FCC114A /* Pods-FlipMateTests.debug.xcconfig */,
-				65D7B3C8248401D64CA3EF90 /* Pods-FlipMateTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		600908B12AFCD7DF0065DFFB = {
 			isa = PBXGroup;
 			children = (
@@ -902,8 +853,6 @@
 				600908BC2AFCD7DF0065DFFB /* FlipMate */,
 				600908D32AFCD7E00065DFFB /* FlipMateTests */,
 				600908BB2AFCD7DF0065DFFB /* Products */,
-				48114A3517087E7FD0C9546F /* Pods */,
-				03C3410571D585C249FC9CC2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -912,7 +861,6 @@
 			children = (
 				600908BA2AFCD7DF0065DFFB /* FlipMate.app */,
 				600908D02AFCD7E00065DFFB /* FlipMateTests.xctest */,
-				600908DA2AFCD7E00065DFFB /* FlipMateUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1602,20 +1550,20 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 600908E42AFCD7E00065DFFB /* Build configuration list for PBXNativeTarget "FlipMate" */;
 			buildPhases = (
-				3B2ECF2F6D77722EA459E586 /* [CP] Check Pods Manifest.lock */,
 				60FAB9792B4E97CA004572BF /* Sources */,
 				600908B72AFCD7DF0065DFFB /* Frameworks */,
 				600908B82AFCD7DF0065DFFB /* Resources */,
-				EDA976DF2AFCF727003F8687 /* ShellScript */,
-				1F2BCCF4CE2BA0D364B4392D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				604309EB2BF1B18000768D87 /* PBXTargetDependency */,
 			);
 			name = FlipMate;
 			packageProductDependencies = (
 				60BB72772BEA709D00E2A7E9 /* FMImageProvider */,
+				604309E52BF1AFE800768D87 /* GoogleSignIn */,
+				604309E72BF1AFE800768D87 /* GoogleSignInSwift */,
 			);
 			productName = FlipMate;
 			productReference = 600908BA2AFCD7DF0065DFFB /* FlipMate.app */;
@@ -1625,7 +1573,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 600908E72AFCD7E00065DFFB /* Build configuration list for PBXNativeTarget "FlipMateTests" */;
 			buildPhases = (
-				7F7839FD31222BA31A3D6910 /* [CP] Check Pods Manifest.lock */,
 				60FABAD72B4E9970004572BF /* Sources */,
 				600908CD2AFCD7E00065DFFB /* Frameworks */,
 				600908CE2AFCD7E00065DFFB /* Resources */,
@@ -1639,26 +1586,6 @@
 			productName = FlipMateTests;
 			productReference = 600908D02AFCD7E00065DFFB /* FlipMateTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		600908D92AFCD7E00065DFFB /* FlipMateUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 600908EA2AFCD7E00065DFFB /* Build configuration list for PBXNativeTarget "FlipMateUITests" */;
-			buildPhases = (
-				F5288B62D09351759D05C46B /* [CP] Check Pods Manifest.lock */,
-				600908D62AFCD7E00065DFFB /* Sources */,
-				600908D72AFCD7E00065DFFB /* Frameworks */,
-				600908D82AFCD7E00065DFFB /* Resources */,
-				146D8B9E4271FADF89BEA2B7 /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				600908DC2AFCD7E00065DFFB /* PBXTargetDependency */,
-			);
-			name = FlipMateUITests;
-			productName = FlipMateUITests;
-			productReference = 600908DA2AFCD7E00065DFFB /* FlipMateUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -1677,10 +1604,6 @@
 						CreatedOnToolsVersion = 15.0.1;
 						TestTargetID = 600908B92AFCD7DF0065DFFB;
 					};
-					600908D92AFCD7E00065DFFB = {
-						CreatedOnToolsVersion = 15.0.1;
-						TestTargetID = 600908B92AFCD7DF0065DFFB;
-					};
 				};
 			};
 			buildConfigurationList = 600908B52AFCD7DF0065DFFB /* Build configuration list for PBXProject "FlipMate" */;
@@ -1696,6 +1619,8 @@
 			mainGroup = 600908B12AFCD7DF0065DFFB;
 			packageReferences = (
 				60BB72762BEA709D00E2A7E9 /* XCLocalSwiftPackageReference "../FMImageProvider" */,
+				604309E42BF1AFE800768D87 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				604309E92BF1B10A00768D87 /* XCRemoteSwiftPackageReference "SwiftLint" */,
 			);
 			productRefGroup = 600908BB2AFCD7DF0065DFFB /* Products */;
 			projectDirPath = "";
@@ -1703,7 +1628,6 @@
 			targets = (
 				600908B92AFCD7DF0065DFFB /* FlipMate */,
 				600908CF2AFCD7E00065DFFB /* FlipMateTests */,
-				600908D92AFCD7E00065DFFB /* FlipMateUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1729,144 +1653,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		600908D82AFCD7E00065DFFB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		146D8B9E4271FADF89BEA2B7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FlipMate-FlipMateUITests/Pods-FlipMate-FlipMateUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1F2BCCF4CE2BA0D364B4392D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FlipMate/Pods-FlipMate-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FlipMate/Pods-FlipMate-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FlipMate/Pods-FlipMate-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3B2ECF2F6D77722EA459E586 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FlipMate-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7F7839FD31222BA31A3D6910 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FlipMateTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EDA976DF2AFCF727003F8687 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
-		};
-		F5288B62D09351759D05C46B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FlipMate-FlipMateUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		600908D62AFCD7E00065DFFB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		60FAB9792B4E97CA004572BF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2120,10 +1909,9 @@
 			target = 600908B92AFCD7DF0065DFFB /* FlipMate */;
 			targetProxy = 600908D12AFCD7E00065DFFB /* PBXContainerItemProxy */;
 		};
-		600908DC2AFCD7E00065DFFB /* PBXTargetDependency */ = {
+		604309EB2BF1B18000768D87 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 600908B92AFCD7DF0065DFFB /* FlipMate */;
-			targetProxy = 600908DB2AFCD7E00065DFFB /* PBXContainerItemProxy */;
+			productRef = 604309EA2BF1B18000768D87 /* SwiftLintBuildToolPlugin */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2272,7 +2060,6 @@
 		};
 		600908E52AFCD7E00065DFFB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3CDE44797543C08CA812941B /* Pods-FlipMate.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2309,7 +2096,6 @@
 		};
 		600908E62AFCD7E00065DFFB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22B8C8EC4954AA20D64D3139 /* Pods-FlipMate.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2346,7 +2132,6 @@
 		};
 		600908E82AFCD7E00065DFFB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E627FDBCC589BEB94FCC114A /* Pods-FlipMateTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2372,7 +2157,6 @@
 		};
 		600908E92AFCD7E00065DFFB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 65D7B3C8248401D64CA3EF90 /* Pods-FlipMateTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2393,48 +2177,6 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FlipMate.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FlipMate";
-			};
-			name = Release;
-		};
-		600908EB2AFCD7E00065DFFB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8ED331B3B7BDE8C6BB68666F /* Pods-FlipMate-FlipMateUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MV89SHQKF4;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.codesquad.FlipMateUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = FlipMate;
-			};
-			name = Debug;
-		};
-		600908EC2AFCD7E00065DFFB /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D2F176F76D65D7B591BA21B0 /* Pods-FlipMate-FlipMateUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MV89SHQKF4;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.codesquad.FlipMateUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = FlipMate;
 			};
 			name = Release;
 		};
@@ -2468,15 +2210,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		600908EA2AFCD7E00065DFFB /* Build configuration list for PBXNativeTarget "FlipMateUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				600908EB2AFCD7E00065DFFB /* Debug */,
-				600908EC2AFCD7E00065DFFB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
@@ -2486,7 +2219,41 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		604309E42BF1AFE800768D87 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.0;
+			};
+		};
+		604309E92BF1B10A00768D87 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.55.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		604309E52BF1AFE800768D87 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 604309E42BF1AFE800768D87 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		604309E72BF1AFE800768D87 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 604309E42BF1AFE800768D87 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		604309EA2BF1B18000768D87 /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 604309E92BF1B10A00768D87 /* XCRemoteSwiftPackageReference "SwiftLint" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
 		60BB72772BEA709D00E2A7E9 /* FMImageProvider */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FMImageProvider;

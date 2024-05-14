@@ -167,7 +167,6 @@ private extension DonutChartView {
         static let noResultText = NSLocalizedString("noStudyLog", comment: "")
         static let hypotenuse: CGFloat = 130
         
-        
         static let middleCircleRadius: CGFloat = 100
         static let middleCircleStartAngle: CGFloat = 0
         static let middleCircleEndAngle: CGFloat = 360 * CGFloat.pi / 180
