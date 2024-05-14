@@ -5,6 +5,7 @@
 //  Created by 임현규 on 2023/11/28.
 //
 
+import Core
 import Foundation
 import Combine
 
@@ -93,11 +94,10 @@ final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
         } catch let error as APIError {
             FMLogger.general.error("카테고리 에러 \(error)")
             switch error {
-            case .errorResponse(let response):
-                switch response.statusCode {
-                case 400: throw CategoryModificationError.duplicatedName
-                default: throw CategoryModificationError.unknownError
-                }
+            case .duplicatedCategoryName:
+                throw CategoryModificationError.duplicatedName
+            default:
+                throw CategoryModificationError.unknownError
             }
         }
     }

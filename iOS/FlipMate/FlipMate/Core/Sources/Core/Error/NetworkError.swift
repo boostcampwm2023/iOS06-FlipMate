@@ -1,13 +1,13 @@
 //
 //  NetworkError.swift
-//  FlipMate
 //
-//  Created by 권승용 on 11/21/23.
+//
+//  Created by 권승용 on 5/14/24.
 //
 
 import Foundation
 
-enum NetworkError: LocalizedError, Equatable {
+public enum NetworkError: LocalizedError, Equatable {
     case invalidURLComponents
     case invalidResponse
     case statusCodeError(statusCode: Int, message: String)
@@ -15,7 +15,7 @@ enum NetworkError: LocalizedError, Equatable {
     case typeCastingFailed
     case unknown
     
-    var errorDescription: String? {
+    public var errorDescription: String? {
         switch self {
         case .invalidURLComponents: return "URLComponents 초기화 실패."
         case .invalidResponse: return "Response 타입 HTTPURLResponse로 변환 실패"

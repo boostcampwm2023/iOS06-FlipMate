@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import Core
 
 protocol UnfollowFriendUseCase {
     func unfollow(at id: Int) -> AnyPublisher<String, NetworkError>

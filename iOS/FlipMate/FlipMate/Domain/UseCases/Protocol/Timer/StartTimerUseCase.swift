@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import Core
 
 protocol StartTimerUseCase {
     func startTimer(startTime: Date, categoryId: Int?) -> AnyPublisher<Void, NetworkError>

@@ -5,6 +5,7 @@
 //  Created by 권승용 on 11/27/23.
 //
 
+import Core
 import Foundation
 import Combine
 
@@ -63,17 +64,12 @@ final class SignUpViewModel: SignUpViewModelProtocol {
                 }
             } catch let errorBody as APIError {
                 switch errorBody {
-                case .errorResponse(let response):
-                    switch response.statusCode {
-                    // 닉네임 중복
-                    case 40000:
-                        isValidNickNameSubject.send(.duplicated)
-                    // 이미지 유해함
-                    case 40001:
-                        imageNotSafeSubject.send()
-                    default:
-                        errorSubject.send(errorBody)
-                    }
+                case .duplicatedNickName:
+                    isValidNickNameSubject.send(.duplicated)
+                case .imageNotSafe:
+                    imageNotSafeSubject.send()
+                default:
+                    errorSubject.send(errorBody)
                 }
             } catch let error {
                 errorSubject.send(error)

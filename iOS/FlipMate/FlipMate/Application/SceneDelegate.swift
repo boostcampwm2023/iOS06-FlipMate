@@ -5,6 +5,7 @@
 //  Created by 권승용 on 11/9/23.
 //
 
+import Core
 import UIKit
 import GoogleSignIn
 import AuthenticationServices
