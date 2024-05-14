@@ -222,7 +222,6 @@
 		2C8D21CB2B7216EF00632718 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430982B0C8427008CBC85 /* Provider.swift */; };
 		2C8D21CC2B7216EF00632718 /* URLSessionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34309A2B0C8674008CBC85 /* URLSessionable.swift */; };
 		2C8D21CD2B7216EF00632718 /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430A22B0DA5A5008CBC85 /* HTTPHeader.swift */; };
-		2C8D21CE2B7216EF00632718 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD06B2B18E6960080DCDE /* UserDefault.swift */; };
 		2C8D21CF2B7216EF00632718 /* FlipMateConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE493F2B05E67200ACE6DD /* FlipMateConstant.swift */; };
 		2C8D21D02B7216EF00632718 /* FlipMateLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE493C2B05DEA400ACE6DD /* FlipMateLogger.swift */; };
 		2C8D21D12B7216EF00632718 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA512B025426007AFC57 /* BaseViewController.swift */; };
@@ -366,7 +365,6 @@
 		2CDCD0632B18CEDF0080DCDE /* FriendsResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsResponseDTO.swift; sourceTree = "<group>"; };
 		2CDCD0662B18D0330080DCDE /* FriendUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendUser.swift; sourceTree = "<group>"; };
 		2CDCD0682B18D0D10080DCDE /* FriendSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchItem.swift; sourceTree = "<group>"; };
-		2CDCD06B2B18E6960080DCDE /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		2CE0E5BC2B833602000D231C /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
 		2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		2CE84EF02B0B77BD00E2FB71 /* UICollectionView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView++Extension.swift"; sourceTree = "<group>"; };
@@ -394,6 +392,7 @@
 		601EB7422B14F83400C5B216 /* DefaultProfileSettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileSettingsRepository.swift; sourceTree = "<group>"; };
 		601EB7442B14F86100C5B216 /* SignUpEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEndpoints.swift; sourceTree = "<group>"; };
 		601EB7462B14F97700C5B216 /* NickNameValidationResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameValidationResponseDTO.swift; sourceTree = "<group>"; };
+		601F396A2BF3836F001689A0 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Core; path = FlipMate/Core; sourceTree = "<group>"; };
 		6020C7632B21C1D400F58AD0 /* MyPageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageHeaderView.swift; sourceTree = "<group>"; };
 		60243EEF2B05D24D0098A92F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		60459D462B21A17C00A80AF7 /* MyPageFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -830,14 +829,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		2CDCD06A2B18E6850080DCDE /* UserDefault */ = {
-			isa = PBXGroup;
-			children = (
-				2CDCD06B2B18E6960080DCDE /* UserDefault.swift */,
-			);
-			path = UserDefault;
-			sourceTree = "<group>";
-		};
 		2CE91C712B25970700EACCD7 /* UserInfoManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -849,6 +840,7 @@
 		600908B12AFCD7DF0065DFFB = {
 			isa = PBXGroup;
 			children = (
+				601F396A2BF3836F001689A0 /* Core */,
 				60243EEF2B05D24D0098A92F /* .swiftlint.yml */,
 				600908BC2AFCD7DF0065DFFB /* FlipMate */,
 				600908D32AFCD7E00065DFFB /* FlipMateTests */,
@@ -1109,7 +1101,6 @@
 		600909012AFCDFD10065DFFB /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				2CDCD06A2B18E6850080DCDE /* UserDefault */,
 				60DE493E2B05E66500ACE6DD /* Constant */,
 				60DE493B2B05DE6700ACE6DD /* Logger */,
 				2C5CDA502B025426007AFC57 /* Base */,
@@ -1879,7 +1870,6 @@
 				2C8D21CB2B7216EF00632718 /* Provider.swift in Sources */,
 				2C8D21CC2B7216EF00632718 /* URLSessionable.swift in Sources */,
 				2C8D21CD2B7216EF00632718 /* HTTPHeader.swift in Sources */,
-				2C8D21CE2B7216EF00632718 /* UserDefault.swift in Sources */,
 				2C8D21CF2B7216EF00632718 /* FlipMateConstant.swift in Sources */,
 				2C8D21D02B7216EF00632718 /* FlipMateLogger.swift in Sources */,
 				2C8D21D12B7216EF00632718 /* BaseViewController.swift in Sources */,
