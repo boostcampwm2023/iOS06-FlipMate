@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol Responsable {
+public protocol Responsable {
     associatedtype Response: Decodable
 }

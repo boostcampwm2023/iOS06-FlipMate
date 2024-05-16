@@ -8,18 +8,18 @@
 import Core
 import Foundation
 
-typealias RequestResponseable = Responsable & Requestable
+public typealias RequestResponseable = Responsable & Requestable
 
-final class EndPoint<R: Decodable>: RequestResponseable {
-    typealias Response = R
+public struct EndPoint<R: Decodable>: RequestResponseable {
+    public typealias Response = R
     
-    var baseURL: String
-    var path: String
-    var method: HTTPMethod
-    var data: Data?
-    var headers: [HTTPHeader]?
+    public var baseURL: String
+    public var path: String
+    public var method: HTTPMethod
+    public var data: Data?
+    public var headers: [HTTPHeader]?
     
-    init(baseURL: String, path: String, method: HTTPMethod, data: Data? = nil, headers: [HTTPHeader]? = nil) {
+    public init(baseURL: String, path: String, method: HTTPMethod, data: Data? = nil, headers: [HTTPHeader]? = nil) {
         self.baseURL = baseURL
         self.path = path
         self.method = method
@@ -27,7 +27,7 @@ final class EndPoint<R: Decodable>: RequestResponseable {
         self.headers = headers
     }
     
-    func makeURLRequest(with token: String?) throws -> URLRequest {
+    public func makeURLRequest(with token: String?) throws -> URLRequest {
         let url = try makeURL()
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue

@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct HTTPHeader {
+public struct HTTPHeader {
     var value: String
     var field: String
+    
+    public init(value: String, field: String) {
+        self.value = value
+        self.field = field
+    }
 }
