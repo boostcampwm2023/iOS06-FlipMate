@@ -387,6 +387,7 @@
 		601F396A2BF3836F001689A0 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Core; path = FlipMate/Core; sourceTree = "<group>"; };
 		6020C7632B21C1D400F58AD0 /* MyPageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageHeaderView.swift; sourceTree = "<group>"; };
 		60243EEF2B05D24D0098A92F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		602BF08C2BF4FB5B0088050A /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Network; path = FlipMate/Network; sourceTree = "<group>"; };
 		60459D462B21A17C00A80AF7 /* MyPageFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFlowCoordinator.swift; sourceTree = "<group>"; };
 		60459D482B21A28400A80AF7 /* MyPageDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDIContainer.swift; sourceTree = "<group>"; };
 		604A6FFC2B2AC5F100B0B42E /* AppleAuthRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthRequestDTO.swift; sourceTree = "<group>"; };
@@ -824,6 +825,7 @@
 			children = (
 				60243EEF2B05D24D0098A92F /* .swiftlint.yml */,
 				601F396A2BF3836F001689A0 /* Core */,
+				602BF08C2BF4FB5B0088050A /* Network */,
 				600908BC2AFCD7DF0065DFFB /* FlipMate */,
 				600908D32AFCD7E00065DFFB /* FlipMateTests */,
 				600908BB2AFCD7DF0065DFFB /* Products */,
