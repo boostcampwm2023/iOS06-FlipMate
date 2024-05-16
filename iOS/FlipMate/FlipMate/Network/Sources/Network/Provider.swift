@@ -32,14 +32,10 @@ struct Provider: Providable {
                         throw NetworkError.invalidResponse
                     }
                     
-                    guard 200..<300 ~= response.statusCode else {
-                        if response.statusCode == 401 {
-                            FMLogger.general.error("토큰이 만료되어 로그인 화면으로 이동합니다.")
-                        }
-                        
-                        let errorResult = try JSONDecoder().decode(StatusResponseWithErrorDTO.self, from: data)
-                        FMLogger.general.error("에러 코드 : \(errorResult.statusCode)\n내용 : \(errorResult.message)")
-                        throw configureAPIError(with: errorResult)
+                    let status = response.statusCode
+                    guard 200..<300 ~= status else {
+                        let message = String(decoding: data, as: UTF8.self)
+                        throw NetworkError.statusCodeError(statusCode: status, message: message)
                     }
                     
                     guard !data.isEmpty else {
@@ -72,23 +68,11 @@ struct Provider: Providable {
             throw NetworkError.invalidResponse
         }
         
-        guard 200..<300 ~= response.statusCode else {
-            do {
-                if response.statusCode == 401 {
-                    FMLogger.general.error("토큰이 만료되어 로그인 화면으로 이동합니다.")
-                }
-                
-                let errorResult = try JSONDecoder().decode(StatusResponseWithErrorDTO.self, from: data)
-                FMLogger.general.error("에러 코드 : \(errorResult.statusCode)\n내용 : \(errorResult.message)")
-                throw configureAPIError(with: errorResult)
-            } catch let error as APIError {
-                throw error
-            } catch {
-                FMLogger.general.error("에러 코드 : \(response.statusCode)\n내용 : \(HTTPURLResponse.localizedString(forStatusCode: response.statusCode))")
-                throw NetworkError.statusCodeError(
-                    statusCode: response.statusCode,
-                    message: HTTPURLResponse.localizedString(forStatusCode: response.statusCode))
-            }
+        let status = response.statusCode
+        guard 200..<300 ~= status else {
+            let message = String(decoding: data, as: UTF8.self)
+            FMLogger.general.error("에러 코드 : \(response.statusCode)\n내용 : \(HTTPURLResponse.localizedString(forStatusCode: response.statusCode))")
+            throw NetworkError.statusCodeError(statusCode: status, message: message)
         }
         
         guard !data.isEmpty else {
@@ -98,23 +82,5 @@ struct Provider: Providable {
         let decoder = JSONDecoder()
         let responseData = try decoder.decode(E.Response.self, from: data)
         return responseData
-    }
-}
-
-extension Provider {
-    func configureAPIError(with errorResult: StatusResponseWithErrorDTO) -> APIError {
-        switch errorResult.statusCode {
-            // 카테고리 이름 중복
-        case 400:
-            return .duplicatedCategoryName
-            // 닉네임 중복
-        case 40000:
-            return .duplicatedNickName
-            // 이미지 유해함
-        case 40001:
-            return .imageNotSafe
-        default:
-            return .unknown
-        }
     }
 }
