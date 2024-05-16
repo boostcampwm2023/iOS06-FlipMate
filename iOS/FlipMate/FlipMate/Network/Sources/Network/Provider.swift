@@ -10,8 +10,8 @@ import Foundation
 import Combine
 
 public protocol Providable {
-    func request<E: RequestResponseable>(with endpoint: E, using userToken: String) -> AnyPublisher<E.Response, NetworkError>
-    func request<E: RequestResponseable>(with endpoint: E, using userToken: String) async throws -> E.Response
+    func request<E: RequestResponseable>(with endpoint: E, userToken: String?) -> AnyPublisher<E.Response, NetworkError>
+    func request<E: RequestResponseable>(with endpoint: E, userToken: String?) async throws -> E.Response
 }
 
 public struct Provider: Providable {
@@ -21,7 +21,7 @@ public struct Provider: Providable {
         self.urlSession = urlSession
     }
     
-    public func request<E: RequestResponseable>(with endpoint: E, using userToken: String) -> AnyPublisher<E.Response, NetworkError> {
+    public func request<E: RequestResponseable>(with endpoint: E, userToken: String? = nil) -> AnyPublisher<E.Response, NetworkError> {
         do {
             let urlReqeust = try endpoint.makeURLRequest(with: userToken)
             let jsonDecoder = JSONDecoder()
@@ -61,7 +61,7 @@ public struct Provider: Providable {
         }
     }
     
-    public func request<E: RequestResponseable>(with endpoint: E, using userToken: String) async throws -> E.Response where E: Requestable, E: Responsable {
+    public func request<E: RequestResponseable>(with endpoint: E, userToken: String? = nil) async throws -> E.Response where E: Requestable, E: Responsable {
         let urlRequest = try endpoint.makeURLRequest(with: userToken)
         let (data, response) = try await urlSession.response(for: urlRequest)
         
