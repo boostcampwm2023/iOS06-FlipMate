@@ -10,8 +10,8 @@ import Foundation
 import Combine
 
 protocol Providable {
-    func request<E: RequestResponseable>(with endpoint: E) -> AnyPublisher<E.Response, NetworkError>
-    func request<E: RequestResponseable>(with endpoint: E) async throws -> E.Response
+    func request<E: RequestResponseable>(with endpoint: E, using userToken: String) -> AnyPublisher<E.Response, NetworkError>
+    func request<E: RequestResponseable>(with endpoint: E, using userToken: String) async throws -> E.Response
 }
 
 struct Provider: Providable {
@@ -22,9 +22,9 @@ struct Provider: Providable {
         self.urlSession = urlSession
     }
     
-    func request<E: RequestResponseable>(with endpoint: E) -> AnyPublisher<E.Response, NetworkError> {
+    func request<E: RequestResponseable>(with endpoint: E, using userToken: String) -> AnyPublisher<E.Response, NetworkError> {
         do {
-            let urlReqeust = try endpoint.makeURLRequest(with: token)
+            let urlReqeust = try endpoint.makeURLRequest(with: userToken)
             
             return urlSession.response(for: urlReqeust)
                 .tryMap { data, response in
@@ -64,8 +64,8 @@ struct Provider: Providable {
         }
     }
     
-    func request<E: RequestResponseable>(with endpoint: E) async throws -> E.Response where E: Requestable, E: Responsable {
-        let urlRequest = try endpoint.makeURLRequest(with: token)
+    func request<E: RequestResponseable>(with endpoint: E, using userToken: String) async throws -> E.Response where E: Requestable, E: Responsable {
+        let urlRequest = try endpoint.makeURLRequest(with: userToken)
         let (data, response) = try await urlSession.response(for: urlRequest)
         
         guard let response = response as? HTTPURLResponse else {
