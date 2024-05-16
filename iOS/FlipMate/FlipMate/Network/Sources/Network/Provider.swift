@@ -15,7 +15,6 @@ protocol Providable {
 }
 
 struct Provider: Providable {
-    private let jsonDecoder = JSONDecoder()
     private var urlSession: URLSessionable
     
     init(urlSession: URLSessionable) {
@@ -25,6 +24,7 @@ struct Provider: Providable {
     func request<E: RequestResponseable>(with endpoint: E, using userToken: String) -> AnyPublisher<E.Response, NetworkError> {
         do {
             let urlReqeust = try endpoint.makeURLRequest(with: userToken)
+            let jsonDecoder = JSONDecoder()
             
             return urlSession.response(for: urlReqeust)
                 .tryMap { data, response in
@@ -35,6 +35,7 @@ struct Provider: Providable {
                     let status = response.statusCode
                     guard 200..<300 ~= status else {
                         let message = String(decoding: data, as: UTF8.self)
+                        FMLogger.general.error("에러 코드 : \(response.statusCode)\n내용 : \(HTTPURLResponse.localizedString(forStatusCode: response.statusCode))")
                         throw NetworkError.statusCodeError(statusCode: status, message: message)
                     }
                     
