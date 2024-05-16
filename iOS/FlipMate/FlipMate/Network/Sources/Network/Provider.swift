@@ -17,17 +17,13 @@ protocol Providable {
 struct Provider: Providable {
     private let jsonDecoder = JSONDecoder()
     private var urlSession: URLSessionable
-    private let keychainManager: KeychainManageable
     
-    init(urlSession: URLSessionable,
-         keychainManager: KeychainManageable) {
+    init(urlSession: URLSessionable) {
         self.urlSession = urlSession
-        self.keychainManager = keychainManager
     }
     
     func request<E: RequestResponseable>(with endpoint: E) -> AnyPublisher<E.Response, NetworkError> {
         do {
-            let token = try? keychainManager.getAccessToken()
             let urlReqeust = try endpoint.makeURLRequest(with: token)
             
             return urlSession.response(for: urlReqeust)
@@ -69,7 +65,6 @@ struct Provider: Providable {
     }
     
     func request<E: RequestResponseable>(with endpoint: E) async throws -> E.Response where E: Requestable, E: Responsable {
-        let token = try? keychainManager.getAccessToken()
         let urlRequest = try endpoint.makeURLRequest(with: token)
         let (data, response) = try await urlSession.response(for: urlRequest)
         
