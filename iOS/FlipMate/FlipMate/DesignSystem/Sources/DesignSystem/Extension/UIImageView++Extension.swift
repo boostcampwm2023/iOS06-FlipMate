@@ -18,12 +18,12 @@ extension UIImageView {
         Task {
             do {
                 guard let imageURL = URL(string: url ?? "") else {
-                    self.image = UIImage(resource: .defaultProfile)
+                    self.image = .profileImage
                     return
                 }
                 try await self.downLoadImage(with: imageURL)
             } catch {
-                self.image = UIImage(resource: .defaultProfile)
+                self.image = .profileImage
             }
         }
     }
