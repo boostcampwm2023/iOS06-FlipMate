@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIViewController {
-    func showToast(title: String) {
+    public func showToast(title: String) {
         let toastLabel = UILabel(frame: CGRect(
             x: 40,
             y: self.view.frame.height / 2,

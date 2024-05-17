@@ -14,7 +14,7 @@ extension UIImageView {
         self.image = UIImage(data: image)
     }
     
-    func setImage(url: String?) {
+    public func setImage(url: String?) {
         Task {
             do {
                 guard let imageURL = URL(string: url ?? "") else {
