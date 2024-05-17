@@ -18,7 +18,7 @@ public struct Provider: Providable {
     private var urlSession: URLSessionable
     private var keychainManager: KeychainManageable
     
-    init(urlSession: URLSessionable, keychainManager: KeychainManageable) {
+    public init(urlSession: URLSessionable, keychainManager: KeychainManageable) {
         self.urlSession = urlSession
         self.keychainManager = keychainManager
     }

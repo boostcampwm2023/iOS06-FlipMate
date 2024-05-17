@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Network
 
 struct AuthenticationEndpoints {
     static func enterGoogleLogin(_ dto: GoogleAuthRequestDTO) -> EndPoint<AuthResponseDTO> {

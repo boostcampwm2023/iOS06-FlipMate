@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Network
 
 struct ChartEndpoints {
     static func fetchDailyLog(date: Date) -> EndPoint<DailyChartLogResponseDTO> {

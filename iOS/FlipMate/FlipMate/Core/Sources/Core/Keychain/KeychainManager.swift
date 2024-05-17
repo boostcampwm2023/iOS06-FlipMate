@@ -28,6 +28,8 @@ public struct KeychainManager: KeychainManageable {
         static let appleLogin = "AppleLogin"
     }
     
+    public init() {}
+    
     public func saveAccessToken(token: String) throws {
         guard let tokenData = token.data(using: .utf8) else {
             throw KeychainError.noToken

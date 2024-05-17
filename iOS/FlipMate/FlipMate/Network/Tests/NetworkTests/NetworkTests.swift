@@ -17,7 +17,7 @@ final class NetworkTests: XCTestCase {
         let configuration = URLSessionConfiguration.default
         configuration.protocolClasses = [MockURLProtocol.self]
         let session = URLSession(configuration: configuration)
-        sut = Provider(urlSession: session)
+        sut = Provider(urlSession: session, keychainManager: MockKeychainManager())
     }
     
     override func tearDownWithError() throws {
@@ -38,7 +38,7 @@ final class NetworkTests: XCTestCase {
         let endpoint = EndPoint<TestCodableType>(baseURL: TestConstant.url.path, path: TestConstant.path, method: .get)
         
         let expectation = XCTestExpectation(description: "request")
-        let cancellable = sut.request(with: endpoint, using: TestConstant.token)
+        let cancellable = sut.request(with: endpoint)
             .sink { completion in
                 switch completion {
                 case .finished:
@@ -66,7 +66,7 @@ final class NetworkTests: XCTestCase {
         
         let endpoint = EndPoint<TestCodableType>(baseURL: TestConstant.url.path, path: TestConstant.path, method: .get)
         
-        let result = try await sut.request(with: endpoint, using: TestConstant.token)
+        let result = try await sut.request(with: endpoint)
         XCTAssertEqual(result, TestConstant.dummyData)
     }
     
@@ -80,7 +80,7 @@ final class NetworkTests: XCTestCase {
         let endpoint = EndPoint<TestCodableType>(baseURL: TestConstant.url.path, path: TestConstant.path, method: .get)
         
         let expectation = XCTestExpectation(description: "request")
-        let cancellable = sut.request(with: endpoint, using: TestConstant.token)
+        let cancellable = sut.request(with: endpoint)
             .sink { completion in
                 switch completion {
                 case .finished:
@@ -107,7 +107,7 @@ final class NetworkTests: XCTestCase {
         let endpoint = EndPoint<TestCodableType>(baseURL: TestConstant.url.path, path: TestConstant.path, method: .get)
         
         do {
-            _ = try await sut.request(with: endpoint, using: TestConstant.token)
+            _ = try await sut.request(with: endpoint)
         } catch let error {
             guard let error = error as? NetworkError else {
                 XCTFail("Test Failed")

@@ -6,14 +6,14 @@
 //
 
 import Foundation
+import Core
 
 final class DefaultAppleLoginUseCase: AppleLoginUseCase {
     private let repository: AuthenticationRepository
-    private let keychainManager: KeychainManageable
+    private let keychainManager = KeychainManager()
     
-    public init(repository: AuthenticationRepository, keychainManager: KeychainManageable) {
+    public init(repository: AuthenticationRepository) {
         self.repository = repository
-        self.keychainManager = keychainManager
     }
     
     func appleLogin(accessToken: String, userID: String) async throws -> User {

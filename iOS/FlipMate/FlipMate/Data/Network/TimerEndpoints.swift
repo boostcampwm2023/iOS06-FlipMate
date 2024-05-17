@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Network
 
 /// Timer 기능 API 통신을 위한 Endpoint을 생성해주는 객체
 struct TimerEndpoints {

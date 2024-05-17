@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Network
 
 struct FriendEndpoints {
     static func followFriend(with friendFollowRequestDTO: FriendFollowReqeustDTO) -> EndPoint<StatusResponseDTO> {

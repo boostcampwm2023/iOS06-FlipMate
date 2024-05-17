@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Network
 
 final class MyPageDIContainer: MyPageFlowCoordinatorDependencies {
     struct Dependencies {

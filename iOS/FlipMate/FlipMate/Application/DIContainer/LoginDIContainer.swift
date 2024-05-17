@@ -6,13 +6,13 @@
 //
 
 import UIKit
+import Network
 
 final class LoginDIContainer: LoginFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
         let categoryManager: CategoryManageable
         let userInfoManager: UserInfoManageable
-        let keychainManager: KeychainManageable
     }
     
     private let dependencies: Dependencies
@@ -26,11 +26,9 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
         return LoginViewController(
             loginViewModel: LoginViewModel(
                 googleLoginUseCase: DefaultGoogleLoginUseCase(
-                    repository: repository,
-                    keychainManager: dependencies.keychainManager),
+                    repository: repository),
                 appleLoginUseCase: DefaultAppleLoginUseCase(
-                    repository: repository,
-                    keychainManager: dependencies.keychainManager),
+                    repository: repository),
                 actions: actions)
             )
     }
