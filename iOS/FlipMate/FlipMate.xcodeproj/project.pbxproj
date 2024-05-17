@@ -254,6 +254,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C04FF5A2BF78AAE0065075F /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DesignSystem; path = FlipMate/DesignSystem; sourceTree = "<group>"; };
 		2C1F2BBA2B20D8D60026C30B /* SocialUserInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialUserInfoHeaderView.swift; sourceTree = "<group>"; };
 		2C1F2BBC2B20DA770026C30B /* ProfileHeaderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderItem.swift; sourceTree = "<group>"; };
 		2C2176E22B5AC156000422F9 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
@@ -822,6 +823,7 @@
 		600908B12AFCD7DF0065DFFB = {
 			isa = PBXGroup;
 			children = (
+				2C04FF5A2BF78AAE0065075F /* DesignSystem */,
 				60243EEF2B05D24D0098A92F /* .swiftlint.yml */,
 				601F396A2BF3836F001689A0 /* Core */,
 				600908BC2AFCD7DF0065DFFB /* FlipMate */,
