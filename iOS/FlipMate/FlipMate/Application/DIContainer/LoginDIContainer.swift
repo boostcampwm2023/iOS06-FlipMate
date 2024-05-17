@@ -11,7 +11,6 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
         let categoryManager: CategoryManageable
-        let signOutManager: SignOutManageable
         let userInfoManager: UserInfoManageable
         let keychainManager: KeychainManageable
     }
@@ -53,7 +52,6 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
         let dependencies = TabBarDIContainer.Dependencies(
             provider: dependencies.provider,
             categoryManager: dependencies.categoryManager,
-            signOutManager: dependencies.signOutManager,
             userInfoManager: dependencies.userInfoManager
         )
         

@@ -85,7 +85,6 @@
 		2C8D21422B7216EF00632718 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2C8D21432B7216EF00632718 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2C8D21442B7216EF00632718 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		2C8D21452B7216EF00632718 /* SignOutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C28D2B1E316800A26313 /* SignOutManager.swift */; };
 		2C8D21462B7216EF00632718 /* FriendStatusPollingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2762B1C789A00A26313 /* FriendStatusPollingManager.swift */; };
 		2C8D21472B7216EF00632718 /* NickNameValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DFDDDD2B16384500FEF98A /* NickNameValidator.swift */; };
 		2C8D21482B7216EF00632718 /* CategoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61F62B14EFA200AE63F9 /* CategoryManager.swift */; };
@@ -306,7 +305,6 @@
 		2C87C2802B1DF2C000A26313 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		2C87C2822B1DF30E00A26313 /* GetUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserInfoUseCase.swift; sourceTree = "<group>"; };
 		2C87C2842B1DF32A00A26313 /* DefaultGetUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGetUserInfoUseCase.swift; sourceTree = "<group>"; };
-		2C87C28D2B1E316800A26313 /* SignOutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignOutManager.swift; path = FlipMate/Presentation/Utils/SignOutManager.swift; sourceTree = SOURCE_ROOT; };
 		2C87C2922B1F344500A26313 /* UIImageView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView++Extension.swift"; sourceTree = "<group>"; };
 		2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		2C88DCF32B124272000B4686 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
@@ -666,14 +664,6 @@
 				2C87C2762B1C789A00A26313 /* FriendStatusPollingManager.swift */,
 			);
 			path = FriendStatusPollingManager;
-			sourceTree = "<group>";
-		};
-		2C87C28C2B1E315600A26313 /* SignOutManager */ = {
-			isa = PBXGroup;
-			children = (
-				2C87C28D2B1E316800A26313 /* SignOutManager.swift */,
-			);
-			path = SignOutManager;
 			sourceTree = "<group>";
 		};
 		2C88DCF72B1242C7000B4686 /* Flows */ = {
@@ -1045,7 +1035,6 @@
 			children = (
 				2C2176E12B5AC147000422F9 /* CalendarManager */,
 				2CE91C712B25970700EACCD7 /* UserInfoManager */,
-				2C87C28C2B1E315600A26313 /* SignOutManager */,
 				2C87C2752B1C788700A26313 /* FriendStatusPollingManager */,
 				60DFDDDC2B16383900FEF98A /* NickNameValidator */,
 				2C9F61F52B14EA9800AE63F9 /* CategoryManager */,
@@ -1704,7 +1693,6 @@
 				2C8D21422B7216EF00632718 /* (null) in Sources */,
 				2C8D21432B7216EF00632718 /* (null) in Sources */,
 				2C8D21442B7216EF00632718 /* (null) in Sources */,
-				2C8D21452B7216EF00632718 /* SignOutManager.swift in Sources */,
 				2C8D21462B7216EF00632718 /* FriendStatusPollingManager.swift in Sources */,
 				2C8D21472B7216EF00632718 /* NickNameValidator.swift in Sources */,
 				2C8D21482B7216EF00632718 /* CategoryManager.swift in Sources */,

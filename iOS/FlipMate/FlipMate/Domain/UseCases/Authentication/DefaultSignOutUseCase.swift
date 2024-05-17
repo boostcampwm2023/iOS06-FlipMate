@@ -6,15 +6,11 @@
 //
 
 import Foundation
+import Core
 
 final class DefaultSignOutUseCase: SignOutUseCase {
-    private let signoutManager: SignOutManageable
-    
-    public init(signoutManager: SignOutManageable) {
-        self.signoutManager = signoutManager
-    }
     
     func signOut() {
-        signoutManager.signOut()
+        NotificationCenter.default.post(name: NotificationName.signOut, object: nil)
     }
 }

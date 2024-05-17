@@ -37,6 +37,12 @@ public struct Provider: Providable {
                     
                     let status = response.statusCode
                     guard 200..<300 ~= status else {
+                        if status == 401 {
+                            FMLogger.general.error("토큰이 만료되어 로그인 화면으로 이동합니다.")
+                            signOut()
+                            throw NetworkError.invalidToken
+                        }
+                        
                         let message = String(decoding: data, as: UTF8.self)
                         FMLogger.general.error("에러 코드 : \(response.statusCode)\n내용 : \(HTTPURLResponse.localizedString(forStatusCode: response.statusCode))")
                         throw NetworkError.statusCodeError(statusCode: status, message: message)
@@ -75,6 +81,12 @@ public struct Provider: Providable {
         
         let status = response.statusCode
         guard 200..<300 ~= status else {
+            if status == 401 {
+                FMLogger.general.error("토큰이 만료되어 로그인 화면으로 이동합니다.")
+                signOut()
+                throw NetworkError.invalidToken
+            }
+            
             let message = String(decoding: data, as: UTF8.self)
             FMLogger.general.error("에러 코드 : \(response.statusCode)\n내용 : \(HTTPURLResponse.localizedString(forStatusCode: response.statusCode))")
             throw NetworkError.statusCodeError(statusCode: status, message: message)
@@ -87,5 +99,9 @@ public struct Provider: Providable {
         let decoder = JSONDecoder()
         let responseData = try decoder.decode(E.Response.self, from: data)
         return responseData
+    }
+    
+    private func signOut() {
+        NotificationCenter.default.post(name: NotificationName.signOut, object: nil)
     }
 }

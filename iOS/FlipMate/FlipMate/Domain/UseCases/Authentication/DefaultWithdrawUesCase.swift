@@ -6,18 +6,21 @@
 //
 
 import Foundation
+import Core
 
 final class DefaultWithdrawUesCase: WithdrawUseCase {
     private let repository: AuthenticationRepository
-    private let signOutManager: SignOutManageable
     
-    init(repository: AuthenticationRepository, signOutManager: SignOutManageable) {
+    init(repository: AuthenticationRepository) {
         self.repository = repository
-        self.signOutManager = signOutManager
     }
     
     func withdraw() async throws {
         try await repository.withdraw()
-        signOutManager.signOut()
+        signOut()
+    }
+    
+    private func signOut() {
+        NotificationCenter.default.post(name: NotificationName.signOut, object: nil)
     }
 }
