@@ -7,6 +7,7 @@
 
 import Core
 import UIKit
+import DesignSystem
 
 final class FriendsCollectionViewCell: UICollectionViewCell {
     static let identifier = "FriendsCollectionViewCell"
@@ -14,7 +15,7 @@ final class FriendsCollectionViewCell: UICollectionViewCell {
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(resource: .defaultProfile)
+        imageView.image = .profileImage
         imageView.clipsToBounds = true
         imageView.bounds = CGRect(x: 0, y: 0, width: 90, height: 90)
         imageView.layer.cornerRadius = imageView.bounds.height / 2

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DesignSystem
 
 final class ChartSegmentedControl: UISegmentedControl {
     private lazy var segmentView: UIView = {

@@ -9,13 +9,14 @@ import Core
 import UIKit
 import Combine
 import PhotosUI
+import DesignSystem
 
 final class ProfileSettingsViewController: BaseViewController {
     // MARK: - View Properties
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(resource: .defaultProfile)
+        imageView.image = .profileImage
         imageView.clipsToBounds = true
         imageView.bounds = CGRect(
             x: ProfileImageConstant.xPos,

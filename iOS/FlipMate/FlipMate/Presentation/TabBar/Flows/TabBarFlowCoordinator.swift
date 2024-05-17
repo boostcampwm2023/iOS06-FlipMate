@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DesignSystem
 
 protocol TabBarFlowCoordinatorDependencies {
     func makeTabBarController() -> TabBarViewController

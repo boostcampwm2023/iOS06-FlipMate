@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DesignSystem
 
 final class SocialUserInfoHeaderView: UICollectionReusableView {
       
@@ -50,7 +51,7 @@ final class SocialUserInfoHeaderView: UICollectionReusableView {
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(resource: .defaultProfile)
+        imageView.image = .profileImage
         imageView.clipsToBounds = true
         imageView.bounds = CGRect(x: 0, y: 0, width: ProfileImageViewConstant.width, height: ProfileImageViewConstant.height)
         imageView.layer.cornerRadius = imageView.bounds.height / 2

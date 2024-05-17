@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import DesignSystem
 
 final class MyPageHeaderView: UIView {
     // MARK: - View Properties
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(resource: .defaultProfile)
+        imageView.image = .profileImage
         imageView.clipsToBounds = true
         imageView.bounds = CGRect(x: 0, y: 0, width: 100, height: 100)
         imageView.layer.cornerRadius = imageView.bounds.height / 2

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DesignSystem
 
 protocol TimerFlowCoordinatorDependencies {
     func makeTimerViewController(actions: TimerViewModelActions) -> TimerViewController

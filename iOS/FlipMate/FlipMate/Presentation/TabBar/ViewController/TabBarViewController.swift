@@ -7,6 +7,7 @@
 
 import Core
 import UIKit
+import DesignSystem
 
 protocol TimeZoneDelegate: AnyObject {
     func didChangeTimeZone()

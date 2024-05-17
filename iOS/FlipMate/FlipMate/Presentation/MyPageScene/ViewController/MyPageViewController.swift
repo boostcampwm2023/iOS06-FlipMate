@@ -9,6 +9,7 @@ import Core
 import UIKit
 import Combine
 import SafariServices
+import DesignSystem
 
 final class MyPageViewController: BaseViewController {
     // MARK: - View Properties

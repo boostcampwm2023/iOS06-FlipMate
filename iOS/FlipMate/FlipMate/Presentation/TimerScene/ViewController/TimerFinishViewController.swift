@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import DesignSystem
 
 final class TimerFinishViewController: BaseViewController {
     private enum Constant {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DesignSystem
 
 final class CustomChartView: UIView {
     // MARK: - UI Components

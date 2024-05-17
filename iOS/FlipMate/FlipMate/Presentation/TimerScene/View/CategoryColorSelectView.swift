@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import DesignSystem
 
 final class CategoryColorSelectView: UIView {
     private var colorSubject = PassthroughSubject<String, Never>()
