@@ -5,25 +5,28 @@
 //  Created by 권승용 on 5/16/24.
 //
 
-import Core
 import Foundation
+import Core
 import Combine
 
 public protocol Providable {
-    func request<E: RequestResponseable>(with endpoint: E, userToken: String?) -> AnyPublisher<E.Response, NetworkError>
-    func request<E: RequestResponseable>(with endpoint: E, userToken: String?) async throws -> E.Response
+    func request<E: RequestResponseable>(with endpoint: E) -> AnyPublisher<E.Response, NetworkError>
+    func request<E: RequestResponseable>(with endpoint: E) async throws -> E.Response
 }
 
 public struct Provider: Providable {
     private var urlSession: URLSessionable
+    private var keychainManager: KeychainManageable
     
-    init(urlSession: URLSessionable) {
+    init(urlSession: URLSessionable, keychainManager: KeychainManageable) {
         self.urlSession = urlSession
+        self.keychainManager = keychainManager
     }
     
-    public func request<E: RequestResponseable>(with endpoint: E, userToken: String? = nil) -> AnyPublisher<E.Response, NetworkError> {
+    public func request<E: RequestResponseable>(with endpoint: E) -> AnyPublisher<E.Response, NetworkError> {
         do {
-            let urlReqeust = try endpoint.makeURLRequest(with: userToken)
+            let token = try? keychainManager.getAccessToken()
+            let urlReqeust = try endpoint.makeURLRequest(with: token)
             let jsonDecoder = JSONDecoder()
             
             return urlSession.response(for: urlReqeust)
@@ -61,8 +64,9 @@ public struct Provider: Providable {
         }
     }
     
-    public func request<E: RequestResponseable>(with endpoint: E, userToken: String? = nil) async throws -> E.Response where E: Requestable, E: Responsable {
-        let urlRequest = try endpoint.makeURLRequest(with: userToken)
+    public func request<E: RequestResponseable>(with endpoint: E) async throws -> E.Response where E: Requestable, E: Responsable {
+        let token = try? keychainManager.getAccessToken()
+        let urlRequest = try endpoint.makeURLRequest(with: token)
         let (data, response) = try await urlSession.response(for: urlRequest)
         
         guard let response = response as? HTTPURLResponse else {
