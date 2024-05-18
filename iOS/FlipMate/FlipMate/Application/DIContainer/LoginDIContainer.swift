@@ -6,14 +6,13 @@
 //
 
 import UIKit
+import Network
 
 final class LoginDIContainer: LoginFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
         let categoryManager: CategoryManageable
-        let signOutManager: SignOutManageable
         let userInfoManager: UserInfoManageable
-        let keychainManager: KeychainManageable
     }
     
     private let dependencies: Dependencies
@@ -27,11 +26,9 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
         return LoginViewController(
             loginViewModel: LoginViewModel(
                 googleLoginUseCase: DefaultGoogleLoginUseCase(
-                    repository: repository,
-                    keychainManager: dependencies.keychainManager),
+                    repository: repository),
                 appleLoginUseCase: DefaultAppleLoginUseCase(
-                    repository: repository,
-                    keychainManager: dependencies.keychainManager),
+                    repository: repository),
                 actions: actions)
             )
     }
@@ -53,7 +50,6 @@ final class LoginDIContainer: LoginFlowCoordinatorDependencies {
         let dependencies = TabBarDIContainer.Dependencies(
             provider: dependencies.provider,
             categoryManager: dependencies.categoryManager,
-            signOutManager: dependencies.signOutManager,
             userInfoManager: dependencies.userInfoManager
         )
         

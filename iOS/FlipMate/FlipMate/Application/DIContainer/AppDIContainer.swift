@@ -6,11 +6,11 @@
 //
 
 import UIKit
+import Core
+import Network
 
 final class AppDIContainer {
-    lazy var keychainManager: KeychainManageable = KeychainManager()
-    lazy var signOutManager: SignOutManageable = SignOutManager(userInfoManager: userInfoManager, keychainManager: keychainManager)
-    lazy var provider: Provider = Provider(urlSession: URLSession.shared, signOutManager: signOutManager, keychainManager: keychainManager)
+    lazy var provider: Provider = Provider(urlSession: URLSession.shared, keychainManager: KeychainManager())
     lazy var categoryManager: CategoryManageable = CategoryManager(categories: [])
     lazy var userInfoManager: UserInfoManageable = UserInfoManager()
     
@@ -18,7 +18,6 @@ final class AppDIContainer {
         let dependencies = TabBarDIContainer.Dependencies(
             provider: provider,
             categoryManager: categoryManager,
-            signOutManager: signOutManager,
             userInfoManager: userInfoManager
         )
         
@@ -29,9 +28,7 @@ final class AppDIContainer {
         let dependencies = LoginDIContainer.Dependencies(
             provider: provider,
             categoryManager: categoryManager,
-            signOutManager: signOutManager,
-            userInfoManager: userInfoManager,
-            keychainManager: keychainManager
+            userInfoManager: userInfoManager
         )
         
         return LoginDIContainer(dependencies: dependencies)

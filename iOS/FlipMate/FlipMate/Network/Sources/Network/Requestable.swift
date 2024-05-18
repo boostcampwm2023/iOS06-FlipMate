@@ -1,13 +1,13 @@
 //
 //  Requestable.swift
-//  FlipMate
+//  
 //
-//  Created by 권승용 on 11/21/23.
+//  Created by 권승용 on 5/15/24.
 //
 
 import Foundation
 
-protocol Requestable {
+public protocol Requestable {
     var baseURL: String { get }
     var path: String { get }
     var method: HTTPMethod { get }

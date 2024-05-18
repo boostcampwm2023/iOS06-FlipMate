@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Network
 
 final class DefaultAuthenticationRepository: AuthenticationRepository {
     private let provider: Providable

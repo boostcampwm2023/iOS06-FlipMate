@@ -8,6 +8,7 @@
 import Core
 import Foundation
 import Combine
+import Network
 
 enum FriendSearchStatus: Int {
     case alreayFriend = 20002

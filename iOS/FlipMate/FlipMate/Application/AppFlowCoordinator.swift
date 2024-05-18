@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Core
 
 protocol Coordinator: AnyObject {
     var childCoordinators: [Coordinator] { get set }
@@ -25,7 +26,8 @@ final class AppFlowCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     private var navigationController: UINavigationController
     private let appDIContainer: AppDIContainer
-    
+    private let keychainManager = KeychainManager()
+
     init(navigationController: UINavigationController, appDIContainer: AppDIContainer) {
         self.navigationController = navigationController
         self.appDIContainer = appDIContainer
@@ -34,7 +36,7 @@ final class AppFlowCoordinator: Coordinator {
     func start() {
         var isLoggedIn: Bool
         
-        if (try? appDIContainer.keychainManager.getAccessToken()) != nil {
+        if (try? keychainManager.getAccessToken()) != nil {
             isLoggedIn = true
         } else {
             isLoggedIn = false

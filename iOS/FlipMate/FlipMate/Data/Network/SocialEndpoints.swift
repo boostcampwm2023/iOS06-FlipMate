@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import Network
 
 struct SocialEndpoints {
     static func getMyFreinds(date: Date) -> EndPoint<[FriendsResponseDTO]> {

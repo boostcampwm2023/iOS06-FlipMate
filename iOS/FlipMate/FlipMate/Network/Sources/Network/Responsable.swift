@@ -1,12 +1,12 @@
 //
 //  Responsable.swift
-//  FlipMate
+//  
 //
-//  Created by 신민규 on 11/21/23.
+//  Created by 권승용 on 5/15/24.
 //
 
 import Foundation
 
-protocol Responsable {
+public protocol Responsable {
     associatedtype Response: Decodable
 }

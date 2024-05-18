@@ -8,6 +8,7 @@
 import Core
 import Foundation
 import Combine
+import Network
 
 final class DefaultUserInfoRepository: UserInfoRepository {
     private let provider: Providable

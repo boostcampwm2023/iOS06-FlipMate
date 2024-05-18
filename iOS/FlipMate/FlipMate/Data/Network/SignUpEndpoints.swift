@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Network
 
 struct SignUpEndpoints {
     static func nickNameValidation(_ nickName: String) -> EndPoint<NickNameValidationResponseDTO> {
