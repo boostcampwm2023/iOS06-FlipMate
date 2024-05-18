@@ -8,6 +8,7 @@
 import Core
 import UIKit
 import Combine
+import DesignSystem
 
 enum CategoryPurpose {
     case create

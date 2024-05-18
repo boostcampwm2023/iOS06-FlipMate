@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 import Combine
+import DesignSystem
 
 final class SocialDetailViewController: BaseViewController {
     private enum ComponentConstant {

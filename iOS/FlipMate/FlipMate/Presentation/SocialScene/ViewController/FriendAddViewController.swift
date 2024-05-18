@@ -8,6 +8,7 @@
 import Core
 import UIKit
 import Combine
+import DesignSystem
 
 final class FriendAddViewController: BaseViewController {
     // MARK: - Constant

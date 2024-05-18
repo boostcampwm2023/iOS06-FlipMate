@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DesignSystem
 
 struct ChartLabel {
     let title: String

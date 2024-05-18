@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DesignSystem
 
 final class MyNickNameView: UIView, FreindAddResultViewProtocol {
     private enum Constant {

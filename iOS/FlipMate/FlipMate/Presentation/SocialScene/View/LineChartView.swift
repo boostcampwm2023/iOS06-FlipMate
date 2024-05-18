@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DesignSystem
 
 final class LineChartView: UIView {
     
@@ -95,8 +96,8 @@ private extension LineChartView {
             
             for dataPoint in data {
                 var lineHeight = CGFloat(dataPoint) / CGFloat(maxPoint) * (frame.height - Constant.bottomSpacing)
-                let yPosition = Int(yBottomPosition) - Int(lineHeight) + Constant.ySpacing
                 if lineHeight.isNaN { lineHeight = 0.0 }
+                let yPosition = Int(yBottomPosition) - Int(lineHeight) + Constant.ySpacing
                 if !isFirstDataPoint {
                     path.move(to: CGPoint(x: xPosition + Int(Constant.xSpacing), y: yPosition))
                     isFirstDataPoint.toggle()
@@ -139,7 +140,7 @@ private extension LineChartView {
             path.setLineDash([6, 3], count: 2, phase: 0)
             path.move(to: CGPoint(x: Int(Constant.xSpacing), y: yPosition))
             path.addLine(to: CGPoint(x: frame.width - Constant.rightSpacing, y: CGFloat(yPosition)))
-            UIColor.gray2.set()
+            UIColor.systemGray2.set()
             path.stroke()
         }
     }

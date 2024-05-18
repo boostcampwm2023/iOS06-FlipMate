@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum FlipMateFont {
+public enum FlipMateFont {
     case largeRegular
     case semiLargeRegular
     case mediumRegular
@@ -19,7 +19,7 @@ enum FlipMateFont {
     case mediumBold
     case smallBold
     
-    var font: UIFont {
+    public var font: UIFont {
         switch self {
         case .largeRegular: return .systemFont(ofSize: 32, weight: .regular)
         case .semiLargeRegular: return .systemFont(ofSize: 24, weight: .regular)

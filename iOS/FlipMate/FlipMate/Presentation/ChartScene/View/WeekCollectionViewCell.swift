@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DesignSystem
 
 final class WeekCollectionViewCell: UICollectionViewCell {
     // MARK: - UI Components

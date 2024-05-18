@@ -14,16 +14,16 @@ extension UIImageView {
         self.image = UIImage(data: image)
     }
     
-    func setImage(url: String?) {
+    public func setImage(url: String?) {
         Task {
             do {
                 guard let imageURL = URL(string: url ?? "") else {
-                    self.image = UIImage(resource: .defaultProfile)
+                    self.image = .profileImage
                     return
                 }
                 try await self.downLoadImage(with: imageURL)
             } catch {
-                self.image = UIImage(resource: .defaultProfile)
+                self.image = .profileImage
             }
         }
     }
