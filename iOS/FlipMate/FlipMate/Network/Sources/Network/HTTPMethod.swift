@@ -1,13 +1,13 @@
 //
-//  HttpMethod.swift
-//  FlipMate
+//  HTTPMethod.swift
+//  
 //
-//  Created by 신민규 on 11/21/23.
+//  Created by 권승용 on 5/15/24.
 //
 
 import Foundation
 
-enum HTTPMethod: String {
+public enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
     case delete = "DELETE"

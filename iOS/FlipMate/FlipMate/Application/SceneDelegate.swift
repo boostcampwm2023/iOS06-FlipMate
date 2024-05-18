@@ -57,7 +57,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
         
-        appleIDProvider.getCredentialState(forUserID: userID) { credentialState, error in
+        appleIDProvider.getCredentialState(forUserID: userID) { [weak self] credentialState, error in
+            guard let self = self else { return }
             if error != nil {
                 FMLogger.general.error("애플 credential 가져오는 중 오류 - \(error)")
                 return
@@ -67,13 +68,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 FMLogger.appLifeCycle.log("sceneDidBecomeActive - 애플 로그인 인증 성공")
             case .revoked:
                 FMLogger.appLifeCycle.log("sceneDidBecomeActive - 애플 로그인 인증 만료")
-                self.appDIContainer.signOutManager.signOut()
+                self.signOut()
             case .notFound:
                 FMLogger.appLifeCycle.log("sceneDidBecomeActive - 애플 Credential을 찾을 수 없음")
             default:
                 break
             }
         }
+    }
+    
+    private func signOut() {
+        NotificationCenter.default.post(name: NotificationName.signOut, object: nil)
     }
 }
 
@@ -89,12 +94,16 @@ private extension SceneDelegate {
     }
     
     func receiveSignOut() {
-        appDIContainer.signOutManager.signOutPublisher
+        NotificationCenter.default.publisher(for: NotificationName.signOut)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self = self else { return }
-                self.resetAppFlowCoordinator()
-                self.appFlowCoordinator?.start()
+                try? keychainManager.deleteAccessToken()
+                try? keychainManager.deleteAppleUserID()
+                appDIContainer.userInfoManager.initManager()
+                
+                resetAppFlowCoordinator()
+                appFlowCoordinator?.start()
             }
             .store(in: &cancellables)
     }

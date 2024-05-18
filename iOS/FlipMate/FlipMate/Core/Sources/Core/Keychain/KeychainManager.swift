@@ -1,6 +1,13 @@
+//
+//  KeychainManager.swift
+//
+//
+//  Created by 권승용 on 5/17/24.
+//
+
 import Foundation
 
-protocol KeychainManageable {
+public protocol KeychainManageable {
     func saveAccessToken(token: String) throws
     func getAccessToken() throws -> String
     func deleteAccessToken() throws
@@ -9,19 +16,21 @@ protocol KeychainManageable {
     func deleteAppleUserID() throws
 }
 
-enum KeychainError: Error {
+public enum KeychainError: Error {
     case duplicateEntry
     case noToken
     case unknown(OSStatus)
 }
 
-final class KeychainManager: KeychainManageable {
+public struct KeychainManager: KeychainManageable {
     enum ServiceName {
         static let flipMate = "FlipMate"
         static let appleLogin = "AppleLogin"
     }
     
-    func saveAccessToken(token: String) throws {
+    public init() {}
+    
+    public func saveAccessToken(token: String) throws {
         guard let tokenData = token.data(using: .utf8) else {
             throw KeychainError.noToken
         }
@@ -43,7 +52,7 @@ final class KeychainManager: KeychainManageable {
         }
     }
     
-    func getAccessToken() throws -> String {
+    public func getAccessToken() throws -> String {
         let query: [String: AnyObject] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: ServiceName.flipMate as AnyObject,
@@ -66,7 +75,7 @@ final class KeychainManager: KeychainManageable {
         return token
     }
     
-    func deleteAccessToken() throws {
+    public func deleteAccessToken() throws {
         let query: [String: AnyObject] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: ServiceName.flipMate as AnyObject
@@ -83,7 +92,7 @@ final class KeychainManager: KeychainManageable {
         }
     }
     
-    func saveAppleUserID(id: String) throws {
+    public func saveAppleUserID(id: String) throws {
         guard let idData = id.data(using: .utf8) else {
             throw KeychainError.noToken
         }
@@ -105,7 +114,7 @@ final class KeychainManager: KeychainManageable {
         }
     }
     
-    func getAppleUserID() throws -> String {
+    public func getAppleUserID() throws -> String {
         let query: [String: AnyObject] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: ServiceName.appleLogin as AnyObject,
@@ -129,7 +138,7 @@ final class KeychainManager: KeychainManageable {
         return id
     }
     
-    func deleteAppleUserID() throws {
+    public func deleteAppleUserID() throws {
         let query: [String: AnyObject] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: ServiceName.appleLogin as AnyObject

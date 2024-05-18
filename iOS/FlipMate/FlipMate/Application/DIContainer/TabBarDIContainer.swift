@@ -6,13 +6,13 @@
 //
 
 import UIKit
+import Network
 
 final class TabBarDIContainer: TabBarFlowCoordinatorDependencies {
     
     struct Dependencies {
         let provider: Providable
         let categoryManager: CategoryManageable
-        let signOutManager: SignOutManageable
         let userInfoManager: UserInfoManageable
     }
     
@@ -39,7 +39,6 @@ final class TabBarDIContainer: TabBarFlowCoordinatorDependencies {
     func makeSocialDIContainer() -> SocialDIContainer {
         let dependencies = SocialDIContainer.Dependencies(
             provider: dependencies.provider,
-            signOutManager: dependencies.signOutManager,
             userInfoManager: dependencies.userInfoManager
         )
         

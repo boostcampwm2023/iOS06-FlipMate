@@ -6,11 +6,11 @@
 //
 
 import UIKit
+import Network
 
 final class SocialDIContainer: SocialFlowCoordinatorDependencies {
     struct Dependencies {
         let provider: Providable
-        let signOutManager: SignOutManageable
         let userInfoManager: UserInfoManageable
     }
     
@@ -71,7 +71,6 @@ final class SocialDIContainer: SocialFlowCoordinatorDependencies {
         return MyPageDIContainer(
             dependencies: MyPageDIContainer.Dependencies(
                 provider: dependencies.provider,
-                signOutManager: dependencies.signOutManager,
                 userInfoManager: dependencies.userInfoManager)
         )
     }

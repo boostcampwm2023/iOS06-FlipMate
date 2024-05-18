@@ -8,6 +8,7 @@
 import Core
 import Foundation
 import Combine
+import Network
 
 final class DefaultStudyLogRepository: StudyLogRepository {
     private let provider: Providable

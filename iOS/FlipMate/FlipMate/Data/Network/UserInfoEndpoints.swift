@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Network
 
 struct UserInfoEndpoints {
     static func userInfo() -> EndPoint<UserInfoResponseDTO> {
