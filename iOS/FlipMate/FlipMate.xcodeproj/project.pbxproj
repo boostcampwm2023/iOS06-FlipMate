@@ -404,6 +404,7 @@
 		60C2F2852B172D6900EBDD78 /* FriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewCell.swift; sourceTree = "<group>"; };
 		60C791892B5810FA0019E81F /* DummyUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyUseCases.swift; sourceTree = "<group>"; };
 		60C7918C2B5819F10019E81F /* DummyManagers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyManagers.swift; sourceTree = "<group>"; };
+		60DC013D2BF842F6007C90A2 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Domain; path = FlipMate/Domain; sourceTree = "<group>"; };
 		60DFDDD82B14FD7800FEF98A /* StatusResponseWithErrorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusResponseWithErrorDTO.swift; sourceTree = "<group>"; };
 		60DFDDDA2B14FE0100FEF98A /* SignUpResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponseDTO.swift; sourceTree = "<group>"; };
 		60DFDDDD2B16384500FEF98A /* NickNameValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameValidator.swift; sourceTree = "<group>"; };
@@ -767,6 +768,7 @@
 		600908B12AFCD7DF0065DFFB = {
 			isa = PBXGroup;
 			children = (
+				60DC013D2BF842F6007C90A2 /* Domain */,
 				2C04FF5A2BF78AAE0065075F /* DesignSystem */,
 				60243EEF2B05D24D0098A92F /* .swiftlint.yml */,
 				601F396A2BF3836F001689A0 /* Core */,
@@ -793,7 +795,7 @@
 				605F88492B297DA5008975DC /* FlipMate.entitlements */,
 				600908ED2AFCDB6E0065DFFB /* Application */,
 				600908EF2AFCDBC90065DFFB /* Presentation */,
-				600908F72AFCDE540065DFFB /* Domain */,
+				600908F72AFCDE540065DFFB /* FMDomain */,
 				600908F82AFCDE630065DFFB /* Data */,
 				600909012AFCDFD10065DFFB /* Common */,
 				600908EE2AFCDBAB0065DFFB /* Resources */,
@@ -914,14 +916,14 @@
 			path = Splash;
 			sourceTree = "<group>";
 		};
-		600908F72AFCDE540065DFFB /* Domain */ = {
+		600908F72AFCDE540065DFFB /* FMDomain */ = {
 			isa = PBXGroup;
 			children = (
 				600909052AFCE0C90065DFFB /* Entities */,
 				600909062AFCE0D00065DFFB /* UseCases */,
 				600909082AFCE0EA0065DFFB /* Repositories */,
 			);
-			path = Domain;
+			path = FMDomain;
 			sourceTree = "<group>";
 		};
 		600908F82AFCDE630065DFFB /* Data */ = {
