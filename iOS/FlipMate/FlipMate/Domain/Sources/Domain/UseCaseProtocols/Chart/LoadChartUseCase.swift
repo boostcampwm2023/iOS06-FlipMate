@@ -10,6 +10,6 @@ import Combine
 
 import Core
 
-protocol LoadChartUseCase {
+public protocol LoadChartUseCase {
     func loadChart(at id: Int) -> AnyPublisher<SocialChart, NetworkError>
 }

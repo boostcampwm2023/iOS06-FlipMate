@@ -5,10 +5,12 @@
 //  Created by 임현규 on 2023/12/04.
 //
 
-import Core
 import Foundation
 import Combine
+
+import Domain
 import Network
+import Core
 
 final class DefaultUserInfoRepository: UserInfoRepository {
     private let provider: Providable

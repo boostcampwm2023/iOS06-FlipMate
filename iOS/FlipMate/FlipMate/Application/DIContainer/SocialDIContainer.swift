@@ -6,6 +6,8 @@
 //
 
 import UIKit
+
+import Domain
 import Network
 
 final class SocialDIContainer: SocialFlowCoordinatorDependencies {

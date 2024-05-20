@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import Combine
+
+import Core
 
 public protocol StudyLogRepository {
     func getUserInfo() -> AnyPublisher<StudyLog, NetworkError>

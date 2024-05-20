@@ -6,8 +6,10 @@
 //
 
 import Foundation
-import Core
+
+import Domain
 import Network
+import Core
 
 final class DefaultProfileSettingsRepository: ProfileSettingsRepository {
     private let provider: Providable

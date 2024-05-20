@@ -9,6 +9,7 @@ import Foundation
 import XCTest
 import Combine
 @testable import FlipMate
+import Domain
 
 private enum TestToken {
     static let success = "success"

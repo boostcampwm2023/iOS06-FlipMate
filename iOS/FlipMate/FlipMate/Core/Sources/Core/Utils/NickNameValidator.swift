@@ -12,6 +12,9 @@ public protocol NickNameValidatable {
 }
 
 public final class NickNameValidator: NickNameValidatable {
+    
+    public init() {}
+    
     public func checkNickNameValidationState(_ nickName: String) -> NickNameValidationState {
         enum Constant {
             static let maxLenght = 10

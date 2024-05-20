@@ -9,6 +9,8 @@ import Core
 import Foundation
 import Combine
 @testable import FlipMate
+@testable import Domain
+@testable import Core
 
 final class DummyStartTimerUseCase: StartTimerUseCase {
     func startTimer(startTime: Date, categoryId: Int?) -> AnyPublisher<Void, NetworkError> {
@@ -17,15 +19,15 @@ final class DummyStartTimerUseCase: StartTimerUseCase {
 }
 
 final class DummyGetStudyLogUseCase: GetStudyLogUseCase {
-    func getStudyLog() -> AnyPublisher<FlipMate.StudyLog, NetworkError> {
-        return PassthroughSubject<FlipMate.StudyLog, NetworkError>().eraseToAnyPublisher()
+    func getStudyLog() -> AnyPublisher<StudyLog, NetworkError> {
+        return PassthroughSubject<StudyLog, NetworkError>().eraseToAnyPublisher()
 
     }
 }
 
 final class DummyGetUserInfoUseCase: GetUserInfoUseCase {
-    func getUserInfo() -> AnyPublisher<FlipMate.UserInfo, NetworkError> {
-        return PassthroughSubject<FlipMate.UserInfo, NetworkError>().eraseToAnyPublisher()
+    func getUserInfo() -> AnyPublisher<UserInfo, NetworkError> {
+        return PassthroughSubject<UserInfo, NetworkError>().eraseToAnyPublisher()
 
     }
 }

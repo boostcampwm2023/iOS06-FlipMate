@@ -7,6 +7,8 @@
 
 import Foundation
 
+import Domain
+
 struct FreindSeacrhItem {
     let nickname: String
     let iamgeURL: String?

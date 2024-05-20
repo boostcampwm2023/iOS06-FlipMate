@@ -8,6 +8,8 @@
 import Foundation
 import Combine
 
+import Domain
+
 struct MyPageViewModelActions {
     let showProfileSettingsView: () -> Void
     let showPrivacyPolicyView: () -> Void

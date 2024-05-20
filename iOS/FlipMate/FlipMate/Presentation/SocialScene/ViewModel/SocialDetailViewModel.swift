@@ -5,9 +5,11 @@
 //  Created by 신민규 on 11/30/23.
 //
 
-import Core
 import Foundation
 import Combine
+
+import Domain
+import Core
 
 struct SocialDetailViewModelActions {
     var didCancelSocialDetail: () -> Void

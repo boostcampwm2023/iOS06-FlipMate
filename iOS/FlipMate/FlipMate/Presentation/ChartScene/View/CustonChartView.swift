@@ -6,6 +6,8 @@
 //
 
 import UIKit
+
+import Domain
 import DesignSystem
 
 final class CustomChartView: UIView {
