@@ -7,6 +7,8 @@
 
 import Foundation
 
+import Domain
+
 struct StudyLogResponseDTO: Decodable {
     let todayTime: Int
     let categories: [CategoryDTO]?

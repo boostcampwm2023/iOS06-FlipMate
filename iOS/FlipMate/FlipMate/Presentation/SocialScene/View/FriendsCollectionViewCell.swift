@@ -5,9 +5,11 @@
 //  Created by 권승용 on 11/29/23.
 //
 
-import Core
 import UIKit
+
+import Domain
 import DesignSystem
+import Core
 
 final class FriendsCollectionViewCell: UICollectionViewCell {
     static let identifier = "FriendsCollectionViewCell"

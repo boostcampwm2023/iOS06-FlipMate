@@ -5,17 +5,12 @@
 //  Created by 임현규 on 2023/11/29.
 //
 
-import Core
 import Foundation
 import Combine
-import Network
 
-enum FriendSearchStatus: Int {
-    case alreayFriend = 20002
-    case myself = 20001
-    case notFriend = 20000
-    case unknown = 0
-}
+import Domain
+import Network
+import Core
 
 final class DefaultFriendRepository: FriendRepository {
     

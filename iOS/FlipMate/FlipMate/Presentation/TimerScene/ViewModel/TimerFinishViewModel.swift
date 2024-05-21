@@ -5,9 +5,11 @@
 //  Created by 임현규 on 2023/11/27.
 //
 
-import Core
 import Foundation
 import Combine
+
+import Domain
+import Core
 
 struct TimerFinishViewModelActions {
     let didSaveStudyEndLog: () -> Void

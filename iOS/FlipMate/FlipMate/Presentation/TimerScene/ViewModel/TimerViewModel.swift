@@ -5,10 +5,12 @@
 //  Created by 임현규 on 2023/11/14.
 //
 
-import Core
 import Foundation
 import Combine
 import OSLog
+
+import Domain
+import Core
 
 enum TimerState {
     case suspended // 타이머 일시정지 상태

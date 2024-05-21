@@ -5,9 +5,11 @@
 //  Created by 임현규 on 2023/11/29.
 //
 
-import Core
 import Foundation
 import Combine
+
+import Domain
+import Core
 
 struct FriendAddViewModelActions {
     var didCancleFriendAdd: () -> Void

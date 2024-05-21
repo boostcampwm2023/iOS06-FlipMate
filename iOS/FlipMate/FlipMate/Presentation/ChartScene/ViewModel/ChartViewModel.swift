@@ -8,6 +8,8 @@
 import Foundation
 import Combine
 
+import Domain
+
 protocol ChartViewModelInput {
     func viewDidLoad()
     func dateDidSelected(date: Date)

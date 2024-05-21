@@ -5,9 +5,11 @@
 //  Created by 임현규 on 2023/11/28.
 //
 
-import Core
 import Foundation
 import Combine
+
+import Domain
+import Core
 
 struct CategoryModifyViewModelActions {
     let didFinishCategoryModify: () -> Void

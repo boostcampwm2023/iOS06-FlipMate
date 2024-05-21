@@ -6,8 +6,10 @@
 //
 
 import Foundation
-import Core
+
+import Domain
 import Network
+import Core
 
 final class DefaultCategoryRepository: CategoryRepository {
     private let provider: Providable

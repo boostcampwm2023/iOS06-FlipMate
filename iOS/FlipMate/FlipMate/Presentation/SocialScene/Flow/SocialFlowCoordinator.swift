@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+import Domain
+
 protocol SocialFlowCoordinatorDependencies {
     func makeSocialFlowCoordinator(navigationController: UINavigationController) -> SocialFlowCoordinator
     func makeSocialViewController(actions: SocialViewModelActions) -> UIViewController

@@ -6,7 +6,11 @@
 //
 
 import UIKit
+
+import Domain
 import Network
+
+typealias Category = Domain.Category
 
 final class CategoryDIContainer: CategoryFlowCoordinatorDependencies {
     struct Dependencies {

@@ -8,6 +8,8 @@
 import Foundation
 import Combine
 
+import Domain
+
 struct CategoryViewModelActions {
     let showModifyCategory: (CategoryPurpose, Category?) -> Void
     let didFinishCategorySetting: () -> Void

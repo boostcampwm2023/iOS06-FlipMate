@@ -7,6 +7,8 @@
 
 import UIKit
 import Combine
+
+import Domain
 import DesignSystem
 
 final class SocialViewController: BaseViewController {

@@ -5,9 +5,11 @@
 //  Created by 권승용 on 11/27/23.
 //
 
-import Core
 import Foundation
 import Combine
+
+import Domain
+import Core
 
 struct SignUpViewModelActions {
     let didFinishSignUp: () -> Void

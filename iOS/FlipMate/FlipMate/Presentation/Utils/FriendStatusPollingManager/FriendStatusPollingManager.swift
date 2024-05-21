@@ -8,6 +8,8 @@
 import Foundation
 import Combine
 
+import Domain
+
 struct StopFriend {
     let id: Int
     let totalTime: Int
