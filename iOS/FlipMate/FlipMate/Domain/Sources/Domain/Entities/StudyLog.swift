@@ -9,9 +9,9 @@ import Foundation
 
 public struct StudyLog {
     public var totalTime: Int
-    public var category: [Category]
+    public var category: [StudyCategory]
     
-    public init(totalTime: Int, category: [Category]) {
+    public init(totalTime: Int, category: [StudyCategory]) {
         self.totalTime = totalTime
         self.category = category
     }

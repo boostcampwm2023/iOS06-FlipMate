@@ -11,25 +11,25 @@ import Domain
 import Network
 import Core
 
-final class DefaultChartRepository: ChartRepository {
+public final class DefaultChartRepository: ChartRepository {
     private let provider: Providable
     
-    init(provider: Providable) {
+    public init(provider: Providable) {
         self.provider = provider
     }
     
-    func fetchDailyLog(date: Date) async throws -> CategoryChartLog {
+    public func fetchDailyLog(date: Date) async throws -> CategoryChartLog {
         let endpoint = ChartEndpoints.fetchDailyLog(date: date)
         let responseDTO = try await provider.request(with: endpoint)
         
         let categories = responseDTO.categories?.map { dto in
-            return Category(id: dto.id, color: dto.color, subject: dto.name, studyTime: dto.todayTime)
+            return StudyCategory(id: dto.id, color: dto.color, subject: dto.name, studyTime: dto.todayTime)
         } ?? []
         
         return CategoryChartLog(studyLog: StudyLog(totalTime: responseDTO.todayTime, category: categories), percentage: responseDTO.percentage)
     }
     
-    func fetchWeeklyLog() async throws -> WeeklyChartLog {
+    public func fetchWeeklyLog() async throws -> WeeklyChartLog {
         let endpoint = ChartEndpoints.fetchWeeklyLog()
         let responseDTO = try await provider.request(with: endpoint)
         

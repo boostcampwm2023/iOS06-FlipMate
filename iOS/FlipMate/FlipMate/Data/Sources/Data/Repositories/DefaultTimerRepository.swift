@@ -12,7 +12,7 @@ import Domain
 import Network
 import Core
 
-final class DefaultTimerRepository {
+public final class DefaultTimerRepository {
     private enum StudyType: String {
         case start
         case finish
@@ -20,13 +20,13 @@ final class DefaultTimerRepository {
     
     private let provider: Providable
     
-    init(provider: Providable) {
+    public init(provider: Providable) {
         self.provider = provider
     }
 }
 
 extension DefaultTimerRepository: TimerRepsoitory {
-    func startTimer(
+    public func startTimer(
         startTime: Date,
         categoryId: Int?)
     -> AnyPublisher<Void, NetworkError> {
@@ -45,7 +45,7 @@ extension DefaultTimerRepository: TimerRepsoitory {
             .eraseToAnyPublisher()
     }
     
-    func finishTimer(
+    public func finishTimer(
         endTime: Date,
         learningTime: Int,
         categoryId: Int?)

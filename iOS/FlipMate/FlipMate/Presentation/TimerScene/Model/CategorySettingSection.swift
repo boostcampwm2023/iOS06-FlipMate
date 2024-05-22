@@ -7,14 +7,16 @@
 
 import UIKit
 
+import Domain
+
 enum CategorySettingSection: Hashable {
     case categorySection([CategorySettingItem])
 }
 
 enum CategorySettingItem: Hashable {
-    case categoryCell(Category)
+    case categoryCell(StudyCategory)
     
-    var category: Category {
+    var category: StudyCategory {
         switch self {
         case .categoryCell(let category):
             return category

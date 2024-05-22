@@ -12,14 +12,14 @@ import Domain
 import Network
 import Core
 
-final class DefaultSocialRepository: SocialRepository {
+public final class DefaultSocialRepository: SocialRepository {
     private let provider: Providable
     
-    init(provider: Providable) {
+    public init(provider: Providable) {
         self.provider = provider
     }
     
-    func getMyFriend(date: Date) -> AnyPublisher<[Friend], NetworkError> {
+    public func getMyFriend(date: Date) -> AnyPublisher<[Friend], NetworkError> {
         let endPoint = SocialEndpoints.getMyFreinds(date: date)
         return provider.request(with: endPoint)
             .map { response -> [Friend] in
@@ -35,7 +35,7 @@ final class DefaultSocialRepository: SocialRepository {
             .eraseToAnyPublisher()
     }
     
-    func fetchMyFriend(date: Date) -> AnyPublisher<[FriendStatus], NetworkError> {
+    public func fetchMyFriend(date: Date) -> AnyPublisher<[FriendStatus], NetworkError> {
         let endpoint = SocialEndpoints.fetchMyFriend(date: date)
         return provider.request(with: endpoint)
             .map { response -> [FriendStatus] in

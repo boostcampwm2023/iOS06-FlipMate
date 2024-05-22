@@ -9,7 +9,7 @@ import Foundation
 
 public protocol CategoryRepository {
     func createCategory(name: String, colorCode: String) async throws -> Int
-    func readCategories() async throws -> [Category]
+    func readCategories() async throws -> [StudyCategory]
     func updateCategory(id: Int, newName: String, newColorCode: String) async throws
     func deleteCategory(id: Int) async throws
 }

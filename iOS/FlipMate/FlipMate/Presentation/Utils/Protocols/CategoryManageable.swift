@@ -8,12 +8,14 @@
 import Foundation
 import Combine
 
+import Domain
+
 protocol CategoryManageable {
-    var categoryDidChangePublisher: AnyPublisher<[Category], Never> { get }
-    func replace(categories: [Category])
-    func change(category: Category)
+    var categoryDidChangePublisher: AnyPublisher<[StudyCategory], Never> { get }
+    func replace(categories: [StudyCategory])
+    func change(category: StudyCategory)
     func removeCategory(categoryId: Int)
-    func append(category: Category)
-    func findCategory(categoryId: Int) -> Category?
+    func append(category: StudyCategory)
+    func findCategory(categoryId: Int) -> StudyCategory?
     func numberOfCategory() -> Int
 }

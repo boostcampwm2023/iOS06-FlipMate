@@ -9,8 +9,7 @@ import UIKit
 
 import Domain
 import Network
-
-typealias Category = Domain.Category
+import Data
 
 final class CategoryDIContainer: CategoryFlowCoordinatorDependencies {
     struct Dependencies {
@@ -33,7 +32,7 @@ final class CategoryDIContainer: CategoryFlowCoordinatorDependencies {
     }
     
     func makeCategoryModifyViewModel(actions: CategoryModifyViewModelActions? = nil,
-                                     selectedCategory: Category? = nil) -> CategoryModifyViewModelProtocol {
+                                     selectedCategory: StudyCategory? = nil) -> CategoryModifyViewModelProtocol {
         let repository = DefaultCategoryRepository(provider: dependencies.provider)
         return CategoryModifyViewModel(
             createCategoryUseCase: DefaultCreateCategoryUseCase(repository: repository),
@@ -51,7 +50,7 @@ final class CategoryDIContainer: CategoryFlowCoordinatorDependencies {
     func makeCategoryModifyViewController(
         purpose: CategoryPurpose,
         actions: CategoryModifyViewModelActions,
-        selectedCategory: Category? = nil
+        selectedCategory: StudyCategory? = nil
     ) -> UIViewController {
         return CategoryModifyViewController(
             viewModel: makeCategoryModifyViewModel(

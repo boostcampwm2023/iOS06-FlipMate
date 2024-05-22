@@ -7,12 +7,14 @@
 
 import UIKit
 
+import Domain
+
 protocol CategoryFlowCoordinatorDependencies {
     func makeCategorySettingViewController(actions: CategoryViewModelActions) -> UIViewController
     func makeCategoryModifyViewController(
         purpose: CategoryPurpose,
         actions: CategoryModifyViewModelActions,
-        selectedCategory: Category?) -> UIViewController
+        selectedCategory: StudyCategory?) -> UIViewController
 }
 
 final class CategoryFlowCoordinator: Coordinator {
@@ -34,7 +36,7 @@ final class CategoryFlowCoordinator: Coordinator {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func showCategoryModifyVieWController(purpose: CategoryPurpose, selectedCategory: Category? = nil) {
+    private func showCategoryModifyVieWController(purpose: CategoryPurpose, selectedCategory: StudyCategory? = nil) {
         let actions = CategoryModifyViewModelActions(
             didFinishCategoryModify: didFinishCategoryModify)
         let categoryModifyViewController = dependencies.makeCategoryModifyViewController(

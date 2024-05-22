@@ -9,6 +9,7 @@ import UIKit
 
 import Domain
 import Network
+import Data
 
 final class SocialDIContainer: SocialFlowCoordinatorDependencies {
     struct Dependencies {

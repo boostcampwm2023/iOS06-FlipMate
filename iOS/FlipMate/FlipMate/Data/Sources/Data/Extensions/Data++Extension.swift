@@ -8,7 +8,7 @@
 import Foundation
 
 extension Data {
-    static func makeMultiPartRequestBody(userName: String, jpegImageData: Data, boundary: String) -> Data {
+    public static func makeMultiPartRequestBody(userName: String, jpegImageData: Data, boundary: String) -> Data {
         var body = Data()
         
         // nickname 추가

@@ -8,27 +8,29 @@
 import Foundation
 import Combine
 
+import Domain
+
 final class CategoryManager: CategoryManageable {
     // MARK: - Properties
-    private lazy var categoryDidChangeSubject = CurrentValueSubject<[Category], Never>(categories)
-    private var categories: [Category] = []
+    private lazy var categoryDidChangeSubject = CurrentValueSubject<[StudyCategory], Never>(categories)
+    private var categories: [StudyCategory] = []
 
-    var categoryDidChangePublisher: AnyPublisher<[Category], Never> {
+    var categoryDidChangePublisher: AnyPublisher<[StudyCategory], Never> {
         return categoryDidChangeSubject.eraseToAnyPublisher()
     }
     
     // MARK: - init
-    init(categories: [Category]) {
+    init(categories: [StudyCategory]) {
         self.categories = categories
     }
     
     // MARK: - Methods
-    func replace(categories: [Category]) {
+    func replace(categories: [StudyCategory]) {
         self.categories = categories
         categoryDidChangeSubject.send(self.categories)
     }
     
-    func change(category: Category) {
+    func change(category: StudyCategory) {
         guard let targetCategory = categories.filter({ $0.id == category.id }).first else { return }
         guard let targetIndex = categories.firstIndex(of: targetCategory) else { return }
         categories[targetIndex] = category
@@ -42,12 +44,12 @@ final class CategoryManager: CategoryManageable {
         categoryDidChangeSubject.send(categories)
     }
     
-    func append(category: Category) {
+    func append(category: StudyCategory) {
         categories.append(category)
         categoryDidChangeSubject.send(categories)
     }
     
-    func findCategory(categoryId: Int) -> Category? {
+    func findCategory(categoryId: Int) -> StudyCategory? {
         guard let targetCategory = categories.filter({ $0.id == categoryId }).first else { return nil }
         guard let targetIndex = categories.firstIndex(of: targetCategory) else { return nil }
         return categories[targetIndex]

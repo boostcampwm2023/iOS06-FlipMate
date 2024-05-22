@@ -11,21 +11,21 @@ import Combine
 import Domain
 
 struct CategoryViewModelActions {
-    let showModifyCategory: (CategoryPurpose, Category?) -> Void
+    let showModifyCategory: (CategoryPurpose, StudyCategory?) -> Void
     let didFinishCategorySetting: () -> Void
 }
 
 protocol CategoryViewModelInput {
     func createCategoryTapped()
-    func updateCategoryTapped(category: Category)
+    func updateCategoryTapped(category: StudyCategory)
     func deleteCategory(of id: Int) async throws
     func didFinishCategorySetting()
-    func cellDidTapped(category: Category)
+    func cellDidTapped(category: StudyCategory)
 }
 
 protocol CategoryViewModelOutput {
-    var categoriesPublisher: AnyPublisher<[Category], Never> { get }
-    var selectedCategoryPublisher: AnyPublisher<Category, Never> { get }
+    var categoriesPublisher: AnyPublisher<[StudyCategory], Never> { get }
+    var selectedCategoryPublisher: AnyPublisher<StudyCategory, Never> { get }
     var categoryPullPublisher: AnyPublisher<Void, Never> { get }
 }
 
@@ -33,14 +33,14 @@ typealias CategoryViewModelProtocol = CategoryViewModelInput & CategoryViewModel
 
 final class CategoryViewModel: CategoryViewModelProtocol {
     // MARK: properties
-    private var categoriesSubject = CurrentValueSubject<[Category], Never>([])
-    private var selectedCategorySubject = PassthroughSubject<Category, Never>()
+    private var categoriesSubject = CurrentValueSubject<[StudyCategory], Never>([])
+    private var selectedCategorySubject = PassthroughSubject<StudyCategory, Never>()
     private var categoryPullSubject = PassthroughSubject<Void, Never>()
     
     private var categoryMananger: CategoryManageable
     private let deleteCategoryUseCase: DeleteCategoryUseCase
     private let actions: CategoryViewModelActions?
-    private var selectedCategory: Category?
+    private var selectedCategory: StudyCategory?
     
     init(deleteCategoryUseCase: DeleteCategoryUseCase, categoryManager: CategoryManageable, actions: CategoryViewModelActions? = nil) {
         self.deleteCategoryUseCase = deleteCategoryUseCase
@@ -49,11 +49,11 @@ final class CategoryViewModel: CategoryViewModelProtocol {
     }
     
     // MARK: Output
-    var categoriesPublisher: AnyPublisher<[Category], Never> {
+    var categoriesPublisher: AnyPublisher<[StudyCategory], Never> {
         return categoryMananger.categoryDidChangePublisher
     }
     
-    var selectedCategoryPublisher: AnyPublisher<Category, Never> {
+    var selectedCategoryPublisher: AnyPublisher<StudyCategory, Never> {
         return selectedCategorySubject.eraseToAnyPublisher()
     }
     
@@ -71,7 +71,7 @@ final class CategoryViewModel: CategoryViewModelProtocol {
         }
     }
     
-    func updateCategoryTapped(category: Category) {
+    func updateCategoryTapped(category: StudyCategory) {
         actions?.showModifyCategory(.update, category)
     }
     
@@ -79,7 +79,7 @@ final class CategoryViewModel: CategoryViewModelProtocol {
         actions?.didFinishCategorySetting()
     }
 
-    func cellDidTapped(category: Category) {
+    func cellDidTapped(category: StudyCategory) {
         selectedCategory = category
         selectedCategorySubject.send(category)
 //        categoryMananger.selectedCategory(category: category)

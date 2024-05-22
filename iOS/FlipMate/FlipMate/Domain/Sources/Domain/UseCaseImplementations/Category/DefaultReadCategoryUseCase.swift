@@ -14,7 +14,7 @@ public final class DefaultReadCategoryUseCase: ReadCategoryUseCase {
         self.repository = repository
     }
     
-    public func readCategory() async throws -> [Category] {
+    public func readCategory() async throws -> [StudyCategory] {
         return try await repository.readCategories()
     }
 }
