@@ -644,7 +644,7 @@
 				605F88492B297DA5008975DC /* FlipMate.entitlements */,
 				600908ED2AFCDB6E0065DFFB /* Application */,
 				600908EF2AFCDBC90065DFFB /* Presentation */,
-				600908F82AFCDE630065DFFB /* Data */,
+				600908F82AFCDE630065DFFB /* FMData */,
 				600908EE2AFCDBAB0065DFFB /* Resources */,
 				6067DD822B2737F9004625AF /* Selection.ahap */,
 				6096F91D2B04F3CA00D0B972 /* FaceDown.ahap */,
@@ -763,14 +763,14 @@
 			path = Splash;
 			sourceTree = "<group>";
 		};
-		600908F82AFCDE630065DFFB /* Data */ = {
+		600908F82AFCDE630065DFFB /* FMData */ = {
 			isa = PBXGroup;
 			children = (
 				2C4D55A92B033015006D7C26 /* Extension */,
 				600908FA2AFCDF0F0065DFFB /* Repositories */,
 				600908FC2AFCDF2F0065DFFB /* Network */,
 			);
-			path = Data;
+			path = FMData;
 			sourceTree = "<group>";
 		};
 		600908FA2AFCDF0F0065DFFB /* Repositories */ = {
