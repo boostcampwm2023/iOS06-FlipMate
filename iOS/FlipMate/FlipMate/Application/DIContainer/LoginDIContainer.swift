@@ -10,6 +10,7 @@ import UIKit
 import Domain
 import Network
 import Core
+import Data
 
 final class LoginDIContainer: LoginFlowCoordinatorDependencies {
     struct Dependencies {
