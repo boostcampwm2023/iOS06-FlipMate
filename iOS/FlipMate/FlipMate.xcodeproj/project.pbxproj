@@ -92,9 +92,6 @@
 		2C8D214A2B7216EF00632718 /* DeviceMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851D82B05C37C009031EA /* DeviceMotionManager.swift */; };
 		2C8D214B2B7216EF00632718 /* FeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C43A0D72B037BBC0005596A /* FeedbackManager.swift */; };
 		2C8D21552B7216EF00632718 /* CategoryManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61F82B14F33600AE63F9 /* CategoryManageable.swift */; };
-		2C8D21952B7216EF00632718 /* UIView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D55AA2B033029006D7C26 /* UIView++Extension.swift */; };
-		2C8D21962B7216EF00632718 /* UITextField++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F0062B126C95005BB32D /* UITextField++Extension.swift */; };
-		2C8D21972B7216EF00632718 /* UIColor++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */; };
 		2C8D21982B7216EF00632718 /* Data++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A0B8E02B181C4900510299 /* Data++Extension.swift */; };
 		2C8D21992B7216EF00632718 /* DefaultAuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3842282B0F3B19001E2803 /* DefaultAuthenticationRepository.swift */; };
 		2C8D219A2B7216EF00632718 /* DefaultTimerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3430AC2B0DDF25008CBC85 /* DefaultTimerRepository.swift */; };
@@ -191,7 +188,6 @@
 		2C3430AA2B0DDB8D008CBC85 /* TimerEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEndpoints.swift; sourceTree = "<group>"; };
 		2C3430AC2B0DDF25008CBC85 /* DefaultTimerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimerRepository.swift; sourceTree = "<group>"; };
 		2C43A0D72B037BBC0005596A /* FeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackManager.swift; sourceTree = "<group>"; };
-		2C4D55AA2B033029006D7C26 /* UIView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView++Extension.swift"; sourceTree = "<group>"; };
 		2C4D55AF2B0348FB006D7C26 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
 		2C4D55B22B035484006D7C26 /* DeviceOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceOrientation.swift; sourceTree = "<group>"; };
 		2C5CDA472B0252B2007AFC57 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -319,8 +315,6 @@
 		ED6865CF2B1F1429001A2AAD /* ChartDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDIContainer.swift; sourceTree = "<group>"; };
 		ED6865D22B1F1464001A2AAD /* ChartFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFlowCoordinator.swift; sourceTree = "<group>"; };
 		ED6865D52B1F14CF001A2AAD /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
-		ED82F0062B126C95005BB32D /* UITextField++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField++Extension.swift"; sourceTree = "<group>"; };
-		ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor++Extension.swift"; sourceTree = "<group>"; };
 		ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		EDC851C62B021492009031EA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		EDC851D12B04EE83009031EA /* CategoryListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -381,9 +375,6 @@
 		2C4D55A92B033015006D7C26 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				2C4D55AA2B033029006D7C26 /* UIView++Extension.swift */,
-				ED82F0062B126C95005BB32D /* UITextField++Extension.swift */,
-				ED82F00A2B128C4D005BB32D /* UIColor++Extension.swift */,
 				60A0B8E02B181C4900510299 /* Data++Extension.swift */,
 			);
 			path = Extension;
@@ -1272,9 +1263,6 @@
 				2C8D214B2B7216EF00632718 /* FeedbackManager.swift in Sources */,
 				2C8D21552B7216EF00632718 /* CategoryManageable.swift in Sources */,
 				2CE0E5BD2B833602000D231C /* LineChartView.swift in Sources */,
-				2C8D21952B7216EF00632718 /* UIView++Extension.swift in Sources */,
-				2C8D21962B7216EF00632718 /* UITextField++Extension.swift in Sources */,
-				2C8D21972B7216EF00632718 /* UIColor++Extension.swift in Sources */,
 				2C8D21982B7216EF00632718 /* Data++Extension.swift in Sources */,
 				2C8D21992B7216EF00632718 /* DefaultAuthenticationRepository.swift in Sources */,
 				2C8D219A2B7216EF00632718 /* DefaultTimerRepository.swift in Sources */,

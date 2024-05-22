@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIColor {
-    convenience init?(hexString: String) {
+    public convenience init?(hexString: String) {
         let hexSanitized = hexString.trimmingCharacters(in: .whitespacesAndNewlines)
         var rgb: UInt64 = 0
         
@@ -24,7 +24,7 @@ extension UIColor {
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
     
-    func toHexString() -> String {
+    public func toHexString() -> String {
         guard let components = cgColor.components, components.count >= 3 else {
             return "FFFFFFFF"
         }
