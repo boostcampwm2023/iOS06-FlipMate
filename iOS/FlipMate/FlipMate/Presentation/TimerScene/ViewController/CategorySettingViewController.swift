@@ -7,7 +7,9 @@
 
 import UIKit
 import Combine
+
 import DesignSystem
+import Domain
 
 final class CategorySettingViewController: BaseViewController {
     typealias CategoryDataSource
@@ -109,7 +111,7 @@ extension CategorySettingViewController: UICollectionViewDelegate {
 
 // MARK: - objc function
 private extension CategorySettingViewController {
-    func showActionSheet(with category: Category) {
+    func showActionSheet(with category: StudyCategory) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let actions = createActionSheet(with: category)
@@ -121,7 +123,7 @@ private extension CategorySettingViewController {
         self.present(actionSheet, animated: true)
     }
     
-    func showDeleteAlert(with category: Category) {
+    func showDeleteAlert(with category: StudyCategory) {
         let alert = UIAlertController(title: category.subject,
                                       message: Constant.deleteAlertMessage,
                                       preferredStyle: .alert)
@@ -176,7 +178,7 @@ private extension CategorySettingViewController {
         dataSource?.apply(snapshot)
     }
     
-    func updateCategoryTapped(with category: Category) {
+    func updateCategoryTapped(with category: StudyCategory) {
         viewModel.updateCategoryTapped(category: category)
     }
 }
@@ -209,7 +211,7 @@ private extension CategorySettingViewController {
 // MARK: - Alert function
 
 private extension CategorySettingViewController {
-    func createActionSheet(with category: Category) -> [UIAlertAction] {
+    func createActionSheet(with category: StudyCategory) -> [UIAlertAction] {
         let modifyAction = UIAlertAction(title: Constant.modifyCategory, style: .default) { [weak self] _ in
             guard let self = self else { return }
             self.viewModel.updateCategoryTapped(category: category)
@@ -225,7 +227,7 @@ private extension CategorySettingViewController {
         return [modifyAction, deleteAction, cancelAction]
     }
     
-    func createDeleteAlert(with category: Category) -> [UIAlertAction] {
+    func createDeleteAlert(with category: StudyCategory) -> [UIAlertAction] {
         let deleteAction = UIAlertAction(title: Constant.delete, style: .destructive) { [weak self] _ in
             guard let self = self else { return }
             Task {

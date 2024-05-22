@@ -24,7 +24,7 @@ protocol CategoryModifyViewModelInput {
 }
 
 protocol CategoryModifyViewModelOutput {
-    var selectedCategoryPublisher: AnyPublisher<Category?, Never> { get }
+    var selectedCategoryPublisher: AnyPublisher<StudyCategory?, Never> { get }
 }
 
 typealias CategoryModifyViewModelProtocol = CategoryModifyViewModelInput & CategoryModifyViewModelOutput
@@ -32,14 +32,14 @@ typealias CategoryModifyViewModelProtocol = CategoryModifyViewModelInput & Categ
 final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
     
     // MARK: - Subject
-    private lazy var selectedCategorySubject = CurrentValueSubject<Category?, Never>(selectedCategory)
+    private lazy var selectedCategorySubject = CurrentValueSubject<StudyCategory?, Never>(selectedCategory)
     
     // MARK: - Properites
     private var categoryMananger: CategoryManageable
     private let createCategoryUseCase: CreateCategoryUseCase
     private let updateCategoryUseCase: UpdateCategoryUseCsae
     private let actions: CategoryModifyViewModelActions?
-    private let selectedCategory: Category?
+    private let selectedCategory: StudyCategory?
     
     // MARK: - init
     
@@ -47,7 +47,7 @@ final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
          updateCategoryUseCase: UpdateCategoryUseCsae,
          categoryManager: CategoryManageable,
          actions: CategoryModifyViewModelActions? = nil,
-         selectedCategory: Category? = nil) {
+         selectedCategory: StudyCategory? = nil) {
         self.createCategoryUseCase = createCategoryUseCase
         self.updateCategoryUseCase = updateCategoryUseCase
         self.categoryMananger = categoryManager
@@ -56,7 +56,7 @@ final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
     }
     
     // MARK: - Output
-    var selectedCategoryPublisher: AnyPublisher<Category?, Never> {
+    var selectedCategoryPublisher: AnyPublisher<StudyCategory?, Never> {
         return selectedCategorySubject.eraseToAnyPublisher()
     }
     
@@ -64,7 +64,7 @@ final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
     func createCategory(name: String, colorCode: String?) async throws {
         let colorCode = colorCode ?? "000000FF"
         let newCategoryID = try await createCategoryUseCase.createCategory(name: name, colorCode: colorCode)
-        let newCategory = Category(id: newCategoryID, color: colorCode, subject: name, studyTime: 0)
+        let newCategory = StudyCategory(id: newCategoryID, color: colorCode, subject: name, studyTime: 0)
         categoryMananger.append(category: newCategory)
     }
     
@@ -72,7 +72,7 @@ final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
         guard let selectedCategory = selectedCategory else { return FMLogger.general.error("선택된 카테고리 없음")}
         let colorCode = newColorCode ?? "000000FF", studyTime = selectedCategory.studyTime ?? 0
         try await updateCategoryUseCase.updateCategory(of: selectedCategory.id, newName: newName, newColorCode: colorCode)
-        let updateCategory = Category(id: selectedCategory.id, color: colorCode, subject: newName, studyTime: studyTime)
+        let updateCategory = StudyCategory(id: selectedCategory.id, color: colorCode, subject: newName, studyTime: studyTime)
         categoryMananger.change(category: updateCategory)
     }
     

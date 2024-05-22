@@ -16,10 +16,10 @@ final class FeedbackManager {
     
     // MARK: - init
     private init() {
-        createEngine()
-        checkHapticsCompatibility()
-        configureResetHandler()
-        configureStoppedHandler()
+//        createEngine()
+//        checkHapticsCompatibility()
+//        configureResetHandler()
+//        configureStoppedHandler()
     }
     
     // MARK: - Configure Haptic Engine

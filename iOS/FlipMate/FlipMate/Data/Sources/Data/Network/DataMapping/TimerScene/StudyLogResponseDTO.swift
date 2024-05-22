@@ -23,7 +23,7 @@ struct StudyLogResponseDTO: Decodable {
         return .init(
             totalTime: todayTime,
             category: categories.map {
-                Category(id: $0.id, color: $0.color, subject: $0.name, studyTime: $0.todayTime)
+                StudyCategory(id: $0.id, color: $0.color, subject: $0.name, studyTime: $0.todayTime)
             }
         )
     }

@@ -23,7 +23,7 @@ public final class DefaultFetchDailyChartUseCase: FetchDailyChartUseCase {
         
         etcTime = chartLog.studyLog.totalTime - etcTime
         
-        let etcCategory = Category(id: 0, color: "888888FF", subject: NSLocalizedString("etc", comment: ""), studyTime: etcTime)
+        let etcCategory = StudyCategory(id: 0, color: "888888FF", subject: NSLocalizedString("etc", comment: ""), studyTime: etcTime)
         chartLog.studyLog.category.append(etcCategory)
         
         return chartLog

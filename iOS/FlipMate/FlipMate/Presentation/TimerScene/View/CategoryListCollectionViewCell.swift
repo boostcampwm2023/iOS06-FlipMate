@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 import DesignSystem
+import Domain
 
 final class CategoryListCollectionViewCell: UICollectionViewCell {
     static let identifier = "CategoryListCollectionViewCell"
@@ -47,7 +48,7 @@ final class CategoryListCollectionViewCell: UICollectionViewCell {
         fatalError("Don't use storyboard")
     }
     
-    func updateUI(category: Category) {
+    func updateUI(category: StudyCategory) {
         subjectLabel.text = category.subject
         colorCircle.backgroundColor = UIColor(hexString: category.color)
         timeLabel.text = category.studyTime?.secondsToStringTime()

@@ -8,5 +8,5 @@
 import Foundation
 
 public protocol ReadCategoryUseCase {
-    func readCategory() async throws -> [Category]
+    func readCategory() async throws -> [StudyCategory]
 }

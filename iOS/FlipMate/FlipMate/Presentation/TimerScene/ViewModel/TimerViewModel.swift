@@ -31,7 +31,7 @@ protocol TimerViewModelInput {
     func deviceOrientationDidChange(_ sender: DeviceOrientation)
     func deviceProximityDidChange(_ sender: Bool)
     func categorySettingButtoneDidTapped()
-    func categoryDidSelected(category: Category)
+    func categoryDidSelected(category: StudyCategory)
     func categoryDidDeselected()
     func refreshStudyLog()
 }
@@ -39,8 +39,8 @@ protocol TimerViewModelInput {
 protocol TimerViewModelOutput {
     var isDeviceFaceDownPublisher: AnyPublisher<Bool, Never> { get }
     var totalTimePublisher: AnyPublisher<Int, Never> { get }
-    var categoryChangePublisher: AnyPublisher<Category, Never> { get }
-    var categoriesPublisher: AnyPublisher<[Category], Never> { get }
+    var categoryChangePublisher: AnyPublisher<StudyCategory, Never> { get }
+    var categoriesPublisher: AnyPublisher<[StudyCategory], Never> { get }
     var deviceSettingEnabledPublisher: AnyPublisher<Bool, Never> { get }
 }
 
@@ -57,8 +57,8 @@ final class TimerViewModel: TimerViewModelProtocol {
     // MARK: Subject
     private var isDeviceFaceDownSubject = PassthroughSubject<Bool, Never>()
     private var isPresentingCategorySubject = PassthroughSubject<Void, Never>()
-    private var categoryChangeSubject = PassthroughSubject<Category, Never>()
-    private var categoriesSubject = PassthroughSubject<[Category], Never>()
+    private var categoryChangeSubject = PassthroughSubject<StudyCategory, Never>()
+    private var categoriesSubject = PassthroughSubject<[StudyCategory], Never>()
     private var deviceSettingEnabledSubject = PassthroughSubject<Bool, Never>()
     
     // MARK: Properties
@@ -66,7 +66,7 @@ final class TimerViewModel: TimerViewModelProtocol {
     private var orientation: DeviceOrientation = .unknown
     private var cancellables = Set<AnyCancellable>()
     private var increaseTime: Int = -1
-    private var selectedCategory: Category?
+    private var selectedCategory: StudyCategory?
     private let actions: TimerViewModelActions?
     
     // MARK: - Managers
@@ -108,11 +108,11 @@ final class TimerViewModel: TimerViewModelProtocol {
         return userInfoManager.totalTimeChangePublihser
     }
     
-    var categoryChangePublisher: AnyPublisher<Category, Never> {
+    var categoryChangePublisher: AnyPublisher<StudyCategory, Never> {
         return categoryChangeSubject.eraseToAnyPublisher()
     }
     
-    var categoriesPublisher: AnyPublisher<[Category], Never> {
+    var categoriesPublisher: AnyPublisher<[StudyCategory], Never> {
         return categoryManager.categoryDidChangePublisher
     }
     
@@ -149,7 +149,7 @@ final class TimerViewModel: TimerViewModelProtocol {
         deviceSettingEnabledSubject.send(false)
     }
     
-    func categoryDidSelected(category: Category) {
+    func categoryDidSelected(category: StudyCategory) {
         FMLogger.timer.debug("\(category.subject)가 선택되었습니다.")
         selectedCategory = category
     }
@@ -181,7 +181,7 @@ private extension TimerViewModel {
         }
     }
     
-    func changeCategory(category: Category) {
+    func changeCategory(category: StudyCategory) {
         categoryManager.change(category: category)
     }
     

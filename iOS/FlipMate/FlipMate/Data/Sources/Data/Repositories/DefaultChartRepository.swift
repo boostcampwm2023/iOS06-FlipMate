@@ -23,7 +23,7 @@ public final class DefaultChartRepository: ChartRepository {
         let responseDTO = try await provider.request(with: endpoint)
         
         let categories = responseDTO.categories?.map { dto in
-            return Category(id: dto.id, color: dto.color, subject: dto.name, studyTime: dto.todayTime)
+            return StudyCategory(id: dto.id, color: dto.color, subject: dto.name, studyTime: dto.todayTime)
         } ?? []
         
         return CategoryChartLog(studyLog: StudyLog(totalTime: responseDTO.todayTime, category: categories), percentage: responseDTO.percentage)
