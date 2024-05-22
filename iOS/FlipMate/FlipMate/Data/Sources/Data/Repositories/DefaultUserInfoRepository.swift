@@ -12,14 +12,14 @@ import Domain
 import Network
 import Core
 
-final class DefaultUserInfoRepository: UserInfoRepository {
+public final class DefaultUserInfoRepository: UserInfoRepository {
     private let provider: Providable
     
-    init(provider: Providable) {
+    public init(provider: Providable) {
         self.provider = provider
     }
     
-    func getUserInfo() -> AnyPublisher<UserInfo, NetworkError> {
+    public func getUserInfo() -> AnyPublisher<UserInfo, NetworkError> {
         let endpoint = UserInfoEndpoints.userInfo()
         return provider.request(with: endpoint)
             .map { response -> UserInfo in
@@ -31,7 +31,7 @@ final class DefaultUserInfoRepository: UserInfoRepository {
             .eraseToAnyPublisher()
     }
     
-    func patchTimeZone(date: Date) async throws {
+    public func patchTimeZone(date: Date) async throws {
         let reqeust = TimeZoneRequestDTO(timezone: date.dateToString(format: .ZZZZZ))
         let endpoint = UserInfoEndpoints.patchTimeZone(with: reqeust)
         _ = try await provider.request(with: endpoint)

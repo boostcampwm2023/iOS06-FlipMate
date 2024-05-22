@@ -11,14 +11,14 @@ import Domain
 import Network
 import Core
 
-final class DefaultCategoryRepository: CategoryRepository {
+public final class DefaultCategoryRepository: CategoryRepository {
     private let provider: Providable
     
-    init(provider: Providable) {
+    public init(provider: Providable) {
         self.provider = provider
     }
     
-    func createCategory(name: String, colorCode: String) async throws -> Int {
+    public func createCategory(name: String, colorCode: String) async throws -> Int {
         let categoryDTO = CategoryRequestDTO(
             name: name,
             colorCode: colorCode)
@@ -28,7 +28,7 @@ final class DefaultCategoryRepository: CategoryRepository {
         return createdCategory.categoryID
     }
     
-    func readCategories() async throws -> [Category] {
+    public func readCategories() async throws -> [Category] {
         let endpoint = CategoryEndpoints.fetchCategories()
         let categories = try await provider.request(with: endpoint)
         FMLogger.general.log("카테고리 읽기 완료")
@@ -37,7 +37,7 @@ final class DefaultCategoryRepository: CategoryRepository {
         }
     }
     
-    func updateCategory(id: Int, newName: String, newColorCode: String) async throws {
+    public func updateCategory(id: Int, newName: String, newColorCode: String) async throws {
         let categoryDTO = CategoryRequestDTO(
             name: newName,
             colorCode: newColorCode)
@@ -46,7 +46,7 @@ final class DefaultCategoryRepository: CategoryRepository {
         FMLogger.general.log("카테고리 업데이트 완료")
     }
     
-    func deleteCategory(id: Int) async throws {
+    public func deleteCategory(id: Int) async throws {
         let endpoint = CategoryEndpoints.deleteCategory(id: id)
         _ = try await provider.request(with: endpoint)
         FMLogger.general.log("카테고리 삭제 완료")

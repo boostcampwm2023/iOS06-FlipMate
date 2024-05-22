@@ -12,14 +12,14 @@ import Domain
 import Network
 import Core
 
-final class DefaultStudyLogRepository: StudyLogRepository {
+public final class DefaultStudyLogRepository: StudyLogRepository {
     private let provider: Providable
     
-    init(provider: Providable) {
+    public init(provider: Providable) {
         self.provider = provider
     }
     
-    func getUserInfo() -> AnyPublisher<StudyLog, NetworkError> {
+    public func getUserInfo() -> AnyPublisher<StudyLog, NetworkError> {
         let endpoint = StudyLogEndpoints.getStudyLog()
         
         return provider.request(with: endpoint)
@@ -29,7 +29,7 @@ final class DefaultStudyLogRepository: StudyLogRepository {
             .eraseToAnyPublisher()
     }
     
-    func studingPing() async throws {
+    public func studingPing() async throws {
         let endpoint = StudyLogEndpoints.studingPing()
         
         _ = try await provider.request(with: endpoint)
