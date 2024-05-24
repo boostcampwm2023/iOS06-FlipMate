@@ -175,6 +175,7 @@
 		2CD272EE2B21A619000CB9E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2CD272F02B21A622000CB9E5 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2CD272F12B21A62B000CB9E5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2CD65BB62C008F8700D1344F /* Home */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Home; sourceTree = "<group>"; };
 		2CDCD03C2B1871E60080DCDE /* SocialDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDIContainer.swift; sourceTree = "<group>"; };
 		2CDCD03F2B1872060080DCDE /* SocialFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFlowCoordinator.swift; sourceTree = "<group>"; };
 		2CDCD0412B1873F60080DCDE /* SocialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewModel.swift; sourceTree = "<group>"; };
@@ -350,6 +351,14 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		2C654A342C008ECA00105D5A /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				2CD65BB62C008F8700D1344F /* Home */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
 		2C801D812B04C62900A7ABAE /* TimerManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,6 +508,7 @@
 		600908B12AFCD7DF0065DFFB = {
 			isa = PBXGroup;
 			children = (
+				2C654A342C008ECA00105D5A /* Features */,
 				2C24ECCF2BFDD4E4000664BC /* Data */,
 				60DC013D2BF842F6007C90A2 /* Domain */,
 				2C04FF5A2BF78AAE0065075F /* DesignSystem */,
