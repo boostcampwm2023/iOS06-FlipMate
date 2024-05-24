@@ -184,6 +184,7 @@
 		2CD272F12B21A62B000CB9E5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2CD65BB62C008F8700D1344F /* Home */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Home; sourceTree = "<group>"; };
 		2CD65C1E2C00902E00D1344F /* HomeDemo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HomeDemo.xcodeproj; path = Home/HomeDemo/HomeDemo.xcodeproj; sourceTree = "<group>"; };
+		2CD65C262C009DF200D1344F /* Social */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Social; sourceTree = "<group>"; };
 		2CDCD03C2B1871E60080DCDE /* SocialDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDIContainer.swift; sourceTree = "<group>"; };
 		2CDCD03F2B1872060080DCDE /* SocialFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFlowCoordinator.swift; sourceTree = "<group>"; };
 		2CDCD0412B1873F60080DCDE /* SocialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewModel.swift; sourceTree = "<group>"; };
@@ -362,6 +363,7 @@
 		2C654A342C008ECA00105D5A /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				2CD65C262C009DF200D1344F /* Social */,
 				2CD65C1E2C00902E00D1344F /* HomeDemo.xcodeproj */,
 				2CD65BB62C008F8700D1344F /* Home */,
 			);
