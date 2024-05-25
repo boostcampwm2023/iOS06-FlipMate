@@ -499,13 +499,14 @@
 		600908B12AFCD7DF0065DFFB = {
 			isa = PBXGroup;
 			children = (
-				2C24ECCF2BFDD4E4000664BC /* Data */,
-				60DC013D2BF842F6007C90A2 /* Domain */,
-				2C04FF5A2BF78AAE0065075F /* DesignSystem */,
 				60243EEF2B05D24D0098A92F /* .swiftlint.yml */,
-				601F396A2BF3836F001689A0 /* Core */,
-				602BF08C2BF4FB5B0088050A /* Network */,
 				600908BC2AFCD7DF0065DFFB /* FlipMate */,
+				60FE503F2C01C7B600AA2475 /* Feature */,
+				60DC013D2BF842F6007C90A2 /* Domain */,
+				2C24ECCF2BFDD4E4000664BC /* Data */,
+				2C04FF5A2BF78AAE0065075F /* DesignSystem */,
+				602BF08C2BF4FB5B0088050A /* Network */,
+				601F396A2BF3836F001689A0 /* Core */,
 				600908D32AFCD7E00065DFFB /* FlipMateTests */,
 				600908BB2AFCD7DF0065DFFB /* Products */,
 				601F396B2BF386DC001689A0 /* Frameworks */,
@@ -780,6 +781,13 @@
 			children = (
 			);
 			path = MyPageScene;
+			sourceTree = "<group>";
+		};
+		60FE503F2C01C7B600AA2475 /* Feature */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Feature;
 			sourceTree = "<group>";
 		};
 		ED38422A2B0F451F001E2803 /* ViewModel */ = {
