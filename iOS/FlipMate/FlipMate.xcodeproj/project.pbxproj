@@ -217,6 +217,7 @@
 		60FBEE492B4B826F006B1CF9 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		60FBEE4B2B4B829B006B1CF9 /* SignUpViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModelTests.swift; sourceTree = "<group>"; };
 		60FBEE4D2B4B82B1006B1CF9 /* TimerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModelTests.swift; sourceTree = "<group>"; };
+		60FE50402C020EC200AA2475 /* Timer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Timer; path = FlipMate/Timer; sourceTree = SOURCE_ROOT; };
 		ED3595BC2B0DB29F00558FAA /* CategoryModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModifyViewController.swift; sourceTree = "<group>"; };
 		ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColorSelectView.swift; sourceTree = "<group>"; };
 		ED38422B2B0F4531001E2803 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -369,8 +370,6 @@
 		2C88DCF72B1242C7000B4686 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				2C88DCF82B1242DA000B4686 /* TimerFlowCoordinator.swift */,
-				2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -546,9 +545,9 @@
 		600908ED2AFCDB6E0065DFFB /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */,
 				600908BD2AFCD7DF0065DFFB /* AppDelegate.swift */,
 				600908BF2AFCD7DF0065DFFB /* SceneDelegate.swift */,
+				6037BB542C0997AA00BE37AC /* Coordinator */,
 				600909042AFCE0AB0065DFFB /* DIContainer */,
 			);
 			path = Application;
@@ -699,6 +698,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6037BB542C0997AA00BE37AC /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */,
+				6037BB552C09992B00BE37AC /* TimerFlow */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		6037BB552C09992B00BE37AC /* TimerFlow */ = {
+			isa = PBXGroup;
+			children = (
+				2C88DCF82B1242DA000B4686 /* TimerFlowCoordinator.swift */,
+				2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */,
+			);
+			path = TimerFlow;
+			sourceTree = "<group>";
+		};
 		60C791882B5810EB0019E81F /* DummyUseCases */ = {
 			isa = PBXGroup;
 			children = (
@@ -786,6 +803,7 @@
 		60FE503F2C01C7B600AA2475 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				60FE50402C020EC200AA2475 /* Timer */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
