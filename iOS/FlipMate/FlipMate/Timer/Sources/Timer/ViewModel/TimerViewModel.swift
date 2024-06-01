@@ -11,12 +11,17 @@ import OSLog
 import Core
 import Domain
 
-struct TimerViewModelActions {
+public struct TimerViewModelActions {
     let showCategorySettingViewController: () -> Void
     let showTimerFinishViewController: (StudyEndLog) -> Void
+    
+    public init(showCategorySettingViewController: @escaping () -> Void, showTimerFinishViewController: @escaping (StudyEndLog) -> Void) {
+        self.showCategorySettingViewController = showCategorySettingViewController
+        self.showTimerFinishViewController = showTimerFinishViewController
+    }
 }
 
-protocol TimerViewModelInput {
+public protocol TimerViewModelInput {
     func viewDidLoad()
     func viewWillAppear()
     func viewDidDisappear()
@@ -28,7 +33,7 @@ protocol TimerViewModelInput {
     func refreshStudyLog()
 }
 
-protocol TimerViewModelOutput {
+public protocol TimerViewModelOutput {
     var isDeviceFaceDownPublisher: AnyPublisher<Bool, Never> { get }
     var totalTimePublisher: AnyPublisher<Int, Never> { get }
     var categoryChangePublisher: AnyPublisher<StudyCategory, Never> { get }
@@ -36,9 +41,9 @@ protocol TimerViewModelOutput {
     var deviceSettingEnabledPublisher: AnyPublisher<Bool, Never> { get }
 }
 
-typealias TimerViewModelProtocol = TimerViewModelInput & TimerViewModelOutput
+public typealias TimerViewModelProtocol = TimerViewModelInput & TimerViewModelOutput
 
-final class TimerViewModel: TimerViewModelProtocol {
+public final class TimerViewModel: TimerViewModelProtocol {
     // MARK: UseCase
     private let startTimerUseCase: StartTimerUseCase
     private let getStudyLogUseCase: GetStudyLogUseCase
@@ -67,7 +72,7 @@ final class TimerViewModel: TimerViewModelProtocol {
     private let userInfoManager: UserInfoManageable
     
     // MARK: - init
-    init(startTimerUseCase: StartTimerUseCase,
+    public init(startTimerUseCase: StartTimerUseCase,
          getStudyLogUseCase: GetStudyLogUseCase,
          getUserInfoUseCase: GetUserInfoUseCase,
          studingPingUseCase: StudingPingUseCase,
@@ -88,70 +93,66 @@ final class TimerViewModel: TimerViewModelProtocol {
     }
     
     // MARK: Output
-    var isDeviceFaceDownPublisher: AnyPublisher<Bool, Never> {
+    public var isDeviceFaceDownPublisher: AnyPublisher<Bool, Never> {
         return isDeviceFaceDownSubject.eraseToAnyPublisher()
     }
     
-    var isPresentingCategoryPublisher: AnyPublisher<Void, Never> {
-        return isPresentingCategorySubject.eraseToAnyPublisher()
-    }
-    
-    var totalTimePublisher: AnyPublisher<Int, Never> {
+    public var totalTimePublisher: AnyPublisher<Int, Never> {
         return userInfoManager.totalTimeChangePublihser
     }
     
-    var categoryChangePublisher: AnyPublisher<StudyCategory, Never> {
+    public var categoryChangePublisher: AnyPublisher<StudyCategory, Never> {
         return categoryChangeSubject.eraseToAnyPublisher()
     }
     
-    var categoriesPublisher: AnyPublisher<[StudyCategory], Never> {
+    public var categoriesPublisher: AnyPublisher<[StudyCategory], Never> {
         return categoryManager.categoryDidChangePublisher
     }
     
-    var deviceSettingEnabledPublisher: AnyPublisher<Bool, Never> {
+    public var deviceSettingEnabledPublisher: AnyPublisher<Bool, Never> {
         return deviceSettingEnabledSubject.eraseToAnyPublisher()
     }
     
     // MARK: Input
-    func deviceOrientationDidChange(_ sender: DeviceOrientation) {
+    public func deviceOrientationDidChange(_ sender: DeviceOrientation) {
         orientation = sender
         sendFaceDownStatus()
     }
     
-    func deviceProximityDidChange(_ sender: Bool) {
+    public func deviceProximityDidChange(_ sender: Bool) {
         proximity = sender
         sendFaceDownStatus()
     }
     
-    func categorySettingButtoneDidTapped() {
+    public func categorySettingButtoneDidTapped() {
         actions?.showCategorySettingViewController()
     }
     
-    func viewDidLoad() {
+    public func viewDidLoad() {
         updateStudyLog()
         updateUserInfo()
         patchTimeZone()
     }
     
-    func viewWillAppear() {
+    public func viewWillAppear() {
         deviceSettingEnabledSubject.send(true)
     }
     
-    func viewDidDisappear() {
+    public func viewDidDisappear() {
         deviceSettingEnabledSubject.send(false)
     }
     
-    func categoryDidSelected(category: StudyCategory) {
+    public func categoryDidSelected(category: StudyCategory) {
         FMLogger.timer.debug("\(category.subject)가 선택되었습니다.")
         selectedCategory = category
     }
     
-    func categoryDidDeselected() {
+    public func categoryDidDeselected() {
         FMLogger.timer.debug("선택된 카테고리가 해제되었습니다.")
         selectedCategory = nil
     }
     
-    func refreshStudyLog() {
+    public func refreshStudyLog() {
         updateStudyLog()
     }
 }

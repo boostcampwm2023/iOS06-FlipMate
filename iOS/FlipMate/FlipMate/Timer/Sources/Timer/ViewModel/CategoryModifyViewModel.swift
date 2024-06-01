@@ -11,11 +11,15 @@ import Combine
 import Domain
 import Core
 
-struct CategoryModifyViewModelActions {
-    let didFinishCategoryModify: () -> Void
+public struct CategoryModifyViewModelActions {
+    public let didFinishCategoryModify: () -> Void
+    
+    public init(didFinishCategoryModify: @escaping () -> Void) {
+        self.didFinishCategoryModify = didFinishCategoryModify
+    }
 }
 
-protocol CategoryModifyViewModelInput {
+public protocol CategoryModifyViewModelInput {
     func createCategory(name: String, colorCode: String?) async throws
     func updateCategory(newName: String, newColorCode: String?) async throws
     func modifyCloseButtonTapped()
@@ -23,13 +27,13 @@ protocol CategoryModifyViewModelInput {
     func performCategoryModification(purpose: CategoryPurpose, name: String, colorCode: String?) async throws
 }
 
-protocol CategoryModifyViewModelOutput {
+public protocol CategoryModifyViewModelOutput {
     var selectedCategoryPublisher: AnyPublisher<StudyCategory?, Never> { get }
 }
 
-typealias CategoryModifyViewModelProtocol = CategoryModifyViewModelInput & CategoryModifyViewModelOutput
+public typealias CategoryModifyViewModelProtocol = CategoryModifyViewModelInput & CategoryModifyViewModelOutput
 
-final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
+public final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
     
     // MARK: - Subject
     private lazy var selectedCategorySubject = CurrentValueSubject<StudyCategory?, Never>(selectedCategory)
@@ -43,7 +47,7 @@ final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
     
     // MARK: - init
     
-    init(createCategoryUseCase: CreateCategoryUseCase,
+    public init(createCategoryUseCase: CreateCategoryUseCase,
          updateCategoryUseCase: UpdateCategoryUseCsae,
          categoryManager: CategoryManageable,
          actions: CategoryModifyViewModelActions? = nil,
@@ -56,19 +60,19 @@ final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
     }
     
     // MARK: - Output
-    var selectedCategoryPublisher: AnyPublisher<StudyCategory?, Never> {
+    public var selectedCategoryPublisher: AnyPublisher<StudyCategory?, Never> {
         return selectedCategorySubject.eraseToAnyPublisher()
     }
     
     // MARK: - Input
-    func createCategory(name: String, colorCode: String?) async throws {
+    public func createCategory(name: String, colorCode: String?) async throws {
         let colorCode = colorCode ?? "000000FF"
         let newCategoryID = try await createCategoryUseCase.createCategory(name: name, colorCode: colorCode)
         let newCategory = StudyCategory(id: newCategoryID, color: colorCode, subject: name, studyTime: 0)
         categoryMananger.append(category: newCategory)
     }
     
-    func updateCategory(newName: String, newColorCode: String?) async throws {
+    public func updateCategory(newName: String, newColorCode: String?) async throws {
         guard let selectedCategory = selectedCategory else { return FMLogger.general.error("선택된 카테고리 없음")}
         let colorCode = newColorCode ?? "000000FF", studyTime = selectedCategory.studyTime ?? 0
         try await updateCategoryUseCase.updateCategory(of: selectedCategory.id, newName: newName, newColorCode: colorCode)
@@ -76,15 +80,15 @@ final class CategoryModifyViewModel: CategoryModifyViewModelProtocol {
         categoryMananger.change(category: updateCategory)
     }
     
-    func modifyDoneButtonTapped() {
+    public func modifyDoneButtonTapped() {
         actions?.didFinishCategoryModify()
     }
     
-    func modifyCloseButtonTapped() {
+    public func modifyCloseButtonTapped() {
         actions?.didFinishCategoryModify()
     }
     
-    func performCategoryModification(purpose: CategoryPurpose, name: String, colorCode: String?) async throws {
+    public func performCategoryModification(purpose: CategoryPurpose, name: String, colorCode: String?) async throws {
         do {
             switch purpose {
             case .create:

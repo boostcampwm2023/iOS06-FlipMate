@@ -9,7 +9,7 @@ import UIKit
 import Combine
 import DesignSystem
 
-final class TimerFinishViewController: BaseViewController {
+public final class TimerFinishViewController: BaseViewController {
     private enum Constant {
         static let save = NSLocalizedString("yes", comment: "")
         static let cancle =  NSLocalizedString("no", comment: "")
@@ -93,7 +93,7 @@ final class TimerFinishViewController: BaseViewController {
     }()
     
     // MARK: - init
-    init(viewModel: TimerFinishViewModelProtocol) {
+    public init(viewModel: TimerFinishViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -103,15 +103,15 @@ final class TimerFinishViewController: BaseViewController {
     }
     
     // MARK: - Life Cycle
-    override func viewDidAppear(_ animated: Bool) {
+    public override func viewDidAppear(_ animated: Bool) {
         makeButtonsEnabled()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    public override func viewDidDisappear(_ animated: Bool) {
         deviceMotionManager.startDeviceMotion()
     }
     
-    override func configureUI() {
+    public override func configureUI() {
         view.backgroundColor = .clear
         
         [backgroundView, finishView].forEach {
@@ -159,7 +159,7 @@ final class TimerFinishViewController: BaseViewController {
         ])
     }
     
-    override func bind() {
+    public override func bind() {
         viewModel.learningTimePublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] learningTime in

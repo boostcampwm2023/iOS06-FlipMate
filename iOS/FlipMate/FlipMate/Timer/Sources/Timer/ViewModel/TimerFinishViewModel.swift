@@ -11,29 +11,34 @@ import Combine
 import Domain
 import Core
 
-struct TimerFinishViewModelActions {
+public struct TimerFinishViewModelActions {
     let didSaveStudyEndLog: () -> Void
     let didCancleStudyEndLog: () -> Void
+    
+    public init(didSaveStudyEndLog: @escaping () -> Void, didCancleStudyEndLog: @escaping () -> Void) {
+        self.didSaveStudyEndLog = didSaveStudyEndLog
+        self.didCancleStudyEndLog = didCancleStudyEndLog
+    }
 }
 
-protocol TimerFinishViewModelInput {
+public protocol TimerFinishViewModelInput {
     func saveButtonDidTapped()
     func cancleButtonDidTapped()
 }
 
-protocol TimerFinishViewModelOutput {
+public protocol TimerFinishViewModelOutput {
     var learningTimePublisher: AnyPublisher<Int, Never> { get }
 }
 
-typealias TimerFinishViewModelProtocol = TimerFinishViewModelInput & TimerFinishViewModelOutput
+public typealias TimerFinishViewModelProtocol = TimerFinishViewModelInput & TimerFinishViewModelOutput
 
-struct StudyEndLog {
+public struct StudyEndLog {
     let learningTime: Int
     let endDate: Date
     let categoryId: Int?
 }
 
-final class TimerFinishViewModel: TimerFinishViewModelProtocol {
+public final class TimerFinishViewModel: TimerFinishViewModelProtocol {
     
     private let studyEndLog: StudyEndLog
     private let finishTimerUseCase: FinishTimerUseCase
@@ -43,19 +48,19 @@ final class TimerFinishViewModel: TimerFinishViewModelProtocol {
     // MARK: - Subject
     private lazy var learningTimeSubject = CurrentValueSubject<Int, Never>(studyEndLog.learningTime)
     
-    init(studyEndLog: StudyEndLog, finishTimerUseCase: FinishTimerUseCase, actions: TimerFinishViewModelActions? = nil) {
+    public init(studyEndLog: StudyEndLog, finishTimerUseCase: FinishTimerUseCase, actions: TimerFinishViewModelActions? = nil) {
         self.studyEndLog = studyEndLog
         self.finishTimerUseCase = finishTimerUseCase
         self.actions = actions
     }
     
     // MARK: - output
-    var learningTimePublisher: AnyPublisher<Int, Never> {
+    public var learningTimePublisher: AnyPublisher<Int, Never> {
         return learningTimeSubject.eraseToAnyPublisher()
     }
     
     // MARK: - input
-    func saveButtonDidTapped() {
+    public func saveButtonDidTapped() {
         finishTimerUseCase.finishTimer(
             endTime: studyEndLog.endDate,
             learningTime: studyEndLog.learningTime,
@@ -75,7 +80,7 @@ final class TimerFinishViewModel: TimerFinishViewModelProtocol {
         .store(in: &cancellables)
     }
     
-    func cancleButtonDidTapped() {
+    public func cancleButtonDidTapped() {
         finishTimerUseCase.finishTimer(
             endTime: studyEndLog.endDate,
             learningTime: 0,

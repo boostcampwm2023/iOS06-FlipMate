@@ -10,12 +10,17 @@ import Combine
 
 import Domain
 
-struct CategoryViewModelActions {
+public struct CategoryViewModelActions {
     let showModifyCategory: (CategoryPurpose, StudyCategory?) -> Void
     let didFinishCategorySetting: () -> Void
+    
+    public init(showModifyCategory: @escaping (CategoryPurpose, StudyCategory?) -> Void, didFinishCategorySetting: @escaping () -> Void) {
+        self.showModifyCategory = showModifyCategory
+        self.didFinishCategorySetting = didFinishCategorySetting
+    }
 }
 
-protocol CategoryViewModelInput {
+public protocol CategoryViewModelInput {
     func createCategoryTapped()
     func updateCategoryTapped(category: StudyCategory)
     func deleteCategory(of id: Int) async throws
@@ -23,15 +28,15 @@ protocol CategoryViewModelInput {
     func cellDidTapped(category: StudyCategory)
 }
 
-protocol CategoryViewModelOutput {
+public protocol CategoryViewModelOutput {
     var categoriesPublisher: AnyPublisher<[StudyCategory], Never> { get }
     var selectedCategoryPublisher: AnyPublisher<StudyCategory, Never> { get }
     var categoryPullPublisher: AnyPublisher<Void, Never> { get }
 }
 
-typealias CategoryViewModelProtocol = CategoryViewModelInput & CategoryViewModelOutput
+public typealias CategoryViewModelProtocol = CategoryViewModelInput & CategoryViewModelOutput
 
-final class CategoryViewModel: CategoryViewModelProtocol {
+public final class CategoryViewModel: CategoryViewModelProtocol {
     // MARK: properties
     private var categoriesSubject = CurrentValueSubject<[StudyCategory], Never>([])
     private var selectedCategorySubject = PassthroughSubject<StudyCategory, Never>()
@@ -42,27 +47,27 @@ final class CategoryViewModel: CategoryViewModelProtocol {
     private let actions: CategoryViewModelActions?
     private var selectedCategory: StudyCategory?
     
-    init(deleteCategoryUseCase: DeleteCategoryUseCase, categoryManager: CategoryManageable, actions: CategoryViewModelActions? = nil) {
+    public init(deleteCategoryUseCase: DeleteCategoryUseCase, categoryManager: CategoryManageable, actions: CategoryViewModelActions? = nil) {
         self.deleteCategoryUseCase = deleteCategoryUseCase
         self.categoryMananger = categoryManager
         self.actions = actions
     }
     
     // MARK: Output
-    var categoriesPublisher: AnyPublisher<[StudyCategory], Never> {
+    public var categoriesPublisher: AnyPublisher<[StudyCategory], Never> {
         return categoryMananger.categoryDidChangePublisher
     }
     
-    var selectedCategoryPublisher: AnyPublisher<StudyCategory, Never> {
+    public var selectedCategoryPublisher: AnyPublisher<StudyCategory, Never> {
         return selectedCategorySubject.eraseToAnyPublisher()
     }
     
-    var categoryPullPublisher: AnyPublisher<Void, Never> {
+    public var categoryPullPublisher: AnyPublisher<Void, Never> {
         return categoryPullSubject.eraseToAnyPublisher()
     }
     
     // MARK: Input
-    func createCategoryTapped() {
+    public func createCategoryTapped() {
         
         if categoryMananger.numberOfCategory() == 10 {
             categoryPullSubject.send()
@@ -71,21 +76,21 @@ final class CategoryViewModel: CategoryViewModelProtocol {
         }
     }
     
-    func updateCategoryTapped(category: StudyCategory) {
+    public func updateCategoryTapped(category: StudyCategory) {
         actions?.showModifyCategory(.update, category)
     }
     
-    func didFinishCategorySetting() {
+    public func didFinishCategorySetting() {
         actions?.didFinishCategorySetting()
     }
     
-    func cellDidTapped(category: StudyCategory) {
+    public func cellDidTapped(category: StudyCategory) {
         selectedCategory = category
         selectedCategorySubject.send(category)
         //        categoryMananger.selectedCategory(category: category)
     }
     
-    func deleteCategory(of id: Int) async throws {
+    public func deleteCategory(of id: Int) async throws {
         try await deleteCategoryUseCase.deleteCategory(of: id)
         categoryMananger.removeCategory(categoryId: id)
     }

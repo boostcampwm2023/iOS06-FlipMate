@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Timer
 import Domain
 
 protocol CategoryFlowCoordinatorDependencies {

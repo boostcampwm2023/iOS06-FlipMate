@@ -11,7 +11,7 @@ import OSLog
 import Core
 import DesignSystem
 
-final class TimerViewController: BaseViewController {
+public final class TimerViewController: BaseViewController {
     typealias CateogoryDataSource = UICollectionViewDiffableDataSource<CategorySettingSection, CategorySettingItem>
     typealias Snapshot = NSDiffableDataSourceSnapshot<CategorySettingSection, CategorySettingItem>
     
@@ -49,7 +49,7 @@ final class TimerViewController: BaseViewController {
     }()
     
     // MARK: - init
-    init(timerViewModel: TimerViewModelProtocol) {
+    public init(timerViewModel: TimerViewModelProtocol) {
         self.timerViewModel = timerViewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -59,19 +59,19 @@ final class TimerViewController: BaseViewController {
     }
     
     // MARK: - View LifeCycles
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         setDataSource()
         setSnapshot()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         UIDevice.current.isProximityMonitoringEnabled = true
         configureProximityNotification()
         timerViewModel.viewWillAppear()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    public override func viewDidDisappear(_ animated: Bool) {
         deviceMotionManager.stopDeviceMotion()
         timerViewModel.viewDidDisappear()
         UIDevice.current.isProximityMonitoringEnabled = false
@@ -79,7 +79,7 @@ final class TimerViewController: BaseViewController {
     }
     
     // MARK: - setup UI
-    override func configureUI() {
+    public override func configureUI() {
         view.addSubview(categoryListCollectionView)
         categoryListCollectionView.addSubview(instructionImage)
         
@@ -96,7 +96,7 @@ final class TimerViewController: BaseViewController {
         ])
     }
     
-    override func bind() {
+    public override func bind() {
         timerViewModel.viewDidLoad()
         
         timerViewModel.isDeviceFaceDownPublisher
@@ -152,7 +152,7 @@ final class TimerViewController: BaseViewController {
             .store(in: &cancellables)
     }
     
-    func saveStudyLog() {
+    public func saveStudyLog() {
         timerViewModel.refreshStudyLog()
     }
     
@@ -277,7 +277,7 @@ private extension TimerViewController {
 extension TimerViewController: UICollectionViewDelegateFlowLayout {
     
     /// cell size
-    func collectionView(_ collectionView: UICollectionView,
+    public func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(
@@ -286,13 +286,13 @@ extension TimerViewController: UICollectionViewDelegateFlowLayout {
     }
     
     /// 위아래 간격
-    func collectionView(_ collectionView: UICollectionView,
+    public func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return CollectionViewConstant.sectionSpacing
     }
     
-    func collectionView(
+    public func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -303,7 +303,7 @@ extension TimerViewController: UICollectionViewDelegateFlowLayout {
                 right: CollectionViewConstant.sectionRightInset)
         }
     
-    func collectionView(
+    public func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -314,7 +314,7 @@ extension TimerViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension TimerViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+    public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryListCollectionViewCell else { return true }
         if cell.isSelected {
             collectionView.deselectItem(at: indexPath, animated: true)
@@ -326,14 +326,14 @@ extension TimerViewController: UICollectionViewDelegate {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryListCollectionViewCell else { return }
         guard let item = dataSource?.itemIdentifier(for: indexPath) else { return }
         timerViewModel.categoryDidSelected(category: item.category)
         cell.updateShadow()
     }
     
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryListCollectionViewCell else { return }
         cell.updateShadow()
     }

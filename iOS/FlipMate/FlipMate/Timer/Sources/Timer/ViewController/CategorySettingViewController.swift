@@ -10,7 +10,7 @@ import Combine
 import DesignSystem
 import Domain
 
-final class CategorySettingViewController: BaseViewController {
+public final class CategorySettingViewController: BaseViewController {
     typealias CategoryDataSource
     = UICollectionViewDiffableDataSource<CategorySettingSection, CategorySettingItem>
     typealias Snapshot
@@ -31,7 +31,7 @@ final class CategorySettingViewController: BaseViewController {
     }()
     
     // MARK: - Initializers
-    init(viewModel: CategoryViewModelProtocol) {
+    public init(viewModel: CategoryViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -41,7 +41,7 @@ final class CategorySettingViewController: BaseViewController {
     }
     
     // MARK: - Life cycle
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         setDataSource()
         setDelegate()
@@ -53,7 +53,7 @@ final class CategorySettingViewController: BaseViewController {
     }
     
     // MARK: - Configure UI
-    override func configureUI() {
+    public override func configureUI() {
         title = Constant.title
         view.addSubview(collectionView)
         
@@ -68,7 +68,7 @@ final class CategorySettingViewController: BaseViewController {
         self.navigationController?.navigationBar.topItem?.title = ""
     }
     
-    override func bind() {
+    public override func bind() {
         viewModel.categoriesPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] categories in
@@ -101,7 +101,7 @@ final class CategorySettingViewController: BaseViewController {
 
 // MARK: - CollectionViewDelegate
 extension CategorySettingViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let indexPath = self.collectionView.indexPathsForSelectedItems?.first else { return }
         guard let item = self.dataSource?.itemIdentifier(for: indexPath) else { return }
         viewModel.cellDidTapped(category: item.category)

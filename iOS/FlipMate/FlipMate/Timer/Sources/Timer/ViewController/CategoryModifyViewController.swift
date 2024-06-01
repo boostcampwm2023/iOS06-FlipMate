@@ -10,7 +10,7 @@ import UIKit
 import Combine
 import DesignSystem
 
-enum CategoryPurpose {
+public enum CategoryPurpose {
     case create
     case update
     
@@ -22,7 +22,7 @@ enum CategoryPurpose {
     }
 }
 
-final class CategoryModifyViewController: BaseViewController {
+public final class CategoryModifyViewController: BaseViewController {
     private enum Constant {
         static let leftNavigationBarItemTitle = NSLocalizedString("close", comment: "")
         static let rightNavigationBarItemTitle = NSLocalizedString("done", comment: "")
@@ -84,7 +84,7 @@ final class CategoryModifyViewController: BaseViewController {
     private let viewModel: CategoryModifyViewModelProtocol
     private let purpose: CategoryPurpose
     
-    init(viewModel: CategoryModifyViewModelProtocol, purpose: CategoryPurpose) {
+    public init(viewModel: CategoryModifyViewModelProtocol, purpose: CategoryPurpose) {
         self.viewModel = viewModel
         self.purpose = purpose
         super.init(nibName: nil, bundle: nil)
@@ -95,13 +95,13 @@ final class CategoryModifyViewController: BaseViewController {
     }
     
     // MARK: View LifeCycle
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigation()
     }
     
     // MARK: Configure UI
-    override func configureUI() {
+    public override func configureUI() {
         view.backgroundColor = .systemBackground
         
         categoryTitleTextField.placeholder = Constant.placeHolders[0]
@@ -154,7 +154,7 @@ final class CategoryModifyViewController: BaseViewController {
         ])
     }
     
-    override func bind() {
+    public override func bind() {
         viewModel.selectedCategoryPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] category in
@@ -165,7 +165,7 @@ final class CategoryModifyViewController: BaseViewController {
             .store(in: &cancellables)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
 }

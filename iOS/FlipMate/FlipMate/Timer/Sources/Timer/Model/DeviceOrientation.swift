@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum DeviceOrientation: Int {
+public enum DeviceOrientation: Int {
     case unknown
     case portrait
     case portraitUpsideDown
