@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Chart
 import Domain
 import Network
 import Data

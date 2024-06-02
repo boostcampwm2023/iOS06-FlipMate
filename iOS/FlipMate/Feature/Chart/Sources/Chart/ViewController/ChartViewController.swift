@@ -10,7 +10,7 @@ import UIKit
 import Combine
 import DesignSystem
 
-final class ChartViewController: BaseViewController {
+public final class ChartViewController: BaseViewController {
     // MARK: - Constant
     private enum Constant {
         static let daily = NSLocalizedString("daily", comment: "")
@@ -77,7 +77,7 @@ final class ChartViewController: BaseViewController {
         return barChartView
     }()
     
-    var shouldHideDailyChartView: Bool? {
+    private var shouldHideDailyChartView: Bool? {
         didSet {
             guard let shouldHideDailyChartView = self.shouldHideDailyChartView else { return }
             donutChartView.isHidden = shouldHideDailyChartView
@@ -88,7 +88,7 @@ final class ChartViewController: BaseViewController {
     }
     
     // MARK: - init
-    init(viewModel: ChartViewModelProtocol) {
+    public init(viewModel: ChartViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -98,11 +98,11 @@ final class ChartViewController: BaseViewController {
     }
     
     // MARK: - Life Cycle
-    override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    override func configureUI() {
+    public override func configureUI() {
         [ segmentedControl, scrollView ] .forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -159,7 +159,7 @@ final class ChartViewController: BaseViewController {
         ])
     }
     
-    override func bind() {
+    public override func bind() {
         viewModel.viewDidLoad()
         
         viewModel.dailyChartPublisher

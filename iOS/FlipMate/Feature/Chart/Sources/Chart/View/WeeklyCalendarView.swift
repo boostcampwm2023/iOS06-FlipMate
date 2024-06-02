@@ -8,12 +8,6 @@
 import UIKit
 import DesignSystem
 
-enum CalendarScrollState {
-    case left
-    case none
-    case right
-}
-
 protocol WeeklyCalendarViewDelegate: AnyObject {
     func didSelectDate(_ date: Date)
     func deSelectDate(_ date: Date)
