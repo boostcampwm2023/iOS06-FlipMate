@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MyPage
 
 protocol MyPageFlowCoordinatorDependencies {
     func makeMyPageFlowCoordinator(navigationController: UINavigationController?) -> MyPageFlowCoordinator

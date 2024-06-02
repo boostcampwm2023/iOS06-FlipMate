@@ -8,11 +8,12 @@
 import UIKit
 import DesignSystem
 
-final class PrivacyPolicyViewController: BaseViewController {
+public final class PrivacyPolicyViewController: BaseViewController {
     enum Constant {
         static let privatePolicyLabel = NSLocalizedString("privacyPolicyLabel", comment: "")
         static let privacyPolicy = NSLocalizedString("privacyPolicy", comment: "")
     }
+    
     // MARK: - View Properties
     private let scrollview: UIScrollView = {
         let scrollView = UIScrollView()
@@ -35,7 +36,7 @@ final class PrivacyPolicyViewController: BaseViewController {
         return label
     }()
     
-    override func configureUI() {
+    public override func configureUI() {
         self.navigationItem.title = Constant.privacyPolicy
         
         self.view.addSubview(scrollview)

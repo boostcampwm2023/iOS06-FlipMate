@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import MyPage
 import Domain
 import Network
 import Core

@@ -10,18 +10,21 @@ import Combine
 import Domain
 import Core
 
-struct ProfileSettingsViewModelActions {
+public struct ProfileSettingsViewModelActions {
     let didFinishSignUp: () -> Void
+    
+    public init(didFinishSignUp: @escaping () -> Void) {
+        self.didFinishSignUp = didFinishSignUp
+    }
 }
 
-protocol ProfileSettingsViewModelInput {
-    func viewReady()
+public protocol ProfileSettingsViewModelInput {
     func nickNameChanged(_ newNickName: String)
     func profileImageChanged()
     func signUpButtonTapped(userName: String, profileImageData: Data)
 }
 
-protocol ProfileSettingsViewModelOutput {
+public protocol ProfileSettingsViewModelOutput {
     var nicknamePublisher: AnyPublisher<String, Never> { get }
     var imageURLPublisher: AnyPublisher<String?, Never> { get }
     var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Never> { get }
@@ -31,9 +34,9 @@ protocol ProfileSettingsViewModelOutput {
     var errorPublisher: AnyPublisher<Error, Never> { get }
 }
 
-typealias ProfileSettingsViewModelProtocol = ProfileSettingsViewModelInput & ProfileSettingsViewModelOutput
+public typealias ProfileSettingsViewModelProtocol = ProfileSettingsViewModelInput & ProfileSettingsViewModelOutput
 
-final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
+public final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     // MARK: - Use Case
     private let validateNicknameUseCase: ValidateNicknameUseCase
     private let setupProfileInfoUseCase: SetupProfileInfoUseCase
@@ -47,7 +50,7 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     private let actions: ProfileSettingsViewModelActions?
     private let userInfoManager: UserInfoManageable
     
-    init(validateNicknameUseCase: ValidateNicknameUseCase,
+    public init(validateNicknameUseCase: ValidateNicknameUseCase,
          setupProfileInfoUseCase: SetupProfileInfoUseCase,
          actions: ProfileSettingsViewModelActions?,
          userInfoManager: UserInfoManageable) {
@@ -58,19 +61,16 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     }
     
     // MARK: - Input
-    func viewReady() {
-    }
-    
-    func nickNameChanged(_ newNickName: String) {
+    public func nickNameChanged(_ newNickName: String) {
         let nickNameValidationStatus = validateNicknameUseCase.isNickNameValid(newNickName)
         isValidNickNameSubject.send(nickNameValidationStatus)
     }
     
-    func profileImageChanged() {
+    public func profileImageChanged() {
         isProfileImageChangedSubject.send()
     }
     
-    func signUpButtonTapped(userName: String, profileImageData: Data) {
+    public func signUpButtonTapped(userName: String, profileImageData: Data) {
         Task {
             do {
                 let userInfo = try await setupProfileInfoUseCase.setupProfileInfo(nickName: userName, profileImageData: profileImageData)
@@ -96,35 +96,35 @@ final class ProfileSettingsViewModel: ProfileSettingsViewModelProtocol {
     }
     
     // MARK: - Output
-    var nicknamePublisher: AnyPublisher<String, Never> {
+    public var nicknamePublisher: AnyPublisher<String, Never> {
         return userInfoManager.nicknameChangePublisher
     }
     
-    var imageURLPublisher: AnyPublisher<String?, Never> {
+    public var imageURLPublisher: AnyPublisher<String?, Never> {
         return userInfoManager.profileImageChangePublihser
     }
     
-    var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Never> {
+    public var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Never> {
         return isValidNickNameSubject
             .eraseToAnyPublisher()
     }
     
-    var isProfileImageChangedPublisher: AnyPublisher<Void, Never> {
+    public var isProfileImageChangedPublisher: AnyPublisher<Void, Never> {
         return isProfileImageChangedSubject
             .eraseToAnyPublisher()
     }
     
-    var imageNotSafePublisher: AnyPublisher<Void, Never> {
+    public var imageNotSafePublisher: AnyPublisher<Void, Never> {
         return imageNotSafeSubject
             .eraseToAnyPublisher()
     }
     
-    var isSignUpCompletedPublisher: AnyPublisher<Void, Never> {
+    public var isSignUpCompletedPublisher: AnyPublisher<Void, Never> {
         return isSignUpCompletedSubject
             .eraseToAnyPublisher()
     }
     
-    var errorPublisher: AnyPublisher<Error, Never> {
+    public var errorPublisher: AnyPublisher<Error, Never> {
         return errorSubject
             .eraseToAnyPublisher()
     }
