@@ -24,11 +24,6 @@
 		2C8D21022B7216EE00632718 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851C62B021492009031EA /* TabBarViewController.swift */; };
 		2C8D21032B7216EE00632718 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908C12AFCD7DF0065DFFB /* ViewController.swift */; };
 		2C8D21042B7216EE00632718 /* LoginFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCFD2B1244A6000B4686 /* LoginFlowCoordinator.swift */; };
-		2C8D21052B7216EE00632718 /* LoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA4A2B0252C1007AFC57 /* LoginType.swift */; };
-		2C8D21062B7216EE00632718 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422B2B0F4531001E2803 /* LoginViewModel.swift */; };
-		2C8D21072B7216EE00632718 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601EB73A2B148F9A00C5B216 /* SignUpViewModel.swift */; };
-		2C8D21082B7216EE00632718 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA472B0252B2007AFC57 /* LoginViewController.swift */; };
-		2C8D21092B7216EE00632718 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F6FD722B0B5E130057CE0B /* SignUpViewController.swift */; };
 		2C8D210A2B7216EE00632718 /* TimerFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF82B1242DA000B4686 /* TimerFlowCoordinator.swift */; };
 		2C8D210B2B7216EE00632718 /* CategorySettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */; };
 		2C8D210C2B7216EE00632718 /* DeviceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D55B22B035484006D7C26 /* DeviceOrientation.swift */; };
@@ -136,11 +131,6 @@
 		2C277ABE2B4AB22400567CAC /* WeeklyCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarView.swift; sourceTree = "<group>"; };
 		2C277AC02B4AB98000567CAC /* WeekCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C277AC32B4ABCAD00567CAC /* WeeklySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySection.swift; sourceTree = "<group>"; };
-		2C43A0D72B037BBC0005596A /* FeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackManager.swift; sourceTree = "<group>"; };
-		2C4D55AF2B0348FB006D7C26 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
-		2C4D55B22B035484006D7C26 /* DeviceOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceOrientation.swift; sourceTree = "<group>"; };
-		2C5CDA472B0252B2007AFC57 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		2C5CDA4A2B0252C1007AFC57 /* LoginType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginType.swift; sourceTree = "<group>"; };
 		2C5CDA4E2B025403007AFC57 /* SocialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
 		2C5CDA5A2B025440007AFC57 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		2C7CBD582B2B3AAD0024A9AA /* TimerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHeaderView.swift; sourceTree = "<group>"; };
@@ -189,8 +179,6 @@
 		600908C92AFCD7E00065DFFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		600908CB2AFCD7E00065DFFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		600908D02AFCD7E00065DFFB /* FlipMateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlipMateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		601773E32B021E6000D175D9 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
-		601EB73A2B148F9A00C5B216 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		601F396A2BF3836F001689A0 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Core; path = FlipMate/Core; sourceTree = "<group>"; };
 		6020C7632B21C1D400F58AD0 /* MyPageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageHeaderView.swift; sourceTree = "<group>"; };
 		60243EEF2B05D24D0098A92F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -211,13 +199,10 @@
 		60EB7F552B1F053800F8C613 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		60EB7F5A2B1F19D900F8C613 /* ProfileSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewController.swift; sourceTree = "<group>"; };
 		60EB7F5C2B1F4F9E00F8C613 /* ProfileSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewModel.swift; sourceTree = "<group>"; };
-		60F6FD722B0B5E130057CE0B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		60FBEE492B4B826F006B1CF9 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		60FBEE4B2B4B829B006B1CF9 /* SignUpViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModelTests.swift; sourceTree = "<group>"; };
 		60FBEE4D2B4B82B1006B1CF9 /* TimerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModelTests.swift; sourceTree = "<group>"; };
-		ED3595BC2B0DB29F00558FAA /* CategoryModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModifyViewController.swift; sourceTree = "<group>"; };
-		ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColorSelectView.swift; sourceTree = "<group>"; };
-		ED38422B2B0F4531001E2803 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		60FE50402C020EC200AA2475 /* Timer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Timer; path = FlipMate/Timer; sourceTree = SOURCE_ROOT; };
 		ED68659C2B15E928001A2AAD /* SocialDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDetailViewController.swift; sourceTree = "<group>"; };
 		ED6865AC2B179600001A2AAD /* SocialDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDetailViewModel.swift; sourceTree = "<group>"; };
 		ED6865BE2B1E2FA6001A2AAD /* ChartSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartSegmentedControl.swift; sourceTree = "<group>"; };
@@ -276,62 +261,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		2C43A0D62B037BA50005596A /* FeedbackManager */ = {
-			isa = PBXGroup;
-			children = (
-				2C43A0D72B037BBC0005596A /* FeedbackManager.swift */,
-			);
-			path = FeedbackManager;
-			sourceTree = "<group>";
-		};
-		2C4D55AC2B0348D1006D7C26 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				2C4D55AF2B0348FB006D7C26 /* TimerViewModel.swift */,
-				ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */,
-				2C88DD0E2B14C22C000B4686 /* TimerFinishViewModel.swift */,
-				2C9F61FA2B15C96100AE63F9 /* CategoryModifyViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		2C4D55AE2B0348EC006D7C26 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				601773E32B021E6000D175D9 /* TimerViewController.swift */,
-				2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */,
-				ED3595BC2B0DB29F00558FAA /* CategoryModifyViewController.swift */,
-				2C88DD0C2B148E9B000B4686 /* TimerFinishViewController.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		2C4D55B12B035476006D7C26 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2C4D55B22B035484006D7C26 /* DeviceOrientation.swift */,
-				2CE84EF62B0B7F3C00E2FB71 /* CategorySettingSection.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		2C5CDA462B0252B2007AFC57 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				2C5CDA472B0252B2007AFC57 /* LoginViewController.swift */,
-				60F6FD722B0B5E130057CE0B /* SignUpViewController.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		2C5CDA492B0252C1007AFC57 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2C5CDA4A2B0252C1007AFC57 /* LoginType.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		2C5CDA4D2B0253F5007AFC57 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -364,55 +293,6 @@
 				2C87C2762B1C789A00A26313 /* FriendStatusPollingManager.swift */,
 			);
 			path = FriendStatusPollingManager;
-			sourceTree = "<group>";
-		};
-		2C88DCF72B1242C7000B4686 /* Flows */ = {
-			isa = PBXGroup;
-			children = (
-				2C88DCF82B1242DA000B4686 /* TimerFlowCoordinator.swift */,
-				2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */,
-			);
-			path = Flows;
-			sourceTree = "<group>";
-		};
-		2C88DCFC2B124498000B4686 /* Flows */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Flows;
-			sourceTree = "<group>";
-		};
-		2C88DD012B1256B5000B4686 /* TabBar */ = {
-			isa = PBXGroup;
-			children = (
-				2C88DD032B1256C4000B4686 /* Flows */,
-				2C88DD022B1256BD000B4686 /* ViewController */,
-			);
-			path = TabBar;
-			sourceTree = "<group>";
-		};
-		2C88DD022B1256BD000B4686 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				EDC851C62B021492009031EA /* TabBarViewController.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		2C88DD032B1256C4000B4686 /* Flows */ = {
-			isa = PBXGroup;
-			children = (
-				2C88DD042B1256D0000B4686 /* TabBarFlowCoordinator.swift */,
-			);
-			path = Flows;
-			sourceTree = "<group>";
-		};
-		2C9F61F52B14EA9800AE63F9 /* CategoryManager */ = {
-			isa = PBXGroup;
-			children = (
-				2C9F61F62B14EFA200AE63F9 /* CategoryManager.swift */,
-			);
-			path = CategoryManager;
 			sourceTree = "<group>";
 		};
 		2C9F61FF2B1601E800AE63F9 /* View */ = {
@@ -568,8 +448,6 @@
 			children = (
 				2C88DD012B1256B5000B4686 /* TabBar */,
 				600908F62AFCDDDC0065DFFB /* Splash */,
-				600908F42AFCDCFA0065DFFB /* LoginScene */,
-				600908F12AFCDCD80065DFFB /* TimerScene */,
 				600908F32AFCDCE70065DFFB /* ChartScene */,
 				600908F22AFCDCE10065DFFB /* SocialScene */,
 				600908F52AFCDD0A0065DFFB /* MyPageScene */,
@@ -613,17 +491,6 @@
 				2C5CDA592B025435007AFC57 /* ViewController */,
 			);
 			path = ChartScene;
-			sourceTree = "<group>";
-		};
-		600908F42AFCDCFA0065DFFB /* LoginScene */ = {
-			isa = PBXGroup;
-			children = (
-				2C88DCFC2B124498000B4686 /* Flows */,
-				2C5CDA492B0252C1007AFC57 /* Model */,
-				ED38422A2B0F451F001E2803 /* ViewModel */,
-				2C5CDA462B0252B2007AFC57 /* ViewController */,
-			);
-			path = LoginScene;
 			sourceTree = "<group>";
 		};
 		600908F52AFCDD0A0065DFFB /* MyPageScene */ = {
@@ -827,15 +694,6 @@
 			path = Feature;
 			sourceTree = "<group>";
 		};
-		ED38422A2B0F451F001E2803 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				ED38422B2B0F4531001E2803 /* LoginViewModel.swift */,
-				601EB73A2B148F9A00C5B216 /* SignUpViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		ED6865BB2B1DEE2A001A2AAD /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1028,11 +886,6 @@
 				2C8D21022B7216EE00632718 /* TabBarViewController.swift in Sources */,
 				2C8D21032B7216EE00632718 /* ViewController.swift in Sources */,
 				2C8D21042B7216EE00632718 /* LoginFlowCoordinator.swift in Sources */,
-				2C8D21052B7216EE00632718 /* LoginType.swift in Sources */,
-				2C8D21062B7216EE00632718 /* LoginViewModel.swift in Sources */,
-				2C8D21072B7216EE00632718 /* SignUpViewModel.swift in Sources */,
-				2C8D21082B7216EE00632718 /* LoginViewController.swift in Sources */,
-				2C8D21092B7216EE00632718 /* SignUpViewController.swift in Sources */,
 				2C8D210A2B7216EE00632718 /* TimerFlowCoordinator.swift in Sources */,
 				2C8D210B2B7216EE00632718 /* CategorySettingCoordinator.swift in Sources */,
 				2C8D210C2B7216EE00632718 /* DeviceOrientation.swift in Sources */,

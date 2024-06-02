@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Login
 
 protocol LoginFlowCoordinatorDependencies {
     func makeLoginViewController(actions: LoginViewModelActions) -> UIViewController

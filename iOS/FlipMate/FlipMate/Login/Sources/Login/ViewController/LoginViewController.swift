@@ -12,14 +12,14 @@ import GoogleSignIn
 import AuthenticationServices
 import DesignSystem
 
-final class LoginViewController: BaseViewController {
+public final class LoginViewController: BaseViewController {
     
     // MARK: - Properties
     private let loginViewModel: LoginViewModelProtocol
     private var cancellables: Set<AnyCancellable> = []
     
     // MARK: - Init
-    init(loginViewModel: LoginViewModelProtocol) {
+    public init(loginViewModel: LoginViewModelProtocol) {
         self.loginViewModel = loginViewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -92,7 +92,7 @@ final class LoginViewController: BaseViewController {
     }()
     
     // MARK: - UI Setting
-    override func configureUI() {
+    public override func configureUI() {
         view.backgroundColor = .systemBackground
         
         [ logoImageView,
@@ -124,7 +124,7 @@ final class LoginViewController: BaseViewController {
         ])
     }
     
-    override func bind() {
+    public override func bind() {
         loginViewModel.isMemberPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isMember in
@@ -167,7 +167,7 @@ final class LoginViewController: BaseViewController {
 }
 
 extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
-    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+    public func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         guard let window = self.view.window else {
             FMLogger.general.error("window is nil!!")
             return UIWindow()
@@ -212,7 +212,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         authorizationController.performRequests()
     }
     
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             let userID = appleIDCredential.user
@@ -227,7 +227,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         }
     }
     
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+    public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         // 단순 취소는 오류 띄우지 않음
         if let error = error as? ASAuthorizationError {
             if error.errorCode == 1001 {
