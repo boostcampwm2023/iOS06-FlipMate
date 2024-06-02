@@ -14,7 +14,7 @@ protocol FreindAddResultViewProtocol: UIView {
     func height() -> CGFloat
 }
 
-final class FriendAddViewController: BaseViewController {
+public final class FriendAddViewController: BaseViewController {
     // MARK: - Constant
     private enum NameTextFieldConstant {
         static let top: CGFloat = 20
@@ -87,7 +87,7 @@ final class FriendAddViewController: BaseViewController {
     private let friendSearchResultView = FriendSearchResultView()
     
     // MARK: - init
-    init(viewModel: FriendAddViewModelProtocol) {
+    public init(viewModel: FriendAddViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -97,14 +97,14 @@ final class FriendAddViewController: BaseViewController {
     }
     
     // MARK: - Life cycle
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         updateResultView(myNickNameView)
         configureNavigationBar()
     }
     
     // MARK: - Configure UI
-    override func configureUI() {
+    public override func configureUI() {
         [nickNameTextField, nickNameCountLabel, separatorLineView, containerView].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -131,7 +131,7 @@ final class FriendAddViewController: BaseViewController {
         ])
     }
     
-    override func bind() {
+    public override func bind() {
         viewModel.searchFreindPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] friendSearchItem in
@@ -214,7 +214,7 @@ private extension FriendAddViewController {
 
 // MARK: - UITextFieldDelegate
 extension FriendAddViewController: UITextFieldDelegate {
-    func textFieldDidChangeSelection(_ textField: UITextField) {
+    public func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let nickname = textField.text else { return }
         guard nickname.count <= Constant.maxLength else {
             textField.deleteBackward()
@@ -224,7 +224,7 @@ extension FriendAddViewController: UITextFieldDelegate {
         viewModel.nicknameDidChange(at: nickname)
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard textField.text != nil else { return false }
         viewModel.didSearchFriend()
         return true

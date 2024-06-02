@@ -7,22 +7,23 @@
 
 import Foundation
 
-class UpdateFriend {
+// class일 필요가 있을까?
+public final class UpdateFriend {
     var id: Int
     var currentLearningTime: Int
     
-    init(id: Int, currentLearningTime: Int) {
+    public init(id: Int, currentLearningTime: Int) {
         self.id = id
         self.currentLearningTime = currentLearningTime
     }
 }
 
 extension UpdateFriend: Hashable {
-    static func == (lhs: UpdateFriend, rhs: UpdateFriend) -> Bool {
+    public static func == (lhs: UpdateFriend, rhs: UpdateFriend) -> Bool {
         return lhs.id == rhs.id && lhs.currentLearningTime == rhs.currentLearningTime
     }
     
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
         hasher.combine(currentLearningTime)
     }

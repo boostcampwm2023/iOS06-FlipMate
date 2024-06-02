@@ -10,25 +10,30 @@ import Combine
 import Domain
 import Core
 
-struct SocialDetailViewModelActions {
+public struct SocialDetailViewModelActions {
     var didCancelSocialDetail: () -> Void
     var didFinishUnfollow: () -> Void
+    
+    public init(didCancelSocialDetail: @escaping () -> Void, didFinishUnfollow: @escaping () -> Void) {
+        self.didCancelSocialDetail = didCancelSocialDetail
+        self.didFinishUnfollow = didFinishUnfollow
+    }
 }
 
-protocol SocialDetailViewModelInput {
+public protocol SocialDetailViewModelInput {
     func viewDidLoad()
     func didUnfollowFriend()
     func dismissButtonDidTapped()
 }
 
-protocol SocialDetailViewModelOutput {
+public protocol SocialDetailViewModelOutput {
     var friendPublisher: AnyPublisher<Friend, Never> { get }
     var seriesPublusher: AnyPublisher<[Series], Never> { get }
 }
 
-typealias SocialDetailViewModelProtocol = SocialDetailViewModelInput & SocialDetailViewModelOutput
+public typealias SocialDetailViewModelProtocol = SocialDetailViewModelInput & SocialDetailViewModelOutput
 
-final class SocialDetailViewModel: SocialDetailViewModelProtocol {
+public final class SocialDetailViewModel: SocialDetailViewModelProtocol {
     // MARK: - Properties
     private var cancellables = Set<AnyCancellable>()
     private let friend: Friend
@@ -43,15 +48,15 @@ final class SocialDetailViewModel: SocialDetailViewModelProtocol {
     private let seriesSubject = PassthroughSubject<[Series], Never>()
     
     // MARK: - Publisher
-    var friendPublisher: AnyPublisher<Friend, Never> {
+    public var friendPublisher: AnyPublisher<Friend, Never> {
         return friendSubject.eraseToAnyPublisher()
     }
     
-    var seriesPublusher: AnyPublisher<[Series], Never> {
+    public var seriesPublusher: AnyPublisher<[Series], Never> {
         return seriesSubject.eraseToAnyPublisher()
     }
     
-    init(friend: Friend,
+    public init(friend: Friend,
          loadChartUseCase: LoadChartUseCase,
          unfollowUseCase: UnfollowFriendUseCase,
          actions: SocialDetailViewModelActions? = nil) {
@@ -61,7 +66,7 @@ final class SocialDetailViewModel: SocialDetailViewModelProtocol {
         self.actions = actions
     }
     
-    func viewDidLoad() {
+    public func viewDidLoad() {
         loadChartUseCase.loadChart(at: friend.id)
             .receive(on: DispatchQueue.main)
             .sink { completion in
@@ -78,7 +83,7 @@ final class SocialDetailViewModel: SocialDetailViewModelProtocol {
             .store(in: &cancellables)
     }
     
-    func didUnfollowFriend() {
+    public func didUnfollowFriend() {
         unfollowUseCase.unfollow(at: friend.id)
             .receive(on: DispatchQueue.main)
             .sink { completion in
@@ -95,7 +100,7 @@ final class SocialDetailViewModel: SocialDetailViewModelProtocol {
             .store(in: &cancellables)
     }
     
-    func dismissButtonDidTapped() {
+    public func dismissButtonDidTapped() {
         actions?.didCancelSocialDetail()
     }
 }

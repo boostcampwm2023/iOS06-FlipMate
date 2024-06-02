@@ -8,8 +8,14 @@
 import Foundation
 import Domain
 
-struct FreindSeacrhItem {
+public struct FreindSeacrhItem {
     let nickname: String
     let iamgeURL: String?
     let status: FriendSearchStatus
+    
+    public init(nickname: String, iamgeURL: String?, status: FriendSearchStatus) {
+        self.nickname = nickname
+        self.iamgeURL = iamgeURL
+        self.status = status
+    }
 }

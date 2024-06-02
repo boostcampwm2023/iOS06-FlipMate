@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 import DesignSystem
 
-final class SocialDetailViewController: BaseViewController {
+public final class SocialDetailViewController: BaseViewController {
     private enum ComponentConstant {
         static let dailyStudyLog = NSLocalizedString("dailyStudyLog", comment: "")
         static let weeklyStudyLog = NSLocalizedString("weeklyStudyLog", comment: "")
@@ -234,7 +234,7 @@ final class SocialDetailViewController: BaseViewController {
     private var viewModel: SocialDetailViewModel
     private var cancellables = Set<AnyCancellable>()
     
-    init(viewModel: SocialDetailViewModel) {
+    public init(viewModel: SocialDetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -246,7 +246,7 @@ final class SocialDetailViewController: BaseViewController {
     // MARK: - View Life Cycles
     
     // swiftlint:disable function_body_length
-    override func configureUI() {
+    public override func configureUI() {
         setStudyLogStackView()
         setStudyTimeStackView()
         configureNavigationBar()
@@ -328,7 +328,7 @@ final class SocialDetailViewController: BaseViewController {
         // swiftlint:enable function_body_length
     }
     
-    override func bind() {
+    public override func bind() {
         viewModel.viewDidLoad()
         
         viewModel.friendPublisher

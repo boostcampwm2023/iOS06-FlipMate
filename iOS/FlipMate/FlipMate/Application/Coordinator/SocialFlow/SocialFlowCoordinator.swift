@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-
+import Social
 import Domain
 
 protocol SocialFlowCoordinatorDependencies {

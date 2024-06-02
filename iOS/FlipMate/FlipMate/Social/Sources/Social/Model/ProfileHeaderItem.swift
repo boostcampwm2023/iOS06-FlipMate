@@ -7,8 +7,14 @@
 
 import Foundation
 
-struct ProfileHeaderItem {
+public struct ProfileHeaderItem {
     let nickname: String
     let profileImageURL: String?
     let learningTime: Int
+    
+    public init(nickname: String, profileImageURL: String?, learningTime: Int) {
+        self.nickname = nickname
+        self.profileImageURL = profileImageURL
+        self.learningTime = learningTime
+    }
 }

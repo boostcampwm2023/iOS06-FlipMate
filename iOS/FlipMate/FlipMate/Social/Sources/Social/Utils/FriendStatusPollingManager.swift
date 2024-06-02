@@ -10,12 +10,17 @@ import Combine
 import Domain
 import Core
 
-struct StopFriend {
+public struct StopFriend {
     let id: Int
     let totalTime: Int
+    
+    public init(id: Int, totalTime: Int) {
+        self.id = id
+        self.totalTime = totalTime
+    }
 }
 
-protocol FriendStatusPollingManageable {
+public protocol FriendStatusPollingManageable {
     var updateLearningPublihser: AnyPublisher<[UpdateFriend], Never> { get }
     var updateStopFriendsPublisher: AnyPublisher<[StopFriend], Never> { get }
     
@@ -25,7 +30,7 @@ protocol FriendStatusPollingManageable {
     func updateLearningFriendsBeforeLearning(friendsStatus: [FriendStatus])
 }
 
-final class FriendStatusPollingManager: FriendStatusPollingManageable {
+public final class FriendStatusPollingManager: FriendStatusPollingManageable {
     private var preFriendStatusArray: [FriendStatus] = []
     private var updateFriendArray: [UpdateFriend] = []
     private let timerManager: TimerManageable
@@ -33,34 +38,34 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
     private var updateLearningFriends = PassthroughSubject<[UpdateFriend], Never>()
     private var updateStopFriends = PassthroughSubject<[StopFriend], Never>()
     
-    var updateLearningPublihser: AnyPublisher<[UpdateFriend], Never> {
+    public var updateLearningPublihser: AnyPublisher<[UpdateFriend], Never> {
         return updateLearningFriends.eraseToAnyPublisher()
     }
     
-    var updateStopFriendsPublisher: AnyPublisher<[StopFriend], Never> {
+    public var updateStopFriendsPublisher: AnyPublisher<[StopFriend], Never> {
         return updateStopFriends.eraseToAnyPublisher()
     }
     
-    init(timerManager: TimerManageable) {
+    public init(timerManager: TimerManageable) {
         self.timerManager = timerManager
     }
     
-    func update(preFriendStatusArray: [FriendStatus]) {
+    public func update(preFriendStatusArray: [FriendStatus]) {
         self.preFriendStatusArray = preFriendStatusArray
     }
     
-    func startPolling(friendsStatus: [FriendStatus]) {
+    public func startPolling(friendsStatus: [FriendStatus]) {
         updateLearningFriendsBeforeStop(friendsStatus: friendsStatus)
         updateStopFriends(friendsStatus: friendsStatus)
         startTimer()
     }
     
-    func stopPolling() {
+    public func stopPolling() {
         updateFriendArray = []
         stopTimer()
     }
     
-    func updateLearningFriendsBeforeLearning(friendsStatus: [FriendStatus]) {
+    public func updateLearningFriendsBeforeLearning(friendsStatus: [FriendStatus]) {
         let learningFriendsBeforeLearning = findLearningFreindsBeforLearning(friendsStatus: friendsStatus)
         for id in learningFriendsBeforeLearning {
             guard let friend = friendsStatus.filter({ $0.id == id }).first else { return }

@@ -7,23 +7,27 @@
 
 import Foundation
 import Combine
-
 import Domain
 import Core
 
-struct FriendAddViewModelActions {
+public struct FriendAddViewModelActions {
     var didCancleFriendAdd: () -> Void
     var didSuccessFriendAdd: () -> Void
+    
+    public init(didCancleFriendAdd: @escaping () -> Void, didSuccessFriendAdd: @escaping () -> Void) {
+        self.didCancleFriendAdd = didCancleFriendAdd
+        self.didSuccessFriendAdd = didSuccessFriendAdd
+    }
 }
 
-protocol FriendAddViewModelInput {
+public protocol FriendAddViewModelInput {
     func nicknameDidChange(at nickname: String)
     func didFollowFriend()
     func didSearchFriend()
     func dismissButtonDidTapped()
 }
 
-protocol FriendAddViewModelOutput {
+public protocol FriendAddViewModelOutput {
     var myNicknamePublihser: AnyPublisher<String, Never> { get }
     var searchFreindPublisher: AnyPublisher<FreindSeacrhItem, Never> { get }
     var searchErrorPublisher: AnyPublisher<Error, Never> { get }
@@ -31,9 +35,9 @@ protocol FriendAddViewModelOutput {
     var followErrorPublisher: AnyPublisher<Void, Never> { get }
 }
 
-typealias FriendAddViewModelProtocol = FriendAddViewModelInput & FriendAddViewModelOutput
+public typealias FriendAddViewModelProtocol = FriendAddViewModelInput & FriendAddViewModelOutput
 
-final class FriendAddViewModel: FriendAddViewModelProtocol {
+public final class FriendAddViewModel: FriendAddViewModelProtocol {
     // MARK: - Subject
     private var searchResultSubject = PassthroughSubject<FreindSeacrhItem, Never>()
     private var searchErrorSubject = PassthroughSubject<Error, Never>()
@@ -48,7 +52,7 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     private let actions: FriendAddViewModelActions?
     private let userInfoManger: UserInfoManageable
     
-    init(followUseCase: FollowFriendUseCase,
+    public init(followUseCase: FollowFriendUseCase,
          searchUseCase: SearchFriendUseCase,
          actions: FriendAddViewModelActions? = nil,
          userInfoManager: UserInfoManageable) {
@@ -59,28 +63,28 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
     }
     
     // MARK: - output
-    var searchFreindPublisher: AnyPublisher<FreindSeacrhItem, Never> {
+    public var searchFreindPublisher: AnyPublisher<FreindSeacrhItem, Never> {
         return searchResultSubject.eraseToAnyPublisher()
     }
     
-    var searchErrorPublisher: AnyPublisher<Error, Never> {
+    public var searchErrorPublisher: AnyPublisher<Error, Never> {
         return searchErrorSubject.eraseToAnyPublisher()
     }
     
-    var nicknameCountPublisher: AnyPublisher<Int, Never> {
+    public var nicknameCountPublisher: AnyPublisher<Int, Never> {
         return nicknameCountSubject.eraseToAnyPublisher()
     }
     
-    var myNicknamePublihser: AnyPublisher<String, Never> {
+    public var myNicknamePublihser: AnyPublisher<String, Never> {
         return userInfoManger.nicknameChangePublisher
     }
     
-    var followErrorPublisher: AnyPublisher<Void, Never> {
+    public var followErrorPublisher: AnyPublisher<Void, Never> {
         return followErrorSubject.eraseToAnyPublisher()
     }
     
     // MARK: - Input
-    func didFollowFriend() {
+    public func didFollowFriend() {
         followUseCase.follow(at: friendNickname)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
@@ -99,7 +103,7 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
             .store(in: &cancellables)
     }
     
-    func didSearchFriend() {
+    public func didSearchFriend() {
         searchUseCase.search(at: friendNickname)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
@@ -122,12 +126,12 @@ final class FriendAddViewModel: FriendAddViewModelProtocol {
             .store(in: &cancellables)
     }
     
-    func nicknameDidChange(at nickname: String) {
+    public func nicknameDidChange(at nickname: String) {
         friendNickname = nickname
         nicknameCountSubject.send(nickname.count)
     }
     
-    func dismissButtonDidTapped() {
+    public func dismissButtonDidTapped() {
         actions?.didCancleFriendAdd()
     }
 }

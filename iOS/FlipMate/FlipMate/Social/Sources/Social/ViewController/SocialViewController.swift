@@ -10,7 +10,7 @@ import Combine
 import Domain
 import DesignSystem
 
-final class SocialViewController: BaseViewController {
+public final class SocialViewController: BaseViewController {
     
     // MARK: - View Properties
     private lazy var refreshControl: UIRefreshControl = {
@@ -48,7 +48,7 @@ final class SocialViewController: BaseViewController {
     private let viewModel: SocialViewModelProtocol
     
     // MARK: - init
-    init(viewModel: SocialViewModelProtocol) {
+    public init(viewModel: SocialViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -58,25 +58,25 @@ final class SocialViewController: BaseViewController {
     }
     
     // MARK: - View Life Cycle
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         configureDiffableDataSource()
         configureNavigationBarItems()
         setSnapshot()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.viewWillAppear()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         viewModel.viewDidDisappear()
     }
     
     // MARK: - Configure UI
-    override func configureUI() {
+    public override func configureUI() {
         navigationItem.title = Constant.title
         
         let subviews = [
@@ -133,7 +133,7 @@ final class SocialViewController: BaseViewController {
         navigationItem.rightBarButtonItem = addFriendButton
     }
     
-    override func bind() {
+    public override func bind() {
         bindFriendsRelatedPublisher()
         
         viewModel.nicknamePublisher
@@ -266,7 +266,7 @@ private extension SocialViewController {
 
 // MARK: - UICollectionViewDelegate
 extension SocialViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let indexPath = friendsCollectionView.indexPathsForSelectedItems?.first else { return }
         guard let item = self.diffableDataSource?.itemIdentifier(for: indexPath) else { return }
         viewModel.friendCellDidTapped(friend: item)
