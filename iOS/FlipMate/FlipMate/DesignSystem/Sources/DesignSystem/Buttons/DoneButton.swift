@@ -1,14 +1,14 @@
 //
-//  DoneButton.swift
-//  FlipMate
+//  File.swift
+//  
 //
-//  Created by 임현규 on 2023/12/10.
+//  Created by 권승용 on 6/2/24.
 //
 
 import UIKit
 
-final class DoneButton: UIButton {
-    enum ButtonState {
+public final class DoneButton: UIButton {
+    public enum ButtonState {
         case normal
         case disabled
     }
@@ -20,7 +20,7 @@ final class DoneButton: UIButton {
         }
     }
     
-    override var isEnabled: Bool {
+    public override var isEnabled: Bool {
         didSet {
             if isEnabled {
                 if let color = defaultBackgroundColor {
@@ -34,7 +34,7 @@ final class DoneButton: UIButton {
         }
     }
     
-    func setBackgroundColor(_ color: UIColor?, for state: ButtonState) {
+    public func setBackgroundColor(_ color: UIColor?, for state: ButtonState) {
         switch state {
         case .disabled:
             disabledBackgroundColor = color
