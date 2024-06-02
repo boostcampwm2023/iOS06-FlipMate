@@ -66,6 +66,10 @@ public final class TabBarViewController: UITabBarController {
         tabBar.layer.backgroundColor = FlipMateColor.tabBarColor.color?.cgColor
         tabBar.layer.borderColor = FlipMateColor.tabBarLayerColor.color?.cgColor
     }
+    
+    public func setTimerButtonImageColor(with color: UIColor?) {
+        timerButton.imageView?.tintColor = color
+    }
 }
 
 // MARK: - UI Setting
