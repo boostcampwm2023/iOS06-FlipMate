@@ -201,6 +201,7 @@
 		602BF08C2BF4FB5B0088050A /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Network; path = FlipMate/Network; sourceTree = "<group>"; };
 		60459D462B21A17C00A80AF7 /* MyPageFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFlowCoordinator.swift; sourceTree = "<group>"; };
 		60459D482B21A28400A80AF7 /* MyPageDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDIContainer.swift; sourceTree = "<group>"; };
+		60590D9E2C0C3D9D0069B3E4 /* TabBar */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TabBar; path = FlipMate/TabBar; sourceTree = SOURCE_ROOT; };
 		605F88492B297DA5008975DC /* FlipMate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FlipMate.entitlements; sourceTree = "<group>"; };
 		6067DD822B2737F9004625AF /* Selection.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = Selection.ahap; sourceTree = "<group>"; };
 		606990562B18918B00E5730F /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
@@ -403,7 +404,6 @@
 		2C88DD032B1256C4000B4686 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				2C88DD042B1256D0000B4686 /* TabBarFlowCoordinator.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -699,6 +699,33 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6037BB542C0997AA00BE37AC /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */,
+				60590D9F2C0C3E330069B3E4 /* TabBarFlow */,
+				6037BB552C09992B00BE37AC /* TimerFlow */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		6037BB552C09992B00BE37AC /* TimerFlow */ = {
+			isa = PBXGroup;
+			children = (
+				2C88DCF82B1242DA000B4686 /* TimerFlowCoordinator.swift */,
+				2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */,
+			);
+			path = TimerFlow;
+			sourceTree = "<group>";
+		};
+		60590D9F2C0C3E330069B3E4 /* TabBarFlow */ = {
+			isa = PBXGroup;
+			children = (
+				2C88DD042B1256D0000B4686 /* TabBarFlowCoordinator.swift */,
+			);
+			path = TabBarFlow;
+			sourceTree = "<group>";
+		};
 		60C791882B5810EB0019E81F /* DummyUseCases */ = {
 			isa = PBXGroup;
 			children = (
@@ -786,6 +813,8 @@
 		60FE503F2C01C7B600AA2475 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				60590D9E2C0C3D9D0069B3E4 /* TabBar */,
+				60FE50402C020EC200AA2475 /* Timer */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
