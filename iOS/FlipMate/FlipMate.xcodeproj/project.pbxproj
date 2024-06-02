@@ -204,6 +204,7 @@
 		605F88492B297DA5008975DC /* FlipMate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FlipMate.entitlements; sourceTree = "<group>"; };
 		6067DD822B2737F9004625AF /* Selection.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = Selection.ahap; sourceTree = "<group>"; };
 		606990562B18918B00E5730F /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		608920132C0C794500FFDB14 /* Social */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Social; path = FlipMate/Social; sourceTree = SOURCE_ROOT; };
 		6096F91D2B04F3CA00D0B972 /* FaceDown.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = FaceDown.ahap; sourceTree = "<group>"; };
 		60C2F2852B172D6900EBDD78 /* FriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewCell.swift; sourceTree = "<group>"; };
 		60C791892B5810FA0019E81F /* DummyUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyUseCases.swift; sourceTree = "<group>"; };
@@ -469,14 +470,6 @@
 			path = SocialScene;
 			sourceTree = "<group>";
 		};
-		2CDCD03E2B1871FB0080DCDE /* Flow */ = {
-			isa = PBXGroup;
-			children = (
-				2CDCD03F2B1872060080DCDE /* SocialFlowCoordinator.swift */,
-			);
-			path = Flow;
-			sourceTree = "<group>";
-		};
 		2CDCD0652B18D0280080DCDE /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -595,7 +588,6 @@
 			isa = PBXGroup;
 			children = (
 				2CDCD0652B18D0280080DCDE /* Model */,
-				2CDCD03E2B1871FB0080DCDE /* Flow */,
 				2C9F62062B16397400AE63F9 /* Protocol */,
 				2C9F61FF2B1601E800AE63F9 /* View */,
 				2C9F62092B171C4D00AE63F9 /* ViewModel */,
@@ -699,6 +691,60 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6037BB542C0997AA00BE37AC /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */,
+				60590D9F2C0C3E330069B3E4 /* TabBarFlow */,
+				60590DA52C0C46610069B3E4 /* LoginFlow */,
+				6037BB552C09992B00BE37AC /* TimerFlow */,
+				608920142C0C795E00FFDB14 /* SocialFlow */,
+				60780C922C0C4D9900C1FC52 /* ChartFlow */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		6037BB552C09992B00BE37AC /* TimerFlow */ = {
+			isa = PBXGroup;
+			children = (
+				2C88DCF82B1242DA000B4686 /* TimerFlowCoordinator.swift */,
+				2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */,
+			);
+			path = TimerFlow;
+			sourceTree = "<group>";
+		};
+		60590D9F2C0C3E330069B3E4 /* TabBarFlow */ = {
+			isa = PBXGroup;
+			children = (
+				2C88DD042B1256D0000B4686 /* TabBarFlowCoordinator.swift */,
+			);
+			path = TabBarFlow;
+			sourceTree = "<group>";
+		};
+		60590DA52C0C46610069B3E4 /* LoginFlow */ = {
+			isa = PBXGroup;
+			children = (
+				2C88DCFD2B1244A6000B4686 /* LoginFlowCoordinator.swift */,
+			);
+			path = LoginFlow;
+			sourceTree = "<group>";
+		};
+		60780C922C0C4D9900C1FC52 /* ChartFlow */ = {
+			isa = PBXGroup;
+			children = (
+				ED6865D22B1F1464001A2AAD /* ChartFlowCoordinator.swift */,
+			);
+			path = ChartFlow;
+			sourceTree = "<group>";
+		};
+		608920142C0C795E00FFDB14 /* SocialFlow */ = {
+			isa = PBXGroup;
+			children = (
+				2CDCD03F2B1872060080DCDE /* SocialFlowCoordinator.swift */,
+			);
+			path = SocialFlow;
+			sourceTree = "<group>";
+		};
 		60C791882B5810EB0019E81F /* DummyUseCases */ = {
 			isa = PBXGroup;
 			children = (
@@ -786,6 +832,11 @@
 		60FE503F2C01C7B600AA2475 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				60590D9E2C0C3D9D0069B3E4 /* TabBar */,
+				60590DA32C0C46410069B3E4 /* Login */,
+				60FE50402C020EC200AA2475 /* Timer */,
+				608920132C0C794500FFDB14 /* Social */,
+				60590DA82C0C4D000069B3E4 /* Chart */,
 			);
 			path = Feature;
 			sourceTree = "<group>";

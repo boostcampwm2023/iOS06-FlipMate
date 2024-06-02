@@ -1,5 +1,5 @@
 {
-  "originHash" : "97edc9652c350a029e7f31b6f6e7f71281c819522f73dd66d733465cb08a0171",
+  "originHash" : "dc9aa0931b96187d525971b48ea98d89b45ee83cbd13eeceb9a6180623c20980",
   "pins" : [
     {
       "identity" : "appauth-ios",
@@ -87,8 +87,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/SwiftLint.git",
       "state" : {
-        "revision" : "b515723b16eba33f15c4677ee65f3fef2ce8c255",
-        "version" : "0.55.1"
+        "revision" : "460d88c036163ee2f7cb5e32c180d9143ac332ae",
+        "version" : "0.55.0"
       }
     },
     {

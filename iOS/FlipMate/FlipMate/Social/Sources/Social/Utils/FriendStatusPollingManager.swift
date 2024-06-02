@@ -1,14 +1,14 @@
 //
 //  FriendStatusPollingManager.swift
-//  FlipMate
 //
-//  Created by 임현규 on 2023/12/03.
+//
+//  Created by 권승용 on 6/2/24.
 //
 
 import Foundation
 import Combine
-
 import Domain
+import Core
 
 struct StopFriend {
     let id: Int
@@ -71,7 +71,7 @@ final class FriendStatusPollingManager: FriendStatusPollingManageable {
         }
         startTimer()
     }
-
+    
     private func updateLearningFriendsBeforeStop(friendsStatus: [FriendStatus]) {
         let learningFriendsBeforeStop = findLearningFriendsBeforeStop(friendsStatus: friendsStatus)
         for id in learningFriendsBeforeStop {
