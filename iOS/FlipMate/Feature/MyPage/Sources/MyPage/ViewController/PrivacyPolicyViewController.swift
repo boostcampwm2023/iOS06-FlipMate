@@ -1,18 +1,19 @@
 //
 //  PrivatePolicyViewController.swift
-//  FlipMate
 //
-//  Created by 신민규 on 1/9/24.
+//
+//  Created by 권승용 on 6/3/24.
 //
 
 import UIKit
 import DesignSystem
 
-class PrivacyPolicyViewController: BaseViewController {
+public final class PrivacyPolicyViewController: BaseViewController {
     enum Constant {
         static let privatePolicyLabel = NSLocalizedString("privacyPolicyLabel", comment: "")
         static let privacyPolicy = NSLocalizedString("privacyPolicy", comment: "")
     }
+    
     // MARK: - View Properties
     private let scrollview: UIScrollView = {
         let scrollView = UIScrollView()
@@ -35,7 +36,7 @@ class PrivacyPolicyViewController: BaseViewController {
         return label
     }()
     
-    override func configureUI() {
+    public override func configureUI() {
         self.navigationItem.title = Constant.privacyPolicy
         
         self.view.addSubview(scrollview)

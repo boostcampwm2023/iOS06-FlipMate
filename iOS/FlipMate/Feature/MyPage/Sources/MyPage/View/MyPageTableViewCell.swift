@@ -1,8 +1,8 @@
 //
-//  File.swift
-//  FlipMate
+//  MyPageTableViewCell.swift
 //
-//  Created by 권승용 on 12/5/23.
+//
+//  Created by 권승용 on 6/3/24.
 //
 
 import UIKit
@@ -23,7 +23,7 @@ final class MyPageTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = FlipMateFont.mediumRegular.font
         label.textColor = FlipMateColor.gray2.color
-            
+        
         return label
     }()
     

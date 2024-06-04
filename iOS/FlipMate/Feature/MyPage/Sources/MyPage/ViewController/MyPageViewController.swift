@@ -1,8 +1,8 @@
 //
 //  MyPageViewController.swift
-//  FlipMate
 //
-//  Created by 권승용 on 11/30/23.
+//
+//  Created by 권승용 on 6/3/24.
 //
 
 import Core
@@ -11,7 +11,7 @@ import Combine
 import SafariServices
 import DesignSystem
 
-final class MyPageViewController: BaseViewController {
+public final class MyPageViewController: BaseViewController {
     // MARK: - View Properties
     private lazy var dismissButton: UIButton = {
         let button = UIButton()
@@ -44,7 +44,7 @@ final class MyPageViewController: BaseViewController {
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Initializers
-    init(viewModel: MyPageViewModelProtocol) {
+    public init(viewModel: MyPageViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -54,13 +54,13 @@ final class MyPageViewController: BaseViewController {
     }
     
     // MARK: - View LifeCycles
-    override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.viewReady()
     }
     
     // MARK: - UI Configurations
-    override func configureUI() {
+    public override func configureUI() {
         let subviews = [
             myPageTableView
         ]
@@ -69,7 +69,7 @@ final class MyPageViewController: BaseViewController {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-      
+        
         NSLayoutConstraint.activate([
             myPageTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             myPageTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -88,7 +88,7 @@ final class MyPageViewController: BaseViewController {
     }
     
     // MARK: - Binding
-    override func bind() {
+    public override func bind() {
         viewModel.nicknamePublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] nickname in
@@ -132,7 +132,7 @@ private extension MyPageViewController {
 
 // MARK: - UITableViewDataSource
 extension MyPageViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return 1
@@ -147,7 +147,7 @@ extension MyPageViewController: UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MyPageTableViewCell.identifier, for: indexPath) as? MyPageTableViewCell else {
             return MyPageTableViewCell()
         }
@@ -160,29 +160,15 @@ extension MyPageViewController: UITableViewDataSource {
         }
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = FlipMateColor.gray5.color
-        return view
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 3 {
-            return 0
-        } else {
-            return 1
-        }
-    }
 }
 
 // MARK: - UITableViewDelegate
 extension MyPageViewController: UITableViewDelegate {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    public func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 프로필 수정 탭
         if indexPath.section == 0, indexPath.row == 0 {
             viewModel.profileSettingsViewButtonTapped()
@@ -230,6 +216,20 @@ extension MyPageViewController: UITableViewDelegate {
         }
         
         myPageTableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = FlipMateColor.gray5.color
+        return view
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 3 {
+            return 0
+        } else {
+            return 1
+        }
     }
 }
 

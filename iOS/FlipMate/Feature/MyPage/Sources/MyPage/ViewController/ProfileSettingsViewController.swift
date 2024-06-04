@@ -1,8 +1,8 @@
 //
 //  ProfileSettingsViewController.swift
-//  FlipMate
 //
-//  Created by 권승용 on 12/5/23.
+//
+//  Created by 권승용 on 6/3/24.
 //
 
 import Core
@@ -11,7 +11,7 @@ import Combine
 import PhotosUI
 import DesignSystem
 
-final class ProfileSettingsViewController: BaseViewController {
+public final class ProfileSettingsViewController: BaseViewController {
     // MARK: - View Properties
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -104,7 +104,7 @@ final class ProfileSettingsViewController: BaseViewController {
     private var cancellables = Set<AnyCancellable>()
     private var currentNicknameState: NickNameValidationState?
     
-    init(viewModel: ProfileSettingsViewModelProtocol) {
+    public init(viewModel: ProfileSettingsViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -115,17 +115,16 @@ final class ProfileSettingsViewController: BaseViewController {
     
     // MARK: - View Life Cycles
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.viewReady()
     }
     
-    override func viewDidLayoutSubviews() {
+    public override func viewDidLayoutSubviews() {
         drawTextFieldUnderline()
     }
     
     // MARK: - Configure UI
-    override func configureUI() {
+    public override func configureUI() {
         self.title = Constant.title
         
         let subViews = [
@@ -176,12 +175,12 @@ final class ProfileSettingsViewController: BaseViewController {
         self.nickNameTextField.addSubview(textFieldUnderline)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
     // MARK: - Viewmodel Binding
-    override func bind() {
+    public override func bind() {
         bindNickNameRelatedPublishers()
         bindProfileImageRelatedPublishers()
         
@@ -287,7 +286,7 @@ final class ProfileSettingsViewController: BaseViewController {
 
 // MARK: - UITextFieldDelegate
 extension ProfileSettingsViewController: UITextFieldDelegate {
-    func textFieldDidChangeSelection(_ textField: UITextField) {
+    public func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let nickname = textField.text else { return }
         guard nickname.count <= Constant.maxLength else {
             textField.deleteBackward()
@@ -326,7 +325,7 @@ private extension ProfileSettingsViewController {
 
 // MARK: - PHPickerViewControllerDelegate
 extension ProfileSettingsViewController: PHPickerViewControllerDelegate {
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+    public func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
         
         // 유저가 이미지 선택하지 않음

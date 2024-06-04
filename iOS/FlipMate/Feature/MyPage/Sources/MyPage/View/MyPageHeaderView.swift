@@ -1,8 +1,8 @@
 //
 //  MyPageHeaderView.swift
-//  FlipMate
 //
-//  Created by 권승용 on 12/7/23.
+//
+//  Created by 권승용 on 6/3/24.
 //
 
 import UIKit

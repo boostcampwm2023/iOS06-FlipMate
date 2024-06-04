@@ -1,8 +1,8 @@
 //
 //  MyPageViewModel.swift
-//  FlipMate
 //
-//  Created by 권승용 on 12/5/23.
+//
+//  Created by 권승용 on 6/3/24.
 //
 
 import Foundation
@@ -10,13 +10,19 @@ import Combine
 import Core
 import Domain
 
-struct MyPageViewModelActions {
+public struct MyPageViewModelActions {
     let showProfileSettingsView: () -> Void
     let showPrivacyPolicyView: () -> Void
     let viewDidFinish: () -> Void
+    
+    public init(showProfileSettingsView: @escaping () -> Void, showPrivacyPolicyView: @escaping () -> Void, viewDidFinish: @escaping () -> Void) {
+        self.showProfileSettingsView = showProfileSettingsView
+        self.showPrivacyPolicyView = showPrivacyPolicyView
+        self.viewDidFinish = viewDidFinish
+    }
 }
 
-protocol MyPageViewModelInput {
+public protocol MyPageViewModelInput {
     func viewReady()
     func profileSettingsViewButtonTapped()
     func privacyPolicyViewButtonTapped()
@@ -25,16 +31,16 @@ protocol MyPageViewModelInput {
     func withdrawButtonTapped()
 }
 
-protocol MyPageViewModelOutput {
+public protocol MyPageViewModelOutput {
     var tableViewDataSourcePublisher: AnyPublisher<[[String]], Never> { get }
     var nicknamePublisher: AnyPublisher<String, Never> { get }
     var imageURLPublisher: AnyPublisher<String?, Never> { get }
     var errorPublisher: AnyPublisher<Error, Never> { get }
 }
 
-typealias MyPageViewModelProtocol = MyPageViewModelInput & MyPageViewModelOutput
+public typealias MyPageViewModelProtocol = MyPageViewModelInput & MyPageViewModelOutput
 
-final class MyPageViewModel: MyPageViewModelProtocol {
+public final class MyPageViewModel: MyPageViewModelProtocol {
     private let myPageDataSource: [[String]] = [
         [Constant.editProfile],
         [Constant.developer, Constant.version, Constant.privacyPolicy],
@@ -53,7 +59,7 @@ final class MyPageViewModel: MyPageViewModelProtocol {
     
     private let userInfoManager: UserInfoManageable
     
-    init(signOutUseCase: SignOutUseCase,
+    public init(signOutUseCase: SignOutUseCase,
          withdrawUseCase: WithdrawUseCase,
          actions: MyPageViewModelActions? = nil,
          userInfoManager: UserInfoManageable) {
@@ -64,46 +70,46 @@ final class MyPageViewModel: MyPageViewModelProtocol {
     }
     
     // MARK: - Input
-    func viewReady() {
+    public func viewReady() {
         tableViewDataSourceSubject.send(myPageDataSource)
     }
     
-    func profileSettingsViewButtonTapped() {
+    public func profileSettingsViewButtonTapped() {
         actions?.showProfileSettingsView()
     }
     
-    func privacyPolicyViewButtonTapped() {
+    public func privacyPolicyViewButtonTapped() {
         actions?.showPrivacyPolicyView()
     }
     
-    func signOutButtonTapped() {
+    public func signOutButtonTapped() {
         signOutUseCsae.signOut()
     }
     
-    func withdrawButtonTapped() {
+    public func withdrawButtonTapped() {
         Task {
             try await withdrawUseCase.withdraw()
         }
     }
     
-    func dismissButtonDidTapped() {
+    public func dismissButtonDidTapped() {
         actions?.viewDidFinish()
     }
     
     // MARK: - Output
-    var tableViewDataSourcePublisher: AnyPublisher<[[String]], Never> {
+    public var tableViewDataSourcePublisher: AnyPublisher<[[String]], Never> {
         return tableViewDataSourceSubject.eraseToAnyPublisher()
     }
     
-    var nicknamePublisher: AnyPublisher<String, Never> {
+    public var nicknamePublisher: AnyPublisher<String, Never> {
         return userInfoManager.nicknameChangePublisher
     }
     
-    var imageURLPublisher: AnyPublisher<String?, Never> {
+    public var imageURLPublisher: AnyPublisher<String?, Never> {
         return userInfoManager.profileImageChangePublihser
     }
     
-    var errorPublisher: AnyPublisher<Error, Never> {
+    public var errorPublisher: AnyPublisher<Error, Never> {
         return errorSubject.eraseToAnyPublisher()
     }
 }
