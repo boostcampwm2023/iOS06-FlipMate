@@ -7,6 +7,8 @@
 
 import UIKit
 import Network
+import Timer
+import Core
 
 final class TabBarDIContainer: TabBarFlowCoordinatorDependencies {
     

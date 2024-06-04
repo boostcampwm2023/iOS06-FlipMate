@@ -7,8 +7,8 @@
 
 import Foundation
 import Combine
-
 import Domain
+import Core
 
 struct StopFriend {
     let id: Int

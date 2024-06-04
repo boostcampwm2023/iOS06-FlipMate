@@ -31,20 +31,6 @@
 		2C8D21092B7216EE00632718 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F6FD722B0B5E130057CE0B /* SignUpViewController.swift */; };
 		2C8D210A2B7216EE00632718 /* TimerFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF82B1242DA000B4686 /* TimerFlowCoordinator.swift */; };
 		2C8D210B2B7216EE00632718 /* CategorySettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */; };
-		2C8D210C2B7216EE00632718 /* DeviceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D55B22B035484006D7C26 /* DeviceOrientation.swift */; };
-		2C8D210D2B7216EE00632718 /* CategorySettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF62B0B7F3C00E2FB71 /* CategorySettingSection.swift */; };
-		2C8D210E2B7216EE00632718 /* CategoryListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851D12B04EE83009031EA /* CategoryListCollectionViewCell.swift */; };
-		2C8D210F2B7216EE00632718 /* CategorySettingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF82B0B8A0B00E2FB71 /* CategorySettingFooterView.swift */; };
-		2C8D21102B7216EE00632718 /* CategoryColorSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */; };
-		2C8D21112B7216EE00632718 /* TimerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7CBD582B2B3AAD0024A9AA /* TimerHeaderView.swift */; };
-		2C8D21122B7216EE00632718 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D55AF2B0348FB006D7C26 /* TimerViewModel.swift */; };
-		2C8D21132B7216EE00632718 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */; };
-		2C8D21142B7216EE00632718 /* TimerFinishViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD0E2B14C22C000B4686 /* TimerFinishViewModel.swift */; };
-		2C8D21152B7216EE00632718 /* CategoryModifyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61FA2B15C96100AE63F9 /* CategoryModifyViewModel.swift */; };
-		2C8D21162B7216EE00632718 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601773E32B021E6000D175D9 /* TimerViewController.swift */; };
-		2C8D21172B7216EE00632718 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */; };
-		2C8D21182B7216EE00632718 /* CategoryModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595BC2B0DB29F00558FAA /* CategoryModifyViewController.swift */; };
-		2C8D21192B7216EE00632718 /* TimerFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD0C2B148E9B000B4686 /* TimerFinishViewController.swift */; };
 		2C8D211A2B7216EE00632718 /* WeeklySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C277AC32B4ABCAD00567CAC /* WeeklySection.swift */; };
 		2C8D211B2B7216EE00632718 /* ChartFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865D22B1F1464001A2AAD /* ChartFlowCoordinator.swift */; };
 		2C8D211C2B7216EE00632718 /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865D52B1F14CF001A2AAD /* ChartViewModel.swift */; };
@@ -83,16 +69,10 @@
 		2C8D213E2B7216EF00632718 /* ProfileSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EB7F5A2B1F19D900F8C613 /* ProfileSettingsViewController.swift */; };
 		2C8D213F2B7216EF00632718 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDAD39B2B4D2E43003A9D18 /* PrivacyPolicyViewController.swift */; };
 		2C8D21402B7216EF00632718 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2176E22B5AC156000422F9 /* CalendarManager.swift */; };
-		2C8D21412B7216EF00632718 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE91C722B25971000EACCD7 /* UserInfoManager.swift */; };
 		2C8D21422B7216EF00632718 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2C8D21432B7216EF00632718 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2C8D21442B7216EF00632718 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2C8D21462B7216EF00632718 /* FriendStatusPollingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87C2762B1C789A00A26313 /* FriendStatusPollingManager.swift */; };
-		2C8D21482B7216EF00632718 /* CategoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61F62B14EFA200AE63F9 /* CategoryManager.swift */; };
-		2C8D21492B7216EF00632718 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C801D822B04C64F00A7ABAE /* TimerManager.swift */; };
-		2C8D214A2B7216EF00632718 /* DeviceMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851D82B05C37C009031EA /* DeviceMotionManager.swift */; };
-		2C8D214B2B7216EF00632718 /* FeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C43A0D72B037BBC0005596A /* FeedbackManager.swift */; };
-		2C8D21552B7216EF00632718 /* CategoryManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61F82B14F33600AE63F9 /* CategoryManageable.swift */; };
 		2C8D21D92B735E2B00632718 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D21D82B735E2B00632718 /* BarChartView.swift */; };
 		2CD272ED2B21A619000CB9E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CD272EF2B21A619000CB9E5 /* Localizable.strings */; };
 		2CE0E5BD2B833602000D231C /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0E5BC2B833602000D231C /* LineChartView.swift */; };
@@ -104,6 +84,7 @@
 		60243EF02B05D24D0098A92F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 60243EEF2B05D24D0098A92F /* .swiftlint.yml */; };
 		602C9D472B4E9A310021F2DE /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE492B4B826F006B1CF9 /* LoginViewModelTests.swift */; };
 		602C9D482B4F95D30021F2DE /* SignUpViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE4B2B4B829B006B1CF9 /* SignUpViewModelTests.swift */; };
+		6037BB572C0AE23100BE37AC /* Timer in Frameworks */ = {isa = PBXBuildFile; productRef = 6037BB562C0AE23100BE37AC /* Timer */; };
 		604309E62BF1AFE800768D87 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 604309E52BF1AFE800768D87 /* GoogleSignIn */; };
 		604309E82BF1AFE800768D87 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 604309E72BF1AFE800768D87 /* GoogleSignInSwift */; };
 		60490B922BEA8B93008958C3 /* DummyManagers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C7918C2B5819F10019E81F /* DummyManagers.swift */; };
@@ -135,15 +116,10 @@
 		2C277ABE2B4AB22400567CAC /* WeeklyCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarView.swift; sourceTree = "<group>"; };
 		2C277AC02B4AB98000567CAC /* WeekCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C277AC32B4ABCAD00567CAC /* WeeklySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySection.swift; sourceTree = "<group>"; };
-		2C43A0D72B037BBC0005596A /* FeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackManager.swift; sourceTree = "<group>"; };
-		2C4D55AF2B0348FB006D7C26 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
-		2C4D55B22B035484006D7C26 /* DeviceOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceOrientation.swift; sourceTree = "<group>"; };
 		2C5CDA472B0252B2007AFC57 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2C5CDA4A2B0252C1007AFC57 /* LoginType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginType.swift; sourceTree = "<group>"; };
 		2C5CDA4E2B025403007AFC57 /* SocialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
 		2C5CDA5A2B025440007AFC57 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
-		2C7CBD582B2B3AAD0024A9AA /* TimerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHeaderView.swift; sourceTree = "<group>"; };
-		2C801D822B04C64F00A7ABAE /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		2C87C2762B1C789A00A26313 /* FriendStatusPollingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendStatusPollingManager.swift; sourceTree = "<group>"; };
 		2C87C2782B1C794000A26313 /* UpdateFriend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFriend.swift; sourceTree = "<group>"; };
 		2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -156,13 +132,8 @@
 		2C88DD062B125781000B4686 /* TabBarDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarDIContainer.swift; sourceTree = "<group>"; };
 		2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingCoordinator.swift; sourceTree = "<group>"; };
 		2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDIContainer.swift; sourceTree = "<group>"; };
-		2C88DD0C2B148E9B000B4686 /* TimerFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishViewController.swift; sourceTree = "<group>"; };
-		2C88DD0E2B14C22C000B4686 /* TimerFinishViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFinishViewModel.swift; sourceTree = "<group>"; };
 		2C8D20F42B678A6C00632718 /* LabelListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListView.swift; sourceTree = "<group>"; };
 		2C8D21D82B735E2B00632718 /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
-		2C9F61F62B14EFA200AE63F9 /* CategoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManager.swift; sourceTree = "<group>"; };
-		2C9F61F82B14F33600AE63F9 /* CategoryManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManageable.swift; sourceTree = "<group>"; };
-		2C9F61FA2B15C96100AE63F9 /* CategoryModifyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModifyViewModel.swift; sourceTree = "<group>"; };
 		2C9F61FD2B15F48600AE63F9 /* FriendAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddViewController.swift; sourceTree = "<group>"; };
 		2C9F62002B1601F200AE63F9 /* MyNickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNickNameView.swift; sourceTree = "<group>"; };
 		2C9F62022B16021E00AE63F9 /* FriendSearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchResultView.swift; sourceTree = "<group>"; };
@@ -181,10 +152,6 @@
 		2CDCD0662B18D0330080DCDE /* FriendUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendUser.swift; sourceTree = "<group>"; };
 		2CDCD0682B18D0D10080DCDE /* FriendSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchItem.swift; sourceTree = "<group>"; };
 		2CE0E5BC2B833602000D231C /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
-		2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
-		2CE84EF62B0B7F3C00E2FB71 /* CategorySettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingSection.swift; sourceTree = "<group>"; };
-		2CE84EF82B0B8A0B00E2FB71 /* CategorySettingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingFooterView.swift; sourceTree = "<group>"; };
-		2CE91C722B25971000EACCD7 /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
 		2CE91C742B25AE9700EACCD7 /* DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
 		600908BA2AFCD7DF0065DFFB /* FlipMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlipMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		600908BD2AFCD7DF0065DFFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -193,7 +160,6 @@
 		600908C92AFCD7E00065DFFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		600908CB2AFCD7E00065DFFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		600908D02AFCD7E00065DFFB /* FlipMateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlipMateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		601773E32B021E6000D175D9 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		601EB73A2B148F9A00C5B216 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		601F396A2BF3836F001689A0 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Core; path = FlipMate/Core; sourceTree = "<group>"; };
 		6020C7632B21C1D400F58AD0 /* MyPageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageHeaderView.swift; sourceTree = "<group>"; };
@@ -217,8 +183,7 @@
 		60FBEE492B4B826F006B1CF9 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		60FBEE4B2B4B829B006B1CF9 /* SignUpViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModelTests.swift; sourceTree = "<group>"; };
 		60FBEE4D2B4B82B1006B1CF9 /* TimerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModelTests.swift; sourceTree = "<group>"; };
-		ED3595BC2B0DB29F00558FAA /* CategoryModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModifyViewController.swift; sourceTree = "<group>"; };
-		ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColorSelectView.swift; sourceTree = "<group>"; };
+		60FE50402C020EC200AA2475 /* Timer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Timer; path = FlipMate/Timer; sourceTree = SOURCE_ROOT; };
 		ED38422B2B0F4531001E2803 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		ED68659C2B15E928001A2AAD /* SocialDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDetailViewController.swift; sourceTree = "<group>"; };
 		ED6865AC2B179600001A2AAD /* SocialDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDetailViewModel.swift; sourceTree = "<group>"; };
@@ -226,10 +191,7 @@
 		ED6865CF2B1F1429001A2AAD /* ChartDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDIContainer.swift; sourceTree = "<group>"; };
 		ED6865D22B1F1464001A2AAD /* ChartFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFlowCoordinator.swift; sourceTree = "<group>"; };
 		ED6865D52B1F14CF001A2AAD /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
-		ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		EDC851C62B021492009031EA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		EDC851D12B04EE83009031EA /* CategoryListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCollectionViewCell.swift; sourceTree = "<group>"; };
-		EDC851D82B05C37C009031EA /* DeviceMotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceMotionManager.swift; path = FlipMate/Presentation/Utils/MotionManager/DeviceMotionManager.swift; sourceTree = SOURCE_ROOT; };
 		EDDAD39B2B4D2E43003A9D18 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -241,6 +203,7 @@
 				2C04FF5C2BF78E6F0065075F /* DesignSystem in Frameworks */,
 				60C368E82BFBA1DA008C76ED /* Domain in Frameworks */,
 				604309E82BF1AFE800768D87 /* GoogleSignInSwift in Frameworks */,
+				6037BB572C0AE23100BE37AC /* Timer in Frameworks */,
 				601F39742BF399B9001689A0 /* Core in Frameworks */,
 				60BB72782BEA709D00E2A7E9 /* FMImageProvider in Frameworks */,
 				604309E62BF1AFE800768D87 /* GoogleSignIn in Frameworks */,
@@ -272,45 +235,6 @@
 			isa = PBXGroup;
 			children = (
 				2C277AC32B4ABCAD00567CAC /* WeeklySection.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		2C43A0D62B037BA50005596A /* FeedbackManager */ = {
-			isa = PBXGroup;
-			children = (
-				2C43A0D72B037BBC0005596A /* FeedbackManager.swift */,
-			);
-			path = FeedbackManager;
-			sourceTree = "<group>";
-		};
-		2C4D55AC2B0348D1006D7C26 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				2C4D55AF2B0348FB006D7C26 /* TimerViewModel.swift */,
-				ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */,
-				2C88DD0E2B14C22C000B4686 /* TimerFinishViewModel.swift */,
-				2C9F61FA2B15C96100AE63F9 /* CategoryModifyViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		2C4D55AE2B0348EC006D7C26 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				601773E32B021E6000D175D9 /* TimerViewController.swift */,
-				2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */,
-				ED3595BC2B0DB29F00558FAA /* CategoryModifyViewController.swift */,
-				2C88DD0C2B148E9B000B4686 /* TimerFinishViewController.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		2C4D55B12B035476006D7C26 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2C4D55B22B035484006D7C26 /* DeviceOrientation.swift */,
-				2CE84EF62B0B7F3C00E2FB71 /* CategorySettingSection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -350,29 +274,12 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		2C801D812B04C62900A7ABAE /* TimerManager */ = {
-			isa = PBXGroup;
-			children = (
-				2C801D822B04C64F00A7ABAE /* TimerManager.swift */,
-			);
-			path = TimerManager;
-			sourceTree = "<group>";
-		};
 		2C87C2752B1C788700A26313 /* FriendStatusPollingManager */ = {
 			isa = PBXGroup;
 			children = (
 				2C87C2762B1C789A00A26313 /* FriendStatusPollingManager.swift */,
 			);
 			path = FriendStatusPollingManager;
-			sourceTree = "<group>";
-		};
-		2C88DCF72B1242C7000B4686 /* Flows */ = {
-			isa = PBXGroup;
-			children = (
-				2C88DCF82B1242DA000B4686 /* TimerFlowCoordinator.swift */,
-				2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */,
-			);
-			path = Flows;
 			sourceTree = "<group>";
 		};
 		2C88DCFC2B124498000B4686 /* Flows */ = {
@@ -406,14 +313,6 @@
 				2C88DD042B1256D0000B4686 /* TabBarFlowCoordinator.swift */,
 			);
 			path = Flows;
-			sourceTree = "<group>";
-		};
-		2C9F61F52B14EA9800AE63F9 /* CategoryManager */ = {
-			isa = PBXGroup;
-			children = (
-				2C9F61F62B14EFA200AE63F9 /* CategoryManager.swift */,
-			);
-			path = CategoryManager;
 			sourceTree = "<group>";
 		};
 		2C9F61FF2B1601E800AE63F9 /* View */ = {
@@ -488,14 +387,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		2CE91C712B25970700EACCD7 /* UserInfoManager */ = {
-			isa = PBXGroup;
-			children = (
-				2CE91C722B25971000EACCD7 /* UserInfoManager.swift */,
-			);
-			path = UserInfoManager;
-			sourceTree = "<group>";
-		};
 		600908B12AFCD7DF0065DFFB = {
 			isa = PBXGroup;
 			children = (
@@ -546,9 +437,9 @@
 		600908ED2AFCDB6E0065DFFB /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */,
 				600908BD2AFCD7DF0065DFFB /* AppDelegate.swift */,
 				600908BF2AFCD7DF0065DFFB /* SceneDelegate.swift */,
+				6037BB542C0997AA00BE37AC /* Coordinator */,
 				600909042AFCE0AB0065DFFB /* DIContainer */,
 			);
 			path = Application;
@@ -570,25 +461,12 @@
 				2C88DD012B1256B5000B4686 /* TabBar */,
 				600908F62AFCDDDC0065DFFB /* Splash */,
 				600908F42AFCDCFA0065DFFB /* LoginScene */,
-				600908F12AFCDCD80065DFFB /* TimerScene */,
 				600908F32AFCDCE70065DFFB /* ChartScene */,
 				600908F22AFCDCE10065DFFB /* SocialScene */,
 				600908F52AFCDD0A0065DFFB /* MyPageScene */,
 				600908FE2AFCDF8D0065DFFB /* Utils */,
 			);
 			path = Presentation;
-			sourceTree = "<group>";
-		};
-		600908F12AFCDCD80065DFFB /* TimerScene */ = {
-			isa = PBXGroup;
-			children = (
-				2C88DCF72B1242C7000B4686 /* Flows */,
-				2C4D55B12B035476006D7C26 /* Model */,
-				EDC851D02B04EE74009031EA /* View */,
-				2C4D55AC2B0348D1006D7C26 /* ViewModel */,
-				2C4D55AE2B0348EC006D7C26 /* ViewController */,
-			);
-			path = TimerScene;
 			sourceTree = "<group>";
 		};
 		600908F22AFCDCE10065DFFB /* SocialScene */ = {
@@ -650,14 +528,8 @@
 			isa = PBXGroup;
 			children = (
 				2C2176E12B5AC147000422F9 /* CalendarManager */,
-				2CE91C712B25970700EACCD7 /* UserInfoManager */,
 				2C87C2752B1C788700A26313 /* FriendStatusPollingManager */,
-				2C9F61F52B14EA9800AE63F9 /* CategoryManager */,
-				2C801D812B04C62900A7ABAE /* TimerManager */,
-				EDC851D72B05C357009031EA /* DeviceMotionManager */,
-				2C43A0D62B037BA50005596A /* FeedbackManager */,
 				600908FF2AFCDF990065DFFB /* Extensions */,
-				600909002AFCDFA10065DFFB /* Protocols */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -667,14 +539,6 @@
 			children = (
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		600909002AFCDFA10065DFFB /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				2C9F61F82B14F33600AE63F9 /* CategoryManageable.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		600909042AFCE0AB0065DFFB /* DIContainer */ = {
@@ -697,6 +561,24 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6037BB542C0997AA00BE37AC /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */,
+				6037BB552C09992B00BE37AC /* TimerFlow */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		6037BB552C09992B00BE37AC /* TimerFlow */ = {
+			isa = PBXGroup;
+			children = (
+				2C88DCF82B1242DA000B4686 /* TimerFlowCoordinator.swift */,
+				2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */,
+			);
+			path = TimerFlow;
 			sourceTree = "<group>";
 		};
 		60C791882B5810EB0019E81F /* DummyUseCases */ = {
@@ -786,6 +668,7 @@
 		60FE503F2C01C7B600AA2475 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				60FE50402C020EC200AA2475 /* Timer */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -830,25 +713,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		EDC851D02B04EE74009031EA /* View */ = {
-			isa = PBXGroup;
-			children = (
-				EDC851D12B04EE83009031EA /* CategoryListCollectionViewCell.swift */,
-				2CE84EF82B0B8A0B00E2FB71 /* CategorySettingFooterView.swift */,
-				ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */,
-				2C7CBD582B2B3AAD0024A9AA /* TimerHeaderView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		EDC851D72B05C357009031EA /* DeviceMotionManager */ = {
-			isa = PBXGroup;
-			children = (
-				EDC851D82B05C37C009031EA /* DeviceMotionManager.swift */,
-			);
-			path = DeviceMotionManager;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -875,6 +739,7 @@
 				6071B1C62BF73BF10044574F /* Network */,
 				60C368E72BFBA1DA008C76ED /* Domain */,
 				2C6549BF2BFDD6E900105D5A /* Data */,
+				6037BB562C0AE23100BE37AC /* Timer */,
 			);
 			productName = FlipMate;
 			productReference = 600908BA2AFCD7DF0065DFFB /* FlipMate.app */;
@@ -995,21 +860,7 @@
 				2C8D21092B7216EE00632718 /* SignUpViewController.swift in Sources */,
 				2C8D210A2B7216EE00632718 /* TimerFlowCoordinator.swift in Sources */,
 				2C8D210B2B7216EE00632718 /* CategorySettingCoordinator.swift in Sources */,
-				2C8D210C2B7216EE00632718 /* DeviceOrientation.swift in Sources */,
-				2C8D210D2B7216EE00632718 /* CategorySettingSection.swift in Sources */,
-				2C8D210E2B7216EE00632718 /* CategoryListCollectionViewCell.swift in Sources */,
-				2C8D210F2B7216EE00632718 /* CategorySettingFooterView.swift in Sources */,
-				2C8D21102B7216EE00632718 /* CategoryColorSelectView.swift in Sources */,
-				2C8D21112B7216EE00632718 /* TimerHeaderView.swift in Sources */,
-				2C8D21122B7216EE00632718 /* TimerViewModel.swift in Sources */,
-				2C8D21132B7216EE00632718 /* CategoryViewModel.swift in Sources */,
-				2C8D21142B7216EE00632718 /* TimerFinishViewModel.swift in Sources */,
-				2C8D21152B7216EE00632718 /* CategoryModifyViewModel.swift in Sources */,
 				2C8D21D92B735E2B00632718 /* BarChartView.swift in Sources */,
-				2C8D21162B7216EE00632718 /* TimerViewController.swift in Sources */,
-				2C8D21172B7216EE00632718 /* CategorySettingViewController.swift in Sources */,
-				2C8D21182B7216EE00632718 /* CategoryModifyViewController.swift in Sources */,
-				2C8D21192B7216EE00632718 /* TimerFinishViewController.swift in Sources */,
 				2C8D211A2B7216EE00632718 /* WeeklySection.swift in Sources */,
 				2C8D211B2B7216EE00632718 /* ChartFlowCoordinator.swift in Sources */,
 				2C8D211C2B7216EE00632718 /* ChartViewModel.swift in Sources */,
@@ -1048,16 +899,10 @@
 				2C8D213E2B7216EF00632718 /* ProfileSettingsViewController.swift in Sources */,
 				2C8D213F2B7216EF00632718 /* PrivacyPolicyViewController.swift in Sources */,
 				2C8D21402B7216EF00632718 /* CalendarManager.swift in Sources */,
-				2C8D21412B7216EF00632718 /* UserInfoManager.swift in Sources */,
 				2C8D21422B7216EF00632718 /* (null) in Sources */,
 				2C8D21432B7216EF00632718 /* (null) in Sources */,
 				2C8D21442B7216EF00632718 /* (null) in Sources */,
 				2C8D21462B7216EF00632718 /* FriendStatusPollingManager.swift in Sources */,
-				2C8D21482B7216EF00632718 /* CategoryManager.swift in Sources */,
-				2C8D21492B7216EF00632718 /* TimerManager.swift in Sources */,
-				2C8D214A2B7216EF00632718 /* DeviceMotionManager.swift in Sources */,
-				2C8D214B2B7216EF00632718 /* FeedbackManager.swift in Sources */,
-				2C8D21552B7216EF00632718 /* CategoryManageable.swift in Sources */,
 				2CE0E5BD2B833602000D231C /* LineChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1428,6 +1273,10 @@
 		601F39752BF39E4F001689A0 /* Core */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Core;
+		};
+		6037BB562C0AE23100BE37AC /* Timer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Timer;
 		};
 		604309E52BF1AFE800768D87 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
