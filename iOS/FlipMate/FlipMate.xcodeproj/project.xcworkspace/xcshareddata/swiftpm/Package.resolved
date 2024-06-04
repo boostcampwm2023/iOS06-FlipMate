@@ -1,5 +1,5 @@
 {
-  "originHash" : "97edc9652c350a029e7f31b6f6e7f71281c819522f73dd66d733465cb08a0171",
+  "originHash" : "703d54bf46f51a9c7c59cbd0e501b763e0e15dca59a607860e5b41f1da0169e9",
   "pins" : [
     {
       "identity" : "appauth-ios",
@@ -69,8 +69,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-argument-parser.git",
       "state" : {
-        "revision" : "46989693916f56d1186bd59ac15124caef896560",
-        "version" : "1.3.1"
+        "revision" : "0fbc8848e389af3bb55c182bc19ca9d5dc2f255b",
+        "version" : "1.4.0"
       }
     },
     {
@@ -87,8 +87,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/SwiftLint.git",
       "state" : {
-        "revision" : "b515723b16eba33f15c4677ee65f3fef2ce8c255",
-        "version" : "0.55.1"
+        "revision" : "460d88c036163ee2f7cb5e32c180d9143ac332ae",
+        "version" : "0.55.0"
       }
     },
     {
