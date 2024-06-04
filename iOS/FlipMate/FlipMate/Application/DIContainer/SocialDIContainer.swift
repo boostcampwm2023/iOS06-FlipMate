@@ -7,6 +7,7 @@
 
 import UIKit
 import Core
+import Social
 import Domain
 import Network
 import Data
