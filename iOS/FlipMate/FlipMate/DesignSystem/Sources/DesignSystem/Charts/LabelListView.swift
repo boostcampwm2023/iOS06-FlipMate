@@ -1,28 +1,28 @@
 //
 //  LabelListView.swift
-//  FlipMate
+//  
 //
-//  Created by 임현규 on 2024/01/29.
+//  Created by 권승용 on 6/2/24.
 //
 
 import UIKit
 
-final class LabelListView: UIView {
- 
+public final class LabelListView: UIView {
+    
     // MARK: - Properties
     private var lineCount: CGFloat = 0
-
-    override var intrinsicContentSize: CGSize {
+    
+    public override var intrinsicContentSize: CGSize {
         return CGSize(width: bounds.width, height: lineCount * Constants.spacingY)
     }
     
     // MARK: - Life cycle
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         invalidateIntrinsicContentSize()
     }
     
     // MARK: - init
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
@@ -31,7 +31,7 @@ final class LabelListView: UIView {
     }
     
     // MARK: - Label Methods
-    func addLabel(_ labels: [ChartLabel]) {
+    public func addLabel(_ labels: [ChartLabel]) {
         lineCount += 1
         var positionX = Constants.defaultPositionX
         var positionY = Constants.defaultPositionY
@@ -54,7 +54,7 @@ final class LabelListView: UIView {
         }
     }
     
-    func removeAllLabel() {
+    public func removeAllLabel() {
         subviews.forEach { $0.removeFromSuperview() }
         lineCount = 0
     }

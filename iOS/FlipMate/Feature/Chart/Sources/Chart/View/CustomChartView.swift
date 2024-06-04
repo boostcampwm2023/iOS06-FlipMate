@@ -1,12 +1,11 @@
 //
 //  CustonChartView.swift
-//  FlipMate
 //
-//  Created by 임현규 on 2024/01/27.
+//
+//  Created by 권승용 on 6/2/24.
 //
 
 import UIKit
-
 import Domain
 import DesignSystem
 

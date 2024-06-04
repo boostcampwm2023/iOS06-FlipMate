@@ -1,12 +1,11 @@
 //
 //  DonutChartView.swift
-//  FlipMate
 //
-//  Created by 임현규 on 2024/01/06.
+//
+//  Created by 권승용 on 6/2/24.
 //
 
 import UIKit
-
 import Domain
 import DesignSystem
 
@@ -30,7 +29,7 @@ final class DonutChartView: UIView {
     required init?(coder: NSCoder) {
         fatalError("Don't use storyBoard")
     }
-
+    
     // MARK: - Life Cycle
     override func draw(_ rect: CGRect) {
         drawDonutChartLayer()
@@ -51,7 +50,7 @@ private extension DonutChartView {
         }
         
         textLayerArray.forEach { $0.removeFromSuperlayer() }
-
+        
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
         let categories = studyLog.category, totalTime = CGFloat(studyLog.totalTime)
         var startAngle: CGFloat = 0.0, endAngle: CGFloat = 0.0, middleAngle: CGFloat = 0.0
@@ -100,7 +99,7 @@ private extension DonutChartView {
             drawNoResultText()
             return
         }
-
+        
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
         
         let totalTimeLayer = CATextLayer()
@@ -111,7 +110,7 @@ private extension DonutChartView {
         totalTimeLayer.font = Constant.systemTextFont as CFTypeRef
         totalTimeLayer.string = Constant.totalTimeText
         totalTimeLayer.isWrapped = true
-
+        
         let timeLayer = CATextLayer()
         timeLayer.frame = CGRect(x: center.x, y: center.y + 20, width: 0, height: 0).insetBy(dx: -60, dy: -20)
         timeLayer.foregroundColor = UIColor.black.cgColor

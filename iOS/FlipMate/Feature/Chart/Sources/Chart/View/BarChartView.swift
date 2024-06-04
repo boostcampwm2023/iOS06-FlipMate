@@ -1,12 +1,11 @@
 //
 //  BarChartView.swift
-//  FlipMate
 //
-//  Created by 임현규 on 2024/02/07.
+//
+//  Created by 권승용 on 6/2/24.
 //
 
 import UIKit
-
 import Domain
 import DesignSystem
 
@@ -41,11 +40,11 @@ final class BarChartView: UIView {
 private extension BarChartView {
     func drawBarChart() {
         textLayerArray.forEach { $0.removeFromSuperlayer() }
-
+        
         guard let context = UIGraphicsGetCurrentContext(),
               let dailyDatas = dailyDatas, let maxPoint = dailyDatas.map({ $0.studyTime }).max(),
               let darkBlueColor = FlipMateColor.darkBlue.color?.cgColor else { return }
-
+        
         context.clear(frame)
         context.setFillColor(darkBlueColor)
         

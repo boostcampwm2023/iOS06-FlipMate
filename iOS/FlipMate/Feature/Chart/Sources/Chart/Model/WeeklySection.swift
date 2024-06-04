@@ -1,17 +1,17 @@
 //
-//  WeeklySection.swift
-//  FlipMate
+//  File.swift
+//  
 //
-//  Created by 임현규 on 2024/01/07.
+//  Created by 권승용 on 6/2/24.
 //
 
-import UIKit
+import Foundation
 
-enum WeeklySection: Hashable {
+public enum WeeklySection: Hashable {
     case section([WeeklySectionItem])
 }
 
-enum WeeklySectionItem: Hashable {
+public enum WeeklySectionItem: Hashable {
     case dateCell(String)
     
     var date: String {

@@ -1,11 +1,17 @@
 //
 //  CalendarManager.swift
-//  FlipMate
 //
-//  Created by 임현규 on 2024/01/19.
+//
+//  Created by 권승용 on 6/2/24.
 //
 
 import Foundation
+
+enum CalendarScrollState {
+    case left
+    case none
+    case right
+}
 
 final class CalendarManager {
     // MARK: - Properties
@@ -18,7 +24,7 @@ final class CalendarManager {
     }
     
     private(set) var currentWeek = Date()
-
+    
     // MARK: - Methods
     func updateCurrentWeek(date: Date) {
         currentWeek = date
@@ -48,7 +54,7 @@ final class CalendarManager {
     func currentWeekItem() -> [WeeklySectionItem] {
         return weekendItem(currentWeek)
     }
-
+    
 }
 
 // MARK: - Private Methods

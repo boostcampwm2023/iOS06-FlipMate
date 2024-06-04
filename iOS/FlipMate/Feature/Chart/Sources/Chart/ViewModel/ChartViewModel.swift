@@ -1,28 +1,27 @@
 //
 //  ChartViewModel.swift
-//  FlipMate
 //
-//  Created by 신민규 on 12/5/23.
+//
+//  Created by 권승용 on 6/2/24.
 //
 
 import Foundation
 import Combine
-
 import Domain
 
-protocol ChartViewModelInput {
+public protocol ChartViewModelInput {
     func viewDidLoad()
     func dateDidSelected(date: Date)
 }
 
-protocol ChartViewModelOutput {
+public protocol ChartViewModelOutput {
     var dailyChartPublisher: AnyPublisher<StudyLog, Never> { get }
     var weeklyChartPulisher: AnyPublisher<[DailyData], Never> { get }
 }
 
-typealias ChartViewModelProtocol = ChartViewModelInput & ChartViewModelOutput
+public typealias ChartViewModelProtocol = ChartViewModelInput & ChartViewModelOutput
 
-final class ChartViewModel: ChartViewModelProtocol {
+public final class ChartViewModel: ChartViewModelProtocol {
     
     // MARK: - Properties
     private var selectedDate = Date()
@@ -30,32 +29,33 @@ final class ChartViewModel: ChartViewModelProtocol {
     // MARK: - UseCase
     private let dailyChartUseCase: FetchDailyChartUseCase
     private let weeklyChartUseCase: FetchWeeklyChartUseCase
-
+    
     // MARK: - Subject
     private let dailyChartSubject = PassthroughSubject<StudyLog, Never>()
     private let weeklyChartSubject = PassthroughSubject<[DailyData], Never>()
+    
     // MARK: - Publihser
-    var dailyChartPublisher: AnyPublisher<StudyLog, Never> {
+    public var dailyChartPublisher: AnyPublisher<StudyLog, Never> {
         return dailyChartSubject.eraseToAnyPublisher()
     }
     
-    var weeklyChartPulisher: AnyPublisher<[DailyData], Never> {
+    public var weeklyChartPulisher: AnyPublisher<[DailyData], Never> {
         return weeklyChartSubject.eraseToAnyPublisher()
     }
     
-    init(dailyChartUseCase: FetchDailyChartUseCase,
+    public init(dailyChartUseCase: FetchDailyChartUseCase,
          weeklyChartUseCase: FetchWeeklyChartUseCase) {
         self.dailyChartUseCase = dailyChartUseCase
         self.weeklyChartUseCase = weeklyChartUseCase
     }
     
     // MARK: - input
-    func viewDidLoad() {
+    public func viewDidLoad() {
         fetchDailyChartLog(at: selectedDate)
         fetchWeeklyChartLog(at: selectedDate)
     }
     
-    func dateDidSelected(date: Date) {
+    public func dateDidSelected(date: Date) {
         selectedDate = date
         fetchDailyChartLog(at: selectedDate)
     }

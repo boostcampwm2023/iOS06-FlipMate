@@ -1,19 +1,13 @@
 //
 //  WeeklyCalendarView.swift
-//  FlipMate
 //
-//  Created by 임현규 on 2024/01/07.
+//
+//  Created by 권승용 on 6/2/24.
 //
 
 import UIKit
 import DesignSystem
 
-enum CalendarScrollState {
-    case left
-    case none
-    case right
-}
-    
 protocol WeeklyCalendarViewDelegate: AnyObject {
     func didSelectDate(_ date: Date)
     func deSelectDate(_ date: Date)
@@ -25,7 +19,7 @@ final class WeeklyCalendarView: UIView {
     
     // MARK: - Properties
     weak var delegate: WeeklyCalendarViewDelegate?
-
+    
     private var dataSource: CalendarDataSource?
     private let calendarManager = CalendarManager()
     
@@ -247,14 +241,14 @@ extension WeeklyCalendarView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath) -> CGSize {
             return CGSize(width: frame.width / Constant.weeklyCount, height: Constant.cellHeight)
-    }
+        }
     
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
             return Constant.cellSpacing
-    }
+        }
 }
 
 // MARK: - Constant

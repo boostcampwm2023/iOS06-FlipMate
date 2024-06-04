@@ -1,8 +1,8 @@
 //
 //  ChartSegmentedControl.swift
-//  FlipMate
 //
-//  Created by 신민규 on 12/5/23.
+//
+//  Created by 권승용 on 6/2/24.
 //
 
 import UIKit
@@ -55,7 +55,7 @@ final class ChartSegmentedControl: UISegmentedControl {
         }
         UIView.animate(withDuration: 0.3, animations: {
             self.segmentView.frame.origin.x = linePosition
-            }
+        }
         )
     }
 }

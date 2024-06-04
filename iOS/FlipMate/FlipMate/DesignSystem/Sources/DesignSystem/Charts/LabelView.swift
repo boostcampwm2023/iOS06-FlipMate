@@ -1,19 +1,23 @@
 //
-//  LabelView.swift
-//  FlipMate
+//  File.swift
+//  
 //
-//  Created by 임현규 on 2024/01/27.
+//  Created by 권승용 on 6/2/24.
 //
 
 import UIKit
-import DesignSystem
 
-struct ChartLabel {
+public struct ChartLabel {
     let title: String
     let hexString: String
+    
+    public init(title: String, hexString: String) {
+        self.title = title
+        self.hexString = hexString
+    }
 }
 
-final class LabelView: UIView {
+public final class LabelView: UIView {
     // MARK: - Properties
     private(set) var widthSize: CGFloat = 0.0
     
@@ -31,7 +35,7 @@ final class LabelView: UIView {
     }()
     
     // MARK: - init
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
     }
@@ -40,7 +44,7 @@ final class LabelView: UIView {
         fatalError("Don't use Storyboard")
     }
     
-    func updateLabel(label: ChartLabel) {
+    public func updateLabel(label: ChartLabel) {
         labelTitle.text = label.title
         colorView.backgroundColor = UIColor(hexString: label.hexString)
         labelTitle.sizeToFit()

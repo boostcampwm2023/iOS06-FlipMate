@@ -13,8 +13,8 @@ let package = Package(
             targets: ["Timer"]),
     ],
     dependencies: [
-        .package(path: "../Core"),
-        .package(path: "../Domain")
+        .package(path: "../../Core"),
+        .package(path: "../../Domain")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.

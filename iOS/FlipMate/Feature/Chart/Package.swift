@@ -4,30 +4,32 @@
 import PackageDescription
 
 let package = Package(
-    name: "TabBar",
+    name: "Chart",
     platforms: [.iOS(.v14)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "TabBar",
-            targets: ["TabBar"]),
+            name: "Chart",
+            targets: ["Chart"]),
     ],
     dependencies: [
         .package(path: "../../Core"),
+        .package(path: "../../Domain"),
         .package(path: "../../DesignSystem")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "TabBar",
+            name: "Chart",
             dependencies: [
                 .product(name: "Core", package: "Core"),
+                .product(name: "Domain", package: "Domain"),
                 .product(name: "DesignSystem", package: "DesignSystem")
             ]
         ),
         .testTarget(
-            name: "TabBarTests",
-            dependencies: ["TabBar"]),
+            name: "ChartTests",
+            dependencies: ["Chart"]),
     ]
 )
