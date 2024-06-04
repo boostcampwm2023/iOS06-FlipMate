@@ -21,7 +21,6 @@
 		2C8D20FF2B7216EE00632718 /* MyPageDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60459D482B21A28400A80AF7 /* MyPageDIContainer.swift */; };
 		2C8D21002B7216EE00632718 /* ChartDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865CF2B1F1429001A2AAD /* ChartDIContainer.swift */; };
 		2C8D21012B7216EE00632718 /* TabBarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD042B1256D0000B4686 /* TabBarFlowCoordinator.swift */; };
-		2C8D21022B7216EE00632718 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851C62B021492009031EA /* TabBarViewController.swift */; };
 		2C8D21032B7216EE00632718 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908C12AFCD7DF0065DFFB /* ViewController.swift */; };
 		2C8D21042B7216EE00632718 /* LoginFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCFD2B1244A6000B4686 /* LoginFlowCoordinator.swift */; };
 		2C8D21052B7216EE00632718 /* LoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA4A2B0252C1007AFC57 /* LoginType.swift */; };
@@ -89,6 +88,7 @@
 		604309E82BF1AFE800768D87 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 604309E72BF1AFE800768D87 /* GoogleSignInSwift */; };
 		60490B922BEA8B93008958C3 /* DummyManagers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C7918C2B5819F10019E81F /* DummyManagers.swift */; };
 		60490B932BEA8B97008958C3 /* DummyUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C791892B5810FA0019E81F /* DummyUseCases.swift */; };
+		60590DA12C0C43740069B3E4 /* TabBar in Frameworks */ = {isa = PBXBuildFile; productRef = 60590DA02C0C43740069B3E4 /* TabBar */; };
 		6067DD832B2737F9004625AF /* Selection.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 6067DD822B2737F9004625AF /* Selection.ahap */; };
 		6071B1C72BF73BF10044574F /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 6071B1C62BF73BF10044574F /* Network */; };
 		6096F91E2B04F3CA00D0B972 /* FaceDown.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 6096F91D2B04F3CA00D0B972 /* FaceDown.ahap */; };
@@ -167,6 +167,7 @@
 		602BF08C2BF4FB5B0088050A /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Network; path = FlipMate/Network; sourceTree = "<group>"; };
 		60459D462B21A17C00A80AF7 /* MyPageFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFlowCoordinator.swift; sourceTree = "<group>"; };
 		60459D482B21A28400A80AF7 /* MyPageDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDIContainer.swift; sourceTree = "<group>"; };
+		60590D9E2C0C3D9D0069B3E4 /* TabBar */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TabBar; path = FlipMate/TabBar; sourceTree = SOURCE_ROOT; };
 		605F88492B297DA5008975DC /* FlipMate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FlipMate.entitlements; sourceTree = "<group>"; };
 		6067DD822B2737F9004625AF /* Selection.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = Selection.ahap; sourceTree = "<group>"; };
 		606990562B18918B00E5730F /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
@@ -191,7 +192,6 @@
 		ED6865CF2B1F1429001A2AAD /* ChartDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDIContainer.swift; sourceTree = "<group>"; };
 		ED6865D22B1F1464001A2AAD /* ChartFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFlowCoordinator.swift; sourceTree = "<group>"; };
 		ED6865D52B1F14CF001A2AAD /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
-		EDC851C62B021492009031EA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		EDDAD39B2B4D2E43003A9D18 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -200,6 +200,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60590DA12C0C43740069B3E4 /* TabBar in Frameworks */,
 				2C04FF5C2BF78E6F0065075F /* DesignSystem in Frameworks */,
 				60C368E82BFBA1DA008C76ED /* Domain in Frameworks */,
 				604309E82BF1AFE800768D87 /* GoogleSignInSwift in Frameworks */,
@@ -286,31 +287,6 @@
 			isa = PBXGroup;
 			children = (
 				2C88DCFD2B1244A6000B4686 /* LoginFlowCoordinator.swift */,
-			);
-			path = Flows;
-			sourceTree = "<group>";
-		};
-		2C88DD012B1256B5000B4686 /* TabBar */ = {
-			isa = PBXGroup;
-			children = (
-				2C88DD032B1256C4000B4686 /* Flows */,
-				2C88DD022B1256BD000B4686 /* ViewController */,
-			);
-			path = TabBar;
-			sourceTree = "<group>";
-		};
-		2C88DD022B1256BD000B4686 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				EDC851C62B021492009031EA /* TabBarViewController.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		2C88DD032B1256C4000B4686 /* Flows */ = {
-			isa = PBXGroup;
-			children = (
-				2C88DD042B1256D0000B4686 /* TabBarFlowCoordinator.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -458,7 +434,6 @@
 		600908EF2AFCDBC90065DFFB /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				2C88DD012B1256B5000B4686 /* TabBar */,
 				600908F62AFCDDDC0065DFFB /* Splash */,
 				600908F42AFCDCFA0065DFFB /* LoginScene */,
 				600908F32AFCDCE70065DFFB /* ChartScene */,
@@ -567,6 +542,7 @@
 			isa = PBXGroup;
 			children = (
 				2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */,
+				60590D9F2C0C3E330069B3E4 /* TabBarFlow */,
 				6037BB552C09992B00BE37AC /* TimerFlow */,
 			);
 			path = Coordinator;
@@ -579,6 +555,14 @@
 				2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */,
 			);
 			path = TimerFlow;
+			sourceTree = "<group>";
+		};
+		60590D9F2C0C3E330069B3E4 /* TabBarFlow */ = {
+			isa = PBXGroup;
+			children = (
+				2C88DD042B1256D0000B4686 /* TabBarFlowCoordinator.swift */,
+			);
+			path = TabBarFlow;
 			sourceTree = "<group>";
 		};
 		60C791882B5810EB0019E81F /* DummyUseCases */ = {
@@ -668,6 +652,7 @@
 		60FE503F2C01C7B600AA2475 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				60590D9E2C0C3D9D0069B3E4 /* TabBar */,
 				60FE50402C020EC200AA2475 /* Timer */,
 			);
 			path = Feature;
@@ -740,6 +725,7 @@
 				60C368E72BFBA1DA008C76ED /* Domain */,
 				2C6549BF2BFDD6E900105D5A /* Data */,
 				6037BB562C0AE23100BE37AC /* Timer */,
+				60590DA02C0C43740069B3E4 /* TabBar */,
 			);
 			productName = FlipMate;
 			productReference = 600908BA2AFCD7DF0065DFFB /* FlipMate.app */;
@@ -850,7 +836,6 @@
 				2C8D20FF2B7216EE00632718 /* MyPageDIContainer.swift in Sources */,
 				2C8D21002B7216EE00632718 /* ChartDIContainer.swift in Sources */,
 				2C8D21012B7216EE00632718 /* TabBarFlowCoordinator.swift in Sources */,
-				2C8D21022B7216EE00632718 /* TabBarViewController.swift in Sources */,
 				2C8D21032B7216EE00632718 /* ViewController.swift in Sources */,
 				2C8D21042B7216EE00632718 /* LoginFlowCoordinator.swift in Sources */,
 				2C8D21052B7216EE00632718 /* LoginType.swift in Sources */,
@@ -1292,6 +1277,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 604309E92BF1B10A00768D87 /* XCRemoteSwiftPackageReference "SwiftLint" */;
 			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+		60590DA02C0C43740069B3E4 /* TabBar */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TabBar;
 		};
 		6071B1C62BF73BF10044574F /* Network */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -1,19 +1,19 @@
 //
 //  TabBarViewController.swift
-//  FlipMate
 //
-//  Created by 신민규 on 11/13/23.
+//
+//  Created by 권승용 on 6/2/24.
 //
 
-import Core
 import UIKit
 import DesignSystem
+import Core
 
-protocol TimeZoneDelegate: AnyObject {
+public protocol TimeZoneDelegate: AnyObject {
     func didChangeTimeZone()
 }
 
-final class TabBarViewController: UITabBarController {
+public final class TabBarViewController: UITabBarController {
     
     // MARK: - Constant
     private enum Constant {
@@ -26,7 +26,7 @@ final class TabBarViewController: UITabBarController {
     }
     
     // MARK: - Properties
-    weak var timeZoneDelegate: TimeZoneDelegate?
+    public weak var timeZoneDelegate: TimeZoneDelegate?
     
     // MARK: - UI Components
     lazy var timerButton: UIButton = {
@@ -49,22 +49,26 @@ final class TabBarViewController: UITabBarController {
         return button
     }()
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         configureTabBar()
         configureTimeZoneNotification()
     }
     
-    override func viewDidLayoutSubviews() {
+    public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupFrame()
         setUpTimerButton()
     }
     
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         tabBar.layer.backgroundColor = FlipMateColor.tabBarColor.color?.cgColor
         tabBar.layer.borderColor = FlipMateColor.tabBarLayerColor.color?.cgColor
+    }
+    
+    public func setTimerButtonImageColor(with color: UIColor?) {
+        timerButton.imageView?.tintColor = color
     }
 }
 
@@ -135,3 +139,4 @@ private extension TabBarViewController {
         present(alertController, animated: true)
     }
 }
+

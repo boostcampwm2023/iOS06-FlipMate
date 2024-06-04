@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import TabBar
 import DesignSystem
 import Core
 
@@ -102,7 +103,7 @@ final class TabBarFlowCoordinator: NSObject, Coordinator {
 extension TabBarFlowCoordinator: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if let tabBarVC = tabBarController as? TabBarViewController {
-            tabBarVC.timerButton.imageView?.tintColor = FlipMateColor.tabBarIconUnSelected.color
+            tabBarVC.setTimerButtonImageColor(with: FlipMateColor.tabBarIconUnSelected.color)
         }
         FeedbackManager.shared.startTabBarItemTapFeedback()
         
