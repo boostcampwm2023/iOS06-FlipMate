@@ -1,23 +1,28 @@
 //
 //  LoginViewModel.swift
-//  FlipMate
 //
-//  Created by 신민규 on 11/23/23.
+//
+//  Created by 권승용 on 6/2/24.
 //
 
 import Foundation
 import Combine
-
 import Domain
 import Core
 
-struct LoginViewModelActions {
+public struct LoginViewModelActions {
     let showSignUpViewController: () -> Void
     let showTabBarController: () -> Void
     let skippedLogin: () -> Void
+    
+    public init(showSignUpViewController: @escaping () -> Void, showTabBarController: @escaping () -> Void, skippedLogin: @escaping () -> Void) {
+        self.showSignUpViewController = showSignUpViewController
+        self.showTabBarController = showTabBarController
+        self.skippedLogin = skippedLogin
+    }
 }
 
-protocol LoginViewModelInput {
+public protocol LoginViewModelInput {
     func skippedLogin()
     func didFinishLoginAndIsMember()
     func didFinishLoginAndIsNotMember()
@@ -25,15 +30,15 @@ protocol LoginViewModelInput {
     func requestAppleLogin(accessToken: String, userID: String)
 }
 
-protocol LoginViewModelOutput { 
+public protocol LoginViewModelOutput {
     var isMemberPublisher: AnyPublisher<Bool, Never> { get }
     var errorPublisher: AnyPublisher<Error, Never> { get }
 }
 
-typealias LoginViewModelProtocol = LoginViewModelInput & LoginViewModelOutput
+public typealias LoginViewModelProtocol = LoginViewModelInput & LoginViewModelOutput
 
-final class LoginViewModel: LoginViewModelProtocol {
-
+public final class LoginViewModel: LoginViewModelProtocol {
+    
     // MARK: properties
     private let googleLoginUseCase: GoogleLoginUseCase
     private let appleLoginUseCase: AppleLoginUseCase
@@ -43,7 +48,7 @@ final class LoginViewModel: LoginViewModelProtocol {
     private let isMemberSubject = PassthroughSubject<Bool, Never>()
     private let errorSubject = PassthroughSubject<Error, Never>()
     
-    init(googleLoginUseCase: GoogleLoginUseCase,
+    public init(googleLoginUseCase: GoogleLoginUseCase,
          appleLoginUseCase: AppleLoginUseCase,
          actions: LoginViewModelActions? = nil) {
         self.googleLoginUseCase = googleLoginUseCase
@@ -52,19 +57,19 @@ final class LoginViewModel: LoginViewModelProtocol {
     }
     
     // MARK: - input
-    func skippedLogin() {
+    public func skippedLogin() {
         actions?.skippedLogin()
     }
     
-    func didFinishLoginAndIsMember() {
+    public func didFinishLoginAndIsMember() {
         self.actions?.showTabBarController()
     }
     
-    func didFinishLoginAndIsNotMember() {
+    public func didFinishLoginAndIsNotMember() {
         actions?.showSignUpViewController()
     }
-
-    func requestGoogleLogin(accessToken: String) {
+    
+    public func requestGoogleLogin(accessToken: String) {
         Task {
             do {
                 let response = try await self.googleLoginUseCase.googleLogin(accessToken: accessToken)
@@ -76,7 +81,7 @@ final class LoginViewModel: LoginViewModelProtocol {
         }
     }
     
-    func requestAppleLogin(accessToken: String, userID: String) {
+    public func requestAppleLogin(accessToken: String, userID: String) {
         Task {
             do {
                 let response = try await self.appleLoginUseCase.appleLogin(accessToken: accessToken, userID: userID)
@@ -89,11 +94,11 @@ final class LoginViewModel: LoginViewModelProtocol {
     }
     
     // MARK: - Output
-    var isMemberPublisher: AnyPublisher<Bool, Never> {
+    public var isMemberPublisher: AnyPublisher<Bool, Never> {
         return isMemberSubject.eraseToAnyPublisher()
     }
     
-    var errorPublisher: AnyPublisher<Error, Never> {
+    public var errorPublisher: AnyPublisher<Error, Never> {
         return errorSubject.eraseToAnyPublisher()
     }
 }

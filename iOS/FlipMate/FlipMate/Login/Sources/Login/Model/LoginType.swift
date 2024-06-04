@@ -1,9 +1,10 @@
 //
-//  LoginType.swift
-//  FlipMate
+//  File.swift
+//  
 //
-//  Created by 임현규 on 2023/11/13.
+//  Created by 권승용 on 6/2/24.
 //
+
 import Foundation
 
 enum LoginType {

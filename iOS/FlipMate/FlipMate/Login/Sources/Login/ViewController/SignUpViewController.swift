@@ -1,17 +1,17 @@
 //
 //  SignUpViewController.swift
-//  FlipMate
+//  
 //
-//  Created by 권승용 on 11/20/23.
+//  Created by 권승용 on 6/2/24.
 //
 
-import Core
 import UIKit
 import Combine
 import PhotosUI
 import DesignSystem
+import Core
 
-final class SignUpViewController: BaseViewController {
+public final class SignUpViewController: BaseViewController {
     
     // MARK: - View Properties
     private lazy var profileImageView: UIImageView = {
@@ -80,7 +80,7 @@ final class SignUpViewController: BaseViewController {
         underline.backgroundColor = FlipMateColor.gray1.color
         return underline
     }()
-    
+
     private lazy var doneButton: DoneButton = {
         let button = DoneButton()
         button.contentEdgeInsets = UIEdgeInsets(
@@ -103,7 +103,7 @@ final class SignUpViewController: BaseViewController {
     private let viewModel: SignUpViewModelProtocol
     private var cancellables = Set<AnyCancellable>()
     
-    init(viewModel: SignUpViewModelProtocol) {
+    public init(viewModel: SignUpViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -111,14 +111,14 @@ final class SignUpViewController: BaseViewController {
     required init?(coder: NSCoder) {
         fatalError()
     }
-
+    
     // MARK: - View Life Cycles
-    override func viewDidLayoutSubviews() {
+    public override func viewDidLayoutSubviews() {
         drawTextFieldUnderline()
     }
     
     // MARK: - Configure UI
-    override func configureUI() {
+    public override func configureUI() {
         self.title = "회원가입"
         
         let subViews = [
@@ -172,12 +172,12 @@ final class SignUpViewController: BaseViewController {
         self.nickNameTextField.addSubview(textFieldUnderline)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
     // MARK: - Viewmodel Binding
-    override func bind() {
+    public override func bind() {
         viewModel.isValidNickNamePublisher
             .sink { [weak self] state in
                 FMLogger.general.log("닉네임 유효성 상태 : \(state.message)")
@@ -250,7 +250,7 @@ final class SignUpViewController: BaseViewController {
 
 // MARK: - UITextFieldDelegate
 extension SignUpViewController: UITextFieldDelegate {
-    func textFieldDidChangeSelection(_ textField: UITextField) {
+    public func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let nickname = textField.text else { return }
         guard nickname.count <= Constant.maxLength else {
             textField.deleteBackward()
@@ -289,7 +289,7 @@ private extension SignUpViewController {
 
 // MARK: - PHPickerViewControllerDelegate
 extension SignUpViewController: PHPickerViewControllerDelegate {
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+    public func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
         
         // 유저가 이미지 선택하지 않음

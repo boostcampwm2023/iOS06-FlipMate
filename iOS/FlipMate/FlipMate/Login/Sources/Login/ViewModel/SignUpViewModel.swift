@@ -1,35 +1,38 @@
 //
 //  SignUpViewModel.swift
-//  FlipMate
 //
-//  Created by 권승용 on 11/27/23.
+//
+//  Created by 권승용 on 6/2/24.
 //
 
 import Foundation
 import Combine
-
 import Domain
 import Core
 
-struct SignUpViewModelActions {
+public  struct SignUpViewModelActions {
     let didFinishSignUp: () -> Void
+    
+    public init(didFinishSignUp: @escaping () -> Void) {
+        self.didFinishSignUp = didFinishSignUp
+    }
 }
 
-protocol SignUpViewModelInput {
+public protocol SignUpViewModelInput {
     func nickNameChanged(_ newNickName: String)
     func signUpButtonTapped(userName: String, profileImageData: Data)
 }
 
-protocol SignUpViewModelOutput {
+public protocol SignUpViewModelOutput {
     var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Never> { get }
     var isSignUpCompletedPublisher: AnyPublisher<Void, Never> { get }
     var imageNotSafePublisher: AnyPublisher<Void, Never> { get }
     var errorPublisher: AnyPublisher<Error, Never> { get }
 }
 
-typealias SignUpViewModelProtocol = SignUpViewModelInput & SignUpViewModelOutput
+public typealias SignUpViewModelProtocol = SignUpViewModelInput & SignUpViewModelOutput
 
-final class SignUpViewModel: SignUpViewModelProtocol {
+public final class SignUpViewModel: SignUpViewModelProtocol {
     // MARK: - Use Case
     private let validateNickNameUseCase: ValidateNicknameUseCase
     private let setupProfileUseCase: SetupProfileInfoUseCase
@@ -42,7 +45,7 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     private var errorSubject = PassthroughSubject<Error, Never>()
     private let actions: SignUpViewModelActions?
     
-    init(validateNickNameUseCase: ValidateNicknameUseCase,
+    public init(validateNickNameUseCase: ValidateNicknameUseCase,
          setupProfileUseCase: SetupProfileInfoUseCase,
          actions: SignUpViewModelActions) {
         self.validateNickNameUseCase = validateNickNameUseCase
@@ -51,12 +54,12 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     }
     
     // MARK: - Input
-    func nickNameChanged(_ newNickName: String) {
+    public func nickNameChanged(_ newNickName: String) {
         let nickNameValidationStatus = validateNickNameUseCase.isNickNameValid(newNickName)
         isValidNickNameSubject.send(nickNameValidationStatus)
     }
     
-    func signUpButtonTapped(userName: String, profileImageData: Data) {
+    public func signUpButtonTapped(userName: String, profileImageData: Data) {
         Task {
             do {
                 _ = try await setupProfileUseCase.setupProfileInfo(nickName: userName, profileImageData: profileImageData)
@@ -80,22 +83,22 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     }
     
     // MARK: - Output
-    var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Never> {
+    public var isValidNickNamePublisher: AnyPublisher<NickNameValidationState, Never> {
         return isValidNickNameSubject
             .eraseToAnyPublisher()
     }
     
-    var isSignUpCompletedPublisher: AnyPublisher<Void, Never> {
+    public var isSignUpCompletedPublisher: AnyPublisher<Void, Never> {
         return isSignUpCompletedSubject
             .eraseToAnyPublisher()
     }
     
-    var imageNotSafePublisher: AnyPublisher<Void, Never> {
+    public var imageNotSafePublisher: AnyPublisher<Void, Never> {
         return imageNotSafeSubject
             .eraseToAnyPublisher()
     }
     
-    var errorPublisher: AnyPublisher<Error, Never> {
+    public var errorPublisher: AnyPublisher<Error, Never> {
         return errorSubject
             .eraseToAnyPublisher()
     }
