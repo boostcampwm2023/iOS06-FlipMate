@@ -6,10 +6,11 @@
 //
 
 import UIKit
-
+import Timer
 import Domain
 import Network
 import Data
+import Core
 
 final class TimerSceneDIContainer: TimerFlowCoordinatorDependencies {
     struct Dependencies {
