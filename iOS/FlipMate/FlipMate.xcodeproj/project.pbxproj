@@ -21,44 +21,20 @@
 		2C8D20FF2B7216EE00632718 /* MyPageDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60459D482B21A28400A80AF7 /* MyPageDIContainer.swift */; };
 		2C8D21002B7216EE00632718 /* ChartDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865CF2B1F1429001A2AAD /* ChartDIContainer.swift */; };
 		2C8D21012B7216EE00632718 /* TabBarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD042B1256D0000B4686 /* TabBarFlowCoordinator.swift */; };
-		2C8D21022B7216EE00632718 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851C62B021492009031EA /* TabBarViewController.swift */; };
 		2C8D21032B7216EE00632718 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908C12AFCD7DF0065DFFB /* ViewController.swift */; };
 		2C8D21042B7216EE00632718 /* LoginFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCFD2B1244A6000B4686 /* LoginFlowCoordinator.swift */; };
-		2C8D21052B7216EE00632718 /* LoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA4A2B0252C1007AFC57 /* LoginType.swift */; };
-		2C8D21062B7216EE00632718 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38422B2B0F4531001E2803 /* LoginViewModel.swift */; };
-		2C8D21072B7216EE00632718 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601EB73A2B148F9A00C5B216 /* SignUpViewModel.swift */; };
-		2C8D21082B7216EE00632718 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CDA472B0252B2007AFC57 /* LoginViewController.swift */; };
-		2C8D21092B7216EE00632718 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F6FD722B0B5E130057CE0B /* SignUpViewController.swift */; };
 		2C8D210A2B7216EE00632718 /* TimerFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF82B1242DA000B4686 /* TimerFlowCoordinator.swift */; };
 		2C8D210B2B7216EE00632718 /* CategorySettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */; };
-		2C8D210C2B7216EE00632718 /* DeviceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D55B22B035484006D7C26 /* DeviceOrientation.swift */; };
-		2C8D210D2B7216EE00632718 /* CategorySettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF62B0B7F3C00E2FB71 /* CategorySettingSection.swift */; };
-		2C8D210E2B7216EE00632718 /* CategoryListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC851D12B04EE83009031EA /* CategoryListCollectionViewCell.swift */; };
-		2C8D210F2B7216EE00632718 /* CategorySettingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EF82B0B8A0B00E2FB71 /* CategorySettingFooterView.swift */; };
-		2C8D21102B7216EE00632718 /* CategoryColorSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */; };
-		2C8D21112B7216EE00632718 /* TimerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7CBD582B2B3AAD0024A9AA /* TimerHeaderView.swift */; };
-		2C8D21122B7216EE00632718 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D55AF2B0348FB006D7C26 /* TimerViewModel.swift */; };
-		2C8D21132B7216EE00632718 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */; };
-		2C8D21142B7216EE00632718 /* TimerFinishViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD0E2B14C22C000B4686 /* TimerFinishViewModel.swift */; };
-		2C8D21152B7216EE00632718 /* CategoryModifyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F61FA2B15C96100AE63F9 /* CategoryModifyViewModel.swift */; };
-		2C8D21162B7216EE00632718 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601773E32B021E6000D175D9 /* TimerViewController.swift */; };
-		2C8D21172B7216EE00632718 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE84EEE2B0B742A00E2FB71 /* CategorySettingViewController.swift */; };
-		2C8D21182B7216EE00632718 /* CategoryModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3595BC2B0DB29F00558FAA /* CategoryModifyViewController.swift */; };
-		2C8D21192B7216EE00632718 /* TimerFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DD0C2B148E9B000B4686 /* TimerFinishViewController.swift */; };
-		2C8D211A2B7216EE00632718 /* WeeklySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C277AC32B4ABCAD00567CAC /* WeeklySection.swift */; };
 		2C8D211B2B7216EE00632718 /* ChartFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6865D22B1F1464001A2AAD /* ChartFlowCoordinator.swift */; };
 		2C8D21292B7216EE00632718 /* SocialFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCD03F2B1872060080DCDE /* SocialFlowCoordinator.swift */; };
 		2C8D21372B7216EE00632718 /* MyPageFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60459D462B21A17C00A80AF7 /* MyPageFlowCoordinator.swift */; };
 		2C8D21382B7216EE00632718 /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EB7F512B1EFEDA00F8C613 /* MyPageTableViewCell.swift */; };
 		2C8D21392B7216EE00632718 /* MyPageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6020C7632B21C1D400F58AD0 /* MyPageHeaderView.swift */; };
-		2C8D213A2B7216EE00632718 /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE91C742B25AE9700EACCD7 /* DoneButton.swift */; };
 		2C8D213B2B7216EE00632718 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EB7F552B1F053800F8C613 /* MyPageViewModel.swift */; };
 		2C8D213C2B7216EE00632718 /* ProfileSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EB7F5C2B1F4F9E00F8C613 /* ProfileSettingsViewModel.swift */; };
 		2C8D213D2B7216EF00632718 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606990562B18918B00E5730F /* MyPageViewController.swift */; };
 		2C8D213E2B7216EF00632718 /* ProfileSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EB7F5A2B1F19D900F8C613 /* ProfileSettingsViewController.swift */; };
 		2C8D213F2B7216EF00632718 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDAD39B2B4D2E43003A9D18 /* PrivacyPolicyViewController.swift */; };
-		2C8D21402B7216EF00632718 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2176E22B5AC156000422F9 /* CalendarManager.swift */; };
-		2C8D21412B7216EF00632718 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE91C722B25971000EACCD7 /* UserInfoManager.swift */; };
 		2C8D21422B7216EF00632718 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2C8D21432B7216EF00632718 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2C8D21442B7216EF00632718 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -71,10 +47,13 @@
 		60243EF02B05D24D0098A92F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 60243EEF2B05D24D0098A92F /* .swiftlint.yml */; };
 		602C9D472B4E9A310021F2DE /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE492B4B826F006B1CF9 /* LoginViewModelTests.swift */; };
 		602C9D482B4F95D30021F2DE /* SignUpViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE4B2B4B829B006B1CF9 /* SignUpViewModelTests.swift */; };
+		6037BB572C0AE23100BE37AC /* Timer in Frameworks */ = {isa = PBXBuildFile; productRef = 6037BB562C0AE23100BE37AC /* Timer */; };
 		604309E62BF1AFE800768D87 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 604309E52BF1AFE800768D87 /* GoogleSignIn */; };
 		604309E82BF1AFE800768D87 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 604309E72BF1AFE800768D87 /* GoogleSignInSwift */; };
 		60490B922BEA8B93008958C3 /* DummyManagers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C7918C2B5819F10019E81F /* DummyManagers.swift */; };
 		60490B932BEA8B97008958C3 /* DummyUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C791892B5810FA0019E81F /* DummyUseCases.swift */; };
+		60590DA12C0C43740069B3E4 /* TabBar in Frameworks */ = {isa = PBXBuildFile; productRef = 60590DA02C0C43740069B3E4 /* TabBar */; };
+		60590DA72C0C49FA0069B3E4 /* Login in Frameworks */ = {isa = PBXBuildFile; productRef = 60590DA62C0C49FA0069B3E4 /* Login */; };
 		6067DD832B2737F9004625AF /* Selection.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 6067DD822B2737F9004625AF /* Selection.ahap */; };
 		6071B1C72BF73BF10044574F /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 6071B1C62BF73BF10044574F /* Network */; };
 		60780C942C0C576800C1FC52 /* Chart in Frameworks */ = {isa = PBXBuildFile; productRef = 60780C932C0C576800C1FC52 /* Chart */; };
@@ -108,8 +87,6 @@
 		2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingCoordinator.swift; sourceTree = "<group>"; };
 		2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDIContainer.swift; sourceTree = "<group>"; };
 		2C9F622E2B17505B00AE63F9 /* FriendAddViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddViewModelTests.swift; sourceTree = "<group>"; };
-		2CB4AFE12B64D3CD003F5D0F /* LabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelView.swift; sourceTree = "<group>"; };
-		2CB4AFE32B64E94A003F5D0F /* CustonChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustonChartView.swift; sourceTree = "<group>"; };
 		2CD272EE2B21A619000CB9E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2CD272F02B21A622000CB9E5 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2CD272F12B21A62B000CB9E5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -122,14 +99,15 @@
 		600908C92AFCD7E00065DFFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		600908CB2AFCD7E00065DFFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		600908D02AFCD7E00065DFFB /* FlipMateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlipMateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		601773E32B021E6000D175D9 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
-		601EB73A2B148F9A00C5B216 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		601F396A2BF3836F001689A0 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Core; path = FlipMate/Core; sourceTree = "<group>"; };
 		6020C7632B21C1D400F58AD0 /* MyPageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageHeaderView.swift; sourceTree = "<group>"; };
 		60243EEF2B05D24D0098A92F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		602BF08C2BF4FB5B0088050A /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Network; path = FlipMate/Network; sourceTree = "<group>"; };
 		60459D462B21A17C00A80AF7 /* MyPageFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFlowCoordinator.swift; sourceTree = "<group>"; };
 		60459D482B21A28400A80AF7 /* MyPageDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDIContainer.swift; sourceTree = "<group>"; };
+		60590D9E2C0C3D9D0069B3E4 /* TabBar */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TabBar; path = FlipMate/TabBar; sourceTree = SOURCE_ROOT; };
+		60590DA32C0C46410069B3E4 /* Login */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Login; path = FlipMate/Login; sourceTree = SOURCE_ROOT; };
+		60590DA82C0C4D000069B3E4 /* Chart */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Chart; path = Feature/Chart; sourceTree = SOURCE_ROOT; };
 		605F88492B297DA5008975DC /* FlipMate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FlipMate.entitlements; sourceTree = "<group>"; };
 		6067DD822B2737F9004625AF /* Selection.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = Selection.ahap; sourceTree = "<group>"; };
 		606990562B18918B00E5730F /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
@@ -142,18 +120,12 @@
 		60EB7F552B1F053800F8C613 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		60EB7F5A2B1F19D900F8C613 /* ProfileSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewController.swift; sourceTree = "<group>"; };
 		60EB7F5C2B1F4F9E00F8C613 /* ProfileSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewModel.swift; sourceTree = "<group>"; };
-		60F6FD722B0B5E130057CE0B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		60FBEE492B4B826F006B1CF9 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		60FBEE4B2B4B829B006B1CF9 /* SignUpViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModelTests.swift; sourceTree = "<group>"; };
 		60FBEE4D2B4B82B1006B1CF9 /* TimerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModelTests.swift; sourceTree = "<group>"; };
 		60FE50402C020EC200AA2475 /* Timer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Timer; path = FlipMate/Timer; sourceTree = SOURCE_ROOT; };
 		ED6865CF2B1F1429001A2AAD /* ChartDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDIContainer.swift; sourceTree = "<group>"; };
 		ED6865D22B1F1464001A2AAD /* ChartFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFlowCoordinator.swift; sourceTree = "<group>"; };
-		ED6865D52B1F14CF001A2AAD /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
-		ED9B2A802B06048D008FE1C5 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
-		EDC851C62B021492009031EA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		EDC851D12B04EE83009031EA /* CategoryListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCollectionViewCell.swift; sourceTree = "<group>"; };
-		EDC851D82B05C37C009031EA /* DeviceMotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceMotionManager.swift; path = FlipMate/Presentation/Utils/MotionManager/DeviceMotionManager.swift; sourceTree = SOURCE_ROOT; };
 		EDDAD39B2B4D2E43003A9D18 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,8 +138,10 @@
 				60590DA72C0C49FA0069B3E4 /* Login in Frameworks */,
 				60590DA12C0C43740069B3E4 /* TabBar in Frameworks */,
 				2C04FF5C2BF78E6F0065075F /* DesignSystem in Frameworks */,
+				60780C942C0C576800C1FC52 /* Chart in Frameworks */,
 				60C368E82BFBA1DA008C76ED /* Domain in Frameworks */,
 				604309E82BF1AFE800768D87 /* GoogleSignInSwift in Frameworks */,
+				6037BB572C0AE23100BE37AC /* Timer in Frameworks */,
 				601F39742BF399B9001689A0 /* Core in Frameworks */,
 				60BB72782BEA709D00E2A7E9 /* FMImageProvider in Frameworks */,
 				604309E62BF1AFE800768D87 /* GoogleSignIn in Frameworks */,
@@ -259,9 +233,9 @@
 		600908ED2AFCDB6E0065DFFB /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */,
 				600908BD2AFCD7DF0065DFFB /* AppDelegate.swift */,
 				600908BF2AFCD7DF0065DFFB /* SceneDelegate.swift */,
+				6037BB542C0997AA00BE37AC /* Coordinator */,
 				600909042AFCE0AB0065DFFB /* DIContainer */,
 			);
 			path = Application;
@@ -280,7 +254,6 @@
 		600908EF2AFCDBC90065DFFB /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				2C88DD012B1256B5000B4686 /* TabBar */,
 				600908F62AFCDDDC0065DFFB /* Splash */,
 				600908F52AFCDD0A0065DFFB /* MyPageScene */,
 			);
@@ -403,7 +376,6 @@
 			children = (
 				60EB7F512B1EFEDA00F8C613 /* MyPageTableViewCell.swift */,
 				6020C7632B21C1D400F58AD0 /* MyPageHeaderView.swift */,
-				2CE91C742B25AE9700EACCD7 /* DoneButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -476,65 +448,6 @@
 				60590DA82C0C4D000069B3E4 /* Chart */,
 			);
 			path = Feature;
-			sourceTree = "<group>";
-		};
-		ED38422A2B0F451F001E2803 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				ED38422B2B0F4531001E2803 /* LoginViewModel.swift */,
-				601EB73A2B148F9A00C5B216 /* SignUpViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		ED6865BB2B1DEE2A001A2AAD /* View */ = {
-			isa = PBXGroup;
-			children = (
-				ED6865BE2B1E2FA6001A2AAD /* ChartSegmentedControl.swift */,
-				2C277ABA2B497FB500567CAC /* DonutChartView.swift */,
-				2C277ABE2B4AB22400567CAC /* WeeklyCalendarView.swift */,
-				2C277AC02B4AB98000567CAC /* WeekCollectionViewCell.swift */,
-				2CB4AFE12B64D3CD003F5D0F /* LabelView.swift */,
-				2CB4AFE32B64E94A003F5D0F /* CustonChartView.swift */,
-				2C8D20F42B678A6C00632718 /* LabelListView.swift */,
-				2C8D21D82B735E2B00632718 /* BarChartView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		ED6865D12B1F1459001A2AAD /* Flow */ = {
-			isa = PBXGroup;
-			children = (
-				ED6865D22B1F1464001A2AAD /* ChartFlowCoordinator.swift */,
-			);
-			path = Flow;
-			sourceTree = "<group>";
-		};
-		ED6865D42B1F14C3001A2AAD /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				ED6865D52B1F14CF001A2AAD /* ChartViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		EDC851D02B04EE74009031EA /* View */ = {
-			isa = PBXGroup;
-			children = (
-				EDC851D12B04EE83009031EA /* CategoryListCollectionViewCell.swift */,
-				2CE84EF82B0B8A0B00E2FB71 /* CategorySettingFooterView.swift */,
-				ED3595C02B0DC2F100558FAA /* CategoryColorSelectView.swift */,
-				2C7CBD582B2B3AAD0024A9AA /* TimerHeaderView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		EDC851D72B05C357009031EA /* DeviceMotionManager */ = {
-			isa = PBXGroup;
-			children = (
-				EDC851D82B05C37C009031EA /* DeviceMotionManager.swift */,
-			);
-			path = DeviceMotionManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -678,45 +591,20 @@
 				2C8D20FF2B7216EE00632718 /* MyPageDIContainer.swift in Sources */,
 				2C8D21002B7216EE00632718 /* ChartDIContainer.swift in Sources */,
 				2C8D21012B7216EE00632718 /* TabBarFlowCoordinator.swift in Sources */,
-				2C8D21022B7216EE00632718 /* TabBarViewController.swift in Sources */,
 				2C8D21032B7216EE00632718 /* ViewController.swift in Sources */,
 				2C8D21042B7216EE00632718 /* LoginFlowCoordinator.swift in Sources */,
-				2C8D21052B7216EE00632718 /* LoginType.swift in Sources */,
-				2C8D21062B7216EE00632718 /* LoginViewModel.swift in Sources */,
-				2C8D21072B7216EE00632718 /* SignUpViewModel.swift in Sources */,
-				2C8D21082B7216EE00632718 /* LoginViewController.swift in Sources */,
-				2C8D21092B7216EE00632718 /* SignUpViewController.swift in Sources */,
 				2C8D210A2B7216EE00632718 /* TimerFlowCoordinator.swift in Sources */,
 				2C8D210B2B7216EE00632718 /* CategorySettingCoordinator.swift in Sources */,
-				2C8D210C2B7216EE00632718 /* DeviceOrientation.swift in Sources */,
-				2C8D210D2B7216EE00632718 /* CategorySettingSection.swift in Sources */,
-				2C8D210E2B7216EE00632718 /* CategoryListCollectionViewCell.swift in Sources */,
-				2C8D210F2B7216EE00632718 /* CategorySettingFooterView.swift in Sources */,
-				2C8D21102B7216EE00632718 /* CategoryColorSelectView.swift in Sources */,
-				2C8D21112B7216EE00632718 /* TimerHeaderView.swift in Sources */,
-				2C8D21122B7216EE00632718 /* TimerViewModel.swift in Sources */,
-				2C8D21132B7216EE00632718 /* CategoryViewModel.swift in Sources */,
-				2C8D21142B7216EE00632718 /* TimerFinishViewModel.swift in Sources */,
-				2C8D21152B7216EE00632718 /* CategoryModifyViewModel.swift in Sources */,
-				2C8D21D92B735E2B00632718 /* BarChartView.swift in Sources */,
-				2C8D21162B7216EE00632718 /* TimerViewController.swift in Sources */,
-				2C8D21172B7216EE00632718 /* CategorySettingViewController.swift in Sources */,
-				2C8D21182B7216EE00632718 /* CategoryModifyViewController.swift in Sources */,
-				2C8D21192B7216EE00632718 /* TimerFinishViewController.swift in Sources */,
-				2C8D211A2B7216EE00632718 /* WeeklySection.swift in Sources */,
 				2C8D211B2B7216EE00632718 /* ChartFlowCoordinator.swift in Sources */,
 				2C8D21292B7216EE00632718 /* SocialFlowCoordinator.swift in Sources */,
 				2C8D21372B7216EE00632718 /* MyPageFlowCoordinator.swift in Sources */,
 				2C8D21382B7216EE00632718 /* MyPageTableViewCell.swift in Sources */,
 				2C8D21392B7216EE00632718 /* MyPageHeaderView.swift in Sources */,
-				2C8D213A2B7216EE00632718 /* DoneButton.swift in Sources */,
 				2C8D213B2B7216EE00632718 /* MyPageViewModel.swift in Sources */,
 				2C8D213C2B7216EE00632718 /* ProfileSettingsViewModel.swift in Sources */,
 				2C8D213D2B7216EF00632718 /* MyPageViewController.swift in Sources */,
 				2C8D213E2B7216EF00632718 /* ProfileSettingsViewController.swift in Sources */,
 				2C8D213F2B7216EF00632718 /* PrivacyPolicyViewController.swift in Sources */,
-				2C8D21402B7216EF00632718 /* CalendarManager.swift in Sources */,
-				2C8D21412B7216EF00632718 /* UserInfoManager.swift in Sources */,
 				2C8D21422B7216EF00632718 /* (null) in Sources */,
 				2C8D21432B7216EF00632718 /* (null) in Sources */,
 				2C8D21442B7216EF00632718 /* (null) in Sources */,
@@ -1090,6 +978,10 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Core;
 		};
+		6037BB562C0AE23100BE37AC /* Timer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Timer;
+		};
 		604309E52BF1AFE800768D87 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 604309E42BF1AFE800768D87 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
@@ -1104,6 +996,14 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 604309E92BF1B10A00768D87 /* XCRemoteSwiftPackageReference "SwiftLint" */;
 			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+		60590DA02C0C43740069B3E4 /* TabBar */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TabBar;
+		};
+		60590DA62C0C49FA0069B3E4 /* Login */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Login;
 		};
 		6071B1C62BF73BF10044574F /* Network */ = {
 			isa = XCSwiftPackageProductDependency;

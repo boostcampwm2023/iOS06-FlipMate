@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-
+import Core
 import Domain
 
 struct MyPageViewModelActions {
