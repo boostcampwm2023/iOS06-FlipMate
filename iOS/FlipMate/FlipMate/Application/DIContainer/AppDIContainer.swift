@@ -8,6 +8,7 @@
 import UIKit
 import Core
 import Network
+import Timer
 
 final class AppDIContainer {
     lazy var provider: Provider = Provider(urlSession: URLSession.shared, keychainManager: KeychainManager())
