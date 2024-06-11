@@ -69,6 +69,7 @@
 /* Begin PBXFileReference section */
 		2C04FF5A2BF78AAE0065075F /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DesignSystem; path = FlipMate/DesignSystem; sourceTree = "<group>"; };
 		2C24ECCF2BFDD4E4000664BC /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Data; path = FlipMate/Data; sourceTree = "<group>"; };
+		2C82BD7D2C18406400CAD08B /* Category */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Category; sourceTree = "<group>"; };
 		2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		2C88DCF32B124272000B4686 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		2C88DCF52B124292000B4686 /* TimerSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSceneDIContainer.swift; sourceTree = "<group>"; };
@@ -372,6 +373,7 @@
 		60FE503F2C01C7B600AA2475 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				2C82BD7D2C18406400CAD08B /* Category */,
 				60590D9E2C0C3D9D0069B3E4 /* TabBar */,
 				60590DA32C0C46410069B3E4 /* Login */,
 				60FE50402C020EC200AA2475 /* Timer */,
