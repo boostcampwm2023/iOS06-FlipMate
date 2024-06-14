@@ -1,8 +1,8 @@
 //
 //  CategoryManageable.swift
+//  
 //
-//
-//  Created by 임현규 on 6/11/24.
+//  Created by 임현규 on 6/14/24.
 //
 
 import Foundation
