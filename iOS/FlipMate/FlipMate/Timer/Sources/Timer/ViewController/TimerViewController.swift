@@ -10,6 +10,7 @@ import Combine
 import OSLog
 import Core
 import DesignSystem
+import CategoryInterface
 
 public final class TimerViewController: BaseViewController {
     typealias CateogoryDataSource = UICollectionViewDiffableDataSource<CategorySettingSection, CategorySettingItem>
@@ -245,7 +246,7 @@ private extension TimerViewController {
             switch itemIdentifier {
             case .categoryCell(let category):
                 let cell: CategoryListCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-                cell.updateUI(category: category)
+                cell.updateUI(category.subject, UIColor(hexString: category.color), category.studyTime?.secondsToStringTime())
                 cell.updateShadow()
                 cell.setTimeLabelHidden(isHidden: false)
                 return cell

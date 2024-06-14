@@ -9,6 +9,7 @@ import UIKit
 import Combine
 import DesignSystem
 import Domain
+import CategoryInterface
 
 public final class CategorySettingViewController: BaseViewController {
     typealias CategoryDataSource
@@ -147,7 +148,7 @@ private extension CategorySettingViewController {
                 case .categoryCell(let category):
                     let cell: CategoryListCollectionViewCell = collectionView
                         .dequeueReusableCell(for: indexPath)
-                    cell.updateUI(category: category)
+                    cell.updateUI(category.subject, UIColor(hexString: category.color), category.studyTime?.secondsToStringTime())
                     cell.setTimeLabelHidden(isHidden: true)
                     return cell
                 }
