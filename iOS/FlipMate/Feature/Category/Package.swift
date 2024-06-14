@@ -13,14 +13,16 @@ let package = Package(
     dependencies: [
         .package(name: "Core", path: "../Core"),
         .package(name: "DesignSystem", path: "../DesignSystem"),
-        .package(name: "Domain", path: "../Domain")
+        .package(name: "Domain", path: "../Domain"),
+        .package(name: "Service", path: "../Service")
     ],
     
     targets: [
         .target(name: "Category", dependencies: [
             .product(name: "Core", package: "Core"),
             .product(name: "DesignSystem", package: "DesignSystem"),
-            .product(name: "Domain", package: "Domain")
+            .product(name: "Domain", package: "Domain"),
+            .product(name: "CategoryService", package: "Service")
         ]),
         .testTarget(name: "CategoryTests", dependencies: ["Category"]),
     ]
