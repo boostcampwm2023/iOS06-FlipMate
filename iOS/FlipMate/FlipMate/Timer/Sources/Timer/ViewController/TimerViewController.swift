@@ -10,7 +10,6 @@ import Combine
 import OSLog
 import Core
 import DesignSystem
-import CategoryInterface
 
 public final class TimerViewController: BaseViewController {
     typealias CateogoryDataSource = UICollectionViewDiffableDataSource<CategorySettingSection, CategorySettingItem>

@@ -9,7 +9,6 @@ import UIKit
 import Combine
 import DesignSystem
 import Domain
-import CategoryInterface
 
 public final class CategorySettingViewController: BaseViewController {
     typealias CategoryDataSource

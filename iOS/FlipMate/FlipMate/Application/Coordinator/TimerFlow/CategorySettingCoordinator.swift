@@ -8,6 +8,7 @@
 import UIKit
 import Timer
 import Domain
+import Category
 
 protocol CategoryFlowCoordinatorDependencies {
     func makeCategorySettingViewController(actions: CategoryViewModelActions) -> UIViewController

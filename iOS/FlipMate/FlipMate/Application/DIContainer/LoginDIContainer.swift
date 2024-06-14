@@ -12,6 +12,7 @@ import Domain
 import Network
 import Core
 import Data
+import CategoryService
 
 final class LoginDIContainer: LoginFlowCoordinatorDependencies {
     struct Dependencies {

@@ -11,6 +11,7 @@ import Domain
 import Network
 import Data
 import Core
+import CategoryService
 
 final class TimerSceneDIContainer: TimerFlowCoordinatorDependencies {
     struct Dependencies {

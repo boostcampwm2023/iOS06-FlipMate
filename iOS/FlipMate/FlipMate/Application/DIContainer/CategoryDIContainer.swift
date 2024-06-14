@@ -10,6 +10,8 @@ import Timer
 import Domain
 import Network
 import Data
+import Category
+import CategoryService
 
 final class CategoryDIContainer: CategoryFlowCoordinatorDependencies {
     struct Dependencies {
