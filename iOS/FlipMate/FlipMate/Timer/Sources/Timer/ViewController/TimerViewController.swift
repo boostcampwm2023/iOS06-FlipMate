@@ -12,8 +12,8 @@ import Core
 import DesignSystem
 
 public final class TimerViewController: BaseViewController {
-    typealias CateogoryDataSource = UICollectionViewDiffableDataSource<CategorySettingSection, CategorySettingItem>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<CategorySettingSection, CategorySettingItem>
+    typealias CateogoryDataSource = UICollectionViewDiffableDataSource<CategoryListSection, CategoryListItem>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<CategoryListSection, CategoryListItem>
     
     // MARK: - Properties
     private var timerViewModel: TimerViewModelProtocol
@@ -134,10 +134,10 @@ public final class TimerViewController: BaseViewController {
                     self.instructionImage.isHidden = false
                 }
                 guard var snapShot = self.dataSource?.snapshot() else { return }
-                let sections: [CategorySettingSection] = [.categorySection([])]
+                let sections: [CategoryListSection] = [.categorySection([])]
                 snapShot.deleteAllItems()
                 snapShot.appendSections(sections)
-                snapShot.appendItems(categories.map { CategorySettingItem.categoryCell($0) })
+                snapShot.appendItems(categories.map { CategoryListItem.categoryCell($0) })
                 self.dataSource?.apply(snapShot)
                 self.setInstructionImage()
             }
@@ -247,7 +247,6 @@ private extension TimerViewController {
                 let cell: CategoryListCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
                 cell.updateUI(category.subject, UIColor(hexString: category.color), category.studyTime?.secondsToStringTime())
                 cell.updateShadow()
-                cell.setTimeLabelHidden(isHidden: false)
                 return cell
             }
         })
@@ -267,7 +266,7 @@ private extension TimerViewController {
     
     func setSnapshot() {
         var snapshot = Snapshot()
-        let sections: [CategorySettingSection] = [.categorySection([])]
+        let sections: [CategoryListSection] = [.categorySection([])]
         snapshot.appendSections(sections)
         dataSource?.apply(snapshot)
     }
