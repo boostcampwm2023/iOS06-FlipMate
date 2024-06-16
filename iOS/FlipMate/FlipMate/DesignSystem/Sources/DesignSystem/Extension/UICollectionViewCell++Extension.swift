@@ -16,3 +16,11 @@ extension ReusableView where Self: UIView {
         return String(describing: self)
     }
 }
+
+extension UICollectionViewCell {
+    public func configureCategoryCellLayer() {
+        layer.borderWidth = 1.0
+        layer.cornerRadius = 8.0
+        layer.borderColor = FlipMateColor.gray2.color?.cgColor
+    }
+}

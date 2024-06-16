@@ -37,14 +37,12 @@ public final class CategoryInfoView: UIView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
-        configureLayer()
     }
     
     public init(isTimerLabelHidden: Bool) {
         super.init(frame: .zero)
         timeLabel.isHidden = isTimerLabelHidden
         configureUI()
-        configureLayer()
     }
     
     required init?(coder: NSCoder) {
@@ -87,12 +85,6 @@ private extension CategoryInfoView {
             subjectLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             timeLabel.heightAnchor.constraint(equalToConstant: Constants.heigth)
         ])
-    }
-    
-    func configureLayer() {
-        layer.borderWidth = Constants.layerWidth
-        layer.cornerRadius = Constants.viewLayerRadius
-        layer.borderColor = FlipMateColor.gray2.color?.cgColor
     }
 }
 

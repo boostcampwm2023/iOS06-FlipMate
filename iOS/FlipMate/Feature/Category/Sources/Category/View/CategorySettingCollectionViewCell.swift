@@ -22,6 +22,7 @@ public final class CategorySettingCollectionViewCell: UICollectionViewCell {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
+        configureCategoryCellLayer()
     }
     
     required init?(coder: NSCoder) {
