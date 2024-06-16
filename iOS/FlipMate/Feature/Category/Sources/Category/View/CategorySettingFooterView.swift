@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import DesignSystem
 
 public final class CategorySettingFooterView: UICollectionReusableView {
     // MARK: - Constant
