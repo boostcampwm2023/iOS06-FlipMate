@@ -8,7 +8,7 @@
 import UIKit
 import DesignSystem
 
-public final class CategoryListCollectionViewCell: UICollectionViewCell {
+final class CategoryListCollectionViewCell: UICollectionViewCell {
     
     // MARK: - UI Components
     private let categoryView: CategoryInfoView = {
@@ -18,7 +18,7 @@ public final class CategoryListCollectionViewCell: UICollectionViewCell {
     }()
     
     // MARK: - init
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
         configureCategoryCellLayer()
@@ -28,8 +28,8 @@ public final class CategoryListCollectionViewCell: UICollectionViewCell {
         fatalError("Don't use storyboard")
     }
     
-    // MARK: - Public Methods
-    public func updateShadow() {
+    // MARK: - UI Update Methods
+    func updateShadow() {
         if isSelected {
             backgroundColor = FlipMateColor.gray2.color
             setShadow()
@@ -39,7 +39,7 @@ public final class CategoryListCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    public func updateUI(_ subjectLabelText: String, _ circleBackgroundColor: UIColor?, _ timeLabelText: String?) {
+    func updateUI(_ subjectLabelText: String, _ circleBackgroundColor: UIColor?, _ timeLabelText: String?) {
         categoryView.updateUI(subjectLabelText, circleBackgroundColor, timeLabelText)
     }
 }

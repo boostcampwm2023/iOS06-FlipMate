@@ -8,7 +8,7 @@
 import UIKit
 import DesignSystem
 
-public final class CategorySettingCollectionViewCell: UICollectionViewCell {
+final class CategorySettingCollectionViewCell: UICollectionViewCell {
     
     // MARK: - UI Components
     private let categoryView: CategoryInfoView = {
@@ -19,7 +19,7 @@ public final class CategorySettingCollectionViewCell: UICollectionViewCell {
     }()
     
     // MARK: - init
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
         configureCategoryCellLayer()
@@ -29,8 +29,8 @@ public final class CategorySettingCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Public Methods
-    public func updateUI(_ subjectLabelText: String, _ circleBackgroundColor: UIColor?, _ timeLabelText: String?) {
+    // MARK: - UI Update Methods
+    func updateUI(_ subjectLabelText: String, _ circleBackgroundColor: UIColor?, _ timeLabelText: String?) {
         categoryView.updateUI(subjectLabelText, circleBackgroundColor, timeLabelText)
     }
 }

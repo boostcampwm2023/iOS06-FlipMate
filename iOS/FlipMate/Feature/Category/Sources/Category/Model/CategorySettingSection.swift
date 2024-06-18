@@ -8,14 +8,14 @@
 import UIKit
 import Domain
 
-public enum CategorySettingSection: Hashable {
+enum CategorySettingSection: Hashable {
     case categorySection([CategorySettingItem])
 }
 
-public enum CategorySettingItem: Hashable {
+enum CategorySettingItem: Hashable {
     case categoryCell(StudyCategory)
     
-    public var category: StudyCategory {
+    var category: StudyCategory {
         switch self {
         case .categoryCell(let category):
             return category
@@ -23,7 +23,7 @@ public enum CategorySettingItem: Hashable {
     }
 }
 
-public extension CategorySettingSection {
+extension CategorySettingSection {
     var itemSize: NSCollectionLayoutSize {
         return NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),

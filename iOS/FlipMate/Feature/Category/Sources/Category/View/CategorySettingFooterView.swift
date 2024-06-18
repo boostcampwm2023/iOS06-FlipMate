@@ -9,7 +9,7 @@ import UIKit
 import Combine
 import DesignSystem
 
-public final class CategorySettingFooterView: UICollectionReusableView {
+final class CategorySettingFooterView: UICollectionReusableView {
     // MARK: - Constant
     private enum Constant {
         static let addButtonTitle = NSLocalizedString("addCategory", comment: "")
@@ -32,10 +32,10 @@ public final class CategorySettingFooterView: UICollectionReusableView {
     }()
     
     private var subject = PassthroughSubject<Void, Never>()
-    public var cancellable: AnyCancellable?
+    var cancellable: AnyCancellable?
     
     // MARK: - init
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
     }
@@ -44,12 +44,12 @@ public final class CategorySettingFooterView: UICollectionReusableView {
         fatalError("Don't use storyboard")
     }
     
-    public override func prepareForReuse() {
+    override func prepareForReuse() {
         super.prepareForReuse()
         cancellable?.cancel()
     }
     
-    public func tapPublisher() -> AnyPublisher<Void, Never> {
+    func tapPublisher() -> AnyPublisher<Void, Never> {
         return subject
             .eraseToAnyPublisher()
     }
