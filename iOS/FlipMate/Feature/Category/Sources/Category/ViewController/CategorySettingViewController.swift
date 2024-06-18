@@ -25,7 +25,7 @@ public final class CategorySettingViewController: BaseViewController {
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(CategoryListCollectionViewCell.self)
+        collectionView.register(CategorySettingCollectionViewCell.self)
         collectionView.register(CategorySettingFooterView.self, kind: .footer)
         return collectionView
     }()
@@ -145,10 +145,9 @@ private extension CategorySettingViewController {
             cellProvider: { collectionView, indexPath, itemIdentifier in
                 switch itemIdentifier {
                 case .categoryCell(let category):
-                    let cell: CategoryListCollectionViewCell = collectionView
+                    let cell: CategorySettingCollectionViewCell = collectionView
                         .dequeueReusableCell(for: indexPath)
-                    cell.updateUI(category: category)
-                    cell.setTimeLabelHidden(isHidden: true)
+                    cell.updateUI(category.subject, UIColor(hexString: category.color), category.studyTime?.secondsToStringTime())
                     return cell
                 }
             })

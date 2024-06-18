@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2C04FF5C2BF78E6F0065075F /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 2C04FF5B2BF78E6F0065075F /* DesignSystem */; };
 		2C6549C02BFDD6E900105D5A /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = 2C6549BF2BFDD6E900105D5A /* Data */; };
+		2C82BD7F2C18482D00CAD08B /* Category in Frameworks */ = {isa = PBXBuildFile; productRef = 2C82BD7E2C18482D00CAD08B /* Category */; };
 		2C8D20F62B7216EE00632718 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */; };
 		2C8D20F72B7216EE00632718 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908BD2AFCD7DF0065DFFB /* AppDelegate.swift */; };
 		2C8D20F82B7216EE00632718 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600908BF2AFCD7DF0065DFFB /* SceneDelegate.swift */; };
@@ -30,6 +31,7 @@
 		2C8D21422B7216EF00632718 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2C8D21432B7216EF00632718 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2C8D21442B7216EF00632718 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		2CB24F4B2C1C234400327FA0 /* CategoryService in Frameworks */ = {isa = PBXBuildFile; productRef = 2CB24F4A2C1C234400327FA0 /* CategoryService */; };
 		2CD272ED2B21A619000CB9E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CD272EF2B21A619000CB9E5 /* Localizable.strings */; };
 		600908CA2AFCD7E00065DFFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 600908C82AFCD7E00065DFFB /* LaunchScreen.storyboard */; };
 		600D81362B51344500670882 /* TimerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FBEE4D2B4B82B1006B1CF9 /* TimerViewModelTests.swift */; };
@@ -69,6 +71,7 @@
 /* Begin PBXFileReference section */
 		2C04FF5A2BF78AAE0065075F /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DesignSystem; path = FlipMate/DesignSystem; sourceTree = "<group>"; };
 		2C24ECCF2BFDD4E4000664BC /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Data; path = FlipMate/Data; sourceTree = "<group>"; };
+		2C82BD7D2C18406400CAD08B /* Category */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Category; sourceTree = "<group>"; };
 		2C88DCF12B124238000B4686 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		2C88DCF32B124272000B4686 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		2C88DCF52B124292000B4686 /* TimerSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSceneDIContainer.swift; sourceTree = "<group>"; };
@@ -80,6 +83,7 @@
 		2C88DD082B1274FA000B4686 /* CategorySettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingCoordinator.swift; sourceTree = "<group>"; };
 		2C88DD0A2B1340E4000B4686 /* CategoryDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDIContainer.swift; sourceTree = "<group>"; };
 		2C9F622E2B17505B00AE63F9 /* FriendAddViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAddViewModelTests.swift; sourceTree = "<group>"; };
+		2CB24F492C1C173D00327FA0 /* Service */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Service; path = Feature/Service; sourceTree = "<group>"; };
 		2CD272EE2B21A619000CB9E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2CD272F02B21A622000CB9E5 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2CD272F12B21A62B000CB9E5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -128,11 +132,13 @@
 				60780C942C0C576800C1FC52 /* Chart in Frameworks */,
 				60C368E82BFBA1DA008C76ED /* Domain in Frameworks */,
 				604309E82BF1AFE800768D87 /* GoogleSignInSwift in Frameworks */,
+				2C82BD7F2C18482D00CAD08B /* Category in Frameworks */,
 				6037BB572C0AE23100BE37AC /* Timer in Frameworks */,
 				601F39742BF399B9001689A0 /* Core in Frameworks */,
 				60BB72782BEA709D00E2A7E9 /* FMImageProvider in Frameworks */,
 				604309E62BF1AFE800768D87 /* GoogleSignIn in Frameworks */,
 				2C6549C02BFDD6E900105D5A /* Data in Frameworks */,
+				2CB24F4B2C1C234400327FA0 /* CategoryService in Frameworks */,
 				6071B1C72BF73BF10044574F /* Network in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -181,6 +187,7 @@
 				2C04FF5A2BF78AAE0065075F /* DesignSystem */,
 				602BF08C2BF4FB5B0088050A /* Network */,
 				601F396A2BF3836F001689A0 /* Core */,
+				2CB24F492C1C173D00327FA0 /* Service */,
 				600908D32AFCD7E00065DFFB /* FlipMateTests */,
 				600908BB2AFCD7DF0065DFFB /* Products */,
 				601F396B2BF386DC001689A0 /* Frameworks */,
@@ -372,6 +379,7 @@
 		60FE503F2C01C7B600AA2475 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				2C82BD7D2C18406400CAD08B /* Category */,
 				60590D9E2C0C3D9D0069B3E4 /* TabBar */,
 				60590DA32C0C46410069B3E4 /* Login */,
 				60FE50402C020EC200AA2475 /* Timer */,
@@ -414,6 +422,8 @@
 				60780C932C0C576800C1FC52 /* Chart */,
 				608920152C0C7F7100FFDB14 /* Social */,
 				609B1B922C0CCBB100F5A5A6 /* MyPage */,
+				2C82BD7E2C18482D00CAD08B /* Category */,
+				2CB24F4A2C1C234400327FA0 /* CategoryService */,
 			);
 			productName = FlipMate;
 			productReference = 600908BA2AFCD7DF0065DFFB /* FlipMate.app */;
@@ -894,6 +904,14 @@
 		2C6549BF2BFDD6E900105D5A /* Data */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Data;
+		};
+		2C82BD7E2C18482D00CAD08B /* Category */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Category;
+		};
+		2CB24F4A2C1C234400327FA0 /* CategoryService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CategoryService;
 		};
 		601F39732BF399B9001689A0 /* Core */ = {
 			isa = XCSwiftPackageProductDependency;

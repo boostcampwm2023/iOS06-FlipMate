@@ -10,6 +10,7 @@ import Combine
 import OSLog
 import Core
 import Domain
+import CategoryService
 
 public struct TimerViewModelActions {
     let showCategorySettingViewController: () -> Void

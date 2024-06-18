@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 import Domain
+import CategoryService
 
 public struct CategoryViewModelActions {
     let showModifyCategory: (CategoryPurpose, StudyCategory?) -> Void

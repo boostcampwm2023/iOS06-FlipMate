@@ -1,6 +1,6 @@
 //
-//  CategoryListCollectionViewCell.swift
-//  
+//  CategorySettingCollectionViewCell.swift
+//
 //
 //  Created by 임현규 on 6/16/24.
 //
@@ -8,12 +8,13 @@
 import UIKit
 import DesignSystem
 
-final class CategoryListCollectionViewCell: UICollectionViewCell {
+final class CategorySettingCollectionViewCell: UICollectionViewCell {
     
     // MARK: - UI Components
     private let categoryView: CategoryInfoView = {
-        let view = CategoryInfoView()
+        let view = CategoryInfoView(isTimerLabelHidden: true)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemBackground
         return view
     }()
     
@@ -25,29 +26,19 @@ final class CategoryListCollectionViewCell: UICollectionViewCell {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("Don't use storyboard")
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - UI Update Methods
-    func updateShadow() {
-        if isSelected {
-            backgroundColor = FlipMateColor.gray2.color
-            setShadow()
-        } else {
-            backgroundColor = .systemBackground
-            layer.shadowOpacity = 0
-        }
-    }
-    
     func updateUI(_ subjectLabelText: String, _ circleBackgroundColor: UIColor?, _ timeLabelText: String?) {
         categoryView.updateUI(subjectLabelText, circleBackgroundColor, timeLabelText)
     }
 }
 
 // MARK: - Private Methods
-private extension CategoryListCollectionViewCell {
+private extension CategorySettingCollectionViewCell {
     func configureUI() {
-        [ categoryView ].forEach { contentView.addSubview($0) }
+        [ categoryView ] .forEach { contentView.addSubview($0) }
         
         NSLayoutConstraint.activate([
             categoryView.topAnchor.constraint(equalTo: contentView.topAnchor),

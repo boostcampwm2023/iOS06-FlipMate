@@ -10,6 +10,7 @@ import Network
 import TabBar
 import Timer
 import Core
+import CategoryService
 
 final class TabBarDIContainer: TabBarFlowCoordinatorDependencies {
     

@@ -10,6 +10,7 @@ import Combine
 
 import Domain
 import Core
+import CategoryService
 
 public struct CategoryModifyViewModelActions {
     public let didFinishCategoryModify: () -> Void

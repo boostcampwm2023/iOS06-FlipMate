@@ -14,7 +14,8 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../../Core"),
-        .package(path: "../../Domain")
+        .package(path: "../../Domain"),
+        .package(path: "../../Service")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -23,7 +24,9 @@ let package = Package(
             name: "Timer",
             dependencies: [
                 .product(name: "Core", package: "Core"),
-                .product(name: "Domain", package: "Domain")
+                .product(name: "Domain", package: "Domain"),
+                .product(name: "CategoryService", package: "Service")
+                
             ]),
         .testTarget(
             name: "TimerTests",
